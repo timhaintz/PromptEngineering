@@ -63,7 +63,7 @@ promptTest = [
 #############
 # MAIN CODE #
 #############
-prompt = prompt00
+prompt = prompt01
 response = openai.ChatCompletion.create(
     engine="gpt-35-00", # engine = "deployment_name".
     messages=prompt
@@ -82,4 +82,11 @@ data = {
 ##########
 #print(response)
 #print(response['choices'][0]['message']['content'])
-print(data)
+print(json.dumps(data))
+# Define the output file path
+output_file = fr"C:\Users\tihaintz\OneDrive - Microsoft\Masters\{iso_datetime.replace(':', '-').replace('.', '-')}_{cve}_Agent0.json"
+# Write the data to the output file
+with open(output_file, "w") as f:
+    json.dump(data, f)
+# Print a message indicating that the file was written
+print("Data written to file:", output_file)
