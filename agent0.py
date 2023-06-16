@@ -82,7 +82,7 @@ data = {
 ##########
 #print(response)
 #print(response['choices'][0]['message']['content'])
-print(json.dumps(data))
+#print(json.dumps(data))
 # Define the output file path
 output_file = fr"C:\Users\tihaintz\OneDrive - Microsoft\Masters\{iso_datetime.replace(':', '-').replace('.', '-')}_{cve}_Agent0.json"
 # Write the data to the output file
