@@ -10,6 +10,9 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-
 https://learn.microsoft.com/en-us/azure/cognitive-services/openai/chatgpt-quickstart?tabs=command-line&pivots=programming-language-python
 https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt?pivots=programming-language-chat-completions
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
+https://cve.mitre.org/
+https://nvd.nist.gov/vuln/detail/
+
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -53,6 +56,26 @@ prompt03 = [
         {"role": "user", "content": "What steps do I need to fix {}?".format(cve)}
 ]
 
+prompt04 = [
+    {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries.\n Instructions:\n- Only answer questions related to Common Vulnerability Exposure (CVE) queries.\n- If you don't know the answer, say \"I don't know\"."},
+    {"role": "user", "content": "What steps do I need to fix {}?".format(cve)}
+]
+
+prompt05 = [
+    {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries.\n Instructions:\n- Only answer questions related to Common Vulnerability Exposure (CVE) queries.\n- If you don\'t know the answer, say \"I don't know\". \n- The help with the answer use https://cve.mitre.org/cgi-bin/cvename.cgi?name={}".format(cve)},
+    {"role": "user", "content": "What steps do I need to fix {}?".format(cve)}
+]
+
+prompt06 = [
+    {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries.\n Instructions:\n- Only answer questions related to Common Vulnerability Exposure (CVE) queries.\n- If you don\'t know the answer, say \"I don't know\". \n- The help with the answer Use https://cve.mitre.org/cgi-bin/cvename.cgi?name={}".format(cve) + "\n- To help with the answer use https://nvd.nist.gov/vuln/detail/{}".format(cve)},
+    {"role": "user", "content": "What steps do I need to fix {}?".format(cve)}
+]
+
+prompt07 = [
+    {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries.\n Instructions:\n- Only answer questions related to Common Vulnerability Exposure (CVE) queries.\n- If you don\'t know the answer, say \"I don't know\". \n- Take a step-by-step approach in your response, cite sources and give reasoning before sharing final answer."},
+    {"role": "user", "content": "What steps do I need to fix {}?".format(cve)}
+]
+
 promptTest = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Does Azure OpenAI support customer managed keys?"},
@@ -63,7 +86,7 @@ promptTest = [
 #############
 # MAIN CODE #
 #############
-prompt = prompt01
+prompt = prompt07
 response = openai.ChatCompletion.create(
     engine="gpt-35-00", # engine = "deployment_name".
     messages=prompt
