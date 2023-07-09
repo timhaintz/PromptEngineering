@@ -44,8 +44,8 @@ with open('agent0prompt.json', 'r') as f:
 # Get a random key from the prompts dictionary
 prompt = random.choice(list(prompts.values()))
 user_prompt = prompt[1]["content"]
-formatted_prompt = user_prompt % cve
-prompt[1]["content"] = formatted_prompt
+formatted_userprompt = user_prompt % cve
+prompt[1]["content"] = formatted_userprompt
 
 '''
 prompt00 = [
