@@ -20,6 +20,7 @@ import os
 import openai
 import json
 from datetime import datetime
+import random
 # Load environment variables from the .env file
 load_dotenv()
 
@@ -36,6 +37,17 @@ iso_datetime = datetime.utcnow().isoformat()
 ########### 
 # PROMPTS #
 ###########
+# Load the prompts from the JSON file
+with open('agent0prompt.json', 'r') as f:
+    prompts = json.load(f)
+
+# Get a random key from the prompts dictionary
+prompt = random.choice(list(prompts.values()))
+user_prompt = prompt[1]["content"]
+formatted_prompt = user_prompt % cve
+prompt[1]["content"] = formatted_prompt
+
+'''
 prompt00 = [
         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
         {"role": "user", "content": "Tell me about {}?".format(cve)}
@@ -82,11 +94,12 @@ promptTest = [
         {"role": "assistant", "content": "Yes, customer managed keys are supported by Azure OpenAI."},
         {"role": "user", "content": "Do other Azure Cognitive Services support this too?"}
 ]
+'''
 
 #############
 # MAIN CODE #
 #############
-prompt = prompt07
+'prompt = prompt07'
 response = openai.ChatCompletion.create(
     engine="gpt-35-00", # engine = "deployment_name".
     messages=prompt
