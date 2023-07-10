@@ -43,17 +43,25 @@ with open('agent0prompt.json', 'r') as f:
 
 # Get a random key from the prompts dictionary
 prompt = random.choice(list(prompts.values()))
-# Need to add logic to check if user and system prompt has %s in it to check if it needs to be replaced with the CVE variable value
-'''
-system_prompt = prompt[0]["content"]
-formatted_systemprompt = system_prompt % cve
-prompt[0]["content"] = formatted_systemprompt
+
+# Loop through each value in the prompt dictionary
+for prompt_key, prompt_list in prompt.items():
+    # Loop through each value in the prompt list
+    for value in prompt_list:
+        # Check if the value contains the %s placeholder
+        if "%s" in value["content"]:
+            # Replace the %s placeholder with the CVE variable value
+            formatted_value = value["content"] % cve
+            value["content"] = formatted_value
+    # Update the prompt list with the new formatted values
+    prompt.update({prompt_key: prompt_list})
+
 '''
 # Format the user prompt with the CVE variable value from the %s JSON format
 user_prompt = prompt[1]["content"]
 formatted_userprompt = user_prompt % cve
 prompt[1]["content"] = formatted_userprompt
-
+'''
 '''
 prompt00 = [
         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
