@@ -59,12 +59,6 @@ for value in prompt_list:
 prompt = prompt_list
 
 '''
-# Format the user prompt with the CVE variable value from the %s JSON format
-user_prompt = prompt[1]["content"]
-formatted_userprompt = user_prompt % cve
-prompt[1]["content"] = formatted_userprompt
-'''
-'''
 prompt00 = [
         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
         {"role": "user", "content": "Tell me about {}?".format(cve)}
