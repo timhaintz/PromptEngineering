@@ -42,19 +42,21 @@ with open('agent0prompt.json', 'r') as f:
     prompts = json.load(f)
 
 # Get a random key from the prompts dictionary
-prompt = random.choice(list(prompts.values()))
+prompt_key = random.choice(list(prompts.keys()))
 
-# Loop through each value in the prompt dictionary
-for prompt_key, prompt_list in prompt.items():
-    # Loop through each value in the prompt list
-    for value in prompt_list:
-        # Check if the value contains the %s placeholder
-        if "%s" in value["content"]:
-            # Replace the %s placeholder with the CVE variable value
-            formatted_value = value["content"] % cve
-            value["content"] = formatted_value
-    # Update the prompt list with the new formatted values
-    prompt.update({prompt_key: prompt_list})
+# Get the prompt list for the selected key
+prompt_list = prompts[prompt_key]
+
+# Loop through each value in the prompt list
+for value in prompt_list:
+    # Check if the value contains the %s placeholder
+    if "%s" in value["content"]:
+        # Replace the %s placeholder with the CVE variable value
+        formatted_value = value["content"] % cve
+        value["content"] = formatted_value
+
+# Update the prompt variable with the new formatted values
+prompt = prompt_list
 
 '''
 # Format the user prompt with the CVE variable value from the %s JSON format
