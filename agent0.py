@@ -41,8 +41,12 @@ iso_datetime = datetime.utcnow().isoformat()
 with open('agent0prompt.json', 'r') as f:
     prompts = json.load(f)
 
-# Get a random key from the prompts dictionary
-prompt_key = random.choice(list(prompts.keys()))
+'prompt_key = None'
+prompt_key = "prompt00"
+
+if prompt_key is None:
+    # Get a random key from the prompts dictionary
+    prompt_key = random.choice(list(prompts.keys()))
 
 # Get the prompt list for the selected key
 prompt_list = prompts[prompt_key]
