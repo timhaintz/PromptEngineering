@@ -33,6 +33,9 @@ openai.api_version = "2023-05-15"
 openai.api_key = os.getenv("AZURE_OPENAI_KEY")
 cve = "CVE-2020-16969"
 iso_datetime = datetime.utcnow().isoformat()
+# Used to select a specific prompt from the prompts dictionary
+'prompt_key = None'
+prompt_key = "prompt06"
 
 ########### 
 # PROMPTS #
@@ -40,9 +43,6 @@ iso_datetime = datetime.utcnow().isoformat()
 # Load the prompts from the JSON file
 with open('agent0prompt.json', 'r') as f:
     prompts = json.load(f)
-
-'prompt_key = None'
-prompt_key = "prompt00"
 
 if prompt_key is None:
     # Get a random key from the prompts dictionary
@@ -56,7 +56,7 @@ for value in prompt_list:
     # Check if the value contains the %s placeholder
     if "%s" in value["content"]:
         # Replace the %s placeholder with the CVE variable value
-        formatted_value = value["content"] % cve
+        formatted_value = value["content"].replace("%s", cve)
         value["content"] = formatted_value
 
 # Update the prompt variable with the new formatted values
@@ -114,7 +114,6 @@ promptTest = [
 #############
 # MAIN CODE #
 #############
-'prompt = prompt07'
 response = openai.ChatCompletion.create(
     engine="gpt-35-00", # engine = "deployment_name".
     messages=prompt
