@@ -1,6 +1,6 @@
 '''
 DESCRIPTION
-Connect to the Azure OpenAI API gpt-35-turbo model and chat with it.
+Connect to the Azure OpenAI API gpt-35-turbo model and chat with it about CVEs.
 NOTES
 Version:        0.1
 Author:         Tim Haintz                         
