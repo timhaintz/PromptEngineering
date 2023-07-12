@@ -14,3 +14,22 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-vi
 https://cve.mitre.org/
 https://nvd.nist.gov/vuln/detail/
 '''
+
+#Note: The openai-python library support for Azure OpenAI is in preview.
+from dotenv import load_dotenv
+import os
+import openai
+import json
+from datetime import datetime
+import random
+# Load environment variables from the .env file
+load_dotenv()
+
+#############
+# VARIABLES #
+#############
+openai.api_type = "azure"
+openai.api_base = os.getenv("AZURE_OPENAI_ENDPOINT")
+openai.api_version = "2023-05-15"
+openai.api_key = os.getenv("AZURE_OPENAI_KEY")
+iso_datetime = datetime.utcnow().isoformat()
