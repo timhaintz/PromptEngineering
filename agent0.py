@@ -12,7 +12,6 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
 https://cve.mitre.org/
 https://nvd.nist.gov/vuln/detail/
-
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
