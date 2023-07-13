@@ -30,11 +30,46 @@ openai.api_type = "azure"
 openai.api_base = os.getenv("AZURE_OPENAI_ENDPOINT")
 openai.api_version = "2023-05-15"
 openai.api_key = os.getenv("AZURE_OPENAI_KEY")
-cve = "CVE-2020-16969"
+cve = None
+#cve = "CVE-2020-16969"
 iso_datetime = datetime.utcnow().isoformat()
 # Used to select a specific prompt from the prompts dictionary
-'prompt_key = None'
+#prompt_key = None
 prompt_key = "prompt06"
+
+#######
+# CVE #
+#######
+# Get a random CVE
+if cve is None:
+    # Set the folder path to search in
+    folder_path = r"C:\Users\tihaintz\OneDrive - Microsoft\Masters\cvelistV5-main\cves"
+
+    # Get a list of all directories in the folder
+    directories = [dir for dir in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, dir))]
+
+    # Filter the list to include only directories prior to the year 2020
+    filtered_directories = [dir for dir in directories if dir <= "2020"]
+
+    # Select a random directory from the filtered list
+    random_directory = random.choice(filtered_directories)
+
+    # Get a list of all subdirectories in the selected directory
+    subdirectories_path = os.path.join(folder_path, random_directory)
+    subdirectories = [dir for dir in os.listdir(subdirectories_path) if os.path.isdir(os.path.join(subdirectories_path, dir))]
+
+    # Select a random subdirectory from the list of subdirectories in the selected directory
+    random_subdirectory = random.choice(subdirectories)
+
+    # Get a list of all files in the selected subdirectory
+    subdirectory_path = os.path.join(subdirectories_path, random_subdirectory)
+    files = os.listdir(subdirectory_path)
+
+    # Select a random file from the list of files in the selected subdirectory
+    random_file = random.choice(files)
+    cve = os.path.splitext(random_file)[0]
+    # Print the selected file name
+    print(f"Selected file: {os.path.splitext(random_file)[0]}")
 
 ########### 
 # PROMPTS #
