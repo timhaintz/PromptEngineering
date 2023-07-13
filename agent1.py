@@ -60,6 +60,7 @@ for filename in os.listdir(response_folder_path):
         else:
             print(f"File {filename} does not contain a CVE")
 
+
 # Below will be used to check on the CVE from the above code 
 
 # Set the folder path to search in
