@@ -1,31 +1,41 @@
 {
     "Source": {
-        "Title": "",
-        "APAReference": "",
-        "URLReference": "",
-        "PromptPatterns": [
+        "Titles": [
             {
-                "PatternName": "Pattern 1",
-                "ExamplePrompts": []
+                "Title": "Title 1",
+                "APAReference": "",
+                "URLReference": "",
+                "PromptPattern": {
+                    "PatternCategory": "Category 1",
+                    "PromptPatterns": [
+                        {
+                            "PatternName": "Pattern 1",
+                            "ExamplePrompts": []
+                        },
+                        {
+                            "PatternName": "Pattern 2",
+                            "ExamplePrompts": []
+                        }
+                    ]
+                }
             },
             {
-                "PatternName": "Pattern 2",
-                "ExamplePrompts": []
-            }
-        ]
-    },
-    "Source": {
-        "Title": "",
-        "APAReference": "",
-        "URLReference": "",
-        "PromptPatterns": [
-            {
-                "PatternName": "Pattern 1",
-                "ExamplePrompts": []
-            },
-            {
-                "PatternName": "Pattern 2",
-                "ExamplePrompts": []
+                "Title": "Title 2",
+                "APAReference": "",
+                "URLReference": "",
+                "PromptPattern": {
+                    "PatternCategory": "Category 2",
+                    "PromptPatterns": [
+                        {
+                            "PatternName": "Pattern 3",
+                            "ExamplePrompts": []
+                        },
+                        {
+                            "PatternName": "Pattern 4",
+                            "ExamplePrompts": []
+                        }
+                    ]
+                }
             }
         ]
     }
