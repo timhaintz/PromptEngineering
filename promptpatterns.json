@@ -3,18 +3,30 @@
         "Title": "",
         "APAReference": "",
         "URLReference": "",
-        "PromptPattern": {
-            "Prompt": "",
-            "ExamplePrompts": []
-        }
+        "PromptPatterns": [
+            {
+                "PatternName": "Pattern 1",
+                "ExamplePrompts": []
+            },
+            {
+                "PatternName": "Pattern 2",
+                "ExamplePrompts": []
+            }
+        ]
     },
     "Source": {
         "Title": "",
         "APAReference": "",
         "URLReference": "",
-        "PromptPattern": {
-            "Prompt": "",
-            "ExamplePrompts": []
-        }
+        "PromptPatterns": [
+            {
+                "PatternName": "Pattern 1",
+                "ExamplePrompts": []
+            },
+            {
+                "PatternName": "Pattern 2",
+                "ExamplePrompts": []
+            }
+        ]
     }
 }
