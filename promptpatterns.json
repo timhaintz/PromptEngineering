@@ -190,6 +190,106 @@
                 ]
             },
             {
+                "Title": "Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering",
+                "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
+                "URLReference": "http://www.dre.vanderbilt.edu/~schmidt/PDF/ADA_Europe_Position_Paper.pdf",
+                "PromptPatterns": [
+                    {
+                        "PatternCategory": "Prompt Improvement",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Question Refinement",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Error Identification",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Reflection",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Interaction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Game Play",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "Title 2",
+                "APAReference": "",
+                "URLReference": "",
+                "PromptPatterns": [
+                    {
+                        "PatternCategory": "Category 3",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 5",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 6",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Category 4",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 7",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 8",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "Title 2",
+                "APAReference": "",
+                "URLReference": "",
+                "PromptPatterns": [
+                    {
+                        "PatternCategory": "Category 3",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 5",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 6",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Category 4",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 7",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 8",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "Title": "Title 2",
                 "APAReference": "",
                 "URLReference": "",
