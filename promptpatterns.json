@@ -107,32 +107,82 @@
                 ]
             },
             {
-                "Title": "Title 2",
-                "APAReference": "",
-                "URLReference": "",
+                "Title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+                "APAReference": "White, J., Hays, S., Fu, Q., Spencer-Smith, J., & Schmidt, D. C. (2023). Chatgpt prompt patterns for improving code quality, refactoring, requirements elicitation, and software design. arXiv preprint arXiv:2303.07839.",
+                "URLReference": "https://arxiv.org/abs/2303.07839",
                 "PromptPatterns": [
                     {
-                        "PatternCategory": "Category 3",
+                        "PatternCategory": "Requirements Elicitation",
                         "PromptPatterns": [
                             {
-                                "PatternName": "Pattern 5",
+                                "PatternName": "Requirements Simulator",
                                 "ExamplePrompts": []
                             },
                             {
-                                "PatternName": "Pattern 6",
+                                "PatternName": "Specification Disambiguation",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Change Request Simulation",
                                 "ExamplePrompts": []
                             }
                         ]
                     },
                     {
-                        "PatternCategory": "Category 4",
+                        "PatternCategory": "System Design and Simulation",
                         "PromptPatterns": [
                             {
-                                "PatternName": "Pattern 7",
+                                "PatternName": "API Generator",
                                 "ExamplePrompts": []
                             },
                             {
-                                "PatternName": "Pattern 8",
+                                "PatternName": "API Simulator",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Few-shot Example Generator",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Domain-Specific Language (DSL) Creation",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Architectural Possibilities",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Code Quality",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Code Clustering",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Intermediate Abstraction",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Principled Code",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Hidden Assumptions",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Refactoring",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pseudo-code Refactoring",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Data-guided Refactoring",
                                 "ExamplePrompts": []
                             }
                         ]
