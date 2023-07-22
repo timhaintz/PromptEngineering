@@ -2,15 +2,15 @@
     "Source": {
         "Titles": [
             {
-                "Title": "Title 1",
-                "APAReference": "",
-                "URLReference": "",
+                "Title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+                "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
+                "URLReference": "https://arxiv.org/abs/2302.11382",
                 "PromptPatterns": [
                     {
-                        "PatternCategory": "Category 1",
+                        "PatternCategory": "Input Semantics",
                         "PromptPatterns": [
                             {
-                                "PatternName": "Pattern 1",
+                                "PatternName": "Meta Language Creation",
                                 "ExamplePrompts": []
                             },
                             {
@@ -20,14 +20,119 @@
                         ]
                     },
                     {
-                        "PatternCategory": "Category 2",
+                        "PatternCategory": "Output Customization",
                         "PromptPatterns": [
                             {
-                                "PatternName": "Pattern 3",
+                                "PatternName": "Output Automater",
                                 "ExamplePrompts": []
                             },
                             {
-                                "PatternName": "Pattern 4",
+                                "PatternName": "Persona",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Visualization Generator",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Recipe",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Template",
+                                "ExamplePrompts": []
+                            },
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Error Identification",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Fact Check List",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Reflection",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompt Improvement",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Question Refinement",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Alternative Approaches",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Cognitive Verifier",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Refusal Breaker",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Interaction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Flipperd Interaction",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Game Play",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Infinite Generation",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Context Control",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Context Manager",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "Title 2",
+                "APAReference": "",
+                "URLReference": "",
+                "PromptPatterns": [
+                    {
+                        "PatternCategory": "Category 3",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 5",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 6",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Category 4",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 7",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 8",
                                 "ExamplePrompts": []
                             }
                         ]
