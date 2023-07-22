@@ -5,6 +5,7 @@
                 "Title": "Title 1",
                 "APAReference": "",
                 "URLReference": "",
+                "datetimeadded": "2023-07-22T00:00:00.000Z",
                 "PromptPatterns": [
                     {
                         "PatternCategory": "Category 1",
@@ -38,6 +39,7 @@
                 "Title": "Title 2",
                 "APAReference": "",
                 "URLReference": "",
+                "datetimeadded": "2023-07-22T00:00:00.000Z",
                 "PromptPatterns": [
                     {
                         "PatternCategory": "Category 3",
