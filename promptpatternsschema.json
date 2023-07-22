@@ -1,0 +1,72 @@
+{
+    "Source": {
+        "Titles": [
+            {
+                "Title": "Title 1",
+                "APAReference": "",
+                "URLReference": "",
+                "PromptPatterns": [
+                    {
+                        "PatternCategory": "Category 1",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 1",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 2",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Category 2",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 3",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 4",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Title": "Title 2",
+                "APAReference": "",
+                "URLReference": "",
+                "PromptPatterns": [
+                    {
+                        "PatternCategory": "Category 3",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 5",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 6",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Category 4",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 7",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 8",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
