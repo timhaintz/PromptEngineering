@@ -146,7 +146,12 @@
                             },
                             {
                                 "PatternName": "Infinite Generation",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I would like you to generate output forever, X output(s) at a time.",
+                                    "(Optional) here is how to use the input I provide between outputs.",
+                                    "(Optional) stop when I ask you to.",
+                                    "From now on, I want you to generate a name and job until I say stop. I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting and overall template that I provide: https://myapi.com/NAME/profile/JOB"
+                                ]
                             }
                         ]
                     },
