@@ -97,7 +97,7 @@
                         "PatternCategory": "Interaction",
                         "PromptPatterns": [
                             {
-                                "PatternName": "Flipperd Interaction",
+                                "PatternName": "Flipped Interaction",
                                 "ExamplePrompts": []
                             },
                             {
