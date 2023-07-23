@@ -238,7 +238,14 @@
                             },
                             {
                                 "PatternName": "Change Request Simulation",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "My software system architecture is X",
+                                    "The system must adhere to these constraints",
+                                    "I want you to simulate a change to the system that I will describe",
+                                    "Describe the impact of that change in terms of Q",
+                                    "This is the change to my system",
+                                    "My software system uses the OpenAPI specification that you generated earlier. I want you to simulate a change where a new mandatory field needs to be added to the prompts. List which functions and which files will need to be modified."
+                                ]
                             }
                         ]
                     },
@@ -301,7 +308,13 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Code Clustering",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Within scope X",
+                                    "I want you to write or refactor code in a way that separates code with property Y from code that has property Z.",
+                                    "These are examples of code with property Y.",
+                                    "These are examples of code with property Z.",
+                                    "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."
+                                ]
                             },
                             {
                                 "PatternName": "Intermediate Abstraction",
