@@ -17,7 +17,7 @@
                 ],
                 "URLReference": "https://arxiv.org/abs/2302.11382",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Input Semantics",
                         "PromptPatterns": [
@@ -134,7 +134,7 @@
                 ],
                 "URLReference": "https://arxiv.org/abs/2303.07839",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Requirements Elicitation",
                         "PromptPatterns": [
@@ -229,7 +229,7 @@
                 ],
                 "URLReference": "http://www.dre.vanderbilt.edu/~schmidt/PDF/ADA_Europe_Position_Paper.pdf",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Prompt Improvement",
                         "PromptPatterns": [
@@ -264,7 +264,7 @@
                 "APAReference": "",
                 "URLReference": "",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 3",
                         "PromptPatterns": [
@@ -298,7 +298,7 @@
                 "APAReference": "",
                 "URLReference": "",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 3",
                         "PromptPatterns": [
@@ -332,7 +332,7 @@
                 "APAReference": "",
                 "URLReference": "",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 3",
                         "PromptPatterns": [
