@@ -265,15 +265,34 @@
                             },
                             {
                                 "PatternName": "Few-shot Example Generator",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I am going to provide you system X",
+                                    "Create a set of N examples that demonstrate usage of system X",
+                                    "Make the examples as complete as possible in their coverage",
+                                    "(Optionally) The examples should be based on the public interfaces of system X",
+                                    "(Optionally) The examples should focus on X",
+                                    "I am going to provide you code. Create a set of 10 examples that demonstrate usage of this OpenAPI specification related to registration of new users.",
+                                    "I am going to provide you code. Create a set of 10 examples that demonstrate usage of this code. Make the examples as complete as possible in their coverage. The examples should be based on the public interfaces of the code."
+                                ]
                             },
                             {
                                 "PatternName": "Domain-Specific Language (DSL) Creation",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I want you to create a domain-specific language for X",
+                                    "The syntax of the language must adhere to the following constraints",
+                                    "Explain the language to me and provide some examples",
+                                    "I want you to create a domain-specific language to document requirements. The syntax of the language should be based on YAML. Explain the language to me and provide some examples."
+                                ]
                             },
                             {
                                 "PatternName": "Architectural Possibilities",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I am developing a software system with X for Y",
+                                    "The system must adhere to these constraints",
+                                    "Describe N possible architectures for this system",
+                                    "Describe the architecture in terms of Q",
+                                    "I am developing a python web application using FastApi that allows users to publish interesting ChatGPT prompts, similar to twitter. Describe three possible architectures for this system. Describe the architecture with respect to modules and the functionality that each module contains."
+                                ]
                             }
                         ]
                     },
