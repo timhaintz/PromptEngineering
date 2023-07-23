@@ -203,11 +203,11 @@
                 "Title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
                 "APAReference": "White, J., Hays, S., Fu, Q., Spencer-Smith, J., & Schmidt, D. C. (2023). Chatgpt prompt patterns for improving code quality, refactoring, requirements elicitation, and software design. arXiv preprint arXiv:2303.07839.",
                 "Authors"   : [
-                    "James White",
-                    "Scott Hays",
-                    "Qingyun Fu",
-                    "Jared Spencer-Smith",
-                    "David C. Schmidt"
+                    "Jules White",
+                    "Sam Hays",
+                    "Quchen Fu",
+                    "Jesse Spencer-Smith",
+                    "Douglas C. Schmidt"
                 ],
                 "URLReference": "https://arxiv.org/abs/2303.07839",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
@@ -217,11 +217,24 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Requirements Simulator",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I want you to act as the system",
+                                    "Use the requirements to guide your behavior",
+                                    "I will ask you to do X, and you will tell me if X is possible given the requirements.",
+                                    "If X is possible, explain why using the requirements.",
+                                    "If I can't do X based on the requirements, write the missing requirements needed in format Y.",
+                                    "Now, I want you to act as this system. Use the requirements to guide your behavior. I am going to say, I want to do X, and you will tell me if X is possible given the requirements. If X is possible, provide a step-by-step set of instructions on how I would accomplish it and provide additional details that would help implement the requirement. If I can’t do X based on the requirements, write the missing requirements to make it possible as user stories.",
+                                    "Now, I want you to act as this system in a text based simulator of the system. Use the requirements to guide your behavior. You will describe the user interface for the system, based on the requirements, and what I can do on each screen. I am going to say, I want to do X, and you will tell me if X is possible given the requirements and the current screen. If X is possible, provide a step-by-step set of instructions how I would accomplish it and provide additional details that would help implement the requirement. If I can't do X based on the requirements, write the missing requirements to make it possible as user stories. Whenever the state of the user interface changes, update the user on what they are looking at. Tell me what I am looking at in the system and ask me what I want to do."
+                                ]
                             },
                             {
                                 "PatternName": "Specification Disambiguation",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Within this scope",
+                                    "Consider these requirements or specifications",
+                                    "Point out any areas of ambiguity or potentially unintended outcomes",
+                                    "The following will represent system requirements. Point out any areas that could be construed as ambiguous or lead to unintended outcomes. Provide ways in which the language can be more precise."
+                                ]
                             },
                             {
                                 "PatternName": "Change Request Simulation",
@@ -234,11 +247,21 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "API Generator",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Using system description X",
+                                    "Generate an API specification for the system",
+                                    "The API specification should be in format Y",
+                                    "Generate an OpenAPI specification for a web application that would implement the listed requirements."
+                                ]
                             },
                             {
                                 "PatternName": "API Simulator",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Act as the described system using specification X",
+                                    "I will type in requests to the API in format Y",
+                                    "You will respond with the appropriate response in format Z based on specification X",
+                                    "Act as this web application based on the OpenAPI specification. I will type in HTTP requests in plain text and you will respond with the appropriate HTTP response based on the OpenAPI specification."
+                                ]
                             },
                             {
                                 "PatternName": "Few-shot Example Generator",
