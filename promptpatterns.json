@@ -318,15 +318,33 @@
                             },
                             {
                                 "PatternName": "Intermediate Abstraction",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "If you write or refactor code with property X",
+                                    "that uses other code with property Y",
+                                    "(Optionally) Define property X",
+                                    "(Optionally) Define property Y",
+                                    "Insert an intermediate abstraction Z between X and Y",
+                                    "(Optionally) Abstraction Z should have these properties",
+                                    "Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed."
+                                ]
                             },
                             {
                                 "PatternName": "Principled Code",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Within this scope",
+                                    "Generate, refactor, or create code to adhere to named Principle X",
+                                    "From now on, whenever you write, refactor, or review code, make sure it adheres to SOLID design principles."
+                                ]
                             },
                             {
                                 "PatternName": "Hidden Assumptions",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Within this scope",
+                                    "List the assumptions that this code makes",
+                                    "(Optionally) Estimate how hard it would be to change these assumptions or their likelyhood of changing",
+                                    "List the assumptions that this code makes and how hard it would be to change each of them given the current code structure.",
+                                    "List the assumptions in this code that make it difficult to change from a MongoDB database to MySQL."
+                                ]
                             }
                         ]
                     },
