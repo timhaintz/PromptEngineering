@@ -8,7 +8,7 @@
                 "Authors":[],
                 "URLReference": "",
                 "datetimeadded": "2023-07-22T00:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 1",
                         "PromptPatterns": [
@@ -44,7 +44,7 @@
                 "Authors":[],
                 "URLReference": "",
                 "datetimeadded": "2023-07-22T00:00:00.000Z",
-                "PromptPatterns": [
+                "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 3",
                         "PromptPatterns": [
