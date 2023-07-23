@@ -2,8 +2,10 @@
     "Source": {
         "Titles": [
             {
+                "id":0,
                 "Title": "Title 1",
                 "APAReference": "",
+                "Authors":[],
                 "URLReference": "",
                 "datetimeadded": "2023-07-22T00:00:00.000Z",
                 "PromptPatterns": [
@@ -36,8 +38,10 @@
                 ]
             },
             {
+                "id":1,
                 "Title": "Title 2",
                 "APAReference": "",
+                "Authors":[],
                 "URLReference": "",
                 "datetimeadded": "2023-07-22T00:00:00.000Z",
                 "PromptPatterns": [
