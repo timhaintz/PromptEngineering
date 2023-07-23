@@ -43,7 +43,11 @@
                             },
                             {
                                 "PatternName": "Persona",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Act as persona X",
+                                    "Provide outputs that persona X would create",
+                                    "From now on, act as a security reviewer. Pay close attention to the security details of any code that we look at. Provide outputs that a security reviewer would regarding the code."
+                                ]
                             },
                             {
                                 "PatternName": "Visualization Generator",
@@ -98,7 +102,12 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Flipped Interaction",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I would like you to ask me questions to achieve X",
+                                    "You should ask questions until this condition is met or to achieve this goal (alternatively, forever)",
+                                    "(Optional) ask me the questions one at a time, two at a time, etc.",
+                                    "From now on, I would like you to ask me questions to deploy a Python application to AWS. When you have enough information to deploy the application, create a Python script to automate the deployment."
+                                ]
                             },
                             {
                                 "PatternName": "Game Play",
