@@ -3,7 +3,7 @@
         "Titles": [
             {
                 "id":0,
-                "Title": "Title 1",
+                "Title": "Title 0",
                 "APAReference": "",
                 "Authors":[],
                 "URLReference": "",
@@ -39,7 +39,7 @@
             },
             {
                 "id":1,
-                "Title": "Title 2",
+                "Title": "Title 1",
                 "APAReference": "",
                 "Authors":[],
                 "URLReference": "",
