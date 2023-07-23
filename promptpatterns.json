@@ -61,7 +61,14 @@
                             },
                             {
                                 "PatternName": "Template",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I am going to provide a template for your output",
+                                    "X is my placeholder for content",
+                                    "Try to fit the output into one or more of the placeholders that I list",
+                                    "Please preserve the formatting and overall template that I provide",
+                                    "This is the template: PATTERN with PLACEHOLDERS",
+                                    "I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting  and overall template that I provide at https://myapi.com/NAME/profile/JOB"
+                                ]
                             }
                         ]
                     },
@@ -70,7 +77,12 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Fact Check List",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Generate a set of facts that are contained in the output",
+                                    "The set of facts should be inserted in a specific point in the output",
+                                    "The set of facts should be the fundamental facts that could undermine the veracity of the output if any of them are incorrect",
+                                    "From now on, when you generate an answer, create a set of facts that the answer depends on that should be fact-checked and list this set of facts at the end of your output. Only include facts related to cybersecurity."
+                                ]
                             },
                             {
                                 "PatternName": "Reflection",
