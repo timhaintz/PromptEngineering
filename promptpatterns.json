@@ -353,11 +353,21 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Pseudo-code Refactoring",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Refactor the code",
+                                    "So that it matches this pseudo-code",
+                                    "Match the structure of the pseudo-code as closely as possible",
+                                    "Refactor the following code to match the following psuedo-code. Match the structure of the pseudo-code as closely as possible. files = scan_features() for file in files: print file name for file in files: load feature mount router create_openapi() main():launch app"
+                                ]
                             },
                             {
                                 "PatternName": "Data-guided Refactoring",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Refactor the code",
+                                    "So that its input, output, or stored data format is X",
+                                    "Provide one or more examples of X",
+                                    "Let's refactor execute graph so that graph has the following format {'graph':{ ...current graph format... }, 'sorted nodes': { 'a': ['b','c'...],...}}"
+                                ]
                             }
                         ]
                     }
@@ -366,16 +376,12 @@
             {
                 "id":2,
                 "Title": "Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering",
-                "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
+                "APAReference": "Schmidt, D. C., Spencer-Smith, J., Fu, Q., & White, J. Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering.",
                 "Authors": [
-                    "James White",
-                    "Qingyun Fu",
-                    "Scott Hays",
-                    "Michael Sandborn",
-                    "Carlos Olea",
-                    "Hannah Gilbert",
-                    "Jared Spencer-Smith",
-                    "David C. Schmidt"
+                    "Douglas C. Schmidt",
+                    "Jesse Spencer-Smith",
+                    "Quchen Fu",
+                    "Jules White"
                 ],
                 "URLReference": "http://www.dre.vanderbilt.edu/~schmidt/PDF/ADA_Europe_Position_Paper.pdf",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
