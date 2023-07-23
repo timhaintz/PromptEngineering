@@ -6,14 +6,15 @@
                 "Title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
                 "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
                 "Authors": [
-                    "James White",
-                    "Qingyun Fu",
-                    "Scott Hays",
+                    "Jules White",
+                    "Quchen Fu",
+                    "Sam Hays",
                     "Michael Sandborn",
                     "Carlos Olea",
-                    "Hannah Gilbert",
-                    "Jared Spencer-Smith",
-                    "David C. Schmidt"
+                    "Henry Gilbert",
+                    "Ashraf Elnashar",
+                    "Jesse Spencer-Smith",
+                    "Douglas C. Schmidt"
                 ],
                 "URLReference": "https://arxiv.org/abs/2302.11382",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
@@ -46,7 +47,8 @@
                                 "ExamplePrompts": [
                                     "Act as persona X",
                                     "Provide outputs that persona X would create",
-                                    "From now on, act as a security reviewer. Pay close attention to the security details of any code that we look at. Provide outputs that a security reviewer would regarding the code."
+                                    "From now on, act as a security reviewer. Pay close attention to the security details of any code that we look at. Provide outputs that a security reviewer would regarding the code.",
+                                    "You are going to pretend to be a Linux terminal for a computer that has been compromised by an attacker. When I type in a command, you are going to output the corresponding text that the Linux terminal would produce."
                                 ]
                             },
                             {
@@ -81,15 +83,32 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Question Refinement",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Within scope X, suggest a better version of the question to use instead",
+                                    "(Optional) prompt me if I would like to use the better version instead",
+                                    "From now on, whenever I ask a question about a software artifact’s security, suggest a better version of the question to use that incorporates information specific to security risks in the language or framework that I am using instead and ask me if I would like to use your question instead.",
+                                    "Whenever I ask a question about how to write some code, suggest a better version of my question that asks how to write the code in a way that minimizes my dependencies on external libraries."
+                                ]
                             },
                             {
                                 "PatternName": "Alternative Approaches",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Within scope X, if there are alternative ways to accomplish the same thing, list the best alternate approaches",
+                                    "(Optional) compare/contrast the pros and cons of each approach",
+                                    "(Optional) include the original way that I asked",
+                                    "(Optional) prompt me for which approach I would like to use",
+                                    "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."
+                                ]
                             },
                             {
                                 "PatternName": "Cognitive Verifier",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "When you are asked a question, follow these rules",
+                                    "Generate a number of additional questions that would help more accurately answer the question",
+                                    "Combine the answers to the individual questions to produce the final answer to the overall question",
+                                    "When I ask you a question, generate three additional questions that would help you give a more accurate answer. When I have answered the three questions, combine the answers to produce the final answers to my original question.",
+                                    "When I ask you a question, generate three additional questions that would help you give a more accurate answer. Assume that I know little about the topic that we are discussing and please define any terms that are not general knowledge. When I have answered the three questions, combine the answers to produce the final answers to my original question."
+                                ]
                             },
                             {
                                 "PatternName": "Refusal Breaker",
