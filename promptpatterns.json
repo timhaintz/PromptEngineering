@@ -113,7 +113,7 @@
                                 "ExamplePrompts": [
                                     "Within scope X, suggest a better version of the question to use instead",
                                     "(Optional) prompt me if I would like to use the better version instead",
-                                    "From now on, whenever I ask a question about a software artifact’s security, suggest a better version of the question to use that incorporates information specific to security risks in the language or framework that I am using instead and ask me if I would like to use your question instead.",
+                                    "From now on, whenever I ask a question about a software artifact's security, suggest a better version of the question to use that incorporates information specific to security risks in the language or framework that I am using instead and ask me if I would like to use your question instead.",
                                     "Whenever I ask a question about how to write some code, suggest a better version of my question that asks how to write the code in a way that minimizes my dependencies on external libraries."
                                 ]
                             },
@@ -140,10 +140,10 @@
                             {
                                 "PatternName": "Refusal Breaker",
                                 "ExamplePrompts": [
-                                    "Whenever you can’t answer a question",
-                                    "Explain why you can’t answer the question",
+                                    "Whenever you can't answer a question",
+                                    "Explain why you can't answer the question",
                                     "Provide one or more alternative wordings of the question that you could answer",
-                                    "Whenever you can’t answer a question, explain why and provide one or more alternate wordings of the question that you can’t answer so that I can improve my questions."
+                                    "Whenever you can't answer a question, explain why and provide one or more alternate wordings of the question that you can’t answer so that I can improve my questions."
                                 ]
                             }
                         ]
