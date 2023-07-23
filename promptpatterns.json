@@ -53,11 +53,21 @@
                             },
                             {
                                 "PatternName": "Visualization Generator",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Generate an X that I can provide to tool Y to visualize it",
+                                    "Whenever I ask you to visualize something, please create either a Graphviz Dot file or DALL-E prompt that I can use to create the visualization. Choose the appropriate tools based on what needs to be visualized."
+                                ]
                             },
                             {
                                 "PatternName": "Recipe",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "I would like to achieve X",
+                                    "I know that I need to perform steps A,B,C",
+                                    "Provide a complete sequence of steps for me",
+                                    "Fill in any missing steps",
+                                    "Identify any unnecessary steps",
+                                    "I am trying to deploy an application to the cloud. I know that I need to install the necessary dependencies on a virtual machine for my application. I know that I need to sign up for an AWS account. Please provide a complete sequence of steps. Please fill in any missing steps. Please identify any unnecessary steps."
+                                ]
                             },
                             {
                                 "PatternName": "Template",
@@ -86,7 +96,12 @@
                             },
                             {
                                 "PatternName": "Reflection",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Whenever you generate an answer",
+                                    "Explain the reasoning and assumptions behind your answer",
+                                    "(Optional) ...so that I can improve my question",
+                                    "When you provide an answer, please explain the reasoning and assumptions behind your selection of software frameworks. If possible, use specific examples or evidence with associated code samples to support your answer of why the framework is the best selection for the task. Moreover, please address any potential ambiguities or limitations in your answer, in order to provide a more complete and accurate response."
+                                ]
                             }
                         ]
                     },
@@ -124,7 +139,12 @@
                             },
                             {
                                 "PatternName": "Refusal Breaker",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Whenever you can’t answer a question",
+                                    "Explain why you can’t answer the question",
+                                    "Provide one or more alternative wordings of the question that you could answer",
+                                    "Whenever you can’t answer a question, explain why and provide one or more alternate wordings of the question that you can’t answer so that I can improve my questions."
+                                ]
                             }
                         ]
                     },
@@ -142,7 +162,11 @@
                             },
                             {
                                 "PatternName": "Game Play",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Create a game for me around X",
+                                    "One or more fundamental rules of the game",
+                                    "We are going to play a cybersecurity game. You are going to pretend to be a Linux terminal for a computer that has been compromised by an attacker. When I type in a command, you are going to output the corresponding text that the Linux terminal would produce. I am going to use commands to try and figure out how the system was compromised. The attack should have done one or more of the following things: (1) launched new processes, (2) changed files, (3) opened new ports to receive communication, (4) created new outbound connections, (5) changed passwords, (6) created new user accounts, or (7) read and stolen information. To start the game, print a scenario of what happened that led to my investigation and make the description have clues that I can use to get started."
+                                ]
                             },
                             {
                                 "PatternName": "Infinite Generation",
@@ -160,7 +184,15 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Context Manager",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Within scope X",
+                                    "Please consider Y",
+                                    "Please ignore Z",
+                                    "(Optional) start over",
+                                    "When analyzing the following pieces of code, only consider security aspects.",
+                                    "When analyzing the following pieces of code, do not consider formatting or naming conventions.",
+                                    "Ignore everything that we have discussed. Start over."
+                                ]
                             }
                         ]
                     }
