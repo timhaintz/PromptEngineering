@@ -23,11 +23,10 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Meta Language Creation",
-                                "ExamplePrompts": []
-                            },
-                            {
-                                "PatternName": "Pattern 2",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "When I say X, I mean Y (or would like you to do Y)",
+                                    "From now on, whenever I type two identifiers separated by a “→”, I am describing a graph. For example, “a → b” is describing a graph with nodes “a” and “b” and an edge between them. If I separate identifiers by “-[w:2, z:3]→”, I am adding properties of the edge, such as a weight or label."
+                            ]
                             }
                         ]
                     },
@@ -36,7 +35,11 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Output Automater",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Whenever you produce an output that has at least one step to take and the following properties (alternatively, always do this)",
+                                    "Produce an executable artifact of type X that will automate these steps",
+                                    "From now on, whenever you generate code that spans more than one file, generate a Python script that can be run to automatically create the specified files or make changes to existing files to insert the generated code."
+                                ]
                             },
                             {
                                 "PatternName": "Persona",
