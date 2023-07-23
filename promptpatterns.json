@@ -2,8 +2,19 @@
     "Source": {
         "Titles": [
             {
+                "id":0,
                 "Title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
                 "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
+                "Authors": [
+                    "James White",
+                    "Qingyun Fu",
+                    "Scott Hays",
+                    "Michael Sandborn",
+                    "Carlos Olea",
+                    "Hannah Gilbert",
+                    "Jared Spencer-Smith",
+                    "David C. Schmidt"
+                ],
                 "URLReference": "https://arxiv.org/abs/2302.11382",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
                 "PromptPatterns": [
@@ -108,8 +119,16 @@
                 ]
             },
             {
+                "id":1,
                 "Title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
                 "APAReference": "White, J., Hays, S., Fu, Q., Spencer-Smith, J., & Schmidt, D. C. (2023). Chatgpt prompt patterns for improving code quality, refactoring, requirements elicitation, and software design. arXiv preprint arXiv:2303.07839.",
+                "Authors"   : [
+                    "James White",
+                    "Scott Hays",
+                    "Qingyun Fu",
+                    "Jared Spencer-Smith",
+                    "David C. Schmidt"
+                ],
                 "URLReference": "https://arxiv.org/abs/2303.07839",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
                 "PromptPatterns": [
@@ -192,8 +211,19 @@
                 ]
             },
             {
+                "id":2,
                 "Title": "Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering",
                 "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
+                "Authors": [
+                    "James White",
+                    "Qingyun Fu",
+                    "Scott Hays",
+                    "Michael Sandborn",
+                    "Carlos Olea",
+                    "Hannah Gilbert",
+                    "Jared Spencer-Smith",
+                    "David C. Schmidt"
+                ],
                 "URLReference": "http://www.dre.vanderbilt.edu/~schmidt/PDF/ADA_Europe_Position_Paper.pdf",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
                 "PromptPatterns": [
