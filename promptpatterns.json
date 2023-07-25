@@ -17,6 +17,7 @@
                     "Douglas C. Schmidt"
                 ],
                 "URLReference": "https://arxiv.org/abs/2302.11382",
+                "datetimesubmitted": "2023-02-21T12:42:44.000Z",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
@@ -210,6 +211,7 @@
                     "Douglas C. Schmidt"
                 ],
                 "URLReference": "https://arxiv.org/abs/2303.07839",
+                "datetimesubmitted": "2023-03-11T14:43:17.000Z",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
@@ -384,6 +386,7 @@
                     "Jules White"
                 ],
                 "URLReference": "http://www.dre.vanderbilt.edu/~schmidt/PDF/ADA_Europe_Position_Paper.pdf",
+                "datetimesubmitted": "N/A",
                 "datetimeadded": "2023-07-22T12:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
@@ -400,7 +403,12 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Reflection",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Whenever you generate an answer",
+                                    "Explain the reasoning and assumptions behind your answer",
+                                    "(Optional) ...so that I can improve my question",
+                                    "When you provide an answer, please explain the reasoning and assumptions behind your selection of software frameworks. If possible, use specific examples or evidence with associated code samples to support your answer of why the framework is the best selection for the task. Moreover, please address any potential ambiguities or limitations in your answer, in order to provide a more complete and accurate response."
+                                ]
                             }
                         ]
                     },
@@ -409,7 +417,11 @@
                         "PromptPatterns": [
                             {
                                 "PatternName": "Game Play",
-                                "ExamplePrompts": []
+                                "ExamplePrompts": [
+                                    "Create a game for me around X",
+                                    "One or more fundamental rules of the game",
+                                    "We will play a cybersecurity game where you pretend to be a Linux terminal for a computer compromised by an attacker. When I type in a command, you will output the corresponding text the Linux terminal would produce. I will use commands to try and figure out how the system was compromised. The attack should have done one or more of the following things: (1) launched new processes, (2) changed files, (3) opened new ports to receive communication, (4) created new outbound connections, (5) changed passwords, (6) created new user accounts, or (7) read and stolen information. To start the game, print a scenario of what happened that led to my investigation and make the description have clues I can use to get started."
+                                ]
                             }
                         ]
                     }
