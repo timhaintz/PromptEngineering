@@ -397,7 +397,8 @@
                                 "ExamplePrompts": [
                                     "Within scope X, suggest a better version of the question to use instead",
                                     "(Optional) prompt me if I would like to use the better version instead",
-                                    "From now on, whenever I ask a question about a software artifact's security, suggest a better version of the question to use that incorporates information specific to security risks in the language or framework that I am using instead and ask me if I would like to use your question instead."
+                                    "From now on, whenever I ask a question about a software artifact's security, suggest a better version of the question to use that incorporates information specific to security risks in the language or framework that I am using instead and ask me if I would like to use your question instead.",
+                                    "Whenever I ask a question about how to write some code, suggest a better version of my question that asks how to write the code in a way that minimizes my dependencies on external libraries."
                                 ]
                             }
                         ]
