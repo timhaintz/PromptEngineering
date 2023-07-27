@@ -436,7 +436,7 @@
                 "Title": "Title 2",
                 "APAReference": "",
                 "URLReference": "",
-                "datetimeadded": "2023-07-22T12:00:00.000Z",
+                "datetimeadded": "0001-01-01T00:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 3",
@@ -470,7 +470,7 @@
                 "Title": "Title 2",
                 "APAReference": "",
                 "URLReference": "",
-                "datetimeadded": "2023-07-22T12:00:00.000Z",
+                "datetimeadded": "0001-01-01T00:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 3",
@@ -504,7 +504,7 @@
                 "Title": "Title 2",
                 "APAReference": "",
                 "URLReference": "",
-                "datetimeadded": "2023-07-22T12:00:00.000Z",
+                "datetimeadded": "0001-01-01T00:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Category 3",
