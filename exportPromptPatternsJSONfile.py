@@ -7,8 +7,6 @@ Author:         Tim Haintz
 Creation Date:  26/7/2023
 LINKS
 EXAMPLES
-GitHub Copilot: Sure! Here are some examples of how you can call the `exportPromptPatternsJSONfile.py` script with different arguments:
-
 1. To print the prompt patterns to the console, run the following command:
 
 ```
