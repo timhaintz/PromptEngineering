@@ -47,10 +47,6 @@ import argparse
 import json
 import datetime
 
-# Get the current date and time
-now = datetime.datetime.now()
-# Format the date as YYYYmmdd
-date_str = now.strftime('%Y%m%d')
 
 def read_prompt_patterns():
     # Open the JSON file
@@ -95,6 +91,7 @@ def write_prompt_patterns(data, format, filename):
             f.write('<body>\n')
             for title in data['Source']['Titles']:
                 f.write('<h1>{}</h1>\n'.format(title['Title']))
+                f.write('<p>URL: <a href="{}">{}</a></p>\n'.format(title['URLReference'], title['URLReference']))
                 for category in title['CategoriesAndPatterns']:
                     f.write('<h2>{}</h2>\n'.format(category['PatternCategory']))
                     for pattern in category['PromptPatterns']:
