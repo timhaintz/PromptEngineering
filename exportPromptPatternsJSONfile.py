@@ -116,6 +116,21 @@ parser.add_argument('--format', choices=['console', 'html'], default='console', 
 parser.add_argument('--filename', default='promptpatterns.html', help='output filename (default: promptpatterns.html)')
 args = parser.parse_args()
 
+# Print help section with examples
+print('EXAMPLES')
+print('To print the prompt patterns to the console, run the following command:')
+print('python exportPromptPatternsJSONfile.py --format console')
+print()
+print('To write the prompt patterns to an HTML file with the default filename `promptpatterns.html`, run the following command:')
+print('python exportPromptPatternsJSONfile.py --format html')
+print()
+print('To write the prompt patterns to an HTML file with a custom filename, run the following command:')
+print('python exportPromptPatternsJSONfile.py --format html --filename mypromptpatterns.html')
+print()
+print('To include the current date in the filename of the HTML file, use the `{date}` placeholder in the filename argument, like this:')
+print('python exportPromptPatternsJSONfile.py --format html --filename promptpatterns_{date}.html')
+print()
+
 # Read the prompt patterns from the JSON file
 data = read_prompt_patterns()
 
