@@ -6,6 +6,42 @@ Version:        0.1
 Author:         Tim Haintz                         
 Creation Date:  26/7/2023
 LINKS
+EXAMPLES
+GitHub Copilot: Sure! Here are some examples of how you can call the `exportPromptPatternsJSONfile.py` script with different arguments:
+
+1. To print the prompt patterns to the console, run the following command:
+
+```
+python exportPromptPatternsJSONfile.py --format console
+```
+
+This will print the prompt patterns to the console in a formatted way.
+
+2. To write the prompt patterns to an HTML file with the default filename `promptpatterns.html`, run the following command:
+
+```
+python exportPromptPatternsJSONfile.py --format html
+```
+
+This will write the prompt patterns to an HTML file called `promptpatterns.html` in the same directory as the script.
+
+3. To write the prompt patterns to an HTML file with a custom filename, run the following command:
+
+```
+python exportPromptPatternsJSONfile.py --format html --filename mypromptpatterns.html
+```
+
+This will write the prompt patterns to an HTML file called `mypromptpatterns.html` in the same directory as the script.
+
+4. To include the current date in the filename of the HTML file, use the `{date}` placeholder in the filename argument, like this:
+
+```
+python exportPromptPatternsJSONfile.py --format html --filename promptpatterns_{date}.html
+```
+
+This will write the prompt patterns to an HTML file with a filename that includes the current date in the format `promptpatterns_YYYYmmdd.html`.
+
+Note that you can replace `promptpatterns.html`, `mypromptpatterns.html`, or `promptpatterns_{date}.html` with any filename you like.
 
 '''
 # Import modules
