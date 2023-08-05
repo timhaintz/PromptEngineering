@@ -433,6 +433,37 @@
                 ]
             },
             {
+                "id":3,
+                "Title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach- A case study in Libya ",
+                "APAReference": "Abdulshahed, A. M. (2023). A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach-A case study in Libya. Available at SSRN 4492606.",
+                "URLReference": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4492606",
+                "datetimeadded": "2023-08-05T03:17:42.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "N/A",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Expert #1",
+                                "ExamplePrompts": ["As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria."]
+                            },
+                            {
+                                "PatternName": "Expert #2",
+                                "ExamplePrompts": ["As a university professor, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria."]
+                            },
+                            {
+                                "PatternName": "Expert #3",
+                                "ExamplePrompts": ["As a quality Assurance officer in the university, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria."]
+                            },
+                            {
+                                "PatternName": "Pattern 4",
+                                "ExamplePrompts": ["As a university president, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria."]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id":4,
                 "Title": "Title 2",
                 "APAReference": "",
                 "URLReference": "",
@@ -467,40 +498,7 @@
                 ]
             },
             {
-                "Title": "Title 2",
-                "APAReference": "",
-                "URLReference": "",
-                "datetimeadded": "0001-01-01T00:00:00.000Z",
-                "CategoriesAndPatterns": [
-                    {
-                        "PatternCategory": "Category 3",
-                        "PromptPatterns": [
-                            {
-                                "PatternName": "Pattern 5",
-                                "ExamplePrompts": []
-                            },
-                            {
-                                "PatternName": "Pattern 6",
-                                "ExamplePrompts": []
-                            }
-                        ]
-                    },
-                    {
-                        "PatternCategory": "Category 4",
-                        "PromptPatterns": [
-                            {
-                                "PatternName": "Pattern 7",
-                                "ExamplePrompts": []
-                            },
-                            {
-                                "PatternName": "Pattern 8",
-                                "ExamplePrompts": []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
+                "id":5,
                 "Title": "Title 2",
                 "APAReference": "",
                 "URLReference": "",
