@@ -63,21 +63,26 @@ prompts = '''# Prompt Example 0.
 - Etc'''
 
 def extract_text_from_pdf(pdf_file_name):
-    # Open the PDF file in read-binary mode
     with open(pdf_file_name, 'rb') as pdf_file:
         # Create a PDF reader object
-        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
+
+        # Get the title of the document
+        title = pdf_reader.metadata.title
+
+        # Print the title of the document
+        print(f'Title: {title}')
 
         # Get the number of pages in the PDF file
-        num_pages = pdf_reader.getNumPages()
+        num_pages = len(pdf_reader.pages)
 
         # Loop through each page in the PDF file
         for page_num in range(num_pages):
             # Get the page object for the current page
-            page_obj = pdf_reader.getPage(page_num)
+            page_obj = pdf_reader.pages[page_num]
 
             # Extract the text from the page object
-            page_text = page_obj.extractText()
+            page_text = page_obj.extract_text()
 
             # Print the text for the current page
             print(f'Text for page {page_num + 1}:')
@@ -103,9 +108,10 @@ def generate_json(prompts, data):
 if __name__ == '__main__':
     # Get the file path from the command line arguments
     file_path = sys.argv[1]
-    # Replace 'path/to/your/pdf_file.pdf' with the actual file path
+    # Replace 'file_path' with the actual file path
     extract_text_from_pdf(file_path)
 
+'''
 ####################
 # OpenAI CODE #
 ####################
@@ -117,3 +123,4 @@ response = openai.ChatCompletion.create(
 # Print the response from the OpenAI API
 print(response['choices'][0]['message']['content'])
 #print(response)
+'''
