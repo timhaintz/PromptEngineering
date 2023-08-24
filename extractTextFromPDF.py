@@ -20,7 +20,7 @@ import openai
 import json
 from datetime import datetime
 import re
-import PyPDF2
+import fitz
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -63,30 +63,32 @@ prompts = '''# Prompt Example 0.
 - Etc'''
 
 def extract_text_from_pdf(pdf_file_name):
-    with open(pdf_file_name, 'rb') as pdf_file:
-        # Create a PDF reader object
-        pdf_reader = PyPDF2.PdfReader(pdf_file)
+    with fitz.open(pdf_file_name) as pdf_file:
+        # Get the document information
+        document_info = pdf_file.metadata
 
-        # Get the title of the document
-        title = pdf_reader.metadata.title
+        # Extract the title from the document information
+        title = document_info.get('title')
 
-        # Print the title of the document
+        # Get the file name from the file path
+        file_name = os.path.basename(pdf_file_name)
+
+        # Print the file name and extracted title
         print(f'Title: {title}')
+        print(f'File name: {file_name}')
+        
 
-        # Get the number of pages in the PDF file
-        num_pages = len(pdf_reader.pages)
+        # Iterate over the pages of the PDF file
+        for page_num in range(pdf_file.page_count):
+            # Get the page object
+            page = pdf_file[page_num]
 
-        # Loop through each page in the PDF file
-        for page_num in range(num_pages):
-            # Get the page object for the current page
-            page_obj = pdf_reader.pages[page_num]
+            # Extract the text from the page
+            text = page.get_text()
 
-            # Extract the text from the page object
-            page_text = page_obj.extract_text()
-
-            # Print the text for the current page
-            print(f'Text for page {page_num + 1}:')
-            print(page_text)
+            # Print the extracted text
+            print(f'Page {page_num + 1}:')
+            print(text)
 
 def generate_json(prompts, data):
     initial_prompt = [
