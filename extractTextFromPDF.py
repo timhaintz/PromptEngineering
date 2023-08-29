@@ -97,19 +97,12 @@ def extract_text_from_pdf(pdf_file_name):
         # Return the list of dictionaries containing the extracted text
         return f'Title: {title}', f'File name: {file_name}', extracted_text_dicts
 
-def generate_json(prompts, data):
-    initial_prompt = [
-    {"role": "system", "content": "#Prompt:"},
-    {"role": "user", "content": "#Content:"}
+def generate_OpenAIPromptAndContent(prompts, data):
+    promptAndContent = [
+        {"role": "system", "content": prompts},
+        {"role": "user", "content": data}
     ]
-    # Convert the initial prompt to a JSON string
-    prompt_json = json.dumps(initial_prompt)
 
-    # Add the deidentified data and prompt to the prompt variable
-    promptAndContent = prompt_json.replace('"#Prompt:"', f'"{prompts}"')
-    promptAndContent = promptAndContent.replace('"#Content:"', f'"#Content:{data}"')
-    # Replace newline characters with the escape sequence \n
-    promptAndContent = promptAndContent.replace('\n', '\\n')
     return promptAndContent
 
 if __name__ == '__main__':
@@ -123,28 +116,17 @@ if __name__ == '__main__':
     for i, text in enumerate(extracted_text_dicts):
         print(f'Page {i + 1}:')
         # Generate JSON data
-        openAIInput = generate_json(prompts, text)
+        openAIInput = generate_OpenAIPromptAndContent(prompts, text)
         #print(openAIInput)
-        # Parse the JSON string into a Python object and send to OpenAI
         try:
-            openAIInput_obj = json.loads(openAIInput)
-            openAIInput_list = list(openAIInput_obj)
-            #print(openAIInput_list)
-            ###############
-            # OpenAI CODE #
-            ###############
-            try:
-                response = openai.ChatCompletion.create(
-                    engine="gpt-35-00", # engine = "deployment_name".
-                    messages=openAIInput_list
-                )
-                # Print the response from the OpenAI API
-                print(response['choices'][0]['message']['content'])
-                continue
-            except  openai.Error as e:
-                # Handle the error
-                print(f"Error: {e}")
-                continue
-        except json.JSONDecodeError:
-            print(f"Invalid JSON on page {i + 1}")
+            response = openai.ChatCompletion.create(
+                engine="gpt-35-Turbo-16k", # engine = "deployment_name".
+                messages=openAIInput
+            )
+            # Print the response from the OpenAI API
+            print(response['choices'][0]['message']['content'])
+            continue
+        except  openai.Error as e:
+            # Handle the error
+            print(f"Error: {e}")
             continue
