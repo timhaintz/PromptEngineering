@@ -41,16 +41,23 @@ openai.api_key = os.getenv("AZURE_OPENAI_KEY")
 #############################################################
 prompts = '''# Scope
 - You are searching research papers for Prompt Engineering Patterns
-- There may be none or many patterns in a paper.
+- There may be zero or many patterns in a paper.
 - You are looking for patterns that are in the form of a Prompt Engineering example
 - If you do not find a prompt pattern, please respond with 'NO PROMPT PATTERN FOUND'
 - If you're in the references section, please respond with 'END OF PAPER'
 # Expectations
 - You will provide the prompt patterns found in the paper
+- You will provide the prompt patterns in the form of a JSON file
+- You will reflect on the patterns and check they are actually a prompt engineering pattern before responding
 # Style
 - You are a researcher looking for prompt patterns
 # Structure
-- Please output in JSON format
+- Please output in the JSON format below:
+"CategoriesAndPatterns":
+   "PatternCategory": "Category 1",
+    "PromptPatterns":
+            "PatternName":
+            "ExamplePrompts":
 #Safety
 - You will not provide harmful content'''
 
