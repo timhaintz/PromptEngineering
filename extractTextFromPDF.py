@@ -56,7 +56,7 @@ prompts = '''# Scope
 "CategoriesAndPatterns":
    "PatternCategory": "Category 1",
     "PromptPatterns":
-            "PatternName":
+            "PatternName": "Pattern 1",
             "ExamplePrompts":
 #Safety
 - You will not provide harmful content'''
@@ -123,13 +123,16 @@ if __name__ == '__main__':
 
     # Loop through the extracted text pages in sets of 'pages_per_set'
     for i in range(0, len(extracted_text_dicts), pages_per_set):
-        # Extract the text for the current set of pages
+        # Extract the text and page numbers for the current set of pages
         text_set = extracted_text_dicts[i:i+pages_per_set]
+        #page_numbers = [page['page'] for page in text_set]
+        #page_number_range = f'{page_numbers[0]}-{page_numbers[-1]}'
+        #print('Page number range:', page_number_range)
         # Join the text for the current set of pages into a single string
         text = '\f'.join([text_set[i] for i in range(len(text_set))])
         # Generate the OpenAI prompt and content using the extracted text
         openAIInput = generate_OpenAIPromptAndContent(prompts, text)
-        #print(openAIInput)
+        
         try:
             response = openai.ChatCompletion.create(
                 engine="gpt-35-Turbo-16k", # engine = "deployment_name".
@@ -142,3 +145,4 @@ if __name__ == '__main__':
             # Handle the error
             print(f"Error: {e}")
             continue
+            
