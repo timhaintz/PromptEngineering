@@ -80,9 +80,10 @@ def extract_text_from_pdf(pdf_file_name):
         extracted_text_dicts = []
 
         # Iterate over the pages of the PDF file
-        for page_num in range(pdf_file.page_count):
+        for each_page in range(pdf_file.page_count):
             # Get the page object
-            page = pdf_file[page_num]
+            page = pdf_file[each_page]
+            page_num = each_page + 1
 
             # Extract the text from the page
             text = page.get_text()
@@ -99,7 +100,7 @@ def extract_text_from_pdf(pdf_file_name):
             text = text.replace("\f", "\\f")
 
             # Add the text to the list
-            extracted_text_dicts.append(text)
+            extracted_text_dicts.append({'page': page_num, 'text': text})
             
         # Return the list of dictionaries containing the extracted text
         return f'Title: {title}', f'File name: {file_name}', extracted_text_dicts
@@ -125,14 +126,14 @@ if __name__ == '__main__':
     for i in range(0, len(extracted_text_dicts), pages_per_set):
         # Extract the text and page numbers for the current set of pages
         text_set = extracted_text_dicts[i:i+pages_per_set]
-        #page_numbers = [page['page'] for page in text_set]
-        #page_number_range = f'{page_numbers[0]}-{page_numbers[-1]}'
-        #print('Page number range:', page_number_range)
+        page_numbers = [page['page'] for page in text_set]
+        page_number_range = f'{page_numbers[0]}-{page_numbers[-1]}'
+        print('Page number range:', page_number_range)
         # Join the text for the current set of pages into a single string
-        text = '\f'.join([text_set[i] for i in range(len(text_set))])
+        text = '\f'.join([page['text'] for page in text_set])
         # Generate the OpenAI prompt and content using the extracted text
         openAIInput = generate_OpenAIPromptAndContent(prompts, text)
-        
+        # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
         try:
             response = openai.ChatCompletion.create(
                 engine="gpt-35-Turbo-16k", # engine = "deployment_name".
@@ -145,4 +146,3 @@ if __name__ == '__main__':
             # Handle the error
             print(f"Error: {e}")
             continue
-            
