@@ -118,11 +118,16 @@ if __name__ == '__main__':
     # Replace 'file_path' with the actual file path
     title, file_name, extracted_text_dicts = extract_text_from_pdf(file_path)
 
-    # Print the extracted text for each page
-    #print(title, file_name)
-    for i, text in enumerate(extracted_text_dicts):
-        print(f'Page {i + 1}:')
-        # Generate JSON data
+    # Set the number of pages to pass to OpenAI at a time
+    pages_per_set = 4
+
+    # Loop through the extracted text pages in sets of 'pages_per_set'
+    for i in range(0, len(extracted_text_dicts), pages_per_set):
+        # Extract the text for the current set of pages
+        text_set = extracted_text_dicts[i:i+pages_per_set]
+        # Join the text for the current set of pages into a single string
+        text = '\f'.join([text_set[i] for i in range(len(text_set))])
+        # Generate the OpenAI prompt and content using the extracted text
         openAIInput = generate_OpenAIPromptAndContent(prompts, text)
         #print(openAIInput)
         try:
@@ -133,7 +138,7 @@ if __name__ == '__main__':
             # Print the response from the OpenAI API
             print(response['choices'][0]['message']['content'])
             continue
-        except  openai.Error as e:
+        except  openai.error as e:
             # Handle the error
             print(f"Error: {e}")
             continue
