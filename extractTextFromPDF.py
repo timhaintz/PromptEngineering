@@ -32,9 +32,9 @@ load_dotenv()
 # VARIABLES #
 #############
 openai.api_type = "azure"
-openai.api_base = os.getenv("AZURE_OPENAI_ENDPOINT")
+openai.api_base = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 openai.api_version = "2023-05-15"
-openai.api_key = os.getenv("AZURE_OPENAI_KEY")
+openai.api_key = os.getenv("AZUREVS_OPENAI_KEY")
 
 #############################################################
 # Enter Prompt Instructions Here Separated by '#' character #
@@ -133,16 +133,18 @@ if __name__ == '__main__':
         text = '\f'.join([page['text'] for page in text_set])
         # Generate the OpenAI prompt and content using the extracted text
         openAIInput = generate_OpenAIPromptAndContent(prompts, text)
+        #print(openAIInput)
         # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
         try:
             response = openai.ChatCompletion.create(
-                engine="gpt-35-Turbo-16k", # engine = "deployment_name".
+                engine="tjhvs-gpt-35-Turbo-16k", # engine = "model deployment name".
                 messages=openAIInput
             )
             # Print the response from the OpenAI API
             print(response['choices'][0]['message']['content'])
             continue
-        except  openai.error as e:
+        except Exception as e:
             # Handle the error
             print(f"Error: {e}")
             continue
+        
