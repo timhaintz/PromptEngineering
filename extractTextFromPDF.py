@@ -35,22 +35,23 @@ openai.api_type = "azure"
 openai.api_base = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 openai.api_version = "2023-05-15"
 openai.api_key = os.getenv("AZUREVS_OPENAI_KEY")
+iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
 #############################################################
 # Enter Prompt Instructions Here Separated by '#' character #
 #############################################################
 prompts = '''# Scope
-- You are searching research papers for Prompt Engineering Patterns
-- There may be zero or many patterns in a paper.
-- You are looking for patterns that are in the form of a Prompt Engineering example
-- If you do not find a prompt pattern, please respond with 'NO PROMPT PATTERN FOUND'
-- If you're in the references section, please respond with 'END OF PAPER'
+- You are searching research papers for Prompt Engineering Prompts
+- There may be zero examples
+- Look for patterns that are an example Prompt Engineering Prompt
+- Please respond with 'NO PROMPT PATTERN FOUND' if no Prompt Engineering Prompt is found
+- Respond with 'END OF PAPER' in the bibliography or references section
 # Expectations
-- You will provide the prompt patterns found in the paper
-- You will provide the prompt patterns in the form of a JSON file
-- You will reflect on the patterns and check they are actually a prompt engineering pattern before responding
+- Provide the prompt patterns found in the paper
+- Provide the prompt patterns in the form of a JSON file
+- Reflect on the patterns and check they are a prompt engineering pattern before responding
 # Style
-- You are a researcher looking for prompt patterns
+- You are a PhD researcher looking for prompt patterns
 # Structure
 - Please output in the JSON format below:
 "CategoriesAndPatterns":
@@ -99,7 +100,7 @@ def extract_text_from_pdf(pdf_file_name):
             text = text.replace("\b", "\\b")
             text = text.replace("\f", "\\f")
 
-            # Add the text to the list
+            # Add page number and text to the list
             extracted_text_dicts.append({'page': page_num, 'text': text})
             
         # Return the list of dictionaries containing the extracted text
@@ -142,6 +143,9 @@ if __name__ == '__main__':
             )
             # Print the response from the OpenAI API
             print(response['choices'][0]['message']['content'])
+            #output_file = os.path.join(r'C:\Users\tihaintz\OneDrive - Microsoft\Git\PromptEngineering4Cybersecurity\extractedPromptPatternsFromPDF', f'{os.path.splitext(file_name)[0]}_{iso_datetime}.json')
+            #with open(output_file, 'w') as f:
+                #json.dump(response, f)
             continue
         except Exception as e:
             # Handle the error

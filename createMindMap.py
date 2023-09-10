@@ -12,12 +12,23 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
 https://resources.github.com/copilot-for-business/
 '''
-
+import os
+import datetime
 import json
 import pydot
 
+# Get the current date and time
+now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+
+# Create the folder path with the current date and time
+folder_path = os.path.join('graphvizFiles', now)
+
+# Create the folder if it does not exist
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
+
 # Load the JSON data from the file
-with open('promptpatterns.json', 'r') as f:
+with open('promptpatterns.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 # Loop through each title and generate a DOT file for each title
@@ -39,6 +50,6 @@ for title in data['Source']['Titles']:
             graph.add_node(pattern_node)
             graph.add_edge(pydot.Edge(category_node, pattern_node))
 
-    # Write the graph to a DOT file with the title as the file name
-    file_name = title['Title'].replace(' ', '_').lower() + '.dot'
-    graph.write(file_name)
+            # Create the file name with the current date and time
+            file_name = os.path.join(folder_path, title['Title'].replace(' ', '_').lower() + '.dot')
+            graph.write(file_name)
