@@ -17,11 +17,14 @@ import datetime
 import json
 import pydot
 
-# Get the current date and time
-now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+# Get the current UTC time
+now_utc = datetime.datetime.utcnow()
+
+# Format the UTC time as a string
+now_utc_str = now_utc.strftime('%Y-%m-%d_%H-%M-%S')
 
 # Create the folder path with the current date and time
-folder_path = os.path.join('graphvizFiles', now)
+folder_path = os.path.join('graphvizFiles', now_utc_str)
 
 # Create the folder if it does not exist
 if not os.path.exists(folder_path):
@@ -34,19 +37,19 @@ with open('promptpatterns.json', 'r', encoding='utf-8') as f:
 # Loop through each title and generate a DOT file for each title
 for title in data['Source']['Titles']:
     # Create a new graph
-    graph = pydot.Dot(graph_type='digraph')
+    graph = pydot.Dot(graph_type='digraph', rankdir='LR')
 
     # Add the title as the root node
-    root_node = pydot.Node(title['Title'])
+    root_node = pydot.Node(title['Title'], shape='box')
     graph.add_node(root_node)
 
     # Loop through each category and pattern and add them as child nodes
     for category in title['CategoriesAndPatterns']:
-        category_node = pydot.Node(category['PatternCategory'])
+        category_node = pydot.Node(category['PatternCategory'], shape='box')
         graph.add_node(category_node)
         graph.add_edge(pydot.Edge(root_node, category_node))
         for pattern in category['PromptPatterns']:
-            pattern_node = pydot.Node(pattern['PatternName'])
+            pattern_node = pydot.Node(pattern['PatternName'], shape='box')
             graph.add_node(pattern_node)
             graph.add_edge(pydot.Edge(category_node, pattern_node))
 
