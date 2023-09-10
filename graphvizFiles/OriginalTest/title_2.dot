@@ -1,0 +1,15 @@
+digraph G {
+"Title 2";
+"Category 3";
+"Title 2" -> "Category 3";
+"Pattern 5";
+"Category 3" -> "Pattern 5";
+"Pattern 6";
+"Category 3" -> "Pattern 6";
+"Category 4";
+"Title 2" -> "Category 4";
+"Pattern 7";
+"Category 4" -> "Pattern 7";
+"Pattern 8";
+"Category 4" -> "Pattern 8";
+}
