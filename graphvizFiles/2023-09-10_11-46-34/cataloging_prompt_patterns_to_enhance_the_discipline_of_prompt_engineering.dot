@@ -1,0 +1,15 @@
+digraph G {
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering";
+"Prompt Improvement";
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering" -> "Prompt Improvement";
+"Question Refinement";
+"Prompt Improvement" -> "Question Refinement";
+"Error Identification";
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering" -> "Error Identification";
+Reflection;
+"Error Identification" -> Reflection;
+Interaction;
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering" -> Interaction;
+"Game Play";
+Interaction -> "Game Play";
+}
