@@ -11,6 +11,7 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/chatgpt-quicks
 https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt?pivots=programming-language-chat-completions
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
 https://resources.github.com/copilot-for-business/
+https://graphviz.org/
 '''
 import os
 import datetime
