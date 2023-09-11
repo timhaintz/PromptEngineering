@@ -110,20 +110,24 @@ def count_prompt_patterns(data):
     total_title_count = 0
     total_category_count = 0
     total_pattern_count = 0
+    total_example_count = 0
     for title in data['Source']['Titles']:
-        title_count = 0
+        title_count = 1
         category_count = 0
         pattern_count = 0
+        example_count = 0
         for category in title['CategoriesAndPatterns']:
             category_count += 1
             for pattern in category['PromptPatterns']:
                 pattern_count += 1
+                example_count += len(pattern['ExamplePrompts'])
             title_count += 1
-        title_counts[title['Title']] = (title_count, category_count, pattern_count)
-        total_title_count += title_count
+        title_counts[title['Title']] = (title_count - 1, category_count, pattern_count, example_count)
+        total_title_count += 1
         total_category_count += category_count
         total_pattern_count += pattern_count
-    return title_counts, (total_title_count, total_category_count, total_pattern_count)
+        total_example_count += example_count
+    return title_counts, (total_title_count, total_category_count, total_pattern_count, total_example_count)
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description='Export prompt patterns from JSON file.')
@@ -161,9 +165,11 @@ elif args.count:
         print('Title:', title)
         print('\tTotal Pattern Categories:', counts[1])
         print('\tTotal Patterns:', counts[2])
+        print('\tTotal Example Prompts:', counts[3])
     print('Total Titles:', total_counts[0])
     print('Total Pattern Categories:', total_counts[1])
     print('Total Patterns:', total_counts[2])
+    print('Total Example Prompts:', total_counts[3])
 else:
     # Read the prompt patterns from the JSON file
     data = read_prompt_patterns()
