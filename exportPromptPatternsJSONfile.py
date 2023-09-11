@@ -105,8 +105,29 @@ def write_prompt_patterns(data, format, filename):
     else:
         print('Invalid format:', format)
 
+def count_prompt_patterns(data):
+    title_counts = {}
+    total_title_count = 0
+    total_category_count = 0
+    total_pattern_count = 0
+    for title in data['Source']['Titles']:
+        title_count = 0
+        category_count = 0
+        pattern_count = 0
+        for category in title['CategoriesAndPatterns']:
+            category_count += 1
+            for pattern in category['PromptPatterns']:
+                pattern_count += 1
+            title_count += 1
+        title_counts[title['Title']] = (title_count, category_count, pattern_count)
+        total_title_count += title_count
+        total_category_count += category_count
+        total_pattern_count += pattern_count
+    return title_counts, (total_title_count, total_category_count, total_pattern_count)
+
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description='Export prompt patterns from JSON file.')
+parser.add_argument('--count', action='store_true', help='count the number of Titles, PatternCategory, and pattern name')
 parser.add_argument('--format', choices=['console', 'html'], default='console', help='output format (default: console)')
 parser.add_argument('--filename', default='promptpatterns.html', help='output filename (default: promptpatterns.html)')
 parser.add_argument('--show-examples', action='store_true', help='show examples of how to use this script')
@@ -127,6 +148,22 @@ if args.show_examples:
     print()
     print('To include the current date in the filename of the HTML file, use the `{date}` placeholder in the filename argument, like this:')
     print('python exportPromptPatternsJSONfile.py --format html --filename promptpatterns_{date}.html')
+    print()
+    print('To count the number of Titles, PatternCategory, and pattern name, run the following command:')
+    print('python exportPromptPatternsJSONfile.py --count')
+elif args.count:
+    # Read the prompt patterns from the JSON file
+    data = read_prompt_patterns()
+
+    # Count the number of Titles, PatternCategory, and pattern name
+    title_counts, total_counts = count_prompt_patterns(data)
+    for title, counts in title_counts.items():
+        print('Title:', title)
+        print('\tTotal Pattern Categories:', counts[1])
+        print('\tTotal Patterns:', counts[2])
+    print('Total Titles:', total_counts[0])
+    print('Total Pattern Categories:', total_counts[1])
+    print('Total Patterns:', total_counts[2])
 else:
     # Read the prompt patterns from the JSON file
     data = read_prompt_patterns()
