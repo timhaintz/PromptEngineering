@@ -32,7 +32,7 @@ if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
 # Load the JSON data from the file
-with open('promptpatternsschema.json', 'r', encoding='utf-8') as f:
+with open('promptpatterns.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 # Loop through each title and generate a DOT file for each title
