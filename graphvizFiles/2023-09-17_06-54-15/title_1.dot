@@ -1,0 +1,16 @@
+digraph G {
+rankdir=LR;
+"Title 1" [shape=box];
+"Category 3" [shape=box];
+"Title 1" -> "Category 3";
+"Pattern 5" [shape=box];
+"Category 3" -> "Pattern 5";
+"Pattern 6" [shape=box];
+"Category 3" -> "Pattern 6";
+"Category 4" [shape=box];
+"Title 1" -> "Category 4";
+"Pattern 7" [shape=box];
+"Category 4" -> "Pattern 7";
+"Pattern 8" [shape=box];
+"Category 4" -> "Pattern 8";
+}
