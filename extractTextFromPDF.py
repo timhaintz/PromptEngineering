@@ -144,6 +144,10 @@ if __name__ == '__main__':
             )
             # Print the response from the OpenAI API
             #print(response['choices'][0]['message']['content'])
+            
+            # Convert response to JSON format
+            response_json = json.dumps(response['choices'][0]['message']['content'], indent=4)
+            
             # Save extracted prompt patterns to a JSON file
             filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
             folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
@@ -152,7 +156,7 @@ if __name__ == '__main__':
             save_file_path = os.path.join(folder_name, save_file_name)
             print(f'Saving extracted prompt patterns to {save_file_path}')
             with open(save_file_path, 'w') as f:
-                json.dump(response['choices'][0]['message']['content'], f)
+                f.write(response_json)
             continue
         except Exception as e:
             # Handle the error
