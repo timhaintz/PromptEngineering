@@ -24,6 +24,7 @@ from datetime import datetime
 import time
 import re
 import fitz
+import json
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -104,7 +105,7 @@ def extract_text_from_pdf(pdf_file_name):
             extracted_text_dicts.append({'page': page_num, 'text': text})
             
         # Return the list of dictionaries containing the extracted text
-        return f'Title: {title}', f'File name: {file_name}', extracted_text_dicts
+        return title, file_name, extracted_text_dicts
 
 def generate_OpenAIPromptAndContent(prompts, data):
     promptAndContent = [
@@ -117,7 +118,7 @@ def generate_OpenAIPromptAndContent(prompts, data):
 if __name__ == '__main__':
     # Get the file path from the command line arguments
     file_path = sys.argv[1]
-    # Replace 'file_path' with the actual file path
+    # Extract the text from the PDF file
     title, file_name, extracted_text_dicts = extract_text_from_pdf(file_path)
 
     # Set the number of pages to pass to OpenAI at a time
@@ -142,10 +143,16 @@ if __name__ == '__main__':
                 messages=openAIInput
             )
             # Print the response from the OpenAI API
-            print(response['choices'][0]['message']['content'])
-            #output_file = os.path.join(r'C:\Users\tihaintz\OneDrive - Microsoft\Git\PromptEngineering4Cybersecurity\extractedPromptPatternsFromPDF', f'{os.path.splitext(file_name)[0]}_{iso_datetime}.json')
-            #with open(output_file, 'w') as f:
-                #json.dump(response, f)
+            #print(response['choices'][0]['message']['content'])
+            # Save extracted prompt patterns to a JSON file
+            filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
+            folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
+            os.makedirs(folder_name, exist_ok=True)
+            save_file_name = f"{iso_datetime}_{filename_without_extension}_{page_number_range}.json"      
+            save_file_path = os.path.join(folder_name, save_file_name)
+            print(f'Saving extracted prompt patterns to {save_file_path}')
+            with open(save_file_path, 'w') as f:
+                json.dump(response['choices'][0]['message']['content'], f)
             continue
         except Exception as e:
             # Handle the error
