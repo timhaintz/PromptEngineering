@@ -713,6 +713,62 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":6,
+                "Title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+                "APAReference": "Khot, T., Trivedi, H., Finlayson, M., Fu, Y., Richardson, K., Clark, P., & Sabharwal, A. (2022). Decomposed prompting: A modular approach for solving complex tasks. arXiv preprint arXiv:2210.02406.",
+                "Authors":[
+                    "Tushar Khot",
+                    "Harsh Trivedi",
+                    "Matthew Finlayson",
+                    "Yao Fu",
+                    "Kyle Richardson",
+                    "Peter Clark",
+                    "Ashish Sabharwal"
+                ],
+                "URLReference": "https://arxiv.org/abs/2210.02406",
+                "datetimesubmitted": "2023-04-11T19:39:17.000Z",
+                "datetimeadded": "2023-09-24T07:03:14.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Decomposed Prompting",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Decomposed Prompt",
+                                "ExamplePrompts": [
+                                    "QC: Concatenate the first letter of every word in \"Jack Ryan\" using spaces\nQ1: [split] What are the words in \"Jack Ryan\"?\n#1: [\"Jack\", \"Ryan\"]\nQ2: (foreach) [str_pos] What is the first letter of #1?\n#2: [\"J\", \"R\"]\nQ3: [merge] Concatenate #2 with spaces\n#3: \"J R\"\nQ4: [EOQ]"
+                                ]
+                            },
+                            {
+                                "PatternName": "Hierarchical Decomposition",
+                                "ExamplePrompts": [
+                                    "QC: What is the letter at position 1 of the word \"Google\"?\nQS: [split] What are the letters and their positions in \"Google\"?\nA: \"[(G, 1), (o, 2), (o, 3), (g, 4), (l, 5), (e, 6)]\"\nQS: [arr_pos] What is at position 1 in #1?\nA: \"G\"\nQS: [EOQ]\""
+                                ]
+                            },
+                            {
+                                "PatternName": "Recursive Decomposition",
+                                "ExamplePrompts": [
+                                    "QC: Reverse the sequence \"laptop, photo, clip\".\nQS: [extract] First is laptop. Second is photo. Third is\nclip. Now to reverse, change the order to: Third is\nclip. Second is photo. First is laptop. So the answer\nis \"clip, photo, laptop\".\nA: \"laptop, photo, clip\"\nQS: [EOQ]",
+                                    "QC: Reverse the sequence \"newspaper, glasses, laptop, bottle\".\nQS: [list_split] Split the sequence \"...\".\nA: \"newspaper, glasses\" and \"laptop, bottle\"\nQS: [reverse] Reverse the sequence \"newspaper, glasses\"\nA: \"glasses, newspaper\"\nQS: [reverse] Reverse the sequence \"laptop, bottle\"\nA: \"bottle, laptop\"\nQS: [merge] Concatenate \"bottle, laptop\" and \"glasses, newspaper\" using a comma\nA: \"bottle, laptop, glasses, newspaper\"\nQS: [EOQ]"
+                                ]
+                            },
+                            {
+                                "PatternName": "External API Calls",
+                                "ExamplePrompts": [
+                                    "QC: Which company manufactured Lost Gravity?\nQS: [retrieve] Which company manufactured Lost Gravity?\nA: [\"Lost Gravity (roller coaster)\", \"The Roller Coaster\", ...]\nQS: [singlehop_rcqa] Titles: [\"Lost Gravity (roller coaster)\", ... ]. \nQuestion: Which company manufactured Lost Gravity?\nA: {\"titles\": [\"Lost Gravity (roller coaster)\", ...] \"answer\": \"Mack Rides\"}\nQS: [EOQ]",
+                                    "[retrieve]Wikipedia Title: Mack Rides\nMack Rides GmbH & Co ...\nQ: Which company manufactured The\nLost Gravity?\nA: \"Mack Rides\""                                    
+                                ]
+                            },
+                            {
+                                "PatternName": "Letter Concatenation",
+                                "ExamplePrompts": [
+                                    "QC: Take the last letters of the words in ”Augusta Ada King” and concatenate them using a space.\nQS: [split] What are the words in ”Augusta Ada King”?\nA: [”Augusta”, ”Ada”, ”King”]\nQS: [str position] What is the last letter in ”Augusta”?\nA: ”a”\nQS: [str position] What is the last letter in ”Ada”?\nA: ”a”\nQS: [str position] What is the last letter in ”King”?\nA: ”g”\nQS: [merge] Concatenate [”a”, ”a”, ”g”] using a space.\nA: ”a a g”\nQS: [EOQ]"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
