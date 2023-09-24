@@ -586,7 +586,134 @@
                         ]
                     }
                 ] 
+            },
+            {
+                "id": 5,
+                "Title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+                "APAReference": "Wang, X., Wei, J., Schuurmans, D., Le, Q., Chi, E., Narang, S., ... & Zhou, D. (2022). Self-consistency improves chain of thought reasoning in language models. arXiv preprint arXiv:2203.11171.",
+                "Authors": [
+                    "Xuezhi Wang",
+                    "Jason Wei",
+                    "Dale Schuurmans",
+                    "Quoc Le",
+                    "Ed H. Chi",
+                    "Sharan Narang",
+                    "Aakanksha Chowdhery",
+                    "Denny Zhou"
+                ],
+                "URLReference": "http://arxiv.org/abs/2203.11171",
+                "datetimesubmitted": "2023-03-07T17:57:37.000Z",
+                "datetimeadded": "2023-09-24T07:03:14.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Chain-of-Thought Prompting",
+                                "ExamplePrompts": [
+                                    "Given the question “If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?”, instead of directly responding with “5”, a language model would be prompted to respond with the entire chain-of-thought: “There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5.”"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Self-consistency",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "MultiArith",
+                                "ExamplePrompts": [
+                                    "[MultiArith] Sam had 10 socks. If he threw away 3 old ones that didn\u2019t fit and bought 36 new ones, how many socks would he have?"
+                                ]
+                            },
+                            {
+                                "PatternName": "SVAMP",
+                                "ExamplePrompts": [
+                                    "[SVAMP] In a school there are 697 girls and the rest are boys. If there are 228 more girls than boys, how many boys are there in that school?"
+                                ]
+                            },
+                            {
+                                "PatternName": "AQuA",
+                                "ExamplePrompts": [
+                                    "[AQuA] There are 10 oranges in a basket. Find the no. of ways in which 2 oranges are chosen from the basket?",
+                                    "[AQuA] The capacity of a tank of dimensions (8 m x 6 m x 2.5 m) is (a) 120 litres (b) 1200 litres (c) 12000 litres (d) 120000 litres (e) None of these"
+                                ]
+                            },
+                            {
+                                "PatternName": "CommonsenseQA",
+                                "ExamplePrompts": [
+                                    "[CommonsenseQA] The man laid on the soft moss and looked up at the trees, where was the man? (a) niagra falls (b) forest (c) waterfall (d) ground (e) tree"
+                                ]
+                            },
+                            {
+                                "PatternName": "AI2 Reasoning Challenge (ARC)",
+                                "ExamplePrompts": [
+                                    "[ARC] Which of these will most likely harm a habitat? (a) planting trees. (b) water pollution. (c) rainfall. (d) sunlight.",
+                                    "[ARC-challenge] Which process in the carbon cycle takes the longest to complete? (a) emission of waste. (b) respiration in animals. (c) photosynthesis in plants. (d) formation of fossil fuels.",
+                                    "[ARC-easy] Which source of energy is nonrenewable? (a) coal. (b) sunlight. (c) water. (d) wood.",
+                                    "[ARC-challenge] Students studied the revolution of Earth around the Sun. During which month will Florida have the most sunlight energy available? (a) March. (b) June. (c) September. (d) December."
+                                ]
+                            },
+                            {
+                                "PatternName": "GSM8K",
+                                "ExamplePrompts": [
+                                    "[GSM8K] Kyle bought last years best-selling book for $19.50. This is with a 25% discount from the original price. What was the original price of the book?"
+                                ]
+                            },
+                            {
+                                "PatternName": "StrategyQA",
+                                "ExamplePrompts": [
+                                    "[StrategyQA] Yes or no: Can the Great Depression be treated with Prozac?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Mathematics",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Word Problems - Addition/Subtraction",
+                                "ExamplePrompts": [
+                                    "Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today? A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6."
+                                ]
+                            },
+                            {
+                                "PatternName": "Word Problems - Multiplication/Division",
+                                "ExamplePrompts": [
+                                    "Q: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot? A: There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Logic and Reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Premise and Conclusion",
+                                "ExamplePrompts": [
+                                    "Premise: \"Conceptually cream skimming has two basic dimensions - product and geography.\" Based on this premise, can we conclude the hypothesis \"Product and geography are what make cream skimming work.\" is true? OPTIONS: - yes - no - it is not possible to tell A: Based on \"cream skimming has two basic dimensions\" we can't infer that these two dimensions are what make cream skimming work. The answer is it is not possible to tell."
+                                ]
+                            },
+                            {
+                                "PatternName": "Equivalence",
+                                "ExamplePrompts": [
+                                    "Premise:\"One of our member will carry out your instructions minutely.\"\nBased on this premise, can we conclude the hypothesis \"A member of my team will execute your orders with immense precision.\" is true? OPTIONS:- yes - no - it is not possible to tell A: \"one of\" means the same as \"a member of\", \"carry out\" means the same as \"execute\", and \"minutely\" means the same as \"immense precision\\\". The answer is yes."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Language and Semantics",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Contradiction",
+                                "ExamplePrompts": [
+                                    "Premise: Fun for adults and children. Based on this premise, can we conclude the hypothesis \"Fun for only children.\" is true? OPTIONS: - yes - no - it is not possible to tell A: \"adults and children\" contradicts \"only children\". The answer is no."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
-    }    
+    }
 }
