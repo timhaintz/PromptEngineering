@@ -42,17 +42,8 @@ iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 # Enter Prompt Instructions Here Separated by '#' character #
 #############################################################
 prompts = '''# Scope
-- You are searching research papers for Prompt Engineering Prompts
-- There may be zero examples
-- Look for patterns that are an example Prompt Engineering Prompt
-- Please respond with 'NO PROMPT PATTERN FOUND' if no Prompt Engineering Prompt is found
-- Respond with 'END OF PAPER' in the bibliography or references section
-# Expectations
-- Provide the prompt patterns found in the paper
-- Provide the prompt patterns in the form of a JSON file
-- Reflect on the patterns and check they are a prompt engineering pattern before responding
-# Style
-- You are a PhD researcher looking for prompt patterns
+- Can you find prompt engineering patterns in the content?
+- Can you act like a PhD student and find prompt engineering patterns in the content?
 # Structure
 - Please output in the JSON format below:
 "CategoriesAndPatterns":
