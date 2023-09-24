@@ -41,6 +41,12 @@ This will write the prompt patterns to an HTML file with a filename that include
 
 Note that you can replace `promptpatterns.html`, `mypromptpatterns.html`, or `promptpatterns_{date}.html` with any filename you like.
 
+5. To count the number of Titles, PatternCategory, and pattern name, run the following command:
+
+```
+python exportPromptPatternsJSONfile.py --count
+```
+This will count the number of Titles, PatternCategory, and pattern name and ouput it to the console.
 '''
 # Import modules
 import argparse

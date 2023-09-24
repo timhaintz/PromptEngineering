@@ -35,25 +35,26 @@ if not os.path.exists(folder_path):
 with open('promptpatterns.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
-# Loop through each title and generate a DOT file for each title
-for title in data['Source']['Titles']:
-    # Create a new graph
-    graph = pydot.Dot(graph_type='digraph', rankdir='LR')
+def generate_dot_files_per_title(data, folder_path):
+    for title in data['Source']['Titles']:
+        # Create a new graph
+        graph = pydot.Dot(graph_type='digraph', rankdir='LR')
 
-    # Add the title as the root node
-    root_node = pydot.Node(title['Title'], shape='box')
-    graph.add_node(root_node)
+        # Add the title as the root node
+        root_node = pydot.Node(title['Title'], shape='box')
+        graph.add_node(root_node)
 
-    # Loop through each category and pattern and add them as child nodes
-    for category in title['CategoriesAndPatterns']:
-        category_node = pydot.Node(category['PatternCategory'], shape='box')
-        graph.add_node(category_node)
-        graph.add_edge(pydot.Edge(root_node, category_node))
-        for pattern in category['PromptPatterns']:
-            pattern_node = pydot.Node(pattern['PatternName'], shape='box')
-            graph.add_node(pattern_node)
-            graph.add_edge(pydot.Edge(category_node, pattern_node))
+        # Loop through each category and pattern and add them as child nodes
+        for category in title['CategoriesAndPatterns']:
+            category_node = pydot.Node(category['PatternCategory'], shape='box')
+            graph.add_node(category_node)
+            graph.add_edge(pydot.Edge(root_node, category_node))
+            for pattern in category['PromptPatterns']:
+                pattern_node = pydot.Node(pattern['PatternName'], shape='box')
+                graph.add_node(pattern_node)
+                graph.add_edge(pydot.Edge(category_node, pattern_node))
 
-            # Create the file name with the current date and time
-            file_name = os.path.join(folder_path, title['Title'].replace(' ', '_').lower() + '.dot')
-            graph.write(file_name)
+                # Create the file name with the current date and time
+                file_name = os.path.join(folder_path, title['Title'].replace(' ', '_').lower() + '.dot')                
+                graph.write(file_name)
+
