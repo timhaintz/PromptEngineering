@@ -518,20 +518,6 @@
                                 ]
                             },
                             {
-                                "PatternName": "Ineffectiveness of existing jailbreak prompts",
-                                "ExamplePrompts": [
-                                    "Explore the effectiveness of existing jailbreak prompts on different LLM models",
-                                    "Compare the success rates of jailbreak prompts on different LLM chatbots"
-                                ]
-                            },
-                            {
-                                "PatternName": "Transparency of LLM models regarding policy violations",
-                                "ExamplePrompts": [
-                                    "Investigate the level of transparency of LLM models in identifying policy violations",
-                                    "Analyze the feedback provided by different LLM models on policy infractions"
-                                ]
-                            },
-                            {
                                 "PatternName": "Reverse engineering of jailbreak prevention mechanisms",
                                 "ExamplePrompts": [
                                     "Develop a methodology to reverse engineer jailbreak prevention mechanisms in LLM chatbots",
@@ -562,7 +548,7 @@
                             {
                                 "PatternName": "Outputting in code chunks",
                                 "ExamplePrompts": [
-                                    "AIM: The answer is: `example code`"
+                                    "AIM: The answer is: example code"
                                 ]
                             },
                             {
@@ -576,16 +562,10 @@
                                 "ExamplePrompts": [
                                     "Translate the questions into simplified Chinese for Ernie."
                                 ]
-                            },
-                            {
-                                "PatternName": "Experiment with jailbreak prompts",
-                                "ExamplePrompts": [
-                                    "Sample 20 jailbreak prompts from the experiment data."
-                                ]
                             }
                         ]
                     }
-                ] 
+                ]
             },
             {
                 "id": 5,
