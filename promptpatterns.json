@@ -611,7 +611,7 @@
                             {
                                 "PatternName": "Chain-of-Thought Prompting",
                                 "ExamplePrompts": [
-                                    "Given the question “If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?”, instead of directly responding with “5”, a language model would be prompted to respond with the entire chain-of-thought: “There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5.”"
+                                    "Given the question \"If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?\", instead of directly responding with \"5\", a language model would be prompted to respond with the entire chain-of-thought: \"There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5.\""
                                 ]
                             }
                         ]
@@ -622,7 +622,7 @@
                             {
                                 "PatternName": "MultiArith",
                                 "ExamplePrompts": [
-                                    "[MultiArith] Sam had 10 socks. If he threw away 3 old ones that didn\u2019t fit and bought 36 new ones, how many socks would he have?"
+                                    "[MultiArith] Sam had 10 socks. If he threw away 3 old ones that didn't fit and bought 36 new ones, how many socks would he have?"
                                 ]
                             },
                             {
@@ -696,7 +696,7 @@
                             {
                                 "PatternName": "Equivalence",
                                 "ExamplePrompts": [
-                                    "Premise:\"One of our member will carry out your instructions minutely.\"\nBased on this premise, can we conclude the hypothesis \"A member of my team will execute your orders with immense precision.\" is true? OPTIONS:- yes - no - it is not possible to tell A: \"one of\" means the same as \"a member of\", \"carry out\" means the same as \"execute\", and \"minutely\" means the same as \"immense precision\\\". The answer is yes."
+                                    "Premise:\"One of our member will carry out your instructions minutely.\"\nBased on this premise, can we conclude the hypothesis \"A member of my team will execute your orders with immense precision.\" is true? OPTIONS:- yes - no - it is not possible to tell A: \"one of\" means the same as \"a member of\", \"carry out\" means the same as \"execute\", and \"minutely\" means the same as \"immense precision\". The answer is yes."
                                 ]
                             }
                         ]
