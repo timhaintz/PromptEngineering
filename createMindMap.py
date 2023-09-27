@@ -12,7 +12,7 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
 https://resources.github.com/copilot-for-business/
 https://graphviz.org/
-HELP
+HELP:
 1. To generate a dot file for each title, run the following command:
 ```
 python createMindMap.py promptpatterns.json graphvizFiles --function generate_dot_files_per_title
