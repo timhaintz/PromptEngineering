@@ -81,7 +81,6 @@ def generate_dot_file_category_and_pattern(data, folder_path):
         for category in title['CategoriesAndPatterns']:
             category_node = pydot.Node(category['PatternCategory'], shape='box')
             graph.add_node(category_node)
-            graph.add_edge(pydot.Edge(category_node))
             for pattern in category['PromptPatterns']:
                 pattern_node = pydot.Node(pattern['PatternName'], shape='box')
                 graph.add_node(pattern_node)
