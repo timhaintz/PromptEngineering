@@ -5,11 +5,7 @@ NOTES
 Version:        0.1
 Author:         Tim Haintz                         
 Creation Date:  21/8/2023
-LINKS
-https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#deploy-a-model
-https://learn.microsoft.com/en-us/azure/cognitive-services/openai/chatgpt-quickstart?tabs=command-line&pivots=programming-language-python
-https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt?pivots=programming-language-chat-completions
-https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
+LINKS:
 https://resources.github.com/copilot-for-business/
 https://graphviz.org/
 HELP:
