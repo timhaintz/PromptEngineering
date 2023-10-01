@@ -20,19 +20,28 @@ from categorisation_logic import application
 '''
 
 categoriesAndPatterns = {
-    'Input Semantics': ['Meta Language Creation', 'Pattern 2', 'Pattern 3'],
+    'Input Semantics': ['Meta Language Creation', 'Free-Form Questions'],
     'Output Customization': ['Output Automater', 'Persona', 'Visualization Generator', 'Recipe', 'Template'],
-    'Error Identification': ['Fact Check List', 'Reflection'],
+    'Error Identification': ['Fact Check List', 'Reflection', 'Restrict'],
     'Prompt Improvement': ['Question Refinement', 'Alternative Approaches', 'Cognitive Verifier', 'Refusal Breaker'],
-    'Refactoring': ['Pseudo-code Refactoring', 'Data-guided Refactoring'],
+    'Refactoring': ['Pseudo-code Refactoring', 'Data-guided Refactoring', 'Code Clustering', 'Intermediate Abstraction', 'Principled Code', 'Hidden Assumptions'],
     'Interaction': ['Flipped Interaction', 'Game Play', 'Infinite Generation'],
     'Context Control': ['Context Manager'],
     'Requirements Elicitation': ['Requirements Simulator', 'Specification Disambiguation', 'Change Request Simulation'],
     'System Design and Simulation': ['API Generator', 'API Simulator', 'Few-shot Example Generator', 'Domain-Specific Language (DSL) Creation', 'Architectural Possibilities'],
-    'Mathematics': ['Pattern 28', 'Pattern 29', 'Pattern 30'],
-    'Jailbreaking': ['Pattern 31', 'Pattern 32', 'Pattern 33'],
-    'Self-consistency': ['Pattern 34', 'Pattern 35', 'Pattern 36'],
-    'Logic and Reasoning': ['Pattern 37', 'Pattern 38', 'Pattern 39'],
-    'Decomposed Prompting': ['Pattern 40', 'Pattern 41', 'Pattern 42']
+    'Mathematics': ['Word Problems - Addition/Subtraction', 'Word Problems - Multiplication/Division'],
+    'Jailbreaking': ['Jailbreak Attack', 'Simulated Experiment', 'Successful jailbreaking attempts', 'Reverse engineering of jailbreak prevention mechanisms', 'Testing defense mechanisms through time-based analysis', 'Characterizing keyword-based defense mechanisms', 'Crafting effective jailbreak prompts', 'Outputting in code chunks', 'Interspersing spaces between characters', 'Usage of translated prompts'],
+    'Logic and Reasoning': ['Premise and Conclusion', 'Equivalence', 'Chain-of-Thought Prompting', 'MultiArith', 'SVAMP', 'AQuA', 'CommonsenseQA', 'AI2 Reasoning Challenge (ARC)', 'GSM8K', 'StrategyQA', 'Cloze-Questions'],
+    'Decomposed Prompting': ['Decomposed Prompt', 'Hierarchical Decomposition', 'Recursive Decomposition', 'External API Calls', 'Letter Concatenation'],
+    'Language and Semantics': ['Contradiction'],
+    'Evaluation and Rating': ['Multi-Criteria Rating']
+}
+
+pattern_descriptions = {
+    'Multi-Criteria Rating': 'This pattern refers to Pattern Category: N/A and Pattern Name Expert #1 - #4 in promptpatterns.json.',
+}
+
+application = {
 
 }
+

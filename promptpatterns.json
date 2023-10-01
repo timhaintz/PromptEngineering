@@ -749,6 +749,53 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":7,
+                "Title": "Ask Me Anything: A simple strategy for prompting language models",
+                "APAReference": "Arora, S., Narayan, A., Chen, M. F., Orr, L. J., Guha, N., Bhatia, K., ... & Ré, C. (2022). Ask me anything: A simple strategy for prompting language models. arXiv preprint arXiv:2210.02441.",
+                "Authors":[
+                    "Simran Arora",
+                    "Avanika Narayan",
+                    "Mayee F. Chen",
+                    "Laurel Orr",
+                    "Neel Guha",
+                    "Kush Bhatia",
+                    "Ines Chami",
+                    "Frederic Sala",
+                    "Christopher Ré"
+                ],
+                "URLReference": "http://arxiv.org/abs/2210.02441",
+                "datetimesubmitted": "2022-11-20T00:07:06.000Z",
+                "datetimeadded": "2022-11-20T00:07:06.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Ask Me Anything (AMA)",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Restrict",
+                                "ExamplePrompts": [
+                                    "John invited Mark to come watch Jurassic Park. Output True or False?",
+                                    "Plese see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
+                            ]
+                            },
+                            {
+                                "PatternName": "Cloze-Questions",
+                                "ExamplePrompts": [
+                                    "John invited Mark to come watch Jurassic _",
+                                    "Plese see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
+                                ]
+                            },
+                            {
+                                "PatternName": "Free-Form Questions",
+                                "ExamplePrompts": [
+                                    "Where did John invite Mark?",
+                                    "Plese see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
