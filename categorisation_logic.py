@@ -4,10 +4,10 @@ Dictionaries for categories, applications, etc. to map the promptpatterns.json f
 This is the opinionated logic of the author. The JSON file is the source of truth as per the research papers. 
 This file contains the following dictionaries:
 - root_node: The root node of the mind map
+- domain: A dictionary of domains and applications
+- application: A dictionary of applications and categories
 - categories_and_patterns: A dictionary of categories and patterns
 - pattern_descriptions: A dictionary of pattern descriptions if there is not a direct link of a prompt name to a research paper
-- application: A dictionary of applications and categories
-- domain: A dictionary of domains and applications
 
 NOTES
 Version:        0.1
@@ -27,10 +27,34 @@ from categorisation_logic import application
 ```
 '''
 
+# The root node of the mind map
 root_node = {
     'Q': 'Q?'
 }
 
+# The second node of the mind map. This is the first level of the mind map. Used to map the high level domains and categories.
+domain = {
+    'Coding': ['Programming', 'System Design and Simulation', 'Jailbreaking', 'Decomposed Prompting'],
+    'Cybersecurity': ['Data Science', 'Programming'],
+    'General': ['Chatbot', 'Classification', 'Clustering', 'Content Creation', 'Customer Service', 'Data Science', 'Healthcare', 'Programming', 'Question Answering', 'Sentiment Analysis', 'Translation'],
+}
+
+# The third node of the mind map. This is the second level of the mind map. Used to map the applications and categories.
+application = { 
+    'Chatbot': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control', 'Logic and Reasoning', 'Language and Semantics', 'Evaluation and Rating'],
+    'Classification': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Decomposed Prompting', 'Language and Semantics', 'Evaluation and Rating', 'Summarisation'],
+    'Clustering': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Evaluation and Rating', 'Summarisation'],
+    'Content Creation': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Interaction', 'Context Control', 'Requirements Elicitation', 'System Design and Simulation'], 
+    'Customer Service': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control'], 
+    'Data Science': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Evaluation and Rating'], 
+    'Healthcare': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction'], 
+    'Programming': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Refactoring','System Design and Simulation','Jailbreaking','Decomposed Prompting'], 
+    'Question Answering': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Interaction','Logic and Reasoning','Language and Semantics'],
+    'Sentiment Analysis': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics', 'Summarisation'], 
+    'Translation': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics'] 
+    }
+
+# The fourth node of the mind map. This is the third level of the mind map. Used to map the categories and patterns.
 categories_and_patterns = {
     'Input Semantics': ['Meta Language Creation', 'Free-Form Questions'],
     'Output Customisation': ['Output Automater', 'Persona', 'Visualization Generator', 'Recipe', 'Template'],
@@ -50,29 +74,7 @@ categories_and_patterns = {
     'Summarisation': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics']
 }
 
+# Not used in the mindmap. A dictionary of pattern descriptions if there is not a direct link of a prompt name to a research paper
 pattern_descriptions = {
     'Multi-Criteria Rating': 'This pattern refers to Pattern Category: N/A and Pattern Name Expert #1 - #4 for the id:3 research paper in promptpatterns.json.',
 }
-
-application = { 
-    'Chatbot': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control', 'Logic and Reasoning', 'Language and Semantics', 'Evaluation and Rating'],
-    'Classification': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Decomposed Prompting', 'Language and Semantics', 'Evaluation and Rating', 'Summarisation'],
-    'Clustering': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Evaluation and Rating', 'Summarisation'],
-    'Content Creation': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Interaction', 'Context Control', 'Requirements Elicitation', 'System Design and Simulation'], 
-    'Customer Service': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control'], 
-    'Data Science': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Evaluation and Rating'], 
-    'Healthcare': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction'], 
-    'Programming': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Refactoring','System Design and Simulation','Jailbreaking','Decomposed Prompting'], 
-    'Question Answering': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Interaction','Logic and Reasoning','Language and Semantics'],
-    'Sentiment Analysis': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics', 'Summarisation'], 
-    'Translation': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics'] 
-    }
-
-domain = {
-    'Coding': ['Programming', 'System Design and Simulation', 'Jailbreaking', 'Decomposed Prompting'],
-    'Cybersecurity': ['Data Science', 'Programming'],
-    'General': ['Chatbot', 'Classification', 'Clustering', 'Content Creation', 'Customer Service', 'Data Science', 'Healthcare', 'Programming', 'Question Answering', 'Sentiment Analysis', 'Translation'],
-}
-
-
-
