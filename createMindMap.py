@@ -29,7 +29,7 @@ import json
 import pydot
 import argparse
 # Importing at the global level to avoid circular imports
-from categorisation_logic import root_node, domain, application, categoriesAndPatterns
+from categorisation_logic import root_node, domain, application, categories_and_patterns
 
 
 def get_folder_path(folder_name=None):
@@ -147,4 +147,4 @@ if __name__ == '__main__':
         generate_dot_file_category_and_pattern(data, folder_path)
     elif args.function == 'generate_dot_file_opinionated':
         folder_path = get_folder_path("Opinionated")
-        generate_dot_file_opinionated(data, folder_path)
+        generate_dot_file_opinionated(folder_path)
