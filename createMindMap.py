@@ -1,6 +1,6 @@
 '''
 DESCRIPTION
-Create MindMap from JSON
+Create MindMap from JSON and Python dictionary data
 NOTES
 Version:        0.1
 Author:         Tim Haintz                         
@@ -19,12 +19,18 @@ This will generate a dot file for each title in the `graphvizFiles` folder.
 python createMindMap.py promptpatterns.json graphvizFiles --function generate_dot_file_category_and_pattern
 ```
 This will generate a dot file for the categories and patterns in the `graphvizFiles` folder.
+3. To generate a dot file for the opinionated mind map, run the following command:
+```
+python createMindMap.py graphvizFiles --function generate_dot_file_opinionated
 '''
 import os
 import datetime
 import json
 import pydot
 import argparse
+# Importing at the global level to avoid circular imports
+from categorisation_logic import root_node, domain, application, categoriesAndPatterns
+
 
 def get_folder_path(folder_name=None):
     # Get the current UTC time
@@ -86,10 +92,46 @@ def generate_dot_file_category_and_pattern(data, folder_path):
     file_name = os.path.join(folder_path, 'CategoriesAndPatterns.dot')                
     graph.write(file_name)
 
+
+def generate_dot_file_opinionated(folder_path):
+    # Create the graph object
+    graph = pydot.Dot(graph_type='digraph')
+
+    # Add the root node to the graph
+    root_node_name = list(root_node.keys())[0]
+    root_node_label = root_node[root_node_name]
+    root_node = pydot.Node(root_node_name, shape='box', label=root_node_label)
+    graph.add_node(root_node)
+
+    # Add the domain and application nodes to the graph
+    for domain_name, application_names in domain.items():
+        domain_node = pydot.Node(domain_name, shape='box')
+        graph.add_node(domain_node)
+        graph.add_edge(pydot.Edge(root_node, domain_node))
+        for application_name in application_names:
+            application_node = pydot.Node(application_name, shape='box')
+            graph.add_node(application_node)
+            graph.add_edge(pydot.Edge(domain_node, application_node))
+
+            # Add the categories and patterns to the graph
+            for category_name, pattern_names in categoriesAndPatterns.items():
+                if category_name.startswith(application_name):
+                    category_node = pydot.Node(category_name, shape='box')
+                    graph.add_node(category_node)
+                    graph.add_edge(pydot.Edge(application_node, category_node))
+                    for pattern_name in pattern_names:
+                        pattern_node = pydot.Node(pattern_name, shape='box')
+                        graph.add_node(pattern_node)
+                        graph.add_edge(pydot.Edge(category_node, pattern_node))
+
+    # Write the DOT file to disk
+    dot_file_path = os.path.join(folder_path, 'opinionated.dot')
+    graph.write_dot(dot_file_path)
+
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Create mind maps from JSON data')
+    parser = argparse.ArgumentParser(description='Create mind maps from JSON and dictionary data')
     parser.add_argument('data_file', type=str, help='JSON data file')
-    parser.add_argument('--function', type=str, choices=['generate_dot_files_per_title', 'generate_dot_file_category_and_pattern'], default='generate_dot_files_per_title', help='function to call')
+    parser.add_argument('--function', type=str, choices=['generate_dot_files_per_title', 'generate_dot_file_category_and_pattern', 'generate_dot_file_opinionated'], default='generate_dot_files_per_title', help='function to call')
     args = parser.parse_args()
 
     # Load the JSON data from the file
@@ -101,5 +143,8 @@ if __name__ == '__main__':
         folder_path = get_folder_path("Titles")
         generate_dot_files_per_title(data, folder_path)
     elif args.function == 'generate_dot_file_category_and_pattern':
-        folder_path = get_folder_path("CattegoryAndPattern")
+        folder_path = get_folder_path("CategoryAndPattern")
         generate_dot_file_category_and_pattern(data, folder_path)
+    elif args.function == 'generate_dot_file_opinionated':
+        folder_path = get_folder_path("Opinionated")
+        generate_dot_file_opinionated(data, folder_path)
