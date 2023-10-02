@@ -93,9 +93,9 @@ def generate_dot_file_category_and_pattern(data, folder_path):
     graph.write(file_name)
 
 
-def generate_dot_file_opinionated(folder_path):
+def generate_dot_file_opinionated(folder_path, root_node):
     # Create the graph object
-    graph = pydot.Dot(graph_type='digraph')
+    graph = pydot.Dot(graph_type='digraph', rankdir='LR')
 
     # Add the root node to the graph
     root_node_name = list(root_node.keys())[0]
@@ -114,7 +114,7 @@ def generate_dot_file_opinionated(folder_path):
             graph.add_edge(pydot.Edge(domain_node, application_node))
 
             # Add the categories and patterns to the graph
-            for category_name, pattern_names in categoriesAndPatterns.items():
+            for category_name, pattern_names in categories_and_patterns.items():
                 if category_name.startswith(application_name):
                     category_node = pydot.Node(category_name, shape='box')
                     graph.add_node(category_node)
@@ -125,8 +125,8 @@ def generate_dot_file_opinionated(folder_path):
                         graph.add_edge(pydot.Edge(category_node, pattern_node))
 
     # Write the DOT file to disk
-    dot_file_path = os.path.join(folder_path, 'opinionated.dot')
-    graph.write_dot(dot_file_path)
+    file_name = os.path.join(folder_path, 'opinionated.dot')
+    graph.write(file_name)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Create mind maps from JSON and dictionary data')
@@ -147,4 +147,4 @@ if __name__ == '__main__':
         generate_dot_file_category_and_pattern(data, folder_path)
     elif args.function == 'generate_dot_file_opinionated':
         folder_path = get_folder_path("Opinionated")
-        generate_dot_file_opinionated(folder_path)
+        generate_dot_file_opinionated(folder_path, root_node)
