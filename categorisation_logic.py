@@ -1,6 +1,14 @@
 '''
 DESCRIPTION
 Dictionaries for categories, applications, etc. to map the promptpatterns.json file.
+This is the opinionated logic of the author. The JSON file is the source of truth as per the research papers. 
+This file contains the following dictionaries:
+- root_node: The root node of the mind map
+- categories_and_patterns: A dictionary of categories and patterns
+- pattern_descriptions: A dictionary of pattern descriptions if there is not a direct link of a prompt name to a research paper
+- application: A dictionary of applications and categories
+- domain: A dictionary of domains and applications
+
 NOTES
 Version:        0.1
 Author:         Tim Haintz                         
@@ -19,7 +27,11 @@ from categorisation_logic import application
 ```
 '''
 
-categoriesAndPatterns = {
+root_node = {
+    'Q': 'Q?'
+}
+
+categories_and_patterns = {
     'Input Semantics': ['Meta Language Creation', 'Free-Form Questions'],
     'Output Customisation': ['Output Automater', 'Persona', 'Visualization Generator', 'Recipe', 'Template'],
     'Error Identification': ['Fact Check List', 'Reflection', 'Restrict'],
@@ -34,25 +46,33 @@ categoriesAndPatterns = {
     'Logic and Reasoning': ['Premise and Conclusion', 'Equivalence', 'Chain-of-Thought Prompting', 'MultiArith', 'SVAMP', 'AQuA', 'CommonsenseQA', 'AI2 Reasoning Challenge (ARC)', 'GSM8K', 'StrategyQA', 'Cloze-Questions'],
     'Decomposed Prompting': ['Decomposed Prompt', 'Hierarchical Decomposition', 'Recursive Decomposition', 'External API Calls', 'Letter Concatenation'],
     'Language and Semantics': ['Contradiction'],
-    'Evaluation and Rating': ['Multi-Criteria Rating']
+    'Evaluation and Rating': ['Multi-Criteria Rating'],
+    'Summarisation': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics']
 }
 
 pattern_descriptions = {
-    'Multi-Criteria Rating': 'This pattern refers to Pattern Category: N/A and Pattern Name Expert #1 - #4 in promptpatterns.json.',
+    'Multi-Criteria Rating': 'This pattern refers to Pattern Category: N/A and Pattern Name Expert #1 - #4 for the id:3 research paper in promptpatterns.json.',
 }
 
 application = { 
     'Chatbot': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control', 'Logic and Reasoning', 'Language and Semantics', 'Evaluation and Rating'],
-    'Classification': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Decomposed Prompting', 'Language and Semantics'],
-    'Clustering': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning'],
+    'Classification': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Decomposed Prompting', 'Language and Semantics', 'Evaluation and Rating', 'Summarisation'],
+    'Clustering': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Evaluation and Rating', 'Summarisation'],
     'Content Creation': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Interaction', 'Context Control', 'Requirements Elicitation', 'System Design and Simulation'], 
     'Customer Service': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control'], 
-    'Data Science': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics'], 
+    'Data Science': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Evaluation and Rating'], 
     'Healthcare': ['Input Semantics', 'Output Customization', 'Error Identification', 'Prompt Improvement', 'Interaction'], 
     'Programming': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Refactoring','System Design and Simulation','Jailbreaking','Decomposed Prompting'], 
     'Question Answering': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Interaction','Logic and Reasoning','Language and Semantics'],
-    'Sentiment Analysis': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics'], 
-    'Summarisation': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics'], 
+    'Sentiment Analysis': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics', 'Summarisation'], 
     'Translation': ['Input Semantics','Output Customization','Error Identification','Prompt Improvement','Language and Semantics'] 
     }
+
+domain = {
+    'Coding': ['Programming', 'System Design and Simulation', 'Jailbreaking', 'Decomposed Prompting'],
+    'Cybersecurity': ['Data Science', 'Programming'],
+    'General': ['Chatbot', 'Classification', 'Clustering', 'Content Creation', 'Customer Service', 'Data Science', 'Healthcare', 'Programming', 'Question Answering', 'Sentiment Analysis', 'Translation'],
+}
+
+
 
