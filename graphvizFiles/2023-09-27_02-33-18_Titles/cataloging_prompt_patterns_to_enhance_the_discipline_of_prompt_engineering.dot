@@ -1,0 +1,16 @@
+digraph G {
+rankdir=LR;
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering" [shape=box];
+"Prompt Improvement" [shape=box];
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering" -> "Prompt Improvement";
+"Question Refinement" [shape=box];
+"Prompt Improvement" -> "Question Refinement";
+"Error Identification" [shape=box];
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering" -> "Error Identification";
+Reflection [shape=box];
+"Error Identification" -> Reflection;
+Interaction [shape=box];
+"Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering" -> Interaction;
+"Game Play" [shape=box];
+Interaction -> "Game Play";
+}
