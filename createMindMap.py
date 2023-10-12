@@ -95,10 +95,10 @@ def generate_dot_file_category_and_pattern(data, folder_path):
 
 def generate_dot_file_opinionated(folder_path, root_node):
     # Create the graph object
-    graph = pydot.Dot(graph_type='digraph', rankdir='LR')
+    graph = pydot.Dot(graph_type='digraph', rankdir='LR', ranksep='10', nodesep='0.1')
     # Create the legend subgraph
 
-    legend_subgraph = pydot.Cluster(graph_name='legend', label='Legend', shape='box', pos='0,0!')
+    legend_subgraph = pydot.Cluster(graph_name='legend', label='Legend', shape='box', rank='min')
     graph.add_subgraph(legend_subgraph)
 
     box_node = pydot.Node('Box', shape='box', label='Root Node')
@@ -191,7 +191,7 @@ def generate_dot_file_opinionated(folder_path, root_node):
                     # Connect the category node to the pattern node
                     edge_name = f"{category_name}_{pattern_name}"
                     if edge_name not in edges:
-                        edge = pydot.Edge(category_node, pattern_node)
+                        edge = pydot.Edge(category_node, pattern_node, arrowhead='none')
                         graph.add_edge(edge)
                         edges[edge_name] = edge
 
