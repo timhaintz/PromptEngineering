@@ -1001,6 +1001,54 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "PatternCategory": "In-context Few-shot Learning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Zero-shot",
+                                "ExamplePrompts": [
+                                    "What is the read of the speed meter?",
+                                    "In the graph, which year has the highest average gas price for the month of June?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Zero-shot (think step-by-step)",
+                                "ExamplePrompts": [
+                                    "What is the read of the speed meter? Let's think step-by-step.",
+                                    "In the graph, which year has the highest average gas price for the month of June? Let's think step-by-step."
+                                ]
+                            },
+                            {
+                                "PatternName": "Zero-shot (w/ text instructions)",
+                                "ExamplePrompts": [
+                                    "What is the read of the speed meter? To read this speed meter, observe the needle on the outer edge of the dial which points to your current speed represented in miles per hour. Yellow is the color of the needle.",
+                                    "In the graph, which year has the highest average gas price for the month of June? Step 1, read the title of the graph; Step 2 read the legend of the graph to learn the correspondence between year and line color; Step 3 look at the graph and identify the month of June on the x-axis; Step 4, look at the data points for each line in the month of June; Step 5, Compare the data points of each line to determine which one has the highest average gas price in June; Step 6, identify the color of that line, and match to the year in the legend on top."
+                                ]
+                            },
+                            {
+                                "PatternName": "Zero-shot (w/ text instructions, think step-by-step)",
+                                "ExamplePrompts": [
+                                    "What is the read of the speed meter? To read this speed meter, observe the needle on the outer edge of the dial which points to your current speed represented in miles per hour. Yellow is the color of the needle. Let's think step-by-step.",
+                                    "In the graph, which year has the highest average gas price for the month of June? Step 1, read the title of the graph; Step 2 read the legend of the graph to learn the correspondence between year and line color; Step 3 look at the graph and identify the month of June on the x-axis; Step 4, look at the data points for each line in the month of June; Step 5, Compare the data points of each line to determine which one has the highest average gas price in June; Step 6, identify the color of that line, and match to the year in the legend on top. Let's think step by step."
+                                ]
+                            },
+                            {
+                                "PatternName": "In-context Few-shot (1-shot)",
+                                "ExamplePrompts": [
+                                    "What is the read of the speed meter? The yellow pointer is roughly at the middle between 80 and 100 mph. The middle between 80 and 100 is 90.The speed is around 91 mph, as the pointer is just passing 90 mph.",
+                                    "What is the read of the speed meter? The yellow pointer is at the long tick between 20 and 40 mph. The long tick at the middle between 20 and 40 is 30. The speed is around 29 mph, as the pointer is close to 30 mph but not quite 30 yet.",
+                                    "In the graph, which year has the highest average gas price for the month of June? This graph is a line plot for national gas price comparison from 2016 until 02/04/2019. The legend on top shows the line color of each year, red (2019), blue (2018), green (2017) and orange (2016). Since the data is reported until Feb. 2019, only 3 years have datapoints for the month of June, 2018 (blue), 2017 (green) and 2016 (orange). Among them, blue line for 2018 is at the top for the month of June. Hence, the year with the highest average gas price for the month of June is 2022."
+                                ]
+                            },
+                            {
+                                "PatternName": "In-context Few-shot (2-shot)",
+                                "ExamplePrompts": [
+                                    "What is the read of the speed meter? The yellow pointer is roughly at the middle between 80 and 100 mph. The middle between 80 and 100 is 90.The speed is around 91 mph, as the pointer is just passing 90 mph. The yellow needle is roughly at the middle between 20 and 40 mph. The middle between 20 and 40 is 30. The speed is around 29 mph, as the needle is close to 30 mph but not quite 30 yet.",
+                                    "In the graph, which year has the highest average gas price for the month of June? This graph is a line plot for national gas price comparison from 2016 until 02/04/2019. The legend on top shows the line color of each year, red (2019), blue (2018), green (2017) and orange (2016). Since the data is reported until Feb. 2019, only 3 years have datapoints for the month of June, 2018 (blue), 2017 (green) and 2016 (orange). Among them, blue line for 2018 is at the top for the month of June. Hence, the year with the highest average gas price for the month of June is 2022. This graph is a line plot for national gas price comparison from 2015 until 12/10/2018. The legend on top shows the line color of each year, red (2018), orange (2017), green (2016) and orange (2017). Since the data is reported until Dec. 2018, all 4 years have datapoints for the month of June. Among them, red line for 2018 is at the top for the month of June. Hence, the year with the highest average gas price for the month of June is 2018."
+                                    ]
+                            }
+                        ]
                     }
                 ]
             }
