@@ -67,7 +67,7 @@ categories_patterns = {
     'Requirements Elicitation': ['Requirements Simulator', 'Specification Disambiguation', 'Change Request Simulation'],
     'System Design and Simulation': ['API Generator', 'API Simulator', 'Few-shot Example Generator', 'Domain-Specific Language (DSL) Creation', 'Architectural Possibilities'],
     'Mathematics': ['Word Problems - Addition/Subtraction', 'Word Problems - Multiplication/Division'],
-    'Jailbreaking': ['Jailbreak Attack', 'Simulated Experiment', 'Successful jailbreaking attempts', 'Reverse engineering of jailbreak prevention mechanisms', 'Testing defense mechanisms through time-based analysis', 'Characterizing keyword-based defense mechanisms', 'Crafting effective jailbreak prompts', 'Outputting in code chunks', 'Interspersing spaces between characters', 'Usage of translated prompts', 'Hallucination Generation'],
+    'Jailbreaking': ['Jailbreak Attack', 'Simulated Experiment', 'Successful jailbreaking attempts', 'Reverse engineering of jailbreak prevention mechanisms', 'Testing defense mechanisms through time-based analysis', 'Characterizing keyword-based defense mechanisms', 'Crafting effective jailbreak prompts', 'Outputting in code chunks', 'Interspersing spaces between characters', 'Usage of translated prompts', 'Hallucination Generation', 'Prompt Injection'],
     'Logic and Reasoning': ['Premise and Conclusion', 'Equivalence', 'Chain-of-Thought Prompting', 'MultiArith', 'SVAMP', 'AQuA', 'CommonsenseQA', 'AI2 Reasoning Challenge (ARC)', 'GSM8K', 'StrategyQA', 'Cloze-Questions'],
     'Decomposed Prompting': ['Decomposed Prompt', 'Hierarchical Decomposition', 'Recursive Decomposition', 'External API Calls', 'Letter Concatenation'],
     'Language and Semantics': ['Contradiction'],

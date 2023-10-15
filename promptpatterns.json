@@ -916,6 +916,51 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":10,
+                "Title": "The Dawn of LMMs: Preliminary Explorations with GPT-4V(ision)",
+                "APAReference": "Yang, Z., Li, L., Lin, K., Wang, J., Lin, C. C., Liu, Z., & Wang, L. (2023). The Dawn of LMMs: Preliminary Explorations with GPT-4V (ision). arXiv preprint arXiv:2309.17421.",
+                "Authors":[
+                    "Zhengyuan Yang",
+                    "Linjie Li",
+                    "Kevin Lin",
+                    "Jianfeng Wang",
+                    "Chung-Ching Lin",
+                    "Zicheng Liu",
+                    "Lijuan Wang"
+                ],
+                "URLReference": "https://arxiv.org/abs/2309.17421",
+                "datetimesubmitted": "2023-10-11T05:07:37.000Z",
+                "datetimeadded": "2023-10-15T03:40:53.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Category 1",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 1",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 2",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Category 2",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pattern 3",
+                                "ExamplePrompts": []
+                            },
+                            {
+                                "PatternName": "Pattern 4",
+                                "ExamplePrompts": []
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
