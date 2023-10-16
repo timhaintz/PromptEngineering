@@ -71,7 +71,13 @@ categories_patterns = {
     'Logic and Reasoning': ['Premise and Conclusion', 'Equivalence', 'Chain-of-Thought Prompting', 'MultiArith', 'SVAMP', 'AQuA', 'CommonsenseQA', 'AI2 Reasoning Challenge (ARC)', 'GSM8K', 'StrategyQA', 'Cloze-Questions'],
     'Decomposed Prompting': ['Decomposed Prompt', 'Hierarchical Decomposition', 'Recursive Decomposition', 'External API Calls', 'Letter Concatenation'],
     'Language and Semantics': ['Contradiction'],
-    'Evaluation and Rating': ['Multi-Criteria Rating']
+    'Evaluation and Rating': ['Multi-Criteria Rating'],
+    'Comparison': [''],
+    'Summarising': [''],
+    'Categorising': [''],
+    'Predicting': [''],
+    'Assessment': [''],
+    'Hypotehsise': ['']
 }
 
 # Not used in the mindmap. A dictionary of pattern descriptions if there is not a direct link of a prompt name to a research paper

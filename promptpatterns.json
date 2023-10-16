@@ -1049,6 +1049,30 @@
                                     ]
                             }
                         ]
+                    },
+                    {
+                        "PatternCategory": "Image Description on Diverse Domains",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Celebrity Recognition and Description",
+                                "ExamplePrompts": [
+                                    "Describe the image",
+                                    "Who is the person in the image and what is the person doing?"                                    
+                                ]
+                            },
+                            {
+                                "PatternName": "Landmark Recognition and Description",
+                                "ExamplePrompts": [
+                                    "Describe the landmark in the  image"
+                                ]
+                            },
+                            {
+                                "PatternName": "Food Recognition and Description",
+                                "ExamplePrompts": [
+                                    "Describe the name of the dish."
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
