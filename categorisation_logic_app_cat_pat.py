@@ -34,27 +34,21 @@ root_node = {
 
 # The second node of the mind map. This is the first level of the mind map. Used to map the high level domains and categories.
 domain_applications = {
-    'Coding': ['Content Creation','Programming'],
-    'Cybersecurity': ['Data Science', 'Programming', 'Summarisation'],
-    'General': ['Chatbot', 'Classification', 'Clustering', 'Content Creation', 'Customer Service', 'Data Science', 'Healthcare', 'Programming', 'Question Answering', 'Sentiment Analysis', 'Translation', 'Summarisation'],
+    'Coding': ['Programming'],
+    'Cybersecurity': ['Data Science', 'Programming'],
+    'General': ['Chatbot', 'Data Science', 'Healthcare', 'Programming', 'Question Answering'],
 }
 
 # The third node of the mind map. This is the second level of the mind map. Used to map the applications and categories.
 application_categories = { 
-    'Chatbot': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control', 'Logic and Reasoning', 'Language and Semantics', 'Evaluation and Rating'],
-    'Classification': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Decomposed Prompting', 'Language and Semantics', 'Evaluation and Rating'],
-    'Clustering': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Logic and Reasoning', 'Evaluation and Rating'],
-    'Content Creation': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Interaction', 'Context Control', 'Requirements Elicitation', 'System Design and Simulation'], 
-    'Customer Service': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control'], 
-    'Data Science': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Evaluation and Rating'], 
+    'Chatbot': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control', 'Logic and Reasoning', 'Language and Semantics', 'Evaluation and Rating', 'Summarising'],
+    'Customer Service': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control', 'Summarising'], 
+    'Data Science': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Mathematics', 'Evaluation and Rating', 'Summarising'], 
     'Healthcare': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Interaction'], 
     'Programming': ['Input Semantics','Output Customisation','Error Identification','Prompt Improvement','Refactoring','System Design and Simulation','Jailbreaking','Decomposed Prompting'], 
     'Question Answering': ['Input Semantics','Output Customisation','Error Identification','Prompt Improvement','Interaction','Logic and Reasoning','Language and Semantics'],
-    'Sentiment Analysis': ['Input Semantics','Output Customisation','Error Identification','Prompt Improvement','Language and Semantics'],
-    'Summarisation': ['Input Semantics','Output Customisation','Error Identification','Prompt Improvement','Language and Semantics'],
-    'Translation': ['Input Semantics','Output Customisation','Error Identification','Prompt Improvement','Language and Semantics']
     }
-
+     
 # The fourth node of the mind map. This is the third level of the mind map. Used to map the categories and patterns.
 categories_patterns = {
     'Input Semantics': ['Meta Language Creation', 'Free-Form Questions'],
@@ -73,11 +67,16 @@ categories_patterns = {
     'Language and Semantics': ['Contradiction'],
     'Evaluation and Rating': ['Multi-Criteria Rating'],
     'Comparison': [''],
-    'Summarising': [''],
+    'Summarising': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
     'Categorising': [''],
     'Predicting': [''],
     'Assessment': [''],
-    'Hypotehsise': ['']
+    'Hypotehsise': [''],
+    'Classification': ['Multi-Criteria Rating', 'Cloze-Questions', 'MultiArith', 'CommonsenseQA', 'Code Clustering', 'Question Refinement', 'Contradiction', 'Principled Code', 'Meta Language Creation', 'SVAMP', 'StrategyQA', 'Letter Concatenation', 'Reflection', 'Visualization Generator', 'Word Problems - Addition/Subtraction', 'Data-guided Refactoring', 'GSM8K', 'Fact Check List', 'External API Calls', 'Decomposed Prompt', 'Hidden Assumptions', 'Restrict', 'Word Problems - Multiplication/Division', 'Hierarchical Decomposition', 'Recursive Decomposition', 'Free-Form Questions', 'Equivalence', 'Intermediate Abstraction', 'Output Automater', 'Chain-of-Thought Prompting', 'Pseudo-code Refactoring', 'AQuA', 'Template', 'Persona', 'Cognitive Verifier', 'AI2 Reasoning Challenge (ARC)', 'Refusal Breaker', 'Alternative Approaches', 'Premise and Conclusion', 'Recipe'],
+    'Clustering': ['Multi-Criteria Rating', 'Cloze-Questions', 'MultiArith', 'CommonsenseQA', 'Code Clustering', 'Question Refinement', 'Principled Code', 'Meta Language Creation', 'SVAMP', 'StrategyQA', 'Reflection', 'Visualization Generator', 'Word Problems - Addition/Subtraction', 'Data-guided Refactoring', 'GSM8K', 'Fact Check List', 'Hidden Assumptions', 'Restrict', 'Word Problems - Multiplication/Division', 'Free-Form Questions', 'Equivalence', 'Intermediate Abstraction', 'Output Automater', 'Chain-of-Thought Prompting', 'Pseudo-code Refactoring', 'AQuA', 'Template', 'Persona', 'Cognitive Verifier', 'AI2 Reasoning Challenge (ARC)', 'Refusal Breaker', 'Alternative Approaches', 'Premise and Conclusion', 'Recipe'],
+    'Content Creation': ['Architectural Possibilities', 'Specification Disambiguation', 'Code Clustering', 'Infinite Generation', 'Question Refinement', 'Requirements Simulator', 'Principled Code', 'Meta Language Creation', 'Context Manager', 'Change Request Simulation', 'Few-shot Example Generator', 'Reflection', 'Visualization Generator', 'Data-guided Refactoring', 'Fact Check List', 'Hidden Assumptions', 'Restrict', 'Free-Form Questions', 'Intermediate Abstraction', 'Output Automater', 'Pseudo-code Refactoring', 'Game Play', 'Domain-Specific Language (DSL) Creation', 'Template', 'API Generator', 'Persona', 'Cognitive Verifier', 'Refusal Breaker', 'API Simulator', 'Alternative Approaches', 'Flipped Interaction', 'Recipe'],
+    'Sentiment Analysis': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
+    'Translation': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
 }
 
 # Not used in the mindmap. A dictionary of pattern descriptions if there is not a direct link of a prompt name to a research paper
