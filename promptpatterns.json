@@ -1227,6 +1227,59 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "PatternCategory": "Multilingual Multimodal Understanding",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Multilingual Image Description",
+                                "ExamplePrompts": [
+                                    "描述這張圖片",
+                                    "Décrire l’image",
+                                    "Popište obrázek",
+                                    "Describe the image in Chinese",
+                                    "Describe the image in French",
+                                    "Describe the image in Czech",
+                                    "Describir la imagen en 20 idiomas diferentes"
+                                ]
+                            },
+                            {
+                                "PatternName": "Multilingual Scene Text Recognition",
+                                "ExamplePrompts": [
+                                    "What are all the scene text in the image?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Multilingual Text Recognition, Translation, and Description",
+                                "ExamplePrompts": [
+                                    "If the image is presented in a language other than English, translate the content to English.",
+                                    "Summarize the info in 20 languages"
+                                ]
+                            },
+                            {
+                                "PatternName": "Multilingual Multicultural Understanding",
+                                "ExamplePrompts": [
+                                    "Describe the image in both English and the local language corresponding to the geolocation depicted in the image."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Coding Capability with Vision",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Coding Capability with Vision",
+                                "ExamplePrompts": [
+                                    "Please see original document. Screenshot of handwritten equations used.",
+                                    "Please read the table in this image and return a markdown-style reconstructed table in text.",
+                                    "Please read the table in this image and return a latex-style reconstructed table in text.",
+                                    "Generate python code to draw similar curves.",
+                                    "Write python codes to generate similar figures.",
+                                    "Generate the following image in tikz.",
+                                    "Write svg codes to generate following image."
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
