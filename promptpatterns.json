@@ -1071,6 +1071,46 @@
                                 "ExamplePrompts": [
                                     "Describe the name of the dish."
                                 ]
+                            },
+                            {
+                                "PatternName": "Medical Image Understanding",
+                                "ExamplePrompts": [
+                                    "Describe the image",
+                                    "Are there wisdom teeth that needs to be removed in this x-ray image?",
+                                    "Which wisdom tooth is hardest to remove?",
+                                    "What's wrong?",
+                                    "Look at the CT scan of lung in the image below, tell me what's wrong."
+                                ]
+                            },
+                            {
+                                "PatternName": "Logo Recognition and Description",
+                                "ExamplePrompts": [
+                                    "Describe the image",
+                                    "Describe the logos in details"
+                                ]
+                            },
+                            {
+                                "PatternName": "In-the-Wild Logo Recognition and Description",
+                                "ExamplePrompts": [
+                                    "Describe both the image and logo in details"
+                                ]
+                            },
+                            {
+                                "PatternName": "Scene Understanding",
+                                "ExamplePrompts": [
+                                    "Describe the image"
+                                ]
+                            },
+                            {
+                                "PatternName": "Counterfactual Examples",
+                                "ExamplePrompts": [
+                                    "Can you find the red ball near the gray cat in the image?",
+                                    "Can you see the bright blue feathers on the bird's wing?",
+                                    "Can you spot the pink elephant playing in the corner?",
+                                    "Can you find the baseball player wearing a blue shirt?",
+                                    "Try to locate a large waterfall behind the trees.",
+                                    "Can you find the blue lighting fixture mounted to the ceiling?"
+                                ]
                             }
                         ]
                     }
