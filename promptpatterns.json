@@ -1113,6 +1113,120 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "PatternCategory": "Object Localization, Counting, and Dense Captioning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Spatial Relationship Understanding",
+                                "ExamplePrompts": [
+                                    "What is the spatial relation between the frisbee and the man?",
+                                    "Does the person bigger than the car?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Object Counting",
+                                "ExamplePrompts": [
+                                    "Count the number of apples in the image.",
+                                    "Count the number of oranges in the image.",
+                                    "Count the number of people in the image."
+                                ]
+                            },
+                            {
+                                "PatternName": "Object Localization",
+                                "ExamplePrompts": [
+                                    "Localize each person in the image using bounding box. The image size is (width, height) = (998,786)",
+                                    "Localize each car in the image using bounding box. What is the image size of the input image?",
+                                    "Localize each person in the image using bounding box. What is the image size of the input image?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Dense Captioning",
+                                "ExamplePrompts": [
+                                    "Please follow the instructions \n 1. Tell me the size of the input image; \n 2. Localize each person in the image using bounding box; \n 3. Recognize each person; \n 4. Generate detailed caption for each bounding box.",
+                                    "Describe the image in details"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Multimodal Knowledge and Commonsense",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Joke and Meme",
+                                "ExamplePrompts": [
+                                    "Can you explain this meme?",
+                                    "What is funny about this image?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Science and Knowledge",
+                                "ExamplePrompts": [
+                                    "Which of these oceans does the prime meridian intersect?",
+                                    "Compare the average kinetic energies of the particles in each sample. The diagrams below show two pure samples of gas in identical closed, rigid containers. Each colored ball represents one gas particle. Both samples have the same number of particles. Which sample has the higher temperature? Sample A or sample B?",
+                                    "Which of these states is farthest north?",
+                                    "Which of the organisms is the producer in this food web?",
+                                    "Suppose you are a teacher, please use the figure to explain the distinction between evaporation and evapotranspiration."
+                                ]
+                            },
+                            {
+                                "PatternName": "Multimodal Commonsense",
+                                "ExamplePrompts": [
+                                    "What is [person3] doing?",
+                                    "What are [person1] and [person2] doing?",
+                                    "Suppose you are a detective, what can you infer from the visual clues in the image?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Scene Text, Table, Chart, and Document Reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Scene Text Recognition",
+                                "ExamplePrompts": [
+                                    "What are all the scene text in the image?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Visual Math",
+                                "ExamplePrompts": [
+                                    "What is x in the equation?",
+                                    "What is the value of d in the last equation?",
+                                    "What is the value of x in the image?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Flow Chart Understanding",
+                                "ExamplePrompts": [
+                                    "Explain the figure",
+                                    "Can you translate the flowchart to a python code?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Chart Understanding and Reasoning",
+                                "ExamplePrompts": [
+                                    "What is the average total fueling cost excluding the Ford F150?",
+                                    "Explain the figure."
+                                ]
+                            },
+                            {
+                                "PatternName": "Table Understanding and Reasoning",
+                                "ExamplePrompts": [
+                                    "How many families are earning more than 13000 and owns more than 2 cars?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Document Understanding",
+                                "ExamplePrompts": [
+                                    "Describe the image.",
+                                    "Where is the bathroom for the second bedroom?",
+                                    "Answer the question in the image.",
+                                    "Describe the poster. Which city is this dish from?",
+                                    "This is a paper \"Paper Gestalt.\" Describe the paper in details and highlight their contribution."
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
