@@ -1235,7 +1235,7 @@
                                 "PatternName": "Multilingual Image Description",
                                 "ExamplePrompts": [
                                     "描述這張圖片",
-                                    "Décrire l’image",
+                                    "Décrire l'image",
                                     "Popište obrázek",
                                     "Describe the image in Chinese",
                                     "Describe the image in French",
@@ -1277,6 +1277,49 @@
                                     "Write python codes to generate similar figures.",
                                     "Generate the following image in tikz.",
                                     "Write svg codes to generate following image."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Understanding Pointing Inputs",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Grounded Description (overlaid visual pointers)",
+                                "ExamplePrompts": [
+                                    "Describe the pointed region in the image.",
+                                    "Describe the two pointed objects in the image."
+                                ]
+                            },
+                            {
+                                "PatternName": "Grounded Description (text-format region coordinates)",
+                                "ExamplePrompts": [
+                                    "Locate the region based on given coordinates and describe the contents in the region. Regions are represented by (x1,y1,x2,y2) coordinates. x1 x2 are the left and right most positions, normalized into 0 to 1, where 0 is the left and 1 is the right. y1 y2 are the top and bottom most positions, normalized into 0 to 1, where 0 is the top and 1 is the bottom. Describe the relative position of region (0.47, 0.48, 0.55, 0.87) in the image. Describe the contents in that relative position. No need to mention contents in other part of the image.",
+                                    "Locate the region based on given coordinates and describe the contents in the region. Regions are represented by (x1,y1,x2,y2) coordinates. x1 x2 are the left and right most positions, normalized into 0 to 1, where 0 is the left and 1 is the right. y1 y2 are the top and bottom most positions, normalized into 0 to 1, where 0 is the top  and 1 is the bottom. Describe the relative position of region (0.01, 0.09, 0.29, 0.21) in the image. Describe the contents in that relative position. No need to mention contents in other part of the image.",
+                                    "Locate the region based on given coordinates and describe the contents in the region. Regions are represented by (x1,y1,x2,y2) coordinates. x1 x2 are the left and right most positions, normalized into 0 to 1, where 0 is the left and 1 is the right. y1 y2 are the top and bottom most positions, normalized into 0 to 1, where 0 is the top and 1 is the bottom. Describe the relative position of region (0.01, 0.67, 0.36, 0.91) in the image. Describe the contents in that relative position. No need to mention contents in other part of the image.",
+                                    "Locate the region based on given coordinates and describe the contents in the region. Regions are represented by (x1,y1,x2,y2) coordinates. x1 x2 are the left and right most positions, normalized into 0 to 1, where 0 is the left and 1 is the right. y1 y2 are the top and bottom most positions, normalized into 0 to 1, where 0 is the top and 1 is the bottom. Describe the relative position of region (0.47, 0.48, 0.55, 0.87) in the image. Describe the contents in that relative position. No need to mention contents in other part of the image."
+                                ]
+                            },
+                            {
+                                "PatternName": "Visual Referring Prompting",
+                                "ExamplePrompts": [
+                                    "What is in the circled glass? Object 1 or object 2? Describe what is Object 1 and object 2. Then check what is in the circled glass.",
+                                    "Answer the question in the following figure. Provide intermediate steps. How long is this edge? What is the angle here?",
+                                    "Which circled line shows a different comparison trend? Provide intermediate steps.",
+                                    "Answer questions in the following figure. Provide intermediate steps.",
+                                    "What is the icon used for?",
+                                    "What does the pointed news talk about?",
+                                    "What does this part of the poster highlights?",
+                                    "What are the differences between these two experiments in the slides?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Generate Pointing Outputs",
+                                "ExamplePrompts": [
+                                    "Locate the referred object and represent the location of the region. Regions are represented by (x1,y1,x2,y2) coordinates. x1 x2 are the left and right most positions, normalized into 0 to 1, where 0 is the left and 1 is the right. y1 y2 are the top and bottom most positions, normalized into 0 to 1, where 0 is the top and 1 is the bottom. For example, the (x1,y1,x2,y2) coordinates for that region with the beer bottle is (0.47, 0.48, 0.55, 0.87).",
+                                    "For the image below, what is the (x1,y1,x2,y2) coordinates for the region with the blue Subaru SUV?",
+                                    "For the image below, what is the (x1,y1,x2,y2) coordinates for the region with object in it?",
+                                    "Describe the pointed region in the image."
                                 ]
                             }
                         ]
