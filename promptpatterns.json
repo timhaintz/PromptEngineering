@@ -1323,6 +1323,55 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "PatternCategory": "Multi-image Sequencing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Action Recognition",
+                                "ExamplePrompts": [
+                                    "Explain the images and the action the person is taking."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Video Understanding",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Temporal Ordering",
+                                "ExamplePrompts": [
+                                    "Analyze the images and decide the correct order in which they should be displayed.",
+                                    "For opening a door, decide the correct order in which they should be displayed.",
+                                    "For closing a door, decide the correct order in which they should be displayed."
+                                ]
+                            },
+                            {
+                                "PatternName": "Temporal Anticipation",
+                                "ExamplePrompts": [
+                                    "Predict what will happen next based on the images.",
+                                    "Analyze the images and decide what the next steps should be."
+                                ]
+                            },
+                            {
+                                "PatternName": "Temporal Localization and Reasoning",
+                                "ExamplePrompts": [
+                                    "In which frame does the player kick the ball? Did the goalkeeper block the ball?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Video Visual Referring Prompting",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Grounded Temporal Understanding",
+                                "ExamplePrompts": [
+                                    "Describe and summarize what the circled person doing?",
+                                    "Summarize the activities of the person."
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
