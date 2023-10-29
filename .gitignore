@@ -1,3 +1,4 @@
 .env
 extractedPromptPatternsFromPDF/
 __pycache__/
+.vscode/

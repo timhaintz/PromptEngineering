@@ -1046,7 +1046,7 @@
                                 "ExamplePrompts": [
                                     "What is the read of the speed meter? The yellow pointer is roughly at the middle between 80 and 100 mph. The middle between 80 and 100 is 90.The speed is around 91 mph, as the pointer is just passing 90 mph. The yellow needle is roughly at the middle between 20 and 40 mph. The middle between 20 and 40 is 30. The speed is around 29 mph, as the needle is close to 30 mph but not quite 30 yet.",
                                     "In the graph, which year has the highest average gas price for the month of June? This graph is a line plot for national gas price comparison from 2016 until 02/04/2019. The legend on top shows the line color of each year, red (2019), blue (2018), green (2017) and orange (2016). Since the data is reported until Feb. 2019, only 3 years have datapoints for the month of June, 2018 (blue), 2017 (green) and 2016 (orange). Among them, blue line for 2018 is at the top for the month of June. Hence, the year with the highest average gas price for the month of June is 2022. This graph is a line plot for national gas price comparison from 2015 until 12/10/2018. The legend on top shows the line color of each year, red (2018), orange (2017), green (2016) and orange (2017). Since the data is reported until Dec. 2018, all 4 years have datapoints for the month of June. Among them, red line for 2018 is at the top for the month of June. Hence, the year with the highest average gas price for the month of June is 2018."
-                                    ]
+                                ]
                             }
                         ]
                     },
@@ -1372,7 +1372,64 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "PatternCategory": "Abstract Visual Stimuli",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Abstract Visual Stimuli",
+                                "ExamplePrompts": [
+                                    "A tangram is a geometric puzzle that consists of seven flat pieces to form shapes. Here are ten abstract tangram. Which one best illustrates a flying goose? What do other figures look like?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Association of Parts and Objects",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Discovery and Association of Parts and Objects",
+                                "ExamplePrompts": [
+                                    "A tangram is a geometric puzzle that consists of seven flat pieces to form shapes. Locate the referred object and represent the location of the region. Regions are represented by (x1,y1,x2,y2) coordinates. x1 x2 are the left and right most positions, normalized into 0 to 1, where 0 is the left and 1 is the right. y1 y2 are the top and bottom most positions, normalized into 0 to 1, where 0 is the top and 1 is the bottom. For example, the (x1,y1,x2,y2) coordinates for that region with the beer bottle is (0.47, 0.48, 0.55, 0.87).",
+                                    "The image below that shows a flying goose. Which part represents the head of the bird? What is the (x1,y1,x2,y2) coordinates for the region with the head of the bird?",
+                                    "How are those visual parts related, and can they be combined to form a single object such as a boy? If so, how to arrange them?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Wechsler Adult Intelligence Scale",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Wechsler Adult Intelligence Scale",
+                                "ExamplePrompts": [
+                                    "Which one of the five is least like the other four? \n a. Apple \n b. Potato \n c. Corn \n d. Carrot \n e. Bean",
+                                    "Tom, twelve years old, is three times as old as his sister. How old will Tom be when he is twice as old as his sister? \n a. 18 \n b. 21 \n c. 16 \n d. 20 \n e. 15",
+                                    "Which one of the five is least like the other four?",
+                                    "Which one of the five designs makes the best comparison?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Raven's Progressive Matrices",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "RPM: Entire Question Page",
+                                "ExamplePrompts": [
+                                    "Find out the pattern in the first column and use it to infer the missing figure in the second column.",
+                                    "Find out the pattern in the first two rows and use it to infer the missing figure in the third row."
+                                ]
+                            },
+                            {
+                                "PatternName": "RPM: Processed Sub-figures",
+                                "ExamplePrompts": [
+                                    "Here are three sub images arranged in a 2-by-2 matrix. Figure out which figure of a to f that should logically replace the missing figure. What would be the next image to complete the matrix?"
+                                ]
+                            }
+                        ]
                     }
+
                 ]
             }
         ]
