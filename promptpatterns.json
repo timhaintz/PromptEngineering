@@ -1428,8 +1428,50 @@
                                 ]
                             }
                         ]
-                    }
+                    },
+                    {
+                        "PatternCategory": "Read Emotion from Facial Expressions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Read Emotion from Facial Expressions",
+                                "ExamplePrompts": [
+                                    "Identify and read emotions of people from their faces as shown in the image below."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "How Visual Content Arouses Emotions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "How Visual Content Arouses Emotions",
+                                "ExamplePrompts": [
+                                    "After seeing the below image, how people might emotionally feel and react?"
 
+                                ]
+                            },
+                            {
+                                "PatternName": "Image Aesthetics",
+                                "ExamplePrompts": [
+                                    "Aesthetics reflects the perceived beauty or visual appeal of an object, design, or piece of art by human. Among the images provided below, based on societal standards and norms, which one more people will consider having a higher aesthetics?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Emotion Conditioned Output",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Emotion Conditioned Output",
+                                "ExamplePrompts": [
+                                    "Describe the image in a humorous way.",
+                                    "Describe the image to make people feel uneasy and anxious.",
+                                    "Describe the image to lessen someone's desire to visit.",
+                                    "Describe the image to make people feel relax and comforting."
+                                ]
+                            }
+                        ]
+                    }
                 ]
             }
         ]
