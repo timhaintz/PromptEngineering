@@ -1471,6 +1471,200 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "PatternCategory": "Spot the Difference",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Spot the Difference",
+                                "ExamplePrompts": [
+                                    "Compare Image 1 and image 2, tell me about the differences between image 1 and image 2.",
+                                    "Compare Image 1 and image 2, tell me about 3 differences between image 1 and image 2."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Industry",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Defect Detection",
+                                "ExamplePrompts": [
+                                    "What is wrong with the object in the image?",
+                                    "Given Image 1, tell me what is wrong in image 2."
+                                ]
+                            },
+                            {
+                                "PatternName": "Safety Inspection",
+                                "ExamplePrompts": [
+                                    "How many people are wearing helmet?",
+                                    "Please determine whether the person in the image wears a helmet or not. And summarize how many people are wearing helmets."
+                                ]
+                            },
+                            {
+                                "PatternName": "Grocery Checkout",
+                                "ExamplePrompts": [
+                                    "For below image, find what products are presented in the basket. Try to be accurate",
+                                    "Here is a list of reference images: \n Shrimp \n Crab dip \n Smoked Ham \n Banana \n Apple \n Bread \n Cheese \n Strawberries \n Pink Tulips \n For below image, find what products are presented in the basket according to reference image above. Only tell me products that are exactly same type of reference images."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Medical",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Radiology Report Generation",
+                                "ExamplePrompts": [
+                                    "Write a radiology report for this image as an expert radiologist.",
+                                    "Write a radiology report for this image as an expert radiologist..",
+                                    "Write a radiology report as an expert radiologist for the following case.",
+                                    "Write a radiology report as an expert radiologist for the following case: Case: A 32-year-old woman presented with a complaint of pain in her right wrist. The patient reported that she fell on her outstretched hand while playing basketball. An X-ray of the right wrist was performed."
+                                ]
+                            },
+                            {
+                                "PatternName": "Radiology Report Generation with Diagnosis History",
+                                "ExamplePrompts": [
+                                    "The first image is a chest x-ray scan the patient took last time. The previous diagnoses mention pleural effusion. The second image is a chest x-ray scan the patient took this time. Write a radiology report as an expert radiologist for the symptoms and changes."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Auto Insurance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Damage Evaluation",
+                                "ExamplePrompts": [
+                                    "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below."
+                                ]
+                            },
+                            {
+                                "PatternName": "Insurance Report Generation",
+                                "ExamplePrompts": [
+                                    "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please fill the incident report for the accident shown in image below, with the following format in JSON (note xxx is placeholder, if you cannot determine that based on the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}",
+                                    "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Customized Captioner",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Photo Organization",
+                                "ExamplePrompts": [
+                                    "Here are the photos of my family members. \n Linda \n Cotton \n Max \n Sam \n Emma \n Please describe the image with as many details as possible, using my family members' names."
+                                ]
+                            },
+                            {
+                                "PatternName": "Dense Captioning w/ Segmentation",
+                                "ExamplePrompts": [
+                                    "Describe the objects below with as many details as possible, Reference to the content shown in the context image but focus on describing each object below. \n Object 1 \n Object 2 \n Object 3 \n Object 4 \n Context image"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Image Generation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Evaluation of Generated Images (Prompt-Image Alignment)",
+                                "ExamplePrompts": [
+                                    "What is happening in the image? From scale 1 to 10, decide how similar the image is to the text prompt \"a parrot driving a car\"?",
+                                    "What is happening in the image? From scale 1 to 10, decide how similar the image is to the text prompt \"a cake on the table with word \"Azure Research\" written on it\"?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Prompt Generation for Image Editing",
+                                "ExamplePrompts": [
+                                    "This is the original image: \n I want to make this image look like graphic novel cover. The prompt should be a single sentence in less than 15 words with descriptive words. For example: “have it look like a graphic novel”. Based on the above prompt examples and the original image, help me to write a better prompt to an image editing model.",
+                                    "Instruct Pix2Pix: With original image and prompt \"Transform this image of a statue into a dramatic graphic novel cover with a dark tone.\"",
+                                    "This is the original image: \n The prompt I used to edit this image is “have it look like a graphic novel”. \n The edited image I got is: \n Tell me how I should change my prompt to make the edited image better.",
+                                    "Instruct Pix2Pix: With original image and prompt “make the image look like a black and white comic book illustration” as the input",
+                                    "Instruct Pix2Pix: With original image and prompt “add bold lines and high contrast to the image to make it look like a graphic novel cover” as the input"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Embodied Agent",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Operating Machine",
+                                "ExamplePrompts": [
+                                    "First, read the operating menu below for coffee machine buttons. \n Menu: \n Now, let's look at the operating panel of the coffee machine in the image below, which button should I use for a 8 OZ coffee: left, right, top or bottom button?",
+                                    "First, read the operating menus below for coffee machine buttons. Menu 1: \n Menu 2: \n Menu 3: \n Now, let's look at the operating panel of the coffee machine in the image below, which button should I use for a 6 OZ coffee: left, right, top or bottom button?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Navigation",
+                                "ExamplePrompts": [
+                                    "Imagine that you are a home robot, and is asked to go to the kitchen to fetch something from the fridge. The image below shows your current position. Please plan your next action.",
+                                    "Imagine that you are a home robot, and is asked to go to the kitchen to fetch something from the fridge. At the previous turn, you were at the position shown in the below image: The action taken in previous turn is: turn right and move forward towards the hallway. Now you are at the hallway, this is what you can see from there. Can you see the kitchen from here? What is your next action?",
+                                    "Imagine that you are a home robot, and is asked to go to the kitchen to fetch something from the fridge. At the previous turn, you were at the position shown in the below image: The action taken in previous turn is: turn right and move forward towards the kitchen. Now you are at the kitchen, this is what you can see from there. Can you see the fridge from here? What is your next action?",
+                                    "Imagine that you are a home robot, and is asked to go to the kitchen to fetch something from the fridge. At the previous turn, you were at the position shown in the below image: The action taken in previous turn is: move forward and turn slightly to the right to approach the fridge. Now this is what you can see from there. What is your next action?"                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "GUI Navigation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Web Browsing (Mapo Tofu Recipe)",
+                                "ExamplePrompts": [
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find a detailed recipe of Mapo Tofu. Below is what you see on the computer screen, predict your next move. If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find a detailed recipe of Mapo Tofu. Previous action: \"I would move the mouse to the Google Chrome icon located on the left side of the screen, approximately 1/3 of the way down from the top. I would then click on the icon to open the web browser. \" You have now opened the web browser. Below is what you see on the computer screen. What will you do next? If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find a detailed recipe of Mapo Tofu.Previous action: \" I would move the mouse to the search bar located in the center of the screen, approximately 1/2 of the way down from the top. I would then click on the search bar and type in \"Mapo Tofu recipe\" using the keyboard. After typing in the search query, I would press the \"Enter\" key on the keyboard to initiate the search.\" You have now completed the previous action as described above. Below is what you see on the computer screen. What will you do next? If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find a detailed recipe of Mapo Tofu. Previous action: “I would move the mouse to the first search result under the \"Recipes\" section, which is titled \"Mapo Tofu Recipe - The Woks of Life\". I would then click on the link to open the webpage and view the detailed recipe.\" You have now completed the previous action as described above. Below is what you see on the computer screen. Based on the image below, what will you do next? If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find a detailed recipe of Mapo Tofu. Previous action: “I would move the mouse to the \"Jump to Recipe\" button located at the top right corner of the webpage. I would then click on the button to jump to the detailed recipe section of the page.\" You have now completed the previous action as described above. Below is what you see on the computer screen. Based on the image below, what will you do next? If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Describe the image below as detailed as possible."
+                                ]
+                            },
+                            {
+                                "PatternName": "Web Browsing (Today's News)",
+                                "ExamplePrompts": [
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find what's in the news today. Below is what you see on the computer screen, predict your next move. If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find what's in the news today. Previous action: \"My next move would be to move the mouse to the Google Chrome icon located on the left side of the screen, approximately 1/3 of the way down from the top. I would then click on the icon to open the web browser and search for news websites to find out what's in the news today. \" You have now opened the web browser. Below is what you see on the computer screen, what is your immediate next step? If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find what's in the news today. Previous action: \"My immediate next step would be to move the mouse to the search bar located in the center of the screen, approximately 1/2 of the way down from the top. I would then click on the search bar and type in \"news\" and press the enter key on the keyboard to search for news websites. \" You have now completed the previous action. Below is what you see on the computer screen. Based on the image below, what is your immediate next step? If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Read the article shown in the images below and summarize it.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find what's in the news today. Previous action: \"My immediate next step would be to move the mouse to the first search result, which is \"State Department doubles down on Zelensky slams\" located approximately 1/4 of the way down from the top of the screen and 1/8 of the way from the left side of the screen. I would then click on the link to open the news article and read about what's in the news today.\" You have now completed reading “State Department doubles down on Zelensky slams”. What is your immediate next step? If the action involves moving the mouse, describe the location as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. You are asked to find what's in the news today. Previous action: \"My immediate next step would be to move the mouse to the top right corner of the screen, where I can see the \"X\" icon to close the current tab. I would then click on the \"X\" icon to close the tab and return to the previous page to continue browsing for more news articles. \" You have now returned to the previous page after reading the first article “State Department doubles down on Zelensky slams”. Below is what you see on the computer screen. Based on the image below, what is your immediate next step? If the action involves moving the mouse, describe the location as detailed as possible."
+                                ]
+                            },
+                            {
+                                "PatternName": "Online Shopping (Ergonomic Keyboard)",
+                                "ExamplePrompts": [
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Below is what you see on the phone screen, predict your next move. If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \"My next move would be to move my finger to the Amazon icon, which is located in the third row and third column of the screen. I would then click on the icon to open the app and search for an ergonomic keyboard within my budget of $50. \" You have now opened the Amazon app. Below is what you see on the phone screen. What will you do next? If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \"My next move would be to move my finger to the search bar, which is located at the top of the screen. I would then click on the search bar and type in \"ergonomic keyboard\" using the keyboard. After typing in the search term, I would click on the \"Search\" button, which is located on the bottom right corner of the keyboard, to initiate the search. \" You have now completed the previous action as described above. Below is what you see on the phone screen. Please predict your immediate next move. If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \"My immediate next move would be to move my finger to the \"Filters\" button, which is located at the top right corner of the screen, next to the \"Windows\" button. I would then click on the \"Filters\" button to open the filter options and narrow down my search results to only show ergonomic keyboards within my budget range of $50 to $100. \" You have now completed the previous action as described above. Below is what you see on the phone screen. Please predict your immediate next move. If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \" My immediate next move would be to move my finger to the \"Price & Deals\" filter option, which is located under the \"Colors\" filter option and above the \"Sort by\" filter option. I would then click on the \"Price & Deals\" filter option to open the price range filter and set my minimum price to $50 and my maximum price to $100. This would further narrow down my search results to only show ergonomic keyboards within my budget range. \" You have now completed the previous action as described above. Below is what you see on the phone screen. What will you do next? If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \" My next move would be to move my finger to the \"Show 1,987 results\" button, which is located at the bottom of the screen, below the \"Clear Filters\" button and above the navigation bar. I would then click on the \"Show 1,987 results\" button to view the search results for ergonomic keyboards within my budget range. \" You have now completed the previous action as described above. Below is what you see on the phone screen. What will you do next? If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \" My next move would be to scroll down the screen to view the different options for ergonomic keyboards within my budget range. I would then move my finger to the \"Kensington Pro Fit Ergonomic Wireless Keyboard - Black\" option, which is located below the \"Explore Related Brands\" section and above the \"VIVO\" option. I would then click on the \"Kensington Pro Fit Ergonomic Wireless Keyboard - Black\" option to view more details about the product and potentially make a purchase. \" You have now completed the previous action as described above. Below is what you see on the phone screen. What will you do next? If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \" My next move would be to scroll down the screen to view more details about the \"Kensington Pro Fit Ergonomic Wireless Keyboard - Black\" product. I would then move my finger to the \"Buy New\" button, which is located below the product image and above the \"Get a $8 bonus when you reload $100 or more to your gift card balance\" section. I would then click on the \"Buy New\" button to proceed with the purchase. \" You have now completed the previous action as described above. Below is what you see on the phone screen. What will you do next? If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. You are asked to shop for an ergonomic keyboard, your budget is between $50 and $100. Previous action: \" My next move would be to move my finger to the \"Add to Cart\" button, which is located below the \"Buy New\" button and above the \"Ships from Amazon\" section. I would then click on the \"Add to Cart\" button to add the item to my shopping cart. \" You have now completed the previous action as described above. Below is what you see on the phone screen. What will you do next? If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible."
+                                ]
+                            },
+                            {
+                                "PatternName": "Notification Understanding",
+                                "ExamplePrompts": [
+                                    "Imagine that you are a robot operating a phone. Like how humans operate the phone, you can move your finger to an icon, click an icon with your finger, scroll down a screen, or type some texts with the keyboard. Below is what you see on the phone screen. Describe the image and predict your next move. If the action involves moving your finger to an icon, describe the location of that icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. Below is what you see on the computer screen. Describe the image and predict your next move. If the action involves moving the mouse, describe the location and the icon as detailed as possible.",
+                                    "Imagine that you are a robot operating a computer. Like how humans operate the computer, you can move the mouse, click an icon with the mouse, or type some texts with the keyboard. Below is what you see on the computer screen. Describe the image and predict your next move. If the action involves moving the mouse, describe the location as detailed as possible.",                                    ""
+                                ]
+                            },
+                            {
+                                "PatternName": "Watching Videos",
+                                "ExamplePrompts": [
+                                    "Explain the story shown in the images below.",
+                                    "Tell me about the video content, given the frames below.",
+                                    "Transcribe the video content, given the frames below.",
+                                    "Tell me about the video content, given the frames below. Please include as many details as possible.",
+                                    "Tell me about the video content, given the 9 frames below. Please include as many details as possible."
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
