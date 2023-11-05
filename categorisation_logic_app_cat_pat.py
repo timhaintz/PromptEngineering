@@ -51,11 +51,12 @@ application_categories = {
     #'Healthcare': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Interaction'], 
     'Question Answering': ['Input Semantics','Output Customisation','Error Identification','Prompt Improvement','Interaction','Logic and Reasoning','Language and Semantics'],
     'Sentiment Analysis': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Interaction', 'Context Control', 'Logic and Reasoning', 'Language and Semantics', 'Evaluation and Rating', 'Summarising'],
-    'System Design and Simulation': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Interaction', 'Context Control', 'Requirements Elicitation', 'System Design and Simulation', 'Mathematics', 'Evaluation and Rating', 'Sentiment Analysis', 'Summarising'],
+    'System Design and Simulation': ['Input Semantics', 'Output Customisation', 'Error Identification', 'Prompt Improvement', 'Refactoring', 'Interaction', 'Context Control', 'Requirements Elicitation', 'Simulation', 'Mathematics', 'Evaluation and Rating', 'Analysis', 'Summarising'],
     }
      
 # The fourth node of the mind map. This is the third level of the mind map. Used to map the categories and patterns.
 categories_patterns = {
+    'Analysis': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
     'Argument': ['Contradiction'],
     'Assessment': ['Multi-Criteria Rating'],
     'Calculation': ['Word Problems - Addition/Subtraction', 'Word Problems - Multiplication/Division'],
@@ -77,7 +78,6 @@ categories_patterns = {
     'Prompt Improvement': ['Question Refinement', 'Alternative Approaches', 'Cognitive Verifier', 'Refusal Breaker'],
     'Refactoring': ['Pseudo-code Refactoring', 'Data-guided Refactoring', 'Code Clustering', 'Intermediate Abstraction', 'Principled Code', 'Hidden Assumptions'],
     'Requirements Elicitation': ['Requirements Simulator', 'Specification Disambiguation', 'Change Request Simulation'],
-    'Sentiment Analysis': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
     'Simulation': ['API Generator', 'API Simulator', 'Few-shot Example Generator', 'Domain-Specific Language (DSL) Creation', 'Architectural Possibilities'],
     'Summarising': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
     'Translation': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
