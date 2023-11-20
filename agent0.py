@@ -27,9 +27,10 @@ load_dotenv()
 # VARIABLES #
 #############
 openai.api_type = "azure"
-openai.api_base = os.getenv("AZURE_OPENAI_ENDPOINT")
+openai.api_base = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 openai.api_version = "2023-05-15"
-openai.api_key = os.getenv("AZURE_OPENAI_KEY")
+openai.api_key = os.getenv("AZUREVS_OPENAI_KEY")
+model = os.getenv("AZUREVS_OPENAI_MODEL")
 cve = None
 #cve = "CVE-2020-16969"
 iso_datetime = datetime.utcnow().isoformat()
@@ -149,7 +150,7 @@ promptTest = [
 # MAIN CODE #
 #############
 response = openai.ChatCompletion.create(
-    engine="gpt-35-00", # engine = "deployment_name".
+    engine=model, # engine = "deployment_name".
     messages=prompt
 )
 
