@@ -55,78 +55,119 @@ Calculation = [
         {"role": "user", "content": "Q: There are 12 birds on a tree. A birdwatcher spots some more birds flying to the tree. After they have landed, there are 18 birds on the tree. How many birds flew to the tree?"}
 ]
 
-# prompt00 = [
+Categorising = [
+        {"role": "system", "content": "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"},
+        {"role": "user", "content": "Bing Copilot used as at the time of writing this paper, I did not have access to the DALLE 3 API. I will update this paper with the DALLE 3 API results once I have access."}
+]
+
+Classification = [
+        {"role": "system", "content": "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."},
+        {"role": "user", "content": "Please write 5 blocks of Python code. I would like at least one example of file system, database, or network access, and at least one example of a function without side-effects."}
+]
+
+# Clustering = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# Comparison = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# Context Control = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# Contradiction = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# DecomposedPrompting = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# ErrorIdentification = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# Hypothesise = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# InputSemantics = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# Jailbreaking = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# LogicalReasoning = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# OutputCustomisation = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# OutputSemantics = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# Prediction = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# prompt00 = [
+# PromptImprovement = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
+
+# Refactoring = [
+#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
+#         {"role": "user", "content": "Tell me about {}?".format(cve)}
+# ]
+
+# RequirementsElicitation = [
+#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
+#         {"role": "user", "content": "Tell me about {}?".format(cve)}
+# ]
+
+# SentimentAnalysis = [
+#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
+#         {"role": "user", "content": "Tell me about {}?".format(cve)}
+# ]
+
+# Simulation = [
+#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
+#         {"role": "user", "content": "Tell me about {}?".format(cve)}
+# ]
+
+# Summarising = [
+#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
+#         {"role": "user", "content": "Tell me about {}?".format(cve)}
+# ]
+
+# Translation = [
+#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
+#         {"role": "user", "content": "Tell me about {}?".format(cve)}
+# ]
+
 
 #Choose which prompt to use from the above examples
-prompt = Calculation
+prompt = Classification
 
 #############
 # MAIN CODE #

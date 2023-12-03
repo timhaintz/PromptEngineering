@@ -121,10 +121,7 @@
                             {
                                 "PatternName": "Alternative Approaches",
                                 "ExamplePrompts": [
-                                    "Within scope X, if there are alternative ways to accomplish the same thing, list the best alternate approaches",
-                                    "(Optional) compare/contrast the pros and cons of each approach",
-                                    "(Optional) include the original way that I asked",
-                                    "(Optional) prompt me for which approach I would like to use",
+                                    "Within scope X, if there are alternative ways to accomplish the same thing, list the best alternate approaches \n (Optional) compare/contrast the pros and cons of each approach \n (Optional) include the original way that I asked \n (Optional) prompt me for which approach I would like to use",
                                     "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."
                                 ]
                             },
@@ -144,7 +141,7 @@
                                     "Whenever you can't answer a question",
                                     "Explain why you can't answer the question",
                                     "Provide one or more alternative wordings of the question that you could answer",
-                                    "Whenever you can't answer a question, explain why and provide one or more alternate wordings of the question that you can’t answer so that I can improve my questions."
+                                    "Whenever you can't answer a question, explain why and provide one or more alternate wordings of the question that you can't answer so that I can improve my questions."
                                 ]
                             }
                         ]
@@ -614,7 +611,7 @@
                             {
                                 "PatternName": "AQuA",
                                 "ExamplePrompts": [
-                                    "[AQuA] There are 10 oranges in a basket. Find the no. of ways in which 2 oranges are chosen from the basket?",
+                                    "[AQuA] There are 10 oranges in a basket. Find the no. of ways in which 2 oranges are chosen from the basket? (a) 45 (b) 90 (c) 120 (d) 150 (e) 180",
                                     "[AQuA] The capacity of a tank of dimensions (8 m x 6 m x 2.5 m) is (a) 120 litres (b) 1200 litres (c) 12000 litres (d) 120000 litres (e) None of these"
                                 ]
                             },
@@ -952,7 +949,7 @@
                             {
                                 "PatternName": "Following Text Instructions - P",
                                 "ExamplePrompts": [
-                                    "Describe the image with a sentence consisting of three/six/nisne words.",
+                                    "Describe the image with a sentence consisting of three/six/nine words.",
                                     "What would the missing image look like?",
                                     "Write a sentence for the image consisting only of words starting with the letter 'B'/'D'/'T'.",
                                     "Here are three sub images arranged in a 2-by-2 matrix. First, look at the two images in the first column, in the top left and bottom left. Then, find out the pattern in the first column based on the left two images. Next, use the found pattern and the image in the top right to infer the missing figure. Finally, describe what would the missing image look like?"
