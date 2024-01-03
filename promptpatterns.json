@@ -222,7 +222,7 @@
                                     "I will ask you to do X, and you will tell me if X is possible given the requirements.",
                                     "If X is possible, explain why using the requirements.",
                                     "If I can't do X based on the requirements, write the missing requirements needed in format Y.",
-                                    "Now, I want you to act as this system. Use the requirements to guide your behavior. I am going to say, I want to do X, and you will tell me if X is possible given the requirements. If X is possible, provide a step-by-step set of instructions on how I would accomplish it and provide additional details that would help implement the requirement. If I can’t do X based on the requirements, write the missing requirements to make it possible as user stories.",
+                                    "Now, I want you to act as this system. Use the requirements to guide your behavior. I am going to say, I want to do X, and you will tell me if X is possible given the requirements. If X is possible, provide a step-by-step set of instructions on how I would accomplish it and provide additional details that would help implement the requirement. If I can't do X based on the requirements, write the missing requirements to make it possible as user stories.",
                                     "Now, I want you to act as this system in a text based simulator of the system. Use the requirements to guide your behavior. You will describe the user interface for the system, based on the requirements, and what I can do on each screen. I am going to say, I want to do X, and you will tell me if X is possible given the requirements and the current screen. If X is possible, provide a step-by-step set of instructions how I would accomplish it and provide additional details that would help implement the requirement. If I can't do X based on the requirements, write the missing requirements to make it possible as user stories. Whenever the state of the user interface changes, update the user on what they are looking at. Tell me what I am looking at in the system and ask me what I want to do."
                                 ]
                             },
@@ -312,7 +312,7 @@
                                     "I want you to write or refactor code in a way that separates code with property Y from code that has property Z.",
                                     "These are examples of code with property Y.",
                                     "These are examples of code with property Z.",
-                                    "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."
+                                    "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without side-effects."
                                 ]
                             },
                             {
@@ -406,8 +406,7 @@
                             {
                                 "PatternName": "Reflection",
                                 "ExamplePrompts": [
-                                    "Whenever you generate an answer",
-                                    "Explain the reasoning and assumptions behind your answer",
+                                    "Whenever you generate an answer Explain the reasoning and assumptions behind your answer",
                                     "(Optional) ...so that I can improve my question",
                                     "When you provide an answer, please explain the reasoning and assumptions behind your selection of software frameworks. If possible, use specific examples or evidence with associated code samples to support your answer of why the framework is the best selection for the task. Moreover, please address any potential ambiguities or limitations in your answer, in order to provide a more complete and accurate response."
                                 ]
@@ -796,7 +795,7 @@
             },
             {
                 "id":8,
-                "Title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+                "Title": " ",
                 "APAReference": "Li, J., Cheng, X., Zhao, W. X., Nie, J. Y., & Wen, J. R. (2023). HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models. arXiv e-prints, arXiv-2305.",
                 "Authors":[
                     "Junyi Li",

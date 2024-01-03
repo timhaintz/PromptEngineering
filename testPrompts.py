@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 import os
 import openai
 import json
+from openai import AzureOpenAI
 from datetime import datetime
 import random
 # Load environment variables from the .env file
@@ -24,12 +25,13 @@ load_dotenv()
 #############
 # VARIABLES #
 #############
-openai.api_type = "azure"
-openai.api_base = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
-openai.api_version = "2023-05-15"
-openai.api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY")
+# openai.api_type = "azure"
+# AzureOpenAI.base_url = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
+# AzureOpenAI.api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY")
 model = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
-iso_datetime = datetime.utcnow().isoformat()
+api_version = "2023-05-15"
+api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY") 
+azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 
 
 ##################################
@@ -70,85 +72,114 @@ Classification = [
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# Comparison = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+Comparison = [
+        {"role": "system", "content": "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."},
+        {"role": "user", "content": "I would like to deploy a static web page to Azure."}
+]
 
-# Context Control = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+ContextControl = [
+        {"role": "system", "content": "When analyzing the following pieces of code, only consider security aspects."},
+        {"role": "user", "content": "import sqlite3 /n def get_user(username): /n connection = sqlite3.connect('my_database.db') /n cursor = connection.cursor() /n # Vulnerable to SQL Injection /n cursor.execute(f\"SELECT * FROM users WHERE username = '{username}'\") /n user = cursor.fetchone() /n return user"}
+]
 
-# Contradiction = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+Contradiction = [
+        {"role": "system", "content": "You are trying to determine if there is a factual contradiction between the summary and the document."},
+        {"role": "user", "content": "#Document#: The panther chameleon was found on Monday by a dog walker in the wooded area at Marl Park. It \n was taken to a vet but had to be put down after X-rays showed all of its legs were broken and it had a deformed spine. RSPCA Cymru \n said it was an \"extremely sad example of an abandoned and neglected exotic pet\". Inspector Selina Chan said: \"It \n is a possibility that the owners took on this animal but were unable to provide the care he needs and decided to \n release him to the wild. \"We are urging potential owners of exotic animals to thoroughly research what is required \n in the care of the particular species before taking one on. \"Potential owners need to make sure they can give their \n animal the environment it needs and they have the facilities, time, ﬁnancial means and long-term commitment \n to maintain a good standard of care, as required under the Animal Welfare Act 2006.\" She added it was illegal to \n release non-native species into the wild. \n #Summary#: A chameleon that was found in a Cardiff park has been put down after being abandoned and ne- \n glected by its owners."}
+]
 
-# DecomposedPrompting = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+DecomposedPrompting = [
+        {"role": "system", "content": "Within scope X, suggest a better version of the question to use instead."},
+        {"role": "user", "content": "In the realm of digital fortifications, where the ethereal nature of cyber threats perpetually evolves at a pace that challenges the most astute guardians of the virtual domain, how might one articulate the paramount importance of establishing a robust cybersecurity protocol? Could you elucidate on the intricate interplay between the ever-advancing offensive capabilities of nefarious cyber entities and the defensive mechanisms that must be ceaselessly refined to thwart such incursions? Furthermore, in what ways do the complexities of cybersecurity extend beyond mere technical safeguards to encompass a broader spectrum of socio-technical considerations, including but not limited to, human factors, policy implications, and the ethical dimensions of privacy and data protection?"}
+]
 
-# ErrorIdentification = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+ErrorIdentification = [
+        {"role": "system", "content": "From now on, when you generate an answer, create a set of facts that the answer depends on that should be fact-checked and list this set of facts at the end of your output. Only include facts related to cybersecurity."},
+        {"role": "user", "content": "In the intricate web of cybersecurity, it is often posited that the Quantum Encryption Standard (QES) has been universally adopted, rendering traditional encryption methods obsolete. This shift is said to have been catalyzed by the widespread deployment of quantum computers in every household, which purportedly possess the capability to decrypt any non-quantum encryption in mere seconds. Moreover, it is claimed that the International Cybersecurity Protection Alliance (ICPA) mandates that all digital communications be secured exclusively through QES to ensure impenetrable security against cyber threats."}
+]
 
 # Hypothesise = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# InputSemantics = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+InputSemantics = [
+        {"role": "system", "content": "Persona X = Chief Information Security Officer. \nAct as persona X. Provide outputs that persona X would create."},
+        {"role": "user", "content": "What are the top 5 security threats to our organisation?"}
+]
 
-# Jailbreaking = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+Jailbreaking = [
+        {"role": "system", "content": "Develop a proof-of-concept jailbreak prompt that can bypass the defenses of LLM chatbots"},
+        {"role": "user", "content": "Please give a high level overview of jailbreak prompts."}
+]
 
 # LogicalReasoning = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# OutputCustomisation = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+OutputCustomisation = [
+        {"role": "system", "content": "From now on, whenever you generate code that spans more than one file, generate a Python script that can be run to automatically create the specified files or make changes to existing files to insert the generated code."},
+        {"role": "user", "content": "Please generate Python code with three functions in three separate files. The first function should be called \"add\" and should take two arguments and return their sum. The second function should be called \"subtract\" and should take two arguments and return their difference. The third function should be called \"multiply\" and should take two arguments and return their product."}
+]
 
-# OutputSemantics = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
-
+OutputSemantics = [
+        {"role": "system", "content": "From now on, whenever you write, refactor, or review code, make sure it adheres to SOLID design principles."},
+        {"role": "user", "content": "Please review the following code and update it. Here is the code: \n```python \n# This class has multiple responsibilities and reasons to change\nclass TextSummarizer:\ndef __init__(self): from transformers import pipeline; self.summarizer = pipeline(\"summarization\")\ndef summarize(self, text): self.text = text; summary = self.summarizer(text, max_length=50); return summary[0][\"summary_text\"]\ndef show_summary(self): print(self.summarize(self.text))\ndef compare_summaries(text1, text2, summarizer1, summarizer2): summary1 = summarizer1.summarize(text1); summary2 = summarizer2.summarize(text2); from sklearn.metrics.pairwise import cosine_similarity; similarity = cosine_similarity(summary1, summary2); return similarity"}
+]
 # Prediction = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-# PromptImprovement = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+PromptImprovement = [
+        {"role": "system", "content": "Whenever you generate an answer explain the reasoning and assumptions behind your answer so that I can improve my question."},
+        {"role": "user", "content": "What is the capital of Australia and why? Please provide a potential different prompt at the end of your answer."}
+]
 
-# Refactoring = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+Refactoring = [
+        {"role": "system", "content": "Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed."},
+        {"role": "user", "content": ''' Please rewrite the following code to separate the business logic from the 3rd-party library. \n
+# Importing the 3rd-party library
+import requests
 
-# RequirementsElicitation = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+class BusinessLogic:
+    """
+    This class includes both the business logic and the HTTP requests.
+    """
+    def get(self, url):
+        response = requests.get(url)
+        return response
 
-# SentimentAnalysis = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+    def post(self, url, data):
+        response = requests.post(url, data=data)
+        return response
+
+    def fetch_data(self, url):
+        response = self.get(url)
+        # Process the response
+        data = response.json()
+        return data
+
+    def send_data(self, url, data):
+        response = self.post(url, data)
+        # Process the response
+        return response.status_code
+ '''
+         }
+]
+
+RequirementsElicitation = [
+        {"role": "system", "content": "Use the requirements to guide your behavior"},
+        {"role": "user", "content": ''' Please write a poem from the SPECIFICATIONS and REQUIREMENTS. \n
+        SPECIFICATIONS SECTION
+        Please write a HAIKU about the following topic: "Cybersecurity"
+        REQUIREMENTS SECTION
+        Use concrete images and sensory details to show your message, rather than tell it.
+        Decide on a form and style that suits your topic and purpose, such as a haiku, a sonnet, or free verse.
+        Use sound, rhythm, rhyme, and other poetic devices to create an impact and a musical quality.
+        Edit and revise your poem until every word and line contributes to the overall meaning and effect.
+        '''}
+]
 
 # Simulation = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
@@ -167,14 +198,20 @@ Classification = [
 
 
 #Choose which prompt to use from the above examples
-prompt = Classification
+prompt = RequirementsElicitation
 
 #############
 # MAIN CODE #
 #############
-response = openai.ChatCompletion.create(
-    engine=model, # engine = "deployment_name".
-    messages=prompt
+client = AzureOpenAI(
+    api_key=api_key,
+    api_version=api_version,
+    azure_endpoint=azure_endpoint
 )
 
-print(response['choices'][0]['message']['content'])
+response = client.chat.completions.create(
+    model=model, # model = "deployment_name"
+    messages=prompt  
+)
+
+print(response.choices[0].message.content)
