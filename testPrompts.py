@@ -57,10 +57,10 @@ Calculation = [
         {"role": "user", "content": "Q: There are 12 birds on a tree. A birdwatcher spots some more birds flying to the tree. After they have landed, there are 18 birds on the tree. How many birds flew to the tree?"}
 ]
 
-Categorising = [
-        {"role": "system", "content": "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"},
-        {"role": "user", "content": "Bing Copilot used as at the time of writing this paper, I did not have access to the DALLE 3 API. I will update this paper with the DALLE 3 API results once I have access."}
-]
+# Categorising = [
+#         {"role": "system", "content": "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"},
+#         {"role": "user", "content": "Bing Copilot used as at the time of writing this paper, I did not have access to the DALLE 3 API. I will update this paper with the DALLE 3 API results once I have access."}
+# ]
 
 Classification = [
         {"role": "system", "content": "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."},

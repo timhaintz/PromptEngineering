@@ -38,9 +38,12 @@ api_base = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 ##########################
 # Base64 Encode an Image #
 ##########################
+CategorisingImage = "images\\blueCorollaCrash.jpg"
+
+image = CategorisingImage
 
 # Open the image file in binary mode, read it, and encode it
-with open("images\\iLikeBooks.jpg", "rb") as image_file:
+with open(image, "rb") as image_file:
     encoded_string = base64.b64encode(image_file.read()).decode()
 data_url = f"data:image/jpeg;base64,{encoded_string}"
 
@@ -52,13 +55,20 @@ base_url = f"{api_base}openai/deployments/{deployment_name}"
 headers = {   
     "Content-Type": "application/json",   
     "api-key": API_KEY 
-} 
+}
+
+##################################
+# Prompt Categories and Examples #
+##################################
+Categorising = "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"
+
+system_prompt = Categorising
 
 # Prepare endpoint, headers, and request body 
 endpoint = f"{base_url}/chat/completions?api-version={api_version}" 
 data = { 
     "messages": [ 
-        { "role": "system", "content": "You are a helpful assistant." }, 
+        { "role": "system", "content": system_prompt }, 
         { "role": "user", "content": [  
             { 
                 "type": "text", 
@@ -79,5 +89,9 @@ data = {
 #####################
 response = requests.post(endpoint, headers=headers, data=json.dumps(data))   
 
-print(f"Status Code: {response.status_code}")   
-print(response.text)
+print(f"Status Code: {response.status_code}")
+# Parse the JSON string into a dictionary
+response_dict = json.loads(response.text)
+# Extract the content
+content = response_dict['choices'][0]['message']['content']
+print(content)
