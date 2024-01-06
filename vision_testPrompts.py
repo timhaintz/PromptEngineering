@@ -38,9 +38,11 @@ api_base = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 ##########################
 # Base64 Encode an Image #
 ##########################
-CategorisingImage = "images\\blueCorollaCrash.jpg"
+CategorisingImage = "images\\categorising_sision_model_blue_corolla_crash.jpg"
+HypothesiseImage = "images\\hypothesise_vision_model_goal_kick.png"
 
-image = CategorisingImage
+# Change the below variable to change the image
+image = HypothesiseImage
 
 # Open the image file in binary mode, read it, and encode it
 with open(image, "rb") as image_file:
@@ -62,7 +64,10 @@ headers = {
 ##################################
 Categorising = "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"
 
-system_prompt = Categorising
+Hypothesise = "Predict what will happen next based on the images."
+
+# Change the below variable to change the prompt
+system_prompt = Hypothesise
 
 # Prepare endpoint, headers, and request body 
 endpoint = f"{base_url}/chat/completions?api-version={api_version}" 
@@ -87,6 +92,8 @@ data = {
 #####################
 # Make the API call #
 #####################
+print(f"Image used: {image} \nPrompt used:{system_prompt}")
+
 response = requests.post(endpoint, headers=headers, data=json.dumps(data))   
 
 print(f"Status Code: {response.status_code}")
