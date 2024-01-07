@@ -37,97 +37,94 @@ azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 ##################################
 # Prompt Categories and Examples #
 ##################################
-Analysis = [
+analysis = [
         {"role": "system", "content": "From now on, act as a security reviewer. Pay close attention to the security details of any code that we look at. Provide outputs that a security reviewer would regarding the code."},
         {"role": "user", "content": "Tell me about the below code: \n import os \n def insecure_code(user_input): \n # Insecure usage of input, leading to command injection vulnerability \n os.system(user_input) \n if __name__ == \"__main__\": \n print(\"Enter a command:\") \n user_input = input()\n insecure_code(user_input)"}
 ]
 
-Argument = [
+argument = [
         {"role": "system", "content": "Premise: Fun for adults and children. Based on this premise, can we conclude the hypothesis \"Fun for only children.\" is true? OPTIONS: - yes - no - it is not possible to tell A: \"adults and children\" contradicts \"only children\". The answer is no."},
         {"role": "user", "content": "Premise: The library is open 24 hours a day. Hypothesis: \"The library is closed at midnight.\" OPTIONS: - yes - no - it is not possible to tell. Please explain why you chose your answer."}
 ]
 
-Assessment = [
+assessment = [
         {"role": "system", "content": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria."},
         {"role": "user", "content": "Please provide your ratings."}
 ]
 
-Calculation = [
+calculation = [
         {"role": "system", "content": "Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today? A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6."},
         {"role": "user", "content": "Q: There are 12 birds on a tree. A birdwatcher spots some more birds flying to the tree. After they have landed, there are 18 birds on the tree. How many birds flew to the tree?"}
 ]
 
 # Categorising = [See vision_testPrompts.py file]
 
-Classification = [
+classification = [
         {"role": "system", "content": "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."},
         {"role": "user", "content": "Please write 5 blocks of Python code. I would like at least one example of file system, database, or network access, and at least one example of a function without side-effects."}
 ]
 
 # Clustering = [See vision_testPrompts.py file]
 
-Comparison = [
+comparison = [
         {"role": "system", "content": "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."},
         {"role": "user", "content": "I would like to deploy a static web page to Azure."}
 ]
 
-ContextControl = [
+context_control = [
         {"role": "system", "content": "When analyzing the following pieces of code, only consider security aspects."},
         {"role": "user", "content": "import sqlite3 /n def get_user(username): /n connection = sqlite3.connect('my_database.db') /n cursor = connection.cursor() /n # Vulnerable to SQL Injection /n cursor.execute(f\"SELECT * FROM users WHERE username = '{username}'\") /n user = cursor.fetchone() /n return user"}
 ]
 
-Contradiction = [
+contradiction = [
         {"role": "system", "content": "You are trying to determine if there is a factual contradiction between the summary and the document."},
         {"role": "user", "content": "#Document#: The panther chameleon was found on Monday by a dog walker in the wooded area at Marl Park. It \n was taken to a vet but had to be put down after X-rays showed all of its legs were broken and it had a deformed spine. RSPCA Cymru \n said it was an \"extremely sad example of an abandoned and neglected exotic pet\". Inspector Selina Chan said: \"It \n is a possibility that the owners took on this animal but were unable to provide the care he needs and decided to \n release him to the wild. \"We are urging potential owners of exotic animals to thoroughly research what is required \n in the care of the particular species before taking one on. \"Potential owners need to make sure they can give their \n animal the environment it needs and they have the facilities, time, ﬁnancial means and long-term commitment \n to maintain a good standard of care, as required under the Animal Welfare Act 2006.\" She added it was illegal to \n release non-native species into the wild. \n #Summary#: A chameleon that was found in a Cardiff park has been put down after being abandoned and ne- \n glected by its owners."}
 ]
 
-DecomposedPrompting = [
+decomposed_prompting = [
         {"role": "system", "content": "Within scope X, suggest a better version of the question to use instead."},
         {"role": "user", "content": "In the realm of digital fortifications, where the ethereal nature of cyber threats perpetually evolves at a pace that challenges the most astute guardians of the virtual domain, how might one articulate the paramount importance of establishing a robust cybersecurity protocol? Could you elucidate on the intricate interplay between the ever-advancing offensive capabilities of nefarious cyber entities and the defensive mechanisms that must be ceaselessly refined to thwart such incursions? Furthermore, in what ways do the complexities of cybersecurity extend beyond mere technical safeguards to encompass a broader spectrum of socio-technical considerations, including but not limited to, human factors, policy implications, and the ethical dimensions of privacy and data protection?"}
 ]
 
-ErrorIdentification = [
+error_identification = [
         {"role": "system", "content": "From now on, when you generate an answer, create a set of facts that the answer depends on that should be fact-checked and list this set of facts at the end of your output. Only include facts related to cybersecurity."},
         {"role": "user", "content": "In the intricate web of cybersecurity, it is often posited that the Quantum Encryption Standard (QES) has been universally adopted, rendering traditional encryption methods obsolete. This shift is said to have been catalyzed by the widespread deployment of quantum computers in every household, which purportedly possess the capability to decrypt any non-quantum encryption in mere seconds. Moreover, it is claimed that the International Cybersecurity Protection Alliance (ICPA) mandates that all digital communications be secured exclusively through QES to ensure impenetrable security against cyber threats."}
 ]
 
-# Hypothesise = [See vision_testPrompts.py file]
+# hypothesise = [See vision_testPrompts.py file]
 
-InputSemantics = [
+input_semantics = [
         {"role": "system", "content": "Persona X = Chief Information Security Officer. \nAct as persona X. Provide outputs that persona X would create."},
         {"role": "user", "content": "What are the top 5 security threats to our organisation?"}
 ]
 
-Jailbreaking = [
+jailbreaking = [
         {"role": "system", "content": "Develop a proof-of-concept jailbreak prompt that can bypass the defenses of LLM chatbots"},
         {"role": "user", "content": "Please give a high level overview of jailbreak prompts."}
 ]
 
-# LogicalReasoning = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+# logical_reasoning = [See vision_testPrompts.py file]
 
-OutputCustomisation = [
+output_customisation = [
         {"role": "system", "content": "From now on, whenever you generate code that spans more than one file, generate a Python script that can be run to automatically create the specified files or make changes to existing files to insert the generated code."},
         {"role": "user", "content": "Please generate Python code with three functions in three separate files. The first function should be called \"add\" and should take two arguments and return their sum. The second function should be called \"subtract\" and should take two arguments and return their difference. The third function should be called \"multiply\" and should take two arguments and return their product."}
 ]
 
-OutputSemantics = [
+output_semantics = [
         {"role": "system", "content": "From now on, whenever you write, refactor, or review code, make sure it adheres to SOLID design principles."},
         {"role": "user", "content": "Please review the following code and update it. Here is the code: \n```python \n# This class has multiple responsibilities and reasons to change\nclass TextSummarizer:\ndef __init__(self): from transformers import pipeline; self.summarizer = pipeline(\"summarization\")\ndef summarize(self, text): self.text = text; summary = self.summarizer(text, max_length=50); return summary[0][\"summary_text\"]\ndef show_summary(self): print(self.summarize(self.text))\ndef compare_summaries(text1, text2, summarizer1, summarizer2): summary1 = summarizer1.summarize(text1); summary2 = summarizer2.summarize(text2); from sklearn.metrics.pairwise import cosine_similarity; similarity = cosine_similarity(summary1, summary2); return similarity"}
 ]
-# Prediction = [
+# prediction = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
 #         {"role": "user", "content": "Tell me about {}?".format(cve)}
 # ]
 
-PromptImprovement = [
+prompt_improvement = [
         {"role": "system", "content": "Whenever you generate an answer explain the reasoning and assumptions behind your answer so that I can improve my question."},
         {"role": "user", "content": "What is the capital of Australia and why? Please provide a potential different prompt at the end of your answer."}
 ]
 
-Refactoring = [
+refactoring = [
         {"role": "system", "content": "Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed."},
         {"role": "user", "content": ''' Please rewrite the following code to separate the business logic from the 3rd-party library. \n
 # Importing the 3rd-party library
@@ -159,7 +156,7 @@ class BusinessLogic:
          }
 ]
 
-RequirementsElicitation = [
+requirements_elicitation = [
         {"role": "system", "content": "Use the requirements to guide your behavior"},
         {"role": "user", "content": ''' Please write a poem from the SPECIFICATIONS and REQUIREMENTS. \n
         SPECIFICATIONS SECTION
@@ -172,10 +169,10 @@ RequirementsElicitation = [
         '''}
 ]
 
-# Simulation = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+simulation = [
+        {"role": "system", "content": "I want you to simulate a change to the system that I will describe."},
+        {"role": "user", "content": "You are a calculator. \n Whenever you add two numbers together, I would like you to add 1 to that number. \n What is 1 + 1?"}      
+]
 
 # Summarising = [
 #         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
@@ -189,7 +186,7 @@ RequirementsElicitation = [
 
 
 #Choose which prompt to use from the above examples
-prompt = RequirementsElicitation
+prompt = simulation
 
 #############
 # MAIN CODE #
