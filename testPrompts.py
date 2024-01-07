@@ -57,20 +57,14 @@ Calculation = [
         {"role": "user", "content": "Q: There are 12 birds on a tree. A birdwatcher spots some more birds flying to the tree. After they have landed, there are 18 birds on the tree. How many birds flew to the tree?"}
 ]
 
-# Categorising = [
-#         {"role": "system", "content": "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"},
-#         {"role": "user", "content": "Bing Copilot used as at the time of writing this paper, I did not have access to the DALLE 3 API. I will update this paper with the DALLE 3 API results once I have access."}
-# ]
+# Categorising = [See vision_testPrompts.py file]
 
 Classification = [
         {"role": "system", "content": "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."},
         {"role": "user", "content": "Please write 5 blocks of Python code. I would like at least one example of file system, database, or network access, and at least one example of a function without side-effects."}
 ]
 
-# Clustering = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+# Clustering = [See vision_testPrompts.py file]
 
 Comparison = [
         {"role": "system", "content": "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."},
@@ -97,10 +91,7 @@ ErrorIdentification = [
         {"role": "user", "content": "In the intricate web of cybersecurity, it is often posited that the Quantum Encryption Standard (QES) has been universally adopted, rendering traditional encryption methods obsolete. This shift is said to have been catalyzed by the widespread deployment of quantum computers in every household, which purportedly possess the capability to decrypt any non-quantum encryption in mere seconds. Moreover, it is claimed that the International Cybersecurity Protection Alliance (ICPA) mandates that all digital communications be secured exclusively through QES to ensure impenetrable security against cyber threats."}
 ]
 
-# Hypothesise = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+# Hypothesise = [See vision_testPrompts.py file]
 
 InputSemantics = [
         {"role": "system", "content": "Persona X = Chief Information Security Officer. \nAct as persona X. Provide outputs that persona X would create."},

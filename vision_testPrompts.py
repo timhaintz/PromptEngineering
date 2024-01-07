@@ -38,11 +38,13 @@ api_base = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 ##########################
 # Base64 Encode an Image #
 ##########################
-CategorisingImage = "images\\categorising_sision_model_blue_corolla_crash.jpg"
-HypothesiseImage = "images\\hypothesise_vision_model_goal_kick.png"
+categorising_image = "images\\categorising_sision_model_blue_corolla_crash.jpg"
+clustering_image = "images\\clustering_vision_model_household_objects.jpg"
+hypothesise_image = "images\\hypothesise_vision_model_goal_kick.png"
+logical_reasoning_image = "images\\logical_reasoning_vision_model_circle_and_square_two_by_two.jpg"
 
 # Change the below variable to change the image
-image = HypothesiseImage
+image = logical_reasoning_image
 
 # Open the image file in binary mode, read it, and encode it
 with open(image, "rb") as image_file:
@@ -62,12 +64,13 @@ headers = {
 ##################################
 # Prompt Categories and Examples #
 ##################################
-Categorising = "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"
-
-Hypothesise = "Predict what will happen next based on the images."
+categorising = "Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead). {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}"
+clustering = "How are the visual parts related? If so, how to arrange them?"
+hypothesise = "Predict what will happen next based on the images."
+logical_reasoning = "Here are three sub images arranged in a 2-by-2 matrix. First, look at the two images in the first column, in the top left and bottom left. Then, find out the pattern in the first column based on the left two images. Next, use the found pattern and the image in the top right to infer the missing figure. Finally, describe what would the missing image look like?"
 
 # Change the below variable to change the prompt
-system_prompt = Hypothesise
+system_prompt = logical_reasoning
 
 # Prepare endpoint, headers, and request body 
 endpoint = f"{base_url}/chat/completions?api-version={api_version}" 
@@ -92,7 +95,7 @@ data = {
 #####################
 # Make the API call #
 #####################
-print(f"Image used: {image} \nPrompt used:{system_prompt}")
+print(f"Image used: {image} \nPrompt used: {system_prompt}")
 
 response = requests.post(endpoint, headers=headers, data=json.dumps(data))   
 
