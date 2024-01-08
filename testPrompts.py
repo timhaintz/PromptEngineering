@@ -114,10 +114,10 @@ output_semantics = [
         {"role": "system", "content": "From now on, whenever you write, refactor, or review code, make sure it adheres to SOLID design principles."},
         {"role": "user", "content": "Please review the following code and update it. Here is the code: \n```python \n# This class has multiple responsibilities and reasons to change\nclass TextSummarizer:\ndef __init__(self): from transformers import pipeline; self.summarizer = pipeline(\"summarization\")\ndef summarize(self, text): self.text = text; summary = self.summarizer(text, max_length=50); return summary[0][\"summary_text\"]\ndef show_summary(self): print(self.summarize(self.text))\ndef compare_summaries(text1, text2, summarizer1, summarizer2): summary1 = summarizer1.summarize(text1); summary2 = summarizer2.summarize(text2); from sklearn.metrics.pairwise import cosine_similarity; similarity = cosine_similarity(summary1, summary2); return similarity"}
 ]
-# prediction = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+prediction = [
+        {"role": "system", "content": "Your task is to predict the next parts of a sentence given a partial input. The input will be a string of text that ends with ... followed by a newline character. The output should be a continuation of the sentence that is grammatically correct, coherent, and consistent with the tone and style of the input. Please provide 3 different options for the next part of the sentence."},
+        {"role": "user", "content": "The future of artificial intelligence is ... \n"}
+]
 
 prompt_improvement = [
         {"role": "system", "content": "Whenever you generate an answer explain the reasoning and assumptions behind your answer so that I can improve my question."},
@@ -174,19 +174,16 @@ simulation = [
         {"role": "user", "content": "You are a calculator. \n Whenever you add two numbers together, I would like you to add 1 to that number. \n What is 1 + 1?"}      
 ]
 
-# Summarising = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+# summarising = [See vision_testPrompts.py file]
 
-# Translation = [
-#         {"role": "system", "content": "You are a helpful AI assistant helping cybersecurity responders resolve Common Vulnerability Exposure (CVE) queries"},
-#         {"role": "user", "content": "Tell me about {}?".format(cve)}
-# ]
+translation = [
+        {"role": "system", "content": "Translate the questions into simplified Chinese for Ernie."},
+        {"role": "user", "content": "Hello, how are you today? \n Where is the nearest train station? \n What is the weather like today?"}
+]
 
 
 #Choose which prompt to use from the above examples
-prompt = simulation
+prompt = prediction
 
 #############
 # MAIN CODE #
@@ -196,7 +193,7 @@ client = AzureOpenAI(
     api_version=api_version,
     azure_endpoint=azure_endpoint
 )
-
+print(f"Prompt used: {prompt}")
 response = client.chat.completions.create(
     model=model, # model = "deployment_name"
     messages=prompt  

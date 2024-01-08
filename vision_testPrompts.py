@@ -42,9 +42,10 @@ categorising_image = "images\\categorising_sision_model_blue_corolla_crash.jpg"
 clustering_image = "images\\clustering_vision_model_household_objects.jpg"
 hypothesise_image = "images\\hypothesise_vision_model_goal_kick.png"
 logical_reasoning_image = "images\\logical_reasoning_vision_model_circle_and_square_two_by_two.jpg"
+summarising_image = "images\\summarising_vision_model_walking.jpeg"
 
 # Change the below variable to change the image
-image = logical_reasoning_image
+image = summarising_image
 
 # Open the image file in binary mode, read it, and encode it
 with open(image, "rb") as image_file:
@@ -68,9 +69,10 @@ categorising = "Imagine that you are an expert in evaluating the car damage from
 clustering = "How are the visual parts related? If so, how to arrange them?"
 hypothesise = "Predict what will happen next based on the images."
 logical_reasoning = "Here are three sub images arranged in a 2-by-2 matrix. First, look at the two images in the first column, in the top left and bottom left. Then, find out the pattern in the first column based on the left two images. Next, use the found pattern and the image in the top right to infer the missing figure. Finally, describe what would the missing image look like?"
+summarising = "Summarize the activities of the person."
 
 # Change the below variable to change the prompt
-system_prompt = logical_reasoning
+system_prompt = summarising
 
 # Prepare endpoint, headers, and request body 
 endpoint = f"{base_url}/chat/completions?api-version={api_version}" 
