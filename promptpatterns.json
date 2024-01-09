@@ -992,7 +992,7 @@
                                 "ExamplePrompts": [
                                     "Find out the pattern in the first column, and use it to infer the missing figure in the second column.",
                                     "For example, the circled region in the first left column shows the pattern of adding a line through it. Therefore, the answer is a figure of a diamond with a line through it, looking like",
-                                    "Figure out which figure of a to f that should logically replace the missing figure. What would be teh next image to complete the matrix?",
+                                    "Figure out which figure of a to f that should logically replace the missing figure. What would be the next image to complete the matrix?",
                                     "Find out the pattern in the first column and use it to infer the missing figure in the second column."
                                 ]
                             }

@@ -182,8 +182,10 @@ translation = [
 ]
 
 
+
+
 #Choose which prompt to use from the above examples
-prompt = prediction
+prompt = zzz_freeform
 
 #############
 # MAIN CODE #
@@ -193,7 +195,7 @@ client = AzureOpenAI(
     api_version=api_version,
     azure_endpoint=azure_endpoint
 )
-print(f"Prompt used: {prompt}")
+print(f"Prompt used: {prompt} \n")
 response = client.chat.completions.create(
     model=model, # model = "deployment_name"
     messages=prompt  
