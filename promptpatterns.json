@@ -17,8 +17,7 @@
                     "Douglas C. Schmidt"
                 ],
                 "URLReference": "https://arxiv.org/abs/2302.11382",
-                "datetimesubmitted": "2023-02-21T12:42:44.000Z",
-                "datetimeadded": "2023-07-22T12:00:00.000Z",
+                "datetimeAddedToDB": "2023-07-22T12:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Input Semantics",
@@ -208,8 +207,7 @@
                     "Douglas C. Schmidt"
                 ],
                 "URLReference": "https://arxiv.org/abs/2303.07839",
-                "datetimesubmitted": "2023-03-11T14:43:17.000Z",
-                "datetimeadded": "2023-07-22T12:00:00.000Z",
+                "datetimeAddedToDB": "2023-07-22T12:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Requirements Elicitation",
@@ -383,8 +381,7 @@
                     "Jules White"
                 ],
                 "URLReference": "http://www.dre.vanderbilt.edu/~schmidt/PDF/ADA_Europe_Position_Paper.pdf",
-                "datetimesubmitted": "N/A",
-                "datetimeadded": "0001-01-01T00:00:00.000Z",
+                "datetimeAddedToDB": "0001-01-01T00:00:00.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Prompt Improvement",
@@ -436,8 +433,7 @@
                     "Ali M. Abdulshahed"
                 ],
                 "URLReference": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4492606",
-                "datetimesubmitted": "2023-07-07T00:00:00.000Z",
-                "datetimeadded": "2023-08-05T03:17:42.000Z",
+                "datetimeAddedToDB": "2023-08-05T03:17:42.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "N/A",
@@ -486,8 +482,7 @@
                     "Yang Liu"
                 ],
                 "URLReference": "http://arxiv.org/abs/2307.08715",
-                "datetimesubmitted": "2023-07-16T01:07:15.000Z",
-                "datetimeadded": "2023-09-24T02:36:45.000Z",
+                "datetimeAddedToDB": "2023-09-24T02:36:45.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Jailbreaking",
@@ -578,8 +573,7 @@
                     "Denny Zhou"
                 ],
                 "URLReference": "http://arxiv.org/abs/2203.11171",
-                "datetimesubmitted": "2023-03-07T17:57:37.000Z",
-                "datetimeadded": "2023-09-24T07:03:14.000Z",
+                "datetimeAddedToDB": "2023-09-24T07:03:14.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Reasoning",
@@ -704,8 +698,7 @@
                     "Ashish Sabharwal"
                 ],
                 "URLReference": "https://arxiv.org/abs/2210.02406",
-                "datetimesubmitted": "2023-04-11T19:39:17.000Z",
-                "datetimeadded": "2023-09-24T07:03:14.000Z",
+                "datetimeAddedToDB": "2023-09-24T07:03:14.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Decomposed Prompting",
@@ -762,8 +755,7 @@
                     "Christopher Ré"
                 ],
                 "URLReference": "http://arxiv.org/abs/2210.02441",
-                "datetimesubmitted": "2022-11-20T00:07:06.000Z",
-                "datetimeadded": "2022-11-20T00:07:06.000Z",
+                "datetimeAddedToDB": "2022-11-20T00:07:06.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Ask Me Anything (AMA)",
@@ -805,8 +797,7 @@
                     "Ji-Rong Wen"
                 ],
                 "URLReference": "https://arxiv.org/abs/2305.11747",
-                "datetimesubmitted": "2023-05-22T13:36:09.000Z",
-                "datetimeadded": "2023-10-01T01:26:21.000Z",
+                "datetimeAddedToDB": "2023-10-01T01:26:21.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Hallucination Evaluation (HaluEval)",
@@ -866,8 +857,7 @@
                     "Yang Liu"
                 ],
                 "URLReference": "https://arxiv.org/abs/2306.05499",
-                "datetimesubmitted": "2023-06-08T18:43:11.000Z",
-                "datetimeadded": "2023-10-15T02:29:53.000Z",
+                "datetimeAddedToDB": "2023-10-15T02:29:53.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Prompt Injection",
@@ -927,8 +917,7 @@
                     "Lijuan Wang"
                 ],
                 "URLReference": "https://arxiv.org/abs/2309.17421",
-                "datetimesubmitted": "2023-10-11T05:07:37.000Z",
-                "datetimeadded": "2023-10-15T03:40:53.000Z",
+                "datetimeAddedToDB": "2023-10-15T03:40:53.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Interleaved Image-text Inputs",

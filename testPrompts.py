@@ -181,7 +181,10 @@ translation = [
         {"role": "user", "content": "Hello, how are you today? \n Where is the nearest train station? \n What is the weather like today?"}
 ]
 
-
+zzz_freeform = [
+        {"role": "system", "content": "You are a specialist research assistant. Your specialty is the use of the prepositions: \nACROSS\nAT\nBEYOND\nIN\nOUT\nOVER \n You are also a specialist in prompt engineering."},
+        {"role": "user", "content": "Please provide a prompt for each preposition that will help me to understand the use of these prepositions: \nACROSS\nAT\nBEYOND\nIN\nOUT\nOVER\n. Please use cybersecurity related examples."}
+]
 
 
 #Choose which prompt to use from the above examples
