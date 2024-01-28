@@ -14,7 +14,9 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-vi
 https://resources.github.com/copilot-for-business/
 https://pypi.org/project/PyMuPDF/
 EXAMPLE USAGE
-python extractTextFromPDF.py "Test.pdf"
+python extractTextFromPDF.py -filename "Test.pdf"
+
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -179,11 +181,11 @@ def generate_OpenAIPromptAndContent(system_prompt, data, few_shot_prompt=None, a
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-pages', type=str, help='Specify the page range to process (e.g., 1-10)')
-    parser.add_argument('-filepath', type=str, help='Specify the file path of the PDF file')
+    parser.add_argument('-filename', type=str, help='Specify the file path of the PDF file')
     args = parser.parse_args()
 
     # Get the file path from the command line arguments
-    file_path = args.filepath
+    file_path = args.filename
     # Extract the text from the PDF file
     title, file_name, extracted_text_dicts = extract_text_from_pdf(file_path)
 

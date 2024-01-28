@@ -10,6 +10,8 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-
 https://learn.microsoft.com/en-us/azure/cognitive-services/openai/chatgpt-quickstart?tabs=command-line&pivots=programming-language-python
 https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt?pivots=programming-language-chat-completions
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
+EXAMPLE USAGE
+python testPrompts.py
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -37,11 +39,6 @@ azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 ##################################
 # Prompt Categories and Examples #
 ##################################
-analysis = [
-        {"role": "system", "content": "From now on, act as a security reviewer. Pay close attention to the security details of any code that we look at. Provide outputs that a security reviewer would regarding the code."},
-        {"role": "user", "content": "Tell me about the below code: \n import os \n def insecure_code(user_input): \n # Insecure usage of input, leading to command injection vulnerability \n os.system(user_input) \n if __name__ == \"__main__\": \n print(\"Enter a command:\") \n user_input = input()\n insecure_code(user_input)"}
-]
-
 argument = [
         {"role": "system", "content": "Premise: Fun for adults and children. Based on this premise, can we conclude the hypothesis \"Fun for only children.\" is true? OPTIONS: - yes - no - it is not possible to tell A: \"adults and children\" contradicts \"only children\". The answer is no."},
         {"role": "user", "content": "Premise: The library is open 24 hours a day. Hypothesis: \"The library is closed at midnight.\" OPTIONS: - yes - no - it is not possible to tell. Please explain why you chose your answer."}

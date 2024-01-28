@@ -56,7 +56,6 @@ application_categories = {
      
 # The fourth node of the mind map. This is the third level of the mind map. Used to map the categories and patterns.
 categories_patterns = {
-    'Analysis': ['Meta Language Creation', 'Template', 'Reflection', 'Persona', 'Visualization Generator', 'Restrict', 'Cognitive Verifier', 'Question Refinement', 'Refusal Breaker', 'Alternative Approaches', 'Contradiction', 'Fact Check List', 'Free-Form Questions', 'Recipe', 'Output Automater'],
     'Argument': ['Contradiction', 'Hallucination Generation'],
     'Assessment': ['Multi-Criteria Rating'],
     'Calculation': ['Word Problems - Addition/Subtraction', 'Word Problems - Multiplication/Division'],
