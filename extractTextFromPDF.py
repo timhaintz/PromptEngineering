@@ -50,9 +50,9 @@ azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
 
-#############################################################
-# Enter Prompt Instructions Here Separated by '#' character #
-#############################################################
+##################################
+# Enter Prompt Instructions Here #
+##################################
 system_prompt = '''# INSTRUCTIONS
 You are a PhD student collecting prompt engineering examples from research papers.
 ONLY use the provided input text to extract the examples.
@@ -164,7 +164,7 @@ def extract_text_from_pdf(pdf_file_name):
         # Return the list of dictionaries containing the extracted text
         return title, file_name, extracted_text_dicts
 
-def generate_OpenAIPromptAndContent(system_prompt, data, few_shot_prompt=None, assistant_prompt_response=None):
+def generate_OpenAIPromptAndContent(system_prompt, user_prompt, data, few_shot_prompt=None, assistant_prompt_response=None):
     promptAndContent = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt + data}
@@ -211,7 +211,7 @@ if __name__ == '__main__':
         # Join the text for the current set of pages into a single string
         text = '\f'.join([page['text'] for page in text_set])
         # ZERO SHOT - Generate the OpenAI prompt and content using the extracted text
-        openAIInput = generate_OpenAIPromptAndContent(system_prompt, text, few_shot_prompt, assistant_prompt_response)
+        openAIInput = generate_OpenAIPromptAndContent(system_prompt, user_prompt, text, few_shot_prompt, assistant_prompt_response)
         #print(openAIInput)
         # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
         try:

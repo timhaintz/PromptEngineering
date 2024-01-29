@@ -2,7 +2,7 @@
     "Source": {
         "Titles": [
             {
-                "id": 0,
+                "id":0,
                 "Title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
                 "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
                 "Authors": [
@@ -196,7 +196,7 @@
                 ]
             },
             {
-                "id": 1,
+                "id":1,
                 "Title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
                 "APAReference": "White, J., Hays, S., Fu, Q., Spencer-Smith, J., & Schmidt, D. C. (2023). Chatgpt prompt patterns for improving code quality, refactoring, requirements elicitation, and software design. arXiv preprint arXiv:2303.07839.",
                 "Authors": [
@@ -371,7 +371,7 @@
                 ]
             },
             {
-                "id": 2,
+                "id":2,
                 "Title": "Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering",
                 "APAReference": "Schmidt, D. C., Spencer-Smith, J., Fu, Q., & White, J. Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering.",
                 "Authors": [
@@ -426,7 +426,7 @@
                 ]
             },
             {
-                "id": 3,
+                "id":3,
                 "Title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach- A case study in Libya",
                 "APAReference": "Abdulshahed, A. M. (2023). A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach-A case study in Libya. Available at SSRN 4492606.",
                 "Authors": [
@@ -467,7 +467,7 @@
                 ]
             },
             {
-                "id": 4,
+                "id":4,
                 "Title": "Jailbreaker: Automated Jailbreak Across Multiple Large Language Model Chatbots",
                 "APAReference": "Deng, G., Liu, Y., Li, Y., Wang, K., Zhang, Y., Li, Z., ... & Liu, Y. (2023). Jailbreaker: Automated Jailbreak Across Multiple Large Language Model Chatbots. arXiv preprint arXiv:2307.08715.",
                 "Authors": [
@@ -559,7 +559,7 @@
                 ]
             },
             {
-                "id": 5,
+                "id":5,
                 "Title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
                 "APAReference": "Wang, X., Wei, J., Schuurmans, D., Le, Q., Chi, E., Narang, S., ... & Zhou, D. (2022). Self-consistency improves chain of thought reasoning in language models. arXiv preprint arXiv:2203.11171.",
                 "Authors": [
