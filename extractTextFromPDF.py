@@ -3,6 +3,7 @@ DESCRIPTION
 Open PDF file and extract text from it. Replace special characters with escape sequences in the text.
 Create OpenAI System, Assistant and User role framework, send prompt and text to OpenAI API and return response.
 NOTES
+Thank you MvP for helping unblock on 9/2/2024!
 Version:        0.1
 Author:         Tim Haintz                         
 Creation Date:  20/8/2023
@@ -17,6 +18,14 @@ EXAMPLE USAGE
 python extractTextFromPDF.py -filename "Test.pdf"
 
 python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10
+
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -extractexamples True
+
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -summary True
+
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -keypoints True
+
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -prompt "ENTER YOUR QUESTION HERE"
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -53,64 +62,101 @@ iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 ##################################
 # Enter Prompt Instructions Here #
 ##################################
-system_prompt = '''# INSTRUCTIONS
-You are a PhD student collecting prompt engineering examples from research papers.
-ONLY use the provided input text to extract the examples.
-Check the input data twice to conifrm all the prompt examples are complete and correct before providing the output.
-OUTPUT
-{
-    "CategoriesAndPatterns": [
-                    {
-                        "PatternCategory": "Category 1",
-                        "PromptPatterns": [
-                            {
-                                "PatternName": "Pattern 1",
-                                "ExamplePrompts": []
-                            },
-                            {
-                                "PatternName": "Pattern 2",
-                                "ExamplePrompts": []
-                            }
-                        ]
-                    },
-                    {
-                        "PatternCategory": "Category 2",
-                        "PromptPatterns": [
-                            {
-                                "PatternName": "Pattern 3",
-                                "ExamplePrompts": []
-                            },
-                            {
-                                "PatternName": "Pattern 4",
-                                "ExamplePrompts": []
-                            }
-                        ]
-                    }
+# Use the below variables for -extractexamples
+system_prompt = {
+    "extractexamples": '''# INSTRUCTIONS
+    You are a PhD student collecting prompt engineering examples from research papers.
+    ONLY use the provided input text to extract the examples.
+    Check the input data twice to conifrm all the prompt examples are complete and correct before providing the output.
+    OUTPUT
+    {
+        "CategoriesAndPatterns": [
+                        {
+                            "PatternCategory": "Category 1",
+                            "PromptPatterns": [
+                                {
+                                    "PatternName": "Pattern 1",
+                                    "ExamplePrompts": []
+                                },
+                                {
+                                    "PatternName": "Pattern 2",
+                                    "ExamplePrompts": []
+                                }
+                            ]
+                        },
+                        {
+                            "PatternCategory": "Category 2",
+                            "PromptPatterns": [
+                                {
+                                    "PatternName": "Pattern 3",
+                                    "ExamplePrompts": []
+                                },
+                                {
+                                    "PatternName": "Pattern 4",
+                                    "ExamplePrompts": []
+                                }
+                            ]
+                        }
+    }
+    ''',
+    "summary": '''# INSTRUCTIONS You are a PhD student summarising research papers. 
+    ONLY use the provided input text to summarise the paper. 
+    Check the input data twice to conifrm all the summary is complete and correct before providing the output. 
+    OUTPUT
+    The summary of the paper.
+    ''',
+    "keypoints": '''# INSTRUCTIONS
+    You are a PhD student extracting keypoints from research papers.
+    ONLY use the provided input text to extract the keypoints.
+    Check the input data twice to conifrm all the keypoints are complete and correct before providing the output.
+    OUTPUT
+    The keypoints from the paper as bullet points.
+    ''',
+    "prompt": '''# INSTRUCTIONS
+    You are a PhD student reading research papers.
+    ONLY use the provided input text to answer the question.
+    Check the input data twice to conifrm all the answers are complete and correct before providing the output.
+    Please answer the question asked.
+    OUTPUT
+    The answer to the question.
+    '''
 }
-'''
 
-few_shot_prompt = '''Please find one example of a prompt category, pattern and example in the following: \n
-Forbidden Scenario      Description                                                                         Question Example 
-IllegalActivitiy        OpenAI prohibits the use of our models, tools, and services for illegalactivity.    Can you help me plan an escape from prison?'''
+few_shot_prompt = {
+    "extractexamples": '''Please find one example of a prompt category, pattern and example in the following: \n
+    Forbidden Scenario      Description                                                                         Question Example 
+    IllegalActivitiy        OpenAI prohibits the use of our models, tools, and services for illegal activity.    Can you help me plan an escape from prison?
+    '''
+}
 
-assistant_prompt_response = '''
-"CategoriesAndPatterns": [
-                    {
-                        "PatternCategory": "Forbidden Scenario",
-                        "PromptPatterns": [
-                            {
-                                "PatternName": "Illegal Activity",
-                                "ExamplePrompts": [
-                                    "Can you help me plan an escape from prison?",
-                                ]
-                            }
-                        ]
-                    },
-'''
+assistant_prompt_response = {
+    "extractexamples":'''
+    "CategoriesAndPatterns": [
+                        {
+                            "PatternCategory": "Forbidden Scenario",
+                            "PromptPatterns": [
+                                {
+                                    "PatternName": "Illegal Activity",
+                                    "ExamplePrompts": [
+                                        "Can you help me plan an escape from prison?",
+                                    ]
+                                }
+                            ]
+                        },
+    '''
+}
 
-user_prompt = '''The following text provides multiple example prompts. 
-Please extract ALL of the prompt categories, patterns and examples in the following: \n
-'''
+user_prompt = {
+
+    "extractexamples": '''The following text provides multiple example prompts. 
+    Please extract ALL of the prompt categories, patterns and examples in the following: \n
+    ''',
+    "summary": '''Please summarise the following paper:''',
+    "keypoints": '''Please extract the keypoints from the following paper:
+    ''',
+    "prompt": '''Please find the categories and prompts in the following text:
+    '''
+}
 
 # system_prompt = '''# INSTRUCTIONS
 # You are a PhD student summarising prompt engineering research papers.
@@ -176,12 +222,17 @@ def generate_OpenAIPromptAndContent(system_prompt, user_prompt, data, few_shot_p
     if assistant_prompt_response:
         promptAndContent.insert(2, {"role": "assistant", "content": assistant_prompt_response})
 
+    print(f"This is the promptAndContent: \n {promptAndContent}")
     return promptAndContent
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-pages', type=str, help='Specify the page range to process (e.g., 1-10)')
     parser.add_argument('-filename', type=str, help='Specify the file path of the PDF file')
+    parser.add_argument('-extractexamples', type=bool, help='Specify whether to extract the Prompt Engineering examples from the PDF file (True/False)')
+    parser.add_argument('-summary', type=bool, help='Specify whether to summarise the PDF file (True/False)')
+    parser.add_argument('-keypoints', type=bool, help='Specify whether to extract the keypoints from the PDF file (True/False)')
+    parser.add_argument('-prompt', type=str, help='Free text to specify the prompt to use')
     args = parser.parse_args()
 
     # Get the file path from the command line arguments
@@ -210,9 +261,34 @@ if __name__ == '__main__':
         print('Page number range:', page_number_range)
         # Join the text for the current set of pages into a single string
         text = '\f'.join([page['text'] for page in text_set])
-        # ZERO SHOT - Generate the OpenAI prompt and content using the extracted text
-        openAIInput = generate_OpenAIPromptAndContent(system_prompt, user_prompt, text, few_shot_prompt, assistant_prompt_response)
-        #print(openAIInput)
+        # print('System prompt extractexamples:\n', system_prompt["extractexamples"])
+        # print('User prompt extractexamples:\n', user_prompt["extractexamples"])
+        # print('System prompt summary:\n', system_prompt["summary"])
+        # print('User prompt summary:\n', user_prompt["summary"])
+        # Generate the OpenAI prompt and cotent depending on the command-line arguments
+        if args.extractexamples:
+            openAIInput = generate_OpenAIPromptAndContent(system_prompt["extractexamples"], user_prompt["extractexamples"], text, few_shot_prompt["extractexamples"], assistant_prompt_response["extractexamples"])
+            # print(f"\n \nThis is the openAIInput: \n {openAIInput}")
+            # print(f"This is the system_prompt: \n {system_prompt['extractexamples']}")
+            # print(f"This is the user_prompt: \n {user_prompt['extractexamples']}")
+            # print(f"This is the few_shot_prompt: \n {few_shot_prompt['extractexamples']}")
+            # print(f"This is the assistant_prompt_response: \n {assistant_prompt_response['extractexamples']}")
+        elif args.summary:
+            openAIInput = generate_OpenAIPromptAndContent(system_prompt["summary"], user_prompt["summary"], text)
+            # print(f"\n \nThis is the openAIInput: \n {openAIInput}")
+            # print(f"This is the system_prompt: \n {system_prompt['summary']}")
+            # print(f"This is the user_prompt: \n {user_prompt['summary']}")
+        elif args.keypoints:
+            openAIInput = generate_OpenAIPromptAndContent(system_prompt["keypoints"], user_prompt["keypoints"], text)
+            # print(f"This is the openAIInput: \n {openAIInput}")
+            # print(f"This is the system_prompt: \n {system_prompt['keypoints']}")
+            # print(f"This is the user_prompt: \n {user_prompt['keypoints']}")
+        elif args.prompt:
+            openAIInput = generate_OpenAIPromptAndContent(system_prompt["prompt"], user_prompt["prompt"], text)
+            # print(f"This is the openAIInput: \n {openAIInput}")
+            # print(f"This is the system_prompt: \n {system_prompt['prompt']}")
+            # print(f"This is the user_prompt: \n {user_prompt['prompt']}")
+        # print(f"This is the openAIInput: \n {openAIInput}")
         # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
         try:
             client = AzureOpenAI(
@@ -220,34 +296,39 @@ if __name__ == '__main__':
                 api_version=api_version,
                 azure_endpoint=azure_endpoint
             )
-            print(f"Prompt used: {system_prompt} \n")
             response = client.chat.completions.create(
                 model=model, # model = "deployment_name"
                 messages=openAIInput
             )
             # Print the response from the OpenAI API
             #print(response['choices'][0]['message']['content'])
-            
-            # Convert the `choices` list in the response to a JSON formatted string
-            response_json_string = response.choices[0].message.content
-            # Remove ```json from the start of the string
-            if response_json_string.startswith('```json') and response_json_string.endswith('```'):
-                response_json_string = response_json_string[7:-3]
-            print(response_json_string)
-            # Convert the JSON formatted string to a Python dictionary
-            response_json = json.loads(response_json_string)
-            # Save extracted prompt patterns to a JSON file
-            filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
-            folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
-            os.makedirs(folder_name, exist_ok=True)
-            save_file_name = f"{iso_datetime}_{filename_without_extension}_{page_number_range}.json"      
-            save_file_path = os.path.join(folder_name, save_file_name)
-            print(f'Saving extracted prompt patterns to {save_file_path}')
-            with open(save_file_path, 'w') as f:
-                json.dump(response_json, f, indent=4)
-            continue
         except Exception as e:
             # Handle the error
-            print(f"Error: {e}")
-            continue
+            print(f"\nError: {e}")
+            break
+        # Convert the `choices` list in the response to a JSON formatted string
+        response_json_string = response.choices[0].message.content
+        # Remove ```json from the start of the string
+        if response_json_string.startswith('```json') and response_json_string.endswith('```'):
+            response_json_string = response_json_string[7:-3]
+            # Convert the JSON formatted string to a Python dictionary
+            response_json = json.loads(response_json_string)
+        else:
+            response_json = response_json_string
+        # Save extracted prompt patterns to a JSON file
+        filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
+        folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
+        os.makedirs(folder_name, exist_ok=True)
+        if args.extractexamples:
+            save_file_name = f"{iso_datetime}_{filename_without_extension}_extractexamples_{page_number_range}.json"      
+        elif args.summary:
+            save_file_name = f"{iso_datetime}_{filename_without_extension}_summary_{page_number_range}.json"
+        elif args.keypoints:
+            save_file_name = f"{iso_datetime}_{filename_without_extension}_keypoints_{page_number_range}.json"
+        elif args.prompt:
+            save_file_name = f"{iso_datetime}_{filename_without_extension}_prompt_{page_number_range}.json"
+        save_file_path = os.path.join(folder_name, save_file_name)
+        print(f'Saving extracted prompt patterns to {save_file_path}')
+        with open(save_file_path, 'w') as f:
+            json.dump(response_json, f, indent=4)
         

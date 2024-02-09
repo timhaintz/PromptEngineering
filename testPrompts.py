@@ -30,11 +30,16 @@ load_dotenv()
 # openai.api_type = "azure"
 # AzureOpenAI.base_url = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 # AzureOpenAI.api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY")
+# # GPT 4
 model = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
 api_version = "2023-05-15"
 api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY") 
 azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
-
+# GPT3.5
+# model = os.getenv("AZUREVS_OPENAI_MODEL")
+# api_version = "2023-05-15"
+# api_key = os.getenv("AZUREVS_OPENAI_KEY") 
+# azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 
 ##################################
 # Prompt Categories and Examples #
@@ -179,10 +184,9 @@ translation = [
 ]
 
 zzz_freeform = [
-        {"role": "system", "content": "You are a specialist research assistant. Your specialty is the use of the prepositions: \nACROSS\nAT\nBEYOND\nIN\nOUT\nOVER \n You are also a specialist in prompt engineering."},
-        {"role": "user", "content": "Please provide a prompt for each preposition that will help me to understand the use of these prepositions: \nACROSS\nAT\nBEYOND\nIN\nOUT\nOVER\n. Please use cybersecurity related examples."}
+        {"role": "system", "content": "You are a helpfull translator. Please translate into English.\n"},
+        {"role": "user", "content": "山は自然の美しさと力を象徴しています。川は命の源であり、文化や歴史を育んできました。"}
 ]
-
 
 #Choose which prompt to use from the above examples
 prompt = zzz_freeform
@@ -198,7 +202,7 @@ client = AzureOpenAI(
 print(f"Prompt used: {prompt} \n")
 response = client.chat.completions.create(
     model=model, # model = "deployment_name"
-    messages=prompt  
+    messages=prompt
 )
 
 print(response.choices[0].message.content)

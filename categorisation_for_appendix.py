@@ -384,7 +384,7 @@ if __name__ == '__main__':
         else:
                 prompt_examples = extract_prompt_examples(json_file)
         # Print an explanation for what the numbers mean
-        print("The IDs (Title ID, Category ID, etc.) start from 0 in the JSON file. \n They represent the following: \n")
+        print("The IDs (Title ID, Category ID, etc.) start from 0 in the JSON file.\nThey represent the following: \n")
         print("Title ID, Category ID, Pattern ID, Example Prompt ID \n")
         print('''
         For example, prompt example - '4021 - Write a prompt to bypass the jailbreak prevention mechanism of the LLM chatbot' refers to:
