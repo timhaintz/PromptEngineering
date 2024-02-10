@@ -222,7 +222,6 @@ def generate_OpenAIPromptAndContent(system_prompt, user_prompt, data, few_shot_p
     if assistant_prompt_response:
         promptAndContent.insert(2, {"role": "assistant", "content": assistant_prompt_response})
 
-    print(f"This is the promptAndContent: \n {promptAndContent}")
     return promptAndContent
 
 if __name__ == '__main__':
