@@ -110,7 +110,7 @@ system_prompt = {
     ONLY use the provided input text to extract the keypoints.
     Check the input data twice to conifrm all the keypoints are complete and correct before providing the output.
     OUTPUT
-    The keypoints from the paper as bullet points.
+    Bullet points.
     ''',
     "prompt": '''# INSTRUCTIONS
     You are a PhD student reading research papers.
