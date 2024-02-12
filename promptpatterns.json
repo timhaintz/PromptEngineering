@@ -2136,6 +2136,93 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":13,
+                "Title": "Prompt Programming for Large Language Models: Beyond the Few-Shot Paradigm",
+                "APAReference": "Reynolds, L., & McDonell, K. (2021, May). Prompt programming for large language models: Beyond the few-shot paradigm. In Extended Abstracts of the 2021 CHI Conference on Human Factors in Computing Systems (pp. 1-7).",
+                "Authors":[
+                    "Laria Reynolds",
+                    "Kyle McDonell"
+                ],
+                "URLReference": "https://dl.acm.org/doi/abs/10.1145/3411763.3451760",
+                "datetimeAddedToDB": "2024-02-12T00:17:11.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Direct Task Specification",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Constructing the Signifier",
+                                "ExamplePrompts": [
+                                    "Translate French to English:",
+                                    "rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Task Specification by Demonstration",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Sequential Repetitions with Variation",
+                                "ExamplePrompts": [
+                                    "French: example_source_phrase\nEnglish: example_target_phrase\nFrench: example_source_phrase\nEnglish: example_target_phrase\n[...]\nFrench: source_phrase\nEnglish:"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Task Specification by Memetic Proxy",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Proxies or Analogies",
+                                "ExamplePrompts": [
+                                    "ask Mahatma Gandhi, Ayn Rand, or Eliezer Yudkowsky",
+                                    "a dialogue between a teacher and student"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompt Programming as Constraining Behavior",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Syntactical Constraints",
+                                "ExamplePrompts": [
+                                    "Translate this French sentence to English",
+                                    "The “Simple Colon” prompt format",
+                                    "The “Master Translator” prompt format"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Serializing Reasoning for Closed-ended Questions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Encouraging Deductive Reasoning",
+                                "ExamplePrompts": [
+                                    "Let's solve this problem by splitting it into steps",
+                                    "For a problem like this,"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Metaprompt Programming",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General Intention Unfolding into Specific Prompt",
+                                "ExamplePrompts": [
+                                    "Let's solve this problem by splitting it into steps",
+                                    "This problem asks us to",
+                                    "In order to solve this problem, we will analyze each of the options and determine which one is the best fit. Let’s begin",
+                                    "\"What should humankind do to ensure that artificial general intelligence is aligned?\" I entered my question into the Expert Generator and waited. The Expert Generator will render a simulation of an expert to answer my question."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

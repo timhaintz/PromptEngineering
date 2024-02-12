@@ -101,21 +101,21 @@ system_prompt = {
     ''',
     "summary": '''# INSTRUCTIONS You are a PhD student summarising research papers. 
     ONLY use the provided input text to summarise the paper. 
-    Check the input data twice to conifrm all the summary is complete and correct before providing the output. 
+    Check the input data twice to conifrm the summary is complete and correct before providing the output. 
     OUTPUT
     The summary of the paper.
     ''',
     "keypoints": '''# INSTRUCTIONS
     You are a PhD student extracting keypoints from research papers.
     ONLY use the provided input text to extract the keypoints.
-    Check the input data twice to conifrm all the keypoints are complete and correct before providing the output.
+    Check the input data twice to conifrm the keypoints are complete and correct before providing the output.
     OUTPUT
     Bullet points.
     ''',
     "prompt": '''# INSTRUCTIONS
     You are a PhD student reading research papers.
     ONLY use the provided input text to answer the question.
-    Check the input data twice to conifrm all the answers are complete and correct before providing the output.
+    Check the input data twice to conifrm the answers are complete and correct before providing the output.
     Please answer the question asked.
     OUTPUT
     The answer to the question.
@@ -154,7 +154,7 @@ user_prompt = {
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
     ''',
-    "prompt": '''Please find the categories and prompts in the following text:
+    "prompt": '''What are the gaps in this research paper and what can I do to extend the research in this area? The research paper follows:
     '''
 }
 
