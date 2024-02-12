@@ -2561,6 +2561,90 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":17,
+                "Title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+                "APAReference": "Schick, T., Dwivedi-Yu, J., Dessı, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., ... & Scialom, T. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools (2023). arXiv preprint arXiv:2302.04761.",
+                "Authors":[
+                    "Timo Schick",
+                    "Jane Dwivedi-Yu",
+                    "Roberto Dessì",
+                    "Roberta Raileanu",
+                    "Maria Lomeli",
+                    "Luke Zettlemoyer",
+                    "Nicola Cancedda",
+                    "Thomas Scialom"
+                ],
+                "URLReference": "https://arxiv.org/abs/2302.04761",
+                "datetimeAddedToDB": "2024-02-12T07:32:00.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Question Answering",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "API calls",
+                                "ExamplePrompts": [
+                                    "Your task is to add calls to a Question Answering API to a piece of text. The questions should help you get information required to complete the text. You can call the API by writing \"[QA(question)]\" where \"question\" is the question you want to ask. Here are some examples of API calls:",
+                                    "Input: Joe Biden was born in Scranton, Pennsylvania.\nOutput: Joe Biden was born in [QA(\"Where was Joe Biden born?\")] Scranton, [QA(\"In which state is Scranton?\")] Pennsylvania.",
+                                    "Input: Coca-Cola, or Coke, is a carbonated soft drink manufactured by the Coca-Cola Company.\nOutput: Coca-Cola, or [QA(\"What other name is Coca-Cola known by?\")] Coke, is a carbonated soft drink manufactured by [QA(\"Who manufactures Coca-Cola?\")] the Coca-Cola Company."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Calculator",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "API calls",
+                                "ExamplePrompts": [
+                                    "Your task is to add calls to a Calculator API to a piece of text. The calls should help you get information required to complete the text. You can call the API by writing \"[Calculator(expression)]\" where \"expression\" is the expression to be computed. Here are some examples of API calls:",
+                                    "Input: The number in the next term is 18 + 12 x 3 = 54.\nOutput: The number in the next term is 18 + 12 x 3 = [Calculator(18 + 12 * 3)] 54.",
+                                    "Input: The population is 658,893 people. This is 11.4% of the national average of 5,763,868 people.\nOutput: The population is 658,893 people. This is 11.4% of the national average of [Calculator(658,893 / 11.4%)] 5,763,868 people."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Wikipedia Search",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "API calls",
+                                "ExamplePrompts": [
+                                    "Your task is to complete a given piece of text. You can use a Wikipedia Search API to look up information. You can do so by writing \"[WikiSearch(term)]\" where \"term\" is the search term you want to look up. Here are some examples of API calls:",
+                                    "Input: The colors on the flag of Ghana have the following meanings: red is for the blood of martyrs, green for forests, and gold for mineral wealth.\nOutput: The colors on the flag of Ghana have the following meanings: red is for [WikiSearch(\"Ghana flag red meaning\")] the blood of martyrs, green for forests, and gold for mineral wealth.",
+                                    "Input: But what are the risks during production of nanomaterials? Some nanomaterials may give rise to various kinds of lung damage.\nOutput: But what are the risks during production of nanomaterials? [WikiSearch(\"nanomaterial production risks\")] Some nanomaterials may give rise to various kinds of lung damage."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Machine Translation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "API calls",
+                                "ExamplePrompts": [
+                                    "Your task is to complete a given piece of text by using a Machine Translation API. You can do so by writing \"[MT(text)]\" where text is the text to be translated into English. Here are some examples:",
+                                    "Input: He has published one book: O homem suprimido (\u201cThe Supressed Man\u201d)\nOutput: He has published one book: O homem suprimido [MT(O homem suprimido)] (\u201cThe Supressed Man\u201d)",
+                                    "Input: In Morris de Jonge\u2019s Jeschuah, der klassische j\u00fcdische Mann, there is a description of a Jewish writer\nOutput: In Morris de Jonge\u2019s Jeschuah, der klassische j\u00fcdische Mann [MT(der klassische j\u00fcdische Mann)], there is a description of a Jewish writer"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Calendar",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "API calls",
+                                "ExamplePrompts": [
+                                    "Your task is to add calls to a Calendar API to a piece of text. The API calls should help you get information required to complete the text. You can call the API by writing \"[Calendar()]\" Here are some examples of API calls:",
+                                    "Input: The store is never open on the weekend, so today it is closed.\nOutput: The store is never open on the weekend, so today [Calendar()] it is closed.",
+                                    "Input: Today is the first Friday of the year.\nOutput: Today is the first [Calendar()] Friday of the year."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
