@@ -2645,6 +2645,99 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":18,
+                "Title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+                "APAReference": "Polak, M. P., & Morgan, D. (2023). Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering--Example of ChatGPT. arXiv preprint arXiv:2303.05352.",
+                "Authors":[
+                    "Maciej P. Polak",
+                    "Dane Morgan"
+                ],
+                "URLReference": "https://arxiv.org/abs/2303.05352",
+                "datetimeAddedToDB": "2024-02-12T07:55:52.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Classification",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Initial relevancy prompt",
+                                "ExamplePrompts": [
+                                    "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Data Extraction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Single-valued text analysis",
+                                "ExamplePrompts": [
+                                    "What is the value and its unit of the property in the text?",
+                                    "What is the material's name in the text?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Multi-valued sentence analysis",
+                                "ExamplePrompts": [
+                                    "Provide structured data in the form of a table from the text.",
+                                    "Does the table provided match the text in terms of correct data and referencing?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Text Expansion",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Sentence expansion for data extraction",
+                                "ExamplePrompts": [
+                                    "Expand the text for analysis by including the title and the preceding sentence along with the target sentence to ensure all necessary information is present."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Error Avoidance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Discouraging hallucination of data",
+                                "ExamplePrompts": [
+                                    "Only include the data that is explicitly stated in the text and do not assume any data that is not there."
+                                ]
+                            },
+                            {
+                                "PatternName": "Introduce uncertainty through follow-up questions",
+                                "ExamplePrompts": [
+                                    "Are you certain the data extracted is correct and referenced properly in the given text? Is there a possibility it may contain inaccuracies?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Information Retention",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Utilizing conversational model's information",
+                                "ExamplePrompts": [
+                                    "Remember our previous conversation about the data extracted. Now, given that context, can you answer if..."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Answer Structuring",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Enforcing Yes/No format",
+                                "ExamplePrompts": [
+                                    "Please answer with a 'Yes' or 'No' to the question: is the data extracted correct according to the text?"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
