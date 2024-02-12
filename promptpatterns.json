@@ -2223,6 +2223,344 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":14,
+                "Title": "Reframing Instructional Prompts to GPTk's Language",
+                "APAReference": "Mishra, S., Khashabi, D., Baral, C., Choi, Y., & Hajishirzi, H. (2021). Reframing Instructional Prompts to GPTk's Language. arXiv preprint arXiv:2109.07830.",
+                "Authors":[
+                    "Swaroop Mishra",
+                    "Daniel Khashabi ",
+                    "Chitta Baral",
+                    "Yejin Choi",
+                    "Hannaneh Hajishirzi"
+                ],
+                "URLReference": "https://arxiv.org/abs/2109.07830",
+                "datetimeAddedToDB": "2024-02-12T00:29:48.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "PATTERN REFRAMING",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General",
+                                "ExamplePrompts": [
+                                    "Craft a question which requires commonsense to be answered. Based on the given context, craft a common-sense question, especially those that are LONG, INTERESTING, and COMPLEX. The goal is to write questions that are easy for humans and hard for AI machines!",
+                                    "In this task, we ask you to write a question that involves “event duration\", based on a given sentence. Here, event duration is defined as the understanding of how long events typically last. For example, “brushing teeth”, usually takes a few minutes."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ITEMIZING REFRAMING",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General",
+                                "ExamplePrompts": [
+                                    "Write a fact related to the given fact. Note that, your fact should have at least one word in common with the given fact. All facts in this task refer to science facts. Your related fact must form a chain with the given fact.",
+                                    "Write a story. Mention John in the story. Mention Hari."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "DECOMPOSITION REFRAMING",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General",
+                                "ExamplePrompts": [
+                                    "In this task, based on the given context word, you need to create a pair of sentences each containing a blank (_) and their corresponding answer. The sentence pair should look similar, and should be about two related but different objects."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "RESTRAINING REFRAMING",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General",
+                                "ExamplePrompts": [
+                                    "This task involves annotating the answer type to a given question that involve some kind of complex reasoning (including numerical reasoning). Note that the questions require looking at more than one part of the passage to answer.",
+                                    "Answer an incorrect answer to the given question. What is the captial of US?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "SPECIALIZATION REFRAMING",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General",
+                                "ExamplePrompts": [
+                                    "Answer the following question. Father’s age is 70 years. What could be the son’s age? (i) 71 (ii) 72 (iii) 40 (iv) 102?",
+                                    "Answer the following question. Passage: Hoping to rebound from their loss to the Patriots, the Raiders stayed at home for a Week 16 duel with the Houston Texans..."
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id":15,
+                "Title": "Batch Prompting: Efficient Inference with Large Language Model APIs",
+                "APAReference": "Cheng, Z., Kasai, J., & Yu, T. (2023). Batch prompting: Efficient inference with large language model apis. arXiv preprint arXiv:2301.08721.",
+                "Authors":[
+                    "Zhoujun Cheng",
+                    "Jungo Kasai",
+                    "Tao Yu"
+                ],
+                "URLReference": "https://arxiv.org/abs/2301.08721",
+                "datetimeAddedToDB": "2024-02-12T03:48:49.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Standard Prompting",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Standard",
+                                "ExamplePrompts": [
+                                    "# K-shot in-context exemplars\nQ: {question}\nA: {answer}\n...\n# One sample to inference\nQ: Ali had $21. Leila gave him half of her $100. How much does Ali have now?\n-----------------------------------------------\n# Response\nA: Leila gave 100/2=50 to Ali. Ali now has $21+$50 = $71. The answer is 71."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Batch Prompting",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Batch",
+                                "ExamplePrompts": [
+                                    "# K-shot in-context exemplars in K/b batches\nQ[1]: {question}\nQ[2]: {question}\nA[1]: {answer}\nA[2]: {answer}\n...\n# b samples in a batch to inference\nQ[1]: Ali had $21. Leila gave him half of her $100. How much does Ali have now?\nQ[2]: A robe takes 2 bolts of blue fiber and half that white fiber. How many bolts?\n-----------------------------------------------\n# Responses to a batch\nA[1]: Leila gave 100/2=50 to Ali. Ali now has $21+$50 = $71. The answer is 71.\nA[2]: It takes 2/2=1 bolt of white fiber. The total amount is 2+1=3. The answer is 3.\nb(=2) samples in one batch\nFigure 1: Illustration of batch prompting compared with standard prompting. Batch prompting groups multiple samples in one batch (b=2 in the figure) and lets the LLM generate multiple responses (highlighted in yellow) for the batch in inference."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "CommonsenseQA Prompt",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Question and Answer",
+                                "ExamplePrompts": [
+                                    "Q[1]: What do people use to absorb extra ink from a fountain pen? Answer Choices[1]: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter",
+                                    "Q[2]: What home entertainment equipment requires cable? Answer Choices[2]: (a) radio shack (b) substation (c) television (d) cabinet",
+                                    "Q[3]: The fox walked from the city into the forest, what was it looking for? Answer Choices[3]: (a) pretty flowers (b) henhouse (c) natural habitat (d) storybook",
+                                    "Q[4]: Sammy wanted to go to where the people were. Where might he go? Answer Choices[4]: (a) populated areas (b) racetrack (c) desert (d) apartment (e) roadblock",
+                                    "Q[1]: Where do you put your grapes just before checking out? Answer Choices[1]: (a) mouth (b) grocery cart (c) supermarket (d) fruit basket (e) fruit market",
+                                    "Q[2]: Google Maps and other highway and street GPS services have replaced what? Answer Choices[2]: (a) united states (b) mexico (c) countryside (d) atlas",
+                                    "Q[3]: Before getting a divorce, what did the wife feel who was doing all the work? Answer Choices[3]: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness",
+                                    "Q[4]: James went to the tennis court that was located in his home, what? Answer Choices[4]: (a) country club (b) park (c) michigan (d) sports (e) town",
+                                    "Q[1]: What does your body do when you exercise? Answer Choices[1]: (a) need for food (b) thirst (c) workout (d) sweating (e) injury",
+                                    "Q[2]: In order to see a story on the big screen, what must you do? Answer Choices[2]: (a) go to movies (b) visualize (c) reading (d) open book (e) sketching a picture",
+                                    "Q[3]: He followed the train tracks hoping to get home, he had gotten lost in the Yooperland where? Answer Choices[3]: (a) ghetto (b) michigan (c) new york (d) canada (e) train station",
+                                    "Q[4]: What would you get if you want a painting but cannot afford the original? Answer Choices[4]: (a) reproduction (b) derivative (c) reproduction (d) simile (e) remake"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "StrategyQA Prompt",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Question and Answer with Implicit Reasoning",
+                                "ExamplePrompts": [
+                                    "Q[1]: Do hamsters provide food for any animals?",
+                                    "Q[2]: Could Brooke Shields succeed at University of Pennsylvania?",
+                                    "Q[3]: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?",
+                                    "Q[4]: Is it common to see frost during some college commencements?",
+                                    "Q[1]: Could a llama birth twice during War in Vietnam (1945-46)?",
+                                    "Q[2]: Would a pear sink in water?",
+                                    "Q[3]: Can an Arvanite Greek understand some of the Albanian Declaration of Independence?",
+                                    "Q[4]: Can Burundi's communicate with citizens of New Brunswick?",
+                                    "Q[1]: Are quadrupeds represented on Chinese calendar?",
+                                    "Q[2]: Can actress Dafne Keen win the Eurovision Song Contest finals in 2020?",
+                                    "Q[3]: Would a student in eleventh grade be unable to run for president of the United States?",
+                                    "Q[4]: Does the judo rank system reach the triple digits?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "GSM8K, SVAMP, AddSub, MultiArith Prompt",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Arithmetic Reasoning",
+                                "ExamplePrompts": [
+                                    "Q[1]: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today?",
+                                    "Q[2]: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?",
+                                    "Q[3]: Leah had 32 chocolates and her sister had 42. If they ate 35, how many pieces do they have left in total?",
+                                    "Q[4]: Jason had 20 lollipops. He gave Denny some lollipops. Now Jason has 12 lollipops. How many lollipops did Jason give to Denny?",
+                                    "Q[1]: Shawn has five toys. For Christmas, he got two toys each from his mom and dad. How many toys does he have now?",
+                                    "Q[2]: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+                                    "Q[3]: Michael had 58 golf balls. On Tuesday, he lost 23 golf balls. On Wednesday, he lost 2 more. How many golf balls did he have at the end of Wednesday?",
+                                    "Q[4]: Olivia has $23. She bought five bagels for $3 each. How much money does she have left?",
+                                    "Q[1]: A garden produced 237 potatoes, 60 fewer cucumbers and twice as many peppers than the cucumbers. How many vegetables did the garden produce?",
+                                    "Q[2]: John's cow weighs 400 pounds. It increased its weight to 1.5 times its starting weight. He is able to sell the cow for $3 per pound. How much more is it worth after gaining the weight?",
+                                    "Q[3]: John writes 20 pages a day. How long will it take him to write 3 books that are 400 pages each?",
+                                    "Q[4]: James has a rainwater collection barrel. For each inch of rain he collects 15 gallons. On Monday it rained 4 inches and on Tuesday it rained 3 inches. He can sell water for $1.2 per gallon. How much money did he make from selling all the water?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "AQuA Prompt",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Complex Arithmetic Reasoning",
+                                "ExamplePrompts": [
+                                    "Q[1]: John found that the average of 15 numbers is 40. If 10 is added to each number then the mean of the numbers is? Answer Choices[1]: (a) 50 (b) 45 (c) 65 (d) 78 (e) 64",
+                                    "Q[2]: If a / b = 3/4 and 8a + 5b = 22, then find the value of a. Answer Choices[2]: (a) 1/2 (b) 3/2 (c) 5/2 (d) 4/2 (e) 7/2",
+                                    "Q[3]: A person is traveling at 20 km/hr and reached his destiny in 2.5 hr then find the distance? Answer Choices[3]: (a) 53 km (b) 55 km (c) 52 km (d) 60 km (e) 50 km",
+                                    "Q[4]: How many keystrokes are needed to type the numbers from 1 to 500? Answer Choices[4]: (a) 1156 (b) 1392 (c) 1480 (d) 1562 (e) 1788",
+                                    "Q[1]: A number X equals 80% of the average of 5, 7, 14 and a number Y. If the average of X and Y is 26, the value of Y is? Answer Choices[1]: (a) 13 (b) 26 (c) 39 (d)36 (e) None of these",
+                                    "Q[2]: A shopkeeper gave an additional 20 per cent concession on the reduced price after giving 30 per cent standard concession on an article. If Arun bought that article for 1,120, what was the original price? Answer Choices[2]: (a) 3,000 (b) 4,000 (c) 2,400 (d) 2,000 (e) None of these",
+                                    "Q[3]: A and B invests Rs.3000 and Rs.7000 respectively in a business. If A doubles his capital after 6 months. In what ratio should A and B divide that year's profit? Answer Choices[3]: (a) 9:6 (b) 9:8 (c) 9:14 (d) 9:9 (e) 9:5",
+                                    "Q[4]: The angle between two hands at 3.45 is? Answer Choices[4]: (a) 110 degree (b) 115 degree (c) 112 1/2 degree (d) 117 degree (e) 157 1/2 degree",
+                                    "Q[1]: Find the sum of first 30 natural numbers. Answer Choices[1]: (a) 470 (b) 468 (c) 465 (d) 463 (e) 487",
+                                    "Q[2]: What will come in place of the x in the following Number series? 46080, 3840, ?, 48, 8, 2, 1. Answer Choices[2]: (a) 1 (b) 384 (c) 5 (d) 7 (e) 9",
+                                    "Q[3]: A password of a computer used two digits where they are from 0 and 9. What is the probability that the password solely consists of prime numbers and zero? Answer Choices[3]: (a) 1/32 (b) 1/16 (c) 1/8 (d) 2/5 (e) 1/4",
+                                    "Q[4]: If k3 is divisible by 120, what is the least possible value of integer k? Answer Choices[4]: (a) 12 (b) 30 (c) 60 (d) 90 (e) 120"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "RTE Prompt",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Entailment vs. Non-Entailment",
+                                "ExamplePrompts": [
+                                    "Premise[1]: No Weapons of Mass Destruction Found in Iraq Yet. Hypothesis[1]: Weapons of Mass Destruction Found in Iraq.",
+                                    "Premise[2]: A place of sorrow, after Pope John Paul II died, became a place of celebration, as Roman Catholic faithful gathered in downtown Chicago to mark the installation of new Pope Benedict XVI. Hypothesis[2]: Pope Benedict XVI is the new leader of the Roman Catholic Church.",
+                                    "Premise[3]: Libya\u2019s case against Britain and the US concerns the dispute over their demand for extradition of Libyans charged with blowing up a Pan Am jet over Lockerbie in 1988. Hypothesis[3]: One case involved the extradition of Libyan suspects in the Pan Am Lockerbie bombing.",
+                                    "Premise[4]: Argentina sought help from Britain on its privatization program and encouraged British investment. Hypothesis[4]: Argentina sought UK expertise on privatization and agriculture.",
+                                    "Premise[1]: Startling new research into mobile phones claims they may reduce a man\u2019s sperm count by up to 30%. Hypothesis[1]: Male fertility may be affected by use of a mobile phones.",
+                                    "Premise[2]: It rewrites the rules of global trade, established by the General Agreement on Tariffs and Trade, or GATT, in 1947, and modified in multiple rounds of negotiations since then. Hypothesis[2]: GATT was formed in 1947.",
+                                    "Premise[3]: The cost of the consumer of the United States fell in June. Hypothesis[3]: U.S. consumer spending dived in June.",
+                                    "Premise[4]: Israeli Prime Minister Ariel Sharon has said that Mahmoud Abbas is a man that Israel can do business with. Hypothesis[4]: Palestinian leader, Mahmoud Abbas, may be someone Israel can talk with.",
+                                    "Premise[1]: In October, however, amid rising tensions between the government and opposition groups, a car bomb seriously injured an opposition politician and killed his driver, in Beirut. Hypothesis[1]: A member of the opposition was injured in a car bomb attack in Beirut.",
+                                    "Premise[2]: Ruth's 1927 single season record of 60 home runs stood unsurpassed until Roger Maris hit 61 in 1961. Hypothesis[2]: Babe Ruth hit 60 home runs in his lifetime.",
+                                    "Premise[3]: The German technology was employed to build Shanghai's existing maglev line, the first in the world to be used commercially. Hypothesis[3]: Maglev is commercially used.",
+                                    "Premise[4]: Twelve of Jupiter's moons are relatively small and seem to have been more likely captured than to have been formed in orbit around Jupiter. Hypothesis[4]: Jupiter has Twelve moons."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "MNLI Prompt",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Understanding and Inference",
+                                "ExamplePrompts": [
+                                    "Premise[1]: Conceptually cream skimming has two basic dimensions - product and geography. Hypothesis[1]: Product and geography are what make cream skimming work.",
+                                    "Premise[2]: One of our number will carry out your instructions minutely. Hypothesis[2]: A member of my team will execute your orders with immense precision.",
+                                    "Premise[3]: Analyzing Postal Service accounts for depreciation, fuel, and maintenance for city delivery carriers, we have estimated the average city delivery vehicle cost per route. Hypotheis[3]: Driving cost estimates can be averaged with sufficient data.",
+                                    "Premise[4]: Consider the United States Postal Service. Hypothesis[4]: Forget the United States Postal Service.",
+                                    "Premise[1]: Take a remarkable statistic that Shesol cites but lets pass relatively unexamined. Hypothesis[1]: They had data that was very relevant but under used.",
+                                    "Premise[2]: The man on the ground thinks for a moment and yells back, You must work in management. Hypothesis[2]: There was no one on the ground, man or woman.",
+                                    "Premise[3]: Hello, Ben. Hypothesis[3]: I ignored Ben.",
+                                    "Premise[4]: How can you prove it? Hypothesis[4]: Can you tell me how to prove it?",
+                                    "Premise[1]: In the midst of this amazing amalgam of cultures is a passion for continuity. Hypothesis[1]: A passion for continuity is not the most important of these cultures.",
+                                    "Premise[2]: Poirot, I exclaimed, with relief, and seizing him by both hands, I dragged him into the room. Hypothesis[2]: Poirot was now back and I was sorry that he would take over what I now considered my own investigation.",
+                                    "Premise[3]: There's a uh a couple called um oh i'm going to forgot his name now uh Dirkson. Hypothesis[3]: I can't remember their name.",
+                                    "Premise[4]: It's not that the questions they asked weren't interesting or legitimate (though most did fall under the category of already asked and answered). Hypothesis[4]: All of the questions were interesting according to a focus group consulted on the subject."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "SST-5 Prompt",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Sentiment Analysis",
+                                "ExamplePrompts": [
+                                    "Q[1]: a stirring , funny and finally transporting re-imagining of beauty and the beast and 1930s horror films.",
+                                    "Q[2]: they presume their audience won't sit still for a sociology lesson, however entertainingly presented, so they trot out the conventional science-fiction elements of bug-eyed monsters and futuristic women in skimpy clothes.",
+                                    "Q[3]: um , no..",
+                                    "Q[4]: jonathan parker's bartleby should have been the be-all-end-all of the modern-office anomie films.",
+                                    "Q[1]: lacks the inspiration of the original and has a bloated plot that stretches the running time about 10 minutes past a child's interest and an adult's patience.",
+                                    "Q[2]: the santa clause 2 proves itself a more streamlined and thought out encounter than the original could ever have hoped to be.",
+                                    "Q[3]: you might say tykwer has done all that heaven allows, if you wanted to make as anti-kieslowski a pun as possible.",
+                                    "Q[4]: otto-sallies has a real filmmaker\u2019s eye.",
+                                    "Q[1]: with a confrontational stance, todd solondz takes aim on political correctness and suburban families.",
+                                    "Q[2]: verall , cletis tout is a winning comedy that excites the imagination and tickles the funny bone.",
+                                    "Q[3]: with its parade of almost perpetually wasted characters ... margarita feels like a hazy high that takes too long to shake.",
+                                    "Q[4]: an ugly-duckling tale so hideously and clumsily told it feels accidental."
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id":16,
+                "Title": "Synthetic Prompting: Generating Chain-of-Thought Demonstrations for Large Language Models",
+                "APAReference": "Shao, Z., Gong, Y., Shen, Y., Huang, M., Duan, N., & Chen, W. (2023). Synthetic prompting: Generating chain-of-thought demonstrations for large language models. arXiv preprint arXiv:2302.00618.",
+                "Authors":[
+                    "Zhihong Shao",
+                    "Yeyun Gong",
+                    "Yelong Shen",
+                    "Minlie Huang",
+                    "Nan Duan",
+                    "Weizhu Chen"
+                ],
+                "URLReference": "https://arxiv.org/abs/2302.00618",
+                "datetimeAddedToDB": "2024-02-12T07:15:22.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Numerical reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "GSM8K",
+                                "ExamplePrompts": [
+                                    "Patrick has three glue sticks that are partially used. One has 1/6 left, the second has 2/3 left and the third one has 1/2 left. If a glue stick is 12 millimeters long originally, what is the total length of the glue sticks that are not used?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Seed Examples",
+                                "ExamplePrompts": [
+                                    "Carol has 20 signatures in her book, and Jennifer has 44. The sisters have three more weeks of summer vacation, and they decide they want to reach 100 signatures between them by the end of the summer.How many signatures do the sisters need to collect to reach their goal?",
+                                    "A team of 4 painters worked on a mansion for 3/8ths of a day every day for 3 weeks. How many hours of work did each painter put in?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Synthetic Demonstrations from Vanilla SYNTHETIC PROMPTING",
+                                "ExamplePrompts": [
+                                    "80 people attended a party. 40 of them were men and 40 were women. Of the men, 10 were married and of the women, 20 were married. How many single people were at the party?",
+                                    "The team of 4 painters worked on the mansion for 3/8ths of a day every day for 3 weeks. If each painter was paid $25 per hour, how much money did the team of painters earn in total?",
+                                    "80 students took a quiz in Mrs. Smith's math class. The average score was 75%. How many students scored 95% or higher?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Synthetic Demonstrations from SYNTHETIC PROMPTING",
+                                "ExamplePrompts": [
+                                    "GivenTopicWord: idea\nQuestion: If 5 people each have 10 ideas, with 5 of those ideas being innovative and taking 2 minutes each to develop, and the other 5 ideas being non-innovative and taking 1 minute each to develop, how many minutes will it take all 5 people to develop all 10 ideas?",
+                                    "Given Topic Word: office\nQuestion: The office is 20 feet wide, 30 feet long and 10 feet high. It has two windows that are each 5 feet wide and 6 feet high, and one door that is 3 feet wide and 8 feet high. What is the total area of the office walls?",
+                                    "Given Topic Word: gallery\nQuestion: A gallery has 10 paintings, 9 sculptures, 6 photos, and 4 mixed media pieces. The painting is $200, the sculpture is $500, the photo is $100 and the mixed media piece is $150. You get a 15% discount and you have to pay 5% tax. How much will you pay in total?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Symbolic reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Colored Objects",
+                                "ExamplePrompts": [
+                                    "On the nightstand, you see several items arranged in a row: a blue crayon, a red notebook, a teal bracelet, a magenta sheet of paper, a silver dog leash, and a black booklet. What is the color of the item furthest from the dog leash?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Algorithmic reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Repeat Copy",
+                                "ExamplePrompts": [
+                                    "Repeat election to the council three times, but after every other word say cool"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

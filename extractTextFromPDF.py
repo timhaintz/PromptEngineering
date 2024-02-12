@@ -149,7 +149,7 @@ assistant_prompt_response = {
 user_prompt = {
 
     "extractexamples": '''The following text provides multiple example prompts. 
-    Please extract ALL of the prompt categories, patterns and examples in the following: \n
+    Please extract ALL of the prompt categories, patterns and EXAMPLES. Please DO NOT ANSWER the questions, EXTRACT from the following: \n
     ''',
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
