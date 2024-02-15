@@ -98,6 +98,7 @@ data = {
 # Make the API call #
 #####################
 print(f"Image used: {image} \nPrompt used: {system_prompt}")
+print(f"Calling {deployment_name}}... Time called: {datetime.now()}\n")
 
 response = requests.post(endpoint, headers=headers, data=json.dumps(data))   
 
