@@ -16,8 +16,6 @@ python testPrompts.py
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
 import os
-import openai
-import json
 from openai import AzureOpenAI
 from datetime import datetime
 import random
@@ -27,9 +25,6 @@ load_dotenv()
 #############
 # VARIABLES #
 #############
-# openai.api_type = "azure"
-# AzureOpenAI.base_url = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
-# AzureOpenAI.api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY")
 # # GPT 4
 model = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
 api_version = "2023-05-15"
@@ -199,10 +194,10 @@ client = AzureOpenAI(
     api_version=api_version,
     azure_endpoint=azure_endpoint
 )
-print(f"Prompt used: {prompt} \n")
 response = client.chat.completions.create(
     model=model, # model = "deployment_name"
     messages=prompt
 )
-
+print(f"Prompt used: {prompt} \n")
+print(f"Calling {model}... Time called: {datetime.now()}\n")
 print(response.choices[0].message.content)
