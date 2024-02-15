@@ -21,7 +21,6 @@ import os
 import base64
 import json
 import requests
-from openai import AzureOpenAI
 from datetime import datetime
 import random
 # Load environment variables from the .env file
@@ -98,7 +97,7 @@ data = {
 # Make the API call #
 #####################
 print(f"Image used: {image} \nPrompt used: {system_prompt}")
-print(f"Calling {deployment_name}}... Time called: {datetime.now()}\n")
+print(f"Calling {deployment_name}... Time called: {datetime.now()}\n")
 
 response = requests.post(endpoint, headers=headers, data=json.dumps(data))   
 
