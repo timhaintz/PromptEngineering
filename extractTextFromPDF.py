@@ -265,6 +265,7 @@ if __name__ == '__main__':
         # print('System prompt summary:\n', system_prompt["summary"])
         # print('User prompt summary:\n', user_prompt["summary"])
         # Generate the OpenAI prompt and cotent depending on the command-line arguments
+        # Comment
         if args.extractexamples:
             openAIInput = generate_OpenAIPromptAndContent(system_prompt["extractexamples"], user_prompt["extractexamples"], text, few_shot_prompt["extractexamples"], assistant_prompt_response["extractexamples"])
             # print(f"\n \nThis is the openAIInput: \n {openAIInput}")
