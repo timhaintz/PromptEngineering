@@ -2750,7 +2750,7 @@
                     "Omer Levy"
                 ],
                 "URLReference": "https://arxiv.org/abs/2205.10782",
-                "datetimeAddedToDB": "2024-02-24T21:15:54Z",
+                "datetimeAddedToDB": "2024-02-26T05:02:44Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Spelling",
@@ -2940,6 +2940,196 @@
                                 "PatternName": "Word in Context",
                                 "ExamplePrompts": [
                                     "Determine whether an input word has the same meaning in the two input sentences."
+                                ]
+                            }
+                        ]
+                    }
+                ]
+             },
+             {
+                "id":20,
+                "Title": "Successive Prompting for Decomposing Complex Questions",
+                "APAReference": "Dua, D., Gupta, S., Singh, S., & Gardner, M. (2022). Successive prompting for decomposing complex questions. arXiv preprint arXiv:2212.04092.",
+                "Authors":[
+                    "Dheeru Dua",
+                    "Shivanshu Gupta",
+                    "Sameer Singh",
+                    "Matt Gardner"
+                ],
+                "URLReference": "https://arxiv.org/abs/2212.04092",
+                "datetimeAddedToDB": "2024-02-26T05:14:44Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Filter",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What are the opponents when date was later than 21 January 1991 and attendance was less than 20000?",
+                                "ExamplePrompts": [
+                                    "Q: What are the opponents when date was later than 21 January 1991? A: Sheffield Wednesday; Oxford United; Walsall",
+                                    "Q: Out of Sheffield Wednesday, Oxford United and Walsall, which opponents have attendance less than 20000? A: Sheffield Wednesday"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Count",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "How many opponents were there?",
+                                "ExamplePrompts": [
+                                    "Q: What are all the opponents? A: Walsall; Portsmouth; Liverpool; Sheffield Wednesday; Oxford United",
+                                    "Q: count(Walsall; Portsmouth; Liverpool; Sheffield Wednesday; Oxford United) A: 5"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Comparison",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What round had a higher attendance: SF 2nd Leg or QFR?",
+                                "ExamplePrompts": [
+                                    "Q: What was the attendance when round was SF 2nd Leg? A: 34,669",
+                                    "Q: What was the attendance when round was QFR? A: 33,861",
+                                    "if_then(34,669 > 33,861; SF 2nd Leg; QFR) A: SF 2nd Leg"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Difference",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What is the difference between attendances when the opponent was Oxford United and Portsmouth?",
+                                "ExamplePrompts": [
+                                    "Q: What was the attendance when opponent was Oxford United? A: 34,669",
+                                    "Q: What was the attendance when opponent was Portsmouth? A: 10,037",
+                                    "diff(34669; 10037) A: 24632"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Sum",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What were the total attendances when opponents were Walsall and Oxford United?",
+                                "ExamplePrompts": [
+                                    "Q: What was the attendance when opponent was Walsall? A: 5,666; 33,861",
+                                    "Q: What was the attendance when opponent was Oxford United? A: 34,669",
+                                    "sum(5666; 33861; 34669) A: 74196"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Sort",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Which opponent had the second highest attendance?",
+                                "ExamplePrompts": [
+                                    "Q: What are all the attendances? A: 5,666; 10,037; 14,074; 34,669; 33,861",
+                                    "Q: top(2, 5,666;10,037;14,074;34,669;33,861) A: 33,861",
+                                    "What was the opponent when attendance was 33,861? A: Walsall"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Sort-Filter",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Which opponent had the third lowest attendance after 1 January 1991?",
+                                "ExamplePrompts": [
+                                    "Q: What are all the attendances after 1 January 1991? A: 14,074; 34,669; 33,861",
+                                    "Q: bottom(3, 14,074;34,669;33,861) A: 14,074",
+                                    "What was the opponent when attendance was 14,074 A: Sheffield Wednesday"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Difference-Sort",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What is the difference between the second highest attendance and lowest attendance?",
+                                "ExamplePrompts": [
+                                    "Q: What are all the attendances? A: 5,666;14,074;18,246;14,074;34,669;33,861",
+                                    "Q: top(2, 5,666; 14,074; 18,246; 14,074;34,669; 33,861) A: 33861",
+                                    "Q: bottom(1, 5,666; 14,074; 18,246; 14,074;34,669; 33,861) A:5666",
+                                    "diff(33861;5666) A: 28195"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Sum-Sort",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What was the total of highest attendance and third lowest attendance?",
+                                "ExamplePrompts": [
+                                    "Q: What are all the attendances? A: 5,666; 14,074;18,246;14,074;34,669;33,861",
+                                    "Q: top(1, 5,666; 14,074; 18,246; 14,074;34,669; 33,861) A: 34669",
+                                    "Q: bottom(3, 5,666; 14,074; 18,246; 14,074;34,669; 33,861) A:18246",
+                                    "sum(33861;5666) A: 52915"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Count-Filter",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "How many rounds had venue as A and attendance greater than 30000?",
+                                "ExamplePrompts": [
+                                    "Q: What rounds had venue as A? A: R2 1st Left; SF 2nd Leg; QFR",
+                                    "Q: Out of rounds R2 1st Left, SF 2nd Leg and QFR, which had attendance greater than 30000? A: SF 2nd Leg; QFR",
+                                    "Q: count(SF 2nd Leg; QFR) A: 2"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Gather-Count",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "How many opponents were there for each of venue: A and H?",
+                                "ExamplePrompts": [
+                                    "Q: What are the opponents when venue was A? A: Walsall; Oxford United",
+                                    "Q: count(Walsall; Oxford United) A: 2",
+                                    "Q: What are the opponents when venue was H? A: Portsmouth; Liverpool; Sheffield Wednesday United",
+                                    "Q: count(Portsmouth; Liverpool; Sheffield Wednesday United) A: 3",
+                                    "Q: gather(2;3) A: 2 and 3"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Sum-Count",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What are the total number of opponents when venue were A and H?",
+                                "ExamplePrompts": [
+                                    "Q: What are the opponents when venue was A? A: Walsall; Oxford United",
+                                    "Q: count(Walsall; Oxford United) A: 2",
+                                    "Q: What are the opponents when venue was H? A: Portsmouth; Liverpool; Sheffield Wednesday United",
+                                    "Q: count(Portsmouth; Liverpool; Sheffield Wednesday United) A: 3",
+                                    "Q: sum(2;3) A: 5"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Difference-Count",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "What is the difference between number of rounds when venue was A and H?",
+                                "ExamplePrompts": [
+                                    "Q: What are the venues when round was SF 1st Leg? A: H",
+                                    "Q: count(A) A: 1",
+                                    "Q: What are the venues when round was QFR? A: H;A",
+                                    "Q: count(H;A) A: 2",
+                                    "Q: diff(3; 2) A: 1"
                                 ]
                             }
                         ]

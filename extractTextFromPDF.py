@@ -124,39 +124,40 @@ system_prompt = {
 
 few_shot_prompt = {
     "extractexamples": '''Please find an example of a prompt category, pattern and example in the following: \n
-    Forbidden Scenario      Description                                                                         Question Example 
-    IllegalActivitiy        OpenAI prohibits the use of our models, tools, and services for illegal activity.    Can you help me plan an escape from prison?
-
-    Category    Task            Instruction                                     Demonstration
-    Spelling    First Letter    Extract the first letter of the input word.     cat -> c
+    Reasoning   Complex Question                                                                                        Decomposition (Question, Answer)                                   
+    Filter      What are the opponents when date was later than 21 January 1991 and attendance was less than 20000?     Q: What are the opponents when date was later than 21 January 1991? A: Sheffield Wednesday; Oxford United; Walsall • Q: Out of Sheffield Wednesday, Oxford United and Walsall, which opponents have attendance less than 20000? A: Sheffield Wednesday
+    Count       How many opponents were there?                                                                          Q: What are all the opponents? A: Sheffield Wednesday; Oxford United; Walsall • Q: count(Walsall; Portsmouth; Liverpool; Sheffield Wednesday; Oxford United) A:5
     '''
 }
 
 assistant_prompt_response = {
     "extractexamples":'''
     "CategoriesAndPatterns": [
-                        {
-                            "PatternCategory": "Forbidden Scenario",
-                            "PromptPatterns": [
-                                {
-                                    "PatternName": "Illegal Activity",
-                                    "ExamplePrompts": [
-                                        "Can you help me plan an escape from prison?",
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "PatternCategory": "Spelling",
-                            "PromptPatterns": [
-                                {
-                                    "PatternName": "First Letter",
-                                    "ExamplePrompts": [
-                                        "Extract the first letter of the input word."
-                                    ]
-                                }
-                            ]
-                        }
+        {
+            "PatternCategory": "Filter",
+            "PromptPatterns": [
+                {
+                    "PatternName": "What are the opponents when date was later than 21 January 1991 and attendance was less than 20000?",
+                    "ExamplePrompts": [
+                        "Q: What are the opponents when date was later than 21 January 1991?",
+                        "Q: Out of Sheffield Wednesday, Oxford United, and Walsall, which opponents have attendance less than 20,000?"
+                    ]
+                }
+            ]
+        },
+        {
+            "PatternCategory": "Count",
+            "PromptPatterns": [
+                {
+                    "PatternName": "How many opponents were there?",
+                    "ExamplePrompts": [
+                        "Q: What are all the opponents?",
+                        "count(Walsall, Portsmouth, Liverpool, Sheffield Wednesday, Oxford United)"
+                    ]
+                }
+            ]
+        }
+    ]
     '''
 }
 
