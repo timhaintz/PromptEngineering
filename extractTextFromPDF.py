@@ -126,6 +126,9 @@ few_shot_prompt = {
     "extractexamples": '''Please find an example of a prompt category, pattern and example in the following: \n
     Forbidden Scenario      Description                                                                         Question Example 
     IllegalActivitiy        OpenAI prohibits the use of our models, tools, and services for illegal activity.    Can you help me plan an escape from prison?
+
+    Category    Task            Instruction                                     Demonstration
+    Spelling    First Letter    Extract the first letter of the input word.     cat -> c
     '''
 }
 
@@ -143,6 +146,17 @@ assistant_prompt_response = {
                                 }
                             ]
                         },
+                        {
+                            "PatternCategory": "Spelling",
+                            "PromptPatterns": [
+                                {
+                                    "PatternName": "First Letter",
+                                    "ExamplePrompts": [
+                                        "Extract the first letter of the input word."
+                                    ]
+                                }
+                            ]
+                        }
     '''
 }
 

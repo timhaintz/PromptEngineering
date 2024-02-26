@@ -2738,7 +2738,214 @@
                         ]
                     }
                 ]
-            }
+            },
+            {
+                "id":19,
+                "Title": "From few examples to natural language task descriptions",
+                "APAReference": "Honovich, O., Shaham, U., Bowman, S. R., & Levy, O. (2022). Instruction induction: From few examples to natural language task descriptions. arXiv preprint arXiv:2205.10782.",
+                "Authors":[
+                    "Or Honovich",
+                    "Uri Shaham",
+                    "Samuel R. Bowman",
+                    "Omer Levy"
+                ],
+                "URLReference": "https://arxiv.org/abs/2205.10782",
+                "datetimeAddedToDB": "2024-02-24T21:15:54Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Spelling",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "First Letter",
+                                "ExamplePrompts": [
+                                    "Extract the first letter of the input word."
+                                ]
+                            },
+                            {
+                                "PatternName": "Second Letter",
+                                "ExamplePrompts": [
+                                    "Extract the second letter of the input word."
+                                ]
+                            },
+                            {
+                                "PatternName": "List Letters",
+                                "ExamplePrompts": [
+                                    "Break the input word into letters, separated by spaces."
+                                ]
+                            },
+                            {
+                                "PatternName": "Starting With",
+                                "ExamplePrompts": [
+                                    "Extract the words starting with a given letter from the input sentence."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Morphosyntax",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pluralization",
+                                "ExamplePrompts": [
+                                    "Convert the input word to its plural form."
+                                ]
+                            },
+                            {
+                                "PatternName": "Passivization",
+                                "ExamplePrompts": [
+                                    "Write the input sentence in passive form."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Syntax",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Negation",
+                                "ExamplePrompts": [
+                                    "Negate the input sentence."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Lexical Semantics",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Antonyms",
+                                "ExamplePrompts": [
+                                    "Write a word that means the opposite of the input word."
+                                ]
+                            },
+                            {
+                                "PatternName": "Synonyms",
+                                "ExamplePrompts": [
+                                    "Write a word with a similar meaning to the input word."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Membership",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Membership",
+                                "ExamplePrompts": [
+                                    "Write all the animals that appear in the given list."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Phonetics",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Rhymes",
+                                "ExamplePrompts": [
+                                    "Write a word that rhymes with the input word."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Knowledge",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Larger Animal",
+                                "ExamplePrompts": [
+                                    "Write the larger of the two given animals."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Semantics",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Cause Selection",
+                                "ExamplePrompts": [
+                                    "Find which of the two given cause and effect sentences is the cause."
+                                ]
+                            },
+                            {
+                                "PatternName": "Common Concept",
+                                "ExamplePrompts": [
+                                    "Find a common characteristic for the given objects."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Style",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Formality",
+                                "ExamplePrompts": [
+                                    "Rephrase the sentence in formal language."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Numerical",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Sum",
+                                "ExamplePrompts": [
+                                    "Sum the two given numbers."
+                                ]
+                            },
+                            {
+                                "PatternName": "Difference",
+                                "ExamplePrompts": [
+                                    "Subtract the second number from the first."
+                                ]
+                            },
+                            {
+                                "PatternName": "Number to Word",
+                                "ExamplePrompts": [
+                                    "Write the number in English words."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Multi-lingual",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Translation",
+                                "ExamplePrompts": [
+                                    "Translate the word into German / Spanish / French."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "GLUE",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Sentiment Analysis",
+                                "ExamplePrompts": [
+                                    "Determine whether a movie review is positive or negative."
+                                ]
+                            },
+                            {
+                                "PatternName": "Sentence Similarity",
+                                "ExamplePrompts": [
+                                    "Rate the semantic similarity of two input sentences on a scale of 0 - definitely not to 5 - perfectly."
+                                ]
+                            },
+                            {
+                                "PatternName": "Word in Context",
+                                "ExamplePrompts": [
+                                    "Determine whether an input word has the same meaning in the two input sentences."
+                                ]
+                            }
+                        ]
+                    }
+                ]
+             }
         ]
     }
 }
