@@ -3453,6 +3453,95 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":24,
+                "Title": "Exploring the MIT Mathematics and EECS Curriculum Using Large Language Models",
+                "APAReference": "Zhang, S. J., Florin, S., Lee, A. N., Niknafs, E., Marginean, A., Wang, A., ... & Drori, I. (2023). Exploring the MIT Mathematics and EECS Curriculum Using Large Language Models. arXiv preprint arXiv:2306.08997.",
+                "Authors":[
+                    "Sarah J. Zhang",
+                    "Samuel Florin",
+                    "Ariel N. Lee",
+                    "Eamon Niknafs",
+                    "Andrei Marginean",
+                    "Annie Wang",
+                    "Keith Tyser",
+                    "Zad Chin",
+                    "Yann Hicke",
+                    "Nikhil Singh",
+                    "Madeleine Udell",
+                    "Yoon Kim",
+                    "Tonio Buonassisi",
+                    "Armando Solar-Lezama",
+                    "Iddo Drori"
+                ],
+                "datetimeAddedToDB": "2024-02-27T08:05:14Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Prompt Engineering for Evaluating and Improving LLMs",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Zero-shot Learning",
+                                "ExamplePrompts": [
+                                    "Without any data or example questions in the context, the LLM attempts to answer the question directly."
+                                ]
+                            },
+                            {
+                                "PatternName": "Few-shot Learning",
+                                "ExamplePrompts": [
+                                    "The LLM is provided with a few example questions and answers in the context to guide its understanding of the task [5]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Chain-of-Thought",
+                                "ExamplePrompts": [
+                                    "Uses prompt engineering to elicit a step by step answer [25]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Tree-of-Thought",
+                                "ExamplePrompts": [
+                                    "Uses prompt engineering to generate a tree of answers and then searches this tree [26] using BFS or DFS, combining an LLM with classical search algorithms."
+                                ]
+                            },
+                            {
+                                "PatternName": "Program Synthesis",
+                                "ExamplePrompts": [
+                                    "The LLM is prompted to write a program that solves the problem, and then the program is run in an interpreter [7]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Critic",
+                                "ExamplePrompts": [
+                                    "An LLM generates a critique C for an answer A, and the answer is iteratively refined using the critiques [11, 14, 19, 21, 9]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Expert Prompting",
+                                "ExamplePrompts": [
+                                    "A novel contribution of this work is to use the LLM to identify experts E in the field, generate answers as if the experts wrote them, and combine the experts’ answers by collaborative decision-making."
+                                ]
+                            },
+                            {
+                                "PatternName": "Fine-tuning",
+                                "ExamplePrompts": [
+                                    "The LLM is fine-tuned on a dataset D to improve its performance on specific tasks."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Automatic Grading of LLMs",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Automatic Grading Heuristic",
+                                "ExamplePrompts": [
+                                    "Given the question Q, ground truth solution S, and LLM answer A, we use GPT-4 to automatically grade the answers: Q, S, A → G."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
