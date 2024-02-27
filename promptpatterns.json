@@ -3406,7 +3406,7 @@
             },
             {
                 "id":23,
-                "Title": "CheckMeIfYouCan: Detecting ChatGPT-Generated Academic Writing using CheckGPT",
+                "Title": "Check Me If You Can: Detecting ChatGPT-Generated Academic Writing using CheckGPT",
                 "APAReference": "Liu, Z., Yao, Z., Li, F., & Luo, B. (2023). Check Me If You Can: Detecting ChatGPT-Generated Academic Writing using CheckGPT. arXiv preprint arXiv:2306.05524.",
                 "Authors":[
                     "Zeyan Liu",
