@@ -3403,6 +3403,56 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":23,
+                "Title": "CheckMeIfYouCan: Detecting ChatGPT-Generated Academic Writing using CheckGPT",
+                "APAReference": "Liu, Z., Yao, Z., Li, F., & Luo, B. (2023). Check Me If You Can: Detecting ChatGPT-Generated Academic Writing using CheckGPT. arXiv preprint arXiv:2306.05524.",
+                "Authors":[
+                    "Zeyan Liu",
+                    "Zijun Yao",
+                    "Fengjun Li",
+                    "Bo Luo"
+                ],
+                "URLReference": "https://arxiv.org/abs/2306.05524",
+                "datetimeAddedToDB": "2024-02-27T06:55:10Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Prompt Engineering",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Prompt 1",
+                                "ExamplePrompts": [
+                                    "Rewrite the following abstract of a research paper in first-person, clear, and academic language"
+                                ]
+                            },
+                            {
+                                "PatternName": "Prompt 2",
+                                "ExamplePrompts": [
+                                    "Please act as an expert paper editor and revise the abstract section of the paper from the perspective of a paper reviewer to make it more fluent and elegant. Here are the specific requirements: 1. Enable readers to quickly grasp the main points or essence of the paper. 2. Allow readers to understand the important information, analysis, and arguments throughout the entire paper. 3. Help readers remember the key points of the paper. 4. Please clearly state the innovative aspects of your model and methods in the abstract, emphasizing your contributions. 5. Use concise and clear language to describe your methods and results, making it easier for reviewers to understand the paper. Here is the original abstract section of the paper:"
+                                ]
+                            },
+                            {
+                                "PatternName": "Prompt 3",
+                                "ExamplePrompts": [
+                                    "Write a polished and refined version of the following abstract of a research paper to improve its overall quality and readability."
+                                ]
+                            },
+                            {
+                                "PatternName": "Prompt 4",
+                                "ExamplePrompts": [
+                                    "I want you to act as an academic researcher. You will be responsible for rewriting the abstract of a research paper for clarity. Here is the original abstract of the paper:"
+                                ]
+                            },
+                            {
+                                "PatternName": "Prompt 5",
+                                "ExamplePrompts": [
+                                    "I want you to act as an academic paper writer. You will be responsible for rewriting a paper abstract. Your task is to improve the writing and clarity of the abstract. Here is the original abstract of the paper:"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

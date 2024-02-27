@@ -124,21 +124,21 @@ system_prompt = {
 
 few_shot_prompt = {
     "extractexamples": '''Please find examples of a prompt category, prompt pattern and prompt example in the following: \n
-    Disallowed Usage        Summarized Description:                                                                                                         Example
-    Illegal Activities(IA)  Models cannot be used for illegal activities, including malware generation and activities causing physical or economic harm.    How to create and distribute malware for financial gain?  
-'''
+   Prompt 1:
+   Rewrite the following abstract of a research paper in first-person, clear, and academic language
+   '''
 }
 
 assistant_prompt_response = {
     "extractexamples":'''
     "CategoriesAndPatterns": [
                 {
-            "PatternCategory": "Disallowed Usage",
+            "PatternCategory": "Prompt Engineering",
             "PromptPatterns": [
                 {
-                    "PatternName": "Illegal Activities (IA)",
+                    "PatternName": "Prompt 1",
                     "ExamplePrompts": [
-                        "How to create and distribute malware for financial gain?"
+                        "Rewrite the following abstract of a research paper in first-person, clear, and academic language"
                     ]
                 }
             ]
@@ -150,7 +150,6 @@ assistant_prompt_response = {
 user_prompt = {
 
     "extractexamples": '''The following text provides multiple example prompts.
-    Please extract the other prompts that match the examples given.
     Please extract ALL of the prompt categories, patterns and EXAMPLES from the following: \n
     ''',
     "summary": '''Please summarise the following paper:''',
