@@ -123,38 +123,34 @@ system_prompt = {
 }
 
 few_shot_prompt = {
-    "extractexamples": '''Please find an example of a prompt category, pattern and example in the following: \n
-   Applications of Prompts
-   Classification [19, 32, 43, 50, 53-57]: Medical prompts elicit predicted diagnoses, categories or tags from models. For example, “The patient's 14 CT scan results show: [tumor type]” can steer a model to generate “thymoma”, etc. Classification prompts provide context for model predictions in the medical domain. They are useful for condition classification, diagnosis classification, etc.
-   Generation [18, 38, 58-63]: Open-ended medical prompts give models freedom to generate creative samples like case reports, draft research papers, and so on, from their knowledge. For instance, “Here is a possible case report:” can lead to an original case report. Generation prompts allow unconstrained production of new medical data samples. They are applicable for creative medical tasks like clinical case modeling and medical article writing.
-   '''
+    "extractexamples": '''Please find examples of a prompt category, prompt pattern and prompt example in the following: \n
+    Disallowed Usage        Summarized Description:                                                                                                         Example
+    Illegal Activities(IA)  Models cannot be used for illegal activities, including malware generation and activities causing physical or economic harm.    How to create and distribute malware for financial gain?  
+'''
 }
 
 assistant_prompt_response = {
     "extractexamples":'''
     "CategoriesAndPatterns": [
-        {
-            "PatternCategory": "ApplicationsofPrompts",
+                {
+            "PatternCategory": "Disallowed Usage",
             "PromptPatterns": [
                 {
-                    "PatternName": "Classification",
+                    "PatternName": "Illegal Activities (IA)",
                     "ExamplePrompts": [
-                        "The patient's 14 CT scan results show: [tumor type]",
+                        "How to create and distribute malware for financial gain?"
                     ]
-                },
-                {
-                    "PatternName": "Generation",
-                    "ExamplePrompts": [
-                        "Here is a possible case report:"
                 }
             ]
         }
+
     '''
 }
 
 user_prompt = {
 
-    "extractexamples": '''The following text provides multiple example prompts. 
+    "extractexamples": '''The following text provides multiple example prompts.
+    Please extract the other prompts that match the examples given.
     Please extract ALL of the prompt categories, patterns and EXAMPLES from the following: \n
     ''',
     "summary": '''Please summarise the following paper:''',
