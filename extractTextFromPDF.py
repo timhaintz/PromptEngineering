@@ -124,40 +124,31 @@ system_prompt = {
 
 few_shot_prompt = {
     "extractexamples": '''Please find an example of a prompt category, pattern and example in the following: \n
-    Reasoning   Complex Question                                                                                        Decomposition (Question, Answer)                                   
-    Filter      What are the opponents when date was later than 21 January 1991 and attendance was less than 20000?     Q: What are the opponents when date was later than 21 January 1991? A: Sheffield Wednesday; Oxford United; Walsall • Q: Out of Sheffield Wednesday, Oxford United and Walsall, which opponents have attendance less than 20000? A: Sheffield Wednesday
-    Count       How many opponents were there?                                                                          Q: What are all the opponents? A: Sheffield Wednesday; Oxford United; Walsall • Q: count(Walsall; Portsmouth; Liverpool; Sheffield Wednesday; Oxford United) A:5
-    '''
+   Applications of Prompts
+   Classification [19, 32, 43, 50, 53-57]: Medical prompts elicit predicted diagnoses, categories or tags from models. For example, “The patient's 14 CT scan results show: [tumor type]” can steer a model to generate “thymoma”, etc. Classification prompts provide context for model predictions in the medical domain. They are useful for condition classification, diagnosis classification, etc.
+   Generation [18, 38, 58-63]: Open-ended medical prompts give models freedom to generate creative samples like case reports, draft research papers, and so on, from their knowledge. For instance, “Here is a possible case report:” can lead to an original case report. Generation prompts allow unconstrained production of new medical data samples. They are applicable for creative medical tasks like clinical case modeling and medical article writing.
+   '''
 }
 
 assistant_prompt_response = {
     "extractexamples":'''
     "CategoriesAndPatterns": [
         {
-            "PatternCategory": "Filter",
+            "PatternCategory": "ApplicationsofPrompts",
             "PromptPatterns": [
                 {
-                    "PatternName": "What are the opponents when date was later than 21 January 1991 and attendance was less than 20000?",
+                    "PatternName": "Classification",
                     "ExamplePrompts": [
-                        "Q: What are the opponents when date was later than 21 January 1991?",
-                        "Q: Out of Sheffield Wednesday, Oxford United, and Walsall, which opponents have attendance less than 20,000?"
+                        "The patient's 14 CT scan results show: [tumor type]",
                     ]
-                }
-            ]
-        },
-        {
-            "PatternCategory": "Count",
-            "PromptPatterns": [
+                },
                 {
-                    "PatternName": "How many opponents were there?",
+                    "PatternName": "Generation",
                     "ExamplePrompts": [
-                        "Q: What are all the opponents?",
-                        "count(Walsall, Portsmouth, Liverpool, Sheffield Wednesday, Oxford United)"
-                    ]
+                        "Here is a possible case report:"
                 }
             ]
         }
-    ]
     '''
 }
 

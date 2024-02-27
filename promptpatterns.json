@@ -3135,7 +3135,79 @@
                         ]
                     }
                 ]
-             }
+            },
+            {
+                "id":21,
+                "Title": "Prompt Engineering for Healthcare: Methodologies and Applications",
+                "APAReference": "Wang, J., Shi, E., Yu, S., Wu, Z., Ma, C., Dai, H., ... & Zhang, S. (2023). Prompt engineering for healthcare: Methodologies and applications. arXiv preprint arXiv:2304.14670.",
+                "Authors":[
+                    "Jiaqi Wang",
+                    "Enze Shi",
+                    "Sigang Yu",
+                    "Zihao Wu",
+                    "Chong Ma",
+                    "Haixing Dai",
+                    "Qiushi Yang",
+                    "Yanqing Kang",
+                    "Jinru Wu",
+                    "Huawen Hu",
+                    "Chenxi Yue",
+                    "Haiyang Zhang",
+                    "Yiheng Liu",
+                    "Xiang Li",
+                    "Bao Ge",
+                    "Dajiang Zhu",
+                    "Yixuan Yuan",
+                    "Dinggang Shen",
+                    "Tianming Liu",
+                    "Shu Zhang"
+                ],
+                "URLReference": "https://arxiv.org/abs/2304.14670",
+                "datetimeAddedToDB": "2024-02-27T05:38:38Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Applications of Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Classification",
+                                "ExamplePrompts": [
+                                    "The patient's CT scan results show: [tumor type]"
+                                ]
+                            },
+                            {
+                                "PatternName": "Generation",
+                                "ExamplePrompts": [
+                                    "Here is a possible case report:"
+                                ]
+                            },
+                            {
+                                "PatternName": "Detection",
+                                "ExamplePrompts": [
+                                    "Detect any abnormal findings you observe in the attached CT images"
+                                ]
+                            },
+                            {
+                                "PatternName": "Augmentation",
+                                "ExamplePrompts": [
+                                    "Input samples of all classes into language models like ChatGPT and prompt the model to generate samples that preserves semantic consistency with existing labelled data."
+                                ]
+                            },
+                            {
+                                "PatternName": "Question Answering",
+                                "ExamplePrompts": [
+                                    "What year was radiocontrast invented?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Inference",
+                                "ExamplePrompts": [
+                                    "Here are two medical variables: A = [some values], B = [some values]. Explain how A affects B and why."
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
     }
 }
