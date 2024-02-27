@@ -3475,6 +3475,7 @@
                     "Armando Solar-Lezama",
                     "Iddo Drori"
                 ],
+                "URLReference": "https://arxiv.org/abs/2306.08997",
                 "datetimeAddedToDB": "2024-02-27T08:05:14Z",
                 "CategoriesAndPatterns": [
                     {
@@ -3537,6 +3538,60 @@
                                 "PatternName": "Automatic Grading Heuristic",
                                 "ExamplePrompts": [
                                     "Given the question Q, ground truth solution S, and LLM answer A, we use GPT-4 to automatically grade the answers: Q, S, A → G."
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id":25,
+                "Title": "Time for aCTIon: Automated Analysis of Cyber Threat Intelligence in the Wild",
+                "APAReference": "Siracusano, G., Sanvito, D., Gonzalez, R., Srinivasan, M., Kamatchi, S., Takahashi, W., ... & Bifulco, R. (2023). Time for aCTIon: Automated Analysis of Cyber Threat Intelligence in the Wild. arXiv preprint arXiv:2307.10214.",
+                "Authors":[
+                    "Giuseppe Siracusano",
+                    "Davide Sanvito",
+                    "Roberto Gonzalez",
+                    "Manikantan Srinivasan",
+                    "Sivakaman Kamatchi",
+                    "Wataru Takahashi",
+                    "Masaru Kawakita",
+                    "Takahiro Kakumaru",
+                    "Roberto Bifulco"
+                ],
+                "URLReference": "https://arxiv.org/abs/2307.10214",
+                "datetimeAddedToDB": "2024-02-27T08:21:14Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Entity and Relation Extraction Pipeline",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Preprocessing prompt",
+                                "ExamplePrompts": [
+                                    "Write a concise summary of the following: {text} CONCISE SUMMARY:"
+                                ]
+                            },
+                            {
+                                "PatternName": "Entity extraction prompt",
+                                "ExamplePrompts": [
+                                    "Use the following pieces of context to answer the question at the end. {context} Question: Who/which is the target of the described attack?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Attack Pattern Extraction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Attack Pattern Extraction preprocessing strategy #1",
+                                "ExamplePrompts": [
+                                    "Use the following portion of a long document to see if any of the text is relevant to answer the question. Return any relevant text verbatim. {text} Question: Which techniques are used by the attacker? Report only relevant text, if any"
+                                ]
+                            },
+                            {
+                                "PatternName": "Attack Pattern Extraction preprocessing strategy #2",
+                                "ExamplePrompts": [
+                                    "Describe step by step the key facts in the following text: {text} KEY FACTS:"
                                 ]
                             }
                         ]

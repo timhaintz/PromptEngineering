@@ -123,27 +123,36 @@ system_prompt = {
 }
 
 few_shot_prompt = {
-    "extractexamples": '''Please find examples of a prompt category, prompt pattern and prompt example in the following: \n
-   Prompt 1:
-   Rewrite the following abstract of a research paper in first-person, clear, and academic language
+    "extractexamples": '''Please find examples of a prompt category, prompt pattern, and prompt example in the following: \n
+   Preprocessing prompt
+   Write a concise summary of the following: {text} CONCISE SUMMARY:
+
+   Attack Pattern Extraction preprocessing strategy #1
+   Use the following portion of a long document to see if any of the text is relevant to answer the question. Return any relevant text verbatim. {text} Question: Which techniques are used by the attacker? Report only relevant text, if any
    '''
 }
 
 assistant_prompt_response = {
     "extractexamples":'''
     "CategoriesAndPatterns": [
-                {
-            "PatternCategory": "Prompt Engineering",
+            "PatternCategory": "Entity and Relation Extraction Pipeline",
             "PromptPatterns": [
                 {
-                    "PatternName": "Prompt 1",
+                    "PatternName": "Preprocessing prompt",
                     "ExamplePrompts": [
-                        "Rewrite the following abstract of a research paper in first-person, clear, and academic language"
+                        "Write a concise summary of the following: {text} CONCISE SUMMARY:"
+                    ]
+                }
+            ],
+            "PatternCategory": "Attack Pattern Extraction Pipeline",
+            "PromptPatterns": [
+                {
+                    "PatternName": "Attack Pattern Extraction preprocessing strategy #1",
+                    "ExamplePrompts": [
+                        "Use the following portion of a long document to see if any of the text is relevant to answer the question. Return any relevant text verbatim. {text} Question: Which techniques are used by the attacker? Report only relevant text, if any"
                     ]
                 }
             ]
-        }
-
     '''
 }
 
