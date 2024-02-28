@@ -163,8 +163,6 @@ user_prompt = {
     ''',
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
-    ''',
-    "prompt": '''What are the gaps in this research paper and what can I do to extend the research in this area? The research paper follows:
     '''
 }
 
@@ -294,7 +292,7 @@ if __name__ == '__main__':
             # print(f"This is the system_prompt: \n {system_prompt['keypoints']}")
             # print(f"This is the user_prompt: \n {user_prompt['keypoints']}")
         elif args.prompt:
-            openAIInput = generate_OpenAIPromptAndContent(system_prompt["prompt"], user_prompt["prompt"], text)
+            openAIInput = generate_OpenAIPromptAndContent(system_prompt["prompt"], args.prompt, text)
             # print(f"This is the openAIInput: \n {openAIInput}")
             # print(f"This is the system_prompt: \n {system_prompt['prompt']}")
             # print(f"This is the user_prompt: \n {user_prompt['prompt']}")
