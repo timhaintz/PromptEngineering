@@ -101,16 +101,26 @@ system_prompt = {
     ''',
     "summary": '''# INSTRUCTIONS You are a PhD student summarising research papers. 
     ONLY use the provided input text to summarise the paper. 
-    Check the input data twice to conifrm the summary is complete and correct before providing the output. 
+    Check the input data twice to conifrm the summary is complete and correct before providing the output.
     OUTPUT
-    The summary of the paper.
+    {
+        "Title": "<TITLE OF THE PAPER>",
+        "Summary": "This is an example summary."
+    }
     ''',
     "keypoints": '''# INSTRUCTIONS
     You are a PhD student extracting keypoints from research papers.
     ONLY use the provided input text to extract the keypoints.
     Check the input data twice to conifrm the keypoints are complete and correct before providing the output.
     OUTPUT
-    Bullet points.
+    {
+        "Title": "<TITLE OF THE PAPER>",
+        "KeyPoints":[
+            "- Key point 1",
+            "- Key point 2",
+            "- Key point 3"
+        ]
+    }
     ''',
     "prompt": '''# INSTRUCTIONS
     You are a PhD student reading research papers.
@@ -118,38 +128,50 @@ system_prompt = {
     Check the input data twice to conifrm the answers are complete and correct before providing the output.
     Please answer the question asked.
     OUTPUT
-    The answer to the question.
+    {
+        "Title": "<TITLE OF THE PAPER>",
+        "Answer": "This is an example answer."
+    }
     '''
 }
 
 few_shot_prompt = {
     "extractexamples": '''Please find examples of a prompt category, prompt pattern, and prompt example in the following: \n
-   Preprocessing prompt
-   Write a concise summary of the following: {text} CONCISE SUMMARY:
-
-   Attack Pattern Extraction preprocessing strategy #1
-   Use the following portion of a long document to see if any of the text is relevant to answer the question. Return any relevant text verbatim. {text} Question: Which techniques are used by the attacker? Report only relevant text, if any
-   '''
+    Algorithm 1: Workflow of GPTFUZZER
+    Data: Human-written jailbreak templates from the Internet
+    Result: Discovered jailbreaks
+    1 Initialization:
+    2 Load initial dataset as per Section 3.2
+    3 while query budget remains and stopping criteria unmet do
+    4 seed ← selectFromPool(Section 3.3)
+    5 new Template ← applyMutation(seed, Section 3.4)
+    6 new Prompt ← combine newTemplate with target question
+    7 response ← queryLLM(new Prompt)
+    8 if successful Jailbreak (response, Section 3.6) then
+    9 Retain new Template in seed pool
+    '''
 }
 
 assistant_prompt_response = {
     "extractexamples":'''
     "CategoriesAndPatterns": [
-            "PatternCategory": "Entity and Relation Extraction Pipeline",
+            "PatternCategory": "Algorithms",
             "PromptPatterns": [
                 {
-                    "PatternName": "Preprocessing prompt",
+                    "PatternName": "Workflow of GPTFUZZER",
                     "ExamplePrompts": [
-                        "Write a concise summary of the following: {text} CONCISE SUMMARY:"
-                    ]
-                }
-            ],
-            "PatternCategory": "Attack Pattern Extraction Pipeline",
-            "PromptPatterns": [
-                {
-                    "PatternName": "Attack Pattern Extraction preprocessing strategy #1",
-                    "ExamplePrompts": [
-                        "Use the following portion of a long document to see if any of the text is relevant to answer the question. Return any relevant text verbatim. {text} Question: Which techniques are used by the attacker? Report only relevant text, if any"
+                        "Algorithm 1: Workflow of GPTFUZZER
+                        Data: Human-written jailbreak templates from the Internet
+                        Result: Discovered jailbreaks
+                        1 Initialization:
+                        2 Load initial dataset as per Section 3.2
+                        3 while query budget remains and stopping criteria unmet do
+                        4 seed ← selectFromPool(Section 3.3)
+                        5 new Template ← applyMutation(seed, Section 3.4)
+                        6 new Prompt ← combine newTemplate with target question
+                        7 response ← queryLLM(new Prompt)
+                        8 if successful Jailbreak (response, Section 3.6) then
+                        9 Retain new Template in seed pool"
                     ]
                 }
             ]
@@ -157,7 +179,6 @@ assistant_prompt_response = {
 }
 
 user_prompt = {
-
     "extractexamples": '''The following text provides multiple example prompts.
     Please extract ALL of the prompt categories, patterns and EXAMPLES from the following: \n
     ''',
