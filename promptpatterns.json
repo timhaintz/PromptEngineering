@@ -3826,7 +3826,7 @@
                                 "PatternName": "Factual Probing",
                                 "ExamplePrompts": [
                                     "The trophy doesn't fit into the brown suitcase, because it is too [Z].",
-                                    "Great Britain's capital isLondon. Japan's capital is Tokyo. China'scapital is [Z]."
+                                    "Great Britain's capital is London. Japan's capital is Tokyo. China'scapital is [Z]."
                                 ]
                             },
                             {
