@@ -3803,6 +3803,155 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":30,
+                "Title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+                "APAReference": "Liu, P., Yuan, W., Fu, J., Jiang, Z., Hayashi, H., & Neubig, G. (2023). Pre-train, prompt, and predict: A systematic survey of prompting methods in natural language processing. ACM Computing Surveys, 55(9), 1-35.",
+                "Authors":[
+                    "Pengfei Liu",
+                    "Weizhe Yuan",
+                    "Jinlan Fu",
+                    "Zhengbao Jiang",
+                    "Hiroaki Hayashi",
+                    "Graham Neubig"
+                ],
+                "URLReference": "https://dl.acm.org/doi/full/10.1145/3560815",
+                "datetimeAddedToDB": "2024-03-03T08:09:36Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Knowledge Probing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Factual Probing",
+                                "ExamplePrompts": [
+                                    "The trophy doesn't fit into the brown suitcase, because it is too [Z].",
+                                    "China's capital is [Z]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Linguistic Probing",
+                                "ExamplePrompts": [
+                                    "Eleanor offered to fix her visitor some coffee. Then she realized she didn't have a clean [Z]."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Structure Prediction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Semantic Parsing",
+                                "ExamplePrompts": [
+                                    "What is the capital of France? Paris or [Z]?",
+                                    "The capital of France is [Z]."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Classification-based Tasks",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Text Classification",
+                                "ExamplePrompts": [
+                                    "the topic of this document is [Z]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Text Pair Classification",
+                                "ExamplePrompts": [
+                                    "[X1] [Z], [X2]"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Information Extraction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Relation Extraction",
+                                "ExamplePrompts": [
+                                    "[X] middle words [Z]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Named Entity Recognition",
+                                "ExamplePrompts": [
+                                    "Mike is a [Z] entity."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Reasoning in NLP",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Commonsense Reasoning",
+                                "ExamplePrompts": [
+                                    "The trophy doesn't fit into the brown suitcase because it is too [Z].",
+                                    "Eleanor offered to fix her visitor some coffee. Then she realized she didn't have a clean [Z]."
+                                ]
+                            },
+                            {
+                                "PatternName": "Mathematical Reasoning",
+                                "ExamplePrompts": [
+                                    "f (x) = x * x, what is f (f (3))? [Z]"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Question Answering",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Multiple-choice QA",
+                                "ExamplePrompts": [
+                                    "Eleanor offered to fix her visitor some coffee. Then she realized she didn't have a clean [Z]."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Text Generation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Summarization and Translation",
+                                "ExamplePrompts": [
+                                    "translate to french, [X], [Z]."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Automatic Evaluation of Text Generation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Text Generation Evaluation",
+                                "ExamplePrompts": [
+                                    "such as [Z]"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Meta-Applications",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Debiasing",
+                                "ExamplePrompts": [
+                                    "The following text contains violence. [X][Z]"
+                                ]
+                            },
+                            {
+                                "PatternName": "Dataset Construction",
+                                "ExamplePrompts": [
+                                    "Write two sentences that mean the same thing. [X][Z]"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
