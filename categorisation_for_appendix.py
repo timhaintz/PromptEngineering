@@ -12,7 +12,7 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/chatgpt-quicks
 https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt?pivots=programming-language-chat-completions
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
 EXAMPLE USAGE
-python categorisation_for_appendix.py
+python categorisation_for_appendix.py -titleid 0 -category Argument
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -372,8 +372,7 @@ if __name__ == '__main__':
 
         #Choose which category to use from the above examples
         if args.category is not None:
-                # Need to update the logic for this to link to the defined variable, not a string.
-                prompt_category = args.category.tolower()
+                prompt_category = args.category.lower()
         else:
                 prompt_category = argument
         # Extract all data from the JSON file
@@ -411,5 +410,5 @@ if __name__ == '__main__':
         except Exception as e:
             # Handle the error
             print(f"Error: {e}")
-
+print(f"Azure OpenAI responded at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 print(response.choices[0].message.content)
