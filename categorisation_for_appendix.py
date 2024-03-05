@@ -47,24 +47,6 @@ Some prompts won't match the category. Leave them blank.
 OUTPUT in Latex format please
 \\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
 '''
-'''
-OUTPUT as a Latex table.
-\\begin{landscape}
-\\begin{table}[h!]
-\\centering \\tiny
-\\begin{tabular}{|c|c|p{2cm}|p{2cm}|p{2cm}|p{2cm}|c|c|}
-\\hline
-\\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
-\\hline
-PP01 & Name1 & Brief description of the prompt pattern. & Template for the prompt pattern. & Expected response for the prompt pattern. & An example of the prompt pattern in use. & Ref01 & PP02, PP03 \\
-\\hline
-PP02 & Name2 & Brief description of the prompt pattern. & Template for the prompt pattern. & Expected response for the prompt pattern. & An example of the prompt pattern in use. & Ref02 & PP01, PP04 \\
-\\hline
-\\end{tabular}
-\\label{tab:PP_C_AG}
-\\end{table}
-\\end{landscape}
-'''
 
 few_shot_prompt = None
 
@@ -382,6 +364,8 @@ if __name__ == '__main__':
         Title: Jailbreaker: Automated Jailbreak Across Multiple Large Language Model Chatbots
         Category Name: Jailbreaking
         Pattern Name: Successful jailbreaking attempts
+        
+        The above are the categories and patterns that are used in the research paper. We're adding an overarching categorisation.
               ''')
         # print('\n'.join(prompt_examples))
         # Generate the prompt and content for OpenAI
