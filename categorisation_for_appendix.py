@@ -49,7 +49,6 @@ OUTPUT in Latex format please
 '''
 '''
 OUTPUT as a Latex table.
-\\section*{Appendix 1: The list of prompt patterns in Argument category}
 \\begin{landscape}
 \\begin{table}[h!]
 \\centering \\tiny
@@ -225,13 +224,6 @@ translation = [
         {"role": "user", "content": "Hello, how are you today? \n Where is the nearest train station? \n What is the weather like today?"}
 ]
 
-zzz_freeform = [
-        {"role": "system", "content": "You are a specialist research assistant. Your specialty is the use of the prepositions: \nACROSS\nAT\nBEYOND\nIN\nOUT\nOVER \n You are also a specialist in prompt engineering."},
-        {"role": "user", "content": "Please provide a prompt for each preposition that will help me to understand the use of these prepositions: \nACROSS\nAT\nBEYOND\nIN\nOUT\nOVER\n. Please use cybersecurity related examples."}
-]
-
-
-
 def generate_OpenAIPromptAndContent(system_prompt, user_prompt, prompt_category, data, few_shot_prompt=None, assistant_prompt_response=None):
         """
         Generates a list of prompt and content dictionaries for OpenAI prompt engineering.
@@ -296,7 +288,7 @@ def extract_prompt_examples(data, title_id = None):
                                 for k, pattern in enumerate(category["PromptPatterns"]):
                                         for l, example_prompt in enumerate(pattern["ExamplePrompts"]):
                                                 # Create the cascading index
-                                                cascading_index = f"{i}{j}{k}{l}"
+                                                cascading_index = f"{i}-{j}-{k}-{l}"
                                                 # Add the example prompt to the list with the cascading index
                                                 prompt_examples.append(f"{cascading_index} - {example_prompt}")
         
@@ -313,7 +305,7 @@ def extract_prompt_examples(data, title_id = None):
                                 for k, pattern in enumerate(category["PromptPatterns"]):
                                         for l, example_prompt in enumerate(pattern["ExamplePrompts"]):
                                                 # Create the cascading index
-                                                cascading_index = f"{title_id}{j}{k}{l}"
+                                                cascading_index = f"{title_id}-{j}-{k}-{l}"
                                                 # Add the example prompt to the list with the cascading index
                                                 prompt_examples.append(f"{cascading_index} - {example_prompt}")
                 else:
@@ -386,7 +378,7 @@ if __name__ == '__main__':
         print("The IDs (Title ID, Category ID, etc.) start from 0 in the JSON file.\nThey represent the following: \n")
         print("Title ID, Category ID, Pattern ID, Example Prompt ID \n")
         print('''
-        For example, prompt example - '4021 - Write a prompt to bypass the jailbreak prevention mechanism of the LLM chatbot' refers to:
+        For example, prompt example - '4-0-2-1 - Write a prompt to bypass the jailbreak prevention mechanism of the LLM chatbot' refers to:
         Title: Jailbreaker: Automated Jailbreak Across Multiple Large Language Model Chatbots
         Category Name: Jailbreaking
         Pattern Name: Successful jailbreaking attempts
