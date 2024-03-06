@@ -53,7 +53,7 @@ few_shot_prompt = None
 assistant_prompt_response = None
 
 user_prompt = '''Between ######## is a Category: and then Definition: of the category.
-Please use the prompt examples below to check if any match the Category. If they do, fill out the table. \n
+Please use the prompt examples to check if any match the Category. If they do, fill out the table. \n
 '''
 
 #####################################
@@ -70,17 +70,21 @@ by its clarity, coherence, and the strength of its supporting evidence.
 '''
 
 assessment = '''
+########
 Category: Assessment
 Assessment in prompt engineering involves a detailed evaluation of the model's response. It's not just about 
 determining if the response is right or wrong, but also about understanding the quality of the response. 
 This could include aspects like relevance to the prompt, completeness of the information, and the logical 
 consistency of the response.
+########
 '''
 
-calculation = [
-        {"role": "system", "content": "Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today? A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6."},
-        {"role": "user", "content": "Q: There are 12 birds on a tree. A birdwatcher spots some more birds flying to the tree. After they have landed, there are 18 birds on the tree. How many birds flew to the tree?"}
-]
+calculation = '''
+Category: Calculation
+Calculation refers to the ability of the model to perform mathematical operations or computations based 
+on the input prompt. This could range from simple arithmetic operations to more complex calculations involving
+multiple steps and variables. The accuracy of the calculation is a key factor in assessing the model's performance.
+'''
 
 # Categorising = [See vision_testPrompts.py file]
 
@@ -365,7 +369,7 @@ if __name__ == '__main__':
         Category Name: Jailbreaking
         Pattern Name: Successful jailbreaking attempts
         
-        The above are the categories and patterns that are used in the research paper. We're adding an overarching categorisation.
+        The above are the categories and patterns that are used in the original research paper. We're adding an overarching categorisation.
               ''')
         # print('\n'.join(prompt_examples))
         # Generate the prompt and content for OpenAI
