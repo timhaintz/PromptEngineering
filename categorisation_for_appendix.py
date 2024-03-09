@@ -295,7 +295,7 @@ def extract_prompt_examples(data, title_id = None):
                                                 # Add the example prompt to the list with the cascading index
                                                 prompt_examples.append(f"{cascading_index} - {example_prompt}")
                 else:
-                        prompt_examples = print("The title ID does not exist.")
+                        prompt_examples = "The title ID does not exist."
 
         return prompt_examples
 
@@ -358,6 +358,9 @@ if __name__ == '__main__':
         if args.titleid is not None:
                 title_id = args.titleid
                 prompt_examples = extract_prompt_examples(json_file, title_id)
+                if prompt_examples == 'The title ID does not exist.':
+                        print(prompt_examples)
+                        exit()
         else:
                 prompt_examples = extract_prompt_examples(json_file)
         # Print an explanation for what the numbers mean

@@ -57,6 +57,7 @@ api_version = "2023-05-15"
 api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY") 
 azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+temperature = 0.0
 
 
 ##################################
@@ -317,7 +318,8 @@ if __name__ == '__main__':
             )
             response = client.chat.completions.create(
                 model=model, # model = "deployment_name"
-                messages=openAIInput
+                messages=openAIInput,
+                temperature=temperature
             )
             # Print the response from the OpenAI API
             #print(response['choices'][0]['message']['content'])
