@@ -280,35 +280,15 @@ if __name__ == '__main__':
         print('Page number range:', page_number_range)
         # Join the text for the current set of pages into a single string
         text = '\f'.join([page['text'] for page in text_set])
-        # print('System prompt extractexamples:\n', system_prompt["extractexamples"])
-        # print('User prompt extractexamples:\n', user_prompt["extractexamples"])
-        # print('System prompt summary:\n', system_prompt["summary"])
-        # print('User prompt summary:\n', user_prompt["summary"])
         # Generate the OpenAI prompt and cotent depending on the command-line arguments
-        # Comment
         if args.extractexamples:
             openAIInput = generate_OpenAIPromptAndContent(system_prompt["extractexamples"], user_prompt["extractexamples"], text, few_shot_prompt["extractexamples"], assistant_prompt_response["extractexamples"])
-            # print(f"\n \nThis is the openAIInput: \n {openAIInput}")
-            # print(f"This is the system_prompt: \n {system_prompt['extractexamples']}")
-            # print(f"This is the user_prompt: \n {user_prompt['extractexamples']}")
-            # print(f"This is the few_shot_prompt: \n {few_shot_prompt['extractexamples']}")
-            # print(f"This is the assistant_prompt_response: \n {assistant_prompt_response['extractexamples']}")
         elif args.summary:
             openAIInput = generate_OpenAIPromptAndContent(system_prompt["summary"], user_prompt["summary"], text)
-            # print(f"\n \nThis is the openAIInput: \n {openAIInput}")
-            # print(f"This is the system_prompt: \n {system_prompt['summary']}")
-            # print(f"This is the user_prompt: \n {user_prompt['summary']}")
         elif args.keypoints:
             openAIInput = generate_OpenAIPromptAndContent(system_prompt["keypoints"], user_prompt["keypoints"], text)
-            # print(f"This is the openAIInput: \n {openAIInput}")
-            # print(f"This is the system_prompt: \n {system_prompt['keypoints']}")
-            # print(f"This is the user_prompt: \n {user_prompt['keypoints']}")
         elif args.prompt:
             openAIInput = generate_OpenAIPromptAndContent(system_prompt["prompt"], args.prompt, text)
-            # print(f"This is the openAIInput: \n {openAIInput}")
-            # print(f"This is the system_prompt: \n {system_prompt['prompt']}")
-            # print(f"This is the user_prompt: \n {user_prompt['prompt']}")
-        # print(f"This is the openAIInput: \n {openAIInput}")
         # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
         try:
             client = AzureOpenAI(

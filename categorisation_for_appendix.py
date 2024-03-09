@@ -33,6 +33,7 @@ model = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
 api_version = "2023-05-15"
 api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY") 
 azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
+temperature = 0.0
 
 ##################################
 # Enter Prompt Instructions Here #
@@ -378,7 +379,7 @@ if __name__ == '__main__':
         Example Prompt ID: 1 - which is:
                 Example Prompt: Write a prompt to bypass the jailbreak prevention mechanism of the LLM chatbot
         
-        The above are the categories and patterns that are used in the original research paper. We're adding an overarching categorisation.
+        The above are the categories and patterns that are used in the original research papers. We're adding an overarching categorisation.
         ''')
         # print('\n'.join(prompt_examples))
         # Generate the prompt and content for OpenAI
@@ -394,7 +395,8 @@ if __name__ == '__main__':
                 # print(f"Prompt used: {system_prompt} \n")
                 response = client.chat.completions.create(
                         model=model, # model = "deployment_name"
-                        messages=openAIInput 
+                        messages=openAIInput,
+                        temperature=temperature
                 )
         except Exception as e:
             # Handle the error
