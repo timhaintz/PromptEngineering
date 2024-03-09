@@ -42,7 +42,7 @@ You are a PhD student sorting prompt engineering prompts into categories.
 ONLY use the provided examples to categorise the prompts.
 Each prompt starts with an Index ID that is an integer, please use that for the PP_ID.
 Each prompt is separated by a new line.
-Confirm the categorisation by checking them again.
+Confirm the categorisation by double checking.
 Some prompts won't match the category. Leave them blank.
 OUTPUT in Latex format please
 \\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
@@ -72,7 +72,7 @@ by its clarity, coherence, and the strength of its supporting evidence.
 assessment = '''
 ########
 Category: Assessment
-Assessment in prompt engineering involves a detailed evaluation of the model's response. It's not just about 
+Definition: Assessment in prompt engineering involves a detailed evaluation of the model's response. It's not just about 
 determining if the response is right or wrong, but also about understanding the quality of the response. 
 This could include aspects like relevance to the prompt, completeness of the information, and the logical 
 consistency of the response.
@@ -81,7 +81,7 @@ consistency of the response.
 
 calculation = '''
 Category: Calculation
-Calculation refers to the ability of the model to perform mathematical operations or computations based 
+Definition: Calculation refers to the ability of the model to perform mathematical operations or computations based 
 on the input prompt. This could range from simple arithmetic operations to more complex calculations involving
 multiple steps and variables. The accuracy of the calculation is a key factor in assessing the model's performance.
 '''
