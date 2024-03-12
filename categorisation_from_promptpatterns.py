@@ -39,7 +39,7 @@ temperature = 0.0
 # Enter Prompt Instructions Here #
 ##################################
 system_prompt = {
-        "latex_appendix": '''# INSTRUCTIONS
+        "appendix": '''# INSTRUCTIONS
 You are a PhD student sorting prompt engineering prompts into categories.
 ONLY use the provided examples to categorise the prompts.
 Each prompt starts with an Index ID that is an integer, please use that for the PE_ID.
@@ -58,7 +58,7 @@ OUTPUT in JSON format please
         ...
 ]
 ''', #LaTex example for above \\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
-        "latex_table": '''# INSTRUCTIONS
+        "table": '''# INSTRUCTIONS
 You are a PhD student sorting prompt engineering prompts into categories.
 ONLY use the provided examples to categorise the prompts.
 Each prompt starts with an Index ID that is an integer, please use that for the PP_ID.
@@ -398,10 +398,10 @@ if __name__ == '__main__':
                                                   'Translation'],
                                          default=None, 
                                          help='Choose a category from the list')
-        parser.add_argument("-typeofoutput", choices=['latex_appendix',
-                                                      'latex_table'], 
-                                             default='latex_table',
-                                             help='Choose the type of output. Default is latex_table.')
+        parser.add_argument("-typeofoutput", choices=['appendix',
+                                                      'table'], 
+                                             default='table',
+                                             help='Choose the type of output. Default is table.')
         parser.add_argument("-titleid", type=int, default=None, help="The ID of the title to extract the prompt examples from. The Title ID can be found in the promptpatterns.json file.")
         args = parser.parse_args()
 
@@ -439,10 +439,10 @@ if __name__ == '__main__':
         ''')
         # print('\n'.join(prompt_examples))
         # Generate the prompt and content for OpenAI
-        if args.typeofoutput == 'latex_appendix':
-                system_prompt = system_prompt["latex_appendix"]
-        elif args.typeofoutput == 'latex_table':
-                system_prompt = system_prompt["latex_table"]
+        if args.typeofoutput == 'appendix':
+                system_prompt = system_prompt["appendix"]
+        elif args.typeofoutput == 'table':
+                system_prompt = system_prompt["table"]
         openAIInput = generate_OpenAIPromptAndContent(system_prompt, user_prompt, prompt_category, prompt_examples, few_shot_prompt, assistant_prompt_response)
         # print(prompt_category)
         # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
