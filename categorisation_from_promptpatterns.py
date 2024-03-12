@@ -51,9 +51,8 @@ OUTPUT in JSON format please
         {
                 ID: "Index ID",
                 PE_ID: "PP_PreAcronym_Index ID",
-                
-                Prompt_Example: "Example Prompt without the PE_ID.",
                 Category: "Category",
+                Prompt_Example: "Example Prompt without the PE_ID.",
                 Reasoning: "Explain why it was chosen for this category"
         },
         ...
