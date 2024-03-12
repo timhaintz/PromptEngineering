@@ -42,16 +42,22 @@ system_prompt = {
         "latex_appendix": '''# INSTRUCTIONS
 You are a PhD student sorting prompt engineering prompts into categories.
 ONLY use the provided examples to categorise the prompts.
-Each prompt starts with an Index ID that is an integer, please use that for the PP_ID.
+Each prompt starts with an Index ID that is an integer, please use that for the PE_ID.
 Each prompt is separated by a new line.
 Confirm the categorisation by double checking.
 Some prompts won't match the category. Leave them blank.
 OUTPUT in JSON format please
-{
-        PP_ID: "Index ID",
-        Prompt_Example: "Example Prompt",
-        Reasoning: "Explain why it was chosen for this category"
-}
+[
+        {
+                ID: "Index ID",
+                PE_ID: "PP_PreAcronym_Index ID",
+                
+                Prompt_Example: "Example Prompt without the PE_ID.",
+                Category: "Category",
+                Reasoning: "Explain why it was chosen for this category"
+        },
+        ...
+]
 ''', #LaTex example for above \\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
         "latex_table": '''# INSTRUCTIONS
 You are a PhD student sorting prompt engineering prompts into categories.
@@ -69,7 +75,7 @@ few_shot_prompt = None
 
 assistant_prompt_response = None
 
-user_prompt = '''Between ######## is a Category: and then Definition: of the category.
+user_prompt = '''Between ######## is a Category: and then Definition: of the category. There is also a PreAcronym.
 Please use the prompt examples to check if any match the Category definition. If they do, fill out the information. \n
 '''
 
@@ -78,7 +84,8 @@ Please use the prompt examples to check if any match the Category definition. If
 #####################################
 argument = '''
 ########
-Category: Argument 
+Category: Argument
+PreAcronym: AC_ARG
 Definition: In the realm of prompt engineering, an argument refers to a structured process where a claim or 
 viewpoint is presented and defended. This involves the model generating a response that not only states a 
 position but also provides reasoning and evidence to support it. The quality of an argument can be measured 
@@ -438,25 +445,25 @@ if __name__ == '__main__':
         elif args.typeofoutput == 'latex_table':
                 system_prompt = system_prompt["latex_table"]
         openAIInput = generate_OpenAIPromptAndContent(system_prompt, user_prompt, prompt_category, prompt_examples, few_shot_prompt, assistant_prompt_response)
-        print(prompt_category)
-#         # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
-#         try:
-#                 client = AzureOpenAI(
-#                         api_key=api_key,
-#                         api_version=api_version,
-#                         azure_endpoint=azure_endpoint
-#                 )
-#                 # print(f"Prompt used: {system_prompt} \n")
-#                 response = client.chat.completions.create(
-#                         model=model, # model = "deployment_name"
-#                         messages=openAIInput,
-#                         temperature=temperature,
-#                         response_format={
-#                                 "type": "json_object"
-#                         }
-#                 )
-#         except Exception as e:
-#             # Handle the errors
-#             print(f"Error: {e}")
-# print(f"Azure OpenAI responded at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-# print(response.choices[0].message.content)
+        # print(prompt_category)
+        # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
+        try:
+                client = AzureOpenAI(
+                        api_key=api_key,
+                        api_version=api_version,
+                        azure_endpoint=azure_endpoint
+                )
+                # print(f"Prompt used: {system_prompt} \n")
+                response = client.chat.completions.create(
+                        model=model, # model = "deployment_name"
+                        messages=openAIInput,
+                        temperature=temperature,
+                        response_format={
+                                "type": "json_object"
+                        }
+                )
+        except Exception as e:
+            # Handle the errors
+            print(f"Error: {e}")
+print(f"Azure OpenAI responded at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+print(response.choices[0].message.content)
