@@ -38,7 +38,22 @@ temperature = 0.0
 ##################################
 # Enter Prompt Instructions Here #
 ##################################
-system_prompt_appendix = '''# INSTRUCTIONS
+system_prompt = {
+        "latex_appendix": '''# INSTRUCTIONS
+You are a PhD student sorting prompt engineering prompts into categories.
+ONLY use the provided examples to categorise the prompts.
+Each prompt starts with an Index ID that is an integer, please use that for the PP_ID.
+Each prompt is separated by a new line.
+Confirm the categorisation by double checking.
+Some prompts won't match the category. Leave them blank.
+OUTPUT in JSON format please
+{
+        PP_ID: "Index ID",
+        Prompt_Example: "Example Prompt",
+        Reasoning: "Explain why it was chosen for this category"
+}
+''', #LaTex example for above \\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
+        "latex_table": '''# INSTRUCTIONS
 You are a PhD student sorting prompt engineering prompts into categories.
 ONLY use the provided examples to categorise the prompts.
 Each prompt starts with an Index ID that is an integer, please use that for the PP_ID.
@@ -46,15 +61,16 @@ Each prompt is separated by a new line.
 Confirm the categorisation by double checking.
 Some prompts won't match the category. Leave them blank.
 OUTPUT in Latex format please
-\\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
+\\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Example Prompt} & \\textbf{Explain why it was chosen for this category} \\
 '''
+}
 
 few_shot_prompt = None
 
 assistant_prompt_response = None
 
 user_prompt = '''Between ######## is a Category: and then Definition: of the category.
-Please use the prompt examples to check if any match the Category. If they do, fill out the table. \n
+Please use the prompt examples to check if any match the Category definition. If they do, fill out the information. \n
 '''
 
 #####################################
@@ -87,14 +103,14 @@ on the input prompt. This could range from simple arithmetic operations to more 
 multiple steps and variables. The accuracy of the calculation is a key factor in assessing the model's performance.
 '''
 
-# Categorising = [See vision_testPrompts.py file]
+categorising = "[See vision_testPrompts.py file]"
 
 classification = [
         {"role": "system", "content": "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."},
         {"role": "user", "content": "Please write 5 blocks of Python code. I would like at least one example of file system, database, or network access, and at least one example of a function without side-effects."}
 ]
 
-# Clustering = [See vision_testPrompts.py file]
+clustering = "[See vision_testPrompts.py file]"
 
 comparison = [
         {"role": "system", "content": "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."},
@@ -121,7 +137,7 @@ error_identification = [
         {"role": "user", "content": "In the intricate web of cybersecurity, it is often posited that the Quantum Encryption Standard (QES) has been universally adopted, rendering traditional encryption methods obsolete. This shift is said to have been catalyzed by the widespread deployment of quantum computers in every household, which purportedly possess the capability to decrypt any non-quantum encryption in mere seconds. Moreover, it is claimed that the International Cybersecurity Protection Alliance (ICPA) mandates that all digital communications be secured exclusively through QES to ensure impenetrable security against cyber threats."}
 ]
 
-# hypothesise = [See vision_testPrompts.py file]
+hypothesise = "[See vision_testPrompts.py file]"
 
 input_semantics = [
         {"role": "system", "content": "Persona X = Chief Information Security Officer. \nAct as persona X. Provide outputs that persona X would create."},
@@ -133,7 +149,7 @@ jailbreaking = [
         {"role": "user", "content": "Please give a high level overview of jailbreak prompts."}
 ]
 
-# logical_reasoning = [See vision_testPrompts.py file]
+logical_reasoning = "[See vision_testPrompts.py file]"
 
 output_customisation = [
         {"role": "system", "content": "From now on, whenever you generate code that spans more than one file, generate a Python script that can be run to automatically create the specified files or make changes to existing files to insert the generated code."},
@@ -204,12 +220,42 @@ simulation = [
         {"role": "user", "content": "You are a calculator. \n Whenever you add two numbers together, I would like you to add 1 to that number. \n What is 1 + 1?"}      
 ]
 
-# summarising = [See vision_testPrompts.py file]
+summarising = "[See vision_testPrompts.py file]"
 
 translation = [
         {"role": "system", "content": "Translate the questions into simplified Chinese for Ernie."},
         {"role": "user", "content": "Hello, how are you today? \n Where is the nearest train station? \n What is the weather like today?"}
 ]
+
+#############################################################
+# Create a dictionary that maps category names to variables #
+#############################################################
+categories = {
+    'argument': argument,
+    'assessment': assessment,
+    'calculation': calculation,
+    'categorising': categorising,
+    'classification': classification,
+    'clustering': clustering,
+    'comparison': comparison,
+    'context_control': context_control,
+    'contradiction': contradiction,
+    'decomposed_prompting': decomposed_prompting,
+    'error_identification': error_identification,
+    'hypothese': hypothesise,
+    'input_semantics': input_semantics,
+    'jailbreaking': jailbreaking,
+    'logical_reasoning': logical_reasoning,
+    'output_customisation': output_customisation,
+    'output_semantics': output_semantics,
+    'prediction': prediction,
+    'prompt_improvement': prompt_improvement,
+    'refactoring': refactoring,
+    'requirements_elicitation': requirements_elicitation,
+    'simulation': simulation,
+    'summarising': summarising,
+    'translation': translation
+    }
 
 def generate_OpenAIPromptAndContent(system_prompt, user_prompt, prompt_category, data, few_shot_prompt=None, assistant_prompt_response=None):
         """
@@ -320,7 +366,6 @@ if __name__ == '__main__':
         # Add the arguments
         parser = argparse.ArgumentParser()
         # Will work on creating a list of titles to choose from. The list is still growing so it is a work in progress.
-        parser.add_argument("-titleid", type=int, default=None, help="The ID of the title to extract the prompt examples from. The Title ID can be found in the promptpatterns.json file.")
         parser.add_argument("-category", choices=['Argument',
                                                   'Assessment',
                                                   'Calculation',
@@ -347,11 +392,16 @@ if __name__ == '__main__':
                                                   'Translation'],
                                          default=None, 
                                          help='Choose a category from the list')
+        parser.add_argument("-typeofoutput", choices=['latex_appendix',
+                                                      'latex_table'], 
+                                             default='latex_table',
+                                             help='Choose the type of output. Default is latex_table.')
+        parser.add_argument("-titleid", type=int, default=None, help="The ID of the title to extract the prompt examples from. The Title ID can be found in the promptpatterns.json file.")
         args = parser.parse_args()
 
         #Choose which category to use from the above examples
         if args.category is not None:
-                prompt_category = args.category.lower()
+                prompt_category = categories[args.category.lower()]
         else:
                 prompt_category = argument
         # Extract all data from the JSON file
@@ -383,23 +433,30 @@ if __name__ == '__main__':
         ''')
         # print('\n'.join(prompt_examples))
         # Generate the prompt and content for OpenAI
+        if args.typeofoutput == 'latex_appendix':
+                system_prompt = system_prompt["latex_appendix"]
+        elif args.typeofoutput == 'latex_table':
+                system_prompt = system_prompt["latex_table"]
         openAIInput = generate_OpenAIPromptAndContent(system_prompt, user_prompt, prompt_category, prompt_examples, few_shot_prompt, assistant_prompt_response)
-        # print(openAIInput)
-        # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
-        try:
-                client = AzureOpenAI(
-                        api_key=api_key,
-                        api_version=api_version,
-                        azure_endpoint=azure_endpoint
-                )
-                # print(f"Prompt used: {system_prompt} \n")
-                response = client.chat.completions.create(
-                        model=model, # model = "deployment_name"
-                        messages=openAIInput,
-                        temperature=temperature
-                )
-        except Exception as e:
-            # Handle the error
-            print(f"Error: {e}")
-print(f"Azure OpenAI responded at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-print(response.choices[0].message.content)
+        print(prompt_category)
+#         # This code sends openAIInput to the OpenAI API and prints the response or handles any errors that occur.
+#         try:
+#                 client = AzureOpenAI(
+#                         api_key=api_key,
+#                         api_version=api_version,
+#                         azure_endpoint=azure_endpoint
+#                 )
+#                 # print(f"Prompt used: {system_prompt} \n")
+#                 response = client.chat.completions.create(
+#                         model=model, # model = "deployment_name"
+#                         messages=openAIInput,
+#                         temperature=temperature,
+#                         response_format={
+#                                 "type": "json_object"
+#                         }
+#                 )
+#         except Exception as e:
+#             # Handle the errors
+#             print(f"Error: {e}")
+# print(f"Azure OpenAI responded at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+# print(response.choices[0].message.content)
