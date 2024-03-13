@@ -61,7 +61,7 @@ OUTPUT in JSON format please
                 Category: "Category",
                 Prompt_Example: "Example Prompt without the PE_ID.",
                 Reasoning: "Explain why it was chosen for this category"
-        },
+        }
 ]
 ''', #LaTex example for above \\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
         "table": '''# INSTRUCTIONS
