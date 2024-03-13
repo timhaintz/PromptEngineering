@@ -34,6 +34,7 @@ api_version = "2023-05-15"
 api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY") 
 azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
 temperature = 0.0
+iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
 ##################################
 # Enter Prompt Instructions Here #
@@ -65,7 +66,6 @@ OUTPUT in JSON format please
         }
     ]
 }
-
 ''', #LaTex example for above \\textbf{PP\\_ID} & \\textbf{Name} & \\textbf{Brief Description} & \\textbf{Template} & \\textbf{Response} & \\textbf{Example} & \\textbf{Reference} & \\textbf{Related PP} \\
         "table": '''# INSTRUCTIONS
 You are a PhD student sorting prompt engineering prompts into categories.
@@ -407,11 +407,11 @@ if __name__ == '__main__':
                                                   'Translation'],
                                          default=None, 
                                          help='Choose a category from the list')
+        parser.add_argument("-titleid", type=int, default=None, help="The ID of the title to extract the prompt examples from. The Title ID can be found in the promptpatterns.json file.")
         parser.add_argument("-typeofoutput", choices=['appendix',
                                                       'table'], 
                                              default='table',
                                              help='Choose the type of output. Default is table.')
-        parser.add_argument("-titleid", type=int, default=None, help="The ID of the title to extract the prompt examples from. The Title ID can be found in the promptpatterns.json file.")
         args = parser.parse_args()
 
         #Choose which category to use from the above examples
@@ -475,3 +475,15 @@ if __name__ == '__main__':
             print(f"Error: {e}")
 print(f"Azure OpenAI responded at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 print(response.choices[0].message.content)
+# Create file name to save the JSON file
+if args.titleid is not None:
+        save_file_name = f"{iso_datetime}_{args.category.lower()}_titleId-{args.titleid}.json"
+else:
+        save_file_name = f"{iso_datetime}_{args.category}_allAvailableTitles.json"
+folder_name = os.path.join('categorisation', args.category.lower())
+os.makedirs(folder_name, exist_ok=True)
+save_file_path = os.path.join(folder_name, save_file_name)
+print(f'Saving extracted prompt patterns to {save_file_path}')
+# Write the output to a JSON file
+with open(save_file_path, 'w', encoding='utf-8') as f:
+        json.dump(response.choices[0].message.content, f, ensure_ascii=False, indent=4)
