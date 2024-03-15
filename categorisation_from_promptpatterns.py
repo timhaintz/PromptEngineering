@@ -104,7 +104,7 @@ by its clarity, coherence, and the strength of its supporting evidence.
 assessment = '''
 ########
 Category: Assessment
-PreAcronym: IN_ASM
+PreAcronym: AT_ASM
 Definition: Assessment in prompt engineering involves a detailed evaluation of the model's response. It's not just about 
 determining if the response is right or wrong, but also about understanding the quality of the response. 
 This could include aspects like relevance to the prompt, completeness of the information, and the logical 
