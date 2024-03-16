@@ -127,13 +127,13 @@ based on shared qualities or characteristics. This process helps in organising t
 aid in understanding patterns and relationships within the data.
 '''
 
-classification = ['''
+classification = '''
 Category: Classification
 PreAcronym: IN_CLS
 Definition: Classification in prompt engineering refers to the task of predicting the class or category of an input 
 based on predefined criteria. This involves the model analysing the input and assigning it to one of several 
 predefined categories based on its characteristics.
-''']
+'''
 
 clustering = '''
 Category: Clustering
@@ -142,15 +142,21 @@ Definition: Clustering refers to the task of grouping similar inputs or outputs 
 Unlike classification, clustering does not rely on predefined categories but instead identifies natural groupings within the data.
 '''
 
-comparison = [
-        {"role": "system", "content": "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."},
-        {"role": "user", "content": "I would like to deploy a static web page to Azure."}
-]
+comparison = '''
+Category: Comparison
+PreAcronym: AC_CMP
+Definition: Comparison involves the model examining two or more inputs or outputs and identifying their similarities 
+and differences. This process can help in understanding the relationships between different inputs or outputs and 
+can provide insights into their characteristics.
+'''
 
-context_control = [
-        {"role": "system", "content": "When analyzing the following pieces of code, only consider security aspects."},
-        {"role": "user", "content": "import sqlite3 /n def get_user(username): /n connection = sqlite3.connect('my_database.db') /n cursor = connection.cursor() /n # Vulnerable to SQL Injection /n cursor.execute(f\"SELECT * FROM users WHERE username = '{username}'\") /n user = cursor.fetchone() /n return user"}
-]
+context_control = '''
+Category: Context_Control
+PreAcronym: OUT_CTX
+Definition: Context control refers to the management of the information that the model has access to during the 
+generation of the output. This could involve controlling the amount of information, the type of information, 
+or the sequence in which the information is presented to the model.
+'''
 
 contradiction = [
         {"role": "system", "content": "You are trying to determine if there is a factual contradiction between the summary and the document."},
