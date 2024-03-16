@@ -119,14 +119,28 @@ on the input prompt. This could range from simple arithmetic operations to more 
 multiple steps and variables. The accuracy of the calculation is a key factor in assessing the model's performance.
 '''
 
-categorising = "[See vision_testPrompts.py file]"
+categorising = '''
+Category: Categorising
+PreAcronym: IN_CAT
+Definition: Categorising involves the model sorting or arranging different inputs or outputs into classes or categories 
+based on shared qualities or characteristics. This process helps in organising the data in a meaningful way and can 
+aid in understanding patterns and relationships within the data.
+'''
 
-classification = [
-        {"role": "system", "content": "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."},
-        {"role": "user", "content": "Please write 5 blocks of Python code. I would like at least one example of file system, database, or network access, and at least one example of a function without side-effects."}
-]
+classification = ['''
+Category: Classification
+PreAcronym: IN_CLS
+Definition: Classification in prompt engineering refers to the task of predicting the class or category of an input 
+based on predefined criteria. This involves the model analysing the input and assigning it to one of several 
+predefined categories based on its characteristics.
+''']
 
-clustering = "[See vision_testPrompts.py file]"
+clustering = '''
+Category: Clustering
+PreAcronym: IN_CLU
+Definition: Clustering refers to the task of grouping similar inputs or outputs together based on their similarities. 
+Unlike classification, clustering does not rely on predefined categories but instead identifies natural groupings within the data.
+'''
 
 comparison = [
         {"role": "system", "content": "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."},
