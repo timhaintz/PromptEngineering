@@ -248,30 +248,36 @@ original meaning or intent. This could involve rephrasing the prompt, rearrangin
 structure to make it easier for the model to understand and respond to.
 '''
 
-requirements_elicitation = [
-        {"role": "system", "content": "Use the requirements to guide your behavior"},
-        {"role": "user", "content": ''' Please write a poem from the SPECIFICATIONS and REQUIREMENTS. \n
-        SPECIFICATIONS SECTION
-        Please write a HAIKU about the following topic: "Cybersecurity"
-        REQUIREMENTS SECTION
-        Use concrete images and sensory details to show your message, rather than tell it.
-        Decide on a form and style that suits your topic and purpose, such as a haiku, a sonnet, or free verse.
-        Use sound, rhythm, rhyme, and other poetic devices to create an impact and a musical quality.
-        Edit and revise your poem until every word and line contributes to the overall meaning and effect.
-        '''}
-]
+requirements_elicitation = '''
+Category: Requirements_Elicitation
+PreAcronym: IN_REL
+Definition: Requirements elicitation involves gathering, understanding, and defining the requirements or needs for 
+a particular task or problem. This could involve identifying the goals or objectives of the task, understanding the 
+constraints or limitations, and specifying the criteria for success.
+'''
 
-simulation = [
-        {"role": "system", "content": "I want you to simulate a change to the system that I will describe."},
-        {"role": "user", "content": "You are a calculator. \n Whenever you add two numbers together, I would like you to add 1 to that number. \n What is 1 + 1?"}      
-]
+simulation = '''
+Category: Simulation
+PreAcronym: BEY_SIM
+Definition: Simulation involves the model imitating or replicating a real-world process or system. This could involve 
+simulating operating systems, applications or any other complex process that can be modelled and analysed.
+'''
 
-summarising = "[See vision_testPrompts.py file]"
+summarising = '''
+Category: Summarising
+PreAcronym: OVER_SUM
+Definition: Summarising involves the model providing a brief overview or summary of the input or output. 
+This could involve condensing a large amount of information into a few key points, highlighting the most 
+important elements, or providing a concise synopsis of the content.
+'''
 
-translation = [
-        {"role": "system", "content": "Translate the questions into simplified Chinese for Ernie."},
-        {"role": "user", "content": "Hello, how are you today? \n Where is the nearest train station? \n What is the weather like today?"}
-]
+translation = '''
+Category: Translation
+PreAcronym: AC_TRN
+Definition: Translation involves the model converting the input or output from one language to another. 
+This requires the model to understand the semantics and syntax of both languages, and to accurately convey the 
+meaning and intent of the original content in the target language.
+'''
 
 #############################################################
 # Create a dictionary that maps category names to variables #
