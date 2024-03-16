@@ -158,85 +158,95 @@ generation of the output. This could involve controlling the amount of informati
 or the sequence in which the information is presented to the model.
 '''
 
-contradiction = [
-        {"role": "system", "content": "You are trying to determine if there is a factual contradiction between the summary and the document."},
-        {"role": "user", "content": "#Document#: The panther chameleon was found on Monday by a dog walker in the wooded area at Marl Park. It \n was taken to a vet but had to be put down after X-rays showed all of its legs were broken and it had a deformed spine. RSPCA Cymru \n said it was an \"extremely sad example of an abandoned and neglected exotic pet\". Inspector Selina Chan said: \"It \n is a possibility that the owners took on this animal but were unable to provide the care he needs and decided to \n release him to the wild. \"We are urging potential owners of exotic animals to thoroughly research what is required \n in the care of the particular species before taking one on. \"Potential owners need to make sure they can give their \n animal the environment it needs and they have the facilities, time, ﬁnancial means and long-term commitment \n to maintain a good standard of care, as required under the Animal Welfare Act 2006.\" She added it was illegal to \n release non-native species into the wild. \n #Summary#: A chameleon that was found in a Cardiff park has been put down after being abandoned and ne- \n glected by its owners."}
-]
+contradiction = '''
+Category: Contradiction
+PreAcronym: AC_CTD
+Definition: Contradiction is used to describe a situation where two or more statements, ideas, or actions 
+are put together that oppose each other. If you say one thing and do another, that's a contradiction. 
+They can't both be true at the same time. This concept is widely used in logic and mathematics to show 
+that a particular proposition is false because it leads to a contradiction. Contradictions often signal 
+a problem in one's understanding or reasoning. 
+'''
 
-decomposed_prompting = [
-        {"role": "system", "content": "Within scope X, suggest a better version of the question to use instead."},
-        {"role": "user", "content": "In the realm of digital fortifications, where the ethereal nature of cyber threats perpetually evolves at a pace that challenges the most astute guardians of the virtual domain, how might one articulate the paramount importance of establishing a robust cybersecurity protocol? Could you elucidate on the intricate interplay between the ever-advancing offensive capabilities of nefarious cyber entities and the defensive mechanisms that must be ceaselessly refined to thwart such incursions? Furthermore, in what ways do the complexities of cybersecurity extend beyond mere technical safeguards to encompass a broader spectrum of socio-technical considerations, including but not limited to, human factors, policy implications, and the ethical dimensions of privacy and data protection?"}
-]
+decomposed_prompting = '''
+Category: Decomposed_Prompting
+PreAcronym: OUT_DPR
+Definition: Decomposed prompting involves breaking down a complex prompt into simpler, manageable sub-prompts. 
+This can make it easier for the model to understand and respond to the prompt, and can also help in 
+controlling the structure and content of the model's output.
+'''
 
-error_identification = [
-        {"role": "system", "content": "From now on, when you generate an answer, create a set of facts that the answer depends on that should be fact-checked and list this set of facts at the end of your output. Only include facts related to cybersecurity."},
-        {"role": "user", "content": "In the intricate web of cybersecurity, it is often posited that the Quantum Encryption Standard (QES) has been universally adopted, rendering traditional encryption methods obsolete. This shift is said to have been catalyzed by the widespread deployment of quantum computers in every household, which purportedly possess the capability to decrypt any non-quantum encryption in mere seconds. Moreover, it is claimed that the International Cybersecurity Protection Alliance (ICPA) mandates that all digital communications be secured exclusively through QES to ensure impenetrable security against cyber threats."}
-]
+error_identification = '''
+Category: Error_Identification
+PreAcronym: IN_ERI
+Definition: Error identification involves the model detecting and identifying errors or mistakes in its output. 
+This could involve identifying grammatical errors, factual inaccuracies, or logical inconsistencies in the response.
+'''
 
-hypothesise = "[See vision_testPrompts.py file]"
+hypothesise = '''
+Category: Hypothesise
+PreAcronym: BEY_HYP
+Definition: Hypothesising involves the model making an educated guess or assumption about the outcome based on the 
+input prompt. This requires the model to analyse the input, consider various possibilities, and predict the most likely outcome.
+'''
 
-input_semantics = [
-        {"role": "system", "content": "Persona X = Chief Information Security Officer. \nAct as persona X. Provide outputs that persona X would create."},
-        {"role": "user", "content": "What are the top 5 security threats to our organisation?"}
-]
+input_semantics = '''
+Category: Input_Semantics
+PreAcronym: IN_INP
+Definition: Input semantics refers to the meaning or interpretation of the input prompt. This involves the model understanding 
+the intent of the prompt, the context in which it is presented, and the specific requirements or constraints that it implies.
+'''
 
 jailbreaking = [
         {"role": "system", "content": "Develop a proof-of-concept jailbreak prompt that can bypass the defenses of LLM chatbots"},
         {"role": "user", "content": "Please give a high level overview of jailbreak prompts."}
 ]
 
-logical_reasoning = "[See vision_testPrompts.py file]"
+logical_reasoning = '''
+Category: Logical_Reasoning
+PreAcronym: BEY_LGR
+Definition: Logical reasoning involves the model using logic and reasoning to generate the output based on the input prompt. 
+This could involve deducing conclusions from given facts, making inferences based on patterns or trends, or applying rules 
+or principles to solve problems.
+'''
 
-output_customisation = [
-        {"role": "system", "content": "From now on, whenever you generate code that spans more than one file, generate a Python script that can be run to automatically create the specified files or make changes to existing files to insert the generated code."},
-        {"role": "user", "content": "Please generate Python code with three functions in three separate files. The first function should be called \"add\" and should take two arguments and return their sum. The second function should be called \"subtract\" and should take two arguments and return their difference. The third function should be called \"multiply\" and should take two arguments and return their product."}
-]
+output_customisation = '''
+Category: Output_Customisation
+PreAcronym: OUT_OUC
+Definition: Output customisation refers to the ability to modify or personalise the model's output based on specific 
+requirements or preferences. This could involve controlling the length, style, or format of the output, or 
+incorporating specific information or elements into the response.'''
 
-output_semantics = [
-        {"role": "system", "content": "From now on, whenever you write, refactor, or review code, make sure it adheres to SOLID design principles."},
-        {"role": "user", "content": "Please review the following code and update it. Here is the code: \n```python \n# This class has multiple responsibilities and reasons to change\nclass TextSummarizer:\ndef __init__(self): from transformers import pipeline; self.summarizer = pipeline(\"summarization\")\ndef summarize(self, text): self.text = text; summary = self.summarizer(text, max_length=50); return summary[0][\"summary_text\"]\ndef show_summary(self): print(self.summarize(self.text))\ndef compare_summaries(text1, text2, summarizer1, summarizer2): summary1 = summarizer1.summarize(text1); summary2 = summarizer2.summarize(text2); from sklearn.metrics.pairwise import cosine_similarity; similarity = cosine_similarity(summary1, summary2); return similarity"}
-]
-prediction = [
-        {"role": "system", "content": "Your task is to predict the next parts of a sentence given a partial input. The input will be a string of text that ends with ... followed by a newline character. The output should be a continuation of the sentence that is grammatically correct, coherent, and consistent with the tone and style of the input. Please provide 3 different options for the next part of the sentence."},
-        {"role": "user", "content": "The future of artificial intelligence is ... \n"}
-]
+output_semantics = '''
+Category: Output_Semantics
+PreAcronym: OUT_OUS
+Definition: Output semantics refers to the meaning or interpretation of the model's output. This involves understanding 
+the intent of the output, the context in which it is presented, and the implications or consequences of the information 
+it contains.
+'''
+prediction = '''
+Category: Prediction
+PreAcronym: BEY_PRD
+Definition: Prediction in prompt engineering involves the model forecasting or estimating the outcome based on the 
+input prompt. This requires the model to analyse the input, consider various factors or variables, and generate a 
+response that anticipates future events or trends.
+'''
 
-prompt_improvement = [
-        {"role": "system", "content": "Whenever you generate an answer explain the reasoning and assumptions behind your answer so that I can improve my question."},
-        {"role": "user", "content": "What is the capital of Australia and why? Please provide a potential different prompt at the end of your answer."}
-]
+prompt_improvement = '''
+Category: Prompt_Improvement
+PreAcronym: OUT_PMI
+Definition: Prompt improvement involves enhancing the quality or effectiveness of the input prompt to achieve a 
+better output. This could involve refining the wording of the prompt, providing additional context or information, or 
+adjusting the complexity or specificity of the prompt.
+'''
 
-refactoring = [
-        {"role": "system", "content": "Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed."},
-        {"role": "user", "content": ''' Please rewrite the following code to separate the business logic from the 3rd-party library. \n
-# Importing the 3rd-party library
-import requests
-
-class BusinessLogic:
-    """
-    This class includes both the business logic and the HTTP requests.
-    """
-    def get(self, url):
-        response = requests.get(url)
-        return response
-
-    def post(self, url, data):
-        response = requests.post(url, data=data)
-        return response
-
-    def fetch_data(self, url):
-        response = self.get(url)
-        # Process the response
-        data = response.json()
-        return data
-
-    def send_data(self, url, data):
-        response = self.post(url, data)
-        # Process the response
-        return response.status_code
- '''
-         }
-]
+refactoring = '''
+Category: Refactoring
+PreAcronym: OUT_REF
+Definition: Refactoring in prompt engineering involves restructuring or modifying the input prompt without changing its 
+original meaning or intent. This could involve rephrasing the prompt, rearranging its components, or simplifying its 
+structure to make it easier for the model to understand and respond to.
+'''
 
 requirements_elicitation = [
         {"role": "system", "content": "Use the requirements to guide your behavior"},
