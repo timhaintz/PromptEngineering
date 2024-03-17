@@ -51,7 +51,7 @@ OUTPUT in JSON format please
 {
     "Index ID 1": [
         {
-            "PE_ID": "PP_PreAcronym_Index ID 1",
+            "PE_ID": "PP_Index ID 1",
             "Category": "Category",
             "Prompt_Example": "Example Prompt without the PE_ID.",
             "Reasoning": "Explain why it was chosen for this category"
@@ -59,7 +59,7 @@ OUTPUT in JSON format please
     ],
     "Index ID 2": [
         {
-            "PE_ID": "PP_PreAcronym_Index ID 2",
+            "PE_ID": "PP_Index ID 2",
             "Category": "Category",
             "Prompt_Example": "Example Prompt without the PE_ID.",
             "Reasoning": "Explain why it was chosen for this category"
@@ -83,7 +83,7 @@ few_shot_prompt = None
 
 assistant_prompt_response = None
 
-user_prompt = '''Between ######## is a Category: and then Definition: of the category. There is also a PreAcronym.
+user_prompt = '''Between ######## is a Category: , PreAcronym: and Definition: of the category.
 Please use the prompt examples to check if any match the Category definition. If they do, fill out the information. \n
 '''
 
