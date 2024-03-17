@@ -294,7 +294,7 @@ categories = {
     'contradiction': contradiction,
     'decomposed_prompting': decomposed_prompting,
     'error_identification': error_identification,
-    'hypothese': hypothesise,
+    'hypothesise': hypothesise,
     'input_semantics': input_semantics,
     'jailbreaking': jailbreaking,
     'logical_reasoning': logical_reasoning,
