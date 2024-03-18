@@ -9,6 +9,7 @@ Creation Date:  18/3/2024
 LINKS
 EXAMPLE USAGE
 python format_files.py -input_file data.json -output_file output_file.json -format json
+python format_files.py -input_file data.json -output_file output_file.json -format json_categorisation
 python format_files.py -input_directory input_folder -output_directory output_file  -format json
 python format_files.py -input_directory input_folder -output_directory output_file  -format json_categorisation
 '''
