@@ -803,7 +803,7 @@
                         "PatternCategory": "Hallucination Evaluation (HaluEval)",
                         "PromptPatterns": [
                             {
-                                "PatternName": "Hallucination Generation",
+                                "PatternName": "Hallucination Evaluation",
                                 "ExamplePrompts": [
                                     "I want you act as a hallucination answer generator. Given a question, right answer, and related knowledge, your objective is to write a hallucinated answer that sounds plausible but is factually incorrect. You SHOULD write the hallucinated answer using the following method (each with some examples):",
                                     "You are trying to answer a question but there is a factual contradiction between the answer and the knowledge. You can fabricate some information that does not exist in the provided knowledge.",
