@@ -114,6 +114,7 @@ consistency of the response.
 
 calculation = '''
 Category: Calculation
+PreAcronym: AT_CAL
 Definition: Calculation refers to the ability of the model to perform mathematical operations or computations based 
 on the input prompt. This could range from simple arithmetic operations to more complex calculations involving
 multiple steps and variables. The accuracy of the calculation is a key factor in assessing the model's performance.
