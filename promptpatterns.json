@@ -316,8 +316,7 @@
                             {
                                 "PatternName": "Intermediate Abstraction",
                                 "ExamplePrompts": [
-                                    "If you write or refactor code with property X",
-                                    "that uses other code with property Y",
+                                    "If you write or refactor code with property X that uses other code with property Y",
                                     "(Optionally) Define property X",
                                     "(Optionally) Define property Y",
                                     "Insert an intermediate abstraction Z between X and Y",
@@ -328,8 +327,7 @@
                             {
                                 "PatternName": "Principled Code",
                                 "ExamplePrompts": [
-                                    "Within this scope",
-                                    "Generate, refactor, or create code to adhere to named Principle X",
+                                    "Within this scope generate, refactor, or create code to adhere to named Principle X",
                                     "From now on, whenever you write, refactor, or review code, make sure it adheres to SOLID design principles."
                                 ]
                             },

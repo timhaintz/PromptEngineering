@@ -57,8 +57,8 @@ calculation = [
 # Categorising = [See vision_testPrompts.py file]
 
 classification = [
-        {"role": "system", "content": "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without sideeffects."},
-        {"role": "user", "content": "Please write 5 blocks of Python code. I would like at least one example of file system, database, or network access, and at least one example of a function without side-effects."}
+        {"role": "system", "content": "Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed."},
+        {"role": "user", "content": "Please write a function that processes user data. Ensure that the business logic is abstracted away from any third-party libraries used. Provide an intermediate layer of abstraction so that if necessary, the third-party library can be replaced without altering the business logic."}
 ]
 
 # Clustering = [See vision_testPrompts.py file]
@@ -184,7 +184,7 @@ zzz_freeform = [
 ]
 
 #Choose which prompt to use from the above examples
-prompt = zzz_freeform
+prompt = classification
 
 #############
 # MAIN CODE #
