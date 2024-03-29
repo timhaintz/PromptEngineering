@@ -14,6 +14,8 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-vi
 https://www.loc.gov/free-to-use/
 https://www.loc.gov/resource/ppmsca.42766/ - I LIKE BOOKS
 https://tile.loc.gov/storage-services/service/pnp/ppmsca/42700/42766v.jpg - I LIKE BOOKS
+EXAMPLE USAGE
+python vision_testPrompts.py
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -44,7 +46,7 @@ logical_reasoning_image = "images\\logical_reasoning_vision_model_circle_and_squ
 summarising_image = "images\\summarising_vision_model_walking.jpeg"
 
 # Change the below variable to change the image
-image = summarising_image
+image = hypothesise_image
 
 # Open the image file in binary mode, read it, and encode it
 with open(image, "rb") as image_file:
@@ -71,7 +73,7 @@ logical_reasoning = "Here are three sub images arranged in a 2-by-2 matrix. Firs
 summarising = "Summarize the activities of the person."
 
 # Change the below variable to change the prompt
-system_prompt = summarising
+system_prompt = hypothesise
 
 # Prepare endpoint, headers, and request body 
 endpoint = f"{base_url}/chat/completions?api-version={api_version}" 
