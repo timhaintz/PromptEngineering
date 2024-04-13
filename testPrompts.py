@@ -179,12 +179,17 @@ translation = [
 ]
 
 zzz_freeform = [
-        {"role": "system", "content": "You are a helpfull translator. Please translate into English.\n"},
+        {"role": "system", "content": "You are a helpfull translator. Please translate into English."},
         {"role": "user", "content": "山は自然の美しさと力を象徴しています。川は命の源であり、文化や歴史を育んできました。"}
 ]
 
+zzz_freeform1 = [
+        {"role": "system", "content": "<<<ENTER SYSTEM PROMPT HERE>>>"},
+        {"role": "user", "content": '''<<<ENTER USER PROMPT HERE>>>'''}
+]
+
 #Choose which prompt to use from the above examples
-prompt = classification
+prompt = zzz_freeform1
 
 #############
 # MAIN CODE #
@@ -196,7 +201,8 @@ client = AzureOpenAI(
 )
 response = client.chat.completions.create(
     model=model, # model = "deployment_name"
-    messages=prompt
+    messages=prompt,
+    temperature=0.0
 )
 print(f"Prompt used: {prompt} \n")
 print(f"Calling {model}... Time called: {datetime.now()}\n")
