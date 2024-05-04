@@ -2724,7 +2724,7 @@
             },
             {
                 "id":19,
-                "Title": "From few examples to natural language task descriptions",
+                "Title": "Instruction Induction: From few examples to natural language task descriptions",
                 "APAReference": "Honovich, O., Shaham, U., Bowman, S. R., & Levy, O. (2022). Instruction induction: From few examples to natural language task descriptions. arXiv preprint arXiv:2205.10782.",
                 "Authors":[
                     "Or Honovich",

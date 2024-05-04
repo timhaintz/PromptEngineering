@@ -193,7 +193,7 @@ zzz_freeform1 = [
 ]
 
 #Choose which prompt to use from the above examples
-prompt = zzz_freeform1
+prompt = Clustering
 
 #############
 # MAIN CODE #
