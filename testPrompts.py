@@ -61,7 +61,11 @@ classification = [
         {"role": "user", "content": "Please write a function that processes user data. Ensure that the business logic is abstracted away from any third-party libraries used. Provide an intermediate layer of abstraction so that if necessary, the third-party library can be replaced without altering the business logic."}
 ]
 
-# Clustering = [See vision_testPrompts.py file]
+Clustering = [
+        {"role": "system", "content": "Find a common characteristic for the given objects."},
+        {"role": "user", "content": "guitars, pendulums, neutrinos"}
+]
+
 
 comparison = [
         {"role": "system", "content": "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."},
