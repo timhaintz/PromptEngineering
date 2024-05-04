@@ -1,6 +1,10 @@
 .env
+.cache/
+.vscode/
 categorisation/
 extractedPromptPatternsFromPDF/
 __pycache__/
 venv/
-.vscode/
+OAI_CONFIG_LIST
+AutoGen/
+tmp/
