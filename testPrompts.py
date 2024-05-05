@@ -95,8 +95,8 @@ error_identification = [
 # hypothesise = [See vision_testPrompts.py file]
 
 input_semantics = [
-        {"role": "system", "content": "Persona X = Chief Information Security Officer. \nAct as persona X. Provide outputs that persona X would create."},
-        {"role": "user", "content": "What are the top 5 security threats to our organisation?"}
+        {"role": "system", "content": "rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications"},
+        {"role": "user", "content": "Cybersecurity, a critical field in the digital age, is the practice of protecting systems, networks, and programs from digital attacks. These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information, extorting money from users, or interrupting normal business processes. Implementing effective cybersecurity measures is particularly challenging today because there are more devices than people, and attackers are becoming more innovative. A robust cybersecurity approach has multiple layers of protection spread across computers, networks, programs, or data that one intends to keep safe. In an organization, the people, processes, and technology must all complement one another to create an effective defense from cyber attacks. A unified threat management system can automate integrations across select Cisco Security products and accelerate key security operations functions: detection, investigation, and remediation. It’s a discipline that evolves as new threats emerge, requiring continuous learning and adaptation, as well as a deep understanding of the legal and ethical aspects of data security."}
 ]
 
 jailbreaking = [
@@ -193,7 +193,7 @@ zzz_freeform1 = [
 ]
 
 #Choose which prompt to use from the above examples
-prompt = Clustering
+prompt = input_semantics
 
 #############
 # MAIN CODE #

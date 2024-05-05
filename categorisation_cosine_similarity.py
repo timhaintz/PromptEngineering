@@ -57,11 +57,11 @@ categorising_example = '''Imagine that you are an expert in evaluating the car d
 
 classification_example = '''Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed.'''
 
-clustering_example = '''How are those visual parts related, and can they be combined to form a single object such as a boy? If so, how to arrange them?'''
+clustering_example = '''Find a common characteristic for the given objects.'''
 
 error_identification_example = '''From now on, when you generate an answer, create a set of facts that the answer depends on that should be fact-checked and list this set of facts at the end of your output. Only include facts related to cybersecurity.'''
 
-input_semantics_example = '''Act as persona X'''
+input_semantics_example = '''rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications'''
 
 requirements_elicitation_example = '''Use the requirements to guide your behaviour.'''
 
@@ -135,6 +135,6 @@ def find_similar_prompts(input_string, json_file, top_n=10):
     return [(prompts[i], info[i], cosine_similarities[i]) for i in top_indices]
 
 # Test the function
-input_string = clustering_example
+input_string = input_semantics_example
 json_file = 'promptpatterns.json'
 print(find_similar_prompts(input_string, json_file))
