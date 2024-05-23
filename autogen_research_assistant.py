@@ -21,6 +21,7 @@ from autogen.agentchat.contrib.retrieve_assistant_agent import RetrieveAssistant
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
 from chromadb.utils import embedding_functions
 from typing import Annotated
+from langchain_text_splitters import RecursiveJsonSplitter
 import pandas as pd
 import json
 
@@ -30,6 +31,7 @@ import json
 config_list = config_list_from_json(env_or_file="OAI_CONFIG_LIST")
 work_dir = "AutoGen/RelatedPP/"
 prompt_patterns = "promptpatterns.json"
+json_splitter = RecursiveJsonSplitter(max_chunk_size=1000)
 
 llm_config = {
     "cache_seed": 42,  # change the cache_seed for different trials
@@ -42,7 +44,49 @@ gpt4 = llm_config['config_list'][0]
 gpt35 = llm_config['config_list'][1]
 gpt4_vision = llm_config['config_list'][2]
 text_embedding_3_large = llm_config['config_list'][3]
+text_embedding_ada_002 = llm_config['config_list'][4]
 
+# region import DATA
+###############
+# Import DATA #
+###############
+def prompt_patterns_text_split_function(prompt_patterns):
+    # Parse the JSON
+    data = json.loads(prompt_patterns)
+
+    # Split the JSON into chunks
+    json_chunks = json_splitter.split_json(json_data=data, convert_lists=True)
+
+    # Convert each item in each dictionary in json_chunks to a separate JSON-formatted string
+    json_strings = [json.dumps(item) for chunk in json_chunks for item in chunk.items()]
+
+    return json_strings
+
+
+df = pd.read_json("promptpatterns.json")
+
+output_structure = '''
+\\begin{table}[h!]
+  \\centering
+  \\begin{tabular}{|c|c|c|c|}
+    \\hline
+    ID & PP name& Category & APA ref\\
+    \\hline
+  \\end{tabular}
+  \\caption{The list of different categories of PPs for the in-logic.}
+\\end{table}
+'''
+
+categorising_example = '''
+Category: CAT (Categorising)
+PP Name: Insurance Report Generation
+PE: Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. 
+Please evaluate the damage seen in the image below. 
+For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead).
+ {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}
+'''
+
+# endregion
 # region User Agents
 ###############
 # USER AGENTS #
@@ -145,73 +189,41 @@ research_assistant = AssistantAgent(
 # RETRIEVE AGENTS #
 ###################
 azure_openai_ef = embedding_functions.OpenAIEmbeddingFunction(
-                api_base=text_embedding_3_large["base_url"],
-                api_key=text_embedding_3_large["api_key"],
-                api_type="azure",
-                api_version=text_embedding_3_large["api_version"],
-                model_name=text_embedding_3_large["model"],
-            )
+                    api_base=text_embedding_ada_002["base_url"],
+                    api_key=text_embedding_ada_002["api_key"],
+                    api_type="azure",
+                    api_version=text_embedding_ada_002["api_version"],
+                    model_name=text_embedding_ada_002["model"],
+                )
 
 rag_assistant = RetrieveAssistantAgent(
     name="ragassistant",
     system_message="You are a helpful assistant.",
-    llm_config=gpt35,
+    llm_config=gpt4,
 )
 
 ragproxyagent = RetrieveUserProxyAgent(
     name="ragproxyagent",
+    human_input_mode="ALWAYS",
     retrieve_config={
         "task": "qa",
         "docs_path": "promptpatterns.json",
-        # "embedding_function": azure_openai_ef, # chromadb.errors.InvalidDimensionException: Embedding dimension 384 does not match collection dimensionality 3072
-        #"db_path": "RAG_index/chroma.db",
+        "embedding_function": azure_openai_ef, # chromadb.errors.InvalidDimensionException: Embedding dimension 384 does not match collection dimensionality 3072
+        "embedding_model": "text_embedding_ada_002",
         "collection_name": "promptpatterns",
         "get_or_create": True,
-        "overwrite": False,
         "must_break_at_empty_line": False,
-        "context_max_tokens": 16000,
-    }
+        "chunk_token_size": 1000,
+        "custom_text_split_function": prompt_patterns_text_split_function,
+    },
+    description="The Retrieve User Proxy Agent is used to retrieve information from a database for solving difficult problems.",
 )
-# endregion
-
-# region import DATA
-###############
-# Import DATA #
-###############
-def prompt_patterns_text_split_function():
-    # Parse the JSON
-    data = json.loads(prompt_patterns)
-
-    # Iterate over the 'Titles' array
-    for title in data['Source']['Titles']:
-        # Convert each title back to a JSON string and yield it
-        yield json.dumps(title)
-
-
-df = pd.read_json("promptpatterns.json")
-
-output_structure = '''
-\\begin{table}[h!]
-  \centering
-  \\begin{tabular}{|c|c|c|c|}
-    \hline
-    ID & PP name& Category & APA ref\\
-    \hline
-  \end{tabular}
-  \caption{The list of different categories of PPs for the in-logic.}
-\end{table}
-'''
-
-categorising_example = '''
-Category: CAT (Categorising)
-PP Name: Insurance Report Generation
-PE: Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. 
-Please evaluate the damage seen in the image below. 
-For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \"N/A\" instead).
- {\"make\": xxx, \"model\": xxx, \"license plate\": xxx, \"damage description\": xxx, \"estimated cost of repair\": xxx}
-'''
+        #"db_path": "AutoGen",       
+        
 
 # endregion
+
+
 
 # region nested chat
 #####################
@@ -236,8 +248,6 @@ admin.register_nested_chats(
 )
 
 # endregion
-
-
 
 # region setup GroupChat
 ###################
@@ -271,6 +281,7 @@ def run_group_chat():
     )
 
 # run_group_chat()
+# endregion
 
 # region Setup Retrieve GroupChat
 ##################
@@ -281,9 +292,8 @@ def run_rag_group_chat():
     ragproxyagent.initiate_chat(
         recipient=rag_assistant,
         message=ragproxyagent.message_generator,
-        problem="Extract the prompt patterns from the paper 'A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT'",
-        search_string="A Prompt Pattern Catalog to Enhance Prompt Engineering", # search_string is used as an extra filter for the embeddings search
-        custom_text_split_function=prompt_patterns_text_split_function(),
+        problem="Please find 'Damage Evaluation' ExamplePrompts.",
+        search_string="", # search_string is used as an extra filter for the embeddings search
     )
 
 run_rag_group_chat()

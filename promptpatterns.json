@@ -3479,7 +3479,7 @@
                             {
                                 "PatternName": "Chain-of-Thought",
                                 "ExamplePrompts": [
-                                    "Uses prompt engineering to elicit a step by step answer [25]."
+                                    "Uses prompt engineering to elicit a step by step answer."
                                 ]
                             },
                             {

@@ -158,16 +158,8 @@ class BusinessLogic:
 ]
 
 requirements_elicitation = [
-        {"role": "system", "content": "Use the requirements to guide your behavior"},
-        {"role": "user", "content": ''' Please write a poem from the SPECIFICATIONS and REQUIREMENTS. \n
-        SPECIFICATIONS SECTION
-        Please write a HAIKU about the following topic: "Cybersecurity"
-        REQUIREMENTS SECTION
-        Use concrete images and sensory details to show your message, rather than tell it.
-        Decide on a form and style that suits your topic and purpose, such as a haiku, a sonnet, or free verse.
-        Use sound, rhythm, rhyme, and other poetic devices to create an impact and a musical quality.
-        Edit and revise your poem until every word and line contributes to the overall meaning and effect.
-        '''}
+        {"role": "system", "content": "Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making."},
+        {"role": "user", "content": "What is the future use of autonomous agents in Generative AI. AutoGen and CrewAI are examples leveraging autonomous agents. Please name the experts used in your analysis."}
 ]
 
 simulation = [
@@ -193,7 +185,7 @@ zzz_freeform1 = [
 ]
 
 #Choose which prompt to use from the above examples
-prompt = input_semantics
+prompt = requirements_elicitation
 
 #############
 # MAIN CODE #

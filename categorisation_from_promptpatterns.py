@@ -12,7 +12,7 @@ https://learn.microsoft.com/en-us/azure/cognitive-services/openai/chatgpt-quicks
 https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/chatgpt?pivots=programming-language-chat-completions
 https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal
 EXAMPLE USAGE
-python categorisation_for_appendix.py -titleid 0 -category Argument
+python categorisation_from_promptpatterns.py -titleid 0 -category Argument
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -29,10 +29,10 @@ load_dotenv()
 #############
 # VARIABLES #
 #############
-model = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
-api_version = "2023-05-15"
-api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY") 
-azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
+model = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
+api_version = os.getenv("API_VERSION")
+api_key = os.getenv("AZUREVS_OPENAI_KEY") 
+azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 temperature = 0.0
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 

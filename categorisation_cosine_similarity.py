@@ -30,15 +30,17 @@ import numpy as np
 from datetime import datetime
 from openai import AzureOpenAI
 from sklearn.metrics.pairwise import cosine_similarity
-
+from dotenv import load_dotenv
 # endregion
 
+# region Load the environment variables
 # region variables
 ########################
 # Define the variables #
 ########################
-model = "text-embedding-3-large" # os.getenv("AZUREVS_OPENAI_EMBEDDING3_MODEL")
-api_version = "2024-02-01" # os.getenv("API_VERSION")
+load_dotenv()
+model = os.getenv("AZUREVS_OPENAI_EMBEDDING3_MODEL")
+api_version = os.getenv("API_VERSION")
 api_key = os.getenv("AZUREVS_OPENAI_KEY") 
 azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 
@@ -63,7 +65,9 @@ error_identification_example = '''From now on, when you generate an answer, crea
 
 input_semantics_example = '''rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications'''
 
-requirements_elicitation_example = '''Use the requirements to guide your behaviour.'''
+#requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
+
+requirements_elicitation_example = "Requirements Elicitation"
 
 # endregion
 
@@ -89,7 +93,6 @@ def generate_embeddings(text, model=model):  # model = "deployment_name"
 ###############################################
 # Define the function to find similar prompts #
 ###############################################
-
 def find_similar_prompts(input_string, json_file, top_n=10):
     # Load the JSON data
     with open(json_file, 'r', encoding='utf-8') as f:
@@ -99,31 +102,34 @@ def find_similar_prompts(input_string, json_file, top_n=10):
     prompts = []
     info = []
     embeddings = []
+    max_length = 0  # Initialize the maximum length to 0
+
     for title_id, title in enumerate(data['Source']['Titles']):
         for j, category in enumerate(title['CategoriesAndPatterns']):
             for k, pattern in enumerate(category['PromptPatterns']):
                 for l, example in enumerate(pattern['ExamplePrompts']):
-                    prompts.append(example)
-                    cascading_index = f"{title_id}-{j}-{k}-{l}"
-                    info.append((pattern['PatternName'], title['APAReference'], cascading_index))
+                    try:
+                        embedding = generate_embeddings(example)
+                        # Update the maximum length if this embedding is longer
+                        if len(embedding) > max_length:
+                            max_length = len(embedding)
+                        embeddings.append(embedding)
+                        prompts.append(example)
+                        cascading_index = f"{title_id}-{j}-{k}-{l}"
+                        info.append((pattern['PatternName'], title['APAReference'], cascading_index))
+                    except Exception as e:
+                        print(f"An error occurred at index {len(prompts)}: {e}")
 
-    # Generate embeddings for the prompts
-    for i in range(len(prompts)):
-        try:
-            embedding = generate_embeddings(prompts[i])
-            embeddings.append(embedding)
-        except Exception as e:
-            print(f"An error occurred at index {i}: {e}")
-    
-    # Filter out None objects from embeddings
-    embeddings = [embedding for embedding in embeddings if embedding is not None]
-    
-    # Pad the embeddings so they all have the same length
-    max_length = max(len(embedding) for embedding in embeddings)
-    embeddings = [np.pad(embedding, (0, max_length - len(embedding))) for embedding in embeddings]
-    
+    # Pad all embeddings to the maximum length
+    for i in range(len(embeddings)):
+        if len(embeddings[i]) < max_length:
+            embeddings[i] = np.pad(embeddings[i], (0, max_length - len(embeddings[i])))
+
     # Generate an embedding for the input string
     input_embedding = generate_embeddings(input_string)
+    # Pad the input embedding to the maximum length
+    if len(input_embedding) < max_length:
+        input_embedding = np.pad(input_embedding, (0, max_length - len(input_embedding)))
 
     # Calculate the cosine similarity between the input string and each prompt
     cosine_similarities = cosine_similarity([input_embedding], embeddings).flatten()
@@ -134,7 +140,14 @@ def find_similar_prompts(input_string, json_file, top_n=10):
     # Return the top n most similar prompts and their associated information
     return [(prompts[i], info[i], cosine_similarities[i]) for i in top_indices]
 
-# Test the function
-input_string = input_semantics_example
-json_file = 'promptpatterns.json'
-print(find_similar_prompts(input_string, json_file))
+if __name__ == "__main__":
+
+    # region Define the input string and JSON file
+    ##############################################
+    # Define the input string and JSON file path #
+    ##############################################
+    input_string = requirements_elicitation_example
+    json_file = 'promptpatterns.json'
+
+    # endregion
+    print(find_similar_prompts(input_string, json_file))
