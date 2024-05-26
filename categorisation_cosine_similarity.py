@@ -167,7 +167,7 @@ if __name__ == "__main__":
     # Define the top_n and threshold values #
     #########################################
     top_n = 10
-    threshold = 0.3
+    threshold = 0.2
 
     # endregion
     #print(f"Top: {top_n} results for finding similar prompts:\n{find_similar_prompts(input_string, json_file, top_n=top_n)}")
@@ -180,8 +180,8 @@ if __name__ == "__main__":
 
     # Extract the paper numbers, prompt patterns, and prompt examples
     paper_numbers = [index.split('-')[0] for index in style_indices]
-    prompt_patterns = [index.split('-')[2] for index in style_indices]
-    prompt_examples = [index.split('-')[3] for index in style_indices]
+    prompt_patterns = ['-'.join(index.split('-')[:3]) for index in style_indices]
+    prompt_examples = [index for index in style_indices]
 
     # Count the unique paper numbers, prompt patterns, and prompt examples
     paper_number_counts = Counter(paper_numbers)
@@ -192,6 +192,8 @@ if __name__ == "__main__":
     print(f"Unique Paper Numbers: {len(paper_number_counts)}")
     print(f"Unique Prompt Patterns: {len(prompt_pattern_counts)}")
     print(f"Unique Prompt Examples: {len(prompt_example_counts)}")
+
+    print(f"\n Displaying the actual results of output to confirm the counts above:\n {output}")
 
 
     
