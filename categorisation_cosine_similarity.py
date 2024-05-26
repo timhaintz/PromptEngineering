@@ -34,7 +34,6 @@ from dotenv import load_dotenv
 from collections import Counter
 # endregion
 
-# region Load the environment variables
 # region variables
 ########################
 # Define the variables #
@@ -44,6 +43,12 @@ model = os.getenv("AZUREVS_OPENAI_EMBEDDING3_MODEL")
 api_version = os.getenv("API_VERSION")
 api_key = os.getenv("AZUREVS_OPENAI_KEY") 
 azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
+
+top_n = 10
+threshold = 0.85
+
+# endregion
+
 
 ############################
 # Category prompt examples #
@@ -66,9 +71,7 @@ error_identification_example = '''From now on, when you generate an answer, crea
 
 input_semantics_example = '''rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications'''
 
-#requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
-
-requirements_elicitation_example = "Requirements Elicitation"
+requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
 
 # endregion
 
@@ -163,5 +166,5 @@ if __name__ == "__main__":
     json_file = 'promptpatterns.json'
 
     # endregion
-    print(find_similar_prompts(input_string, json_file, top_n=10))
-    print(find_similar_prompts(input_string, json_file, threshold=0.85))
+    print(f"Top: {top_n} results for finding similar prompts:\n{find_similar_prompts(input_string, json_file, top_n=10)}")
+    print(f"Results for finding similar prompts with Cosine Similarity threshold {threshold}:\n{find_similar_prompts(input_string, json_file, threshold=0.85)}")
