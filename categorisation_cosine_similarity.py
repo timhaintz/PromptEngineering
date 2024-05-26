@@ -32,6 +32,7 @@ from openai import AzureOpenAI
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
 from collections import Counter
+import category_definitions
 # endregion
 
 # region variables
@@ -43,9 +44,6 @@ model = os.getenv("AZUREVS_OPENAI_EMBEDDING3_MODEL")
 api_version = os.getenv("API_VERSION")
 api_key = os.getenv("AZUREVS_OPENAI_KEY") 
 azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
-
-top_n = 10
-threshold = 0.85
 
 # endregion
 
@@ -139,32 +137,48 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
     # Calculate the cosine similarity between the input string and each prompt
     cosine_similarities = cosine_similarity([input_embedding], embeddings).flatten()
 
-    # If both top_n and threshold are provided
-    if top_n is not None and threshold is not None:
-        top_indices = cosine_similarities.argsort()[:-top_n - 1:-1]
-        top_indices = [i for i in top_indices if cosine_similarities[i] >= threshold]
-    # If only top_n is provided
-    elif top_n is not None:
-        top_indices = cosine_similarities.argsort()[:-top_n - 1:-1]
-    # If only threshold is provided
-    elif threshold is not None:
-        top_indices = [i for i, similarity in enumerate(cosine_similarities) if similarity >= threshold]
-    # If neither is provided, return all results
+    # If top_n is None, set it to the length of cosine_similarities
+    if top_n is None:
+        top_n = len(cosine_similarities)
     else:
-        top_indices = range(len(cosine_similarities))
+        # Ensure top_n is not larger than the length of cosine_similarities
+        top_n = min(top_n, len(cosine_similarities))
+
+    # Get the top_n indices based on cosine_similarities
+    top_indices = cosine_similarities.argsort()[:-top_n - 1:-1]
+
+    # If threshold is provided, filter the indices based on the threshold
+    if threshold is not None:
+        top_indices = [i for i in top_indices if cosine_similarities[i] >= threshold]
 
     # Return the selected prompts and their associated information
     return [(prompts[i], info[i], cosine_similarities[i]) for i in top_indices]
 
 if __name__ == "__main__":
 
-    # region Define the input string and JSON file
+    # region Define the variables
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = requirements_elicitation_example
+    input_string = category_definitions.argument
     json_file = 'promptpatterns.json'
+    
+    #########################################
+    # Define the top_n and threshold values #
+    #########################################
+    top_n = 10
+    threshold = 0.3
 
     # endregion
-    print(f"Top: {top_n} results for finding similar prompts:\n{find_similar_prompts(input_string, json_file, top_n=10)}")
-    print(f"Results for finding similar prompts with Cosine Similarity threshold {threshold}:\n{find_similar_prompts(input_string, json_file, threshold=0.85)}")
+    #print(f"Top: {top_n} results for finding similar prompts:\n{find_similar_prompts(input_string, json_file, top_n=top_n)}")
+    
+    output = find_similar_prompts(input_string, json_file, threshold=threshold)
+
+    # Extract the prompts from the results
+    prompts = [result[0] for result in output]
+
+    # Count the unique prompts
+    prompt_counts = Counter(prompts)
+
+    # Print the counts
+    print(f"Results for finding similar prompts with Cosine Similarity threshold {threshold}:\n {output}")

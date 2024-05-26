@@ -747,21 +747,21 @@
                                 "PatternName": "Restrict",
                                 "ExamplePrompts": [
                                     "John invited Mark to come watch Jurassic Park. Output True or False?",
-                                    "Plese see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
+                                    "Please see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
                             ]
                             },
                             {
                                 "PatternName": "Cloze-Questions",
                                 "ExamplePrompts": [
                                     "John invited Mark to come watch Jurassic _",
-                                    "Plese see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
+                                    "Please see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
                                 ]
                             },
                             {
                                 "PatternName": "Free-Form Questions",
                                 "ExamplePrompts": [
                                     "Where did John invite Mark?",
-                                    "Plese see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
+                                    "Please see 'https://github.com/HazyResearch/ama_prompting' for further details and Python functions to generate prompts."
                                 ]
                             }
                         ]
