@@ -31,6 +31,7 @@ from datetime import datetime
 from openai import AzureOpenAI
 from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
+from collections import Counter
 # endregion
 
 # region Load the environment variables
@@ -93,7 +94,8 @@ def generate_embeddings(text, model=model):  # model = "deployment_name"
 ###############################################
 # Define the function to find similar prompts #
 ###############################################
-def find_similar_prompts(input_string, json_file, top_n=10):
+
+def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
     # Load the JSON data
     with open(json_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -134,10 +136,21 @@ def find_similar_prompts(input_string, json_file, top_n=10):
     # Calculate the cosine similarity between the input string and each prompt
     cosine_similarities = cosine_similarity([input_embedding], embeddings).flatten()
 
-    # Get the indices of the top n most similar prompts
-    top_indices = cosine_similarities.argsort()[:-top_n - 1:-1]
+    # If both top_n and threshold are provided
+    if top_n is not None and threshold is not None:
+        top_indices = cosine_similarities.argsort()[:-top_n - 1:-1]
+        top_indices = [i for i in top_indices if cosine_similarities[i] >= threshold]
+    # If only top_n is provided
+    elif top_n is not None:
+        top_indices = cosine_similarities.argsort()[:-top_n - 1:-1]
+    # If only threshold is provided
+    elif threshold is not None:
+        top_indices = [i for i, similarity in enumerate(cosine_similarities) if similarity >= threshold]
+    # If neither is provided, return all results
+    else:
+        top_indices = range(len(cosine_similarities))
 
-    # Return the top n most similar prompts and their associated information
+    # Return the selected prompts and their associated information
     return [(prompts[i], info[i], cosine_similarities[i]) for i in top_indices]
 
 if __name__ == "__main__":
@@ -150,4 +163,5 @@ if __name__ == "__main__":
     json_file = 'promptpatterns.json'
 
     # endregion
-    print(find_similar_prompts(input_string, json_file))
+    print(find_similar_prompts(input_string, json_file, top_n=10))
+    print(find_similar_prompts(input_string, json_file, threshold=0.85))
