@@ -171,14 +171,29 @@ if __name__ == "__main__":
 
     # endregion
     #print(f"Top: {top_n} results for finding similar prompts:\n{find_similar_prompts(input_string, json_file, top_n=top_n)}")
-    
+    print(f"Results for finding similar prompts with Cosine Similarity threshold {threshold}:\n")
+
     output = find_similar_prompts(input_string, json_file, threshold=threshold)
 
-    # Extract the prompts from the results
-    prompts = [result[0] for result in output]
+    # Extract the style indices from the results
+    style_indices = [result[1][2] for result in output]
 
-    # Count the unique prompts
-    prompt_counts = Counter(prompts)
+    # Extract the paper numbers, prompt patterns, and prompt examples
+    paper_numbers = [index.split('-')[0] for index in style_indices]
+    prompt_patterns = [index.split('-')[2] for index in style_indices]
+    prompt_examples = [index.split('-')[3] for index in style_indices]
+
+    # Count the unique paper numbers, prompt patterns, and prompt examples
+    paper_number_counts = Counter(paper_numbers)
+    prompt_pattern_counts = Counter(prompt_patterns)
+    prompt_example_counts = Counter(prompt_examples)
 
     # Print the counts
-    print(f"Results for finding similar prompts with Cosine Similarity threshold {threshold}:\n {output}")
+    print(f"Unique Paper Numbers: {len(paper_number_counts)}")
+    print(f"Unique Prompt Patterns: {len(prompt_pattern_counts)}")
+    print(f"Unique Prompt Examples: {len(prompt_example_counts)}")
+
+
+    
+
+
