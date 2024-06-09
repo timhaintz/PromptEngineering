@@ -160,7 +160,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = category_definitions.argument
+    input_string = category_definitions.assessment
     json_file = 'promptpatterns.json'
     
     #########################################
