@@ -379,7 +379,7 @@
                     "Jules White"
                 ],
                 "URLReference": "http://www.dre.vanderbilt.edu/~schmidt/PDF/ADA_Europe_Position_Paper.pdf",
-                "datetimeAddedToDB": "0001-01-01T00:00:00.000Z",
+                "datetimeAddedToDB": "2023-07-22T12:30:00.000Z",
                 "CategoriesAndPatterns": [
                     {
                         "PatternCategory": "Prompt Improvement",
@@ -2566,7 +2566,7 @@
                         "PatternCategory": "Question Answering",
                         "PromptPatterns": [
                             {
-                                "PatternName": "API calls",
+                                "PatternName": "QA API calls",
                                 "ExamplePrompts": [
                                     "Your task is to add calls to a Question Answering API to a piece of text. The questions should help you get information required to complete the text. You can call the API by writing \"[QA(question)]\" where \"question\" is the question you want to ask. Here are some examples of API calls:",
                                     "Input: Joe Biden was born in Scranton, Pennsylvania.\nOutput: Joe Biden was born in [QA(\"Where was Joe Biden born?\")] Scranton, [QA(\"In which state is Scranton?\")] Pennsylvania.",
@@ -2579,7 +2579,7 @@
                         "PatternCategory": "Calculator",
                         "PromptPatterns": [
                             {
-                                "PatternName": "API calls",
+                                "PatternName": "Calculator API calls",
                                 "ExamplePrompts": [
                                     "Your task is to add calls to a Calculator API to a piece of text. The calls should help you get information required to complete the text. You can call the API by writing \"[Calculator(expression)]\" where \"expression\" is the expression to be computed. Here are some examples of API calls:",
                                     "Input: The number in the next term is 18 + 12 x 3 = 54.\nOutput: The number in the next term is 18 + 12 x 3 = [Calculator(18 + 12 * 3)] 54.",
@@ -2592,7 +2592,7 @@
                         "PatternCategory": "Wikipedia Search",
                         "PromptPatterns": [
                             {
-                                "PatternName": "API calls",
+                                "PatternName": "Wiki API calls",
                                 "ExamplePrompts": [
                                     "Your task is to complete a given piece of text. You can use a Wikipedia Search API to look up information. You can do so by writing \"[WikiSearch(term)]\" where \"term\" is the search term you want to look up. Here are some examples of API calls:",
                                     "Input: The colors on the flag of Ghana have the following meanings: red is for the blood of martyrs, green for forests, and gold for mineral wealth.\nOutput: The colors on the flag of Ghana have the following meanings: red is for [WikiSearch(\"Ghana flag red meaning\")] the blood of martyrs, green for forests, and gold for mineral wealth.",
@@ -2605,7 +2605,7 @@
                         "PatternCategory": "Machine Translation",
                         "PromptPatterns": [
                             {
-                                "PatternName": "API calls",
+                                "PatternName": "MT API calls",
                                 "ExamplePrompts": [
                                     "Your task is to complete a given piece of text by using a Machine Translation API. You can do so by writing \"[MT(text)]\" where text is the text to be translated into English. Here are some examples:",
                                     "Input: He has published one book: O homem suprimido (\u201cThe Supressed Man\u201d)\nOutput: He has published one book: O homem suprimido [MT(O homem suprimido)] (\u201cThe Supressed Man\u201d)",
@@ -2618,7 +2618,7 @@
                         "PatternCategory": "Calendar",
                         "PromptPatterns": [
                             {
-                                "PatternName": "API calls",
+                                "PatternName": "Calendar API calls",
                                 "ExamplePrompts": [
                                     "Your task is to add calls to a Calendar API to a piece of text. The API calls should help you get information required to complete the text. You can call the API by writing \"[Calendar()]\" Here are some examples of API calls:",
                                     "Input: The store is never open on the weekend, so today it is closed.\nOutput: The store is never open on the weekend, so today [Calendar()] it is closed.",
