@@ -52,10 +52,10 @@ load_dotenv()
 # openai.api_version = "2023-05-15"
 # openai.api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY")
 # model_deployment_name = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
-model = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
-api_version = "2023-05-15"
-api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY") 
-azure_endpoint = os.getenv("AZUREVSAUSEAST_OPENAI_ENDPOINT")
+model = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
+api_version = os.getenv("API_VERSION")
+api_key = os.getenv("AZUREVS_OPENAI_KEY") 
+azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 temperature = 0.0
 
@@ -138,32 +138,46 @@ system_prompt = {
 
 few_shot_prompt = {
     "extractexamples": '''Please find examples of a prompt category, prompt pattern, and prompt example in the following: \n
-    For instance, in sentiment analysis, an example template might be '[X] Overall, it was a [Z] movie.' and for machine translation, the template could be 'English: [X] French: [Z]'. The paper discusses various aspects of prompt engineering including prompt shape, manual and automated template engineering, and considerations for designing prompting methods. Tables and figures within the paper provide organized examples of prompts, such as Table 3 which illustrates input, template, and answer for different tasks, and Table 2 which provides terminology and notation for prompting methods.
+    Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today?
+
+    Q: John found that the average of 15 numbers is 40. If 10 is added to each number then the mean of the numbers is? Answer Choices: (a) 50 (b) 45 (c) 65 (d) 78 (e) 64
+
+    Q: Take the last letters of the words in "Elon Musk" and concatenate them.
     '''
 }
 
 assistant_prompt_response = {
-    "extractexamples":'''
+    "extractexamples": '''
     {
         "CategoriesAndPatterns": [
-            "PatternCategory": "Sentiment Analysis",
-            "PromptPatterns": [
-                {
-                    "PatternName": "Sentiment Analysis Template 1",
-                    "ExamplePrompts": [
-                        "[X] Overall, it was a [Z] movie."
-                    ]
-                }
-            ],
-            "PatternCategory": "Machine Translation",
-            "PromptPatterns": [
-                {
-                    "PatternName": "Machine Translation Template 1",
-                    "ExamplePrompts": [
-                        "English: [X] French: [Z]"
-                    ]
-                }
-            ]
+            {
+                "PatternCategory": "AQuA Dataset",
+                "PromptPatterns": [
+                    {
+                        "PatternName": "Math Word Problems",
+                        "ExamplePrompts": [
+                            "There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today?"
+                        ]
+                    },
+                    {
+                        "PatternName": "Algebraic Word Problems",
+                        "ExamplePrompts": [
+                            "John found that the average of 15 numbers is 40. If 10 is added to each number then the mean of the numbers is? Answer Choices: (a) 50 (b) 45 (c) 65 (d) 78 (e) 64"  
+                        ]
+                    }
+                ]
+            },
+            {
+                "PatternCategory": "Last Letter Concatendation Task",
+                "PromptPatterns": [
+                    {
+                        "PatternName": "Last Letter Concatendation",
+                        "ExamplePrompts": [
+                            "Take the last letters of the words in "Elon Musk" and concatenate them."
+                        ]
+                    }
+                ]
+            }
         ]
     }
     '''
@@ -171,7 +185,7 @@ assistant_prompt_response = {
 
 user_prompt = {
     "extractexamples": '''The following text provides multiple example prompts.
-    Please extract ALL of the prompt categories, patterns and EXAMPLES in F1 Text 1 - F5 Text 5 from the following: \n
+    Please extract ALL of the prompt categories, patterns and EXAMPLES in Table 20 through to Table 30 from the following: \n
     ''',
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
