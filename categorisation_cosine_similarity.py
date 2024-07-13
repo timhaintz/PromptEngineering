@@ -14,9 +14,13 @@ https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/embeddings?tab
 https://learn.microsoft.com/en-us/azure/ai-services/openai/tutorials/embeddings?tabs=command-line
 https://platform.openai.com/docs/guides/embeddings/what-are-embeddings
 HELP:
-1. To find the cosine similarity run the following command:
+1. To find the cosine similarity of the top 5 similar prompts run the following command:
 ```
-python categorisation_cosine_similarity.py
+python categorisation_cosine_similarity.py --top_n 5
+```
+2. To find the cosine similarity of all prompts with a threshold above 0.5 run the following command:
+```
+python categorisation_cosine_similarity.py --threshold 0.5
 ```
 '''
 
@@ -33,6 +37,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
 from collections import Counter
 import category_definitions
+import argparse
 # endregion
 
 # region variables
@@ -51,13 +56,6 @@ azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 ############################
 # Category prompt examples #
 ############################
-# categorising_example = '''Category: CAT (Categorising)
-# PP Name: Insurance Report Generation
-# PE: Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. 
-# Please evaluate the damage seen in the image below. 
-# For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \\"N/A\\" instead).
-#  {\\"make\\": xxx, \\"model\\": xxx, \\"license plate\\": xxx, \\"damage description\\": xxx, \\"estimated cost of repair\\": xxx}
-# '''
 # In Logic section - CAT, CLF, CLU, ERI, INP, REL
 categorising_example = '''Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \\"N/A\\" instead). {\\"make\\": xxx, \\"model\\": xxx, \\"license plate\\": xxx, \\"damage description\\": xxx, \\"estimated cost of repair\\": xxx}'''
 
@@ -70,6 +68,14 @@ error_identification_example = '''From now on, when you generate an answer, crea
 input_semantics_example = '''rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications'''
 
 requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
+
+# At logic section - ASM, CAL
+assessment_example = '''As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria.'''
+
+calculation_example = '''Your task is to add calls to a Calculator API to a piece of text. The calls should help you get information required to complete the text. You can call the API by writing "[Calculator(expression)]" where "expression" is the expression to be computed. Here are some examples of API calls:'''
+
+# Over logic section - SUM
+summarising_example = '''Write a concise summary of the following: {text} CONCISE SUMMARY:'''
 
 # endregion
 
@@ -156,24 +162,49 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
 
 if __name__ == "__main__":
 
-    # region Define the variables
+    # region Define the variables and arguments
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = category_definitions.assessment
+    input_string = summarising_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
-    #########################################
-    # Define the top_n and threshold values #
-    #########################################
-    top_n = 10
-    threshold = 0.2
+    # Create the parser
+    parser = argparse.ArgumentParser(description='Find similar prompts based on cosine similarity.')
+
+    # Add arguments
+    parser.add_argument('--top_n', type=int, help='Number of top results to return', default=None)
+    parser.add_argument('--threshold', type=float, help='Cosine similarity threshold for filtering results', default=0.5)
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Use the arguments
+    top_n = args.top_n
+    threshold = args.threshold
 
     # endregion
-    #print(f"Top: {top_n} results for finding similar prompts:\n{find_similar_prompts(input_string, json_file, top_n=top_n)}")
-    print(f"Results for finding similar prompts with Cosine Similarity threshold {threshold}:\n")
-
-    output = find_similar_prompts(input_string, json_file, threshold=threshold)
+    
+    # Check if top_n is provided and not None
+    if top_n is not None:
+        print(f"Finding a maximum of the top: {top_n} similar prompts:")
+        output = find_similar_prompts(input_string, json_file, top_n=top_n)
+    # Else, check if threshold is provided and not None
+    elif threshold is not None:
+        print(f"Finding similar prompts with Cosine Similarity threshold {threshold}:\n")
+        output = find_similar_prompts(input_string, json_file, threshold=threshold)
+    else:
+        # Handle the case where neither top_n nor threshold is provided
+        print("No top_n or threshold provided. Please specify one of them.")
+        output = None
+    
+    # Print number and details of similar prompts with a new line separation
+    if output is not None:
+        # Process the output
+        for index, item in enumerate(output):
+            print(f"{index}. {item}\n")
+    else:
+        print("No operation performed due to missing parameters.")
 
     # Extract the style indices from the results
     style_indices = [result[1][2] for result in output]
@@ -193,7 +224,6 @@ if __name__ == "__main__":
     print(f"Unique Prompt Patterns: {len(prompt_pattern_counts)}")
     print(f"Unique Prompt Examples: {len(prompt_example_counts)}")
 
-    print(f"\n Displaying the actual results of output to confirm the counts above:\n {output}")
 
 
     

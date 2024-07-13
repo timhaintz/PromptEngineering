@@ -1,6 +1,12 @@
 digraph G {
     rankdir="LR";
     node [shape=box];
+    "PP Taxonomy" -> "Across";
+    "PP Taxonomy" -> "At";
+    "PP Taxonomy" -> "Beyond";
+    "PP Taxonomy" -> "In";
+    "PP Taxonomy" -> "Out";
+    "PP Taxonomy" -> "Over";
     "Across" -> "Argument";
     "Across" -> "Comparison";
     "Across" -> "Contradiction";
