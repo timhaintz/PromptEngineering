@@ -263,6 +263,7 @@ if __name__ == '__main__':
     parser.add_argument('-pages', type=str, help='Specify the page range to process (e.g., 1-10)')
     parser.add_argument('-filename', type=str, help='Specify the file path of the PDF file')
     parser.add_argument('-extractexamples', type=bool, help='Specify whether to extract the Prompt Engineering examples from the PDF file (True/False)')
+    parser.add_argument('-use_few_shot', type=bool, help='Specify whether to use the few shot prompt (True/False)')
     parser.add_argument('-summary', type=bool, help='Specify whether to summarise the PDF file (True/False)')
     parser.add_argument('-keypoints', type=bool, help='Specify whether to extract the keypoints from the PDF file (True/False)')
     parser.add_argument('-prompt', type=str, help='Free text to specify the prompt to use')
@@ -296,7 +297,10 @@ if __name__ == '__main__':
         text = '\f'.join([page['text'] for page in text_set])
         # Generate the OpenAI prompt and cotent depending on the command-line arguments
         if args.extractexamples:
-            openAIInput = generate_OpenAIPromptAndContent(system_prompt["extractexamples"], user_prompt["extractexamples"], text, few_shot_prompt["extractexamples"], assistant_prompt_response["extractexamples"])
+            if args.use_few_shot:
+                openAIInput = generate_OpenAIPromptAndContent(system_prompt["extractexamples"], user_prompt["extractexamples"], text, few_shot_prompt["extractexamples"], assistant_prompt_response["extractexamples"])
+            else:
+                openAIInput = generate_OpenAIPromptAndContent(system_prompt["extractexamples"], user_prompt["extractexamples"], text)
         elif args.summary:
             openAIInput = generate_OpenAIPromptAndContent(system_prompt["summary"], user_prompt["summary"], text)
         elif args.keypoints:
