@@ -21,6 +21,8 @@ python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10
 
 python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -extractexamples True
 
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -extractexamples True -use_few_shot True
+
 python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -summary True
 
 python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -keypoints True
@@ -184,8 +186,8 @@ assistant_prompt_response = {
 }
 
 user_prompt = {
-    "extractexamples": '''The following text provides multiple example prompts.
-    Please extract ALL of the prompt categories, patterns and EXAMPLES in Table 20 through to Table 30 from the following: \n
+    "extractexamples": '''Please extract all of the text after Prompt: Do not collect the GPT-4: and ChatGPT: text.
+    Please extract the prompt categories and prompt patterns. Extract from the follow text: \n
     ''',
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
