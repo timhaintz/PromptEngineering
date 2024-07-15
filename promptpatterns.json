@@ -5010,6 +5010,73 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":33,
+                "Title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+                "APAReference": "Koralus, P., & Wang-Maścianica, V. (2023). Humans in humans out: On gpt converging toward common sense in both success and failure. arXiv preprint arXiv:2303.17276.",
+                "Authors":[
+                    "Philipp Koralus",
+                    "Vincent Wang-Ma' scianica"
+                ],
+                "URLReference": "https://arxiv.org/abs/2303.17276",
+                "datetimeAddedToDB": "2024-07-15T08:43:01.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Reasoning patterns in GPT with the ETR61 benchmark",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Additional examples beyond ETR61",
+                                "ExamplePrompts": [
+                                    "You have a hand of several cards. There is at least an ace and a queen in the hand or at least a king and a jack. There is an ace in the hand. What if anything follows?",
+                                    "Some blue cards are textured. All square cards are blue. What if anything follows?",
+                                    "There are several cards on the table, which have a letter on one side and a number on the other side. One card shows an E, one card shows a C, one card shows a 4, and one card shows a 5. Which cards do you have to turn over to determine if the following statement is true? If a card has an E on one side then it has a four on the other side.",
+                                    "[Abbreviated] Linda is thirty-one years old. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice. Please rank order by probability (highest to lowest) the following: Linda is a bank teller. Linda is a bank teller and is active in the feminist movement.",
+                                    "Which of the following subscription would you be most likely to purchase. 1. Economist.com subscription - US $59.00. One-year subscription to Economist.com. Includes online access to all articles from The Economist since 1997. [2. Print subscription - US $ 125.00. One-year subscription to the print edition of The Economist.] 3. Print & web subscription - US $125.00. One-year subscription to the print edition of The Economist and online access to all articles from The Economist since 1997."
+                                ]
+                            },
+                            {
+                                "PatternName": "Dynamics of Reasoning",
+                                "ExamplePrompts": [
+                                    "Either Jane is kneeling by the fire and she is looking at the TV or else Mark is standing at the window and he is peering into the garden. Jane is kneeling by the fire. What if anything follows?",
+                                    "There is an ace and a queen, or else a king and a ten. There is a king. What if anything follows?",
+                                    "There is a king. There is an ace and a queen, or else a king and a ten. What if anything follows?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompt engineering to mitigate fallacies",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Additional examples beyond ETR61 - Reason step-by-step",
+                                "ExamplePrompts": [
+                                    "Reason step-by-step for the following problem. You have a hand of several cards. There is at least an ace and a queen in the hand or at least a king and a jack. There is an ace in the hand. What if anything follows?",
+                                    "Reason step-by-step for the following problem. Some blue cards are textured. All square cards are blue. What if anything follows?",
+                                    "Reason step-by-step for the following problem. There are several cards on the table, which have a letter on one side and a number on the other side. One card shows an E, one card shows a C, one card shows a 4, and one card shows a 5. Which cards do you have to turn over to determine if the following statement is true? If a card has an E on one side then it has a four on the other side.",
+                                    "Reason step-by-step for the following problem. [Abbreviated] Linda is thirty-one years old. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice. Please rank order by probability (highest to lowest) the following: Linda is a bank teller. Linda is a bank teller and is active in the feminist movement.",
+                                    "Reason step-by-step for the following problem. Which of the following subscription would you be most likely to purchase. 1. Economist.com subscription - US $59.00. One-year subscription to Economist.com. Includes online access to all articles from The Economist since 1997. [2. Print subscription - US $ 125.00. One-year subscription to the print edition of The Economist.] 3. Print & web subscription - US $125.00. One-year subscription to the print edition of The Economist and online access to all articles from The Economist since 1997.",
+                                    "Reason step-by-step for the following problem. Either Jane is kneeling by the fire and she is looking at the TV or else Mark is standing at the window and he is peering into the garden. Jane is kneeling by the fire. What if anything follows?",
+                                    "Reason step-by-step for the following problem. There is an ace and a queen, or else a king and a ten. There is a king. What if anything follows?",
+                                    "Reason step-by-step for the following problem. There is a king. There is an ace and a queen, or else a king and a ten. What if anything follows?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Premise-Question Reasoning",
+                                "ExamplePrompts": [
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. You have a hand of several cards. There is at least an ace and a queen in the hand or at least a king and a jack. There is an ace in the hand. What if anything follows?",
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. Some blue cards are textured. All square cards are blue. What if anything follows?",
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. There are several cards on the table, which have a letter on one side and a number on the other side. One card shows an E, one card shows a C, one card shows a 4, and one card shows a 5. Which cards do you have to turn over to determine if the following statement is true? If a card has an E on one side then it has a four on the other side.",
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. [Abbreviated] Linda is thirty-one years old. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice. Please rank order by probability (highest to lowest) the following: Linda is a bank teller. Linda is a bank teller and is active in the feminist movement.",
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. Which of the following subscription would you be most likely to purchase. 1. Economist.com subscription - US $59.00. One-year subscription to Economist.com. Includes online access to all articles from The Economist since 1997. [2. Print subscription - US $ 125.00. One-year subscription to the print edition of The Economist.] 3. Print & web subscription - US $125.00. One-year subscription to the print edition of The Economist and online access to all articles from The Economist since 1997.",
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. Either Jane is kneeling by the fire and she is looking at the TV or else Mark is standing at the window and he is peering into the garden. Jane is kneeling by the fire. What if anything follows?",
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. There is an ace and a queen, or else a king and a ten. There is a king. What if anything follows?",
+                                    "Answer the following question according to this procedure: First, list the premises. Second, turn each premise into a question to make a new list of questions; treat questions as possible alternatives. Third, reason step-by-step using both lists, keeping track of alternatives. There is a king. There is an ace and a queen, or else a king and a ten. What if anything follows?"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

@@ -70,7 +70,7 @@ system_prompt = {
     "extractexamples": '''# INSTRUCTIONS
     You are a PhD student collecting prompt engineering examples from research papers.
     ONLY use the provided input text to extract the examples.
-    Check the input data twice to conifrm all the prompt examples are complete and correct before providing the output.
+    Reflect on the input data to conifrm all the prompt examples are complete and correct before providing the output.
     OUTPUT
     {
         "CategoriesAndPatterns": [
@@ -186,8 +186,7 @@ assistant_prompt_response = {
 }
 
 user_prompt = {
-    "extractexamples": '''Please extract all of the text after Prompt: Do not collect the GPT-4: and ChatGPT: text.
-    Please extract the prompt categories and prompt patterns. Extract from the follow text: \n
+    "extractexamples": '''Please extract the prompt categories and prompt patterns from the follow text: \n
     ''',
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
