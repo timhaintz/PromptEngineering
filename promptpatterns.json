@@ -5214,6 +5214,40 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":36,
+                "Title": "Conversing with Copilot: Exploring Prompt Engineering for Solving CS1 Problems Using Natural Language",
+                "APAReference": "Denny, P., Kumar, V., & Giacaman, N. (2023, March). Conversing with copilot: Exploring prompt engineering for solving cs1 problems using natural language. In Proceedings of the 54th ACM Technical Symposium on Computer Science Education V. 1 (pp. 1136-1142).",
+                "Authors":[
+                    "Paul Denny",
+                    "Viraj Kumar",
+                    "Nasser Giacaman"
+                ],
+                "URLReference": "https://dl.acm.org/doi/abs/10.1145/3545945.3569823",
+                "datetimeAddedToDB": "2024-07-20T05:17:43.984Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "String and Array Manipulation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "String Manipulation",
+                                "ExamplePrompts": [
+                                    "# Given a list of strings and a string s, return the average length of all strings containing s.",
+                                    "# Given a list of strings and a string s, return the average length of all strings containing s. # Count the number of strings that contain s # Also, sum the length of all strings containing s # Finally, divide the total length by the count",
+                                    "# Given a string, return the string with the first half and the second half doubled. For example, Java becomes JaJavava and Hello becomes HelHellolo. If the length is odd, like Hello, consider the middle character as part of the first half. If the string is less than 2 characters long, return the original string."
+                                    
+                                ]
+                            },
+                            {
+                                "PatternName": "Array Manipulation",
+                                "ExamplePrompts": [
+                                    "# Given a two-dimensional array of integers, shift each row by one to the right and put a 0 at the leftmost column. The rightmost column is lost. Then return the updated array."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
