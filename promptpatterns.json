@@ -5157,6 +5157,63 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":35,
+                "Title": "Design Guidelines for Prompt Engineering Text-to-Image Generative Models",
+                "APAReference": "Liu, V., & Chilton, L. B. (2022, April). Design guidelines for prompt engineering text-to-image generative models. In Proceedings of the 2022 CHI conference on human factors in computing systems (pp. 1-23).",
+                "Authors":[
+                    "Vivian Liu",
+                    "Lydia B. Chilton"
+                ],
+                "URLReference": "https://dl.acm.org/doi/abs/10.1145/3491102.3501825",
+                "datetimeAddedToDB": "2024-07-20T04:39:17.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Prompt Parameters",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Subject and Style Keywords",
+                                "ExamplePrompts": [
+                                    "A MEDIUM of SUBJECT in the STYLE style",
+                                    "A STYLE MEDIUM of a SUBJECT",
+                                    "SUBJECT STYLE",
+                                    "SUBJECT. STYLE",
+                                    "SUBJECT in the style of STYLE",
+                                    "SUBJECT in the STYLE style",
+                                    "SUBJECT VERB in the STYLE style",
+                                    "SUBJECT made/done/verb in the STYLE style",
+                                    "SUBJECT made/done/verb in the STYLE art style",
+                                    "SUBJECT with a STYLE style"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Style Keywords",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Breadth of Styles",
+                                "ExamplePrompts": [
+                                    "Generate images using styles: Cubist, Islamic geometric art, Surrealism, action painting, Ukiyo-e, ancient Egyptian art, High Renaissance, Impressionism, cyberpunk, unreal engine, Disney, VSCO",
+                                    "Generate images using styles: photorealism, Studio Ghibli, Neoclassicism, African mask, thangka, fractal, Hippie movement, ancient Egyptian, art deco, unreal engine, Disney, cartoon, Pop art, VSCO, Futurism, 3D render, Pointillism, sketch, Surrealism, Andean textile, Aboriginal art, Ukiyo-e, High Renaissance, Mayan, grafti, Cubism, Impressionism, Baroque, Op art, cyberpunk, and painting"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Subject and Style Interaction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Abstract and Concrete Subjects",
+                                "ExamplePrompts": [
+                                    "Generate images using subjects: love, hate, happiness, sadness, man, woman, tree, river, dog, cat, ocean, forest",
+                                    "Generate images using subjects: progress, relaxation, loyalty, compassion, beauty, pain, dream, thought, trust, freedom, chaos, success, courage, happiness, nostalgia, intelligence, kindness, time, concern, sadness, reality, serenity, fear, victory, happiness, alien, car, house, apple, singing, dancing, sleeping, mountain, rain, ocean, forest, flower, fish, bird, snake, boy, woman, eye, computer, website, universe, reflection"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
