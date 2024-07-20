@@ -5077,6 +5077,86 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":34,
+                "Title": "Prompt Engineering with ChatGPT: A Guide for Academic Writers",
+                "APAReference": "Giray, L. (2023). Prompt engineering with ChatGPT: a guide for academic writers. Annals of biomedical engineering, 51(12), 2629-2633.",
+                "Authors":[
+                    "Louie Giray"
+                ],
+                "URLReference": "https://link.springer.com/article/10.1007/s10439-023-03272-4",
+                "datetimeAddedToDB": "2024-07-20T03:49:28.874Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Prompt Elements",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Instruction",
+                                "ExamplePrompts": [
+                                    "Write an essay discussing the role of nanotechnology in targeted drug delivery for cancer treatment."
+                                ]
+                            },
+                            {
+                                "PatternName": "Context",
+                                "ExamplePrompts": [
+                                    "Explore the applications of nanotechnology in biomedical engineering, focusing on its potential to improve the effectiveness and safety of cancer treatments through targeted drug delivery systems."
+                                ]
+                            },
+                            {
+                                "PatternName": "Input Data",
+                                "ExamplePrompts": [
+                                    "Provide an overview of nanotechnology-based drug delivery systems, such as nanoparticles or nanocarriers, and their ability to selectively deliver anticancer drugs to tumor sites. Discuss the advantages, challenges, and potential future advancements in this field."
+                                ]
+                            },
+                            {
+                                "PatternName": "Output Indicator",
+                                "ExamplePrompts": [
+                                    "Please present your findings in a well-structured essay format, including an introduction, main body paragraphs covering key aspects of nanotechnology in drug delivery, and a conclusion. Aim for approximately 1500 words."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompting Techniques",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Instructive Prompt",
+                                "ExamplePrompts": [
+                                    "Write a comparative analysis of the advantages and limitations of different imaging modalities used in medical diagnostics.",
+                                    "Summarize the recent advancements in tissue engineering for organ regeneration, highlighting their potential applications in biomedical engineering."
+                                ]
+                            },
+                            {
+                                "PatternName": "System Prompt",
+                                "ExamplePrompts": [
+                                    "In the field of biomedical engineering, the use of nanomaterials has revolutionized...",
+                                    "The emerging field of bioinformatics has greatly contributed to..."
+                                ]
+                            },
+                            {
+                                "PatternName": "Question-Answer Prompt",
+                                "ExamplePrompts": [
+                                    "What are the key challenges in developing personalized medical devices for patient-specific applications in biomedical engineering?",
+                                    "Discuss the role of biomaterials in tissue engineering and their potential impact on regenerative medicine."
+                                ]
+                            },
+                            {
+                                "PatternName": "Contextual Prompt",
+                                "ExamplePrompts": [
+                                    "Considering the current advancements in neuroprosthetics, analyze the ethical implications and social impact of these technologies.",
+                                    "Given recent studies on drug delivery systems, critically evaluate the effectiveness and safety of targeted drug delivery approaches in cancer treatment."
+                                ]
+                            },
+                            {
+                                "PatternName": "Mixed Prompt",
+                                "ExamplePrompts": [
+                                    "Given the following case study on the application of tissue engineering in cartilage regeneration, discuss the challenges faced in achieving long-term functional outcomes and propose potential strategies for improving clinical translation."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
