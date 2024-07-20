@@ -38,6 +38,7 @@ from dotenv import load_dotenv
 from collections import Counter
 import category_definitions
 import argparse
+import re
 # endregion
 
 # region variables
@@ -202,7 +203,29 @@ if __name__ == "__main__":
     if output is not None:
         # Process the output
         for index, item in enumerate(output):
-            print(f"{index}. {item}\n")
+            # Extracting parts
+            prompt_example, (prompt_pattern, authors_and_title, pe_index), cosine_similarity = item
+
+            # Use regex to split at the year, assuming the format "(Year)."
+            match = re.search(r'\((\d{4})\)\.', authors_and_title)
+            if match:
+                # Split the string at the position right after the year and period
+                split_pos = match.end()
+                authors = authors_and_title[:split_pos].strip()
+                title = authors_and_title[split_pos:].strip()
+            else:
+                # Fallback if the year pattern is not found
+                authors = authors_and_title  # Assuming the entire string is authors if no year is found
+                title = "Title not found"
+
+            print(f"{index}.")
+            # Printing extracted parts
+            print(f"PromptExample: {prompt_example}")
+            print(f"PromptPattern: {prompt_pattern}")
+            print(f"Authors: {authors}")
+            print(f"Title: {title.strip()}")
+            print(f"PE  & Index: {pe_index}")
+            print(f"CosineSimilarity: {cosine_similarity}\n\n")
     else:
         print("No operation performed due to missing parameters.")
 
