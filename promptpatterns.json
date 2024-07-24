@@ -5606,6 +5606,47 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":42,
+                "Title": "The Benefits of a Concise Chain of Thought on Problem-Solving in Large Language Models",
+                "APAReference": "Renze, M., & Guven, E. (2024). The Benefits of a Concise Chain of Thought on Problem-Solving in Large Language Models. arXiv preprint arXiv:2401.05618.",
+                "Authors":[
+                    "Matthew Renze",
+                    "Erhan Guven"
+                ],
+                "URLReference": "https://arxiv.org/abs/2401.05618",
+                "datetimeAddedToDB": "2024-07-24T08:35:52.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Answer-Only Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Answer-Only Prompt",
+                                "ExamplePrompts": [
+                                    "You are an intelligent assistant. Your task is to answer the following multiple-choice questions. You MUST answer the question using the following format 'Action: Answer(\"[choice]\")'. The parameter [choice] is the letter or number of the answer you want to select (e.g. \"A\", \"B\", \"C\", or \"D\"). For example, 'Answer(\"C\")' will select choice \"C\" as the best answer. You MUST select one of the available choices; the answer CANNOT be \"None of the Above\"."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Chain-of-Thought (CoT) Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Verbose CoT Prompt",
+                                "ExamplePrompts": [
+                                    "You are an intelligent assistant. Your task is to answer the following multiple-choice questions. Think step-by-step through the problem to ensure you have the correct answer. Then, answer the question using the following format 'Action: Answer(\"[choice]\")'. The parameter [choice] is the letter or number of the answer you want to select (e.g. \"A\", \"B\", \"C\", or \"D\"). For example, 'Answer(\"C\")' will select choice \"C\" as the best answer. You MUST select one of the available choices; the answer CANNOT be \"None of the Above\"."
+                                ]
+                            },
+                            {
+                                "PatternName": "Concise CoT Prompt",
+                                "ExamplePrompts": [
+                                    "You are an intelligent assistant. Your task is to answer the following multiple-choice questions. Think step-by-step through the problem to ensure you have the correct answer. Then, answer the question using the following format 'Action: Answer(\"[choice]\")'. The parameter [choice] is the letter or number of the answer you want to select (e.g. \"A\", \"B\", \"C\", or \"D\"). For example, 'Answer(\"C\")' will select choice \"C\" as the best answer. You MUST select one of the available choices; the answer CANNOT be \"None of the Above\". Be concise."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
