@@ -5795,6 +5795,106 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":44,
+                "Title": "TravelPlanner: A Benchmark for Real-World Planning with Language Agents",
+                "APAReference": "Xie, J., Zhang, K., Chen, J., Zhu, T., Lou, R., Tian, Y., ... & Su, Y. (2024). Travelplanner: A benchmark for real-world planning with language agents. arXiv preprint arXiv:2402.01622.",
+                "Authors":[
+                    "Jian Xie",
+                    "Kai Zhang",
+                    "Jiangjie Chen",
+                    "Tinghui Zhu",
+                    "Renze Lou",
+                    "Yuandong Tian",
+                    "Yanghua Xiao",
+                    "Yu Su"
+                ],
+                "URLReference": "https://arxiv.org/abs/2402.01622",
+                "datetimeAddedToDB": "2024-07-26T23:59:34.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Interaction with Environment",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "User Query",
+                                "ExamplePrompts": [
+                                    "I'm going from Seattle to California from November 6 to 10, 2023. I have a budget of $6,000. For lodging, I prefer an entire room and the accommodations must be pet-friendly."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Tool-use",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Action and Observation",
+                                "ExamplePrompts": [
+                                    "Please plan a travel itinerary for me. I'm departing from Cincinnati and heading to Norfolk for three days. The dates of travel are from March 10th to March 12th, 2022. I have a budget of $1,400 for this trip."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Direct",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Direct Planning",
+                                "ExamplePrompts": [
+                                    "Please create a travel itinerary for a solo traveler departing from Jacksonville and heading to Los Angeles for a period of 3 days, from March 25th to March 27th, 2022. The budget for this trip is now set at $2,400."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Reflexion",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Reflective Planning",
+                                "ExamplePrompts": [
+                                    "Can you help construct a travel plan that begins in Philadelphia and includes visits to 3 cities in Virginia? The trip duration is for 7 days, from March 15th to March 21st, 2022, with a total budget of $1,800."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Travel Itinerary Planning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Short Trip Planning",
+                                "ExamplePrompts": [
+                                    "Please draw up a 3-day travel itinerary for one person, beginning in Oakland and heading to Tucson from March 15th to March 17th, 2022, with a budget of $1,400.",
+                                    "Please curate a 3-day travel plan for a solo traveler from Tulsa to Houston from March 23rd to March 25th, 2022, with a total travel budget of $1,000.",
+                                    "Can you help put together a 3-day travel plan for a group of 3, leaving from Daytona Beach and heading to Atlanta from March 2nd to March 4th, 2022? We have a budget of $2,100. We require accommodations that allow children under 10 years of age, and we prefer having entire rooms to ourselves. Please note, we cannot utilize flights for transportation on this trip.",
+                                    "Please create a travel plan for a 3-day trip from Missoula to Dallas scheduled from March 23rd to March 25th, 2022. The budget for this trip is set at $1,900."
+                                ]
+                            },
+                            {
+                                "PatternName": "Medium Trip Planning",
+                                "ExamplePrompts": [
+                                    "Can you create a 5-day travel plan for 2 people departing from Syracuse to visit 2 cities in Georgia? We are planning to travel from March 16th to March 20th, 2022. Our budget is approximately $2,000. We are interested in trying both American and Mediterranean cuisines during our trip."
+                                ]
+                            },
+                            {
+                                "PatternName": "Long Trip Planning",
+                                "ExamplePrompts": [
+                                    "Could you help develop a week-long travel itinerary suitable for a group of 6 people, departing from Baton Rouge and planning to visit 3 different cities in Texas? The travel dates are set from March 17th to March 23rd, 2022. Our travel budget has been adjusted to $14,600. Bearing in mind that we have children under ten years old, our accommodations need to allow young children and we prefer to occupy entire rooms. We also prefer not to self-drive during this trip."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Cost Optimization",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Budget Adjustment",
+                                "ExamplePrompts": [
+                                    "Please assist in crafting a travel plan for a solo traveller, journeying from Detroit to San Diego for 3 days, from March 5th to March 7th, 2022. The travel plan should accommodate a total budget of $3,000."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
