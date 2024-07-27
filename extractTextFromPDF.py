@@ -186,7 +186,7 @@ assistant_prompt_response = {
 }
 
 user_prompt = {
-    "extractexamples": '''Please extract input prompts from Sentiment, Lexical, Style and Format  \nPlease extract the prompt categories and prompt patterns from the follow text: \n
+    "extractexamples": '''nPlease extract the prompt categories and prompt patterns from the follow text: \n
     ''',
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
