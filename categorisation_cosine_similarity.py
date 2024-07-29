@@ -167,7 +167,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = categorising_example # category_definitions.summarising
+    input_string = category_definitions.summarising # categorising_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser

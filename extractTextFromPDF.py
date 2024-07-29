@@ -130,11 +130,10 @@ system_prompt = {
     ONLY use the provided input text to answer the question.
     Check the input data twice to conifrm the answers are complete and correct before providing the output.
     Please answer the question asked.
-    OUTPUT
-    {
+    ###OUTPUT###
         "Title": "<TITLE OF THE PAPER>",
         "Answer": "This is an example answer."
-    }
+    ### END OUTPUT###
     '''
 }
 
@@ -186,7 +185,7 @@ assistant_prompt_response = {
 }
 
 user_prompt = {
-    "extractexamples": '''nPlease extract the prompt categories and prompt patterns from the follow text: \n
+    "extractexamples": '''Please extract the prompt categories and prompt patterns from the follow text: \n
     ''',
     "summary": '''Please summarise the following paper:''',
     "keypoints": '''Please extract the keypoints from the following paper:
