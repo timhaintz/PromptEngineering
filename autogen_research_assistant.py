@@ -45,6 +45,7 @@ gpt35 = llm_config['config_list'][1]
 gpt4_vision = llm_config['config_list'][2]
 text_embedding_3_large = llm_config['config_list'][3]
 text_embedding_ada_002 = llm_config['config_list'][4]
+gpt4o = llm_config['config_list'][5]
 
 # region import DATA
 ###############
