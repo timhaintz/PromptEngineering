@@ -28,6 +28,8 @@ python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -summary True
 python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -keypoints True
 
 python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -prompt "ENTER YOUR QUESTION HERE"
+
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -prompt "ENTER YOUR QUESTION HERE" -printtoscreen True
 '''
 #Note: The openai-python library support for Azure OpenAI is in preview.
 from dotenv import load_dotenv
@@ -128,7 +130,7 @@ system_prompt = {
     "prompt": '''# INSTRUCTIONS
     You are a PhD student reading research papers.
     ONLY use the provided input text to answer the question.
-    Check the input data twice to conifrm the answers are complete and correct before providing the output.
+    Break down the task into parts using Chain-Of-Thought Prompt Engineering techniques.
     Please answer the question asked.
     ###OUTPUT###
         "Title": "<TITLE OF THE PAPER>",
@@ -267,6 +269,7 @@ if __name__ == '__main__':
     parser.add_argument('-summary', type=bool, help='Specify whether to summarise the PDF file (True/False)')
     parser.add_argument('-keypoints', type=bool, help='Specify whether to extract the keypoints from the PDF file (True/False)')
     parser.add_argument('-prompt', type=str, help='Free text to specify the prompt to use')
+    parser.add_argument('-printtoscreen', type=bool, help='Specify whether to print the output to the screen (True/False)')
     args = parser.parse_args()
 
     # Get the file path from the command line arguments
@@ -350,4 +353,8 @@ if __name__ == '__main__':
         print(f'Saving extracted prompt patterns to {save_file_path}')
         with open(save_file_path, 'w') as f:
             json.dump(response_json, f, indent=4)
+        
+        # Print to screen if the argument is set to True
+        if args.printtoscreen:
+            print(json.dumps(response_json, indent=4))
         

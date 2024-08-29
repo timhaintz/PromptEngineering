@@ -1,0 +1,8 @@
+pydot
+pdfminer.six
+scikit-learn
+numpy
+pandas
+python-dotenv
+openai
+graphviz

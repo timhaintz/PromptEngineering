@@ -58,7 +58,7 @@ azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 # Category prompt examples #
 ############################
 # In Logic section - CAT, CLF, CLU, ERI, INP, REL
-categorising_example = '''Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below. For filing the incident report, please follow the following format in JSON (note xxx is placeholder, if the information is not available in the image, put \\"N/A\\" instead). {\\"make\\": xxx, \\"model\\": xxx, \\"license plate\\": xxx, \\"damage description\\": xxx, \\"estimated cost of repair\\": xxx}'''
+categorising_example = '''Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below.'''
 
 classification_example = '''Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed.'''
 
@@ -167,7 +167,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = category_definitions.summarising # categorising_example # category_definitions.summarising
+    input_string = categorising_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
