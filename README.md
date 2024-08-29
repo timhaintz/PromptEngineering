@@ -75,44 +75,44 @@ This repository contains a collection of Python scripts and tools designed for v
 
 ### Export Prompt Patterns from JSON File
 
-    To export and count the prompt patterns from the `promptpatterns.json` JSON file, use the `exportPromptPatternsJSONfile.py` script. Below are some example usages:
+To export and count the prompt patterns from the `promptpatterns.json` JSON file, use the `exportPromptPatternsJSONfile.py` script. Below are some example usages:
 
-    1. **Print the prompt patterns to the console:**
-    This will print the prompt patterns to the console in a formatted way.
+1. **Print the prompt patterns to the console:**
+This will print the prompt patterns to the console in a formatted way.
 
-    ```sh
-    python exportPromptPatternsJSONfile.py --format console
-    ``` 
+```sh
+python exportPromptPatternsJSONfile.py --format console
+``` 
 
-    2. **Write the prompt patterns to an HTML file with the default filename `promptpatterns.html`:**
+2. **Write the prompt patterns to an HTML file with the default filename `promptpatterns.html`:**
 
-    This will write the prompt patterns to an HTML file called `promptpatterns.html` in the same directory as the script.
+This will write the prompt patterns to an HTML file called `promptpatterns.html` in the same directory as the script.
 
-    ```sh
-    python exportPromptPatternsJSONfile.py --format html
-    ```
+```sh
+python exportPromptPatternsJSONfile.py --format html
+```
 
-    3. **Write the prompt patterns to an HTML file with a custom filename:**
-    This will write the prompt patterns to an HTML file called `mypromptpatterns.html` in the same directory as the script.
+3. **Write the prompt patterns to an HTML file with a custom filename:**
+This will write the prompt patterns to an HTML file called `mypromptpatterns.html` in the same directory as the script.
 
-    ```sh
-    python exportPromptPatternsJSONfile.py --format html --filename mypromptpatterns.html
-    ```
+```sh
+python exportPromptPatternsJSONfile.py --format html --filename mypromptpatterns.html
+```
 
-    4. **Include the current date in the filename of the HTML file:**
-    This will write the prompt patterns to an HTML file with a filename that includes the current date in the format `promptpatterns_YYYYmmdd.html`.
+4. **Include the current date in the filename of the HTML file:**
+This will write the prompt patterns to an HTML file with a filename that includes the current date in the format `promptpatterns_YYYYmmdd.html`.
 
-    ```sh
-    python exportPromptPatternsJSONfile.py --format html --filename promptpatterns_{date}.html
-    ```
+```sh
+python exportPromptPatternsJSONfile.py --format html --filename promptpatterns_{date}.html
+```
 
-    5. **Count the number of Titles, PatternCategory, and pattern name:**
+5. **Count the number of Titles, PatternCategory, and pattern name:**
 
-    This will count the number of Titles, PatternCategory, and pattern name and output it to the console.
+This will count the number of Titles, PatternCategory, and pattern name and output it to the console.
 
-    ```sh
-    python exportPromptPatternsJSONfile.py --count
-    ```
+```sh
+python exportPromptPatternsJSONfile.py --count
+```
 
 ## Contributing
 
