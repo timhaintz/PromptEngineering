@@ -1,7 +1,7 @@
 # PromptEngineering4Cybersecurity
 Prompt Engineering for Cybersecurity
 
-This repository contains a collection of Python scripts and tools designed for various tasks related to text extraction, categorization, and prompt engineering. The main functionalities include extracting text from PDFs, categorizing text using cosine similarity, and generating and testing prompts for AI models.
+This repository contains a collection of Python scripts and tools designed for various tasks related to text extraction, categorisation, and prompt engineering. The main functionalities include a JSON database of research papers with Prompt Patterns (PPs) and Prompt Examples (PEs) extracted, extracting text from PDFs, categorizing text using cosine similarity, and generating and testing prompts for AI models.
 
 ## Table of Contents
 
@@ -73,34 +73,35 @@ This repository contains a collection of Python scripts and tools designed for v
     python vision_testPrompts.py
     ```
 
-### Export Prompt Patterns from JSON File
+### Export PPs and PEs from the JSON File
 
-To export and count the prompt patterns from the `promptpatterns.json` JSON file, use the `exportPromptPatternsJSONfile.py` script. Below are some example usages:
+To export and count the PPs and PEs from the `promptpatterns.json` JSON file, use the `exportPromptPatternsJSONfile.py` script.
+Below are some example usages:
 
-1. **Print the prompt patterns to the console:**
-This will print the prompt patterns to the console in a formatted way.
+1. **Print the PPs and PEs to the console:**
+This will print the PPs and PEs to the console in a formatted way.
 
 ```sh
 python exportPromptPatternsJSONfile.py --format console
 ``` 
 
-2. **Write the prompt patterns to an HTML file with the default filename `promptpatterns.html`:**
+2. **Write the PPs and PEs to an HTML file with the default filename `promptpatterns.html`:**
 
-This will write the prompt patterns to an HTML file called `promptpatterns.html` in the same directory as the script.
+This will write the PPs and PEs to an HTML file called `promptpatterns.html` in the same directory as the script.
 
 ```sh
 python exportPromptPatternsJSONfile.py --format html
 ```
 
-3. **Write the prompt patterns to an HTML file with a custom filename:**
-This will write the prompt patterns to an HTML file called `mypromptpatterns.html` in the same directory as the script.
+3. **Write the PPs and PEs to an HTML file with a custom filename:**
+This will write the PPs and PEs to an HTML file called `mypromptpatterns.html` in the same directory as the script.
 
 ```sh
 python exportPromptPatternsJSONfile.py --format html --filename mypromptpatterns.html
 ```
 
 4. **Include the current date in the filename of the HTML file:**
-This will write the prompt patterns to an HTML file with a filename that includes the current date in the format `promptpatterns_YYYYmmdd.html`.
+This will write the PPs and PEs to an HTML file with a filename that includes the current date in the format `promptpatterns_YYYYmmdd.html`.
 
 ```sh
 python exportPromptPatternsJSONfile.py --format html --filename promptpatterns_{date}.html
