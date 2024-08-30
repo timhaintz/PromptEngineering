@@ -47,7 +47,7 @@ pip install -r requirements.txt
 
 ### Extract Text from PDF
 
-To extract text from a PDF file, use the `extractTextFromPDF.py` script. Below are some example usages:
+To extract text from a PDF file, use the `extractTextFromPDF.py` script. Below are some examples:
 
 ```sh
 python extractTextFromPDF.py -filename "Test.pdf"
@@ -59,7 +59,7 @@ python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -keypoints True
 
 ### Categorise Text Using Cosine Similarity
 
-To categorise text using cosine similarity, use the categorisation_cosine_similarity.py script:
+To categorise text using Cosine Similarity, use the categorisation_cosine_similarity.py script:
 
 ```sh
 python categorisation_cosine_similarity.py --threshold 0.5
