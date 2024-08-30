@@ -47,7 +47,7 @@ This repository contains a collection of Python scripts and tools designed for v
 
 ### Extract Text from PDF
 
-    To extract text from a PDF file, use the `extractTextFromPDF.py` script. Below are some example usages:
+To extract text from a PDF file, use the `extractTextFromPDF.py` script. Below are some example usages:
 
     ```sh
     python extractTextFromPDF.py -filename "Test.pdf"
