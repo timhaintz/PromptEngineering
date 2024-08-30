@@ -1,7 +1,7 @@
 # PromptEngineering4Cybersecurity
 Prompt Engineering for Cybersecurity
 
-This repository contains a collection of Python scripts and tools designed for various tasks related to text extraction, categorisation, and prompt engineering. The main functionalities include a JSON database of research papers with Prompt Patterns (PPs) and Prompt Examples (PEs) extracted, extracting text from PDFs, categorizing text using cosine similarity, and generating and testing prompts for AI models.
+This repository contains a collection of Python scripts and tools designed for various tasks related to text extraction, categorisation, and prompt engineering. The main functionalities include a JSON database of research papers with Prompt Patterns (PPs) and Prompt Examples (PEs) extracted, extracting text from PDFs, categorising text using Cosine Similarity, and generating and testing prompts for AI models.
 
 ## Table of Contents
 
