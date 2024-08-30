@@ -37,10 +37,10 @@ This repository contains a collection of Python scripts and tools designed for v
 4. Set up environment variables by creating a `.env` file in the root directory and adding the necessary keys:
 
     ```env
-    AZUREVS_OPENAI_GPT4o_MODEL=<your-model>
+    AZURE_OPENAI_MODEL=<your-model>
     API_VERSION=<your-api-version>
-    AZUREVS_OPENAI_KEY=<your-api-key>
-    AZUREVS_OPENAI_ENDPOINT=<your-endpoint>
+    AZURE_OPENAI_KEY=<your-api-key>
+    AZURE_OPENAI_ENDPOINT=<your-endpoint>
     ```
 
 ## Usage
