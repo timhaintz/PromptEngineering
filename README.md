@@ -8,7 +8,7 @@ This repository contains a collection of Python scripts and tools designed for v
 - [Installation](#installation)
 - [Usage](#usage)
   - [Extract Text from PDF](#extract-text-from-pdf)
-  - [Categorize Text Using Cosine Similarity](#categorize-text-using-cosine-similarity)
+  - [Categorise Text Using Cosine Similarity](#categorise-text-using-cosine-similarity)
   - [Generate and Test Prompt](#generate-and-test-prompt)
   - [Export PPs and PEs from the JSON File](#export-pps-and-pes-from-the-json-file)
 - [Directory Structure](#directory-structure)
