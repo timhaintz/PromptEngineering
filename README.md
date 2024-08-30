@@ -18,21 +18,21 @@ This repository contains a collection of Python scripts and tools designed for v
 ## Installation
 
 1. Clone the repository:
-    ```sh
-    git clone https://github.com/yourusername/your-repo.git
-    cd your-repo
-    ```
+```sh
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+```
 
 2. Create and activate a virtual environment:
-    ```sh
-    python -m venv .venv
-    source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
-    ```
+```sh
+python -m venv .venv
+source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
+```
 
 3. Install the required dependencies:
-    ```sh
-    pip install -r requirements.txt
-    ```
+```sh
+pip install -r requirements.txt
+```
 
 4. Set up environment variables by creating a `.env` file in the root directory and adding the necessary keys:
 
@@ -49,30 +49,30 @@ This repository contains a collection of Python scripts and tools designed for v
 
 To extract text from a PDF file, use the `extractTextFromPDF.py` script. Below are some example usages:
 
-    ```sh
-    python extractTextFromPDF.py -filename "Test.pdf"
-    python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10
-    python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -extractexamples True
-    python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -summary True
-    python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -keypoints True
-    ```
+```sh
+python extractTextFromPDF.py -filename "Test.pdf"
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -extractexamples True
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -summary True
+python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -keypoints True
+```
 
 ### Categorise Text Using Cosine Similarity
 
-    To categorise text using cosine similarity, use the categorisation_cosine_similarity.py script:
+To categorise text using cosine similarity, use the categorisation_cosine_similarity.py script:
 
-    ```sh
-    python categorisation_cosine_similarity.py --threshold 0.5
-    ```
+```sh
+python categorisation_cosine_similarity.py --threshold 0.5
+```
 
 ### Generate and Test Prompt
 
-    To generate and test prompts, use the testPrompts.py script:
+To generate and test prompts, use the testPrompts.py script:
 
-    ```sh
-    python testPrompts.py
-    python vision_testPrompts.py
-    ```
+```sh
+python testPrompts.py
+python vision_testPrompts.py
+```
 
 ### Export PPs and PEs from the JSON File
 
