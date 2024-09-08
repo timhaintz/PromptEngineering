@@ -62,6 +62,7 @@ python extractTextFromPDF.py -filename "Test.pdf" -pages 1-10 -keypoints True
 To categorise text using Cosine Similarity, use the categorisation_cosine_similarity.py script:
 
 ```sh
+python categorisation_cosine_similarity.py --top_n 5
 python categorisation_cosine_similarity.py --threshold 0.5
 ```
 
