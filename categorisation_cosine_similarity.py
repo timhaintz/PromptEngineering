@@ -57,6 +57,14 @@ azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 ############################
 # Category prompt examples #
 ############################
+# Across logic section - ARG, CMP, CTD, TRA
+argument_example = '''I want you to act as a debater. I will provide you with some topics related to current events and your task is to research both sides of the debates, present valid arguments for each side, refute opposing points of view, and draw persuasive conclusions based on evidence. Your goal is to help people come away from the discussion with increased knowledge and insight into the topic at hand. My first request is "I want an opinion piece about Deno."'''
+
+# At logic section - ASM, CAL
+assessment_example = '''As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria.'''
+
+calculation_example = '''Your task is to add calls to a Calculator API to a piece of text. The calls should help you get information required to complete the text. You can call the API by writing "[Calculator(expression)]" where "expression" is the expression to be computed. Here are some examples of API calls:'''
+
 # In Logic section - CAT, CLF, CLU, ERI, INP, REL
 categorising_example = '''Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below.'''
 
@@ -69,11 +77,6 @@ error_identification_example = '''From now on, when you generate an answer, crea
 input_semantics_example = '''rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications'''
 
 requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
-
-# At logic section - ASM, CAL
-assessment_example = '''As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria.'''
-
-calculation_example = '''Your task is to add calls to a Calculator API to a piece of text. The calls should help you get information required to complete the text. You can call the API by writing "[Calculator(expression)]" where "expression" is the expression to be computed. Here are some examples of API calls:'''
 
 # Over logic section - SUM
 summarising_example = '''Write a concise summary of the following: {text} CONCISE SUMMARY:'''
@@ -167,7 +170,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = categorising_example # category_definitions.summarising
+    input_string = category_definitions.argument # categorising_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
