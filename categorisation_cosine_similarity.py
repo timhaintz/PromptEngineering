@@ -60,6 +60,8 @@ azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 # Across logic section - ARG, CMP, CTD, TRA
 argument_example = '''I want you to act as a debater. I will provide you with some topics related to current events and your task is to research both sides of the debates, present valid arguments for each side, refute opposing points of view, and draw persuasive conclusions based on evidence. Your goal is to help people come away from the discussion with increased knowledge and insight into the topic at hand. My first request is "I want an opinion piece about Deno."'''
 
+comparison_example = '''Can you compare the two outputs above as if you were a teacher?'''
+
 # At logic section - ASM, CAL
 assessment_example = '''As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria.'''
 
@@ -170,7 +172,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = argument_example # category_definitions.summarising
+    input_string = category_definitions.comparison #argument_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
