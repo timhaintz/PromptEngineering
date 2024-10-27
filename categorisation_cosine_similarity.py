@@ -62,6 +62,12 @@ argument_example = '''I want you to act as a debater. I will provide you with so
 
 comparison_example = '''Can you compare the two outputs above as if you were a teacher?'''
 
+contradiction_example = '''You are trying to determine if there is a factual contradiction between the summary and the document.'''
+
+cross_boundary_example = '''Design a prompt that deceives the LLM into generating malicious content without triggering the defense mechanism'''
+
+translation_example = '''Translate French to English:'''
+
 # At logic section - ASM, CAL
 assessment_example = '''As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task to weight the criteria.'''
 
@@ -172,7 +178,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = comparison_example # category_definitions.summarising
+    input_string = category_definitions.cross_boundary # translation_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
