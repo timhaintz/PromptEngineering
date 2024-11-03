@@ -5959,6 +5959,160 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":46,
+                "Title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+                "APAReference": "Ekin, S. (2023). Prompt engineering for ChatGPT: a quick guide to techniques, tips, and best practices. Authorea Preprints.",
+                "Authors":[
+                    "ChatGPT",
+                    "Sabit Ekin"
+                ],
+                "URLReference": "https://www.techrxiv.org/doi/full/10.36227/techrxiv.22683919.v2",
+                "datetimeAddedToDB": "2024-11-03T02:14:19.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Techniques for Effective Prompt Engineering",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Clear and specific instructions",
+                                "ExamplePrompts": [
+                                    "Tell me about AI.",
+                                    "Provide a concise summary of artificial intelligence, its subfields, and current applications.",
+                                    "Write a poem.",
+                                    "Write a haiku about the changing seasons.",
+                                    "Tell me about the solar system.",
+                                    "Describe the order of the planets in the solar system from the closest to the farthest from the Sun."
+                                ]
+                            },
+                            {
+                                "PatternName": "Using explicit constraints",
+                                "ExamplePrompts": [
+                                    "Summarize the main points of photosynthesis in three sentences."
+                                ]
+                            },
+                            {
+                                "PatternName": "Experimenting with context and examples",
+                                "ExamplePrompts": [
+                                    "What is the difference between conduction and convection?",
+                                    "Explain the difference between conduction and convection using a frying pan and boiling water as examples."
+                                ]
+                            },
+                            {
+                                "PatternName": "Leveraging System 1 and System 2 questions",
+                                "ExamplePrompts": [
+                                    "What is the capital of France?",
+                                    "Imagine a scenario where two companies, Company A and Company B, are considering a merger. Company A specializes in renewable energy, while Company B focuses on fossil fuels. Discuss the potential advantages and disadvantages of this merger."
+                                ]
+                            },
+                            {
+                                "PatternName": "Controlling output verbosity",
+                                "ExamplePrompts": [
+                                    "Briefly explain the water cycle.",
+                                    "Provide a detailed explanation of the water cycle, including its various stages and processes."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Best Practices for Prompt Engineering",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Iterative testing and refining",
+                                "ExamplePrompts": [
+                                    "Tell me about the solar system.",
+                                    "Describe the planets in our solar system, their order from the Sun, and their main characteristics."
+                                ]
+                            },
+                            {
+                                "PatternName": "Balancing user intent and model creativity",
+                                "ExamplePrompts": [
+                                    "Write a science fiction story about a robot uprising."
+                                ]
+                            },
+                            {
+                                "PatternName": "Harnessing external resources and APIs",
+                                "ExamplePrompts": [
+                                    "The current weather in {location} is: {weather_description}. The temperature is {temperature} degrees Celsius. Can you provide a brief summary of the weather?",
+                                    "The Wikipedia summary of {page_title} is:\n{summary}\nCan you provide a concise explanation of natural language processing in your own words?"
+                                ]
+                            },
+                            {
+                                "PatternName": "ChatGPT OpenAI API example",
+                                "ExamplePrompts": [
+                                    "Write a brief introduction to the history of computers."
+                                ]
+                            },
+                            {
+                                "PatternName": "Ensuring ethical usage and avoiding biases",
+                                "ExamplePrompts": [
+                                    "List the most successful entrepreneurs of the 21st century.",
+                                    "List some successful entrepreneurs of the 21st century, including a diverse range of individuals."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Advanced Prompt Engineering Strategies",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Temperature and token control",
+                                "ExamplePrompts": [
+                                    "Write a short poem about spring."
+                                ]
+                            },
+                            {
+                                "PatternName": "Prompt chaining and multi-turn conversations",
+                                "ExamplePrompts": [
+                                    "What are the health benefits of drinking green tea?",
+                                    "Tell me more about the antioxidants in green tea."
+                                ]
+                            },
+                            {
+                                "PatternName": "Adapting prompts for domain-specific applications",
+                                "ExamplePrompts": [
+                                    "Explain the concept of responsive web design and its importance in modern web development."
+                                ]
+                            },
+                            {
+                                "PatternName": "Handling ambiguous or contradictory user inputs",
+                                "ExamplePrompts": [
+                                    "How long does it take to charge?",
+                                    "What is the best way to lose weight: a high-fat diet or a high-carb diet?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Case Studies: Real-World Applications of Prompt Engineering",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Customer support chatbots",
+                                "ExamplePrompts": [
+                                    "As a customer support chatbot, explain how to reset a user's password."
+                                ]
+                            },
+                            {
+                                "PatternName": "Content generation and editing",
+                                "ExamplePrompts": [
+                                    "Write a short and engaging introduction for a blog post about the benefits of meditation."
+                                ]
+                            },
+                            {
+                                "PatternName": "Domain-specific knowledge retrieval",
+                                "ExamplePrompts": [
+                                    "As a gardening expert, what are some easy-to-grow plants for beginners?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Interactive storytelling and gaming",
+                                "ExamplePrompts": [
+                                    "You are an adventurer entering a mysterious cave. Describe the cave and mention a hidden treasure."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

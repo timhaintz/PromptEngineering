@@ -70,7 +70,7 @@ temperature = 0.0
 # Use the below variables for -extractexamples
 system_prompt = {
     "extractexamples": '''# INSTRUCTIONS
-    You are a PhD student collecting prompt engineering examples from research papers.
+    You are a PhD student collecting prompt engineering examples from research papers. Provide the prompt examples only, I don't need the response from the paper.
     ONLY use the provided input text to extract the examples.
     Reflect on the input data to conifrm all the prompt examples are complete and correct before providing the output.
     OUTPUT
