@@ -6210,7 +6210,7 @@
                         ]
                     },
                     {
-                        "PatternCategory": "PIR",
+                        "PatternCategory": "People in Rooms (PIR)",
                         "PromptPatterns": [
                             {
                                 "PatternName": "PIR - Normal",
@@ -6227,7 +6227,7 @@
                         ]
                     },
                     {
-                        "PatternCategory": "MOnoRel",
+                        "PatternCategory": "Monotone relations (MOnoRel)",
                         "PromptPatterns": [
                             {
                                 "PatternName": "MonoRel - Normal",
