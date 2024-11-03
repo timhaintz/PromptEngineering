@@ -6177,6 +6177,74 @@
                         ]  
                     }  
                 ]
+            },
+            {
+                "id":48,
+                "Title": "Same Task, More Tokens: the Impact of Input Length on the Reasoning Performance of Large Language Models",
+                "APAReference": "Levy, M., Jacoby, A., & Goldberg, Y. (2024). Same task, more tokens: the impact of input length on the reasoning performance of large language models. arXiv preprint arXiv:2402.14848.",
+                "Authors":[
+                    "Mosh Levy",
+                    "Alon Jacoby",
+                    "Yoav Goldberg"
+                ],
+                "URLReference": "https://arxiv.org/abs/2402.14848",
+                "datetimeAddedToDB": "2024-11-03T04:13:35.940Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Ruletaker",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Ruletaker - Normal",
+                                "ExamplePrompts": [
+                                    "Answer whether the statement {statement} can be derived from the rule and the facts. Answer with either \"True\" or \"False\".\nRule: {rule}\nFacts: {facts + padding}\nAnswer with either \"True or \"False\".",
+                                    "Answer whether the statement {statement} can be derived from the rule and the facts.\nShow your steps then answer with either \"True\" or \"False\".\nRule: {rule}\nFacts: {facts + padding}\nAnswer with either \"True or \"False\".\nLet's work this out in a step by step way to be sure we have the right answer."
+                                ]
+                            },
+                            {
+                                "PatternName": "Ruletaker - CoT",
+                                "ExamplePrompts": [
+                                    "{facts + padding}\nTrue/False Question: {question}\nAnswer only True or False.",
+                                    "Show your steps then answer with 'true' or 'false'.\n{facts + padding}\nTrue/False Question: {question}\nLet's work this out in a step by step way to be sure we have the right answer."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "PIR",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "PIR - Normal",
+                                "ExamplePrompts": [
+                                    "{facts + padding} True/False Question: {question} Answer only True or False."
+                                ]
+                            },
+                            {
+                                "PatternName": "PIR - CoT",
+                                "ExamplePrompts": [
+                                    "Show your steps then answer with 'true' or 'false'. {facts + padding} True/False Question: {question} Let's work this out in a step by step way to be sure we have the right answer."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "MOnoRel",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "MonoRel - Normal",
+                                "ExamplePrompts": [
+                                    "Here are some facts. Answer the exact following question based on the text: {question} Answer the question as it appears exactly. {facts + padding}\n{question}\nAnswer only True or False."
+                                    
+                                ]
+                            },
+                            {
+                                "PatternName": "MonoRel - CoT",
+                                "ExamplePrompts": [
+                                    "Here are some facts. Answer the exact following question based on the text: {question} Answer the question as it appears exactly.\nShow your steps then answer with 'true' or 'false'.\n{facts + padding}\n{question}\nLet's work this out in a step by step way to be sure we have the right answer. Show your work and finally answer with 'true' or 'false'. The final step should include the exact text of the question and the answer."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
