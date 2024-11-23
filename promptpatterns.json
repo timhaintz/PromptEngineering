@@ -6342,6 +6342,73 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":51,
+                "Title": "Large Language Models are Zero-Shot Reasoners",
+                "APAReference": "Kojima, T., Gu, S. S., Reid, M., Matsuo, Y., & Iwasawa, Y. (2022). Large language models are zero-shot reasoners. Advances in neural information processing systems, 35, 22199-22213.",
+                "Authors":[
+                    "Takeshi Kojima",
+                    "Shixiang Shane Gu",
+                    "Machel Reid",
+                    "Yutaka Matsuo",
+                    "Yusuke Iwasawa"
+                ],
+                "URLReference": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/8bb0d291acd4acf06ef112099c16f326-Abstract-Conference.html",
+                "datetimeAddedToDB": "2024-11-23T20:35:13.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Few-shot",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Standard Few-shot",
+                                "ExamplePrompts": [
+                                    "Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now?\nA: The answer is 11. \n Q: A juggler can juggle 16 balls. Half of the balls are golf balls, and half of the golf balls are blue. How many blue golf balls are there?\nA:\n"
+                                ]
+                            },
+                            {
+                                "PatternName": "Few-shot-CoT",
+                                "ExamplePrompts": [
+                                    "Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now?\nA: Roger started with 5 balls. 2 cans of 3 tennis balls each is 6 tennis balls. 5 + 6 = 11. The answer is 11. \n Q: A juggler can juggle 16 balls. Half of the balls are golf balls, and half of the golf balls are blue. How many blue golf balls are there?\nA:\n"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Zero-shot",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Standard Zero-shot",
+                                "ExamplePrompts": [
+                                    "Q: A juggler can juggle 16 balls. Half of the balls are golf balls, and half of the golf balls are blue. How many blue golf balls are there?\nA: The answer (arabic numerals) is\n"
+                                ]
+                            },
+                            {
+                                "PatternName": "Zero-shot-CoT",
+                                "ExamplePrompts": [
+                                    "Q: A juggler can juggle 16 balls. Half of the balls are golf balls, and half of the golf balls are blue. How many blue golf balls are there?\nA: Let's think step by step.\n"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Two-stage prompting",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Reasoning Extraction",
+                                "ExamplePrompts": [
+                                    "Q: On average Joe throws 25 punches per minute. A fight lasts 5 rounds of 3 minutes. How many punches did he throw?\nA: Let's think step by step."
+                                ]
+                            },
+                            {
+                                "PatternName": "Answer Extraction",
+                                "ExamplePrompts": [
+                                    "Q: On average Joe throws 25 punches per minute. A fight lasts 5 rounds of 3 minutes. How many punches did he throw?\nA: Let's think step by step. In one minute, Joe throws 25 punches. In three minutes, Joe throws 3 * 25 = 75 punches. In five rounds, Joe throws 5 * 75 = 375 punches. Therefore, the answer (arabic numerals) is\nLLM: 375.\n"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
