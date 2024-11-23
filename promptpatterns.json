@@ -6409,6 +6409,111 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":52,
+                "Title": "Prompting AI Art: An Investigation into the Creative Skill of Prompt Engineering",
+                "APAReference": "Oppenlaender, J., Linder, R., & Silvennoinen, J. (2023). Prompting ai art: An investigation into the creative skill of prompt engineering. arXiv preprint arXiv:2303.13534.",
+                "Authors":[
+                    "Jonas Oppenlaender",
+                    "Rhema Linder",
+                    "Johanna Silvennoinen"
+                ],
+                "URLReference": "https://arxiv.org/abs/2303.13534",
+                "datetimeAddedToDB": "2024-11-23T20:55:07.485Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Art Styles and Techniques",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Classic Art",
+                                "ExamplePrompts": [
+                                    "A beautiful painting of a singular lighthouse, shining its light across a tumultuous sea of blood by greg rutkowski and thomas kinkade, trending on artstation."
+                                ]
+                            },
+                            {
+                                "PatternName": "Explicit Style Information",
+                                "ExamplePrompts": [
+                                    "Cubism portrait of a Labrador Retriever using reds and oranges",
+                                    "Paint a portrait of an old man in a park.",
+                                    "Draw a sketch of an airplane.",
+                                    "Abstract trippy colorful background",
+                                    "surreal sky castle",
+                                    "Can you paint me a rendition of the Monalisa?",
+                                    "Bob Ross, Claude Monet, Vincent Van Gogh",
+                                    "Are you able to produce any of rodans work.",
+                                    "what can you do, can you make pointillism artwork?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Descriptive Language",
+                                "ExamplePrompts": [
+                                    "beautiful landscape with majestic mountains and a bright blue lake",
+                                    "bright yellow sun against a blue sky with puffy clouds",
+                                    "A fruit bowl with vibrant colored fruits in it and a contrasting background",
+                                    "Dragon on the tower of a castle in a storm.",
+                                    "Knight holding a sword that shines in the sunlight",
+                                    "A white fluffy puppy is playing in the grass with a large blue ball that is twice his size.",
+                                    "A shiny black horse with eyes like coal run in a lush green grassy field",
+                                    "There should be a beautiful green forest, full of leaves, with dark brown earth beneath, and a girl in a dress sitting on the ground holding a book."
+                                ]
+                            },
+                            {
+                                "PatternName": "Surrealism",
+                                "ExamplePrompts": [
+                                    "rainbow tyrannosaurus rex + unreal engine",
+                                    "miracle of creation",
+                                    "explosion of creativity",
+                                    "A neutral colored bowl with a variety of several brightly colored and vibrant fruits in it, and a background that is darker to contrast with the fruit.",
+                                    "A man seated on a park bench. He is in a blue business suit. A briefcase is beside him on the bench.",
+                                    "A tiger stands on top of a fence that has been painted with vivid primary colors."
+                                ]
+                            },
+                            {
+                                "PatternName": "Modified Prompts with Adjectives and Adverbs",
+                                "ExamplePrompts": [
+                                    "bright full moon just rising over the desert bright full amber colored moon just rising over the desert (a)",
+                                    "A comfortable warm blanket resting on an antique rocking chair. A comfortable warm blanket resting on an antique rocking chair in front of a fireplace. (d)",
+                                    "A fruit bowl with vibrant colored fruits in it and a contrasting background A neutral colored bowl with a variety of several brightly colored and vibrant fruits in it, and a background that is darker to contrast with the fruit. (g)",
+                                    "A famers market in Nebraska in the early fall. An outdoor famers market in Nebraska in the early fall. (b)",
+                                    "Are you able to produce any of rodans work. Will you please correct Rodans artwork for me. (e)",
+                                    "A man in a blue business suit sitting on a bench. He holds a briefcase. A man seated on a park bench. He is in a blue business suit. A briefcase is beside him on the bench. (h)",
+                                    "Aforest with scary trees all around A forest with vibrant green trees all around. (c)",
+                                    "miracle of creation explosion of creativity (f)",
+                                    "A wild cat sitting on a brightly-painted fence. A tiger stands on top of a fence that has been painted with vivid primary colors. (i)"
+                                ]
+                            },
+                            {
+                                "PatternName": "High Aesthetic Appeal",
+                                "ExamplePrompts": [
+                                    "the foundations of origin, matte painting, genesis, trending on artstation, high resolution",
+                                    "eclectic interior of the mind",
+                                    "., ., matte painting, 8k cgsociety",
+                                    "The Dude by Glenn Fabry",
+                                    "vikings. by Dan Mumford, matte painting, Studio Ghibli",
+                                    "fantastic wardrobe of the inner sanctuary comes to life in giant birtation of the soul",
+                                    "tidal wave, matte painting, rendered in octane, ghibli, 8k #epic #wow trending on wikiart",
+                                    "a moment of silence for our fallen heroes. War memorial. central. CGSociety, painting, postprocessing",
+                                    "portrait of a world war soldier on artstation",
+                                    "buck, Hudson River School 41"
+                                ]
+                            },
+                            {
+                                "PatternName": "Low Aesthetic Appeal",
+                                "ExamplePrompts": [
+                                    "Multi-Fidelity MetaLearning for Efficient and Robust AutoDL",
+                                    "a tweet about bias",
+                                    "Asterix at the Robot Games. by Rene Goscinny and Albert Uderzo",
+                                    "amazing green screen effect",
+                                    "Office Space, Bill Lumbergh. “yeah, we need you to come in on Saturday, mkay?”",
+                                    "Blind No. 20, Seventeen-foot high Ceiling or Lower, Historical Veridian Green, Indian Yellow Hue, Hansa Yellow Medium (to Mike Kelley)",
+                                    "China buys Russia",
+                                    "artwork, academic paper"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
