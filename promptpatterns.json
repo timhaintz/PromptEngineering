@@ -6296,51 +6296,47 @@
                 "datetimeAddedToDB": "2024-11-23T20:05:28.000Z",
                 "CategoriesAndPatterns": [
                     {
-                        "CategoriesAndPatterns": [
+                        "PatternCategory": "Knapsack Problem Variations",
+                        "PromptPatterns": [
                             {
-                                "PatternCategory": "Knapsack Problem Variations",
-                                "PromptPatterns": [
-                                    {
-                                        "PatternName": "Single Optimal Set Selection",
-                                        "ExamplePrompts": [
-                                            "Given the items below, choose the set of items that has the highest total value, as long as the sum of the weights of those items does not exceed 10 kilograms: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg; Item 6: Value - 9, Weight - 3 kg; Item 7: Value - 5, Weight - 2 kg; Item 8: Value - 4, Weight - 1 kg; Item 9: Value - 2, Weight - 6 kg; Item 10: Value - 10, weight - 10 kg"
-                                        ]
-                                    },
-                                    {
-                                        "PatternName": "Multiple Optimal Sets Selection",
-                                        "ExamplePrompts": [
-                                            "Given the items below, give me three sets with the highest total value. The sets can have any number of elements as long as they are not repeated, and the sum of the weights of those items does not exceed 10 kilograms. Show only sets that do not exceed 10 kilograms: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg; Item 6: Value - 9, Weight - 3 kg; Item 7: Value - 5, Weight - 2 kg; Item 8: Value - 4, Weight - 1 kg; Item 9: Value - 2, Weight - 6 kg; Item 10: Value - 10, weight - 10 kg; Your best answer has been: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, weight - 5 kg"
-                                        ]
-                                    }
+                                "PatternName": "Single Optimal Set Selection",
+                                "ExamplePrompts": [
+                                    "Given the items below, choose the set of items that has the highest total value, as long as the sum of the weights of those items does not exceed 10 kilograms: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg; Item 6: Value - 9, Weight - 3 kg; Item 7: Value - 5, Weight - 2 kg; Item 8: Value - 4, Weight - 1 kg; Item 9: Value - 2, Weight - 6 kg; Item 10: Value - 10, weight - 10 kg"
                                 ]
                             },
                             {
-                                "PatternCategory": "Optimization Problem Formulation and Solution",
-                                "PromptPatterns": [
-                                    {
-                                        "PatternName": "Objective Function and Constraints Formulation",
-                                        "ExamplePrompts": [
-                                            "Formulate the objective function and the correspondent constraints for the following problem: Given a number of items, each characterized by a value and a weight in kilograms, find the set of items where the sum of their values is maximum, and the sum of their weights is less than or equal to 10 kilograms. The sets can have any number of elements, as long as they are not repeated."
-                                        ]
-                                    },
-                                    {
-                                        "PatternName": "Code Generation for Optimization Problem",
-                                        "ExamplePrompts": [
-                                            "Generate a code to solve this problem for Google Colab, Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg; Item 6: Value - 9, Weight - 3 kg; Item 7: Value - 5, Weight - 2 kg; Item 8: Value - 4, Weight - 1 kg; Item 9: Value - 2, Weight - 6 kg; Item 10: Value - 10, weight - 10 kg"
-                                        ]
-                                    }
+                                "PatternName": "Multiple Optimal Sets Selection",
+                                "ExamplePrompts": [
+                                    "Given the items below, give me three sets with the highest total value. The sets can have any number of elements as long as they are not repeated, and the sum of the weights of those items does not exceed 10 kilograms. Show only sets that do not exceed 10 kilograms: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg; Item 6: Value - 9, Weight - 3 kg; Item 7: Value - 5, Weight - 2 kg; Item 8: Value - 4, Weight - 1 kg; Item 9: Value - 2, Weight - 6 kg; Item 10: Value - 10, weight - 10 kg; Your best answer has been: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, weight - 5 kg"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Optimization Problem Formulation and Solution",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Objective Function and Constraints Formulation",
+                                "ExamplePrompts": [
+                                    "Formulate the objective function and the correspondent constraints for the following problem: Given a number of items, each characterized by a value and a weight in kilograms, find the set of items where the sum of their values is maximum, and the sum of their weights is less than or equal to 10 kilograms. The sets can have any number of elements, as long as they are not repeated."
                                 ]
                             },
                             {
-                                "PatternCategory": "Text Generation for Writing Assistance",
-                                "PromptPatterns": [
-                                    {
-                                        "PatternName": "Generate Summary Paragraph with Data Insertion",
-                                        "ExamplePrompts": [
-                                            "I am profiling a bibliographic dataset for writing a literature review paper. You are an automatic writer assistant. The table delimited by triple backticks, provides data on the main characteristics of the records and fields of the bibliographic dataset. Your task is to generate a short paragraph with conclusions by using the information in the table. Limit your description to one paragraph in at most 100 words. Table : ``` [Data here] ```",
-                                            "I am working on a guideline for design prompts for LLM. You are an automatic writer assistant. Your task is to generate a short paragraph defining what prompt engineering is. The text below, delimited by '<<<' and '>>>', provides several paragraphs defining what is prompt engineering. Use only the provided text to write a paragraph defining prompt engineering. Limit your description to one paragraph in at most 100 words. Here is the text: <<< [Insert the text here] >>>"
-                                        ]
-                                    }
+                                "PatternName": "Code Generation for Optimization Problem",
+                                "ExamplePrompts": [
+                                    "Generate a code to solve this problem for Google Colab, Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg; Item 6: Value - 9, Weight - 3 kg; Item 7: Value - 5, Weight - 2 kg; Item 8: Value - 4, Weight - 1 kg; Item 9: Value - 2, Weight - 6 kg; Item 10: Value - 10, weight - 10 kg"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Text Generation for Writing Assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Generate Summary Paragraph with Data Insertion",
+                                "ExamplePrompts": [
+                                    "I am profiling a bibliographic dataset for writing a literature review paper. You are an automatic writer assistant. The table delimited by triple backticks, provides data on the main characteristics of the records and fields of the bibliographic dataset. Your task is to generate a short paragraph with conclusions by using the information in the table. Limit your description to one paragraph in at most 100 words. Table : ``` [Data here] ```",
+                                    "I am working on a guideline for design prompts for LLM. You are an automatic writer assistant. Your task is to generate a short paragraph defining what prompt engineering is. The text below, delimited by '<<<' and '>>>', provides several paragraphs defining what is prompt engineering. Use only the provided text to write a paragraph defining prompt engineering. Limit your description to one paragraph in at most 100 words. Here is the text: <<< [Insert the text here] >>>"
                                 ]
                             }
                         ]
