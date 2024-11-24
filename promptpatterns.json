@@ -6641,6 +6641,108 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":55,
+                "Title": "AUser-Friendly Framework for Generating Model-Preferred Prompts in Text-to-Image Synthesis",
+                "APAReference": "Hei, N., Guo, Q., Wang, Z., Wang, Y., Wang, H., & Zhang, W. (2024, March). A User-Friendly Framework for Generating Model-Preferred Prompts in Text-to-Image Synthesis. In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 38, No. 3, pp. 2139-2147).",
+                "Authors":[
+                    "Nailei Hei",
+                    "Qianyu Guo",
+                    "Zihao Wang",
+                    "Yan Wang",
+                    "Haofen Wang",
+                    "Wenqiang Zhang"
+                ],
+                "URLReference": "https://ojs.aaai.org/index.php/AAAI/article/view/27986",
+                "datetimeAddedToDB": "2024-11-24T23:54:35.443Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Comparison of Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "UF-FGTG",
+                                "ExamplePrompts": [
+                                    "a painting of green tree house in the middle of a lake, birds flying around, anton fadeev, comfortable, reasonable structure, shock, high detail, abundant a detailed matte painting, rossdraws global illumination, neo-primitive pastel colors, photorealism, 8k",
+                                    "a woman in a blue dress standing in a cave where flower petals are visible, concept art, octane render, unreal engine 5, trending on artstation, high quality, highly detailed, 8k",
+                                    "a guitar and sings into headphones going into cyberpunk city, detailed, centered, digital painting, artstation, concept art, donato giancola"
+                                ]
+                            },
+                            {
+                                "PatternName": "FLAN-T5",
+                                "ExamplePrompts": [
+                                    "a green tree, with no more than eight leaves. The first four leaves are yellow",
+                                    "a woman in a blue dress catches some air around her neck",
+                                    "a guitar and sings into headphones is shown on a stage in front of a crowd"
+                                ]
+                            },
+                            {
+                                "PatternName": "GPT-2",
+                                "ExamplePrompts": [
+                                    "a green tree is in my yard and I am chasing after it",
+                                    "a woman in a blue dress. It is only beans that keep from becoming a thing that is",
+                                    "a guitar and sings into headphones to tell you he has something in his hands. So I told him that",
+                                    "A woman in a flowing blue dress as a source of inspiration for a natural language processing task, such as generating descriptive text or poetry",
+                                    "A musician sits on a stool in a dimly lit recording studio, strumming a guitar and singing into a microphone. The headphones cover their ears, and the microphone is suspended from a boom arm"
+                                ]
+                            },
+                            {
+                                "PatternName": "GPT-3.5",
+                                "ExamplePrompts": [
+                                    "A solitary green tree standing tall in a vibrant meadow under a clear blue sky, illuminated by the warm glow of the setting sun. Majestic"
+                                ]
+                            },
+                            {
+                                "PatternName": "GPT-4",
+                                "ExamplePrompts": [
+                                    "A single, majestic tree stands tall in the center of a verdant meadow, its leaves a vibrant shade of green. The tree's thick branches sprawl out, providing a canopy of shade beneath",
+                                    "lit by the warm glow of a setting sun, rendered in a romantic, realism style, standing on a cobblestone street lined with blooming cherry blossom trees, with a gentle wind causing her dress and hair to flutter slightly",
+                                    "A passionate musician strumming a vintage guitar, singing soulfully into a pair of worn headphones in a cozy, dimly lit recording studio. Warm, muted tones, rustic, intimate, sharp focus, soft lighting, bokeh background, high detail, realistic style"
+                                ]
+                            },
+                            {
+                                "PatternName": "Origin Prompts",
+                                "ExamplePrompts": [
+                                    "a green tree",
+                                    "a woman in a blue dress",
+                                    "a guitar and sings into headphones"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Adaptive Feature Extraction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "UF-FGTG",
+                                "ExamplePrompts": [
+                                    "a painting of green tree house in the middle of a lake, birds flying around, anton fadeev, comfortable, reasonable structure, shock, high detail, abundant a detailed matte painting, rossdraws global illumination, neo-primitive pastel colors, photorealism, 8k",
+                                    "a green tree with a elephant standing under it in a field with a sky background and stars in the sky, anato finnstark, arossdraws global illumination, a detailed matte painting, fantasy art",
+                                    "a deer standing in a field next to a tree with yellow leaves, highly detailed, artgerm style, artstation, soft light, sharp focus, illustration, character design, concept art, 4k",
+                                    "a green tree, deep focus, d & d, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, matte, sharp focus, illustration, hearthstone, art by artgerm and greg rutkowski and al"
+                                ]
+                            },
+                            {
+                                "PatternName": "UF-FGTG withoutAdaptive Feature Extraction",
+                                "ExamplePrompts": [
+                                    "a tree with a lot of leaves on its trunk and branches in the foreground, with a yellow sky in the background, volumetric lighting, a detailed matte painting, environmental art, high detail, 4k",
+                                    "a green tree with ground and green sky, a green grass field and a green grass field, beeple, blender and photoshop, a digital painting, environmental art",
+                                    "a tree with a green background, filip hodas, octane renderer, a 3d render, environmental art, sharp focus, illustration, character design, concept art, 8k",
+                                    "a green tree, by antonio j. manzanedo, giger, alex grey, android jones, wayne barlowe, philippe druillet, raymond swanland, cyril rolando, josephine"
+                                ]
+                            },
+                            {
+                                "PatternName": "Origin Text Encoder",
+                                "ExamplePrompts": [
+                                    "the great wave",
+                                    "a green tree",
+                                    "a cute dog",
+                                    "cute anime girl"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
