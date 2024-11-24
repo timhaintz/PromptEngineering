@@ -6586,6 +6586,61 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":54,
+                "Title": "Cases of EFL Secondary Students' Prompt Engineering Pathways to Complete a Writing Task with ChatGPT",
+                "APAReference": "Woo, D. J., Guo, K., & Susanto, H. (2023). Cases of EFL secondary students' prompt engineering pathways to complete a writing task with ChatGPT. arXiv preprint arXiv:2307.05493.",
+                "Authors":[
+                    "David James Woo",
+                    "Kai Guo",
+                    "Hengky Susanto"
+                ],
+                "URLReference": "https://arxiv.org/abs/2307.05493",
+                "datetimeAddedToDB": "2024-11-24T02:04:30.929Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "EFL Writing Task - Narrative Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Narrative Continuation",
+                                "ExamplePrompts": [
+                                    "I read a book this morning at school. Continue the story and answer this question: with whom did you do it with?",
+                                    "I was breathing while waiting to go up to the classroom. Continue the story and answer this question: why did you do it?",
+                                    "I am so happy that I walked back with Emily because I didn't like walking back to the classroom by myself. Continue the story and answer this question: how did you do it?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Blog Entry",
+                                "ExamplePrompts": [
+                                    "Write a blog entry about a day going to secondary school",
+                                    "Write a short blog entry about my day at school",
+                                    "Write a blog entry about my morning"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "EFL Writing Task - Informative Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Informative Topics",
+                                "ExamplePrompts": [
+                                    "Some famous places in Turkey",
+                                    "Famous drinks in Turkey",
+                                    "Some fun activities to do in Turkey on vacation"
+                                ]
+                            },
+                            {
+                                "PatternName": "Simple Greetings",
+                                "ExamplePrompts": [
+                                    "hello",
+                                    "Say hi"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
