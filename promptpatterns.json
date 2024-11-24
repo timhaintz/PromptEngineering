@@ -6514,6 +6514,78 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":53,
+                "Title": "User-friendly Image Editing with Minimal Text Input: Leveraging Captioning and Injection Techniques",
+                "APAReference": "Kim, S., Jang, W., Kim, H., Kim, J., Choi, Y., Kim, S., & Lee, G. (2023). User-friendly Image Editing with Minimal Text Input: Leveraging Captioning and Injection Techniques. arXiv preprint arXiv:2306.02717.",
+                "Authors":[
+                    "Sunwoo Kim",
+                    "Wooseok Jang",
+                    "Hyunsu Kim",
+                    "Junho Kim",
+                    "Yunjey Choi",
+                    "Seungryong Kim",
+                    "Gayeong Lee"
+                ],
+                "URLReference": "https://arxiv.org/abs/2306.02717",
+                "datetimeAddedToDB": "2024-11-24T01:53:14.777Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Text-guided Editing Frameworks",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "One Noun",
+                                "ExamplePrompts": [
+                                    "panda → lion",
+                                    "bear → robot",
+                                    "a cat → a dog"
+                                ]
+                            },
+                            {
+                                "PatternName": "Full Nouns",
+                                "ExamplePrompts": [
+                                    "panda, sunglasses → lion, sunglasses",
+                                    "bear sweater → robot sweater",
+                                    "clam pasta dish → shrimp pasta dish"
+                                ]
+                            },
+                            {
+                                "PatternName": "Full Description",
+                                "ExamplePrompts": [
+                                    "A panda wearing sunglasses with skateboarding → A lion wearing sunglasses with skateboarding",
+                                    "A bear wearing sweater → A robot wearing sweater",
+                                    "A clam pasta on the dish → A shrimp pasta on the dish"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Captioning-based Method",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Generated Caption with Source Attribute Injection",
+                                "ExamplePrompts": [
+                                    "A painting of a lion wearing sunglasses on a skateboard",
+                                    "two children riding horses on the beach",
+                                    "daughters rowland pino percy lovely horses moment seaside fra"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Optimization-based Method",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Hard Prompt Optimization",
+                                "ExamplePrompts": [
+                                    "a cat → a dog",
+                                    "blue hair → black hair"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
