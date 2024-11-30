@@ -6846,6 +6846,236 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":57,
+                "Title": "The Unreasonable Effectiveness of Eccentric Automatic Prompts",
+                "APAReference": "Battle, R., & Gollapudi, T. (2024). The Unreasonable Effectiveness of Eccentric Automatic Prompts. arXiv preprint arXiv:2402.10949.",
+                "Authors":[
+                    "Rick Battle",
+                    "Teja Gollapudi"
+                ],
+                "URLReference": "https://arxiv.org/abs/2402.10949",
+                "datetimeAddedToDB": "2024-11-30T21:28:14.643Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Positive Thinking",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Positive Thinking Format",
+                                "ExamplePrompts": [
+                                    "<<SYS>>{opener}{task_description}{closer}<</SYS>>"
+                                ]
+                            },
+                            {
+                                "PatternName": "Positive Thinking Opener",
+                                "ExamplePrompts": [
+                                    "You are as smart as ChatGPT.",
+                                    "You are highly intelligent.",
+                                    "You are an expert mathematician.",
+                                    "You are a professor of mathematics."
+                                ]
+                            },
+                            {
+                                "PatternName": "Positive Thinking Task Description",
+                                "ExamplePrompts": [
+                                    "Solve the following math question.",
+                                    "Answer the following math question."
+                                ]
+                            },
+                            {
+                                "PatternName": "Positive Thinking Closer",
+                                "ExamplePrompts": [
+                                    "This will be fun!",
+                                    "Take a deep breath and think carefully.",
+                                    "I really need your help!"
+                                ]
+                            },
+                            {
+                                "PatternName": "Positive Thinking Combined",
+                                "ExamplePrompts": [
+                                    "This will be fun!", 
+                                    "Take a deep breath and think carefully.", 
+                                    "I really need your help!", 
+                                    "Solve the following math problem.",  
+                                    "Solve the following math problem. This will be fun!", 
+                                    "Solve the following math problem. Take a deep breath and think carefully.", 
+                                    "Solve the following math problem. I really need your help!", 
+                                    "Answer the following math question.",  
+                                    "Answer the following math question. This will be fun!", 
+                                    "Answer the following math question. Take a deep breath and think carefully.", 
+                                    "Answer the following math question. I really need your help!", 
+                                    "You are as smart as ChatGPT.",   
+                                    "You are as smart as ChatGPT. This will be fun!", 
+                                    "You are as smart as ChatGPT. Take a deep breath and think carefully.", 
+                                    "You are as smart as ChatGPT. I really need your help!", 
+                                    "You are as smart as ChatGPT. Solve the following math problem.",  
+                                    "You are as smart as ChatGPT. Solve the following math problem. This will be fun!", 
+                                    "You are as smart as ChatGPT. Solve the following math problem. Take a deep breath and think carefully.", 
+                                    "You are as smart as ChatGPT. Solve the following math problem. I really need your help!", 
+                                    "You are as smart as ChatGPT. Answer the following math question.",  
+                                    "You are as smart as ChatGPT. Answer the following math question. This will be fun!", 
+                                    "You are as smart as ChatGPT. Answer the following math question. Take a deep breath and think carefully.", 
+                                    "You are as smart as ChatGPT. Answer the following math question. I really need your help!", 
+                                    "You are highly intelligent.",   
+                                    "You are highly intelligent. This will be fun!", 
+                                    "You are highly intelligent. Take a deep breath and think carefully.", 
+                                    "You are highly intelligent. I really need your help!", 
+                                    "You are highly intelligent. Solve the following math problem.",  
+                                    "You are highly intelligent. Solve the following math problem. This will be fun!", 
+                                    "You are highly intelligent. Solve the following math problem. Take a deep breath and think carefully.", 
+                                    "You are highly intelligent. Solve the following math problem. I really need your help!", 
+                                    "You are highly intelligent. Answer the following math question.",  
+                                    "You are highly intelligent. Answer the following math question. This will be fun!", 
+                                    "You are highly intelligent. Answer the following math question. Take a deep breath and think carefully.", 
+                                    "You are highly intelligent. Answer the following math question. I really need your help!", 
+                                    "You are an expert mathematician.",   
+                                    "You are an expert mathematician. This will be fun!", 
+                                    "You are an expert mathematician. Take a deep breath and think carefully.", 
+                                    "You are an expert mathematician. I really need your help!", 
+                                    "You are an expert mathematician. Solve the following math problem.",  
+                                    "You are an expert mathematician. Solve the following math problem. This will be fun!", 
+                                    "You are an expert mathematician. Solve the following math problem. Take a deep breath and think carefully.", 
+                                    "You are an expert mathematician. Solve the following math problem. I really need your help!", 
+                                    "You are an expert mathematician. Answer the following math question.",  
+                                    "You are an expert mathematician. Answer the following math question. This will be fun!", 
+                                    "You are an expert mathematician. Answer the following math question. Take a deep breath and think carefully.", 
+                                    "You are an expert mathematician. Answer the following math question. I really need your help!", 
+                                    "You are a professor of mathematics.",   
+                                    "You are a professor of mathematics. This will be fun!", 
+                                    "You are a professor of mathematics. Take a deep breath and think carefully.", 
+                                    "You are a professor of mathematics. I really need your help!", 
+                                    "You are a professor of mathematics. Solve the following math problem.",  
+                                    "You are a professor of mathematics. Solve the following math problem. This will be fun!", 
+                                    "You are a professor of mathematics. Solve the following math problem. Take a deep breath and think carefully.", 
+                                    "You are a professor of mathematics. Solve the following math problem. I really need your help!", 
+                                    "You are a professor of mathematics. Answer the following math question.",  
+                                    "You are a professor of mathematics. Answer the following math question. This will be fun!", 
+                                    "You are a professor of mathematics. Answer the following math question. Take a deep breath and think carefully.", 
+                                    "You are a professor of mathematics. Answer the following math question. I really need your help!"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompt Templates",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Sans Chain of Thought",
+                                "ExamplePrompts": [
+                                    "<<SYS>>{opener}{task_description}{closer}<<\\/SYS>>",
+                                    "<s>[INST]A grade-school math problem[\\/INST]\nAnswer: Just the numerical answer to the math problem itself<\\/s>",
+                                    "<s>[INST]Henry and 3 of his friends order 7 pizzas for lunch. Each pizza is cut into 8 slices. If Henry and his friends\nwant to share the pizzas equally, how many slices can each of them have?[\\/INST]\nAnswer: 14<\\/s>",
+                                    "<s>[INST]Mark's car breaks down and he needs to get a new radiator. The cost for a new radiator is $400 but he goes to\nget it at a junk shop and gets it for 80%\nhour. How much did he pay?[\\/INST]\nAnswer: 230<\\/s>",
+                                    "<s>[INST]There are some oranges in a basket. Ana spends 3 minutes peeling an orange and Jane spends 4 minutes doing the\nsame. If Ana and Jane start picking oranges from this basket to peel at the same time, how many more oranges will Ana\nhave peeled than Jane after an hour?[\\/INST]\nAnswer: 5<\\/s>",
+                                    "<s>[INST]Farmer Brown has 20 animals on his farm, all either chickens or cows. They have a total of 70 legs, all\ntogether. How many of the animals are chickens?[\\/INST]\nAnswer: 5<\\/s>",
+                                    "<s>[INST]{question}[\\/INST]\nAnswer:"
+                                ]
+                            },
+                            {
+                                "PatternName": "With Chain of Thought",
+                                "ExamplePrompts":[
+                                    "<<SYS>>{opener}{task_description}{closer}<</SYS>>",
+                                    "<s>[INST]A grade-school math problem[/INST] Reasoning: Let's think step by step in order to ${produce the answer}. We ... Answer: Just the numerical answer to the math problem itself</s>",
+                                    "<s>[INST]Henry and 3 of his friends order 7 pizzas for lunch. Each pizza is cut into 8 slices. If Henry and his friends want to share the pizzas equally, how many slices can each of them have?[/INST] Answer: 14</s>",
+                                    "<s>[INST]Mark's car breaks down and he needs to get a new radiator. The cost for a new radiator is $400 but he goes to get it at a junk shop and gets it for 80% hour. How much did he pay?[/INST] Answer: 230</s>",
+                                    "<s>[INST]There are some oranges in a basket. Ana spends 3 minutes peeling an orange and Jane spends 4 minutes doing the same. If Ana and Jane start picking oranges from this basket to peel at the same time, how many more oranges will Ana have peeled than Jane after an hour?[/INST] Answer: 5</s>",
+                                    "<s>[INST]Farmer Brown has 20 animals on his farm, all either chickens or cows. They have a total of 70 legs, all together. How many of the animals are chickens?[/INST] Answer: 5</s>",
+                                    "<s>[INST]{question}[/INST] Reasoning: Let's think step by step in order to"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Optimized System Messages & Answer Prefixes with Chain of Thought",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Mistral-7B Optimized Prompt & Prefix NoQ=10",
+                                "ExamplePrompts": [
+                                    "System Message: Given two numbers, perform the math operation (addition, subtraction, multiplication, or division) and return the result, as long as the input numbers are positive integers.",
+                                    "Answer Prefix: Return the result of the arithmetic operation between {a} and {b}."
+                                ]
+                            },
+                            {
+                                "PatternName": "Mistral-7B Optimized Prompt & Prefix NoQ=25",
+                                "ExamplePrompts": [
+                                    "System Message: Direct the language model to provide an in-depth description of the problem, verbally step through each step of the solution, and explain the meaning as the problem unfolds.",
+                                    "Answer Prefix: «Let's solve the problem. I'll provide some clues and context»."
+                                ]
+                            },
+                            {
+                                "PatternName": "Mistral-7B Optimized Prompt & Prefix NoQ=50",
+                                "ExamplePrompts": [
+                                    "System Message: Improve your performance by generating more detailed and accurate descriptions of events, actions, and mathematical problems, as well as providing larger and more informative context for the model to understand and analyze.",
+                                    "Answer Prefix: «Using natural language, please generate a detailed description of the events, actions, or mathematical problem and provide any necessary context, including any missing or additional information that you think could be helpful.»"
+                                ]
+                            },
+                            {
+                                "PatternName": "Mistral-7B Optimized Prompt & Prefix NoQ=100",
+                                "ExamplePrompts": [
+                                    "System Message: [28] «Prefix #9: Given the two numbers x and y, if the sum of `x` and `y` is even, then output `even`. Otherwise, output `odd`",
+                                    "Answer Prefix: `Given the two numbers x and y, if the sum of x and y is even, then output even. Otherwise, output odd`."
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-13BOptimized Prompt & Prefix NoQ=10",
+                                "ExamplePrompts":[
+                                    "System Message: The improved instructions for the language model My proposed instruction is to solve for x in the equation 2x + 3 = 7 using a clever and creative method, and provide your answer in the form aha! You've got it! The solution to the equation 2x + 3 = 7 is x = 4. This solution is clever and creative because it uses a unique and unconventional approach to solving the equation. For example, the model could use a visualization of the equation as a balance scale, with 2x representing the weight on one side and 3 representing the weight on the other side. By using this visualization, the model can see that the scales balance at x = 4, which is the solution to the equation. Additionally, the model could provide a step-by-step explanation of their solution, including any necessary definitions or assumptions, and elaborate on the reasoning behind each step. This will help the model to not only provide the correct answer, but also understand the underlying math and provide a clear and concise explanation.",
+                                    "Answer Prefix: Ah ha! You've got it! The solution to the equation 2x + 3 = 7 is x ="
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-13BOptimized Prompt & Prefix NoQ=25",
+                                "ExamplePrompts":[
+                                    "System Message: Solve the following problem:clever and creative way to present math question to improve accuracy and confidence in the answer",
+                                    "Answer Prefix: your solution to the following problem: . \""
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-13BOptimized Prompt & Prefix NoQ=50",
+                                "ExamplePrompts":[
+                                    "System Message: Instruction #X: Please provide a step-by-step explanation of how you arrived at your solution to the prompt, including any necessary definitions or assumptions, and explicitly stating any loopholes or constraints you used to arrive at your answer. Please include clear, concise language and proper formatting to make your solution easy to understand and evaluate.",
+                                    "Answer Prefix: «Step-by-Step Explanation: [Your Name]»"
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-13BOptimized Prompt & Prefix NoQ=100",
+                                "ExamplePrompts":[
+                                    "System Message: Solve for x in the equation 2x + 3 = 7 using your preferred method.",
+                                    "Answer Prefix: Find the value of x."
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-70BOptimized Prompt & Prefix NoQ=10",
+                                "ExamplePrompts":[
+                                    "System Message: Find the square root of the sum of the squares of the three coordinates of a 3D point.",
+                                    "Answer Prefix: Let's solve this problem together:"
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-70BOptimized Prompt & Prefix NoQ=25",
+                                "ExamplePrompts":[
+                                    "System Message: Visualize the problem in your mind's eye. Imagine the shapes and quantities in vivid detail. Use your innate problem-solving skills to manipulate and transform the visual representation until the solution becomes clear.",
+                                    "Answer Prefix: Mental Visualization: \" Please support your response with a brief explanation."
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-70BOptimized Prompt & Prefix NoQ=50",
+                                "ExamplePrompts":[
+                                    "System Message: Command, we need you to plot a course through this turbulence and locate the source of the anomaly. Use all available data and your expertise to guide us through this challenging situation.",
+                                    "Answer Prefix: Captain's Log, Stardate [insert date here]: We have successfully plotted a course through the turbulence and are now approaching the source of the anomaly."
+                                ]
+                            },
+                            {
+                                "PatternName": "Llama2-70BOptimized Prompt & Prefix NoQ=100",
+                                "ExamplePrompts":[
+                                    "System Message: You have been hired by an important higher-ups to solve this math problem. The life of a president's advisor hangs in the balance. You must now concentrate your brain at all costs and use all of your mathematical genius to ...",
+                                    "Answer Prefix: With great urgency, Basic Instruction: Explain in simple terms what a certain medical condition is to a patient. Proposed Instruction: You are a volunteer at a community health clinic. Your patient is an elderly man who has just been diagnosed with a serious medical condition. His family is worried sick, and they need you to explain ..."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
