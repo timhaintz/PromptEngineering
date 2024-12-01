@@ -7210,6 +7210,68 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":60,
+                "Title": "Automated Social Science: Language Models as Scientist and Subjects",
+                "APAReference": "Manning, B. S., Zhu, K., & Horton, J. J. (2024). Automated social science: Language models as scientist and subjects (No. w32381). National Bureau of Economic Research.",
+                "Authors":[
+                    "Benjamin S. Manning",
+                    "Kehang Zhu",
+                    "John J. Horton"
+                ],
+                "URLReference": "https://www.nber.org/papers/w32381",
+                "datetimeAddedToDB": "2024-12-01T09:25:33.377Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Scenarios",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Relevant Roles",
+                                "ExamplePrompts": [
+                                    "In the following scenario: '{scenario}', Who are the individual human agents in a simple simulation of this scenario?",
+                                    "You are a buyer in a negotiation scenario with a seller. You are negotiating over a mug. You have a budget of $20."
+                                ]
+                            },
+                            {
+                                "PatternName": "Two people bargaining over a mug.",
+                                "ExamplePrompts": [
+                                    "Coordinator: Did the buyer and seller explicitly agree on the price of the mug during their interaction?",
+                                    "Buyer: 'Did a deal happen?'"
+                                ]
+                            },
+                            {
+                                "PatternName": "A bail hearing",
+                                "ExamplePrompts": [
+                                    "Judge: What was the bail amount you set for the defendant?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Interviewing for a job as a lawyer",
+                                "ExamplePrompts": [
+                                    "Employer: Have you decided to hire the job applicant?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Auction for a piece of art",
+                                "ExamplePrompts": [
+                                    "Auctioneer: What was the final bid for the piece of art at the end of the auction?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompt used to elicity LLM predictions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Structural Causal Model (SCM) Predictions",
+                                "ExamplePrompts": [
+                                    "I have just run an experiment to estimate the paths in the SCM from the TIKZ diagram below, which is delineated by triple backticks. We ran the experiment on multiple instances of GPT-4, once for each combination of the different 'Attribute Treatments' in the accompanying table. This table also includes information about the variables and the individual agents involved in the scenario. Your task is to predict the point estimates for the paths in the SCMs as accurately as possible based on the experiments. You can see the summary statistics of the treatment variables below each variable name in the Tikz Diagram. We want to know how good you are at predicting the outcomes of experiments run on you. Make sure you consider the correct units for both the cause and the outcome for each path. Please output your answer in the following form and do not include any other text: {\u2019predictions\u2019: dictionary of point estimate predictions for each path} {'sig': dictionary of whether or not each path is significant} '''Figure X and Table X'''"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
