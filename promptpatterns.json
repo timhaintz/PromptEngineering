@@ -7272,6 +7272,199 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":61,
+                "Title": "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+                "APAReference": "McKinzie, B., Gan, Z., Fauconnier, J. P., Dodge, S., Zhang, B., Dufter, P., ... & Yang, Y. (2025). MM1: methods, analysis and insights from multimodal LLM pre-training. In European Conference on Computer Vision (pp. 304-323). Springer, Cham.",
+                "Authors":[
+                    "Brandon McKinzie",
+                    "Zhe Gan",
+                    "Jean-Philippe Fauconnier",
+                    "Sam Dodge",
+                    "Bowen Zhang",
+                    "Philipp Dufter",
+                    "Dhruti Shah",
+                    "Xianzhi Du",
+                    "Futang Peng",
+                    "Floris Weers",
+                    "Anton Belyi",
+                    "Haotian Zhang",
+                    "Karanjeet Singh",
+                    "Doug Kang",
+                    "Ankur Jain",
+                    "Hongyu Hè",
+                    "Max Schwarzer",
+                    "Tom Gunter",
+                     "Xiang Kong",
+                     "Aonan Zhang",
+                     "Jianyu Wang",
+                     "Chong Wang",
+                     "Nan Du",
+                     "Tao Lei",
+                     "Sam Wiseman",
+                     "Guoli Yin",
+                     "Mark Lee",
+                     "Zirui Wang",
+                     "Ruoming Pang",
+                     "Peter Grasch",
+                     "Alexander Toshev",
+                     "Yinfei Yang"
+                ],
+                "URLReference": "https://link.springer.com/chapter/10.1007/978-3-031-73397-0_18",
+                "datetimeAddedToDB": "2024-12-02T12:23:42.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Image Analysis",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Sum of Products",
+                                "ExamplePrompts": [
+                                    "User: Photo: <img1> Menu: <img2> How much should I pay for all the beer on the table according to the price on the menu? User: Explain why."
+                                ]
+                            },
+                            {
+                                "PatternName": "Image Description",
+                                "ExamplePrompts": [
+                                    "Provide a brief description of the given image."
+                                ]
+                            },
+                            {
+                                "PatternName": "Image Transcription",
+                                "ExamplePrompts": [
+                                    "Please transcribe all the text in the picture."
+                                ]
+                            },
+                            {
+                                "PatternName": "Counting",
+                                "ExamplePrompts": [
+                                    "Count the number of apples in the image.",
+                                    "Count the number of oranges in the image."
+                                ]
+                            },
+                            {
+                                "PatternName": "Scene Text Recognition",
+                                "ExamplePrompts": [
+                                    "What are all the scene text in the image?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Geographical Knowledge - Farthest North State",
+                                "ExamplePrompts": [
+                                    "Which of these states is farthest north?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Geographical Knowledge - Other States",
+                                "ExamplePrompts": [
+                                    "What are the other states?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Scientific Knowledge",
+                                "ExamplePrompts": [
+                                    "Which of the organisms is the producer in this food web?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Image-Text Similarity",
+                                "ExamplePrompts": [
+                                    "From scale 1 to 10, decide how similar the image is to the text prompt 'a parrot driving a car'. Explain your reasoning."
+                                ]
+                            },
+                            {
+                                "PatternName": "Object Presence",
+                                "ExamplePrompts": [
+                                    "Can you find the red ball near the gray cat in the image?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Object Feature",
+                                "ExamplePrompts": [
+                                    "Can you see the bright blue feathers on the bird's wing?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Image Comparison",
+                                "ExamplePrompts": [
+                                    "User: <img1> <img2> For each of the two images comment on whether the water is salty.",
+                                    "User: <img1> <img2> Which image shows the healthier meal?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Emotional Reaction",
+                                "ExamplePrompts": [
+                                    "After seeing the below image, how people might emotionally feel and react?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Operating Machines",
+                                "ExamplePrompts": [
+                                    "First, read the operating menus below for coffee machine buttons. Menu 1: Menu 2: Menu 3: Now, let's look at the operating panel of the coffee machine in the image below, which button should I use for a 6 OZ coffee: left, right, top or bottom button?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Navigating",
+                                "ExamplePrompts": [
+                                    "Describe the image"
+                                ]
+                            },
+                            {
+                                "PatternName": "Diagram Analysis",
+                                "ExamplePrompts": [
+                                    "Suppose you are a teacher, please use the figure to explain the distinction between evaporation and evapotranspiration."
+                                ]
+                            },
+                            {
+                                "PatternName": "Flowchart Analysis",
+                                "ExamplePrompts": [
+                                    "Explain the figure."
+                                ]
+                            },
+                            {
+                                "PatternName": "Weather and Environment Description",
+                                "ExamplePrompts": [
+                                    "User: I will show you several pictures and your task is to answer my question. A:                      B:                                       C: \nEstimate the temperature in Celsius for each image. Also provide reasons."
+                                ]
+                            },
+                            {
+                                "PatternName": "Number Identification",
+                                "ExamplePrompts": [
+                                    "For each image state what's the number shown on the cake. Then return the sum."
+                                ]
+                            },
+                            {
+                                "PatternName": "Color Identification",
+                                "ExamplePrompts": [
+                                    "What is the color of the balloon?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Rotation Prediction",
+                                "ExamplePrompts": [
+                                    "I am showing you an image and you need to predict the letter or number shown when rotating the image by 180 degrees."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Text-Based Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Single Word or Phrase Response",
+                                "ExamplePrompts": [
+                                    "Answer the question using a single word or phrase."
+                                ]
+                            },
+                            {
+                                "PatternName": "Multiple Choice Response",
+                                "ExamplePrompts": [
+                                    "Answer with the option's letter from the given choices directly."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
