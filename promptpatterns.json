@@ -7606,6 +7606,262 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":65,
+                "Title": "RoT: Enhancing Large Language Models with Reflection on Search Trees",
+                "APAReference": "Hui, W., Wang, Y., Tu, K., & Jiang, C. (2024). RoT: Enhancing Large Language Models with Reflection on Search Trees. arXiv preprint arXiv:2404.05449.",
+                "Authors":[
+                    "Wenyang Hui",
+                    "KeweiTu"
+                ],
+                "URLReference": "https://arxiv.org/abs/2404.05449",
+                "datetimeAddedToDB": "2024-12-08T23:35:49.764Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "mistral-7b on GSM8k",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General Guideline for Solving Math Word Problems",
+                                "ExamplePrompts": [
+                                    "To effectively solve math word problems, it's important to follow a structured approach. Here is a general guideline that can be applied to many types of math word problems:\n1. Read the Problem Carefully: Understand what the problem is asking. Identify the key information and what the problem is asking you to find.\n2. Identify the Variables: Determine what quantities the problem is dealing with and assign symbols if necessary.\n3. Translate Words into Math: Convert the words into mathematical expressions or equations using the identified variables.\n4. Develop a Plan: Decide on the steps you need to take to solve the problem using the information given.\n5. Execute the Plan: Carry out the steps you have decided on to find the solution.\n6. Check Your Work: Verify that your solution makes sense in the context of the problem and that you have answered what was asked."
+                                ]
+                            },
+                            {
+                                "PatternName": "Comprehensive Policy for Solving Word Problems",
+                                "ExamplePrompts": [
+                                    "Comprehensive Policy for Solving Word Problems:\n1. Initial Reading and Understanding:\n• Carefully read the entire word problem to fully understand the main question, the context, and all the relevant information needed for the solution.\n• Identify initial conditions, key details, and the end goal of the problem to ensure a comprehensive understanding before beginning to solve it.\n2. Breaking Down the Problem into Subquestions:\n• Formulate subquestions that directly relate to and build upon the main question, ensuring each subquestion is a necessary step toward reaching the final answer.\n• Make sure all aspects of the problem are covered in the subquestions, including any conditions, contributions from different sources, rates, and sequences required for a complete solution.\n• Avoid redundancy in subquestions and exclude any that provide unnecessary calculations or information already known.\n3. Calculations and Unit Conversions:\n• When dealing with time conversions or solving for rates, maintain high precision by using fractions or at least three decimal places to prevent rounding errors until the final calculation.\n• Double-check all arithmetic operations, especially additions, subtractions, and multiplications, for accuracy and ensure that they align with the broader context of the problem.\n• In context-appropriate situations, keep answers in fractional form to represent exact figures and avoid unnecessary rounding.\n4. Approach and Logical Building:\n• Proceed logically through the subquestions, with each providing information and answers that build upon the previous ones, culminating in the solution to the main question.\n• Sequentially address each component of the problem, making sure not to miss any crucial step in between, such as additional money needed, contributions, or subsequent divisions."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Understanding the Problem Context",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Analyzing Initial Conditions and Variables",
+                                "ExamplePrompts": [
+                                    "Ensure you have a deep understanding of the given problem, including initial conditions, mathematical concepts required (e.g., percentages, multiplication), and the main question’s objectives.",
+                                    "Accurately account for starting conditions or states, incorporating all relevant variables that influence the problem’s outcome."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Formulating Subquestions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Formulating Relevant and Logical Subquestions",
+                                "ExamplePrompts": [
+                                    "Subquestions must be directly relevant and contribute meaningfully towards solving the main question. Validate this relevance carefully.",
+                                    "Keep subquestions simple, clear, and precise, using concise language to avoid confusion and misinterpretation.",
+                                    "Avoid redundant or unnecessary subquestions and eliminate any that do not bring us closer to the final solution.",
+                                    "Follow a logical progression where each subquestion builds upon previous answers, leading incrementally to the final answer.",
+                                    "Subquestions should be asked in the appropriate order that aligns with the problem-solving process.",
+                                    "Restate relevant information from previous steps when answering subquestions to prevent misunderstanding."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Calculations and Computations",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Ensuring Accurate Calculations",
+                                "ExamplePrompts": [
+                                    "Carefully perform calculations required for each subquestion, double-checking arithmetic and using tools like calculators when necessary.",
+                                    "Confirm that multiplication factors and percentage increases are correctly applied; convert percentages to decimals for easier computation.",
+                                    "Accumulate values correctly according to the problem statement. For instance, apply the correct operations for totals (addition) and increases (multiplication).",
+                                    "When integrating intermediate answers, ensure full and correct incorporation into subsequent problem-solving steps."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Review and Validation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Ensuring Thorough Review and Validation",
+                                "ExamplePrompts": [
+                                    "Review each calculation and logical flow at every step to verify accuracy before proceeding.",
+                                    "Synthesize all subanswers thoroughly to construct an accurate final answer to the main question.",
+                                    "Consistently check the logic and mathematical rationale behind each step to ascertain that the path from subanswers to final solutions is logical.",
+                                    "After providing responses, review the mathematical correctness and ensure that intermediate steps logically lead to the final answer.",
+                                    "Any time a reward is marked as false, carefully analyze the actions and responses that led to the error. Adjust future strategies based on this analysis."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Consistency in Rewards",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Maintaining Consistent Reward Feedback",
+                                "ExamplePrompts": [
+                                    "Maintain a consistent reward system where correct answers are indicated with the appropriate numerical value (e.g., 1.0) and incorrect answers are clearly marked with 'False' or a reduced reward."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Thorough Understanding and Problem Statement",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Understanding the Problem",
+                                "ExamplePrompts": [
+                                    "Read the problem statement thoroughly to fully understand the context and what is specifically being asked.",
+                                    "Identify and recognize essential data that directly affects the calculation needed for the main question's answer."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Formulation of Subquestions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Developing Subquestions",
+                                "ExamplePrompts": [
+                                    "Develop relevant subquestions that address individual components of the problem and lead toward the solution, ensuring each one progresses logically toward solving the main problem.",
+                                    "Frame subquestions to provide necessary intermediate values required in later steps, without introducing extraneous information.",
+                                    "Ensure subquestions are structured to answer the main question in a logical sequence, providing clear, step-by-step reasoning within subanswers."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Calculation Precision and Accuracy",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Precision in Calculations",
+                                "ExamplePrompts": [
+                                    "Always be as precise as possible in calculations, maintaining exactness in intermediate values and avoiding premature rounding, especially when dealing with fractions or divisions.",
+                                    "When addressing percentages, use the correct mathematical operations to calculate increases or other quantities, ensuring the correct base value is used.",
+                                    "Validate subanswers by re-confirming calculations if results seem unlikely or to rectify simplistic errors, double-checking for accuracy and consistency in units."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Simplification and Rounding Conventions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Simplification and Rounding",
+                                "ExamplePrompts": [
+                                    "Provide simplified fractions that maintain the same level of accuracy as their decimal form when possible.",
+                                    "Final answers must reflect proper rounding conventions, especially involving currency, rounding off to the nearest cent for financial accuracy."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Consistency and Coherence",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Maintaining Consistency",
+                                "ExamplePrompts": [
+                                    "Maintain consistency in units throughout the problem, ensuring all units are converted and used consistently.",
+                                    "Check if subanswers are logically consistent, mathematically correct, and coherent when assembled to solve the overall problem."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Verification and Review",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Final Verification",
+                                "ExamplePrompts": [
+                                    "Perform a final check of the subanswer against the question to validate that it addresses the subquestion fully and revisit steps when necessary.",
+                                    "Verify the completeness of the solution, ensuring all steps are covered and no intermediate values are missing.",
+                                    "Prior to finalizing the answer, verify if it answers the main question sensibly and accurately."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Learning from Rewards and Feedback",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Learning and Improvement",
+                                "ExamplePrompts": [
+                                    "Use rewards as feedback to identify successful problem-solving strategies and reinforce approaches that yield higher accuracy.",
+                                    "Reflect on and learn from any mistakes made in previous problems, understanding why certain responses received lower rewards to improve future outcomes."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Math Word Problem Solving",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Clarify Quantities",
+                                "ExamplePrompts": [
+                                    "Clarify the quantities involved, distinguishing between total amounts, unit costs, and multiplicative factors. Use correct mathematical operations based on these relationships."
+                                ]
+                            },
+                            {
+                                "PatternName": "Convert Units",
+                                "ExamplePrompts": [
+                                    "When necessary, accurately convert between units (e.g., minutes to hours) using proper mathematical operations, and maintain consistency in units throughout the problem."
+                                ]
+                            },
+                            {
+                                "PatternName": "Translate Conditions",
+                                "ExamplePrompts": [
+                                    "Directly translate the word problem's conditions into mathematical equations or expressions, and apply correct mathematical operations."
+                                ]
+                            },
+                            {
+                                "PatternName": "Address Sub-questions",
+                                "ExamplePrompts": [
+                                    "Address each sub-question in a logical order, one at a time, methodically performing operations and maintaining at least three decimal places of precision for operations with hourly rates or similar calculations."
+                                ]
+                            },
+                            {
+                                "PatternName": "Use Correct Base Amounts",
+                                "ExamplePrompts": [
+                                    "When dealing with ratios or relational costs, ensure the correct base amounts are used for calculations."
+                                ]
+                            },
+                            {
+                                "PatternName": "Sequentially Solve Sub-questions",
+                                "ExamplePrompts": [
+                                    "Sequentially solve the sub-questions, constantly cross-referencing with the problem's conditions, and checking that each sub-answer is logical and consistent with the overall scenario."
+                                ]
+                            },
+                            {
+                                "PatternName": "Avoid Rounding Intermediate Results",
+                                "ExamplePrompts": [
+                                    "Refrain from rounding intermediate results to maintain accuracy, and only round the final result if necessary, ensuring the level of precision matches that of the given variables."
+                                ]
+                            },
+                            {
+                                "PatternName": "Maintain Units and Logical Consistencies",
+                                "ExamplePrompts": [
+                                    "Regularly ensure that all units and logical consistencies are maintained throughout the solution process, avoiding impossible situations (such as fractions of indivisible items)."
+                                ]
+                            },
+                            {
+                                "PatternName": "Double-check Each Step",
+                                "ExamplePrompts": [
+                                    "Double-check each step against the provided information and common sense narrative to avoid repetition of errors or misinterpretation."
+                                ]
+                            },
+                            {
+                                "PatternName": "Confirm and Validate Answers",
+                                "ExamplePrompts": [
+                                    "Before finalizing the answer, confirm that each part of the problem has been addressed and that the math operations have been applied correctly. Validate each sub-answer and the final answer, ensuring that they make sense and address the question accurately and fully."
+                                ]
+                            },
+                            {
+                                "PatternName": "Question Reasonableness of Final Solution",
+                                "ExamplePrompts": [
+                                    "After combining sub-answers for the final solution, question its reasonableness in the context of the problem, verifying if quantities add up correctly and whether the overall solution is plausible."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
