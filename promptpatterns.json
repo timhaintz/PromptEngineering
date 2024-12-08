@@ -7545,6 +7545,67 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":64,
+                "Title": "Mind's Eye of LLMs: Visualization-of-Thought Elicits Spatial Reasoning in Large Language Models",
+                "APAReference": "Wu, W., Mao, S., Zhang, Y., Xia, Y., Dong, L., Cui, L., & Wei, F. (2024). Mind's Eye of LLMs: Visualization-of-Thought Elicits Spatial Reasoning in Large Language Models. In The Thirty-eighth Annual Conference on Neural Information Processing Systems.",
+                "Authors":[
+                    "Wenshan Wu",
+                    "Shaoguang Mao",
+                    "Yadong Zhang",
+                    "Yan Xia",
+                    "Li Dong",
+                    "Lei Cui",
+                    "Furu Wei"
+                ],
+                "URLReference": "https://openreview.net/forum?id=CEJ1mYPgWw",
+                "datetimeAddedToDB": "2024-12-08T21:49:18.402Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Visualization-of-Thought Prompting",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Visualization-of-Thought",
+                                "ExamplePrompts": [
+                                    "Visualize the state after each reasoning step.",
+                                    "Starting from      , provide the steps to navigate \nto       .",
+                                    "To fit all the provided polyominoes into the \nempty squares, what's the correct variation of \nTetromino T?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Natural Language Navigation",
+                                "ExamplePrompts": [
+                                    "You have been given a 3 by 3 square grid. Initially, \nyou are at the bottom-left corner…find a cassette \nplayer…go right…a wool, go right…a conch, go \nup…a moving van, go left…a confectionery store, \ngo left…a pot pie, go up…a siamang, go right…a \nblack-and-white colobus, go right…a minivan. \nNow you have all the information on the map. You \nstart at where the cassette player is located, then \nyou go right by one step, go right…go up…go \nleft…go left…go up…go right…go down by one \nstep. What will you find?"
+                                ]
+                            },
+                            {
+                                "PatternName": "GPT-4 CoT",
+                                "ExamplePrompts": [
+                                    "Let's think step by step."
+                                ]
+                            },
+                            {
+                                "PatternName": "GPT-4 w/o Viz",
+                                "ExamplePrompts": [
+                                    "Don't use visualization. Let's think step by step."
+                                ]
+                            },
+                            {
+                                "PatternName": "GPT-4V CoT",
+                                "ExamplePrompts": [
+                                    "Let's think step by step."
+                                ]
+                            },
+                            {
+                                "PatternName": "GPT-4 VoT",
+                                "ExamplePrompts": [
+                                    "Visualize the state after each reasoning step."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
