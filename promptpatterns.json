@@ -7862,6 +7862,152 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":66,
+                "Title": "Buffer of Thoughts: Thought-Augmented Reasoning with Large Language Models",
+                "APAReference": "Yang, L., Yu, Z., Zhang, T., Cao, S., Xu, M., Zhang, W., ... & Cui, B. (2024). Buffer of Thoughts: Thought-Augmented Reasoning with Large Language Models. arXiv preprint arXiv:2406.04271.",
+                "Authors":[
+                    "Ling Yang",
+                    "Zhaochen Yu",
+                    "Tianjun Zhang",
+                    "Shiyi Cao",
+                    "Minkai Xu",
+                    "Wentao Zhang",
+                    "Joseph E. Gonzalez",
+                    "Bin Cui"
+                ],
+                "URLReference": "https://arxiv.org/abs/2406.04271",
+                "datetimeAddedToDB": "2024-12-09T01:25:01.126Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Mathematical Reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Quadratic Equation Solving",
+                                "ExamplePrompts": [
+                                    "To solve any quadratic equation of the form 𝐴𝑥^2 + 𝐵𝑥 + 𝐶 = 0, we can follow a general approach based on the method described. Here is the structured template for solving such equations:\nStep 1: Calculate the Discriminant\n•Compute the discriminant Δ using the formula Δ=𝐵^2 − 4𝐴𝐶.\nStep 2: Determine the Nature of the Roots\n•If Δ≥0, the equation has two distinct real roots.\n•If Δ=0, the equation has exactly one real root (also known as a repeated or double root).\n•If Δ<0, the equation has two complex roots.\nStep 3: Compute the Roots\n•For Δ≥0, calculate the roots using the formula 𝑥 = (-𝐵±√Δ)/(2𝐴)\nFor Δ<0, calculate the real and imaginary parts of the complex roots using the formula 𝑥 = (-𝐵±√|Δ|𝑖)/(2𝐴) where 𝑖 is the imaginary unit."
+                                ]
+                            },
+                            {
+                                "PatternName": "Profit Calculation",
+                                "ExamplePrompts": [
+                                    "To devise a plan to solve the problem, let's break it down into steps:\n1. Determine the current daily profit:\nCalculate the current daily profit using the average daily sales and profit per shirt\n2. Set up the equation for the desired daily profit\nCreate an equation that relates new profit per shirt, increased number of shirts sold, and desired daily profit\n3. Solve the equation\nExpand the equation and collect like terms:\n1200=(20×40)+(2𝑝×40)−(20×𝑝)−(2𝑝×𝑝)\nDivide by 2 to simplify:\n𝑝^2 −30𝑝−200 = 0\n𝑝≈35.6155"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Code Programming",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Element Processing",
+                                "ExamplePrompts": [
+                                    "def process_element(element):\n# Define how to process each individual element, e.g., applying a filter or transformation."
+                                ]
+                            },
+                            {
+                                "PatternName": "Element Combination",
+                                "ExamplePrompts": [
+                                    "def combine_elements(element1, element2):\n# Define how to combine elements, e.g., summing numbers, concatenating strings, etc."
+                                ]
+                            },
+                            {
+                                "PatternName": "Condition Checking",
+                                "ExamplePrompts": [
+                                    "def check_condition(accumulated_result):\n# Define the condition that the accumulated result must meet."
+                                ]
+                            },
+                            {
+                                "PatternName": "Problem Solving",
+                                "ExamplePrompts": [
+                                    "def solve_problem(input_list):\n# Define the steps to solve the problem using the input list."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Template Distillation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Problem-Solving Template",
+                                "ExamplePrompts": [
+                                    "1. Core task summarization: \n Identify and describe the basic type and core challenges of the problem, such as classifying it as a mathematical problem (e.g., solving a quadratic equation), a data structure problem (e.g., array sorting), an algorithm problem (e.g., search algorithms), etc. And analyze the most efficient way to solve the problem. \n 2. Solution Steps Description: \n Outline the general solution steps, including how to define the problem, determine variables, list key equations or constraints, choose appropriate solving strategies and methods, and how to verify the correctness of the results. \n 3. General Answer Template: \n Based on the above analysis, propose a template or approach that can be widely applied to this type of problem, including possible variables, functions, class definitions, etc. If it is a programming problem, provide a set of base classes and interfaces that can be used to construct solutions to specific problems. Please ensure that your response is highly concise and structured, so that specific solutions can be transformed into generalizable methods."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Text Comprehension",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Thought Template",
+                                "ExamplePrompts": [
+                                    "Step 1: Parse the initial table, extracting the header information and each penguin's attributes into a structured format (e.g., a list of dictionaries).",
+                                    "Step 2: Read and integrate any additional natural language information that updates or adds to the table, ensuring the data remains consistent.",
+                                    "Step 3: Identify the attribute in question (e.g., oldest penguin, heaviest penguin) and the corresponding column in the table.",
+                                    "Step 4: Apply logical reasoning to compare the relevant attribute across all entries to find the correct answer (e.g., the highest age for the oldest penguin).",
+                                    "Step 5: Select the answer from the provided options that matches the result of the logical comparison."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Creative Language Generation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Thought Template",
+                                "ExamplePrompts": [
+                                    "Step 1: Identify the three words that must be included in the sonnet.",
+                                    "Step 2: Understand the rhyme scheme \"ABAB CDCD EFEF GG\" and prepare a list of rhyming words that could be used.",
+                                    "Step 3: Develop a theme or story for the sonnet that can naturally incorporate the three provided words.",
+                                    "Step 4: Begin drafting the sonnet by writing the first quatrain (four lines) following the \"ABAB\" rhyme scheme, ensuring one or more of the provided words are included.",
+                                    "Step 5: Continue with the second quatrain \"CDCD,\" the third quatrain \"EFEF,\" and finally the closing couplet \"GG,\" each time incorporating the provided words as needed.",
+                                    "Step 6: Review the sonnet for coherence, flow, and adherence to the rhyme scheme, making adjustments as necessary."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Common Sense Reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Determine the next date",
+                                "ExamplePrompts": [
+                                    "Task Description: Given a specific date and an event, such as a holiday or historical event, determine the following date. Solution Description: To determine the next date, we need to consider the structure of the calendar, the number of days in each month, and whether it's a leap year. Typically, the number of days in a month is fixed, except February may vary due to leap years. The next day in a year is usually the following year. Thought Template: date increased by one day unless it's the end of the month, then the next day will be the first day of the following month. For the end of the year, the next day will be January 1st of the Step 1: Identify the given date's month and day number. Step 2: Check if it's the end of the month; if so, confirm the start date of the next month. Step 3: If it's not the end of the month, simply add one to the day number. Step 4: Pay special attention to the end of the year, ensuring the year increments."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Mathematical Reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Solve a quadratic equation",
+                                "ExamplePrompts": [
+                                    "Task Description: Solve an quadratic equation of the form ax2 + bx + c = 0 considering any situations. Solution Description: To solve any quadratic equation of the form ax2 + bx + c = 0, we can follow a general approach based on the method described. Here is the structured template for solving such equations: Thought Template: Step 1: Calculate the Discriminant- Compute the discriminant D using the formula D = b2 − 4ac. Step 2: Determine the Nature of the Roots- If D > 0,the equation has two distinct real roots.- If D = 0,the equation has exactly one real root (also known as a repeated or double root).- If D < 0,the equation has two complex roots. x = −b 2a ± Step 3: Compute the Roots- For D ≥ 0, calculate the roots using the formula x = −b±√D 2a .- For D < 0,calculate the real and imaginary parts of the complex roots using the formula √−D 2a i, where i is the imaginary unit."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Problem Solving and Reasoning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Problem Distiller",
+                                "ExamplePrompts": [
+                                    "[Problem Distiller]: As a highly professional and intelligent expert in information distillation, you excel at extracting essential information to solve problems from user input queries. You adeptly transform this extracted information into a suitable format based on the respective type of the issue. Please categorize and extract the crucial information required to solve the problem from the user's input query, the distilled information should include. 1. Key information: Values and information of key variables extracted from user input, which will be handed over to the respective expert for task resolution, ensuring all essential information required to solve the problem is provided. 2. Restrictions: The objective of the problem and corresponding constraints. 3. Distilled task: Extend the problem based on 1 and 2, summarize a meta problem that can address the user query and handle more input and output variations. Incorporate the real-world scenario of the extended problem along with the types of key variables and information constraints from the original problem to restrict the key variables in the extended problem. After that, use the user query input key information as input to solve the problem as an example."
+                                ]
+                            },
+                            {
+                                "PatternName": "Instantiated Reasoning",
+                                "ExamplePrompts": [
+                                    "[Meta Reasoner] You are a Meta Reasoner who are extremely knowledgeable in all kinds of fields including Computer Science, Math, Physics, Literature, History, Chemistry, Logical reasoning, Culture, Language..... You are also able to find different high-level thought for different tasks. Here are three reasoning structures: i) Prompt-based structure: It has a good performance when dealing with problems like Common Sense Reasoning, Application Scheduling ii) Procedure-based structure It has a good performance when dealing with creative tasks like Creative Language Generation, and Text Comprehension iii) Programming-based: It has a good performance when dealing with Mathematical Reasoning and Code Programming, it can also transform real-world problems into programming problem which could be solved efficiently. (Reasoning instantiation) Your task is: 1. Deliberately consider the context and the problem within the distilled respond from problem distiller and use your understanding of the question within the distilled respond to find a domain expert who are suitable to solve the problem. 2. Consider the distilled information, choose one reasoning structures for the problem. 3. If the thought-template is provided, directly follow the thought-template to instantiate for the given problem."
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
