@@ -119,7 +119,7 @@ system_prompt = {
     You are a PhD student extracting keypoints from research papers.
     ONLY use the provided input text to extract the keypoints.
     Check the input data twice to confirm the keypoints are complete and correct before providing the output.
-    OUTPUT
+    Confirm the output is valid JSON structured as below:
     {
         "Title": "<TITLE OF THE PAPER>",
         "KeyPoints":[
@@ -134,10 +134,11 @@ system_prompt = {
     ONLY use the provided input text to answer the question.
     Break down the task into parts using Chain-Of-Thought Prompt Engineering techniques.
     Please answer the question asked.
-    ###OUTPUT###
+    Confirm the output is valid JSON structured as below:
+    {
         "Title": "<TITLE OF THE PAPER>",
         "Answer": "This is an example answer."
-    ### END OUTPUT###
+    }
     '''
 }
 
@@ -340,6 +341,7 @@ if __name__ == '__main__':
         else:
             response_json = response_json_string
         # Save extracted prompt patterns to a JSON file
+        # response_json = json.loads(response_json)
         filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
         folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
         os.makedirs(folder_name, exist_ok=True)
