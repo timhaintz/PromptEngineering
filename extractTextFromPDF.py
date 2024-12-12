@@ -72,7 +72,7 @@ system_prompt = {
     "extractexamples": '''# INSTRUCTIONS
     You are a PhD student collecting prompt engineering examples from research papers. Provide the prompt examples only, I don't need the response from the paper.
     ONLY use the provided input text to extract the examples.
-    Reflect on the input data to conifrm all the prompt examples are complete and correct before providing the output.
+    Reflect on the input data to confirm all the prompt examples are complete and correct before providing the output.
     OUTPUT
     {
         "CategoriesAndPatterns": [
@@ -102,21 +102,23 @@ system_prompt = {
                                 }
                             ]
                         }
+                    ]
     }
     ''',
     "summary": '''# INSTRUCTIONS You are a PhD student summarising research papers. 
     ONLY use the provided input text to summarise the paper. 
-    Check the input data twice to conifrm the summary is complete and correct before providing the output.
-    OUTPUT
+    Check the input data twice to confirm the summary is complete and correct before providing the output.
+    Confirm the output is valid JSON structured as below:
     {
         "Title": "<TITLE OF THE PAPER>",
         "Summary": "This is an example summary."
     }
+    
     ''',
     "keypoints": '''# INSTRUCTIONS
     You are a PhD student extracting keypoints from research papers.
     ONLY use the provided input text to extract the keypoints.
-    Check the input data twice to conifrm the keypoints are complete and correct before providing the output.
+    Check the input data twice to confirm the keypoints are complete and correct before providing the output.
     OUTPUT
     {
         "Title": "<TITLE OF THE PAPER>",
