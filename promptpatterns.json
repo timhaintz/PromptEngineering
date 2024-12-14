@@ -8008,6 +8008,57 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":67,
+                "Title": "SPREADSHEETLLM: Encoding Spreadsheets for Large Language Models",
+                "APAReference": "Tian, Y., Zhao, J., Dong, H., Xiong, J., Xia, S., Zhou, M., ... & Zhang, D. (2024). Spreadsheetllm: Encoding spreadsheets for large language models. arXiv preprint arXiv:2407.09025.",
+                "Authors":[
+                    "Yuzhang Tian",
+                    "Jianbo Zhao",
+                    "Haoyu Dong",
+                    "Junyu Xiong",
+                    "Shiyu Xia",
+                    "Mengyu Zhou",
+                    "Yun Lin",
+                    "José Cambronero",
+                    "Yeye He",
+                    "Shi Han",
+                    "Dongmei Zhang"
+                ],
+                "URLReference": "https://readwise-assets.s3.amazonaws.com/media/wisereads/articles/spreadsheetllm-encoding-spread/2407.09025v1.pdf",
+                "datetimeAddedToDB": "2024-12-14T22:43:12.749Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Prompt Templates",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Vanilla Prompt Template for Spreadsheet Table Detection",
+                                "ExamplePrompts": [
+                                    "INSTRUCTION:\nGiven an input that is a string denoting data\nof cells in a spreadsheet. The input spread-\nsheet includes many pairs, and each pair con-\nsists of a cell address and the text in that cell\nwith a \u2019,\u2019 in between, like \u2019A1,Year\u2019. Cells\nare separated by \u2019|\u2019 like \u2019A1,Year|A2,Profit\u2019.\nThe text can be empty so the cell data is like\n\u2019A1, |A2,Profit\u2019. The cells are organized in\nrow-major order. Now you should tell me\nthe range of the table in a format like A2:D5,\nand the range of the table should only CON-\nTAIN HEADER REGION and the data region,\nDON\u2019T include the title or comments. Note\nthat there can be more than one table in the\nstring, so you should return all the RANGE,\nLIKE [\u2019range\u2019: \u2019A1:F9\u2019, \u2019range\u2019: \u2019A12:F18\u2019].\nDON\u2019T ADD OTHER WORDS OR EXPLA-\nNATION.\nINPUT:\n[Encoded Spreadsheet]"
+                                ]
+                            },
+                            {
+                                "PatternName": "SPREADSHEETLLM Prompt Template for Spreadsheet Table Detection",
+                                "ExamplePrompts": [
+                                    "INSTRUCTION:\nGiven an input that is a string denoting data\nof cells in an Excel spreadsheet.\nThe in-\nput spreadsheet contains many tuples, de-\nscribing the cells with content in the spread-\nsheet. Each tuple consists of two elements\nseparated by a \u2019|\u2019: the cell content and the\ncell address/region, like (Year|A1), ( |A1) or\n(IntNum|A1:B3). The content in some cells\nsuch as \u2019#,##0\u2019/\u2019d-mmm-yy\u2019/\u2019H:mm:ss\u2019,etc.,\nrepresents the CELL DATA FORMATS of\nExcel. The content in some cells such as\n\u2019IntNum\u2019/\u2019DateData\u2019/\u2019EmailData\u2019,etc., repre-\nsents a category of data with the same for-\nmat and similar semantics. For example, \u2019Int-\nNum\u2019 represents integer type data, and \u2019Scien-\ntificNum\u2019 represents scientific notation type\ndata. \u2019A1:B3\u2019 represents a region in a spread-\nsheet, from the first row to the third row and\nfrom column A to column B. Some cells with\nempty content in the spreadsheet are not en-\ntered. Now you should tell me the range of\nthe table in a format like A2:D5, and the range\nof the table should only CONTAIN HEADER\nREGION and the data region. DON\u2019T include\nthe title or comments. Note that there can be\nmore than one table in a string, so you should\nreturn all the RANGE.\nDON\u2019T ADD OTHER WORDS OR EXPLA-\nNATION.\nINPUT:\n[Encoded Spreadsheet]"
+                                ]
+                            },
+                            {
+                                "PatternName": "Spreadsheet QA Prompt Template - Stage 1",
+                                "ExamplePrompts": [
+                                    "INSTRUCTION:\nGiven an input that is a string denoting data of\ncells in a table. The input table contains many\ntuples, describing the cells with content in the\nspreadsheet. Each tuple consists of two ele-\nments separated by a \u2019|\u2019: the cell content and the\ncell address/region, like (Year|A1), ( |A1) or\n(IntNum|A1:B3). The content in some cells\nsuch as \u2019#,##0\u2019/\u2019d-mmm-yy\u2019/\u2019H:mm:ss\u2019,etc.,\nrepresents the CELL DATA FORMATS of\nExcel. The content in some cells such as\n\u2019IntNum\u2019/\u2019DateData\u2019/\u2019EmailData\u2019,etc., repre-\nsents a category of data with the same format\nand similar semantics. For example, \u2019IntNum\u2019\nrepresents integer type data, and \u2019Scientific-\nNum\u2019 represents scientific notation type data.\n\u2019A1:B3\u2019 represents a region in a spreadsheet,\nfrom the first row to the third row and from\ncolumn A to column B. Some cells with empty\ncontent in the spreadsheet are not entered.\nHow many tables are there in the spreadsheet?\nBelow is a question about one certain table in\nthis spreadsheet. I need you to determine in\nwhich table the answer to the following ques-\ntion can be found, and return the RANGE\nof the ONE table you choose, LIKE [\u2019range\u2019:\n\u2019A1:F9\u2019]. DON\u2019T ADD OTHER WORDS\nOR EXPLANATION.\nINPUT:\n[Encoded Spreadsheet with compression]"
+                                ]
+                            },
+                            {
+                                "PatternName": "Spreadsheet QA Prompt Template - Stage 2",
+                                "ExamplePrompts": [
+                                    "INSTRUCTION:\nGiven an input that is a string denoting data of\ncells in a table and a question about this table.\nThe answer to the question can be found in\nthe table. The input table includes many pairs,\nand each pair consists of a cell address and\nthe text in that cell with a \u2019,\u2019 in between,\nlike \u2019A1,Year\u2019. Cells are separated by \u2019|\u2019 like\n\u2019A1,Year|A2,Profit\u2019. The text can be empty so\nthe cell data is like \u2019A1, |A2,Profit\u2019. The cells\nare organized in row-major order. The answer\nto the input question is contained in the input\ntable and can be represented by cell address. I\nneed you to find the cell address of the answer\nin the given table based on the given question\ndescription, and return the cell ADDRESS of\nthe answer like \u2019[B3]\u2019 or \u2019[SUM(A2:A10)]\u2019.\nDON\u2019T ADD ANY OTHER WORDS.\"\nINPUT:\n[Encoded Spreadsheet without compression]"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
