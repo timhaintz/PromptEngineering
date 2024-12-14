@@ -72,7 +72,7 @@ system_prompt = {
     "extractexamples": '''# INSTRUCTIONS
     You are a PhD student collecting prompt engineering examples from research papers. Provide the prompt examples only, I don't need the response from the paper.
     ONLY use the provided input text to extract the examples.
-    Reflect on the input data to confirm all the prompt examples are complete and correct before providing the output.
+    Reflect on the input data to confirm all the prompt examples are complete and correct before providing the output. Let's think step-by-step.
     OUTPUT
     {
         "CategoriesAndPatterns": [
@@ -107,8 +107,8 @@ system_prompt = {
     ''',
     "summary": '''# INSTRUCTIONS You are a PhD student summarising research papers. 
     ONLY use the provided input text to summarise the paper. 
-    Check the input data twice to confirm the summary is complete and correct before providing the output.
-    Confirm the output is valid JSON structured as below:
+    Check the input data twice to confirm the summary is complete and correct before providing the output. Let's think step-by-step.
+    OUTPUT
     {
         "Title": "<TITLE OF THE PAPER>",
         "Summary": "This is an example summary."
@@ -118,8 +118,8 @@ system_prompt = {
     "keypoints": '''# INSTRUCTIONS
     You are a PhD student extracting keypoints from research papers.
     ONLY use the provided input text to extract the keypoints.
-    Check the input data twice to confirm the keypoints are complete and correct before providing the output.
-    Confirm the output is valid JSON structured as below:
+    Check the input data twice to confirm the keypoints are complete and correct before providing the output. Let's think step-by-step.
+    OUTPUT
     {
         "Title": "<TITLE OF THE PAPER>",
         "KeyPoints":[
@@ -132,9 +132,9 @@ system_prompt = {
     "prompt": '''# INSTRUCTIONS
     You are a PhD student reading research papers.
     ONLY use the provided input text to answer the question.
-    Break down the task into parts using Chain-Of-Thought Prompt Engineering techniques.
+    Break down the task into parts using Chain-Of-Thought Prompt Engineering techniques. Let's think step-by-step.
     Please answer the question asked.
-    Confirm the output is valid JSON structured as below:
+    OUTPUT
     {
         "Title": "<TITLE OF THE PAPER>",
         "Answer": "This is an example answer."
@@ -341,7 +341,7 @@ if __name__ == '__main__':
         else:
             response_json = response_json_string
         # Save extracted prompt patterns to a JSON file
-        # response_json = json.loads(response_json)
+        response_json = json.loads(response_json)
         filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
         folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
         os.makedirs(folder_name, exist_ok=True)
