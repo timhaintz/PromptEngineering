@@ -8100,6 +8100,121 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":69,
+                "Title": "Automated Design of Agentic Systems",
+                "APAReference": "Hu, S., Lu, C., & Clune, J. (2024). Automated design of agentic systems. arXiv preprint arXiv:2408.08435.",
+                "Authors":[
+                    "Shengran Hu",
+                    "Cong Lu",
+                    "Jeff Clune"
+                ],
+                "URLReference": "https://arxiv.org/abs/2408.08435",
+                "datetimeAddedToDB": "2024-12-15T00:57:40.456Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Meta Agent Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "System Prompt",
+                                "ExamplePrompts": [
+                                    "You are a helpful assistant. Make sure to return in a WELL-FORMED JSON object."
+                                ]
+                            },
+                            {
+                                "PatternName": "Main Prompt",
+                                "ExamplePrompts": [
+                                    "You are an expert machine learning researcher testing various agentic systems. Your objective is to design building blocks such as prompts and control flows within these systems to solve complex tasks. Your aim is to design an optimal agent performing well on [Brief Description of the Domain].\n[Framework Code]\n[Output Instructions and Examples]\n[Discovered Agent Archive] (initialized with baselines, updated at every iteration)\n# Your task\nYou are deeply familiar with prompting techniques and the agent works from the literature. Your goal is to maximize the specified performance metrics by proposing interestingly new agents.\nObserve the discovered agents carefully and think about what insights, lessons, or stepping stones can be learned from them.\nBe creative when thinking about the next interesting agent to try. You are encouraged to draw inspiration from related agent papers or academic papers from other research areas.\nUse the knowledge from the archive and inspiration from academic literature to propose the next interesting agentic system design.\nTHINK OUTSIDE THE BOX."
+                                ]
+                            },
+                            {
+                                "PatternName": "Output Instruction and Example",
+                                "ExamplePrompts": [
+                                    "# Output Instruction and Example:\nThe first key should be (\u201cthought\u201d), and it should capture your thought process for designing the next function. In the \u201cthought\u201d section, first reason about what the next interesting agent to try should be, then describe your reasoning and the overall concept behind the agent design, and finally detail the implementation steps.\nThe second key (\u201cname\u201d) corresponds to the name of your next agent architecture.\nFinally, the last key (\u201ccode\u201d) corresponds to the exact \u201cforward()\u201d function in Python code that you would like to try. You must write COMPLETE CODE in \u201ccode\u201d:\nYour code will be part of the entire project, so please implement complete, reliable, reusable code snippets. Here is an example of the output format for the next agent: {“thought”: “**Insights:** Your insights on what should be the next interesting agent. **Overall Idea:** your reasoning and the overall concept behind the agent design. **Implementation:** describe the implementation step by step.”, “name”: “Name of your proposed agent”, “code”: “def forward(self, taskInfo): # Your code here”} ## WRONG Implementation examples: [Examples of potential mistakes the meta agent may make in implementation]"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Self-Reflection Prompts",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Self-Reflection Round 1",
+                                "ExamplePrompts": [
+                                    "[Generated Agent from Previous Iteration]\nCarefully review the proposed new architecture and reflect on the following points:\n1. **Interestingness**: Assess whether your proposed architecture is interesting or innovative compared to existing methods in the archive. If you determine that the proposed architecture is not interesting, suggest a new architecture that addresses these shortcomings.\n- Make sure to check the difference between the proposed architecture and previous attempts.\n- Compare the proposal and the architectures in the archive CAREFULLY, including their actual differences in the implementation.\n- Decide whether the current architecture is innovative.\n- USE CRITICAL THINKING!\n2. **Implementation Mistakes**: Identify any mistakes you may have made in the implementation. Review the code carefully, debug any issues you find, and provide a corrected version. REMEMBER checking \"## WRONG Implementation examples\" in the prompt.\n3. **Improvement**: Based on the proposed architecture, suggest improvements in the detailed implementation that could increase its performance or effectiveness. In this step, focus on refining and optimizing the existing implementation without altering the overall design framework, except if you want to propose a different architecture if the current is not interesting.\n- Observe carefully about whether the implementation is actually doing what it is supposed to do.\n- Check if there is redundant code or unnecessary steps in the implementation. Replace them with effective implementation.\n- Try to avoid the implementation being too similar to the previous agent.\nAnd then, you need to improve or revise the implementation, or implement the new proposed architecture based on the reflection.\nYour response should be organized as follows:\n\"reflection\": Provide your thoughts on the interestingness of the architecture, identify any mistakes in the implementation, and suggest improvements.\n\"thought\": Revise your previous proposal or propose a new architecture if necessary, using the same format as the example response.\n\"name\": Provide a name for the revised or new architecture. (Don\u2019t put words like \"new\" or \"improved\" in the name.)\n\"code\": Provide the corrected code or an improved implementation. Make sure you actually implement your fix and improvement in this code."
+                                ]
+                            },
+                            {
+                                "PatternName": "Self-Reflection Round 2",
+                                "ExamplePrompts": [
+                                    "Using the tips in \u201c## WRONG Implementation examples\u201d section, further revise the code.\nYour response should be organized as follows:\nInclude your updated reflections in the \u201creflection\u201d. Repeat the previous \u201cthought\u201d and \u201cname\u201d. Update the corrected version of the code in the \u201ccode\u201d section."
+                                ]
+                            },
+                            {
+                                "PatternName": "Self-Reflection for Runtime Errors",
+                                "ExamplePrompts": [
+                                    "Error during evaluation:\n[Runtime errors]\nCarefully consider where you went wrong in your latest implementation. Using insights from previous attempts, try to debug the current code to implement the same thought. Repeat your previous thought in \u201cthought\u201d, and put your thinking for debugging in \u201cdebug_thought\u201d."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ARC Challenge",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Task Overview",
+                                "ExamplePrompts": [
+                                    "You will be given some number of paired example inputs and outputs grids. The outputs were produced by applying a transformation rule to the input grids. In addition to the paired example inputs and outputs, there is also one test input without a known output. The inputs and outputs are each \u201cgrids\u201d. A grid is a rectangular matrix of integers between 0 and 9 (inclusive). Each number corresponds to a color. 0 is black. Your task is to determine the transformation rule from examples and find out the answer, involving determining the size of the output grid for the test and correctly filling each cell of the grid with the appropriate color or number. The transformation only needs to be unambiguous and applicable to the example inputs and the test input. It doesn\u2019t need to work for all possible inputs. Observe the examples carefully, imagine the grid visually, and try to find the pattern."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Reading Comprehension",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "DROP",
+                                "ExamplePrompts": [
+                                    "Your aim is to find an optimal agent performing well on the Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs (DROP), which assesses the ability to perform discrete reasoning and comprehend detailed information across multiple paragraphs. ## An example question from DROP: You will be asked to read a passage and answer a question.\nPassage:\nNon-nationals make up more than half of the population of Bahrain, with immigrants making up\nabout 55% of the overall population. Of those, the vast majority come from South and Southeast Asia:\naccording to various media reports and government statistics dated between 2005-2009 roughly 290,000\nIndians, 125,000 Bangladeshis, 45,000 Pakistanis, 45,000 Filipinos, and 8,000 Indonesians.\nQuestion:\nWhat two nationalities had the same number of people living in Bahrain between\n2005-2009?\nAnswer [Not Given]: Pakistanis and Filipinos"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Science",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "GPQA",
+                                "ExamplePrompts": [
+                                    "Your aim is to find an optimal agent performing well on the GPQA (Graduate-Level Google-Proof Q&A Benchmark). This benchmark consists of challenging multiple-choice questions across the domains of biology, physics, and chemistry, designed by domain experts to ensure high quality and difficulty. ## An example question from GPQA: Two quantum states with energies E1 and E2 have a lifetime of 10\u22129 sec and 10\u22128 sec, respectively. We\nwant to clearly distinguish these two energy levels. Which one of the following options could be their\nenergy difference so that they be clearly resolved?\nAnswer choices:\n10\u22129 eV\n10\u22128 eV\n10\u22127 eV\n10\u22126 eV\nCorrect answer [Not provided]:\n10\u22127 eV\nExplanation [Not provided]:\nAccording to the uncertainty principle, Delta E* Delta t=hbar/2. Delta t is the lifetime and Delta E is the\nwidth of the energy level. With Delta t=10\u22129 s==> Delta E1= 3.3 10\u22127 ev. And Delta t=10\u221211 s gives\nDelta E2=3.310\u22128 eV. Therefore, the energy difference between the two states must be significantly\ngreater than 10\u22127 ev. So the answer is 10\u22124 ev."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Math",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "MGSM",
+                                "ExamplePrompts": [
+                                    "Your aim is to find an optimal agent performing well on the Multilingual Grade School Math Benchmark (MGSM) which evaluates mathematical problem-solving abilities across various languages to ensure broad and effective multilingual performance. ## An example question from MGSM: **Question**: \u3053\u306e\u6570\u5b66\u306e\u554f\u984c\u3092\u89e3\u3044\u3066\u304f\u3060\u3055\u3044\u3002\n\u8fd1\u6240\u3067\u306f\u3001\u30da\u30c3\u30c8\u306e\u30a6\u30b5\u30ae\u306e\u6570\u304c\u30da\u30c3\u30c8\u306e\u72ac\u3068\u732b\u3092\u5408\u308f\u305b\u305f\u6570\u3088\u308a\u308212\u5339\u5c11\u306a\u3044\u3002\u72ac1\u5339\u3042\u305f\u308a2\u5339\n\u306e\u732b\u304c\u304a\u308a\u3001\u72ac\u306e\u6570\u306f60\u5339\u3060\u3068\u3059\u308b\u3068\u3001\u5168\u90e8\u3067\u8fd1\u6240\u306b\u306f\u4f55\u5339\u306e\u30da\u30c3\u30c8\u304c\u3044\u307e\u3059\u304b\uff1f\n**Answer (Not Given)**: 348"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Multitask",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "MMLU",
+                                "ExamplePrompts": [
+                                    "Your aim is to find an optimal agent performing well on the MMLU (Massive Multitask Language Understanding) benchmark, a challenging evaluation that assesses a model’s ability to answer questions across a wide range of subjects and difficulty levels. It includes subjects from STEM, social sciences, humanities, and more. ## An example question from MMLU: Answer the following multiple-choice question.\nThe constellation ... is a bright W-shaped constellation in the northern sky.\n(A) Centaurus\n(B) Cygnus\n(C) Cassiopeia\n(D) Cepheus"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
