@@ -8059,6 +8059,47 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":68,
+                "Title": "Autonomous Prompt Engineering in Large Language Models ",
+                "APAReference": "Kepel, D., & Valogianni, K. (2024). Autonomous Prompt Engineering in Large Language Models. arXiv preprint arXiv:2407.11000.",
+                "Authors":[
+                    "Daan Kepel",
+                    "Konstantina Valogianni"
+                ],
+                "URLReference": "https://arxiv.org/abs/2407.11000",
+                "datetimeAddedToDB": "2024-12-15T00:31:45.489Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Template of Instructions",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "System prompt",
+                                "ExamplePrompts": [
+                                    "Imagine yourself as an  expert in the realm of prompting techniques for LLMs. Your expertise is not just broad, encompassing the entire spectrum of current knowledge on the subject, but also deep, delving into the nuances and intricacies that many overlook. Your job is to reformulate prompts with surgical precision, optimizing them for the most accurate response possible. The reformulated prompt should enable the LLM to always give the correct answer to the question. "
+                                ]
+                            },
+                            {
+                                "PatternName": "User prompt",
+                                "ExamplePrompts": [
+                                    "Your available prompting techniques include, but are not limited to the following: - Crafting an expert who is an expert at the given task, by writing a highquality description about the most capable and suitable agent to answer the instruction in second person perspective.[1] - Explaining step-by-step how the problem should be tackled, and making sure the model explains step-by-step how it came to the answer. You can do this by adding \"Let's think step-by-step\".[2] - Imagining three different experts who are discussing the problem at hand. All experts will write down 1 step of their thinking, then share it with the group. Then all experts will go on to the next step, etc. If any expert realises they're wrong at any point then they leave.[3] - Making sure all information needed is in the prompt, adding where necessary but making sure the question remains having the same objective. Your approach is methodical and analytical, yet creative. You use a mixture of the prompting techniques, making sure you pick the right combination for each instruction. You see beyond the surface of a prompt, identifying the core objectives and the best ways to articulate them to achieve the desired outcomes. Output instructions:\"\"\"\" You should ONLY return the reformulated prompt. Make sure to include ALL information from the given prompt to reformulate. \"\"\"\" Given above information and instructions, reformulate below prompt using the techniques provided: \"\"\"\" {sample_prompt} \"\"\"\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompt Optimization Toolbox Output",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Expert Prompting",
+                                "ExamplePrompts": [
+                                    "Imagine yourself as an expert in SVG path interpretation and geometric shape recognition. You are tasked with analyzing the following SVG path element to determine the geometric shape it represents: SVG Path: `<path d=\"M 88.00,67.00 L 70.00,18.00 L 38.00,60.00 L 73.00,48.00 L 60.00,62.00 L 88.00,67.00\"/>` Let's think step-by-step: 1. Start by identifying the starting point and subsequent points in the path. 2. Count the number of distinct points to determine the number of sides the shape has. 3. Analyze the angles and lengths between these points to discern the type of polygon or shape. 4. Compare the identified shape with the given options to select the correct answer. Options: (A) circle (B) heptagon (C) hexagon (D) kite (E) line (F) octagon (G) pentagon (H) rectangle (I) sector (J) triangle Which geometric shape does the SVG path draw?"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
