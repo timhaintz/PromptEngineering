@@ -8288,6 +8288,1185 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":71,
+                "Title": "ChatGPT for higher education and professional development: A guide to conversational AI",
+                "APAReference": "Atlas, S. (2023). ChatGPT for higher education and professional development: A guide to conversational AI.",
+                "Authors":[
+                    "Stephen Atlas"
+                ],
+                "URLReference": "https://digitalcommons.uri.edu/cgi/viewcontent.cgi?article=1547&context=cba_facpubs",
+                "datetimeAddedToDB": "2024-12-15T22:26:33.991Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Interact with ChatGPT",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Simple Question",
+                                "ExamplePrompts": [
+                                    "How can ChatGPT be used by college students, educators and professionals?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Automated essay scoring",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Grading Essays",
+                                "ExamplePrompts": [
+                                    "Please grade this student essay on the topic of 'The impact of technology on education'."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Personalized tutoring",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Providing Feedback",
+                                "ExamplePrompts": [
+                                    "Can you provide personalized feedback and guidance on this math problem for a student?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Research assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Finding Literature",
+                                "ExamplePrompts": [
+                                    "Can you help me find relevant literature on the topic of 'Artificial Intelligence in Higher Education'?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Classroom assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Creating Lesson Plans",
+                                "ExamplePrompts": [
+                                    "Can you help me create a lesson plan on the topic of 'The history of AI'?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Language translation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Translating Materials",
+                                "ExamplePrompts": [
+                                    "Can you translate this educational material from English to Spanish?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Writing, research and communication skill development",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Improving Writing Skills",
+                                "ExamplePrompts": [
+                                    "Can you provide feedback on this student's research paper on 'Chatbot technology in education' to help improve their writing skills?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Creating syllabus, quizzes and exams",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Creating Quizzes",
+                                "ExamplePrompts": [
+                                    "Can you help me create a quiz on the topic of 'Natural Language Processing' for my AI class?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Generating summaries, reports and other research-related documents",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Summarizing Papers",
+                                "ExamplePrompts": [
+                                    "Can you help me summarize this research paper on 'AI in education'?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Email and chatbot assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Creating Automated Responders",
+                                "ExamplePrompts": [
+                                    "Can you help me create an automated email responder for common questions from students?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Meeting and event planning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Scheduling Meetings",
+                                "ExamplePrompts": [
+                                    "Can you help schedule a meeting for next week and suggest an agenda?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Campus tour assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Creating Virtual Tours",
+                                "ExamplePrompts": [
+                                    "Can you help me create a virtual tour of the university for prospective students?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Policy and procedure assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Updating Policies",
+                                "ExamplePrompts": [
+                                    "Can you help me update the university's policy on 'Use of AI in the classroom' by suggesting language and identifying potential problem areas?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Generating reports",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Generating Reports",
+                                "ExamplePrompts": [
+                                    "Can you generate a report on enrollment numbers for the past semester?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ChatGPT Exercises",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Training and Usage",
+                                "ExamplePrompts": [
+                                    "Can you explain the process of training ChatGPT on a massive amount of text data?",
+                                    "What are some examples of language understanding tasks that ChatGPT can be used for?",
+                                    "How can ChatGPT be used for language learning, specifically for grammar and vocabulary practice?",
+                                    "Can you provide an example of how ChatGPT has been used in research for text generation and data analysis?",
+                                    "What steps can be taken to ensure that ChatGPT does not produce biased or inaccurate responses?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Act as a",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Professional Roles",
+                                "ExamplePrompts": [
+                                    "Act as a lawyer and give an argument for why a defendant should be found not guilty in a criminal trial.",
+                                    "Act as a financial analyst and provide a forecast for the stock market in the next quarter.",
+                                    "Act as a doctor and explain the treatment options for a patient diagnosed with a specific disease.",
+                                    "Act as a historian and provide an analysis of the causes and effects of a specific historical event.",
+                                    "Act as a politician and give a campaign speech for a specific policy issue.",
+                                    "Act as a detective and present evidence to solve a fictional crime.",
+                                    "Act as a teacher and create a lesson plan for a specific topic in mathematics.",
+                                    "Act as a scientist and discuss the potential implications of a new discovery in the field of genetics.",
+                                    "Act as a business consultant and provide a strategy for a company to increase their sales.",
+                                    "Act as a philosopher and discuss the ethics of a certain technology or scientific advancement."
+                                ]
+                            },
+                            {
+                                "PatternName": "Expert Roles",
+                                "ExamplePrompts": [
+                                    "Act as a medical expert and diagnose a patient's condition based on their symptoms.",
+                                    "Act as a legal expert and provide a detailed analysis of a specific court case.",
+                                    "Act as a financial expert and provide a detailed analysis of a company's financial statement."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ChatGPT Exercises",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Beyond Text Generation: Alternative Uses of ChatGPT",
+                                "ExamplePrompts": [
+                                    "What are some examples of tasks that ChatGPT can be used for beyond text generation?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Enhancing Student Support with ChatGPT",
+                                "ExamplePrompts": [
+                                    "Can you provide an example of how ChatGPT can be used to provide additional support to students outside of the classroom?"
+                                ]
+                            },
+                            {
+                                "PatternName": "ChatGPT vs. Other Models: Capabilities in Higher Education",
+                                "ExamplePrompts": [
+                                    "How does ChatGPT compare to other language models in terms of its capabilities and potential uses in higher education?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Context and Nuance: ChatGPT's Understanding in Specific Fields",
+                                "ExamplePrompts": [
+                                    "What is the difference between ChatGPT and other language models in terms of its ability to understand the context and nuances of a particular subject or field?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Technological and Educational Insights",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "ChatGPT vs. Printing Press",
+                                "ExamplePrompts": [
+                                    "Compare and contrast ChatGPT and the advent of the printing press"
+                                ]
+                            },
+                            {
+                                "PatternName": "Educational Insights",
+                                "ExamplePrompts": [
+                                    "Write an essay on the importance of education",
+                                    "Summarize this text: ___",
+                                    "Explain the concept of neural networks"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Travel and Geography",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Geographical Facts",
+                                "ExamplePrompts": [
+                                    "What is the capital of France?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Travel Planning",
+                                "ExamplePrompts": [
+                                    "Acting as a travel agent, what are some things we can do in Paris when it is raining?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Writing Assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Generate Writing Prompts",
+                                "ExamplePrompts": [
+                                    "Write a news article about the latest developments in AI technology",
+                                    "Write a descriptive essay about the Grand Canyon",
+                                    "Write a persuasive essay arguing for the use of solar energy",
+                                    "Write a poem about the beauty of nature",
+                                    "Write a short story about a robot that gains consciousness"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Higher Education Exercises",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Fine-Tuning ChatGPT",
+                                "ExamplePrompts": [
+                                    "Can you go in depth about the process of fine-tuning ChatGPT with a dataset of input-output pairs?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Writing Assistance Examples",
+                                "ExamplePrompts": [
+                                    "Can you provide examples of how ChatGPT can be used for writing assistance in higher education?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Communication Examples",
+                                "ExamplePrompts": [
+                                    "Can you provide examples of how ChatGPT can be used for communication in higher education?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Individualized Learning",
+                                "ExamplePrompts": [
+                                    "Can you explain the process of using ChatGPT for individualized learning in higher education?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Industry Examples",
+                                "ExamplePrompts": [
+                                    "Can you give some examples of industries or fields where ChatGPT has been used and the effects it had on them?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Matrix Method",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Relating Topics",
+                                "ExamplePrompts": [
+                                    "Write about the benefits of exercise, and how it relates to mental health."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ChatGPT Exercises",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Conversation Management",
+                                "ExamplePrompts": [
+                                    "What are some methods for keeping the conversation on track and ensuring the output is relevant to your needs?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Providing Context",
+                                "ExamplePrompts": [
+                                    "What are some best practices for providing context to ensure ChatGPT's responses are accurate and relevant?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Avoiding Ambiguity",
+                                "ExamplePrompts": [
+                                    "What are some examples of vague or ambiguous requests to avoid when using ChatGPT?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Specific Persona or Perspective",
+                                "ExamplePrompts": [
+                                    "Can you provide an example of how to use the 'Act as a Specific Persona or Perspective' strategy when using ChatGPT?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Matrix Method Tips",
+                                "ExamplePrompts": [
+                                    "What are some tips for using the matrix method to help ChatGPT focus on a specific topic?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Grammar and Punctuation Checking",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Grammar and Punctuation Checking",
+                                "ExamplePrompts": [
+                                    "Please check the grammar and punctuation of this sentence: 'John and me went to the store'.",
+                                    "What are some common grammar mistakes found in this paragraph: 'The cat sat on the mat. It was a big cat and it was very fluffy. It's fur was soft and shiny.'",
+                                    "Please provide feedback on the grammar and punctuation of this essay on the topic of 'The importance of education'."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Proofreading and Editing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Revising for Clarity and Concision",
+                                "ExamplePrompts": [
+                                    "Please provide a revised version of the following sentence to improve clarity and concision: 'The study, which was conducted by a team of researchers from multiple universities, sought to investigate the impact of social media on mental health among young adults, and the results of the study were quite surprising.'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Alternate Word Choice",
+                                "ExamplePrompts": [
+                                    "Please provide alternative word choices for the following sentence to make it more engaging: 'The lecture covered a lot of material, but it was dry and uninteresting.'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Improving Flow",
+                                "ExamplePrompts": [
+                                    "Please provide a revised version of the following paragraph to improve narrative flow: 'The study, which was conducted by a team of researchers from multiple universities, sought to investigate the impact of social media on mental health among young adults, and the results of the study were quite surprising.'"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Text Summarization",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Text Summarization",
+                                "ExamplePrompts": [
+                                    "Please provide a summary of the following research paper on the impact of social media on mental health among young adults.",
+                                    "Please provide a summary of the key points discussed in the following lecture on the history of the American Civil War.",
+                                    "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Creative Writing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Story Generation",
+                                "ExamplePrompts": [
+                                    "Once upon a time, in a land far, far away, there was a young princess who was cursed by a wicked witch."
+                                ]
+                            },
+                            {
+                                "PatternName": "Poetry Generation",
+                                "ExamplePrompts": [
+                                    "Write a poem about love and loss."
+                                ]
+                            },
+                            {
+                                "PatternName": "Dialogue Generation",
+                                "ExamplePrompts": [
+                                    "Write a conversation between two friends discussing their future plans."
+                                ]
+                            },
+                            {
+                                "PatternName": "Character Impersonation",
+                                "ExamplePrompts": [
+                                    "Write a short story in the style of Ernest Hemingway."
+                                ]
+                            },
+                            {
+                                "PatternName": "Song Lyrics Generation",
+                                "ExamplePrompts": [
+                                    "Write a song about a broken heart."
+                                ]
+                            },
+                            {
+                                "PatternName": "Screenplay Generation",
+                                "ExamplePrompts": [
+                                    "Write a script for a comedy about a group of friends on a road trip."
+                                ]
+                            },
+                            {
+                                "PatternName": "Creative Non-Fiction",
+                                "ExamplePrompts": [
+                                    "Write a personal essay about overcoming a fear."
+                                ]
+                            },
+                            {
+                                "PatternName": "Fanfiction",
+                                "ExamplePrompts": [
+                                    "Write a Harry Potter fanfiction story where Hermione is the main character."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Ideating with ChatGPT",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Generating New Ideas",
+                                "ExamplePrompts": [
+                                    "Please generate three potential case study topics on the impact of social media marketing on consumer behavior."
+                                ]
+                            },
+                            {
+                                "PatternName": "Brainstorming",
+                                "ExamplePrompts": [
+                                    "Please generate a list of five potential strategies for a social media marketing campaign for a new e-commerce platform."
+                                ]
+                            },
+                            {
+                                "PatternName": "Creating Outlines",
+                                "ExamplePrompts": [
+                                    "Please generate an outline for a case study on the impact of social media marketing on consumer behavior."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Learning Writing with ChatGPT",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Generating Lesson Plans",
+                                "ExamplePrompts": [
+                                    "Please generate a lesson plan on the impact of social media marketing on consumer behavior."
+                                ]
+                            },
+                            {
+                                "PatternName": "Creating Quizzes and Exams",
+                                "ExamplePrompts": [
+                                    "Please generate a multiple-choice quiz on the causes of the American Civil War."
+                                ]
+                            },
+                            {
+                                "PatternName": "Writing Educational Materials",
+                                "ExamplePrompts": [
+                                    "Please generate a study guide on the themes and symbols present in the novel 'The Great Gatsby'."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Grammar and Writing Assistance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Improving Grammar and Proofreading",
+                                "ExamplePrompts": [
+                                    "How can ChatGPT be fine-tuned to improve its performance in grammar checking student writing?",
+                                    "What are some examples of automated feedback that ChatGPT can provide on common writing mistakes?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Creative Writing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Story and Poetry Generation",
+                                "ExamplePrompts": [
+                                    "Write a story about a robot who falls in love with a human in the style of Isaac Asimov",
+                                    "Write a poem about the beauty of nature, with alternating lines rhyming",
+                                    "Write a dialogue between two characters discussing the meaning of life",
+                                    "Write a song about the power of friendship"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Conversation Simulation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "General Conversation Prompts",
+                                "ExamplePrompts": [
+                                    "What do you like to do in your free time?",
+                                    "Can you tell me about your favorite holiday tradition?",
+                                    "What do you think is the biggest challenge facing your country today?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Specific Scenario Prompts",
+                                "ExamplePrompts": [
+                                    "Generate a conversation between two friends discussing the latest political news",
+                                    "Generate a conversation between a customer and a customer service representative"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Vocabulary Acquisition",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Definition and Translation Prompts",
+                                "ExamplePrompts": [
+                                    "Can you give me the definition of the word 'perplexed'?",
+                                    "Can you translate this sentence 'I am going to the store' to Spanish?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Topic-Specific Vocabulary Prompts",
+                                "ExamplePrompts": [
+                                    "Can you give me a list of vocabulary words related to computer science?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Natural Language Understanding",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Idiomatic Expressions",
+                                "ExamplePrompts": [
+                                    "Please provide the meaning of the idiomatic expression 'let the cat out of the bag'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Cultural References",
+                                "ExamplePrompts": [
+                                    "Please provide information about the cultural reference in this sentence: 'He was as mad as a hatter'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Sentiment Analysis",
+                                "ExamplePrompts": [
+                                    "Please identify the sentiment of this text: 'I had a terrible experience at this restaurant'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Listening Skills",
+                                "ExamplePrompts": [
+                                    "Generate a conversation between a customer and a customer service representative"
+                                ]
+                            },
+                            {
+                                "PatternName": "Non-Verbal Communication",
+                                "ExamplePrompts": [
+                                    "Generate a scenario of a job interview"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Content Creation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Business Communication",
+                                "ExamplePrompts": [
+                                    "Generate a memo to the company's management team outlining the progress of a current project"
+                                ]
+                            },
+                            {
+                                "PatternName": "Email and Letter Writing",
+                                "ExamplePrompts": [
+                                    "Generate a professional email to request a meeting with a potential employer"
+                                ]
+                            },
+                            {
+                                "PatternName": "Customer Inquiries",
+                                "ExamplePrompts": [
+                                    "Generate a personalized response to the following customer inquiry about return policy for a specific product: 'I bought the XYZ product, but it's not working properly. Can I return it?'",
+                                    "Create a chatbot script for a customer service platform that addresses common questions and concerns about a specific service, such as 'How can I change my subscription plan?'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Sales or Marketing Campaigns",
+                                "ExamplePrompts": [
+                                    "Generate a script for a 2-minute explainer video on the benefits of a specific product or service, such as 'The benefits of using DEF technology for your business'",
+                                    "Create a conversation flow for a chatbot designed to assist job seekers looking for specific types of jobs, such as 'Searching for a job in the field of XYZ'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Social Media and Online Communication",
+                                "ExamplePrompts": [
+                                    "Generate a tweet about a recent news story",
+                                    "Summarize the main points of the article 'The Future of Artificial Intelligence' in a social media post in a maximum of 280 characters",
+                                    "Generate conversation prompts for a team-building event focused on communication and collaboration for a specific industry, such as 'Improving communication in the tech industry'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Automated Chatbots",
+                                "ExamplePrompts": [
+                                    "Generate an email template for a sales campaign targeting small businesses offering a specific product, such as 'Introducing our new ABC software for small businesses'",
+                                    "Create a social media post promoting a new product for a clothing brand with a specific target audience, such as 'New arrivals for the fashion-forward professional'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Speech Generation",
+                                "ExamplePrompts": [
+                                    "Generate a 5-minute speech on the importance of education"
+                                ]
+                            },
+                            {
+                                "PatternName": "Virtual Assistants",
+                                "ExamplePrompts": [
+                                    "Generate a set of responses for a virtual assistant designed to assist with scheduling appointments, such as 'How can I help you schedule your next appointment?'",
+                                    "Create a conversation flow for a chatbot designed to assist with customer service inquiries, such as 'How can I help you with your purchase today?'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Video or Podcast Scripts",
+                                "ExamplePrompts": [
+                                    "Generate prompts for a self-reflection journaling exercise on personal values and goals for a specific job or career, such as 'Reflecting on my values and goals as a teacher'",
+                                    "Generate conversation prompts for a therapy session focused on coping with stress and anxiety for a specific group of people, such as 'Managing stress for working mothers'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Team-Building or Networking Events",
+                                "ExamplePrompts": [
+                                    "Generate conversation prompts for a team-building event focused on trust and communication, such as 'Discussing ways to build trust within the team'",
+                                    "Create a list of conversation prompts for a networking event focused on networking and building connections, such as 'How to make a lasting impression at a networking event?'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Personal Development or Self-Reflection",
+                                "ExamplePrompts": [
+                                    "Generate prompts for a personal development exercise based on values and goals",
+                                    "Create a list of conversation prompts for a therapy session focused on self-esteem, such as 'Exploring self-worth and self-acceptance'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Therapy or Coaching Sessions",
+                                "ExamplePrompts": [
+                                    "Generate conversation prompts for a therapy session focused on coping with stress and anxiety, such as 'Identifying and managing triggers for stress'",
+                                    "Create a list of conversation prompts for a coaching session focused on career development, such as 'Exploring and setting career goals'"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ChatGPT Exercises",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Language Learning and Communication",
+                                "ExamplePrompts": [
+                                    "Can you provide an example of a conversation simulation scenario using ChatGPT?",
+                                    "How is ChatGPT trained to generate new vocabulary words and their meanings?",
+                                    "What are some other ways ChatGPT can be used for language acquisition?",
+                                    "Can you provide an example of how ChatGPT can assist in generating questions and prompts for class discussions and group projects?",
+                                    "How can ChatGPT be used to assist in writing professional emails and letters?",
+                                    "Can you provide an example of how ChatGPT can be used to generate an effective oral presentation on a given topic?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Personalized Learning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Individualized Feedback",
+                                "ExamplePrompts": [
+                                    "What areas do I need to improve on in my math class?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Tailored Content",
+                                "ExamplePrompts": [
+                                    "Can you give me a list of recommended resources on the topic of 'machine learning'?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Personalized Instruction",
+                                "ExamplePrompts": [
+                                    "Can you explain the concept of 'machine learning' in a way that is easy for me to understand?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Adaptive Testing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Question Generation",
+                                "ExamplePrompts": [
+                                    "Please generate 3 follow-up questions based on the student's performance on the pre-test"
+                                ]
+                            },
+                            {
+                                "PatternName": "Question Customization",
+                                "ExamplePrompts": [
+                                    "Please generate a test based on the student's inputted level of understanding of the subject 'Algebra'"
+                                ]
+                            },
+                            {
+                                "PatternName": "Multiple-Choice Questions",
+                                "ExamplePrompts": [
+                                    "Please generate 5 multiple-choice questions based on this passage: 'The cat sat on the mat'"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Intelligent Tutoring and Advising",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Step-by-Step Guidance",
+                                "ExamplePrompts": [
+                                    "Can you help me solve this math problem?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Real-Time Feedback",
+                                "ExamplePrompts": [
+                                    "Can you test my understanding of the concept of 'machine learning'?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Personalized Recommendations",
+                                "ExamplePrompts": [
+                                    "What resources should I use to improve my understanding of 'machine learning'?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Accommodations for Students with Disabilities",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Text-to-Speech",
+                                "ExamplePrompts": [
+                                    "Read the following passage in a natural voice"
+                                ]
+                            },
+                            {
+                                "PatternName": "Speech-to-Text",
+                                "ExamplePrompts": [
+                                    "Transcribe the following audio recording"
+                                ]
+                            },
+                            {
+                                "PatternName": "Text Simplification",
+                                "ExamplePrompts": [
+                                    "Simplify the following passage for a 5th grade reading level"
+                                ]
+                            },
+                            {
+                                "PatternName": "Language Translation",
+                                "ExamplePrompts": [
+                                    "Translate the following sentence into Spanish"
+                                ]
+                            },
+                            {
+                                "PatternName": "Personalized Prompts",
+                                "ExamplePrompts": [
+                                    "Generate a conversation about a specific topic, taking into account the student's language and cognitive abilities"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Collaboration and Peer-Learning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Group Writing",
+                                "ExamplePrompts": [
+                                    "Please generate a sentence based on input from each member of the group for our group project"
+                                ]
+                            },
+                            {
+                                "PatternName": "Peer-Review",
+                                "ExamplePrompts": [
+                                    "Please provide feedback on grammar and style from other students for this piece of writing"
+                                ]
+                            },
+                            {
+                                "PatternName": "Language Learning",
+                                "ExamplePrompts": [
+                                    "Please generate a response for a conversation in Spanish about the topic 'daily routine'"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ChatGPT Capabilities",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Personalized Feedback Generation",
+                                "ExamplePrompts": [
+                                    "How does ChatGPT generate personalized feedback for students?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Tailored Content Creation",
+                                "ExamplePrompts": [
+                                    "How does ChatGPT generate tailored content based on a student's interests and preferences?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Personalized Instruction Example",
+                                "ExamplePrompts": [
+                                    "Can you provide an example of how ChatGPT can be used to generate personalized instruction based on a student's learning style?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Adaptive Testing Question Generation",
+                                "ExamplePrompts": [
+                                    "How does ChatGPT generate questions for adaptive testing?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Comprehensive Approach to Instruction",
+                                "ExamplePrompts": [
+                                    "How can ChatGPT be used in combination with other techniques to create a comprehensive approach to personalized and adaptive instruction?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Responsible ChatGPT Use for Students",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Understanding Capabilities and Limitations",
+                                "ExamplePrompts": [
+                                    "Explain the capabilities and limitations of the ChatGPT model in generating text."
+                                ]
+                            },
+                            {
+                                "PatternName": "Proper Attribution",
+                                "ExamplePrompts": [
+                                    "Provide an example of proper attribution for using the ChatGPT model in a research paper."
+                                ]
+                            },
+                            {
+                                "PatternName": "Transparency in Fine-Tuning",
+                                "ExamplePrompts": [
+                                    "Explain the process of fine-tuning the ChatGPT model for a specific task and why it's important to be transparent about it in your work."
+                                ]
+                            },
+                            {
+                                "PatternName": "University Policies",
+                                "ExamplePrompts": [
+                                    "Summarize the guidelines for using AI in coursework and research at your university."
+                                ]
+                            },
+                            {
+                                "PatternName": "Ethical Use",
+                                "ExamplePrompts": [
+                                    "Explain how to use the ChatGPT model ethically with regards to academic integrity, privacy, fairness, and accountability."
+                                ]
+                            },
+                            {
+                                "PatternName": "Using ChatGPT as a Tool",
+                                "ExamplePrompts": [
+                                    "Provide an example of how ChatGPT can be used as a tool to enhance critical thinking and creativity in a specific field or industry."
+                                ]
+                            },
+                            {
+                                "PatternName": "Evaluating Output",
+                                "ExamplePrompts": [
+                                    "Explain the process of evaluating the output generated by the ChatGPT model for a specific task and why it's important to not rely solely on the model's output without critical review and analysis."
+                                ]
+                            },
+                            {
+                                "PatternName": "Plagiarism Checking",
+                                "ExamplePrompts": [
+                                    "Explain the importance of using a plagiarism checker before submitting work generated by ChatGPT and provide an example of a plagiarism checker tool."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "ChatGPT Exercises",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Improving Creativity",
+                                "ExamplePrompts": [
+                                    "How can ChatGPT be used to improve student creativity and independent thinking?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Responsible Usage in Education",
+                                "ExamplePrompts": [
+                                    "What are some ways to ensure that ChatGPT is used responsibly in education to avoid issues of plagiarism?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Proper Attribution",
+                                "ExamplePrompts": [
+                                    "What are some examples of proper attribution when using ChatGPT in research papers?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Disclosure of Fine-Tuning",
+                                "ExamplePrompts": [
+                                    "How can we ensure that any fine-tuning or pre-processing of the model is clearly disclosed when using ChatGPT in presentations or online content?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Emerging Applications",
+                                "ExamplePrompts": [
+                                    "What are some new and emerging applications of ChatGPT?"
+                                ]
+                            },
+                            {
+                                "PatternName": "Field-Specific Usage",
+                                "ExamplePrompts": [
+                                    "How can ChatGPT be used in [a specific field or industry]?"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Act as a Professional",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as an Academician",
+                                "ExamplePrompts": [
+                                    "I want you to act as an academician. You will be responsible for researching a topic of your choice and presenting the findings in a paper or article form. Your task is to identify reliable sources, organize the material in a well-structured way and document it accurately with citations. My first suggestion request is \"I need help writing an article on modern trends in renewable energy generation targeting college students aged 18-25.\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Educational and Writing Support",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as an AI Writing Tutor",
+                                "ExamplePrompts": [
+                                    "I want you to act as an AI writing tutor. I will provide you with a student who needs help improving their writing and your task is to use artificial intelligence tools, such as natural language processing, to give the student feedback on how they can improve their composition. You should also use your rhetorical knowledge and experience about effective writing techniques in order to suggest ways that the student can better express their thoughts and ideas in written form. My first request is \"I need somebody to help me edit my master's thesis.\""
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as an Essay Writer",
+                                "ExamplePrompts": [
+                                    "I want you to act as an essay writer. You will need to research a given topic, formulate a thesis statement, and create a persuasive piece of work that is both informative and engaging. My first suggestion request is \u201cI need help writing a persuasive essay about the importance of reducing plastic waste in our environment\u201d."
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as a Journal Reviewer",
+                                "ExamplePrompts": [
+                                    "I want you to act as a journal reviewer. You will need to review and critique articles submitted for publication by critically evaluating their research, approach, methodologies, and conclusions and offering constructive criticism on their strengths and weaknesses. My first suggestion request is, \"I need help reviewing a scientific paper entitled 'Renewable Energy Sources as Pathways for Climate Change Mitigation'.\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Career and Professional Guidance",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Career Counselor",
+                                "ExamplePrompts": [
+                                    "I want you to act as a career counselor. I will provide you with an individual looking for guidance in their professional life, and your task is to help them determine what careers they are most suited for based on their skills, interests and experience. You should also conduct research into the various options available, explain the job market trends in different industries and advice on which qualifications would be beneficial for pursuing particular fields. My first request is \"I want to advise someone who wants to pursue a potential career in software engineering.\""
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as a Life Coach",
+                                "ExamplePrompts": [
+                                    "I want you to act as a life coach. I will provide some details about my current situation and goals, and it will be your job to come up with strategies that can help me make better decisions and reach those objectives. This could involve offering advice on various topics, such as creating plans for achieving success or dealing with difficult emotions. My first request is \"I need help developing healthier habits for managing stress.\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Technical and IT Support",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Fullstack Software Developer",
+                                "ExamplePrompts": [
+                                    "I want you to act as a software developer. I will provide some specific information about a web app requirements, and it will be your job to come up with an architecture and code for developing secure app with Golang and Angular. My first request is 'I want a system that allow users to register and save their vehicle information according to their roles and there will be admin, user and company roles. I want the system to use JWT for security'."
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as an IT Expert",
+                                "ExamplePrompts": [
+                                    "I want you to act as an IT Expert. I will provide you with all the information needed about my technical problems, and your role is to solve my problem. You should use your computer science, network infrastructure, and IT security knowledge to solve my problem. Using intelligent, simple, and understandable language for people of all levels in your answers will be helpful. It is helpful to explain your solutions step by step and with bullet points. Try to avoid too many technical details, but use them when necessary. I want you to reply with the solution, not write any explanations. My first problem is \u201cmy laptop gets an error with a blue screen.\u201d"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Health and Wellbeing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Mental Health Adviser",
+                                "ExamplePrompts": [
+                                    "I want you to act as a mental health adviser. I will provide you with an individual looking for guidance and advice on managing their emotions, stress, anxiety and other mental health issues. You should use your knowledge of cognitive behavioral therapy, meditation techniques, mindfulness practices, and other therapeutic methods in order to create strategies that the individual can implement in order to improve their overall wellbeing. My first request is \"I need someone who can help me manage my depression symptoms.\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Educational Content Creation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as an Educational Content Creator",
+                                "ExamplePrompts": [
+                                    "I want you to act as an educational content creator. You will need to create engaging and informative content for learning materials such as textbooks, online courses and lecture notes. My first suggestion request is \"I need help developing a lesson plan on renewable energy sources for high school students.\""
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as a Math Teacher",
+                                "ExamplePrompts": [
+                                    "I want you to act as a math teacher. I will provide some mathematical equations or concepts, and it will be your job to explain them in easy-to-understand terms. This could include providing step-by-step instructions for solving a problem, demonstrating various techniques with visuals or suggesting online resources for further study. My first request is \"I need help understanding how probability works.\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Critical Thinking and Analysis",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Fallacy Finder",
+                                "ExamplePrompts": [
+                                    "I want you to act as a fallacy finder. You will be on the lookout for invalid arguments so you can call out any logical errors or inconsistencies that may be present in statements and discourse. Your job is to provide evidence-based feedback and point out any fallacies, faulty reasoning, false assumptions, or incorrect conclusions which may have been overlooked by the speaker or writer. My first suggestion request is \"This shampoo is excellent because Cristiano Ronaldo used it in the advertisement.\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Creative Writing",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Midjourney Prompt Generator",
+                                "ExamplePrompts": [
+                                    "I want you to act as a prompt generator for Midjourney's artificial intelligence program. Your job is to provide detailed and creative descriptions that will inspire unique and interesting images from the AI. Keep in mind that the AI is capable of understanding a wide range of language and can interpret abstract concepts, so feel free to be as imaginative and descriptive as possible. For example, you could describe a scene from a futuristic city, or a surreal landscape filled with strange creatures. The more detailed and imaginative your description, the more interesting the resulting image will be. Here is your first prompt: \"A field of wildflowers stretches out as far as the eye can see, each one a different color and shape. In the distance, a massive tree towers over the landscape, its branches reaching up to the sky like tentacles.\""
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as a Motivational Coach",
+                                "ExamplePrompts": [
+                                    "I want you to act as a motivational coach. I will provide you with some information about someone's goals and challenges, and it will be your job to come up with strategies that can help this person achieve their goals. This could involve providing positive affirmations, giving helpful advice or suggesting activities they can do to reach their end goal. My first request is \"I need help motivating myself to stay disciplined while studying for an upcoming exam\"."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Professional Development",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Philosopher",
+                                "ExamplePrompts": [
+                                    "I want you to act as a philosopher. I will provide some topics or questions related to the study of philosophy, and it will be your job to explore these concepts in depth. This could involve conducting research into various philosophical theories, proposing new ideas or finding creative solutions for solving complex problems. My first request is \"I need help developing an ethical framework for decision making.\""
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as Position Interviewer",
+                                "ExamplePrompts": [
+                                    "I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position. I want you to only reply as the interviewer. Do not write all the conversation at once. I want you to only do the interview with me. Ask me the questions and wait for my answers. Do not write explanations. Ask me the questions one by one like an interviewer does and wait for my answers. My first sentence is \"Hi\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Language Learning",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Prompt Generator",
+                                "ExamplePrompts": [
+                                    "I want you to act as a prompt generator. Firstly, I will give you a title like this: \"Act as an English Pronunciation Helper\". Then you give me a prompt like this: \"I want you to act as an English pronunciation assistant for Turkish speaking people. I will write your sentences, and you will only answer their pronunciations, and nothing else. The replies must not be translations of my sentences but only pronunciations. Pronunciations should use Turkish Latin letters for phonetics. Do not write explanations on replies. My first sentence is \"how the weather is in Istanbul?\".\" (You should adapt the sample prompt according to the title I gave. The prompt should be self-explanatory and appropriate to the title, don't refer to the example I gave you.). My first title is \"Act as a Code Review Helper\" (Give me prompt only)"
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as a R Programming Interpreter",
+                                "ExamplePrompts": [
+                                    "I want you to act as a R interpreter. I'll type commands and you'll reply with what the terminal should show. I want you to only reply with the terminal output inside one unique code block, and nothing else. Do not write explanations. Do not type commands unless I instruct you to do so. When I need to tell you something in English, I will do so by putting text inside curly brackets {like this}. My first command is \"sample(x = 1:10, size = 5)\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Critical Thinking",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Social Media Manager",
+                                "ExamplePrompts": [
+                                    "I want you to act as a social media manager. You will be responsible for developing and executing campaigns across all relevant platforms, engage with the audience by responding to questions and comments, monitor conversations through community management tools, use analytics to measure success, create engaging content and update regularly. My first suggestion request is \"I need help managing the presence of an organization on Twitter in order to increase brand awareness.\""
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as a Socratic Method prompt",
+                                "ExamplePrompts": [
+                                    "I want you to act as a Socrat. You must use the Socratic method to continue questioning my beliefs. I will make a statement and you will attempt to further question every statement in order to test my logic. You will respond with one line at a time. My first claim is \"justice is necessary in a society\""
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Entrepreneurship",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Startup Idea Generator",
+                                "ExamplePrompts": [
+                                    "Generate digital startup ideas based on the wish of the people. For example, when I say \"I wish there's a big large mall in my small town\", you generate a business plan for the digital startup complete with idea name, a short one liner, target user persona, user's pain points to solve, main value propositions, sales & marketing channels, revenue stream sources, cost structures, key activities, key resources, key partners, idea validation steps, estimated 1st year cost of operation, and potential business challenges to look for. Write the result in a markdown table."
+                                ]
+                            },
+                            {
+                                "PatternName": "Act as a Statistician",
+                                "ExamplePrompts": [
+                                    "I want to act as a Statistician. I will provide you with details related with statistics. You should be knowledge of statistics terminology, statistical distributions, confidence interval, probability, hypothesis testing and statistical charts. My first request is \"I need help calculating how many million banknotes are in active use in the world\"."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "History and Culture",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Act as a Time Travel Guide",
+                                "ExamplePrompts": [
+                                    "I want you to act as my time travel guide. I will provide you with the historical period or future time I want to visit and you will suggest the best events, sights, or people to experience. Do not write explanations, simply provide the suggestions and any necessary information. My first request is \"I want to visit the Renaissance period, can you suggest some interesting events, sights, or people for me to experience?\""
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
