@@ -178,7 +178,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = cross_boundary_example # translation_example # category_definitions.summarising
+    input_string = category_definitions.logical_reasoning # translation_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
@@ -235,7 +235,7 @@ if __name__ == "__main__":
             print(f"PromptPattern: {prompt_pattern}")
             print(f"Authors: {authors}")
             print(f"Title: {title.strip()}")
-            print(f"PE  & Index: {pe_index}")
+            print(f"PE & Index: {pe_index}")
             print(f"CosineSimilarity: {cosine_similarity}\n\n")
     else:
         print("No operation performed due to missing parameters.")
