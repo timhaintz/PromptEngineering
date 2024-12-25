@@ -131,14 +131,15 @@ system_prompt = {
     }
     ''',
     "prompt": '''# INSTRUCTIONS
-    You are a PhD student reading research papers.
-    ONLY use the provided input text to answer the question.
-    Break down the task into parts using Chain-Of-Thought Prompt Engineering techniques. Let's think step-by-step.
-    Please answer the question asked.
+    You are a PhD student reading research papers. You will be asked questions about the paper.
+    Check the input data twice to confirm the answer is complete and correct before providing the output. Let's think step-by-step.
+    Add the Title of the paper as the value for the Title key.
+    Add the answer to the question as the value for the Answer key.
+    If you don't know the answer, say "I don't know" as the value for the Answer key..
     OUTPUT
     {
         "Title": "<TITLE OF THE PAPER>",
-        "Answer": "This is an example answer."
+        "Answer": "Answer."
     }
     '''
 }
@@ -342,7 +343,7 @@ if __name__ == '__main__':
         else:
             response_json = response_json_string
         # Save extracted prompt patterns to a JSON file
-        response_json = json.loads(response_json)
+        response_json = json.loads(response_json) # this formats the file nicely as long as the response is a JSON object
         filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
         folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
         os.makedirs(folder_name, exist_ok=True)
