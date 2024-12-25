@@ -73,6 +73,15 @@ assessment_example = '''As an expert in the field of online learning, rate the e
 
 calculation_example = '''Your task is to add calls to a Calculator API to a piece of text. The calls should help you get information required to complete the text. You can call the API by writing "[Calculator(expression)]" where "expression" is the expression to be computed. Here are some examples of API calls:'''
 
+# Beyond logic section - HYP, LGR, PRD, SIM
+hypothesise_example = '''Your available prompting techniques include, but are not limited to the following: - Crafting an expert who is an expert at the given task, by writing a highquality description about the most capable and suitable agent to answer the instruction in second person perspective.[1] - Explaining step-by-step how the problem should be tackled, and making sure the model explains step-by-step how it came to the answer. You can do this by adding \"Let's think step-by-step\".[2] - Imagining three different experts who are discussing the problem at hand. All experts will write down 1 step of their thinking, then share it with the group. Then all experts will go on to the next step, etc. If any expert realises they're wrong at any point then they leave.[3] - Making sure all information needed is in the prompt, adding where necessary but making sure the question remains having the same objective. Your approach is methodical and analytical, yet creative. You use a mixture of the prompting techniques, making sure you pick the right combination for each instruction. You see beyond the surface of a prompt, identifying the core objectives and the best ways to articulate them to achieve the desired outcomes. Output instructions:\"\"\"\" You should ONLY return the reformulated prompt. Make sure to include ALL information from the given prompt to reformulate. \"\"\"\" Given above information and instructions, reformulate below prompt using the techniques provided: \"\"\"\" {sample_prompt} \"\"\"\"'''
+
+logical_reasoning_example = ''' '''
+
+prediction_example = ''' '''
+
+simulation_example = ''' '''
+
 # In Logic section - CAT, CLF, CLU, ERI, INP, REL
 categorising_example = '''Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below.'''
 
