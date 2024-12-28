@@ -9467,6 +9467,64 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id":72,
+                "Title": " Skeleton-of-thought: Large language models can do parallel decoding",
+                "APAReference": "Ning, X., Lin, Z., Zhou, Z., Wang, Z., Yang, H., & Wang, Y. (2023). Skeleton-of-thought: Large language models can do parallel decoding. Proceedings ENLSP-III.",
+                "Authors":[
+                    "Xuefei Ning",
+                    "Zinan Lin",
+                    "Zixuan Zhou",
+                    "Zifu Wang",
+                    "Huazhong Yang",                
+                    "Yu Wang"
+
+                ],
+                "URLReference": "https://lirias.kuleuven.be/retrieve/746598",
+                "datetimeAddedToDB": "2023-07-22T00:00:00.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Skeleton-of-Thought Prompt Templates",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Skeleton Prompt Template T s",
+                                "ExamplePrompts": [
+                                    "[User:] You're an organizer responsible for only giving the skeleton (not the full content) for answering the question. Provide the skeleton in a list of points (numbered 1., 2., 3., etc.) to answer the question. Instead of writing a full sentence, each skeleton point should be very short with only 3\u223c5 words. Generally, the skeleton should have 3\u223c10 points. Now, please provide the skeleton for the following question. {question} Skeleton: [Assistant:] 1."
+                                ]
+                            },
+                            {
+                                "PatternName": "Point-Expanding Prompt Template T pe",
+                                "ExamplePrompts": [
+                                    "[User:] You're responsible for continuing the writing of one and only one point in the overall answer to the following question. {question} The skeleton of the answer is {skeleton} Continue and only continue the writing of point {point index}. Write it **very shortly** in 1\u223c2 sentence and do not continue with other points! [Assistant:] {point index}. {point skeleton}"
+                                ]
+                            },
+                            {
+                                "PatternName": "Skeleton Prompt Template T s (with Two-Shot Demonstrations)",
+                                "ExamplePrompts": [
+                                    "[User:] You're an organizer responsible for only giving the skeleton (not the full content) for answering the question. Provide the skeleton in a list of points (numbered 1., 2., 3., etc.) to answer the question. Instead of writing a full sentence, each skeleton point should be very short with only 3\u223c5 words. Generally, the skeleton should have 3\u223c10 points. Question: What are the typical types of Chinese dishes? Skeleton: 1. Dumplings. 2. Noodles. 3. Dim Sum. 4. Hot Pot. 5. Wonton. 6. Ma Po Tofu. 7. Char Siu. 8. Fried Rice. Question: What are some practical tips for individuals to reduce their carbon emissions? Skeleton: 1. Energy conservation. 2. Efficient transportation. 3. Home energy efficiency. 4. Reduce water consumption. 5. Sustainable diet. 6. Sustainable travel. Now, please provide the skeleton for the following question. {question} Skeleton: [Assistant:] 1."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Skeleton-of-Thought with Router",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "LLM Prompting as the Router",
+                                "ExamplePrompts": [
+                                    "Question: {question}\nHow would you like to answer the question?\nA. Organize the answer as a list of points or perspectives (in the format of 1., 2., 3., etc.), and the points or perspectives can be answered independently without referring to the contents of the previous points.\nB. Organize the answer as a list of points or perspectives (in the format of 1., 2., 3., etc.), and the contents of later points or perspectives cannot be answered independently without referring to the contents of the previous ones.\nC. Do not organize the answer as a list of points or perspectives.\nJust say A, B, or C. Do not explain. Do not provide an answer to the question."
+                                ]
+                            },
+                            {
+                                "PatternName": "Prompting Router",
+                                "ExamplePrompts": [
+                                    "Please start your answer from \"{partial answer}\" and do not output other things before that"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

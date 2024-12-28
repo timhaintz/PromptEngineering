@@ -343,7 +343,13 @@ if __name__ == '__main__':
         else:
             response_json = response_json_string
         # Save extracted prompt patterns to a JSON file
-        response_json = json.loads(response_json) # this formats the file nicely as long as the response is a JSON object
+        # Check if response_json is a string and can be converted to a dictionary
+        if isinstance(response_json, str):
+            try:
+                response_json = json.loads(response_json)  # this formats the file nicely as long as the response is a JSON object
+            except json.JSONDecodeError:
+                # If it's not a valid JSON string, leave it as is
+                pass
         filename_without_extension = os.path.splitext(file_name)[0].replace('.', '_')
         folder_name = os.path.join('extractedPromptPatternsFromPDF', filename_without_extension)
         os.makedirs(folder_name, exist_ok=True)
