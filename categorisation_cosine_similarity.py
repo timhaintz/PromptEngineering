@@ -129,9 +129,11 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
         data = json.load(f)
 
     # Extract the prompts and their associated information
-    prompts = []
-    info = []
+    cosine_similarities = []
     embeddings = []
+    info = []
+    prompts = [] 
+
     max_length = 0  # Initialize the maximum length to 0
 
     for title_id, title in enumerate(data['Source']['Titles']):
@@ -149,6 +151,7 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
                         info.append((pattern['PatternName'], title['APAReference'], cascading_index))
                     except Exception as e:
                         print(f"An error occurred at index {len(prompts)}: {e}. Input string: {input_string}")
+                        continue  # Skip this entry and continue with the next one
 
     # Pad all embeddings to the maximum length
     for i in range(len(embeddings)):
@@ -160,7 +163,7 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
         input_embedding = generate_embeddings(input_string)
 
         if input_embedding is None: # Check if input_embedding is None
-            print(f"An error occurred at index {index}: input_embedding is None. Please check the input string and embedding function. Input string: {input_string}")
+            print(f"An error occurred at index {index}: input_embedding is None. Please check the input string and embedding function.")
         else:
             # Pad the input embedding to the maximum length
             if len(input_embedding) < max_length:
@@ -169,8 +172,13 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
             # Calculate the cosine similarity between the input string and each prompt
             cosine_similarities = cosine_similarity([input_embedding], embeddings).flatten()
     except Exception as e:
-        print(f"An error occurred while generating embedding for the input string: {e}. Input string: {input_string}")
+        print(f"An error occurred at index {index}: while generating an embedding for the input string. Exception: {e}.")
 
+        # If cosine_similarities is empty, handle the case
+    if not cosine_similarities:
+        print("No valid cosine similarities could be calculated.")
+        top_n = 0  # Ensure no indices are selected
+    
     # If top_n is None, set it to the length of cosine_similarities
     if top_n is None:
         top_n = len(cosine_similarities)
