@@ -150,7 +150,7 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
                         cascading_index = f"{title_id}-{j}-{k}-{l}"
                         info.append((pattern['PatternName'], title['APAReference'], cascading_index))
                     except Exception as e:
-                        print(f"An error occurred at index {len(prompts)}: {e}. Input string: {input_string}")
+                        print(f"An error occurred at index {len(prompts)}: {e}. Cascading Index: {cascading_index}")
                         continue  # Skip this entry and continue with the next one
 
     # Pad all embeddings to the maximum length
@@ -163,7 +163,7 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
         input_embedding = generate_embeddings(input_string)
 
         if input_embedding is None: # Check if input_embedding is None
-            print(f"An error occurred at index {index}: input_embedding is None. Please check the input string and embedding function.")
+            print(f"An error occurred. Input_embedding is None.")
         else:
             # Pad the input embedding to the maximum length
             if len(input_embedding) < max_length:
@@ -172,7 +172,7 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
             # Calculate the cosine similarity between the input string and each prompt
             cosine_similarities = cosine_similarity([input_embedding], embeddings).flatten()
     except Exception as e:
-        print(f"An error occurred at index {index}: while generating an embedding for the input string. Exception: {e}.")
+        print(f"An error occurred while generating an embedding for the input string. Exception: {e}.")
 
         # If cosine_similarities is empty, handle the case
     if not cosine_similarities:
