@@ -148,7 +148,7 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
                         cascading_index = f"{title_id}-{j}-{k}-{l}"
                         info.append((pattern['PatternName'], title['APAReference'], cascading_index))
                     except Exception as e:
-                        print(f"An error occurred at index {len(prompts)}: {e}")
+                        print(f"An error occurred at index {len(prompts)}: {e}. Input string: {input_string}")
 
     # Pad all embeddings to the maximum length
     for i in range(len(embeddings)):
@@ -156,13 +156,20 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
             embeddings[i] = np.pad(embeddings[i], (0, max_length - len(embeddings[i])))
 
     # Generate an embedding for the input string
-    input_embedding = generate_embeddings(input_string)
-    # Pad the input embedding to the maximum length
-    if len(input_embedding) < max_length:
-        input_embedding = np.pad(input_embedding, (0, max_length - len(input_embedding)))
+    try:
+        input_embedding = generate_embeddings(input_string)
 
-    # Calculate the cosine similarity between the input string and each prompt
-    cosine_similarities = cosine_similarity([input_embedding], embeddings).flatten()
+        if input_embedding is None: # Check if input_embedding is None
+            print(f"An error occurred at index {index}: input_embedding is None. Please check the input string and embedding function. Input string: {input_string}")
+        else:
+            # Pad the input embedding to the maximum length
+            if len(input_embedding) < max_length:
+                input_embedding = np.pad(input_embedding, (0, max_length - len(input_embedding)))
+
+            # Calculate the cosine similarity between the input string and each prompt
+            cosine_similarities = cosine_similarity([input_embedding], embeddings).flatten()
+    except Exception as e:
+        print(f"An error occurred while generating embedding for the input string: {e}. Input string: {input_string}")
 
     # If top_n is None, set it to the length of cosine_similarities
     if top_n is None:
@@ -187,7 +194,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = hypothesise_example # category_definitions.summarising
+    input_string = prediction_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
