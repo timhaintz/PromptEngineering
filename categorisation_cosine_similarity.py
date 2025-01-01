@@ -129,7 +129,6 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
         data = json.load(f)
 
     # Extract the prompts and their associated information
-    cosine_similarities = []
     embeddings = []
     info = []
     prompts = [] 
@@ -157,7 +156,10 @@ def find_similar_prompts(input_string, json_file, top_n=None, threshold=None):
     for i in range(len(embeddings)):
         if len(embeddings[i]) < max_length:
             embeddings[i] = np.pad(embeddings[i], (0, max_length - len(embeddings[i])))
-
+    
+    # Initialize cosine_similarities as a NumPy array
+    cosine_similarities = np.array([])
+    
     # Generate an embedding for the input string
     try:
         input_embedding = generate_embeddings(input_string)
@@ -202,7 +204,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = prediction_example # category_definitions.summarising
+    input_string = category_definitions.prediction #prediction_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
