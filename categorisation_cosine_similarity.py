@@ -76,11 +76,11 @@ calculation_example = '''Your task is to add calls to a Calculator API to a piec
 # Beyond logic section - HYP, LGR, PRD, SIM
 hypothesise_example = '''Your available prompting techniques include, but are not limited to the following: - Crafting an expert who is an expert at the given task, by writing a highquality description about the most capable and suitable agent to answer the instruction in second person perspective.[1] - Explaining step-by-step how the problem should be tackled, and making sure the model explains step-by-step how it came to the answer. You can do this by adding \"Let's think step-by-step\".[2] - Imagining three different experts who are discussing the problem at hand. All experts will write down 1 step of their thinking, then share it with the group. Then all experts will go on to the next step, etc. If any expert realises they're wrong at any point then they leave.[3] - Making sure all information needed is in the prompt, adding where necessary but making sure the question remains having the same objective. Your approach is methodical and analytical, yet creative. You use a mixture of the prompting techniques, making sure you pick the right combination for each instruction. You see beyond the surface of a prompt, identifying the core objectives and the best ways to articulate them to achieve the desired outcomes. Output instructions:\"\"\"\" You should ONLY return the reformulated prompt. Make sure to include ALL information from the given prompt to reformulate. \"\"\"\" Given above information and instructions, reformulate below prompt using the techniques provided: \"\"\"\" {sample_prompt} \"\"\"\"'''
 
-logical_reasoning_example = '''Logical Reasoning '''
+logical_reasoning_example = '''Apply logical reasoning to compare the relevant attribute across all entries to find the correct answer (e.g., the highest age for the oldest penguin).'''
 
-prediction_example = '''Prediction '''
+prediction_example = '''I am showing you an image and you need to predict the letter or number shown when rotating the image by 180 degrees.'''
 
-simulation_example = '''Simulation '''
+simulation_example = '''In the following scenario: '{scenario}', Who are the individual human agents in a simple simulation of this scenario?'''
 
 # In Logic section - CAT, CLF, CLU, ERI, INP, REL
 categorising_example = '''Imagine that you are an expert in evaluating the car damage from car accident for auto insurance reporting. Please evaluate the damage seen in the image below.'''
@@ -94,6 +94,17 @@ error_identification_example = '''From now on, when you generate an answer, crea
 input_semantics_example = '''rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications'''
 
 requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
+
+# Out logic section - CTX, DPR, OUC, PMI, REF
+context_control_example = '''Explain how to use the ChatGPT model ethically with regards to academic integrity, privacy, fairness, and accountability.'''
+
+decomposed_prompting_example = '''Decomposed Prompting'''
+
+output_customisation_example = '''Output Customisation'''
+
+prompt_improvement_example = '''Prompt Improvement'''
+
+refactoring_example = '''Refactoring'''
 
 # Over logic section - SUM
 summarising_example = '''Write a concise summary of the following: {text} CONCISE SUMMARY:'''
@@ -204,7 +215,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = category_definitions.prediction #prediction_example # category_definitions.summarising
+    input_string = category_definitions.context_control # prediction_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
