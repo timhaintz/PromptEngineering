@@ -64,20 +64,6 @@ Instructions:
     {PromptingTechniquesFromPaper}: This variable includes techniques such as Chain of Thought and Tree of Thought, as outlined in the Markdown table.
 }
 
-{PEIL - Example implementation}
-
-{ProvideClearContext}: "You are an AI assistant helping a user with their homework."
-
-{StateDesiredOutput}: "Generate a summary of the given text."
-
-{BreakDownComplexQuestions}: "First, identify the main points. Then, explain each point in detail."
-
-{ProvideSpecificInstructions}: "Use bullet points for clarity."
-
-{DefineConciseness}: "Keep the summary under 150 words."
-
-{PromptingTechniquesFromPaper}: "Apply the techniques from the paper to ensure the response is accurate and relevant. Chain of Thought for example (explain the steps you took....)" 
-
 ## A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications
 ### https://arxiv.org/abs/2402.07927
 
