@@ -8,55 +8,81 @@ Author:         Tim Haintz
 Creation Date:  20250113
 LINKS
 EXAMPLE USAGE
-python peil_prompt_generator.py -prompt "Enter requirements here"
+python peil_prompt_generator.py
 '''
 import os
 import openai
+import json
 from dotenv import load_dotenv
+from openai import AzureOpenAI
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
 
-system_prompt = '''
-VARIABLES
-Prompt Engineering Instructional Language (PEIL) - A set of guidelines and techniques to optimise the performance of large language models by providing tailored prompts.
-	{ProvideClearContext} {StateDesiredOutput} {BreakDownComplexQuestions} {ProvideSpecificInstructions} {DefineConciseness} {PromptingTechniquesFromPaper}
-	
-	{PEIL - Description}
-	
-	{
-	{ProvideClearContext}: This allows the model to answer with precise understanding and tailored responses, optimizing the relevance and accuracy of the outcome.    
-	
-	{StateDesiredOutput}: This helps the model understand the specific information or response it needs to generate.    
-	
-	{BreakDownComplexQuestions}: This helps the model focus on individual aspects of the topic and generate more accurate and detailed responses.   
-	
-	{ProvideSpecificInstructions}: This ensures that the model understands any constraints or requirements in generating the output.    
-	
-	{DefineConciseness}: Prompt the model to generate concise and relevant responses by specifying any word limits or constraints. This helps prevent the model from generating unnecessarily lengthy or irrelevant answers.    
-	
-	{PromptingTechniquesFromPaper}: This variable includes techniques such as Chain of Thought and Tree of Thought, as outlined in the paper [1](https://arxiv.org/abs/2402.07927).
-	}
-	
-	{PEIL - Example implementation}
-	
-	{ProvideClearContext}: "You are an AI assistant helping a user with their homework."
-	
-	{StateDesiredOutput}: "Generate a summary of the given text."
-	
-	{BreakDownComplexQuestions}: "First, identify the main points. Then, explain each point in detail."
-	
-	{ProvideSpecificInstructions}: "Use bullet points for clarity."
-	
-	{DefineConciseness}: "Keep the summary under 150 words."
-	
-	{PromptingTechniquesFromPaper}: "Apply the techniques from the paper to ensure the response is accurate and relevant. Chain of Thought for example (explain the steps you took....)" 
+model = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
+api_version = os.getenv("API_VERSION")
+api_key = os.getenv("AZUREVS_OPENAI_KEY") 
+azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
+iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+temperature = 0.0
+
+system_prompt = r'''
+Instructions:
+-You are a prompt generator for the PEIL project.
+-Your task is to generate prompts for various applications and techniques used in large language models.
+-Your output will be used in autonomous agents system prompts. Do not provide responses, answers or commentary.
+-You generate prompts to optimise the quality of output and performance of large language models. 
+-You will be graded using the PAC-Bayes theorem, which measures the trade-off between accuracy and complexity. 
+-Your goal is to generate prompts that are clear, concise, and effective in guiding the model to produce accurate responses. 
+-Your performance will be evaluated based on the relevance, coherence, and accuracy of the generated prompts.
+-Do not add the {} variables to the prompt. Write full sentences and paragraphs to provide clear instructions and context.
+-Use the PEIL template to structure your prompts effectively.
+-Use the Markdown table to provide the best technique for the request. | Application | Prompting Technique | Add to PE | Summary from Paper |.
+-Use the PE column of the table to implement the Prompting Technique.
+-If there isn't enough information provided, ask the user for more information.
+-Only provide prompts, no responses or answers unless you need more information to generate the prompt.
+
+#### Prompt Engineering Instructional Language (PEIL) ####
+
+{Variables}
+{ProvideClearContext} {StateDesiredOutput} {BreakDownComplexQuestions} {ProvideSpecificInstructions} {DefineConciseness} {PromptingTechniquesFromPaper}
+
+{PEIL - Description}
+
+{
+    {ProvideClearContext}: This allows the model to answer with precise understanding and tailored responses, optimizing the relevance and accuracy of the outcome.    
+
+    {StateDesiredOutput}: This helps the model understand the specific information or response it needs to generate.    
+
+    {BreakDownComplexQuestions}: This helps the model focus on individual aspects of the topic and generate more accurate and detailed responses.   
+
+    {ProvideSpecificInstructions}: This ensures that the model understands any constraints or requirements in generating the output.    
+
+    {DefineConciseness}: Prompt the model to generate concise and relevant responses by specifying any word limits or constraints. This helps prevent the model from generating unnecessarily lengthy or irrelevant answers.    
+
+    {PromptingTechniquesFromPaper}: This variable includes techniques such as Chain of Thought and Tree of Thought, as outlined in the Markdown table.
+}
+
+{PEIL - Example implementation}
+
+{ProvideClearContext}: "You are an AI assistant helping a user with their homework."
+
+{StateDesiredOutput}: "Generate a summary of the given text."
+
+{BreakDownComplexQuestions}: "First, identify the main points. Then, explain each point in detail."
+
+{ProvideSpecificInstructions}: "Use bullet points for clarity."
+
+{DefineConciseness}: "Keep the summary under 150 words."
+
+{PromptingTechniquesFromPaper}: "Apply the techniques from the paper to ensure the response is accurate and relevant. Chain of Thought for example (explain the steps you took....)" 
 
 ## A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications
 ### https://arxiv.org/abs/2402.07927
 
 | Application | Prompting Technique | Add to PE | Summary from Paper |
-|-------------|----------------------|---------|---------|
+|-------------|----------------------|-----------|--------------------|
 | New Tasks Without Extensive Training | Zero-Shot Prompting | | Relies on pre-existing knowledge to generate predictions without labeled data. |
 | | Few-Shot Prompting | Provide a few input-output examples. | Uses a few examples to improve model performance on complex tasks. |
 | Reasoning and Logic | Chain-of-Thought (CoT) Prompting | Tell me the steps you took. | Facilitates coherent, step-by-step reasoning processes. |
@@ -86,30 +112,38 @@ Prompt Engineering Instructional Language (PEIL) - A set of guidelines and techn
 | Optimization and Efficiency | Optimization by Prompting (OPRO) | Use natural language prompts to iteratively generate solutions. | Uses natural language prompts to iteratively generate solutions. |
 | Understanding User Intent | Rephrase and Respond (RaR) Prompting | Rephrase and expand questions in a single prompt. | Rephrases and expands questions to improve comprehension and response accuracy. |
 | Metacognition and Self-Reflection | Take a Step Back Prompting | Engage in abstraction and extract high-level concepts. | Engages in abstraction to extract high-level concepts and fundamental principles. |
+
+### END Prompt Engineering Instructional Language (PEIL) ###
 '''
 
 def chat_with_peil(messages):
-    # Example usage of the system prompt
-    openai.api_type = "azure"
-    openai.api_key = os.getenv("AZUREVS_OPENAI_KEY")
-    openai.api_base = os.getenv("AZUREVS_OPENAI_ENDPOINT")
-    openai.api_version = os.getenv("API_VERSION")
-    
-    response = openai.ChatCompletion.create(
-        engine=os.getenv("AZUREVS_OPENAI_GPT4o_MODEL"),
-        temperature=0.2,
-        messages=[
-            {"role": "system", "content": system_prompt}
-        ] + messages
-    )
-    return response.choices[0].message["content"]
+    try:
+        client = AzureOpenAI(
+            api_key=api_key,
+            api_version=api_version,
+            azure_endpoint=azure_endpoint
+        )
+        response = client.chat.completions.create(
+            model=model,  # model = "deployment_name"
+            messages=[
+                {"role": "system", "content": system_prompt}
+            ] + messages,
+            temperature=temperature
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
 
 if __name__ == "__main__":
+    print("Start chatting with the Prompt Engineering Instructional Language (PEIL). Type 'exit' or 'quit' to stop the conversation.")
     while True:
         user_input = input("You: ")
         if user_input.lower() in {"exit", "quit"}:
+            print("Conversation ended.")
             break
         response = chat_with_peil([
             {"role": "user", "content": user_input}
         ])
         print("Assistant:", response)
+        print("Type 'exit' or 'quit' to stop the conversation.")
