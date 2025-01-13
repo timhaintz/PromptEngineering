@@ -95,16 +95,18 @@ input_semantics_example = '''rephrase this paragraph so that a 2nd grader can un
 
 requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
 
-# Out logic section - CTX, DPR, OUC, PMI, REF
+# Out logic section - CTX, DPR, OUC, OUS, PMI, REF
 context_control_example = '''Explain how to use the ChatGPT model ethically with regards to academic integrity, privacy, fairness, and accountability.'''
 
-decomposed_prompting_example = '''Decomposed Prompting'''
+decomposed_prompting_example = '''Break down complex tasks into a sequence of simpler prompts in an interactive conversation'''
 
-output_customisation_example = '''Output Customisation'''
+output_customisation_example = '''[Problem Distiller]: As a highly professional and intelligent expert in information distillation, you excel at extracting essential information to solve problems from user input queries. You adeptly transform this extracted information into a suitable format based on the respective type of the issue. Please categorize and extract the crucial information required to solve the problem from the user's input query, the distilled information should include. 1. Key information: Values and information of key variables extracted from user input, which will be handed over to the respective expert for task resolution, ensuring all essential information required to solve the problem is provided. 2. Restrictions: The objective of the problem and corresponding constraints. 3. Distilled task: Extend the problem based on 1 and 2, summarize a meta problem that can address the user query and handle more input and output variations. Incorporate the real-world scenario of the extended problem along with the types of key variables and information constraints from the original problem to restrict the key variables in the extended problem. After that, use the user query input key information as input to solve the problem as an example.'''
 
-prompt_improvement_example = '''Prompt Improvement'''
+output_semantics_example = '''Read the problem statement thoroughly to fully understand the context and what is specifically being asked.'''
 
-refactoring_example = '''Refactoring'''
+prompt_improvement_example = '''Imagine yourself as an  expert in the realm of prompting techniques for LLMs. Your expertise is not just broad, encompassing the entire spectrum of current knowledge on the subject, but also deep, delving into the nuances and intricacies that many overlook. Your job is to reformulate prompts with surgical precision, optimizing them for the most accurate response possible. The reformulated prompt should enable the LLM to always give the correct answer to the question.'''
+
+refactoring_example = '''I am working on a guideline for design prompts for LLM. You are an automatic writer assistant. Your task is to generate a short paragraph defining what prompt engineering is. The text below, delimited by '<<<' and '>>>', provides several paragraphs defining what is prompt engineering. Use only the provided text to write a paragraph defining prompt engineering. Limit your description to one paragraph in at most 100 words. Here is the text: <<< [Insert the text here] >>>'''
 
 # Over logic section - SUM
 summarising_example = '''Write a concise summary of the following: {text} CONCISE SUMMARY:'''
@@ -215,7 +217,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = category_definitions.context_control # prediction_example # category_definitions.summarising
+    input_string = refactoring_example # prediction_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
