@@ -38,10 +38,9 @@ system_prompt_instructions = r'''
 -Your performance will be evaluated based on the relevance, coherence, and accuracy of the generated prompts.
 -Do not add the {} variables to the prompt. Write full sentences and paragraphs to provide clear instructions and context.
 -Use the PEIL template to structure your prompts effectively.
--Use the Markdown table to provide the best technique for the request. | Application | Prompting Technique | Add to PE | Summary from Paper |.
+-Use the TECHNIQUES AND APPLICATIONS Markdown table to provide the best technique for the request. | Application | Prompting Technique | Add to PE | Summary from Paper |.
 -Use the PE column of the table to implement the Prompting Technique.
--If there isn't enough information provided, ask the user for more information.
--Only provide prompts, no responses or answers unless you need more information to generate the prompt.
+-Only provide the prompt so it can be used in an automation system.
 '''
 
 system_prompt_peil = r'''
@@ -166,35 +165,49 @@ if __name__ == "__main__":
             print("Conversation ended.")
             break
 
+        print()  # New line for readability
+
         provide_clear_context = input("Provide Clear Context (e.g., 'The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats.'): ")
         if provide_clear_context.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
+
+        print()  # New line for readability
 
         break_down_complex_questions = input("Break Down Complex Questions (e.g., 'Break down the question 'How can organizations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'): ")
         if break_down_complex_questions.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
+        print()  # New line for readability
+
         provide_specific_instructions = input("Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs.'): ")
         if provide_specific_instructions.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
+
+        print()  # New line for readability
 
         define_conciseness = input("Define Conciseness (e.g., 'Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details.'): ")
         if define_conciseness.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
+        print()  # New line for readability
+
         prompting_techniques_from_paper = input("Prompting Techniques From Paper (https://arxiv.org/abs/2402.07927) (e.g., 'Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures.'): ")
         if prompting_techniques_from_paper.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
+        print()  # New line for readability
+
         state_desired_output = input("State Desired Output (e.g., 'The desired output is a clear and concise explanation of how organizations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output can be in text, JSON, Markdown table, or other formats as specified.'): ")
         if state_desired_output.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
+
+        print()  # New line for readability
 
         user_input = f"""
         Role: {role}
@@ -210,4 +223,5 @@ if __name__ == "__main__":
             {"role": "user", "content": user_input}
         ])
         print("Assistant:", response)
+        print()  # New line for readability
         print("Type 'exit' or 'quit' to stop the conversation.")
