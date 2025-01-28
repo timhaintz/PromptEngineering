@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
         print()  # New line for readability
 
-        provide_specific_instructions = input("Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs.'): ") or "Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs."
+        provide_specific_instructions = input("rovide Specific Instructions (e.g., 'Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs.'): ") or "Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs."
         if provide_specific_instructions.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
