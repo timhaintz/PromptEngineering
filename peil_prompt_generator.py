@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
         print()  # New line for readability
 
-        state_desired_output = input("State Desired Output (e.g., 'The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output can be in text, JSON, Markdown table, or other formats as specified.'): ") or "The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Text."
+        state_desired_output = input("State Desired Output (e.g., 'The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output can be in text, JSON, Markdown, Table or other formats as specified.'): ") or "The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Markdown."
         if state_desired_output.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
