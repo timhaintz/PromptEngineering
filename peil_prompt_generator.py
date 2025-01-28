@@ -158,51 +158,51 @@ def chat_with_peil(messages):
         return None
 
 if __name__ == "__main__":
-    print("Start chatting with the Prompt Engineering Instructional Language (PEIL). Type 'exit' or 'quit' to stop the conversation.")
+    print("Start chatting with the Prompt Engineering Instructional Language (PEIL). Press Enter to use the e.g. defaults below or type 'exit' or 'quit' to stop the conversation.")
     while True:
-        role = input("Role (e.g., 'As a prompt generator for the PEIL project, your role is to create prompts that enhance the performance and accuracy of large language models by providing clear, concise, and contextually relevant instructions.'): ")
+        role = input("Role (e.g., 'You are a cybersecurity expert.'): ") or "You are a cybersecurity expert."
         if role.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
         print()  # New line for readability
 
-        provide_clear_context = input("Provide Clear Context (e.g., 'The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats.'): ")
+        provide_clear_context = input("Provide Clear Context (e.g., 'The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats.'): ") or "The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats."
         if provide_clear_context.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
         print()  # New line for readability
 
-        break_down_complex_questions = input("Break Down Complex Questions (e.g., 'Break down the question 'How can organizations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'): ")
+        break_down_complex_questions = input("Break Down Complex Questions (e.g., 'Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'): ") or "Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'"
         if break_down_complex_questions.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
         print()  # New line for readability
 
-        provide_specific_instructions = input("Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs.'): ")
+        provide_specific_instructions = input("Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs.'): ") or "Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs."
         if provide_specific_instructions.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
         print()  # New line for readability
 
-        define_conciseness = input("Define Conciseness (e.g., 'Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details.'): ")
+        define_conciseness = input("Define Conciseness (e.g., 'Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details.'): ") or "Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details."
         if define_conciseness.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
         print()  # New line for readability
 
-        prompting_techniques_from_paper = input("Prompting Techniques From Paper (https://arxiv.org/abs/2402.07927) (e.g., 'Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures.'): ")
+        prompting_techniques_from_paper = input("Prompting Techniques From Paper (https://arxiv.org/abs/2402.07927) (e.g., 'Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures.'): ") or "Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures."
         if prompting_techniques_from_paper.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
 
         print()  # New line for readability
 
-        state_desired_output = input("State Desired Output (e.g., 'The desired output is a clear and concise explanation of how organizations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output can be in text, JSON, Markdown table, or other formats as specified.'): ")
+        state_desired_output = input("State Desired Output (e.g., 'The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output can be in text, JSON, Markdown table, or other formats as specified.'): ") or "The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Text."
         if state_desired_output.lower() in {"exit", "quit"}:
             print("Conversation ended.")
             break
