@@ -8,14 +8,28 @@ Author:         Tim Haintz
 Creation Date:  20250113
 LINKS
 EXAMPLE USAGE
+#1. Start a chat session with the PEIL prompt generator
 python peil_prompt_generator.py
+#2. Start a chat session with the PEIL prompt generator. Continues until exit or quit is entered.
+python peil_prompt_generator.py -chat_with_peil
+#3. Start a chat session with the PEIL prompt generator and automatically evaluate the output with the judgement model
+python peil_prompt_generator.py -chat_with_peil -chat_with_judgement
+#4. Provide a one-off custom prompt
+python peil_prompt_generator.py -prompt "Role: You are a cybersecurity expert. Provide Clear Context: The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats. Break Down Complex Questions: Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?' Provide Specific Instructions: Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs. Define Conciseness: Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details. Prompting Techniques: Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures. State Desired Output: The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Markdown."
+#5. Start an interactive session with the judgement model only
+python peil_prompt_generator.py -chat_with_judgement
+
+
 '''
 import os
 import openai
 import json
+import argparse
 from dotenv import load_dotenv
 from openai import AzureOpenAI
 from datetime import datetime
+from azure.ai.inference import ChatCompletionsClient
+from azure.core.credentials import AzureKeyCredential
 
 # Load environment variables
 load_dotenv()
@@ -26,24 +40,26 @@ api_key = os.getenv("AZUREVS_OPENAI_KEY")
 azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 temperature = 0.0
+r1_endpoint = os.getenv("AZUREVS_DEEPSEEK_R1_ENDPOINT")
+r1_key = os.getenv("AZUREVS_DEEPSEEK_R1_KEY")
 
-system_prompt_instructions = r'''
-#INSTRUCTIONS
+peil_chat_system_prompt_instructions = r'''
+# INSTRUCTIONS
 -You are a prompt generator for the PEIL project.
--Your task is to generate prompts for various applications and techniques used in large language models.
--Your output will be used in autonomous agents system prompts. Do not provide responses, answers or commentary.
+-Your task is to generate system prompts.
+-Your output will be used in autonomous agents system prompts. Only provide the system prompt.
 -You generate prompts to optimise the quality of output and performance of large language models. 
--You will be graded using the PAC-Bayes theorem, which measures the trade-off between accuracy and complexity. 
--Your goal is to generate prompts that are clear, concise, and effective in guiding the model to produce accurate responses. 
+-Your goal is to generate prompts that are clear, concise, and effective in guiding the autonomous agents to produce accurate responses. 
 -Your performance will be evaluated based on the relevance, coherence, and accuracy of the generated prompts.
--Do not add the {} variables to the prompt. Write full sentences and paragraphs to provide clear instructions and context.
+-Do not add the {} variables to the prompt. Write full single string sentences to provide clear instructions and context.
 -Use the PEIL template to structure your prompts effectively.
 -Use the TECHNIQUES AND APPLICATIONS Markdown table to provide the best technique for the request. | Application | Prompting Technique | Add to PE | Summary from Paper |.
 -Use the PE column of the table to implement the Prompting Technique.
 -Only provide the prompt so it can be used in an automation system.
+# END INSTRUCTIONS #
 '''
 
-system_prompt_peil = r'''
+peil_chat_system_prompt_peil_definition = r'''
 # Prompt Engineering Instructional Language (PEIL)
 
 {Variables}
@@ -66,8 +82,10 @@ system_prompt_peil = r'''
 
     {StateDesiredOutput}: This helps the model understand the specific information or response it needs to generate. 
 }
+# END PEIL #
+'''
 
-
+peil_chat_system_prompt_peil_techniques = r'''
 ## A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications
 ### https://arxiv.org/abs/2402.07927
 
@@ -107,7 +125,7 @@ system_prompt_peil = r'''
 # END Prompt Engineering Instructional Language (PEIL) #
 '''
 
-system_prompt_categories =r'''
+peil_chat_system_prompt_categories =r'''
 # CATEGORIES & DEFINITIONS
 | **Category**              | **Definition**                                                                                                                                                                                                                                                                                                                                 |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -138,6 +156,27 @@ system_prompt_categories =r'''
 # END CATEGORIES & DEFINITIONS
 '''
 
+judgement_system_prompt = r''' 
+#INSTRUCTIONS
+You are an AI language model evaluator and judge. Your responsibility is to assess the provided Prompt Engineering Instructional Language (PEIL) prompt for quality and accuracy. 
+Your objective is to generate a concise judgment with feedback and provide a rating out of 100 to enhance the effectiveness of prompts for large language models.
+The prompt you will evaluate is intended to guide AI models in generating effective and accurate responses. 
+It is crucial to focus on how well the prompt communicates instructions and whether it enables the AI to produce the desired outcomes.
+Analyse the prompt based on the following weighted criteria:
+1. **Clarity and Coherence (30%)**: Is the language clear and unambiguous? Does the prompt have a logical flow that is easy to follow? 
+2. **Completeness and Comprehensiveness (25%)**: Does the prompt cover all necessary aspects of the task? Are there any important elements or instructions missing? 
+3. **Relevance and Applicability (20%)**: How well does the prompt align with its intended purpose? Can it be effectively applied in practical scenarios? 
+4. **Creativity and Originality (15%)**: Does the prompt introduce novel ideas or approaches? How original is the content compared to existing prompts? 
+5. **Technical Accuracy (10%)**: Are all technical details and instructions accurate? Is the information presented correctly? 
+For each criterion, provide specific feedback, highlighting strengths and areas for improvement. 
+Make sure your feedback is constructive and actionable, offering clear suggestions on how to enhance the prompt. 
+Keep your evaluation concise and focused. While thorough, avoid unnecessary elaboration to ensure your assessment is clear and to the point. 
+Your final output should include a concise overall judgment of the prompt's quality and accuracy; detailed feedback on each of the five criteria, including specific strengths and areas for improvement;
+an overall rating out of 100, calculated based on the weighted criteria; and a brief summary that encapsulates your assessment. 
+By following these instructions, you will provide a comprehensive evaluation that helps improve the effectiveness of prompt engineering for large language models.
+#END INSTRUCTIONS
+'''
+# Using the GPT-4o model
 def chat_with_peil(messages):
     try:
         client = AzureOpenAI(
@@ -148,7 +187,7 @@ def chat_with_peil(messages):
         response = client.chat.completions.create(
             model=model,  # model = "deployment_name"
             messages=[
-                {"role": "system", "content": system_prompt_instructions + system_prompt_peil + system_prompt_categories}
+                {"role": "system", "content": peil_chat_system_prompt_instructions + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_peil_techniques + peil_chat_system_prompt_categories}
             ] + messages,
             temperature=temperature
         )
@@ -157,71 +196,182 @@ def chat_with_peil(messages):
         print(f"An error occurred: {e}")
         return None
 
+# Using the DeepSeek R1 reasoning
+def chat_with_judgement(messages):
+    try:
+        client = ChatCompletionsClient(
+            endpoint=r1_endpoint,
+            credential=AzureKeyCredential(r1_key)
+        )
+        payload = {
+            "messages": [
+                {"role": "user", "content": judgement_system_prompt + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_categories}
+            ] + messages,
+            "max_tokens": 4096
+        }
+        response = client.complete(payload)
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+
+def judge_response(response):
+    """
+    Judges the LLM response by calling a different model (via chat_with_judgement).
+
+    :param response: The response from the previous LLM call.
+    :return: Judgement result as a string.
+    """
+    judgement_prompt = (
+        "Please evaluate the quality and accuracy of the following response. "
+        "Give a concise judgement with constructive feedback and a rating:\n\n"
+        f"{response}"
+    )
+    judgement_result = chat_with_judgement([{"role": "user", "content": judgement_prompt}])
+    return judgement_result
+
+def main():
+    parser = argparse.ArgumentParser(description="PEIL prompt generator")
+    parser.add_argument("-chat_with_peil", action="store_true", help="Start session with chat_with_peil - Default")
+    parser.add_argument("-chat_with_judgement", action="store_true", help="Automatically evaluate output with the judgement model")
+    parser.add_argument("-prompt", type=str, default="", help="Provide a one-off custom prompt. Non-interactive mode. Parse text in quotes in the command line.")
+    args = parser.parse_args()
+
+    # One-off prompt from command-line arguments
+    if args.prompt:
+        user_prompt = args.prompt
+        peil_response = chat_with_peil([{"role": "user", "content": user_prompt}])
+        if peil_response:
+            print("\nResponse from chat_with_peil:")
+            print(peil_response)
+        else:
+            print("No response from chat_with_peil.")
+        
+        if args.chat_with_judgement and peil_response:
+            judgement_response = judge_response(peil_response)
+            if judgement_response:
+                print("\nJudgement result:")
+                print(judgement_response)
+            else:
+                print("No judgement received.")
+        return
+
+    # If interactive session with judgement model only
+    if args.chat_with_judgement and not args.chat_with_peil:
+        print("Starting interactive session with the judgement model.")
+        while True:
+            user_prompt = input("Enter your prompt for chat_with_judgement (or type 'exit' to quit): ")
+            if user_prompt.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+            judgement_response = chat_with_judgement([{"role": "user", "content": user_prompt}])
+            if judgement_response:
+                print("\nResponse from chat_with_judgement:")
+                print(judgement_response)
+            else:
+                print("No response from chat_with_judgement.")
+            print()
+        return
+
+    # Default interactive loop using chat_with_peil (with optional auto judgement if selected)
+    # Wrap the chat session in an outer loop to re-display the initial instructions when a session ends.
+    while True:        
+        # Inner loop: one full interactive session.
+        while True:
+            print("\nStart chatting with the Prompt Engineering Instructional Language (PEIL).")
+            print("Press Enter to use the default examples or type 'exit' or 'quit' to stop the conversation.")
+            role = input("Role (e.g., 'You are a cybersecurity expert.'): ") or "You are a cybersecurity expert."
+            if role.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+
+            print()  # New line for readability
+
+            provide_clear_context = input(
+                "Provide Clear Context (e.g., 'The context for this prompt is cybersecurity...'): "
+            ) or "The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats."
+            if provide_clear_context.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+
+            print()  # New line for readability
+
+            break_down_complex_questions = input(
+                "Break Down Complex Questions (e.g., 'Break down the question \"How can organisations improve their cybersecurity posture?\"...'): "
+            ) or "Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'"
+            if break_down_complex_questions.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+
+            print()  # New line for readability
+            
+            provide_specific_instructions = input(
+                "Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components...'): "
+            ) or "Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs."
+            if provide_specific_instructions.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+
+            print()  # New line for readability
+
+            define_conciseness = input(
+                "Define Conciseness (e.g., 'Limit the response to 200 words...'): "
+            ) or "Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details."
+            if define_conciseness.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+
+            print()  # New line for readability
+
+            prompting_techniques = input(
+                "Prompting Techniques From Paper (e.g., 'Use the Chain-of-Thought (CoT) prompting technique...'): "
+            ) or "Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures."
+            if prompting_techniques.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+
+            print()  # New line for readability
+
+            state_desired_output = input(
+                "State Desired Output (e.g., 'The desired output is a clear and concise explanation...'): "
+            ) or "The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Markdown."
+            if state_desired_output.strip().lower() in {"exit", "quit"}:
+                print("Conversation ended.")
+                break
+
+            print()  # New line for readability
+
+            user_input = (
+                f"Role: {role}\n"
+                f"Provide Clear Context: {provide_clear_context}\n"
+                f"Break Down Complex Questions: {break_down_complex_questions}\n"
+                f"Provide Specific Instructions: {provide_specific_instructions}\n"
+                f"Define Conciseness: {define_conciseness}\n"
+                f"Prompting Techniques: {prompting_techniques}\n"
+                f"State Desired Output: {state_desired_output}\n"
+            )
+            peil_response = chat_with_peil([{"role": "user", "content": user_input}])
+            if peil_response:
+                print("\nResponse from chat_with_peil:")
+                print(peil_response)
+            else:
+                print("No response received from chat_with_peil.")
+
+            if args.chat_with_judgement and peil_response:
+                judgement_response = judge_response(peil_response)
+                if judgement_response:
+                    print("\nJudgement result:")
+                    print(judgement_response)
+                else:
+                    print("No judgement received.")
+            print()  # New line for readability between interactions
+
+        # End of the inner session. Now re-display the banner and ask if the user wants to start a new session.
+        restart = input("Would you like to start a new chat session? (y/n): ").strip().lower()
+        if restart not in {"y", "yes"}:
+            print("Exiting interactive mode.")
+            break
+
 if __name__ == "__main__":
-    print("Start chatting with the Prompt Engineering Instructional Language (PEIL). Press Enter to use the e.g. defaults below or type 'exit' or 'quit' to stop the conversation.")
-    while True:
-        role = input("Role (e.g., 'You are a cybersecurity expert.'): ") or "You are a cybersecurity expert."
-        if role.lower() in {"exit", "quit"}:
-            print("Conversation ended.")
-            break
-
-        print()  # New line for readability
-
-        provide_clear_context = input("Provide Clear Context (e.g., 'The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats.'): ") or "The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats."
-        if provide_clear_context.lower() in {"exit", "quit"}:
-            print("Conversation ended.")
-            break
-
-        print()  # New line for readability
-
-        break_down_complex_questions = input("Break Down Complex Questions (e.g., 'Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'): ") or "Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'"
-        if break_down_complex_questions.lower() in {"exit", "quit"}:
-            print("Conversation ended.")
-            break
-
-        print()  # New line for readability
-
-        provide_specific_instructions = input("Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs.'): ") or "Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs."
-        if provide_specific_instructions.lower() in {"exit", "quit"}:
-            print("Conversation ended.")
-            break
-
-        print()  # New line for readability
-
-        define_conciseness = input("Define Conciseness (e.g., 'Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details.'): ") or "Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details."
-        if define_conciseness.lower() in {"exit", "quit"}:
-            print("Conversation ended.")
-            break
-
-        print()  # New line for readability
-
-        prompting_techniques_from_paper = input("Prompting Techniques From Paper (https://arxiv.org/abs/2402.07927) (e.g., 'Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures.'): ") or "Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures."
-        if prompting_techniques_from_paper.lower() in {"exit", "quit"}:
-            print("Conversation ended.")
-            break
-
-        print()  # New line for readability
-
-        state_desired_output = input("State Desired Output (e.g., 'The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output can be in text, JSON, Markdown, Table or other formats as specified.'): ") or "The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Markdown."
-        if state_desired_output.lower() in {"exit", "quit"}:
-            print("Conversation ended.")
-            break
-
-        print()  # New line for readability
-
-        user_input = f"""
-        Role: {role}
-        Provide Clear Context: {provide_clear_context}
-        Break Down Complex Questions: {break_down_complex_questions}
-        Provide Specific Instructions: {provide_specific_instructions}
-        Define Conciseness: {define_conciseness}
-        Prompting Techniques From Paper: {prompting_techniques_from_paper}
-        State Desired Output: {state_desired_output}
-        """
-
-        response = chat_with_peil([
-            {"role": "user", "content": user_input}
-        ])
-        print("Assistant:", response)
-        print()  # New line for readability
-        print("Type 'exit' or 'quit' to stop the conversation.")
+    main()
