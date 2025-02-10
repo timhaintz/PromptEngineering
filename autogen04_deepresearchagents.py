@@ -58,9 +58,9 @@ async def main() -> None:
     # Create the Research Assistant agent
     research_assistant = AssistantAgent(
         name="research_assistant",
-        description="A research assistant that performs web searches and analyses information",
+        description="A Senior PhD level research assistant that performs web searches and analyses information",
         model_client=az_model_client,
-        system_message='''You are a research assistant focused on finding accurate information.
+        system_message='''You are a Senior PhD level research assistant focused on finding accurate information.
         Use the WebSurfer agent to find relevant information.
         Break down complex queries into specific search terms.
         Always verify information across multiple sources when possible.
@@ -76,8 +76,9 @@ async def main() -> None:
         Your report should end with the word "TERMINATE" to signal the end of the conversation."""
     )
 
-    surfer = MultimodalWebSurfer(
-        "WebSurfer",
+    web_surfer = MultimodalWebSurfer(
+        name="WebSurfer",
+        description="A web surfer agent that performs web searches to find relevant information",
         model_client=az_model_client,
     )
 
@@ -137,7 +138,7 @@ async def main() -> None:
 
     # Create the team
     team = SelectorGroupChat(
-        participants=[research_assistant, verifier, summary_agent],
+        participants=[research_assistant, verifier, summary_agent, web_surfer],
         model_client=az_model_client,
         termination_condition=termination,
         selector_prompt=selector_prompt,
@@ -146,13 +147,13 @@ async def main() -> None:
 
     # Used for testing the MagenticOneGroupChat
     magentic_one_team = MagenticOneGroupChat(
-        participants=[research_assistant, surfer, verifier], 
+        participants=[research_assistant, web_surfer, verifier], 
         model_client=az_model_client,
         termination_condition=termination,
     )
 
     task = '''
-        Enter your research question here.
+        Please use the WebSurfer agent to find information on the following question: "What are the benefits of using a deep learning model for image recognition?"
     '''
     await Console(team.run_stream(task=task))
 
