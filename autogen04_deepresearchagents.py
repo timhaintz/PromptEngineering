@@ -146,16 +146,6 @@ async def main() -> None:
         },
     )
 
-    # arxiv_search_agent = AssistantAgent(
-    #     name="Arxiv_Search_Agent",
-    #     tools=[arxiv_search_tool],
-    #     model_client=az_model_client,
-    #     description="An agent that can search Arxiv for papers related to a given topic, including abstracts",
-    #     system_message='''You are an expert searching Arxiv for relevant research papers. Solve tasks using your tools.
-    #     Specifically, you take into consideration the user's request and craft a search query that is most likely to return relevant academic papers.
-    #     ''',
-    # )
-
     # Create the Research Assistant agent
     research_assistant = AssistantAgent(
         name="research_assistant",
