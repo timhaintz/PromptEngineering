@@ -151,7 +151,7 @@ async def main() -> None:
         name="research_assistant",
         tools=[arxiv_search_tool],
         description="A Senior PhD research assistant that requests earches and analyses information",
-        model_client=az_model_client_R1,
+        model_client=az_model_client,
         system_message='''You are a Senior PhD research assistant focused on finding accurate information.
         Use the arxiv_search_tool to find relevant research papers.
         Use the WebSurfer agent to extend your search if needed.
@@ -217,7 +217,6 @@ async def main() -> None:
     The research_assistant *ALWAYS GOES FIRST* and requests searches and analyses information.
     The verifier evaluates progress and ensures completeness.
     The writer_agent provides a detailed markdown summary of the research as a report to the user.
-    The WebSurfer agent performs web searches.
 
     Given the current context, select the most appropriate next speaker.
     The research_assistant should search and analyze.
@@ -237,7 +236,7 @@ async def main() -> None:
 
     # Create the team
     team = SelectorGroupChat(
-        participants=[research_assistant, verifier, web_surfer, writer_agent],
+        participants=[research_assistant, verifier, writer_agent], # web_surfer,
         model_client=az_model_client,
         termination_condition=termination,
         selector_prompt=selector_prompt,
@@ -252,9 +251,10 @@ async def main() -> None:
     )
 
     task = f'''
-        The following are techniques and applications of prompt engineering in large language models. 
-        Please find similar papers on Arxiv and provide a summary of the techniques and applications.
+        The following are techniques, strategies and applications of prompt engineering.
+        Come up with a search query to find papers on Arxiv that discuss prompt engineering techniques and strategies.
         Each search task should return a maximum of 10 papers.
+        Choose the 10 most relevant papers on Arxiv and provide a summary of the techniques and applications.
         I'm looking specifically for papers that discuss prompt engineering techniques and strategies.
         {pe_techniques}
         The report should contain the following sections for each paper:
