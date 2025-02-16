@@ -255,7 +255,7 @@ async def main() -> None:
         The following are techniques and applications of prompt engineering in large language models. 
         Please find similar papers on Arxiv and provide a summary of the techniques and applications.
         Each search task should return a maximum of 10 papers.
-        I'm looking specifically for papers that discuss prompt engineering strategies.
+        I'm looking specifically for papers that discuss prompt engineering techniques and strategies.
         {pe_techniques}
         The report should contain the following sections for each paper:
         - Title - with hyperlink to the paper
