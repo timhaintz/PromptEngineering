@@ -141,28 +141,29 @@ async def main() -> None:
         model_info={
             "vision": False,
             "family": ModelFamily.R1,
-            "function_calling": False,
+            "function_calling": True,
             "json_output": True,
         },
     )
 
-    arxiv_search_agent = AssistantAgent(
-        name="Arxiv_Search_Agent",
-        tools=[arxiv_search_tool],
-        model_client=az_model_client,
-        description="An agent that can search Arxiv for papers related to a given topic, including abstracts",
-        system_message='''You are an expert searching Arxiv for relevant research papers. Solve tasks using your tools.
-        Specifically, you take into consideration the user's request and craft a search query that is most likely to return relevant academic papers.
-        ''',
-    )
+    # arxiv_search_agent = AssistantAgent(
+    #     name="Arxiv_Search_Agent",
+    #     tools=[arxiv_search_tool],
+    #     model_client=az_model_client,
+    #     description="An agent that can search Arxiv for papers related to a given topic, including abstracts",
+    #     system_message='''You are an expert searching Arxiv for relevant research papers. Solve tasks using your tools.
+    #     Specifically, you take into consideration the user's request and craft a search query that is most likely to return relevant academic papers.
+    #     ''',
+    # )
 
     # Create the Research Assistant agent
     research_assistant = AssistantAgent(
         name="research_assistant",
-        description="A Senior PhD research assistant that performs web searches and analyses information",
-        model_client=az_model_client,
+        tools=[arxiv_search_tool],
+        description="A Senior PhD research assistant that requests earches and analyses information",
+        model_client=az_model_client_R1,
         system_message='''You are a Senior PhD research assistant focused on finding accurate information.
-        Use the Arxiv_Search_Agent to find relevant research papers.
+        Use the arxiv_search_tool to find relevant research papers.
         Use the WebSurfer agent to extend your search if needed.
         Break down complex queries into specific search terms.
         Always verify information across multiple sources when possible.
@@ -223,15 +224,13 @@ async def main() -> None:
         # Create the selector prompt
     selector_prompt = '''
     You are coordinating a research team by selecting the team member to speak/act next. The following team member roles are available: {roles}.
-    The research_assistant performs searches and analyses information.
-    The arxiv_search_agent searches Arxiv for relevant research papers.
+    The research_assistant *ALWAYS GOES FIRST* and requests searches and analyses information.
     The verifier evaluates progress and ensures completeness.
     The writer_agent provides a detailed markdown summary of the research as a report to the user.
     The WebSurfer agent performs web searches.
 
     Given the current context, select the most appropriate next speaker.
     The research_assistant should search and analyze.
-    The arxiv_search_agent NEVER sends information to the web_surfer. The web_surfer can only be used by the research_assistant.
     The verifier should evaluate progress and guide the research (select this role is there is a need to verify/evaluate progress). You should ONLY select the writer_agent role if the research is complete and it is time to generate a report.
 
     Base your selection on:
@@ -248,7 +247,7 @@ async def main() -> None:
 
     # Create the team
     team = SelectorGroupChat(
-        participants=[arxiv_search_agent, research_assistant, verifier, writer_agent, web_surfer],
+        participants=[research_assistant, verifier, web_surfer, writer_agent],
         model_client=az_model_client,
         termination_condition=termination,
         selector_prompt=selector_prompt,
@@ -257,13 +256,16 @@ async def main() -> None:
 
     # Used for testing the MagenticOneGroupChat
     magentic_one_team = MagenticOneGroupChat(
-        participants=[arxiv_search_agent, research_assistant, verifier, web_surfer, writer_agent], 
+        participants=[research_assistant, verifier, web_surfer, writer_agent], 
         model_client=az_model_client,
         termination_condition=termination,
     )
 
-    task = '''
-        The following are techniques and applications of prompt engineering in large language models. Please find similar papers on Arxiv and provide a summary of the techniques and applications.
+    task = f'''
+        The following are techniques and applications of prompt engineering in large language models. 
+        Please find similar papers on Arxiv and provide a summary of the techniques and applications.
+        Each search task should return a maximum of 10 papers.
+        I'm looking specifically for papers that discuss prompt engineering strategies.
         {pe_techniques}
         The report should contain the following sections for each paper:
         - Title - with hyperlink to the paper
