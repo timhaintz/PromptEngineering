@@ -132,5 +132,19 @@ The paper develops domain-specific prompting for advanced mathematics, combining
 **Summary:**
 This paper presents an automated pipeline for prompt generation and selection, using LLMs to evaluate and rank prompt variations, significantly speeding up the prompt engineering process.
 
+## 11 [The Prompt Canvas: A Literature-Based Practitioner Guide for Creating Effective Prompts in Large Language Models](https://arxiv.org/abs/2412.05127v1)
+    
+**Strategies Used:**
+- Iterative Optimization: Refine prompts with additional instructions to improve effectiveness.
+- Placeholders & Delimiters: Use delimiters for clarity and placeholders for flexibility in prompts.- AI as a Prompt Generator: Utilise the model to generate or refine prompts for better results
+- Chain-of-Thought: Encourage the model to think step-by-step to enhance reasoning capabilities.
+- Tree-of-Thought: Ask the model to analyse from multiple perspectives or personas for diverse viewpoints.
+- Emotion Prompting: Add emotional phrases to prompts to enhance empathetic engagement.
+- Rephrase and Respond / Re-Reading: Instruct the model to express the question in its own words before answering or to read the question again for improved reasoning.
+- Adjusting Hyperparameters (advanced): Modify the model's settings (temperature, top-p, frequency, or presence penalty) to control output diversity and focus.
+
+**Summary:**
+The paper discusses the importance of prompt engineering in optimising outputs from large language models (LLMs). It highlights the fragmented nature of current research and practices in prompt engineering, which are spread across various sources like academic papers, blogs, and informal discussions. To address this, the authors propose the Prompt Canvas, a structured framework that consolidates existing methodologies into a cohesive overview for practitioners. The Prompt Canvas is designed as a learning resource to introduce prompt engineering techniques, such as Few-shot, Chain-of-Thought, and role-based methods, to students and professionals. The paper also emphasises the need for a unified framework to make prompt engineering techniques more accessible and practical, thereby enhancing the application of LLMs across different domains.
+
 ## Conclusion
 The research highlights the diversity and innovation in prompt engineering techniques across various applications. Key trends include the use of hybrid strategies, domain-specific adaptations, and the emergence of automated prompt optimiation. These advancements are crucial for improving the performance and applicability of large language models in real-world scenarios.
