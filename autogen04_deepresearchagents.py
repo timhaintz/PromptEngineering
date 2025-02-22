@@ -151,7 +151,7 @@ async def main() -> None:
         name="research_assistant",
         tools=[arxiv_search_tool],
         description="A Senior PhD research assistant that requests earches and analyses information",
-        model_client=az_model_client,
+        model_client=az_model_client_R1,
         system_message='''You are a Senior PhD research assistant focused on finding accurate information.
         Use the arxiv_search_tool to find relevant research papers.
         Use the WebSurfer agent to extend your search if needed.
