@@ -272,3 +272,124 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 ## Conclusion
 
 The research highlights the diversity and innovation in prompt engineering techniques across various applications. Key trends include the use of hybrid strategies, domain-specific adaptations, and the emergence of automated prompt optimiation. These advancements are crucial for improving the performance and applicability of large language models in real-world scenarios.
+
+| Prompting Technique                                      | Summary                                                                                           |
+|----------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| **Active Prompt**                                        | Dynamically selects the most relevant and impactful examples for few-shot learning, fine-tuning the model's responses by focusing on contextually rich prompts tailored to the specific task. |
+| **AI as a Prompt Generator**                             | Harnesses the model's own capabilities to generate or refine its own prompts, allowing for adaptive and self-improving guidance that enhances performance across diverse tasks. |
+| **Analogical Reasoning**                                 | Solves new problems by mapping similarities from previous examples and analogies, effectively transferring knowledge through the identification of parallel patterns. |
+| **Automatic Chain-of-Thought (Auto-CoT)**                | Automatically generates intermediate reasoning steps without human annotations, improving logical consistency and problem-solving through clustering and zero-shot methods. |
+| **Automatic Prompt Engineer**                            | Utilizes automated strategies to design and select effective prompts, optimizing task-specific performance without the need for extensive manual prompt crafting. |
+| **Automatic Reasoning and Tool-use (ART)**               | Integrates external tools and resources into the reasoning process, supplementing the model's problem-solving abilities with functionalities like calculations and data retrieval. |
+| **Basic Prompting**                                      | Engages the language model with straightforward prompts, relying solely on its inherent capabilities without additional context or strategic guidance. |
+| **Basic with Term Definitions**                          | Enhances simple prompts by including definitions of key terms, providing additional context that guides the model toward more accurate and relevant responses. |
+| **Be Clear and Precise**                                 | Emphasizes unambiguous and concise prompts to reduce uncertainty, driving the model to produce precise and accurate outputs. |
+| **Chain of Code (CoC)**                                  | Guides the model through tasks by formatting sub-tasks as pseudocode or code snippets, facilitating detailed, code-focused reasoning and execution. |
+| **Chain of Events (CoE)**                                | Extracts and links events sequentially to support summarization and process-oriented reasoning, focusing on the temporal or causal progression of events. |
+| **Chain of Knowledge (CoK)**                             | Breaks down tasks into sequential, evidence-based steps, dynamically adjusting the flow of knowledge to build upon prior information effectively. |
+| **Chain of Table**                                       | Utilizes tabular formats to structure reasoning, helping the model handle step-by-step processes through organized and structured data presentations. |
+| **Chain of Thought (CoT)**                               | Encourages the model to think through problems step by step by decomposing complex tasks into manageable reasoning steps, enhancing performance on intricate tasks. |
+| **Chain-of-Symbol (CoS)**                                | Employs symbols and shorthand notations in place of natural language for a concise and structured reasoning framework, particularly useful for mathematical and logical computations. |
+| **Chain-of-Verification (CoVe)**                         | Prompts the model to generate verification queries, checking and refining its intermediate reasoning steps to improve accuracy and reliability. |
+| **Chain-of-Note (CoN)**                                  | Integrates note-taking into the reasoning process, allowing the model to evaluate, summarize, and filter content relevance, aiding in tasks that require synthesis of information. |
+| **Complex Chain-of-Thought (Complex CoT)**               | Utilizes intricate in-context examples to break down highly complex problems into multiple reasoning paths, enabling the model to handle layered and nuanced tasks. |
+| **Conditional Context Optimization (CoCoOp)**            | Dynamically tailors the prompt context based on specific conditions, boosting the model's adaptability and performance across varied inputs. |
+| **Conversational Prompting**                             | Uses dialogue and iterative feedback to progressively refine the model’s output, fostering an interactive problem-solving environment. |
+| **Control Codes and Conditioning**                       | Inserts special tokens or control codes into prompts to steer output characteristics and stylistic attributes, enabling fine-grained control over the model's responses. |
+| **Context Optimization (CoOp)**                          | Uses learnable continuous prompt representations to optimize task performance by adapting context vectors within the model's input. |
+| **Decomposed Prompting (DecomP)**                        | Breaks down complex tasks into sequential, simpler subtasks, enabling the model to tackle each component step-by-step for improved reasoning. |
+| **Domain-Specific Knowledge Integration**                | Integrates specialized domain knowledge into prompts to tailor outputs effectively for specific fields or contexts. |
+| **Dater**                                                | Transforms natural language queries into structured formats (like SQL) to enable precise reasoning and data retrieval from tables. |
+| **Emotion Prompting**                                    | Incorporates emotional cues into prompts to influence the model's tone, fostering responses that convey specific emotions or empathy. |
+| **Ensemble Refinement (ER)**                             | Generates multiple response paths and refines them into a consensus answer, improving accuracy through ensemble reasoning. |
+| **Expert Prompting**                                     | Guides the model to adopt an expert's perspective in a specific domain, enhancing depth and accuracy of its responses. |
+| **Federated Self-Consistency**                           | Aggregates multiple model responses generated under varied conditions to enhance consistency and reliability of the answers. |
+| **Generated Knowledge**                                  | Enables the model to generate and utilize additional context or background information prior to answering, enhancing understanding and response quality. |
+| **Implicit Retrieval Augmented Generation (Implicit RAG)** | Allows the model to implicitly integrate relevant external information into responses, enhancing accuracy without explicit retrieval steps. |
+| **In-Context Learning**                                  | Includes examples within the prompt to guide the model's understanding and adaptation to the specific task or style required. |
+| **Instructed Prompting**                                 | Provides explicit instructions to the model within the prompt to focus on essential information and disregard irrelevant details. |
+| **Least-to-Most Prompting**                              | Encourages solving problems by starting with the simplest sub-problems and sequentially addressing more complex parts. |
+| **Logical Thoughts (LoT)**                               | Prompts the model to utilize formal logic principles to improve reasoning and inference in zero-shot tasks. |
+| **Maieutic Prompting**                                   | Engages the model in self-questioning and iterative refinement to produce well-reasoned, contradiction-free responses. |
+| **MathPrompter**                                         | Guides the model to produce and solve mathematical expressions step-by-step, enhancing accuracy in mathematical tasks. |
+| **Metacognitive Prompting (MP)**                         | Encourages the model to reflect on and assess its own reasoning process, improving self-awareness and response accuracy. |
+| **Multi-Turn Conversational Prompting**                  | Allows the model to maintain and utilize conversation history over multiple turns for coherent and context-aware interactions. |
+| **Multimodal Prompting**                                 | Combines various input modalities within prompts (e.g., text, images) to provide comprehensive context for the model. |
+| **Multimodal Prompt Learning (MaPLe)**                   | Learnable prompts optimize model performance across multiple modalities simultaneously, enhancing cross-modal understanding. |
+| **Negative Prompting**                                   | Uses prompts that specify undesired attributes or content to guide the model away from producing certain types of outputs. |
+| **One-Shot Prompting**                                   | Includes a single example in the prompt to demonstrate the task and guide the model's response. |
+| **Output Formatting**                                    | Guides the model to produce responses in a predefined, structured format for consistent and easy downstream use. |
+| **Placeholders & Delimiters**                            | Employs tokens and delimiters to structure prompts, allowing for flexible templates with clearly defined variable sections. |
+| **Position Engineering**                                 | Adjusts token positions in prompts to optimize model attention and enhance response relevance and quality. |
+| **Prompt Optimization**                                  | Refines prompt wording and structure through iterative testing to maximize output quality and task performance. |
+| **Prompt Pattern Catalog**                               | Provides a curated collection of effective prompt templates and patterns to standardize and guide prompt engineering. |
+| **Prompt Space**                                         | Explores the vector space of prompts using embeddings and mathematical techniques to identify effective prompt representations. |
+| **Recursive Criticism and Improvement (RCI)**            | Enables the model to iteratively critique and refine its outputs, correcting errors through self-review. |
+| **ReAct Framework**                                      | Integrates reasoning and action by enabling the model to think through problems and perform actions (like tool use) within the same prompt. |
+| **Rephrase and Respond (RaR)**                           | Prompts the model to rephrase the input before responding, enhancing understanding and clarity in its final answer. |
+| **Retrieval Augmented Generation (RAG)**                 | Combines information retrieval with generation by incorporating relevant external data into prompts, enhancing accuracy and reducing hallucinations. |
+| **Scratchpad Prompting**                                 | Has the model generate intermediate reasoning steps or calculations before the final answer, improving complex problem solving. |
+| **Security-focused Prompt Prefix**                       | Employs a security-conscious prefix in prompts to guide the model towards producing outputs that are aware of and avoid security vulnerabilities. |
+| **Simple Prompting**                                     | Provides direct, uncomplicated instructions to the model, relying on its inherent understanding to generate the desired output. |
+| **Structured Chain-of-Thought (SCoT)**                   | Structures the model's reasoning steps explicitly, using formats like lists or sequences, to enhance clarity in chain-of-thought. |
+| **System 2 Attention Prompting (S2A)**                   | Encourages the model to focus on critical input components by emphasizing or reprocessing key information, enhancing deliberate reasoning. |
+| **Task-Specific Prompting**                              | Designs prompts customized for specific tasks or domains, ensuring the model's responses are highly relevant and effective. |
+| **Template-Based Generation**                            | Utilizes fixed prompt templates with placeholders, ensuring generated outputs adhere to a consistent and pre-defined structure. |
+| **Thread of Thought (ThoT)**                             | Segments complex contexts into smaller, manageable pieces, enabling incremental reasoning and analysis by the model. |
+| **Try Several Times**                                    | Generates multiple responses to the same prompt and selects or aggregates them to improve reliability and overcome variability. |
+| **Tree-of-Thoughts**                                     | Explores various reasoning paths through a branching tree structure, allowing the model to evaluate alternatives and converge on a well-considered answer. |
+| **Take a Step Back Prompting**                           | Guides the model to pause and reflect from a broader perspective, reassessing its reasoning to improve or correct its responses. |
+| **Program of Thoughts (PoT)**                            | Combines natural language with programming logic or pseudocode, assisting the model in detailed computational reasoning tasks. |
+| **Program-Aided Language Models (PAL)**                  | Incorporates code execution or programming within language modeling, enabling the model to perform complex computations for enhanced problem-solving. |
+| **Role-Prompting**                                       | Assigns the model a specific role or persona to influence tone, style, and depth, guiding responses to align with that role. |
+| **Unified Combined Annotation and Error Analysis Prompting** | Integrates task guidelines with error analysis instructions in the prompt, enhancing model performance by promoting awareness of potential mistakes. |
+
+## Top 10 Most Impactful Prompt Engineering Techniques
+
+1. **Chain of Thought (CoT)**  
+   **Why it's impactful:**  
+   Chain of Thought prompting encourages the model to articulate intermediate reasoning steps before arriving at the final answer. By decomposing complex tasks into sequential steps, CoT enhances the model's ability to handle intricate problems that require logical reasoning, mathematical calculations, or multi-faceted analysis. This mirrors human problem-solving processes, leading to more accurate and interpretable responses.
+
+2. **In-Context Learning**  
+   **Why it's impactful:**  
+   In-Context Learning provides examples within the prompt to guide the model's response. This technique leverages the model's capacity to learn patterns and tasks from the context without additional fine-tuning. By showcasing desired behaviors or formats directly in the prompt, the model adapts quickly to new tasks, making it highly flexible and powerful for a wide range of applications.
+
+3. **Retrieval Augmented Generation (RAG)**  
+   **Why it's impactful:**  
+   RAG integrates external information retrieval into the generation process. By incorporating relevant data from external sources into the prompt, the model's responses become more accurate and grounded in up-to-date information. This significantly reduces hallucinations (i.e., the model generating incorrect or fabricated facts) and enhances performance on tasks requiring current or specialized knowledge.
+
+4. **Context Optimization (CoOp)**  
+   **Why it's impactful:**  
+   Context Optimization utilizes learnable continuous prompt embeddings that are optimized for specific tasks. By adapting context vectors within the model's input, CoOp fine-tunes the prompt to better align with the task objectives, improving performance without modifying the model's weights. This technique bridges prompt engineering and model fine-tuning, offering a resource-efficient way to enhance results.
+
+5. **ReAct Framework**  
+   **Why it's impactful:**  
+   The ReAct (Reasoning and Acting) Framework combines reasoning steps with action-oriented outputs, enabling the model to not only process information but also interact with external tools or environments. This approach allows the model to perform tasks that require tool use, such as calculations, data retrieval, or interfacing with APIs, dramatically expanding its practical applications.
+
+6. **Automatic Chain-of-Thought (Auto-CoT)**  
+   **Why it's impactful:**  
+   Auto-CoT automates the generation of reasoning steps without relying on human-annotated examples. By clustering problems and generating intermediate reasoning paths through zero-shot methods, it scales the benefits of Chain of Thought prompting to a broader range of tasks efficiently. This enhances logical consistency and problem-solving capabilities without extensive manual intervention.
+
+7. **Role-Prompting**  
+   **Why it's impactful:**  
+   Role-Prompting assigns a specific persona or role to the model, such as a domain expert, teacher, or assistant. This technique influences the tone, depth, and style of the responses, making them more tailored and contextually appropriate. It enhances engagement and relevance, especially in tasks requiring specialized knowledge or particular communication styles.
+
+8. **Analogical Reasoning**  
+   **Why it's impactful:**  
+   Analogical Reasoning enables the model to solve new problems by drawing parallels with known concepts or situations. By identifying similarities between different contexts, the model can transfer knowledge and apply it creatively to novel scenarios. This enhances problem-solving abilities and fosters innovative thinking, making it valuable for tasks that benefit from abstract reasoning.
+
+9. **Prompt Optimization**  
+   **Why it's impactful:**  
+   Prompt Optimization involves refining the wording and structure of prompts through iterative testing to achieve the best possible model performance. This technique acknowledges that even subtle changes in prompts can significantly affect outputs. By systematically exploring variations, users can elicit more accurate, coherent, and contextually appropriate responses from the model.
+
+10. **Chain of Knowledge (CoK)**  
+    **Why it's impactful:**  
+    Chain of Knowledge breaks down tasks into sequential, evidence-based steps, allowing the model to build upon prior information effectively. By dynamically adjusting the flow of knowledge, CoK enhances the model's ability to handle complex reasoning tasks that require integrating multiple pieces of information over several stages, leading to more comprehensive and accurate outcomes.
+
+## Why These Techniques Stand Out
+
+- **Enhance Reasoning Abilities:** Techniques like CoT, Auto-CoT, and CoK improve the model's capacity to handle complex reasoning tasks by structuring the thought process.
+- **Improve Accuracy and Reliability:** RAG and Prompt Optimization focus on grounding the model's responses in accurate information and refining inputs for better outputs.
+- **Increase Flexibility and Adaptability:** In-Context Learning and Context Optimization enable the model to adapt quickly to new tasks and domains without extensive retraining.
+- **Expand Practical Applications:** The ReAct Framework and Role-Prompting extend the model's utility by enabling interaction with tools and tailoring responses to specific contexts.
+- **Foster Creativity and Problem-Solving:** Analogical Reasoning encourages innovative approaches to new problems by leveraging known similarities.
