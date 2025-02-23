@@ -273,6 +273,8 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 
 The research highlights the diversity and innovation in prompt engineering techniques across various applications. Key trends include the use of hybrid strategies, domain-specific adaptations, and the emergence of automated prompt optimiation. These advancements are crucial for improving the performance and applicability of large language models in real-world scenarios.
 
+## Unique Prompting Techniques
+
 | Prompting Technique                                      | Summary                                                                                           |
 |----------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | **Active Prompt**                                        | Dynamically selects the most relevant and impactful examples for few-shot learning, fine-tuning the model's responses by focusing on contextually rich prompts tailored to the specific task. |
