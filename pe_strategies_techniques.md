@@ -1,16 +1,20 @@
 # Research Findings on Prompt Engineering Techniques and Strategies
-### 20250216
+
+## Tim Haintz - 20250216
 
 This report summarises recent research papers from Arxiv that discuss prompt engineering techniques and strategies in large language models (LLMs). The findings are based on a systematic search and verification process, focusing on the latest advancements and applications in the field.
 
 ## 1. [A Systematic Survey of Prompting Methods in Large Language Models: Techniques and Applications](https://arxiv.org/abs/2402.07927)
+
 **Strategies Used:**
+
 - Zero-Shot/Few-Shot Prompting
 - Chain-of-Thought (CoT)
 - Self-Consistency
 - Retrieval Augmented Generation (RAG)
 
 **Results:**
+
 - Achieved 15-35% accuracy improvements across various NLP tasks compared to baseline prompting.
 - CoT improved reasoning task performance by 40% in GPT-4.
 
@@ -18,6 +22,7 @@ This report summarises recent research papers from Arxiv that discuss prompt eng
 This survey provides an extensive analysis of over 30 prompting methods, focusing on reasoning, knowledge integration, and hallucination reduction. It includes a comparative analysis of technique effectiveness across different model families, aligning closely with the reference paper.
 
 **Table:**
+
 | Application | Prompting Technique | Add to PE | Summary from Paper |
 |-------------|----------------------|-----------|--------------------|
 | New Tasks Without Extensive Training | Zero-Shot Prompting | | Relies on pre-existing knowledge to generate predictions without labeled data. |
@@ -51,6 +56,7 @@ This survey provides an extensive analysis of over 30 prompting methods, focusin
 | Metacognition and Self-Reflection | Take a Step Back Prompting | Engage in abstraction and extract high-level concepts. | Engages in abstraction to extract high-level concepts and fundamental principles. |
 
 ## 2. [Prompt Engineering or Fine Tuning: An Empirical Assessment of Large Language Models in Automated Software Engineering Tasks](http://arxiv.org/pdf/2310.10508v1)
+
 - **Strategies Used**: Basic prompting, in-context learning, task-specific prompting, conversational prompts.
 - **Results**: Task-specific prompts with GPT-4 excelled in comment generation but lagged in code generation compared to fine-tuned models. Conversational prompts significantly enhanced performance.
 - **Summary**: This study evaluates various prompting strategies against fine-tuned models for software engineering tasks, underscoring the potential of conversational prompting.
@@ -64,6 +70,7 @@ This survey provides an extensive analysis of over 30 prompting methods, focusin
 | Conversational Prompting  | Involves human feedback in the loop, where participants request improvements, add more context, or give specific instructions to guide GPT-4 in generating better responses. |
 
 ## 3. [Benchmarking Prompt Engineering Techniques for Secure Code Generation with GPT Models](http://arxiv.org/pdf/2502.06039v1)
+
 - **Strategies Used**: Security-focused prompt prefix, iterative prompting techniques.
 - **Results**: Security vulnerabilities were reduced by up to 56% with specific prompts; iterative techniques improved vulnerability detection and repair.
 - **Summary**: This paper benchmarks prompt engineering strategies for secure code generation, demonstrating significant improvements in code security.
@@ -79,15 +86,15 @@ This survey provides an extensive analysis of over 30 prompting methods, focusin
 | Negative prompting                 | Asking the model to create vulnerable code on purpose to understand detection boundaries. |
 
 ## 4. [The Prompt Canvas: A Literature-Based Practitioner Guide for Creating Effective Prompts in Large Language Models](https://arxiv.org/abs/2412.05127v1)
-    
+
 - **Strategies Used**:
-    - Iterative Optimization: Refine prompts with additional instructions to improve effectiveness.
-    - Placeholders & Delimiters: Use delimiters for clarity and placeholders for flexibility in prompts.- AI as a Prompt Generator: Utilise the model to generate or refine prompts for better results
-    - Chain-of-Thought: Encourage the model to think step-by-step to enhance reasoning capabilities.
-    - Tree-of-Thought: Ask the model to analyse from multiple perspectives or personas for diverse viewpoints.
-    - Emotion Prompting: Add emotional phrases to prompts to enhance empathetic engagement.
-    - Rephrase and Respond / Re-Reading: Instruct the model to express the question in its own words before answering or to read the question again for improved reasoning.
-    - Adjusting Hyperparameters (advanced): Modify the model's settings (temperature, top-p, frequency, or presence penalty) to control output diversity and focus.
+  - Iterative Optimization: Refine prompts with additional instructions to improve effectiveness.
+  - Placeholders & Delimiters: Use delimiters for clarity and placeholders for flexibility in prompts.- AI as a Prompt Generator: Utilise the model to generate or refine prompts for better results
+  - Chain-of-Thought: Encourage the model to think step-by-step to enhance reasoning capabilities.
+  - Tree-of-Thought: Ask the model to analyse from multiple perspectives or personas for diverse viewpoints.
+  - Emotion Prompting: Add emotional phrases to prompts to enhance empathetic engagement.
+  - Rephrase and Respond / Re-Reading: Instruct the model to express the question in its own words before answering or to read the question again for improved reasoning.
+  - Adjusting Hyperparameters (advanced): Modify the model's settings (temperature, top-p, frequency, or presence penalty) to control output diversity and focus.
 - **Results**: Development of the Prompt Canvas framework for structured prompt engineering.
 - **Summary**:
 The paper discusses the importance of prompt engineering in optimising outputs from large language models (LLMs). It highlights the fragmented nature of current research and practices in prompt engineering, which are spread across various sources like academic papers, blogs, and informal discussions. To address this, the authors propose the Prompt Canvas, a structured framework that consolidates existing methodologies into a cohesive overview for practitioners. The Prompt Canvas is designed as a learning resource to introduce prompt engineering techniques, such as Few-shot, Chain-of-Thought, and role-based methods, to students and professionals. The paper also emphasises the need for a unified framework to make prompt engineering techniques more accessible and practical, thereby enhancing the application of LLMs across different domains.
@@ -105,6 +112,7 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | Adjusting Hyperparameters         | Modify model settings like temperature, top-p, frequency, or presence penalty for desired output.           |
 
 ## 5. [A Brief History of Prompt: Leveraging Language Models. (Through Advanced Prompting)](http://arxiv.org/pdf/2310.04438v2)
+
 - **Strategies Used**: Attention mechanisms, reinforcement learning, contextual prompting.
 - **Results**: Traces the evolution of prompt engineering, highlighting key developments and ethical considerations.
 - **Summary**: A comprehensive exploration of the historical development of prompt engineering in NLP.
@@ -122,8 +130,8 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | Contextual Intent Prediction      | Identified underlying user intent from prompts for accurate, contextually relevant responses. |
 | Personalization and User Modeling | Learned from past interactions to generate personalized content tailored to individual users. |
 
-
 ## 6. [Autonomous Prompt Engineering in Large Language Models](http://arxiv.org/pdf/2407.11000v1)
+
 - **Strategies Used**: Expert Prompting, Chain of Thought, Tree of Thoughts.
 - **Results**: Introduction of APET for autonomous prompt optimization, showing improvements in specific tasks.
 - **Summary**: Introduces APET, a toolbox for autonomous prompt engineering, demonstrating its potential in optimizing LLM performance.
@@ -136,6 +144,7 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | Tree of Thoughts     | Enriches the reasoning capabilities of models by incorporating the dynamics of collaborative discussion among multiple expert personas. This sophisticated approach builds upon and extends the "Chain of Thought" methodology by introducing a multi-perspective dialogue that allows for an iterative and self-correcting reasoning process. |
 
 ## 7. [A Survey of Prompt Engineering Methods in Large Language Models for Different NLP Tasks](http://arxiv.org/pdf/2407.12994v2)
+
 - **Strategies Used**: Various prompting techniques categorized by NLP tasks.
 - **Results**: Survey of 44 papers, summarizing 39 prompting methods across 29 NLP tasks.
 - **Summary**: A comprehensive survey of prompt engineering methods, providing a taxonomy and performance analysis for different NLP tasks.
@@ -184,6 +193,7 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | Basic + Annotation Guideline-Based Prompting + Error Analysis-Based Prompting | Combines basic prompts with annotation guidelines and error analysis for clinical NER tasks. |
 
 ## 8. [Prompt Space Optimizing Few-shot Reasoning Success with Large Language Models](http://arxiv.org/pdf/2306.03799v2)
+
 - **Strategies Used**: Prompt Space methodology using text embeddings.
 - **Results**: Outperformed state-of-the-art paradigms on reasoning benchmarks.
 - **Summary**: Introduces Prompt Space, a mathematical framework for selecting effective prompts, showing significant performance improvements.
@@ -198,6 +208,7 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | Prompt Space | A novel approach that utilizes text embeddings to obtain basis vectors by matrix decomposition, constructing a space for representing all prompts. It significantly outperforms state-of-the-art prompt paradigms on reasoning benchmarks. |
 
 ### 9. [A Systematic Review on Prompt Engineering in Large Language Models for K-12 STEM Education](http://arxiv.org/pdf/2410.11123v1)
+
 - **Strategies Used**: Simple, zero-shot, few-shot, chain-of-thought prompting.
 - **Results**: Review of 30 studies, highlighting effective strategies in STEM education.
 - **Summary**: Systematic review of prompt engineering applications in K-12 STEM education, identifying effective strategies and models.
@@ -214,6 +225,7 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | Output Formatting | Guides LLMs to generate responses in structured formats, facilitating further programmatic processing or analysis. |
 
 ### 10. [Position Engineering: Boosting Large Language Models through Positional Information Manipulation](http://arxiv.org/pdf/2404.11216v2)
+
 - **Strategies Used**: Position engineering.
 - **Results**: Improved performance in retrieval-augmented generation and in-context learning.
 - **Summary**: Introduces position engineering as a novel strategy to enhance LLM performance by manipulating positional information.
@@ -227,6 +239,7 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | Automatic Prompt Engineer | This technique autonomously designs the prompting text for better task-specific performance. |
 
 ### 11. [Unleashing the potential of prompt engineering in Large Language Models: a comprehensive review](http://arxiv.org/pdf/2310.14735v5)
+
 - **Strategies Used**: Self-consistency, chain-of-thought, generated knowledge.
 - **Results**: Comprehensive review of foundational and advanced prompt engineering methodologies.
 - **Summary**: A detailed review of prompt engineering techniques, exploring their impact on AI capabilities and security considerations.
@@ -234,7 +247,11 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 
 | Prompting Technique | Summary from Paper |
 |----------------------|---------------------|
-| 2.3 Be clear and precise | This technique involves formulating prompts that are unambiguous and specific, guiding the model toward generating the desired output. A detailed and precise prompt reduces the model\u2019s uncertainty and aligns the content with the unique requirements of the scenario. |\n| 2.4 Role-prompting | Role-prompting involves giving the model a specific role to play, such as a helpful assistant or a knowledgeable expert, to guide the model\u2019s responses and ensure alignment with the desired output. |\n| 2.5 Use of triple quotes to separate | This technique uses triple quotes to separate different parts of a prompt or to encapsulate multi-line strings, which is particularly useful for complex prompts with multiple components. |\n| 2.6 Try several times | Known as \u201cresampling,\u201d this technique involves running the model multiple times with the same prompt and selecting the best output to overcome variability in responses and increase the chances of obtaining high-quality output. |\n| 2.7 One-shot or few-shot prompting | One-shot prompting provides a single example for the model to learn from, while few-shot prompting provides multiple examples. The choice depends on task complexity and model capability, with few-shot prompting offering additional context and guidance for complex tasks. |
+| Be clear and precise | This technique involves formulating prompts that are unambiguous and specific, guiding the model toward generating the desired output. A detailed and precise prompt reduces the model's uncertainty and aligns the content with the unique requirements of the scenario. |
+| Role-prompting | Role-prompting involves giving the model a specific role to play, such as a helpful assistant or a knowledgeable expert, to guide the model's responses and ensure alignment with the desired output. |
+| Use of triple quotes to separate | This technique uses triple quotes to separate different parts of a prompt or to encapsulate multi-line strings, which is particularly useful for complex prompts with multiple components. |
+| Try several times | Known as "resampling," this technique involves running the model multiple times with the same prompt and selecting the best output to overcome variability in responses and increase the chances of obtaining high-quality output. |
+| One-shot or few-shot prompting | One-shot prompting provides a single example for the model to learn from, while few-shot prompting provides multiple examples. The choice depends on task complexity and model capability, with few-shot prompting offering additional context and guidance for complex tasks. |
 | Self-consistency | Ensures the model's responses are consistent with each other by generating diverse reasoning paths and selecting the most consistent answer. |
 | Chain-of-thought | Involves providing intermediate reasoning steps to guide the model's responses, improving accuracy on logical reasoning tasks. |
 | Generated knowledge | Leverages the model's ability to generate useful information about a prompt before generating a final response, enhancing commonsense reasoning. |
@@ -253,4 +270,5 @@ The paper discusses the importance of prompt engineering in optimising outputs f
 | ReAct framework | Combines reasoning and action, enabling LLMs to interact with external tools for more accurate outcomes. |
 
 ## Conclusion
+
 The research highlights the diversity and innovation in prompt engineering techniques across various applications. Key trends include the use of hybrid strategies, domain-specific adaptations, and the emergence of automated prompt optimiation. These advancements are crucial for improving the performance and applicability of large language models in real-world scenarios.
