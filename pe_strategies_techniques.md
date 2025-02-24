@@ -395,3 +395,170 @@ The research highlights the diversity and innovation in prompt engineering techn
 - **Increase Flexibility and Adaptability:** In-Context Learning and Context Optimization enable the model to adapt quickly to new tasks and domains without extensive retraining.
 - **Expand Practical Applications:** The ReAct Framework and Role-Prompting extend the model's utility by enabling interaction with tools and tailoring responses to specific contexts.
 - **Foster Creativity and Problem-Solving:** Analogical Reasoning encourages innovative approaches to new problems by leveraging known similarities.
+
+## Potential Mappings
+
+1. **Chain of Thought (CoT)**
+   - **Prepositional Logic:** Beyond Logic
+   - **PP Category:** Logical Reasoning
+   - **Why:** CoT mirrors structured reasoning processes, requiring the model to iterate through logical steps to solve complex problems, aligning with "Logical Reasoning" under Beyond Logic.
+
+2. **In-Context Learning**
+   - **Prepositional Logic:** In Logic
+   - **PP Category:** Input Semantics
+   - **Why:** This technique relies on interpreting and leveraging contextual examples within the prompt, directly tied to understanding input meaning and context (Input Semantics in In Logic).
+
+3. **Retrieval Augmented Generation (RAG)**
+   - **Prepositional Logic:** Across Logic
+   - **PP Category:** Translation
+   - **Why:** RAG bridges external data with generative tasks, translating retrieved knowledge into contextually relevant outputs (Translation under Across Logic).
+
+4. **Context Optimization (CoOp)**
+   - **Prepositional Logic:** At Logic
+   - **PP Category:** Calculation
+   - **Why:** CoOp involves optimizing continuous prompt embeddings, akin to fine-tuning parameters for task-specific alignment (Calculation in At Logic).
+
+5. **ReAct Framework**
+   - **Prepositional Logic:** Beyond Logic
+   - **PP Category:** Simulation
+   - **Why:** ReAct enables interaction with external tools (e.g., APIs, calculators), simulating real-world problem-solving (Simulation under Beyond Logic).
+
+6. **Automatic Chain-of-Thought (Auto-CoT)**
+   - **Prepositional Logic:** Beyond Logic
+   - **PP Category:** Logical Reasoning
+   - **Why:** Auto-CoT automates step-by-step reasoning without human examples, enhancing logical consistency (Logical Reasoning in Beyond Logic).
+
+7. **Role-Prompting**
+   - **Prepositional Logic:** Out Logic
+   - **PP Category:** Output Customization
+   - **Why:** Assigning personas tailors outputs to specific styles or expertise, aligning with Output Customization in Out Logic.
+
+8. **Analogical Reasoning**
+   - **Prepositional Logic:** Across Logic
+   - **PP Category:** Comparison
+   - **Why:** This technique draws parallels between concepts, exploring similarities/differences (Comparison under Across Logic).
+
+9. **Prompt Optimization**
+   - **Prepositional Logic:** Out Logic
+   - **PP Category:** Prompt Improvement
+   - **Why:** Iterative refinement of prompts aligns with Out Logic's focus on enhancing input quality to improve outputs (Prompt Improvement).
+
+10. **Chain of Knowledge (CoK)**
+    - **Prepositional Logic:** Across Logic
+    - **PP Category:** Argument
+    - **Why:** CoK sequentially builds evidence-based conclusions, mirroring structured argumentation (Argument under Across Logic).
+
+### Summary of Mappings
+
+| Prompt Engineering Technique | Prepositional Logic | PP Category         |
+|------------------------------|---------------------|---------------------|
+| Chain of Thought (CoT)       | Beyond              | Logical Reasoning   |
+| In-Context Learning          | In                  | Input Semantics     |
+| RAG                          | Across              | Translation         |
+| Context Optimization (CoOp)  | At                  | Calculation         |
+| ReAct Framework              | Beyond              | Simulation          |
+| Auto-CoT                     | Beyond              | Logical Reasoning   |
+| Role-Prompting               | Out                 | Output Customization|
+| Analogical Reasoning         | Across              | Comparison          |
+| Prompt Optimization          | Out                 | Prompt Improvement  |
+| Chain of Knowledge (CoK)     | Across              | Argument            |
+
+#### Key Observations
+
+Beyond Logic dominates techniques requiring reasoning (CoT, Auto-CoT) or action (ReAct).
+Across Logic supports techniques bridging domains (RAG, Analogical Reasoning) or building structured knowledge (CoK).
+Out Logic focuses on refining outputs (Prompt Optimization) or tailoring responses (Role-Prompting).
+At Logic and In Logic handle granular task-specific optimizations (CoOp) or contextual understanding (In-Context Learning).
+
+## Potential Multi Mappings
+
+1. **Chain of Thought (CoT)**
+   - **Primary Mapping:**
+     - Beyond Logic → Logical Reasoning (structured step-by-step reasoning).
+   - **Secondary Mappings:**
+     - In Logic → Input Semantics (interpreting nuanced reasoning steps internally).
+     - Across Logic → Argument (building a logical narrative across steps).
+
+2. **In-Context Learning**
+   - **Primary Mapping:**
+     - In Logic → Input Semantics (leveraging context within the prompt).
+   - **Secondary Mappings:**
+     - At Logic → Assessment (evaluating relevance of examples to the task).
+     - Out Logic → Prompt Improvement (optimizing context inclusion).
+
+3. **Retrieval Augmented Generation (RAG)**
+   - **Primary Mapping:**
+     - Across Logic → Translation (bridging external data with generative tasks).
+   - **Secondary Mappings:**
+     - Out Logic → Output Customization (tailoring outputs using retrieved data).
+     - Beyond Logic → Simulation (mimicking real-world knowledge integration).
+
+4. **Context Optimization (CoOp)**
+   - **Primary Mapping:**
+     - At Logic → Calculation (mathematical optimization of embeddings).
+   - **Secondary Mappings:**
+     - In Logic → Requirements Elicitation (aligning prompts with task-specific needs).
+     - Over Logic → Summarizing (holistic refinement of prompt quality).
+
+5. **ReAct Framework**
+   - **Primary Mapping:**
+     - Beyond Logic → Simulation (interacting with external tools).
+   - **Secondary Mappings:**
+     - Across Logic → Cross Boundary (pushing limits of model capabilities).
+     - Out Logic → Context Control (managing dynamic tool interactions).
+
+6. **Auto-CoT**
+   - **Primary Mapping:**
+     - Beyond Logic → Logical Reasoning (automated reasoning paths).
+   - **Secondary Mappings:**
+     - In Logic → Clustering (grouping similar problems for generalization).
+     - Out Logic → Refactoring (restructuring prompts for better reasoning).
+
+7. **Role-Prompting**
+   - **Primary Mapping:**
+     - Out Logic → Output Customization (tailoring responses to personas).
+   - **Secondary Mappings:**
+     - In Logic → Input Semantics (interpreting role-based context).
+     - Across Logic → Comparison (contrasting roles for specialized outputs).
+
+8. **Analogical Reasoning**
+   - **Primary Mapping:**
+     - Across Logic → Comparison (identifying cross-domain parallels).
+   - **Secondary Mappings:**
+     - Beyond Logic → Hypothesize (generating creative analogies).
+     - In Logic → Categorizing (grouping concepts for analogy-building).
+
+9. **Prompt Optimization**
+   - **Primary Mapping:**
+     - Out Logic → Prompt Improvement (iterative refinement of prompts).
+   - **Secondary Mappings:**
+     - At Logic → Assessment (evaluating prompt effectiveness).
+     - Over Logic → Summarizing (condensing prompts for clarity).
+
+10. **Chain of Knowledge (CoK)**
+    - **Primary Mapping:**
+      - Across Logic → Argument (evidence-based sequential reasoning).
+    - **Secondary Mappings:**
+      - Beyond Logic → Prediction (anticipating knowledge gaps dynamically).
+      - In Logic → Classification (organizing knowledge into stages).
+
+### Multi-Mapping Summary Table
+
+| Technique                  | Primary Mapping                | Secondary Mappings                                      |
+|----------------------------|--------------------------------|---------------------------------------------------------|
+| Chain of Thought (CoT)     | Beyond → Logical Reasoning     | In → Input Semantics; Across → Argument                 |
+| In-Context Learning        | In → Input Semantics           | At → Assessment; Out → Prompt Improvement               |
+| RAG                        | Across → Translation           | Out → Output Customization; Beyond → Simulation         |
+| Context Optimization (CoOp)| At → Calculation               | In → Requirements Elicitation; Over → Summarizing       |
+| ReAct Framework            | Beyond → Simulation            | Across → Cross Boundary; Out → Context Control          |
+| Auto-CoT                   | Beyond → Logical Reasoning     | In → Clustering; Out → Refactoring                      |
+| Role-Prompting             | Out → Output Customization     | In → Input Semantics; Across → Comparison               |
+| Analogical Reasoning       | Across → Comparison            | Beyond → Hypothesize; In → Categorizing                 |
+| Prompt Optimization        | Out → Prompt Improvement       | At → Assessment; Over → Summarizing                     |
+| Chain of Knowledge (CoK)   | Across → Argument              | Beyond → Prediction; In → Classification                |
+
+#### Why Multiple Mappings?
+
+Functional Overlap: Techniques like RAG and ReAct span reasoning (Beyond), integration (Across), and output control (Out).
+Task Flexibility: Role-Prompting can be both about customizing outputs (Out) and interpreting context (In).
+Stage-Specific Logic: Techniques like CoT involve internal reasoning (In) and structured logic (Beyond/Across).
