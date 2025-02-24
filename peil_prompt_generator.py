@@ -80,7 +80,7 @@ peil_chat_system_prompt_peil_definition = r'''
 
     {PromptingTechniquesFromPaper}: This variable includes Prompting Techniques, as outlined in the TECHNIQUES AND APPLICATIONS table.
 
-    {StateDesiredOutput}: This helps the model understand the specific information or response it needs to generate. 
+    {StateDesiredOutput}: This helps the model understand the specific information or response it needs to generate.
 }
 # END PEIL #
 '''
