@@ -44,7 +44,9 @@ load_dotenv()
 
 azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
 api_version = os.getenv("API_VERSION")
+api_version_o1mini = os.getenv("API_VERSION_o1mini")
 azure_deployment = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
+azure_deployment_o1mini = os.getenv("AZUREVS_OPENAI_o1mini_MODEL")
 r1_endpoint = os.getenv("AZUREVS_DEEPSEEK_R1_ENDPOINT")
 r1_key = os.getenv("AZUREVS_DEEPSEEK_R1_KEY")
 
@@ -126,12 +128,21 @@ pe_techniques = r'''
 
 async def main() -> None:
     az_model_client = AzureOpenAIChatCompletionClient(
-    azure_deployment=azure_deployment,
-    model="gpt-4o",
-    api_version=api_version,
-    azure_endpoint=azure_endpoint,
-    azure_ad_token_provider=token_provider,
-    temperature=0.2,
+        azure_deployment=azure_deployment,
+        model="gpt-4o",
+        api_version=api_version,
+        azure_endpoint=azure_endpoint,
+        azure_ad_token_provider=token_provider,
+        temperature=0.2,
+    )
+
+    az_model_client_o1_mini = AzureOpenAIChatCompletionClient(
+        azure_deployment=azure_deployment_o1mini,
+        model="o1-mini",
+        api_version=api_version_o1mini,
+        azure_endpoint=azure_endpoint,
+        azure_ad_token_provider=token_provider,
+        temperature=1.0,
     )
 
     az_model_client_R1 = OpenAIChatCompletionClient(
@@ -150,16 +161,15 @@ async def main() -> None:
     research_assistant = AssistantAgent(
         name="research_assistant",
         tools=[arxiv_search_tool],
-        description="A Senior PhD research assistant that requests earches and analyses information",
+        description="A Senior PhD research assistant that requests, searches and analyses information",
         model_client=az_model_client_R1,
+        # Below is the system message for the Research Assistant if using R1. o1-mini uses a developer message.
         system_message='''You are a Senior PhD research assistant focused on finding accurate information.
         Use the arxiv_search_tool to find relevant research papers.
-        Use the WebSurfer agent to extend your search if needed.
         Break down complex queries into specific search terms.
         Always verify information across multiple sources when possible.
         When you find relevant information, explain why it's relevant and how it connects to the query. 
         When you get feedback from the verifier agent, use your tools to act on the feedback and make progress.
-        Do not send messages directly to the WebSurfer agent. Instead, use the information provided by the WebSurfer agent as needed.
         '''
     )
 
@@ -173,7 +183,7 @@ async def main() -> None:
     verifier = AssistantAgent(
         name="verifier",
         description="A verification specialist who ensures research quality and completeness",
-        model_client=az_model_client,
+        model_client=az_model_client_R1,
         system_message='''You are a research verification specialist.
         Your role is to:
         1. Verify that search queries are effective and suggest improvements if needed
@@ -210,8 +220,6 @@ async def main() -> None:
     text_termination = TextMentionTermination("TERMINATE")
     max_messages = MaxMessageTermination(max_messages=30)
     termination = text_termination | max_messages
-
-        # Create the selector prompt
     selector_prompt = '''
     You are coordinating a research team by selecting the team member to speak/act next. The following team member roles are available: {roles}.
     The research_assistant *ALWAYS GOES FIRST* and requests searches and analyses information.
@@ -227,16 +235,16 @@ async def main() -> None:
     2. Last speaker's findings or suggestions
     3. Need for verification vs need for new information
         
-    Read the following conversation. Then select the next role from {participants} to play. Only return the role.
+    Read the following conversation. Then select the next role from {participants}. Only return the role.
 
     {history}
 
-    Read the above conversation. Then select the next role from {participants} to play. ONLY RETURN THE ROLE.
+    Read the above conversation. Then select the next role from {participants}. ONLY RETURN THE ROLE.
     '''
 
     # Create the team
     team = SelectorGroupChat(
-        participants=[research_assistant, verifier, writer_agent], # web_surfer,
+        participants=[research_assistant, verifier, writer_agent], #web_surfer,
         model_client=az_model_client,
         termination_condition=termination,
         selector_prompt=selector_prompt,
@@ -245,24 +253,31 @@ async def main() -> None:
 
     # Used for testing the MagenticOneGroupChat
     magentic_one_team = MagenticOneGroupChat(
-        participants=[research_assistant, verifier, web_surfer, writer_agent], 
+        participants=[research_assistant, verifier, writer_agent], #web_surfer,
         model_client=az_model_client,
         termination_condition=termination,
     )
 
-    task = f'''
-        The following are techniques, strategies and applications of prompt engineering.
-        Come up with a search query to find papers on Arxiv that discuss prompt engineering techniques and strategies.
-        Each search task should return a maximum of 10 papers.
-        Choose the 10 most relevant papers on Arxiv and provide a summary of the techniques and applications.
-        I'm looking specifically for papers that discuss prompt engineering techniques and strategies.
-        {pe_techniques}
-        The report should contain the following sections for each paper:
-        - Title - with hyperlink to the paper
-        - Strategies used in the paper
-        - Results
-        - Summary of the paper
+# # TASK FOR COMPARISON OF LLM MODELS
+    task = '''
+            Generate varied Arxiv query variations to locate 10 research papers covering multiple LLM models—including "Open AI GPT-4o", "OpenAI o1", "OpenAI o1-mini" and "OpenAI o3";
+            R1 (DeepSeek); "Reasoning LLM" models. Finally, compile your findings and evaluations into a comprehensive Markdown report written in concise Australian English that includes an introduction to the models,
+            a discussion of their differences, a summary, and references.
     '''
+# # TASK FOR TECHNIQUES AND STRATEGIES
+#     task = f'''
+#         The following are techniques, strategies and applications of prompt engineering.
+#         Come up with a search query to find papers on Arxiv that discuss prompt engineering techniques and strategies.
+#         Each search task should return a maximum of 10 papers.
+#         Choose the 10 most relevant papers on Arxiv and provide a summary of the techniques and applications.
+#         I'm looking specifically for papers that discuss prompt engineering techniques and strategies.
+#         {pe_techniques}
+#         The report should contain the following sections for each paper:
+#         - Title - with hyperlink to the paper
+#         - Strategies used in the paper
+#         - Results
+#         - Summary of the paper
+#     '''
     await Console(team.run_stream(task=task))
 
 

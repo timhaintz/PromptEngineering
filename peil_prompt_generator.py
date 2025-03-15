@@ -289,7 +289,7 @@ def main():
             print()  # New line for readability
 
             provide_clear_context = input(
-                "Provide Clear Context (e.g., 'The context for this prompt is cybersecurity...'): "
+                "Provide Clear Context (e.g., 'The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats.'): "
             ) or "The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats."
             if provide_clear_context.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
@@ -298,7 +298,7 @@ def main():
             print()  # New line for readability
 
             break_down_complex_questions = input(
-                "Break Down Complex Questions (e.g., 'Break down the question \"How can organisations improve their cybersecurity posture?\"...'): "
+                "Break Down Complex Questions (e.g., 'Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'): "
             ) or "Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?'"
             if break_down_complex_questions.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
@@ -307,7 +307,7 @@ def main():
             print()  # New line for readability
             
             provide_specific_instructions = input(
-                "Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components...'): "
+                "Provide Specific Instructions (e.g., 'Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs.'): "
             ) or "Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs."
             if provide_specific_instructions.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
@@ -316,7 +316,7 @@ def main():
             print()  # New line for readability
 
             define_conciseness = input(
-                "Define Conciseness (e.g., 'Limit the response to 200 words...'): "
+                "Define Conciseness (e.g., 'Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details.'): "
             ) or "Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details."
             if define_conciseness.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
@@ -325,7 +325,7 @@ def main():
             print()  # New line for readability
 
             prompting_techniques = input(
-                "Prompting Techniques From Paper (e.g., 'Use the Chain-of-Thought (CoT) prompting technique...'): "
+                "Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures.'): "
             ) or "Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures."
             if prompting_techniques.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
@@ -334,7 +334,7 @@ def main():
             print()  # New line for readability
 
             state_desired_output = input(
-                "State Desired Output (e.g., 'The desired output is a clear and concise explanation...'): "
+                "State Desired Output (e.g., 'The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Markdown.'): "
             ) or "The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Markdown."
             if state_desired_output.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
