@@ -9,7 +9,7 @@ It also provides an interactive chat mode that maintains conversation context.
 
 Version:        1.0
 Author:         Tim Haintz
-Creation Date:  April 6, 2025
+Creation Date:  20250406
 
 LINKS
 https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/managed-identity
