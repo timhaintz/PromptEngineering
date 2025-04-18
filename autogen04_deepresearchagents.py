@@ -47,6 +47,9 @@ api_version = os.getenv("API_VERSION")
 api_version_o1mini = os.getenv("API_VERSION_o1mini")
 azure_deployment = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
 azure_deployment_o1mini = os.getenv("AZUREVS_OPENAI_o1mini_MODEL")
+# Add o4_mini model variables
+azure_deployment_o4mini = os.getenv("AZUREVSEASTUS2_OPENAI_o4mini_MODEL")
+api_version_o4mini = os.getenv("AZUREVSEASTUS2_OPENAI_o4mini_API_VERSION")
 azure_gpt45preview_endpoint = os.getenv("AZUREVS_OPENAI_GPT45PREVIEW_ENDPOINT")
 azure_gpt45preview_deployment = os.getenv("AZUREVS_OPENAI_GPT45PREVIEW_MODEL")
 azure_gpt45preview_api_version = os.getenv("AZUREVS_OPENAI_GPT45PREVIEW_API_VERSION")
@@ -3906,6 +3909,16 @@ async def main() -> None:
         azure_deployment=azure_deployment_o1mini,
         model="o1-mini",
         api_version=api_version_o1mini,
+        azure_endpoint=azure_endpoint,
+        azure_ad_token_provider=token_provider,
+        temperature=1.0,
+    )
+    # Add AzureOpenAIChatCompletionClient for o4_mini model in the main() function
+
+    az_model_client_o4_mini = AzureOpenAIChatCompletionClient(
+        azure_deployment=azure_deployment_o4mini,
+        model="o4-mini",
+        api_version=api_version_o4mini,
         azure_endpoint=azure_endpoint,
         azure_ad_token_provider=token_provider,
         temperature=1.0,
