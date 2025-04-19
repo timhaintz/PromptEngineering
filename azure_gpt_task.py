@@ -62,9 +62,11 @@ import time
 import sys
 from datetime import datetime
 from azure.identity import InteractiveBrowserCredential
-from azure.core.credentials import TokenCredential
 from openai import AzureOpenAI
 from typing import Optional, Dict, Any, List, Union
+
+# Import from our custom models module
+from azure_models import get_model_params, create_azure_openai_client
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -119,10 +121,10 @@ To derive a PE from the Crafting Effective Jailbreak Prompts PP, first define th
             The Hallucination Evaluation (HE) PP in Table \ref{tab:Hallucination_Evaluation_PP} compares a summary with the original text, for detecting any contradictions or fabricated information. This PP helps mitigate misinformation, improves trust in automated summaries, and supports quality control in text generation tasks. Beyond its primary use, this PP can be adapted for fact-checking in news aggregation, verifying AI-generated reports, or validating outputs in educational and research contexts where factual integrity is critical. Its structured approach makes it reusable across various domains requiring content verification.
 
             %%expected response. Put the human feeling into the writing. How do I feel when I view the output.
-            When using the HE PP, the AI model response should provide a clear, methodical comparison between the summary and the source document, highlighting any discrepancies with precision. The response should instill confidence, making you feel that the summary can now be trusted—or at least that you’re fully aware of its limitations. It’s like having a diligent editor by your side, ensuring nothing slips through the cracks.
+            When using the HE PP, the AI model response should provide a clear, methodical comparison between the summary and the source document, highlighting any discrepancies with precision. The response should instill confidence, making you feel that the summary can now be trusted—or at least that you're fully aware of its limitations. It's like having a diligent editor by your side, ensuring nothing slips through the cracks.
 
             %% re-use: how to derive a PE from PP
-            To derive a PE from the HE PP, first specify the context—such as verifying if a news summary aligns with the original article. Provide both the summary and source text, then define the evaluation’s focus (e.g., factual accuracy, omissions, or distortions) and the desired output format (e.g., a list of discrepancies or a confidence score). An example of such PE is "Compare the following summary with its source document and identify any factual inconsistencies or contradictions. Analyse key claims, statistics, and conclusions. Provide a detailed list of discrepancies, if any, and flag any unsupported assertions in the summary."
+            To derive a PE from the HE PP, first specify the context—such as verifying if a news summary aligns with the original article. Provide both the summary and source text, then define the evaluation's focus (e.g., factual accuracy, omissions, or distortions) and the desired output format (e.g., a list of discrepancies or a confidence score). An example of such PE is "Compare the following summary with its source document and identify any factual inconsistencies or contradictions. Analyse key claims, statistics, and conclusions. Provide a detailed list of discrepancies, if any, and flag any unsupported assertions in the summary."
 
             %4 - PP example in this category
             \begin{table}[h!]
@@ -274,26 +276,19 @@ class AzureGPTClient:
             api_version: The API version to use
             temperature: The temperature for model responses
             debug: Whether to enable debug mode
-            model_version: Which model to use ("gpt-4.1", "gpt-4.5-preview", or "o4-mini")
+            model_version: Which model to use ("gpt-4.1", "gpt-4.5-preview", or "o4-mini", etc.)
         """
-        # Model selection logic
-        if model_version == "gpt-4.1":
-            self.azure_endpoint = azure_endpoint or os.getenv("AZUREVS_OPENAI_GPT41_ENDPOINT")
-            self.deployment_name = deployment_name or os.getenv("AZUREVS_OPENAI_GPT41_MODEL")
-            self.api_version = api_version or os.getenv("AZUREVS_OPENAI_GPT41_API_VERSION") or "2024-02-15-preview"
-        elif model_version == "o4-mini":
-            self.azure_endpoint = azure_endpoint or os.getenv("AZUREVS_OPENAI_ENDPOINT")
-            self.deployment_name = deployment_name or os.getenv("AZUREVSEASTUS2_OPENAI_o4mini_MODEL")
-            self.api_version = api_version or os.getenv("AZUREVSEASTUS2_OPENAI_o4mini_API_VERSION") or "2025-01-01-preview"
-        else:
-            self.azure_endpoint = azure_endpoint or os.getenv("AZUREVS_OPENAI_GPT45PREVIEW_ENDPOINT")
-            self.deployment_name = deployment_name or os.getenv("AZUREVS_OPENAI_GPT45PREVIEW_MODEL")
-            self.api_version = api_version or os.getenv("AZUREVS_OPENAI_GPT45PREVIEW_API_VERSION") or "2023-12-01-preview"
+        # Get model configuration from the azure_models module
+        self.azure_endpoint, self.deployment_name, self.api_version = get_model_params(
+            model_version, azure_endpoint, deployment_name, api_version
+        )
+            
         self.temperature = temperature
         self.debug = debug
         self.iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         self.credential = InteractiveBrowserCredential()
         self.client = self._create_client()
+        
         if self.debug:
             print(f"Azure Endpoint: {self.azure_endpoint}")
             print(f"Deployment Name: {self.deployment_name}")
