@@ -22,6 +22,7 @@ python autogen04_deepresearchagents.py
 import asyncio
 import os
 from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
+from azure_models import get_model_config, get_autogen_config
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
 from autogen_agentchat.teams import SelectorGroupChat
@@ -60,9 +61,76 @@ azure_gpt41_endpoint = os.getenv("AZUREVS_OPENAI_GPT41_ENDPOINT")
 azure_gpt41_deployment = os.getenv("AZUREVS_OPENAI_GPT41_MODEL")
 azure_gpt41_api_version = os.getenv("AZUREVS_OPENAI_GPT41_API_VERSION")
 
-token_provider = get_bearer_token_provider(
-    InteractiveBrowserCredential(),
-    "https://cognitiveservices.azure.com/.default")
+# Create token provider for Azure authentication 
+token_provider = get_bearer_token_provider(InteractiveBrowserCredential(), "https://cognitiveservices.azure.com/.default")
+
+async def main() -> None:
+    # Get model configurations using the new module
+    gpt4o_config = get_autogen_config("gpt-4o")
+    gpt41_config = get_autogen_config("gpt-4.1")
+    gpt45preview_config = get_autogen_config("gpt-4.5-preview")
+    o1mini_config = get_autogen_config("o1-mini")
+    o4mini_config = get_autogen_config("o4-mini")
+    deepseek_r1_config = get_autogen_config("deepseek-r1")
+    
+    # Create Azure OpenAI clients for AutoGen using centralized configuration
+    az_model_client = AzureOpenAIChatCompletionClient(
+        azure_deployment=gpt4o_config["model"],
+        model="gpt-4o",
+        api_version=gpt4o_config["api_version"],
+        azure_endpoint=gpt4o_config["azure_endpoint"],
+        azure_ad_token_provider=token_provider,
+        temperature=0.2,
+    )
+
+    # Add client for the 4.1 model using configurations from azure_models.py
+    az_model_client_gpt41 = AzureOpenAIChatCompletionClient(
+        azure_deployment=gpt41_config["model"],
+        model="gpt-4.1",
+        api_version=gpt41_config["api_version"],
+        azure_endpoint=gpt41_config["azure_endpoint"],
+        azure_ad_token_provider=token_provider,
+        temperature=0.2,
+    )
+
+    az_model_client_gpt45preview = AzureOpenAIChatCompletionClient(
+        azure_deployment=gpt45preview_config["model"],
+        model="gpt-4.5-preview",
+        api_version=gpt45preview_config["api_version"],
+        azure_endpoint=gpt45preview_config["azure_endpoint"],
+        azure_ad_token_provider=token_provider,
+        temperature=0.2,
+    )
+
+    az_model_client_o1_mini = AzureOpenAIChatCompletionClient(
+        azure_deployment=o1mini_config["model"],
+        model="o1-mini",
+        api_version=o1mini_config["api_version"],
+        azure_endpoint=o1mini_config["azure_endpoint"],
+        azure_ad_token_provider=token_provider,
+        temperature=1.0,
+    )
+    
+    # Add AzureOpenAIChatCompletionClient for o4_mini model using azure_models.py
+    az_model_client_o4_mini = AzureOpenAIChatCompletionClient(
+        azure_deployment=o4mini_config["model"],
+        model="o4-mini",
+        api_version=o4mini_config["api_version"],
+        azure_endpoint=o4mini_config["azure_endpoint"],
+        azure_ad_token_provider=token_provider,
+        temperature=1.0,
+    )
+
+    # Create DeepSeek model client using configuration from azure_models.py
+    az_model_client_R1 = OpenAIChatCompletionClient(
+        model="deepseek-r1",
+        base_url=deepseek_r1_config["base_url"], 
+        api_key=deepseek_r1_config["api_key"],
+        model_info=deepseek_r1_config["model_info"]
+    )
+
+    # Rest of the code remains unchanged
+    # ...existing code...
 
 def arxiv_search(query: str, max_results: int = 2) -> list:  # type: ignore[type-arg]
     """
