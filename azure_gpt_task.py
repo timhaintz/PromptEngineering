@@ -23,7 +23,7 @@ python azure_gpt_task.py -task "Explain quantum computing in simple terms."
 # Output to file
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -outputfile quantum_explanation.txt
 
-# Specify temperature
+# Specify temperature (Note: o4-mini only supports temperature 1.0)
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -temperature 0.7
 
 # Add system message
@@ -32,10 +32,14 @@ python azure_gpt_task.py -task "Explain quantum computing in simple terms." -sys
 # Add task context
 python azure_gpt_task.py -task "Explain this code." -context "def fibonacci(n): if n <= 1: return n; return fibonacci(n-1) + fibonacci(n-2)"
 
-# Specify model version (gpt-4.1, gpt-4.5-preview, or o4-mini)
+# Specify model version (Available models are dynamically loaded from azure_models.py)
+# Examples:
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version gpt-4.1
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version gpt-4.5-preview
+python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version gpt-4o
+python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version o1-mini
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version o4-mini
+python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version deepseek-r1
 
 # Debug mode
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -debug True
@@ -62,11 +66,11 @@ import time
 import sys
 from datetime import datetime
 from azure.identity import InteractiveBrowserCredential
-from openai import AzureOpenAI
+from openai import AzureOpenAI, OpenAI # Import OpenAI here
 from typing import Optional, Dict, Any, List, Union
 
 # Import from our custom models module
-from azure_models import get_model_params, create_azure_openai_client
+from azure_models import get_model_params, create_azure_openai_client, get_model_config, MODEL_CONFIGS
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -263,229 +267,199 @@ class AzureGPTClient:
     """Client for interacting with Azure GPT models using token provider authentication."""
 
     def __init__(self, 
-                 azure_endpoint: Optional[str] = None, 
-                 deployment_name: Optional[str] = None, 
-                 api_version: Optional[str] = None, 
                  temperature: float = 0.0,
                  debug: bool = False,
-                 model_version: str = "gpt-4.1"):  # Default to 4.1
+                 model_version: str = "gpt-4.1",
+                 credential: Optional[InteractiveBrowserCredential] = None):
         """Initialize the Azure GPT client.
         Args:
-            azure_endpoint: The Azure OpenAI endpoint URL
-            deployment_name: The deployment name for the model
-            api_version: The API version to use
             temperature: The temperature for model responses
             debug: Whether to enable debug mode
-            model_version: Which model to use ("gpt-4.1", "gpt-4.5-preview", or "o4-mini", etc.)
+            model_version: Which model to use (e.g., "gpt-4.1", "gpt-4.5-preview", "o4-mini", etc.)
+            credential: An InteractiveBrowserCredential instance to use for Azure authentication
         """
-        # Get model configuration from the azure_models module
-        self.azure_endpoint, self.deployment_name, self.api_version = get_model_params(
-            model_version, azure_endpoint, deployment_name, api_version
-        )
-            
-        self.temperature = temperature
+        self.model_version = model_version
         self.debug = debug
         self.iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-        self.credential = InteractiveBrowserCredential()
+        self.credential = credential
+
+        # Get model configuration using the unified function
+        self.model_config = get_model_config(model_version)
+
+        # Handle temperature override for o4-mini
+        if self.model_version == "o4-mini" and temperature != 1.0:
+            if self.debug:
+                print(f"[Debug] Overriding temperature to 1.0 for model {self.model_version}")
+            self.temperature = 1.0
+        else:
+            self.temperature = temperature
+
         self.client = self._create_client()
         
         if self.debug:
-            print(f"Azure Endpoint: {self.azure_endpoint}")
-            print(f"Deployment Name: {self.deployment_name}")
-            print(f"API Version: {self.api_version}")
+            print(f"Model Version: {self.model_version}")
             print(f"Temperature: {self.temperature}")
-            print(f"Model Version: {model_version}")
+            if self.model_config.get("is_direct_api"):
+                print(f"Base URL: {self.model_config.get('base_url')}")
+            else:
+                print(f"Azure Endpoint: {self.model_config.get('azure_endpoint')}")
+                print(f"Deployment Name: {self.model_config.get('deployment_name')}")
+                print(f"API Version: {self.model_config.get('api_version')}")
 
-    def _create_client(self) -> AzureOpenAI:
-        token = self.credential.get_token("https://cognitiveservices.azure.com/.default")
-        return AzureOpenAI(
-            azure_ad_token=token.token,
-            azure_endpoint=self.azure_endpoint, 
-            api_version=self.api_version
-        )
+    def _create_client(self) -> Union[AzureOpenAI, OpenAI]: 
+        if self.model_config.get("is_direct_api"):
+            # Use OpenAI client for direct API models (like DeepSeek)
+            if not self.model_config.get('api_key'):
+                 raise ValueError(f"API key not found in environment variables for model {self.model_version}")
+            if self.debug:
+                print(f"[Debug] Creating direct API client with base URL: {self.model_config['base_url']}")
+            return OpenAI(
+                base_url=self.model_config['base_url'],
+                api_key=self.model_config['api_key']
+            )
+        else:
+            # Use the provided credential (do not create a new one)
+            if not self.credential:
+                raise ValueError("InteractiveBrowserCredential must be provided to AzureGPTClient.")
+            token = self.credential.get_token("https://cognitiveservices.azure.com/.default")
+            if not self.model_config.get('azure_endpoint') or not self.model_config.get('api_version'):
+                 raise ValueError(f"Azure endpoint or API version not found for model {self.model_version}")
+            if self.debug:
+                print(f"[Debug] Creating Azure OpenAI client with endpoint: {self.model_config['azure_endpoint']}")
+            return AzureOpenAI(
+                azure_ad_token=token.token,
+                azure_endpoint=self.model_config['azure_endpoint'], 
+                api_version=self.model_config['api_version']
+            )
     
     def refresh_token_if_needed(self):
         """Refresh the Azure AD token if it's close to expiring or has expired"""
-        self.client = self._create_client()
-    
-    def execute_task(self, 
-                    task: str, 
-                    system_message: Optional[str] = None, 
-                    context: Optional[str] = None,
-                    output_file: Optional[str] = None) -> Dict[str, Any]:
-        """Execute a task using the GPT model.
-        
+        # Only refresh if it's an Azure client
+        if not self.model_config.get("is_direct_api"):
+            self.client = self._create_client()
+
+    def execute_task(self, task: str, system_message: str, context: Optional[str] = None, output_file: Optional[str] = None, max_tokens: int = 2000) -> Dict[str, Any]:
+        """Execute a task using the Azure GPT model.
         Args:
-            task: The task to execute
-            system_message: Optional system message to provide context
-            context: Optional additional context for the task
-            output_file: Optional file path to save the response
-            
+            task: The task to execute.
+            system_message: The system message to provide context.
+            context: Additional context for the task.
+            output_file: File path to save the response.
+            max_tokens: Maximum number of tokens to generate.
         Returns:
-            The model response
+            A dictionary containing the response and metadata.
         """
-        messages = []
-        
-        if system_message:
-            messages.append({"role": "system", "content": system_message})
-        else:
-            messages.append({
-                "role": "system", 
-                "content": "You are a helpful AI assistant. Provide accurate, detailed, and concise responses."
-            })
-        
-        user_content = task
-        if context:
-            user_content = f"{task}\n\nContext:\n{context}"
-        
-        messages.append({"role": "user", "content": user_content})
-        
         if self.debug:
-            print("Sending request with the following messages:")
-            for msg in messages:
-                print(f"{msg['role']}: {msg['content'][:50]}...")
-        
+            print("[Debug] Executing task with the following parameters:")
+            print(f"Task: {task}")
+            print(f"System Message: {system_message}")
+            print(f"Context: {context}")
+            print(f"Max Tokens: {max_tokens}")
+            print(f"Model: {self.model_version}")        # Prepare the messages for the model
+        if self.model_config.get("supports_system_role", True):
+            # For models that support system role
+            messages = [
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": task + (f"\n\nContext:\n{context}" if context else "")}
+            ]
+        else:
+            # For models that don't support system role (like o1-mini)
+            # Prepend the system message to the user message
+            developer_role_prefix = "You are a developer. "
+            combined_message = f"{developer_role_prefix}\n\nSystem instructions: {system_message}\n\n{task}" + (f"\n\nContext:\n{context}" if context else "")
+            messages = [
+                {"role": "user", "content": combined_message}
+            ]
+
+        # Call the model
         try:
-            response = self.client.chat.completions.create(
-                model=self.deployment_name,
-                messages=messages,
-                temperature=self.temperature
-            )
-            
-            response_content = response.choices[0].message.content
-            
-            result = {
-                "task": task,
-                "timestamp": self.iso_datetime,
-                "response": response_content
+            self.refresh_token_if_needed()
+              # Common parameters for all models
+            common_params = {
+                "messages": messages,
+                "temperature": self.temperature,
             }
             
-            if output_file:
-                with open(output_file, 'w', encoding='utf-8') as f:
-                    json.dump(result, f, indent=4, ensure_ascii=False)
-                if self.debug:
-                    print(f"Response saved to {output_file}")
+            # Handle token parameter naming differences between models
+            newer_models = ["o1-mini", "o3-mini", "o4-mini"]
+            if self.model_version in newer_models:
+                token_param = {"max_completion_tokens": max_tokens}
+                token_key = "max_completion_tokens"
+                
+                # Add reasoning_effort parameter for o-series models
+                if self.model_config.get("reasoning_effort"):
+                    common_params["reasoning"] = {"effort": self.model_config["reasoning_effort"]}
+                    if self.debug:
+                        print(f"[Debug] Using reasoning_effort: {self.model_config['reasoning_effort']}")
+            else:
+                token_param = {"max_tokens": max_tokens}
+                token_key = "max_tokens"
             
-            return result
-        
-        except Exception as e:
-            error_message = f"Error calling Azure OpenAI API: {str(e)}"
-            print(error_message)
-            return {"error": error_message}
-    
-    def start_chat(self, 
-                   system_message: Optional[str] = None, 
-                   initial_conversation: Optional[List[Dict[str, str]]] = None):
-        """Start an interactive chat session that maintains conversation context.
-        
-        Args:
-            system_message: Optional system message to initialize the chat
-            initial_conversation: Optional initial conversation history
-        """
-        if initial_conversation:
-            conversation = initial_conversation
-        else:
-            conversation = []
+            # Combine parameters
+            params = {**common_params, **token_param}
             
-            if not any(msg.get("role") == "system" for msg in conversation):
-                if system_message:
-                    conversation.append({"role": "system", "content": system_message})
-                else:
-                    conversation.append({
-                        "role": "system", 
-                        "content": "You are a helpful AI assistant. Provide accurate, detailed, and concise responses."
-                    })
-        
-        print(f"\n{'='*50}")
-        print("Azure GPT Chat Interface")
-        print(f"{'='*50}")
-        print("Type 'exit', 'quit', or 'bye' to end the conversation.")
-        print("Type 'clear' to reset the conversation history.")
-        print("Type 'debug' to toggle debug mode.")
-        print("Type 'system: <message>' to change the system message.")
-        print(f"{'='*50}\n")
-        
-        while True:
-            try:
-                user_input = input("\nYou: ")
-                
-                if user_input.lower() in ['exit', 'quit', 'bye']:
-                    print("\nEnding chat session. Goodbye!")
-                    break
-                    
-                elif user_input.lower() == 'clear':
-                    system_content = next((msg["content"] for msg in conversation if msg["role"] == "system"), 
-                                         "You are a helpful AI assistant. Provide accurate, detailed, and concise responses.")
-                    conversation = [{"role": "system", "content": system_content}]
-                    print("\nConversation history cleared.")
-                    continue
-                    
-                elif user_input.lower() == 'debug':
-                    self.debug = not self.debug
-                    print(f"\nDebug mode {'enabled' if self.debug else 'disabled'}.")
-                    continue
-                
-                elif user_input.lower().startswith('system:'):
-                    new_system_message = user_input[7:].strip()
-                    for i, msg in enumerate(conversation):
-                        if msg["role"] == "system":
-                            conversation[i] = {"role": "system", "content": new_system_message}
-                            break
-                    else:
-                        conversation.insert(0, {"role": "system", "content": new_system_message})
-                    print(f"\nSystem message updated.")
-                    continue
-                
-                conversation.append({"role": "user", "content": user_input})
-                
-                self.refresh_token_if_needed()
-                
-                if self.debug:
-                    print("\nSending request with conversation history:")
-                    for idx, msg in enumerate(conversation):
-                        content_preview = msg["content"][:50] + "..." if len(msg["content"]) > 50 else msg["content"]
-                        print(f"{idx}. {msg['role']}: {content_preview}")
-                
-                try:
-                    response = self.client.chat.completions.create(
-                        model=self.deployment_name,
-                        messages=conversation,
-                        temperature=self.temperature
-                    )
-                    
-                    response_content = response.choices[0].message.content
-                    
-                    conversation.append({"role": "assistant", "content": response_content})
-                    
-                    print(f"\nAssistant: {response_content}")
-                    
-                except Exception as e:
-                    error_message = f"Error calling Azure OpenAI API: {str(e)}"
-                    print(error_message)
-                
-            except KeyboardInterrupt:
-                print("\n\nKeyboard interrupt detected. Ending chat session.")
-                break
-                
-            except Exception as e:
-                print(f"\nError: {str(e)}")
+            if self.model_config.get("is_direct_api", False):
+                # Direct API models (like DeepSeek)
+                params["model"] = self.model_version
+                response = self.client.chat.completions.create(**params)
+            else:
+                # Azure OpenAI models
+                params["model"] = self.model_config["deployment_name"]
+                response = self.client.chat.completions.create(**params)
 
+            # Extract response content
+            response_content = response.choices[0].message.content
+
+            # Save the response to a file if specified
+            if output_file:
+                with open(output_file, "w", encoding="utf-8") as f:
+                    f.write(response_content)
+
+            # Return response with metadata
+            return {
+                "response": response_content,
+                "metadata": {
+                    "model": self.model_version,
+                    "temperature": self.temperature,
+                    token_key: max_tokens,
+                    "finish_reason": response.choices[0].finish_reason
+                }
+            }
+
+        except Exception as e:
+            if self.debug:
+                print(f"[Debug] Error during task execution: {str(e)}")
+            raise RuntimeError(f"Error calling Azure OpenAI API: {str(e)}")
 
 def main():
+    # Dynamically get model choices from azure_models.py
+    available_models = list(MODEL_CONFIGS.keys())
+    
     parser = argparse.ArgumentParser(description="Azure GPT Task Runner")
     parser.add_argument('-task', type=str, help='The task to execute')
     parser.add_argument('-system', type=str, help='System message to provide context')
     parser.add_argument('-context', type=str, help='Additional context for the task')
     parser.add_argument('-outputfile', type=str, help='File path to save the response')
     parser.add_argument('-temperature', type=float, default=0.0, help='Temperature for model responses')
+    parser.add_argument('-max_tokens', type=int, default=2000, help='Maximum number of tokens to generate')
     parser.add_argument('-debug', type=bool, default=False, help='Enable debug mode')
     parser.add_argument('-use_default_task', action='store_true', help='Use the default task')
     parser.add_argument('-chat', action='store_true', help='Start an interactive chat session')
-    parser.add_argument('-model_version', type=str, default="gpt-4.1", choices=["gpt-4.1", "gpt-4.5-preview", "o4-mini"], help='Model version to use')
+    parser.add_argument('-model_version', type=str, default="gpt-4.1", choices=available_models, 
+                        help=f'Model version to use. Choices: {", ".join(available_models)}')
     args = parser.parse_args()
+
+    # Create a single InteractiveBrowserCredential instance
+    credential = InteractiveBrowserCredential()
     
     try:
-        client = AzureGPTClient(temperature=args.temperature, debug=args.debug, model_version=args.model_version)
+        # Pass credential to client constructor
+        client = AzureGPTClient(
+            temperature=args.temperature,
+            debug=args.debug,
+            model_version=args.model_version,
+            credential=credential
+        )
         
         system_message = args.system or DEFAULT_SYSTEM_MESSAGE.strip()
         
@@ -501,7 +475,8 @@ def main():
                 task=task,
                 system_message=system_message,
                 context=args.context,
-                output_file=args.outputfile
+                output_file=args.outputfile,
+                max_tokens=args.max_tokens
             )
             
             print("\nTask Response:")
