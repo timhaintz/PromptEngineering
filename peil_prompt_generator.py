@@ -22,26 +22,35 @@ python peil_prompt_generator.py -chat_with_judgement
 
 '''
 import os
-import openai
 import json
 import argparse
 from dotenv import load_dotenv
-from openai import AzureOpenAI
+from openai import AzureOpenAI, OpenAI
 from datetime import datetime
 from azure.ai.inference import ChatCompletionsClient
 from azure.core.credentials import AzureKeyCredential
+from azure.identity import InteractiveBrowserCredential, get_bearer_token_provider
+from typing import Dict, Any, Optional, Union
+
+# Import model configuration functions from azure_models
+from azure_models import get_model_config, create_azure_openai_client, get_autogen_config, MODEL_CONFIGS
 
 # Load environment variables
 load_dotenv()
 
-model = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
-api_version = os.getenv("API_VERSION")
-api_key = os.getenv("AZUREVS_OPENAI_KEY") 
-azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
+# Default settings
+default_model_version = "gpt-4.1"
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 temperature = 0.0
-r1_endpoint = os.getenv("AZUREVS_DEEPSEEK_R1_ENDPOINT")
-r1_key = os.getenv("AZUREVS_DEEPSEEK_R1_KEY")
+
+# Create token provider for Azure authentication
+token_provider = get_bearer_token_provider(
+    InteractiveBrowserCredential(), 
+    "https://cognitiveservices.azure.com/.default"
+)
+
+# Available models from MODEL_CONFIGS
+available_models = list(MODEL_CONFIGS.keys())
 
 peil_chat_system_prompt_instructions = r'''
 # INSTRUCTIONS
@@ -78,7 +87,7 @@ peil_chat_system_prompt_peil_definition = r'''
 
     {DefineConciseness}: Prompt the model to generate concise and relevant responses by specifying any word limits or constraints. This helps prevent the model from generating unnecessarily lengthy or irrelevant answers.    
 
-    {PromptingTechniquesFromPaper}: This variable includes Prompting Techniques, as outlined in the TECHNIQUES AND APPLICATIONS table.
+    {PromptingTechniquesFromResearch}: This variable includes Prompting Techniques, as outlined in the TECHNIQUES AND APPLICATIONS table.
 
     {StateDesiredOutput}: This helps the model understand the specific information or response it needs to generate.
 }
@@ -176,51 +185,139 @@ an overall rating out of 100, calculated based on the weighted criteria; and a b
 By following these instructions, you will provide a comprehensive evaluation that helps improve the effectiveness of prompt engineering for large language models.
 #END INSTRUCTIONS
 '''
-# Using the GPT-4o model
-def chat_with_peil(messages):
+class ModelClient:
+    """Client for interacting with Azure OpenAI and other model providers."""
+    
+    def __init__(self, model_version: str = "gpt-4.1", temperature: float = 0.0, debug: bool = False):
+        """Initialize the model client.
+        
+        Args:
+            model_version: The model to use (e.g., "gpt-41", "deepseek-r1")
+            temperature: Temperature parameter for model responses
+            debug: Whether to output debug information
+        """
+        self.model_version = model_version
+        self.temperature = temperature
+        self.debug = debug
+        
+        # Get model configuration
+        self.model_config = get_model_config(model_version)
+        
+        # Handle temperature overrides for models that require specific temperatures (like o-series)
+        if model_version in ["o1-mini", "o3-mini", "o4-mini"] and temperature != 1.0:
+            if self.debug:
+                print(f"[Debug] Overriding temperature to 1.0 for model {model_version}")
+            self.temperature = 1.0
+            
+        # Create the client
+        self.client = self._create_client()
+        
+    def _create_client(self) -> Union[AzureOpenAI, OpenAI, ChatCompletionsClient]:
+        """Create the appropriate client based on model type."""
+        if self.model_version == "deepseek-r1":
+            # Use ChatCompletionsClient for DeepSeek models
+            return ChatCompletionsClient(
+                endpoint=self.model_config["base_url"],
+                credential=AzureKeyCredential(self.model_config["api_key"])
+            )
+        elif self.model_config.get("is_direct_api", False):
+            # Use OpenAI client for direct API models
+            return OpenAI(
+                base_url=self.model_config["base_url"],
+                api_key=self.model_config["api_key"]
+            )
+        else:
+            # Use AzureOpenAI for Azure-hosted models
+            credential = InteractiveBrowserCredential()
+            token = credential.get_token("https://cognitiveservices.azure.com/.default")
+            return AzureOpenAI(
+                azure_ad_token=token.token,
+                azure_endpoint=self.model_config["azure_endpoint"],
+                api_version=self.model_config["api_version"]
+            )
+    
+    def get_completion(self, messages: list, system_prompt: str = None, max_tokens: int = 4096) -> str:
+        """Get completion from the model.
+        
+        Args:
+            messages: List of message objects (role, content)
+            system_prompt: Optional system prompt
+            max_tokens: Maximum tokens for completion
+            
+        Returns:
+            Model completion text
+        """
+        try:
+            if system_prompt:
+                system_message = {"role": "system", "content": system_prompt}
+                full_messages = [system_message] + messages
+            else:
+                full_messages = messages
+            
+            if self.model_version == "deepseek-r1":
+                # DeepSeek R1 uses the ChatCompletionsClient
+                payload = {
+                    "messages": full_messages,
+                    "max_tokens": max_tokens
+                }
+                response = self.client.complete(payload)
+                return response.choices[0].message.content
+            else:
+                # Handle token parameter naming differences between models
+                token_param = {}
+                if self.model_version in ["o1-mini", "o3-mini", "o4-mini"]:
+                    token_param = {"max_completion_tokens": max_tokens}
+                    
+                    # Add reasoning_effort parameter for o-series models
+                    if "reasoning_effort" in self.model_config:
+                        token_param["reasoning"] = {"effort": self.model_config["reasoning_effort"]}
+                else:
+                    token_param = {"max_tokens": max_tokens}
+                
+                # Determine the model deployment name
+                model_name = self.model_config.get("deployment_name", self.model_version)
+                
+                # Create and call completion
+                response = self.client.chat.completions.create(
+                    model=model_name,
+                    messages=full_messages,
+                    temperature=self.temperature,
+                    **token_param
+                )
+                return response.choices[0].message.content
+                
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return None
+
+# Using the GPT-4o model (or other specified model)
+def chat_with_peil(messages, model_version="gpt-4o", temperature=0.0, debug=False):
     try:
-        client = AzureOpenAI(
-            api_key=api_key,
-            api_version=api_version,
-            azure_endpoint=azure_endpoint
-        )
-        response = client.chat.completions.create(
-            model=model,  # model = "deployment_name"
-            messages=[
-                {"role": "system", "content": peil_chat_system_prompt_instructions + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_peil_techniques + peil_chat_system_prompt_categories}
-            ] + messages,
-            temperature=temperature
-        )
-        return response.choices[0].message.content
+        client = ModelClient(model_version=model_version, temperature=temperature, debug=debug)
+        system_prompt = peil_chat_system_prompt_instructions + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_peil_techniques + peil_chat_system_prompt_categories
+        return client.get_completion(messages, system_prompt=system_prompt)
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
 
 # Using the DeepSeek R1 reasoning
-def chat_with_judgement(messages):
+def chat_with_judgement(messages, model_version="deepseek-r1", temperature=0.0, debug=False):
     try:
-        client = ChatCompletionsClient(
-            endpoint=r1_endpoint,
-            credential=AzureKeyCredential(r1_key)
-        )
-        payload = {
-            "messages": [
-                {"role": "user", "content": judgement_system_prompt + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_categories}
-            ] + messages,
-            "max_tokens": 4096
-        }
-        response = client.complete(payload)
-        return response.choices[0].message.content
+        client = ModelClient(model_version=model_version, temperature=temperature, debug=debug)
+        system_prompt = judgement_system_prompt + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_categories
+        return client.get_completion(messages, system_prompt=system_prompt)
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
 
 
-def judge_response(response):
+def judge_response(response, judgement_model="deepseek-r1", debug=False):
     """
     Judges the LLM response by calling a different model (via chat_with_judgement).
 
     :param response: The response from the previous LLM call.
+    :param judgement_model: The model to use for judgement (default: deepseek-r1)
+    :param debug: Whether to output debug information
     :return: Judgement result as a string.
     """
     judgement_prompt = (
@@ -228,7 +325,11 @@ def judge_response(response):
         "Give a concise judgement with constructive feedback and a rating:\n\n"
         f"{response}"
     )
-    judgement_result = chat_with_judgement([{"role": "user", "content": judgement_prompt}])
+    judgement_result = chat_with_judgement(
+        [{"role": "user", "content": judgement_prompt}],
+        model_version=judgement_model,
+        debug=debug
+    )
     return judgement_result
 
 def main():
@@ -236,12 +337,26 @@ def main():
     parser.add_argument("-chat_with_peil", action="store_true", help="Start session with chat_with_peil - Default")
     parser.add_argument("-chat_with_judgement", action="store_true", help="Automatically evaluate output with the judgement model")
     parser.add_argument("-prompt", type=str, default="", help="Provide a one-off custom prompt. Non-interactive mode. Parse text in quotes in the command line.")
-    args = parser.parse_args()
-
-    # One-off prompt from command-line arguments
+    parser.add_argument("-model_version", type=str, default="gpt-4o", choices=available_models, 
+                        help=f"Model version to use. Choices: {', '.join(available_models)}")
+    parser.add_argument("-judgement_model", type=str, default="deepseek-r1", choices=available_models,
+                        help=f"Model version for judgement. Default: deepseek-r1")
+    parser.add_argument("-temperature", type=float, default=0.0,
+                        help="Temperature for model responses. Note: Some models have fixed temperature values.")
+    parser.add_argument("-debug", action="store_true", help="Enable debug mode with additional output")
+    args = parser.parse_args()    # One-off prompt from command-line arguments
     if args.prompt:
         user_prompt = args.prompt
-        peil_response = chat_with_peil([{"role": "user", "content": user_prompt}])
+        if args.debug:
+            print(f"Using model '{args.model_version}' with temperature {args.temperature}")
+            
+        peil_response = chat_with_peil(
+            [{"role": "user", "content": user_prompt}],
+            model_version=args.model_version,
+            temperature=args.temperature,
+            debug=args.debug
+        )
+        
         if peil_response:
             print("\nResponse from chat_with_peil:")
             print(peil_response)
@@ -249,38 +364,64 @@ def main():
             print("No response from chat_with_peil.")
         
         if args.chat_with_judgement and peil_response:
-            judgement_response = judge_response(peil_response)
+            judgement_response = judge_response(
+                peil_response, 
+                judgement_model=args.judgement_model,
+                debug=args.debug
+            )
             if judgement_response:
                 print("\nJudgement result:")
                 print(judgement_response)
             else:
                 print("No judgement received.")
-        return
-
-    # If interactive session with judgement model only
+        return    # If interactive session with judgement model only
     if args.chat_with_judgement and not args.chat_with_peil:
-        print("Starting interactive session with the judgement model.")
+        print(f"Starting interactive session with the judgement model: {args.judgement_model}")
+        if args.debug:
+            print(f"Temperature: {args.temperature}")
+            model_config = get_model_config(args.judgement_model)
+            print(f"Model information: {model_config}")
+            
         while True:
             user_prompt = input("Enter your prompt for chat_with_judgement (or type 'exit' to quit): ")
             if user_prompt.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
                 break
-            judgement_response = chat_with_judgement([{"role": "user", "content": user_prompt}])
+            judgement_response = chat_with_judgement(
+                [{"role": "user", "content": user_prompt}],
+                model_version=args.judgement_model,
+                temperature=args.temperature,
+                debug=args.debug
+            )
             if judgement_response:
                 print("\nResponse from chat_with_judgement:")
                 print(judgement_response)
             else:
                 print("No response from chat_with_judgement.")
             print()
-        return
-
-    # Default interactive loop using chat_with_peil (with optional auto judgement if selected)
+        return    # Default interactive loop using chat_with_peil (with optional auto judgement if selected)
     # Wrap the chat session in an outer loop to re-display the initial instructions when a session ends.
+    
+    # Display model information
+    print(f"\nUsing model '{args.model_version}' for chat_with_peil")
+    if args.chat_with_judgement:
+        print(f"Using model '{args.judgement_model}' for judgements")
+    
+    if args.debug:
+        print(f"Temperature: {args.temperature}")
+        model_config = get_model_config(args.model_version)
+        print(f"Main model information: {model_config}")
+        if args.chat_with_judgement:
+            judgement_model_config = get_model_config(args.judgement_model)
+            print(f"Judgement model information: {judgement_model_config}")
+    
     while True:        
         # Inner loop: one full interactive session.
         while True:
             print("\nStart chatting with the Prompt Engineering Instructional Language (PEIL).")
             print("Press Enter to use the default examples or type 'exit' or 'quit' to stop the conversation.")
+            print(f"Using model: {args.model_version}")
+            
             role = input("Role (e.g., 'You are a cybersecurity expert.'): ") or "You are a cybersecurity expert."
             if role.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
@@ -325,7 +466,7 @@ def main():
             print()  # New line for readability
 
             prompting_techniques = input(
-                "Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures.'): "
+                "Technique (e.g., 'Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures.'): "
             ) or "Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures."
             if prompting_techniques.strip().lower() in {"exit", "quit"}:
                 print("Conversation ended.")
@@ -351,7 +492,15 @@ def main():
                 f"Prompting Techniques: {prompting_techniques}\n"
                 f"State Desired Output: {state_desired_output}\n"
             )
-            peil_response = chat_with_peil([{"role": "user", "content": user_input}])
+            
+            print(f"\nGenerating response using model '{args.model_version}'...")
+            peil_response = chat_with_peil(
+                [{"role": "user", "content": user_input}],
+                model_version=args.model_version,
+                temperature=args.temperature,
+                debug=args.debug
+            )
+            
             if peil_response:
                 print("\nResponse from chat_with_peil:")
                 print(peil_response)
@@ -359,7 +508,12 @@ def main():
                 print("No response received from chat_with_peil.")
 
             if args.chat_with_judgement and peil_response:
-                judgement_response = judge_response(peil_response)
+                print(f"\nEvaluating response using model '{args.judgement_model}'...")
+                judgement_response = judge_response(
+                    peil_response,
+                    judgement_model=args.judgement_model,
+                    debug=args.debug
+                )
                 if judgement_response:
                     print("\nJudgement result:")
                     print(judgement_response)
@@ -372,6 +526,21 @@ def main():
         if restart not in {"y", "yes"}:
             print("Exiting interactive mode.")
             break
+            
+        # If continuing, ask if they want to change the model
+        change_model = input(f"Would you like to change the model from '{args.model_version}'? (y/n): ").strip().lower()
+        if change_model in {"y", "yes"}:
+            model_options = "\n".join([f"{i+1}. {model}" for i, model in enumerate(available_models)])
+            print(f"\nAvailable models:\n{model_options}")
+            try:
+                model_choice = int(input(f"Enter the number of your chosen model (1-{len(available_models)}): "))
+                if 1 <= model_choice <= len(available_models):
+                    args.model_version = available_models[model_choice-1]
+                    print(f"Model changed to: {args.model_version}")
+                else:
+                    print(f"Invalid choice. Continuing with model: {args.model_version}")
+            except ValueError:
+                print(f"Invalid input. Continuing with model: {args.model_version}")
 
 if __name__ == "__main__":
     main()
