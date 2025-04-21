@@ -3,9 +3,10 @@ DESCRIPTION
 Generate prompts for the PEIL project
 NOTES
 Leveraging Azure OpenAI API to generate prompts for the PEIL project
-Version:        0.1
+Version:        0.2
 Author:         Tim Haintz                         
 Creation Date:  20250113
+Last Updated:   20250421
 LINKS
 EXAMPLE USAGE
 #1. Start a chat session with the PEIL prompt generator
@@ -18,6 +19,14 @@ python peil_prompt_generator.py -chat_with_peil -chat_with_judgement
 python peil_prompt_generator.py -prompt "Role: You are a cybersecurity expert. Provide Clear Context: The context for this prompt is cybersecurity. The model should focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats. Break Down Complex Questions: Break down the question 'How can organisations improve their cybersecurity posture?' into smaller, manageable parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?' Provide Specific Instructions: Ensure that the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs. Define Conciseness: Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details. Prompting Techniques: Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures. State Desired Output: The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be Markdown."
 #5. Start an interactive session with the judgement model only
 python peil_prompt_generator.py -chat_with_judgement
+#6. Use a specific model for generating prompts (all models from azure_models.py are available)
+python peil_prompt_generator.py -model_version gpt-4.1
+#7. Use different models for prompt generation and judgment
+python peil_prompt_generator.py -chat_with_peil -chat_with_judgement -model_version gpt-4.5-preview -judgement_model gpt-4o
+#8. Use debug mode for detailed model configuration information
+python peil_prompt_generator.py -debug
+#9. Set a custom temperature (note: o-series models automatically use temperature=1.0)
+python peil_prompt_generator.py -temperature 0.7
 
 
 '''
