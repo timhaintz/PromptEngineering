@@ -29,10 +29,10 @@ load_dotenv()
 #############
 # VARIABLES #
 #############
-model = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
-api_version = os.getenv("API_VERSION")
-api_key = os.getenv("AZUREVS_OPENAI_KEY") 
-azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
+model = os.getenv("AZUREVSEASTUS2_OPENAI_GPT41_nano_MODEL")
+api_version = os.getenv("AZUREVSEASTUS2_OPENAI_GPT41_nano_API_VERSION")
+api_key = os.getenv("AZUREVSEASTUS2_OPENAI_KEY") 
+azure_endpoint = os.getenv("AZUREVSEASTUS2_OPENAI_ENDPOINT")
 temperature = 0.0
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
@@ -272,6 +272,15 @@ This could involve condensing a large amount of information into a few key point
 important elements, or providing a concise synopsis of the content.
 '''
 
+synthesis = '''
+Category: Synthesis
+PreAcronym: OVER_SYN
+Definition: Integrating and reconciling information from multiple sources or perspectives to produce a unified, 
+coherent, and insightful output. Synthesis goes beyond simple summarisation by combining disparate elements, 
+identifying relationships and patterns, and generating higher-order insights or recommendations that reflect
+ a comprehensive understanding of the topic.
+'''
+
 translation = '''
 Category: Translation
 PreAcronym: AC_TRN
@@ -307,6 +316,7 @@ categories = {
     'requirements_elicitation': requirements_elicitation,
     'simulation': simulation,
     'summarising': summarising,
+    'synthesis': synthesis,
     'translation': translation
     }
 
@@ -442,6 +452,7 @@ if __name__ == '__main__':
                                                   'Requirements_Elicitation',
                                                   'Simulation',
                                                   'Summarising',
+                                                  'Synthesis',
                                                   'Translation'],
                                          default=None, 
                                          help='Choose a category from the list')

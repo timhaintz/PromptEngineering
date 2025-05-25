@@ -300,7 +300,7 @@ class ModelClient:
             return None
 
 # Using the GPT-4o model (or other specified model)
-def chat_with_peil(messages, model_version="gpt-4o", temperature=0.0, debug=False):
+def chat_with_peil(messages, model_version="gpt-4.1", temperature=0.0, debug=False):
     try:
         client = ModelClient(model_version=model_version, temperature=temperature, debug=debug)
         system_prompt = peil_chat_system_prompt_instructions + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_peil_techniques + peil_chat_system_prompt_categories
@@ -310,7 +310,7 @@ def chat_with_peil(messages, model_version="gpt-4o", temperature=0.0, debug=Fals
         return None
 
 # Using the DeepSeek R1 reasoning
-def chat_with_judgement(messages, model_version="deepseek-r1", temperature=0.0, debug=False):
+def chat_with_judgement(messages, model_version="o4-mini", temperature=0.0, debug=False):
     try:
         client = ModelClient(model_version=model_version, temperature=temperature, debug=debug)
         system_prompt = judgement_system_prompt + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_categories

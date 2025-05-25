@@ -56,10 +56,10 @@ load_dotenv()
 # openai.api_version = "2023-05-15"
 # openai.api_key = os.getenv("AZUREVSAUSEAST_OPENAI_KEY")
 # model_deployment_name = os.getenv("AZUREVSAUSEAST_OPENAI_MODEL")
-model = os.getenv("AZUREVS_OPENAI_GPT4o_MODEL")
-api_version = os.getenv("API_VERSION")
-api_key = os.getenv("AZUREVS_OPENAI_KEY") 
-azure_endpoint = os.getenv("AZUREVS_OPENAI_ENDPOINT")
+model = os.getenv("AZUREVSEASTUS2_OPENAI_GPT41_MODEL")
+api_version = os.getenv("AZUREVSEASTUS2_OPENAI_GPT41_API_VERSION")
+api_key = os.getenv("AZUREVSEASTUS2_OPENAI_KEY") 
+azure_endpoint = os.getenv("AZUREVSEASTUS2_OPENAI_ENDPOINT")
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 temperature = 0.0
 
