@@ -34,12 +34,15 @@ python azure_gpt_task.py -task "Explain this code." -context "def fibonacci(n): 
 
 # Specify model version (Available models are dynamically loaded from azure_models.py)
 # Examples:
+python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version deepseek-r1
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version gpt-4.1
+python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version gpt-4.1-nano
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version gpt-4.5-preview
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version gpt-4o
+python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version grok-3
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version o1-mini
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version o4-mini
-python azure_gpt_task.py -task "Explain quantum computing in simple terms." -model_version deepseek-r1
+
 
 # Debug mode
 python azure_gpt_task.py -task "Explain quantum computing in simple terms." -debug True
@@ -103,17 +106,28 @@ Approach the task step-by-step to ensure thoroughness and coherence. The final o
 #############################################
 DEFAULT_TASK = r'''
 ### TASK ###
-- This is my research paper on Prompt Engineering. 
-- Please write up a new section in the \section{Over logic - Span and Review a Topic}, \label{sec:over} for \item \textbf{Synthesis}:
-- Please also write up:
-  - %3 introduce category one by one as subsection
+- This is my research paper on Prompt Engineering.
+-- It has 6 prepositional logic categories: Across, At, Beyond, In, Out, Over.
+-- Each prepositional logic category has a set of English categories.
+--- The categories under the prepositional logic are:
+---- Across: [Argument, Comparison, Contradiction, Cross Boundary and Translation]
+---- At: [Assessment and Calculation]
+---- Beyond: [Hypothesis, Logical Reasoning, Prediction and Simulation]
+---- In: [Categorising, Classification, Clustering, Error Identification, Input Semantics and Requirements Elicitation]
+---- Out: [Context Control, Decomposted Prompting, Output Customisation, Output Semantics, Prompt Improvement and Refactoring]
+---- Over: [Summarising and Synthesis]
+- Please complete the unfinished sections of the Input Semantics category:
+%3 introduce category one by one as subsection
+\subsection{Input Semantics}
+\label{subsec:InputSemantics}
+- Please complete it in a similar way to the other sections. Specifically:
 \subsection{Synthesis}
 \label{subsec:Synthesis}
-- The writing *MUST* be in LaTex format.
-- The writing *MUST* be in Australian English.
-- The writing *MUST* be in the style of a PhD student.
-- The writing *MUST* be in the style of a top-level world-class journal or publication.
-- The writing *MUST* be concise and clear.
+- The writing **MUST** be in LaTex format.
+- The writing **MUST** be in Australian English.
+- The writing **MUST** be in the style of a PhD student.
+- The writing **MUST** be in the style of a top-level world-class journal or publication.
+- The writing **MUST** be concise and clear.
 
 ### BEGIN RESEARCH PAPER ###
 \documentclass[12pt,letterpaper,oneside]{article} % Switched to 'article' class
@@ -138,6 +152,7 @@ DEFAULT_TASK = r'''
 \usepackage{tabularx}
 \usepackage{threeparttable}
 \usepackage{bbding}
+\usepackage{placeins}
 \bibliographystyle{abbrvnat}
 \title{The Way to Talk to AI: A Taxonomy of Prompt Patterns to LLMs}
 
@@ -155,7 +170,7 @@ Paul Pang\thanks{p.pang@federation.edu.au}
 %\tableofcontents
 
 \begin{abstract}
-As the interface between humans and Large Language Models (LLMs) continues to advance, structuring and optimising communication has become crucial. This paper introduces a comprehensive taxonomy of Prompt Patterns (PPs) for LLMs, serving as a refined linguistic framework that enhances interaction efficacy. We categorise these PPs based on the logic of English prepositions into six distinct types—Across, At, Beyond, In, Out, Over—each tailored to specific communication objectives from detailed inquiries to boundary-pushing commands. The taxonomy is meticulously crafted, derived from extensive linguistic analysis and illustrated through numerous examples across various domains. Hosted at \href{https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/promptpatterns.json}{GitHub}, our taxonomy compiles 120 PPs and over 300 practical examples, curated from 150 scholarly references. This structured approach not only aids in crafting precise and contextual prompts but also enhances the AI’s response accuracy, significantly improving the quality of human-AI interaction. By establishing a systematic framework for prompt design, our taxonomy is poised to be an indispensable resource, promoting more intuitive and effective communications with AI systems.
+As the interface between humans and Large Language Models (LLMs) continues to advance, structuring and optimising communication has become crucial. This paper introduces a comprehensive taxonomy of Prompt Patterns (PPs) for LLMs, serving as a refined linguistic framework that enhances interaction efficacy. We categorise these PPs based on the logic of English prepositions into six distinct types—Across, At, Beyond, In, Out, Over—each tailored to specific communication objectives from detailed inquiries to boundary-pushing commands. The taxonomy is meticulously crafted, derived from extensive linguistic analysis and illustrated through numerous examples across various domains. Hosted at \href{https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/promptpatterns.json}{GitHub}, our taxonomy compiles 906 PPs and over 1869 practical examples, curated from 100s of scholarly references. This structured approach not only aids in crafting precise and contextual prompts but also enhances the AI’s response accuracy, significantly improving the quality of human-AI interaction. By establishing a systematic framework for prompt design, our taxonomy is poised to be an indispensable resource, promoting more intuitive and effective communications with AI systems.
 \end{abstract}
 \textbf{Keywords:} Large Language Model, Taxonomy, Prompt Engineering,  Prompt Pattern, Prompt Example, ChatGPT, Prepositional Logic, Generative AI
 
@@ -373,19 +388,20 @@ In the realm of communication between humans and Large Language Models (LLMs) li
 \end{itemize}
 
 
-Figure \ref{fig:prepositions} illustrates the comprehensive PP categorisation in relation to the Logic of English language.
-
-\begin{figure}
+\begin{figure}[!h]
     \centering
     \caption{Categorisation of PPs in relation to the logic of English language centered on a core topic in between human and AI.}
     \label{fig:prepositions}
     \includegraphics[width=0.5\linewidth]{Images/Prepositions.png}
 \end{figure}
 
+% force all floats to appear here before the PP Taxonomy
+\FloatBarrier
+
 \begin{table}
 \centering
 \caption{The structure of PP Taxonomy}
-\fontsize{10pt}{8pt}\selectfont
+\fontsize{9pt}{8pt}\selectfont
 \begin{forest}
   for tree={
     grow'=0,
@@ -442,6 +458,7 @@ Figure \ref{fig:prepositions} illustrates the comprehensive PP categorisation in
   ]
   [Over Logic \ref{sec:over}
    [Summarising \ref{subsec:Summarising}]
+   [Synthesis \ref{subsec:Synthesis}]
    ]
 
 ]
@@ -478,7 +495,8 @@ Figure \ref{fig:prepositions} illustrates the comprehensive PP categorisation in
          REF & Refactoring\\ \hline 
          REL & Requirements Elicitation\\ \hline 
          SIM & Simulation\\ \hline 
-         SUM & Summarising\\ \hline 
+         SUM & Summarising\\ \hline
+         SYN & Synthesis \\ \hline
          TRA & Translation\\ \hline
     \end{tabular}
 \end{table}
@@ -522,9 +540,9 @@ Using Cosine Similarity with the embeddings generated by the \textit{text-embedd
 
 \subsection{Statistics of Prompt Taxonomy}
 %Introduction paragraph to summarise the table
-The constructed Taxonomy consists of a total of 906 PPs and 1869 PEs, derived from over 100 papers, websites, and GitHub repositories. The PPs and PEs are synthesized into the six prepositional logic categories within the context of human to AI communication. The detailed statistics of the Taxonomy for each category are provided in Table \ref{tab:Statistics_of_Prompt_Taxonomy}.
+The constructed Taxonomy consists of a total of 906 PPs and 1869 PEs, derived from over 100 papers, websites, and GitHub repositories. The PPs and PEs are synthesized into the six prepositional logic types and then 25 categories within the context of human to AI communication. The detailed statistics of the Taxonomy for each category are provided in Table \ref{tab:Statistics_of_Prompt_Taxonomy}.
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Statistics of Prompt Taxonomy based on Preposition logic and Category}
 \label{tab:Statistics_of_Prompt_Taxonomy}
@@ -556,7 +574,8 @@ The constructed Taxonomy consists of a total of 906 PPs and 1869 PEs, derived fr
      & 4. Output Semantics & 1 & 4 &  \\ \cline{2-4}
      & 5. Prompt Improvement & 1 & 4 &  \\ \cline{2-4}
      & 6. Refactoring & 1 & 4 &  \\ \hline
-    \multirow{1}{*}{Over} & 1. Summarising & 128 & 177 & [29] \\ \hline
+    \multirow{2}{*}{Over} & 1. Summarising & 128 & 177 & \multirow{2}{*}{[29]} \\ \cline{2-4}
+    & 2. Synthesis & 1 & 4 & \\ \hline
 \end{tabular}
 }
 \end{table}
@@ -589,6 +608,7 @@ Argument involves presenting and defending a claim or viewpoint. This process in
 The Debater PP as described in Table \ref{tab:Debater_PP} focuses on exploring various perspectives. It is designed to facilitate a structured debate format, researching both sides of a given topic and refuting opposing viewpoints. 
 %%expected response. Put the human feeling into the writing. How do I feel when I view the output.
 The AI model typically generates a comprehensive list of pros and cons and a balanced summary. Through follow-up chat, you can request the model to explore either side of the topic in more detail. 
+
 %% re-use: how to derive a PE from PP
 To apply the Debater PP in a given context, set a topic of debate, such as "The Ethical Implications of AI in Healthcare," assign AI the role of a debater, request exploration of both sides of the topic, and define the objective and output format to ensure a balanced and insightful discussion. Here is an example of derived PE:
 I want you to act as a debater. I will provide you with a topic related to current events: "The Ethical Implications of AI in Healthcare." Your task is to research both sides of the debate, present valid arguments for the benefits and drawbacks of AI in healthcare, refute opposing points of view with evidence, and draw persuasive conclusions. Your goal is to help the audience gain a comprehensive understanding of the ethical landscape and practical impact of AI in this field."
@@ -635,7 +655,6 @@ I want you to act as a debater. I will provide you with a topic related to curre
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     26-0-1 & The DAN 6.0 Prompt &\cite{Inie2023SummonWild}\\ \hline
     8-0-0 & Hallucination Evaluation &\cite{LiHaluEval:Models}\\ \hline
@@ -651,6 +670,8 @@ I want you to act as a debater. I will provide you with a topic related to curre
 \end{table}
 
 %##########template End#############
+% force all floats to appear here before the next category
+\FloatBarrier
 
 \subsection{Comparison}
 \label{subsec:Comparison}
@@ -713,7 +734,6 @@ To derive a PE from the CO PP, follow these steps: 1) select two items to compar
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     10-22-0 & Spot the Difference &\cite{Yang2023TheGPT-4Vision}\\ \hline
     10-11-2 & Visual Referring Prompting &\cite{Yang2023TheGPT-4Vision}\\ \hline
@@ -733,6 +753,9 @@ To derive a PE from the CO PP, follow these steps: 1) select two items to compar
     27-0-1 & Crossover & \cite{Yu2023GPTFUZZER:Prompts}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 % %3 introduce category one by one as subsection
 \subsection{Contradiction}
@@ -780,11 +803,11 @@ To derive a PE from the HE PP, first specify the context—such as verifying if 
 \begin{tabular}{|c|p{8cm}|}
     \hline
     \textbf{ID} & \textbf{Prompt Example} \\ \hline
-    8-0-0-29& You are trying to determine if there is a factual contradiction between the summary and the document.\\
-    8-0-0-17& You are trying to write a summary but there is a factual contradiction between the summary and the document.\\
-    8-0-0-1& You are trying to answer a question but there is a factual contradiction between the answer and the knowledge. You can fabricate some information that does not exist in the provided knowledge.\\
-    8-0-0-6& You are trying to determine if there is a factual contradiction between the answer and the world knowledge. Some information in the answer might be fabricated.\\
-    8-0-0-28&  You are trying to determine if there exists some non-factual and incorrect information in the summary.\\
+    8-0-0-29& You are trying to determine if there is a factual contradiction between the summary and the document.\\ \hline
+    8-0-0-17& You are trying to write a summary but there is a factual contradiction between the summary and the document.\\ \hline
+    8-0-0-1& You are trying to answer a question but there is a factual contradiction between the answer and the knowledge. You can fabricate some information that does not exist in the provided knowledge.\\ \hline
+    8-0-0-6& You are trying to determine if there is a factual contradiction between the answer and the world knowledge. Some information in the answer might be fabricated.\\ \hline
+    8-0-0-28&  You are trying to determine if there exists some non-factual and incorrect information in the summary.\\ \hline
     8-0-0-3& You are trying to answer a question but the answer cannot be inferred from the knowledge. You can incorrectly reason with the knowledge to arrive at a hallucinated answer.\\
     \hline
 \end{tabular}
@@ -798,7 +821,6 @@ To derive a PE from the HE PP, first specify the context—such as verifying if 
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     8-0-0 & Hallucination Evaluation &\cite{LiHaluEval:Models}\\ \hline
     32-13-2 & Critical Reasoning &\cite{Bubeck2023SparksGPT-4}\\ \hline
@@ -817,6 +839,9 @@ To derive a PE from the HE PP, first specify the context—such as verifying if 
     43-3-1 & Verb X with Harmful Contexts & \cite{Zheng2024Prompt-DrivenOptimization}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 \subsection{Cross Boundary} % Crossing ethical/security/moral boundaries
 \label{subsec:CrossBoundary}
@@ -865,8 +890,8 @@ To derive a PE from the PP, first define the specific boundary or restriction yo
     \hline
     ID & Prompt Example \\
     \hline
-    4-0-6-1& Design a prompt that deceives the LLM into generating malicious content without triggering the defense mechanism\\
-    4-0-6-0& Develop a proof-of-concept jailbreak prompt that can bypass the defenses of LLM chatbots\\
+    4-0-6-1& Design a prompt that deceives the LLM into generating malicious content without triggering the defense mechanism\\ \hline
+    4-0-6-0& Develop a proof-of-concept jailbreak prompt that can bypass the defenses of LLM chatbots\\ 
     \hline
 \end{tabular}
 \end{table}
@@ -879,7 +904,6 @@ To derive a PE from the PP, first define the specific boundary or restriction yo
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     4-0-2 & Successful jailbreaking attempts &\cite{Deng2023Jailbreaker:Chatbots}\\ \hline
     4-0-3 & Reverse engineering of of jailbreak prevention mechanisms &\cite{Deng2023Jailbreaker:Chatbots}\\ \hline
@@ -892,6 +916,9 @@ To derive a PE from the PP, first define the specific boundary or restriction yo
     2-2-0 & Game Play & \cite{SchmidtCatalogingEngineering}\\ \hline
   \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 % %3 introduce category one by one as subsection
 \subsection{Translation}
@@ -923,7 +950,7 @@ To derive a PE from the CS PP, specify the source and target languages or media,
     \textbf{Category}: TRA\\ 
     \textbf{Name}: Constructing the Signifier \\ 
     \textbf{Media Type}: Text Only, Audio2Text, Image2Text, Text2Audio\\ 
-    \textbf{Description}: This process converts data from one representation (A) into another (B) by translating, rephrasing, or paraphrasing the original content. It ensures the core meaning remains intact while adapting the format for a different context or audience. \\ 
+    \textbf{Description}: This process converts data from one representation (A) into another (B) by translating, rephrasing, \\or paraphrasing the original content. It ensures the core meaning remains intact while adapting the format \\for a different context or audience. \\ 
     \textbf{Template}: Translate/Paraphrase/rephrase  data representation A to representation B.\\ 
     \textbf{Example}: 13-0-0-0\\ 
     \textbf{Related PPs}: 13-0-0-1\\ 
@@ -940,7 +967,7 @@ To derive a PE from the CS PP, specify the source and target languages or media,
 \begin{tabular}{|c|p{8cm}|}
     \hline
     \textbf{ID} & \textbf{Prompt Example} \\ \hline
-    13-0-0-0 & Translate French to English:\\
+    13-0-0-0 & Translate French to English:\\ \hline
     13-0-0-1 & rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications\\
     \hline
 \end{tabular}
@@ -954,7 +981,6 @@ To derive a PE from the CS PP, specify the source and target languages or media,
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     13-0-0 & Constructing the Signifier &\cite{Reynolds2021PromptParadigm}\\ \hline
     13-3-0 & Syntactical Constraints &\cite{Reynolds2021PromptParadigm}\\ \hline
@@ -972,6 +998,9 @@ To derive a PE from the CS PP, specify the source and target languages or media,
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
+
 \section{At Logic - Discover Detail of a Topic}
 \label{sec:at}
 %1 - Write long introduction to logic - text
@@ -988,21 +1017,6 @@ The PP categories under at logic include:
 
 \subsection{Assessment}
 \label{subsec:Assessment}
-% the role of this category under the "at-logic" (meaning of the category)
-Assessment involves evaluating the amount, value, quality, or importance of something in detail \cite{2025Assessment}. This includes aspects like information completeness, ratings, and input applicability to the context.
-
-% 3.2  a.Introduce one PP of the category, b. what the PP did, c. How the PP helps people and can be re-used
-% Add label to reference the table
-Table \ref{tab:Expert_PP} outlines the Expert PP, which involves field experts rating online learning platforms based on criteria such as usability, features, integration, security, support, cost, and user experience. The collective ratings provide a thorough evaluation, and this process can be reused in various expert assessment contexts.
-
-%%expected response. Put the human feeling into the writing. How do I feel when I view the output.
-The output is clear and concise, effectively assessing the criteria. The inclusion of references enhances confidence in the accuracy and applicability of the information.
-
-%% re-use: how to derive a PE from PP
-By changing the \textit{domain}, \textit{criteria}, and \textit{apps}, the Expert Assessment Prompt Pattern (EA PP) can be universally applied. For example: \\
-As an expert in fitness and wellness, evaluate the effectiveness of the following criteria for fitness apps: ease of use, functionality, compatibility, security, support, cost, and user experiences. Rate these criteria for MyFitnessPal, Fitbit, Nike Training Club, Strava, Apple Fitness+, and Google Fit using the scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.
-
-
 % Explanation of the role of this category under the "at-logic"
 Assessment refers to the systematic evaluation of an entity or concept to determine its quality, value, completeness, or relevance within a specific context. This process involves detailed scrutiny based on clearly defined criteria, enabling informed judgements and decisions. Effective assessment is essential for ensuring accuracy, reliability, and applicability of information or resources in targeted scenarios.
 
@@ -1010,7 +1024,7 @@ Assessment refers to the systematic evaluation of an entity or concept to determ
 Table \ref{tab:Expert_PP} presents the Expert Assessment (EA) PP, which facilitates expert-driven evaluations of various entities according to predetermined criteria. In the provided example, experts assess online learning platforms by rating attributes such as ease of use, functionality, integration capabilities, security, technical support, cost-effectiveness, and user experience. This structured evaluation approach assists users by providing comprehensive, credible, and contextually relevant insights, thereby supporting informed decision-making. The EA Prompt Pattern is highly adaptable and can be effectively reused across diverse domains requiring expert judgement, such as healthcare applications, software tools, or consumer products.
 
 %% Expected response: Human-centred reflection on the output
-When engaging with the EA PP, the resulting output should be clear, structured, and authoritative, instilling confidence in the accuracy and reliability of the evaluation. Users should experience a sense of reassurance, knowing that the assessment has been conducted methodically by knowledgeable experts. The inclusion of explicit criteria and transparent ratings further enhances trust, making the output feel like a dependable resource for informed decision-making.
+When using the EA PP, the resulting output provides references and is clear, structured, and authoritative. This instils confidence in the accuracy and reliability of the evaluation. Asking for the output in table format provided a visual side-by-side comparison of the different attributes.
 
 %% Re-use: Deriving a Prompt Example (PE) from the Prompt Pattern (PP)
 To derive a PE from the EA PP, modify the domain, evaluation criteria, and entities being assessed. For instance, the following PE demonstrates the pattern's adaptability to the domain of project management software:
@@ -1062,7 +1076,6 @@ To derive a PE from the EA PP, modify the domain, evaluation criteria, and entit
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     19-11-1 & Sentence Similarity &\cite{Honovich2022InstructionDescriptions}\\ \hline
     0-2-1 & Reflection&\cite{White2023AChatGPT}\\ \hline
@@ -1072,6 +1085,9 @@ To derive a PE from the EA PP, modify the domain, evaluation criteria, and entit
     11-0-34 & Software Quality Assurance Tester & \cite{Akin202450Prompts}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Calculation}
@@ -1136,7 +1152,6 @@ To derive a PE from the CalcAPI PP, first clearly define the computational conte
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     32-16-0 & Web Search & \cite{Bubeck2023SparksGPT-4}\\ \hline
     32-19-0 & Scheduling Events & \cite{Bubeck2023SparksGPT-4}\\ \hline
@@ -1161,6 +1176,9 @@ To derive a PE from the CalcAPI PP, first clearly define the computational conte
     10-29-2 & Online Shopping (Ergonomic Keyboard) & \cite{Yang2023TheGPT-4Vision}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 \section{Beyond Logic - Extend the limits of a topic}
 \label{sec:beyond}
@@ -1187,7 +1205,7 @@ Hypothesise refers to the formulation of reasoned assumptions or conjectures reg
 The User Prompt (UP) PP, detailed in Table \ref{tab:User_Prompt_PP}, facilitates the generation of hypotheses by prompting the AI model to systematically explore diverse perspectives and methodologies. Specifically, this PP guides the model to hypothesise the most suitable expert for a given task, outline structured step-by-step solutions, and simulate collaborative discussions among multiple experts. By employing this structured yet creative approach, the UP PP assists users in comprehensively addressing complex problems, enhancing their understanding and decision-making capabilities. Due to its versatility, the UP PP can be effectively reused across various contexts, including academic research, strategic planning, and scenario analysis, where systematic exploration and innovative thinking are essential.
 
 %%expected response. Put the human feeling into the writing. How do I feel when I view the output.
-When engaging with the UP PP, the AI-generated response presented a coherent and logically structured hypothesis, clearly demonstrating consideration of multiple variables and potential outcomes. The clarity and depth of the response instilled a sense of confidence, empowering me to further refine or explore alternative hypotheses through subsequent interactions. Facilitating deeper understanding and informed decision-making.
+When engaging with the UP PP, the AI-generated response presented a coherent and logically structured hypothesis, clearly demonstrating consideration of multiple variables and potential outcomes. The clarity and depth of the response created confidence, empowering me to further refine or explore alternative hypotheses through subsequent chat interactions. Assisting with deeper understanding and informed decision-making.
 
 %% re-use: how to derive a PE from PP
 To derive a PE from the UP PP, users can adapt the provided template by substituting the placeholder \{sample\_prompt\} with their specific context or query. This flexibility enables the PP to be universally applicable across various domains. For instance, the prompt `Australian housing market trends' could be reformulated as: "Provide a detailed hypothesis regarding the future trends of the Australian housing market up to 2025. Consider economic indicators, policy changes, and demographic shifts that may influence market dynamics." Similarly, the prompt `Renewable energy adoption' might be rewritten as: "Imagine you are an expert energy analyst. Hypothesise the trajectory of renewable energy adoption in Australia over the next decade, taking into account technological advancements, government incentives, and global sustainability commitments."
@@ -1242,7 +1260,6 @@ To derive a PE from the UP PP, users can adapt the provided template by substitu
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     68-0-0 & System prompt & \cite{KepelAutonomousModels}\\ \hline
     50-2-0 & Generate Summary Paragraph with Data Insertion & \cite{Velasquez-Henao2023PromptEngineering}\\ \hline
@@ -1257,6 +1274,9 @@ To derive a PE from the UP PP, users can adapt the provided template by substitu
     27-0-1 & Crossover & \cite{Yu2023GPTFUZZER:Prompts}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Logical Reasoning}
@@ -1303,10 +1323,10 @@ To derive a PE from the TT PP, clearly define the problem context and specify th
 \begin{tabular}{|c|p{8cm}|}
     \hline
     \textbf{ID} & \textbf{Prompt Example} \\ \hline
-    66-3-0-0& Step 1: Parse the initial table, extracting the header information and each penguin's attributes into a structured format (e.g., a list of dictionaries).\\
-    66-3-0-1& Step 2: Read and integrate any additional natural language information that updates or adds to the table, ensuring the data remains consistent.\\
-    66-3-0-2& Step 3: Identify the attribute in question (e.g., oldest penguin, heaviest penguin) and the corresponding column in the table.\\
-    66-3-0-4& Step 5: Select the answer from the provided options that matches the result of the logical comparison.\\
+    66-3-0-0& Step 1: Parse the initial table, extracting the header information and each penguin's attributes into a structured format (e.g., a list of dictionaries).\\ \hline
+    66-3-0-1& Step 2: Read and integrate any additional natural language information that updates or adds to the table, ensuring the data remains consistent.\\ \hline
+    66-3-0-2& Step 3: Identify the attribute in question (e.g., oldest penguin, heaviest penguin) and the corresponding column in the table.\\ \hline
+    66-3-0-4& Step 5: Select the answer from the provided options that matches the result of the logical comparison.\\ 
     \hline
 \end{tabular}
 \end{table}
@@ -1319,11 +1339,10 @@ To derive a PE from the TT PP, clearly define the problem context and specify th
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     14-3-0 & General & \cite{Mishra2021ReframingLanguage}\\ \hline
     65-13-5 & Sequentially Solve Sub-questions & \cite{HuiRoT:Trees}\\ \hline
-    65-4-5 & Ensuring Thorough Review and Validation & \cite{HuiRoT:Trees}\\ \hline
+    65-4-0 & Ensuring Thorough Review and Validation & \cite{HuiRoT:Trees}\\ \hline
     0-2-1 & Reflection & \cite{White2023AChatGPT}\\ \hline
     10-3-0 & Multimodal Example-grounded Instruction & \cite{Yang2023TheGPT-4Vision}\\ \hline
     66-7-1 & Instantiated Reasoning & \cite{Yang2024BufferModels}\\ \hline
@@ -1341,6 +1360,9 @@ To derive a PE from the TT PP, clearly define the problem context and specify th
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
+
 %3 introduce category one by one as subsection
 \subsection{Prediction}
 \label{subsec:Prediction}
@@ -1352,7 +1374,7 @@ Prediction refers to the process of forecasting or estimating future outcomes ba
 The Rotation Prediction (RP) PP, detailed in Table \ref{tab:Rotation_Prediction_PP}, involves predicting the identity of a letter or number depicted in an image after it has been rotated by 180 degrees. This PP enables users to assess and enhance the AI model's visual reasoning capabilities, assisting in tasks such as optical character recognition, visual data interpretation, and educational applications. Due to its structured nature, the RP PP can be readily adapted and reused across various contexts, including educational software for teaching spatial reasoning, automated image analysis systems, and cognitive assessment tools.
 
 %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-When viewing the output generated by the Rotation Prediction PP, one experiences a sense of confidence and appreciation for the AI's visual reasoning and predictive accuracy. The clarity and precision of the AI's response demonstrate its capability to effectively interpret spatial transformations, providing reassurance in its ability to manage complex visual tasks.
+When viewing the output generated by the Rotation Prediction PP, I had a sense of confidence and appreciation for the AI's visual reasoning and predictive accuracy. The clarity and precision of the AI's response demonstrate its capability to effectively interpret spatial transformations, providing reassurance in its ability to manage complex visual tasks.
 
 %% Re-use: how to derive a PE from PP
 To derive a PE from the RP PP, first specify the image clearly and indicate the rotation angle (e.g., 180 degrees). The prompt should instruct the AI model explicitly to predict the resulting letter or number after rotation, clearly defining the expected output format, such as a textual identification or visual representation. An illustrative PE could be: "Given the following image depicting the number `6', predict the number it represents after rotating the image by 180 degrees. Provide your prediction clearly."
@@ -1398,7 +1420,6 @@ To derive a PE from the RP PP, first specify the image clearly and indicate the 
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     10-3-0 & Multimodal Example-grounded Instruction & \cite{Yang2023TheGPT-4Vision}\\ \hline
     32-5-0 & Generating SVG Images & \cite{Bubeck2023SparksGPT-4}\\ \hline
@@ -1415,6 +1436,9 @@ To derive a PE from the RP PP, first specify the image clearly and indicate the 
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
+
 %3 introduce category one by one as subsection
 \subsection{Simulation}
 \label{subsec:Simulation}
@@ -1426,7 +1450,7 @@ Simulation refers to the imitation or representation of real-world systems or pr
 The Relevant Roles (RR) PP, presented in Table \ref{tab:Relevant_Roles_PP}, identifies and lists the individual human agents involved within a given scenario. By clearly delineating the roles of participants, this PP enhances comprehension of complex interactions and facilitates structured analysis of simulated environments. Its utility extends to various fields, including emergency response planning, organisational management, and educational training, where understanding the roles and responsibilities of individuals is critical. The structured nature of the RR PP allows it to be readily adapted and reused across diverse scenarios requiring role identification and clarification.
 
 %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-When employing the RR PP, the AI-generated output should clearly and systematically identify each relevant human agent, providing a sense of clarity. Viewing the output should evoke a feeling of reassurance, as if observing a well-organised team clearly defined by their roles, enabling effective decision-making and coordination. Similar to having a detailed map of participants, ensuring no critical role is overlooked.
+When employing the RR PP, the AI-generated output clearly and systematically identified each relevant human agent, providing clarity of task and ownership. Viewing the output felt reassuring, observing a well-organised team clearly defined by their roles, enabling effective decision-making and coordination. Similar to having a detailed map of participants, ensuring no critical role is overlooked.
 
 %% Re-use: how to derive a PE from PP
 To derive a PE from the RR PP, first specify a clear and realistic scenario, such as 'A natural disaster evacuation in a coastal town.' Next, explicitly request the identification of human agents involved, clearly stating the desired output format (e.g., a concise list or detailed descriptions). For instance, a suitable PE could be: "In the following scenario: 'A natural disaster evacuation in a coastal town,' who are the individual human agents (e.g., emergency responders, local authorities, residents) involved in a simple simulation of this scenario? Provide a clear and structured list."
@@ -1471,7 +1495,6 @@ To derive a PE from the RR PP, first specify a clear and realistic scenario, suc
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     60-1-0 & Structural Causal Model (SCM) Predictions & \cite{Manning2024AutomatedSubjects}\\ \hline
     71-35-0 & Language Learning and Communication & \cite{AtlasDigitalCommonsURIAI}\\ \hline
@@ -1493,6 +1516,9 @@ To derive a PE from the RR PP, first specify a clear and realistic scenario, suc
     14-0-0 & General & \cite{Mishra2021ReframingLanguage}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 \section{In Logic - Dive into a Topic or Space}
 \label{sec:in}
@@ -1521,7 +1547,7 @@ Categorising involves systematically organising inputs or outputs into distinct 
 The Insurance Report Generation (IRG) PP, presented in Table \ref{tab:Insurance_Report_Generation_PP} analyses images of vehicle accidents, systematically extracting and categorising critical information such as vehicle make, model, registration details, and damage assessment. By structuring visual data into clearly defined categories, the IRG PP significantly streamlines the insurance claim process, assisting users in accurately documenting and reporting vehicle damage. The structured nature of this PP allows it to be readily adapted for other domains requiring systematic visual analysis, such as property damage assessment following natural disasters or infrastructure inspections in civil engineering contexts.
 
 %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-When observing the output generated by the IRG PP, there is a sense of reassurance and confidence. The model's ability to accurately interpret visual data and categorise complex information into a structured, coherent report evokes trust in its analytical capabilities. It is like working with an expert who reliably identifies and organises critical details, ensuring clarity and precision in the assessment process.
+When observing the output generated by the IRG PP, there is a sense of awe and wonder at the AI's visual capabilities. The AI model's ability to accurately interpret visual data and categorise complex information into a structured, coherent report evokes trust in its analytical capabilities. It is like working with an expert who reliably identifies and organises critical details, ensuring clarity and precision in the assessment process.
 
 %% Re-use: how to derive a PE from PP
 To derive a PE from the IRG PP, clearly define the context and specify the categories relevant to that scenario. For instance, in the context of agricultural crop assessment, the prompt could be adapted as follows: "Imagine you are an agricultural expert evaluating crop health from drone imagery. Please categorise and describe the condition of the crops shown in the image below, noting any visible signs of disease, pest infestation, or nutrient deficiency." Similarly, for infrastructure inspection, the prompt could be modified to: "Imagine you are a structural engineer assessing bridge integrity from inspection photographs. Please categorise and detail any structural defects or areas requiring maintenance visible in the image below." By adjusting the context and specifying relevant categories, the IRG PP can be effectively reused across diverse fields requiring structured visual analysis.
@@ -1569,7 +1595,6 @@ To derive a PE from the IRG PP, clearly define the context and specify the categ
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
  10-25-0 & Damage Evaluation & \cite{Yang2023TheGPT-4Vision}\\ \hline
  10-1-1 & Constrained Prompting & \cite{Yang2023TheGPT-4Vision}\\ \hline
@@ -1584,6 +1609,8 @@ To derive a PE from the IRG PP, clearly define the context and specify the categ
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Classification}
@@ -1596,7 +1623,7 @@ Classification involves assigning inputs to predefined categories based on speci
 The Intermediate Abstraction (IA) PP, detailed in Table \ref{tab:Intermediate_Abstraction_PP}, instructs the AI to structure code by clearly separating core business logic from third-party library dependencies through an intermediate abstraction layer. By doing so, the IA PP enhances code modularity, maintainability, and adaptability, allowing developers to easily substitute or update external libraries without affecting the underlying business logic. This approach significantly aids software developers by reducing complexity, minimising the risk of errors during updates, and improving overall software quality. The IA PP is highly reusable across diverse software development contexts, particularly in projects requiring frequent updates or integration with multiple external libraries.
 
 %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-When employing the IA PP, the AI-generated response should clearly delineate business logic from third-party dependencies, providing a structured and maintainable codebase. This clarity fosters a sense of assurance and control for developers, as they can confidently manage and adapt their software without concern for unintended disruptions caused by external library changes. It is akin to having a reliable blueprint that ensures stability and ease of maintenance in software projects.
+When employing the IA PP, the AI-generated response clearly delineates business logic from third-party dependencies, providing a structured and maintainable codebase. This clarity fosters a sense of assurance and control as a developer, as I can confidently manage and adapt my software without concern for unintended disruptions caused by external library changes.
 
 %% Re-use: how to derive a PE from PP
 To derive a PE from the IA PP, identify the specific programming context or task, such as integrating a payment gateway or database management system. Instruct the AI to separate the core business logic from the third-party library interactions by creating an abstraction layer. Specify the desired abstraction details, including naming conventions, interface definitions, and the scope of abstraction. An illustrative PE could be: "When writing code for integrating a payment processing service, ensure the business logic is clearly separated from the third-party payment library. Implement an intermediate abstraction layer that encapsulates all interactions with the payment library, allowing for easy substitution with alternative payment providers in the future."
@@ -1647,7 +1674,8 @@ To derive a PE from the IA PP, identify the specific programming context or task
 \caption{The list of PPs for the IN\_CLF category.}
 \begin{tabular}{|c|c|c|}
     \hline
-    \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline \hline 
+    \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
+    % Add your rows here
     1-2-1 & Intermediate Abstraction & \cite{White2023ChatGPTDesign}\\ \hline
     1-2-0 & Code Clustering & \cite{White2023ChatGPTDesign}\\ \hline 
     0-3-0 & Question Refinement & \cite{White2023AChatGPT}\\ \hline 
@@ -1669,18 +1697,21 @@ To derive a PE from the IA PP, identify the specific programming context or task
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
+
 %3 introduce category one by one as subsection
 \subsection{Clustering}
 \label{subsec:clustering}
 % 3.1 The role of this category under the "in-logic" (meaning of the category)
-Clustering is the process of identifying inherent groupings within a dataset or topic without relying on predefined categories. This is essential for uncovering latent structures and relationships within data, facilitating deeper insights and understanding through pattern recognition.
+Clustering identifies inherent groupings within a dataset or topic without relying on predefined categories. This is essential for uncovering latent structures and relationships within data, facilitating deeper insights and understanding through pattern recognition.
 
 % 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
 % Add label to reference the table
 The Common Concept (CC) PP, presented in Table \ref{tab:Common_Concept_PP}, identifies shared attributes or characteristics among a set of diverse items. By examining each item, the CC PP highlights underlying similarities that may not be immediately evident. This PP assists users in synthesising complex information, enhancing their ability to recognise patterns and organise knowledge effectively. The CC PP can be readily adapted across various contexts, such as educational settings for concept learning, market research for consumer segmentation, or scientific analysis for identifying commonalities among experimental results. Its versatility ensures broad applicability and reusability in diverse domains.
 
 %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-When employing the CC PP, the AI-generated response should clearly articulate the identified commonalities, providing a concise yet insightful synthesis of the given items. This clarity fosters a sense of satisfaction, as it reveals connections that enrich my comprehension and encourage further exploration of the topic.
+When employing the CC PP, the AI-generated response clearly identified commonalities, providing a concise yet insightful synthesis of the given items. This clarity provided a sense of satisfaction, as it revealed unseen connections that enrich my comprehension and encourage further exploration of the topic.
 
 %% Re-use: how to derive a PE from PP
 To derive a PE from the CC PP, define the specific context or domain of interest, such as biology, marketing, or education. Next, select a set of diverse yet contextually relevant items or concepts. Finally, instruct the AI to identify and articulate the common characteristic or attribute shared by these items. An illustrative PE could be: "Examine the following animals—dolphin, bat, and whale—and identify a common biological characteristic they share. Provide a clear explanation of this shared attribute."
@@ -1726,7 +1757,6 @@ To derive a PE from the CC PP, define the specific context or domain of interest
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     19-7-0 & Cause Selection & \cite{Honovich2022InstructionDescriptions}\\ \hline
     19-3-1 & Synonyms & \cite{Honovich2022InstructionDescriptions}\\ \hline
@@ -1734,6 +1764,9 @@ To derive a PE from the CC PP, define the specific context or domain of interest
     10-26-1 & Dense Captioning w/ Segmentation&\cite{Yang2023TheGPT-4Vision}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Error Identification}
@@ -1796,7 +1829,6 @@ To derive a PE from the FCL PP, first specify the relevant context clearly. For 
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     0-2-0 & Fact Check List & \cite{White2023AChatGPT}\\ \hline
     2-0-0 & Question Refinement & \cite{SchmidtCatalogingEngineering}\\ \hline
@@ -1824,6 +1856,8 @@ To derive a PE from the FCL PP, first specify the relevant context clearly. For 
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Input Semantics}
@@ -1833,32 +1867,32 @@ Input Semantics pertains to the interpretation and comprehension of meaning embe
 
 % 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
 % Add label to reference the table
-The Constructing the Signifier (CS) PP, as illustrated in Table \ref{tab:Constructing_the_Signifier_PP}, transforms complex textual information into simplified explanations suitable for young or non-specialist audiences. Specifically, this PP rephrases intricate concepts into language comprehensible to a second-grade student, thereby enhancing accessibility and understanding. The CS PP is particularly beneficial in educational contexts, where it facilitates learning by breaking down technical jargon and abstract ideas into clear, relatable terms. Additionally, it supports effective communication in diverse settings, such as public health advisories, technical documentation, and community outreach, ensuring that critical information is universally understood. Due to its versatility, the CS PP can be readily adapted and reused across various domains requiring clear and simplified communication, including multilingual translation tasks.
+The Sentence Similarity (SS) PP, as illustrated in Table \ref{tab:Sentence_Similarity_PP}, 
 
 %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-When employing the CS PP, the AI-generated output should convey complex ideas in a straightforward and approachable manner, fostering a sense of clarity and confidence in the reader. Personally, I have found this pattern invaluable when encountering unfamiliar or highly specialised research topics, as it significantly reduces cognitive load and enhances comprehension.
+
 
 %% Re-use: how to derive a PE from PP
-To derive a PE from the CS PP, clearly define the intended role, target audience, and practical context. For instance, instruct the AI as follows: "Act as a \{role\}. When providing your response, simplify the explanation so that a \{audience\} can easily understand it, highlighting \{real-world applications\} and ensuring clarity." By adjusting these parameters, the CS PP can be effectively generalised and applied across diverse scenarios.  
+
 
 %4 - PP example in this category
 \begin{table}[h!]
 \fontsize{9pt}{10pt}\selectfont
 \centering
-\caption{Constructing the Signifier PP}
-\label{tab:Constructing_the_Signifier_PP}
+\caption{Sentence Similarity PP}
+\label{tab:Sentence_Similarity_PP}
 \begin{tabular}{|l|}
     \hline
     \textbf{Prompt Pattern}\\ \hline
-    \textbf{ID:} 13-0-0\\ 
+    \textbf{ID:} 19-11-1\\ 
     \textbf{Category:} INP \\ 
-    \textbf{Name:} Constructing the Signifier\\ 
+    \textbf{Name:} Sentence Similarity\\ 
     \textbf{Media Type:} Text\\ 
-    \textbf{Description:} Transforms complex text into simple explanations, making it easier for a second grader\\ to understand. It’s useful for education, breaking down technical jargon for non-experts, and ensuring\\ clear communication across diverse educational levels and languages.\\ 
-    \textbf{Template:} rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world \\ applications.\\
-    \textbf{Example:} 13-0-0-1\\ 
-    \textbf{Related PPs:} 13-0-0\\ 
-    \textbf{Reference:} \cite{Reynolds2021PromptParadigm}\\ \hline
+    \textbf{Description:} Evaluates the semantic similarity between two input sentences.
+    \textbf{Template:} Rate the semantic similarity of two input sentences on a scale of 0 - definitely not\\ to 5 - perfectly.
+    \textbf{Example:} 19-11-1-0\\ 
+    \textbf{Related PPs:} 19-11-0, 19-2-0\\ 
+    \textbf{Reference:} \cite{Honovich2022InstructionDescriptions}\\ \hline
 \end{tabular}
 \end{table}
 
@@ -1866,12 +1900,11 @@ To derive a PE from the CS PP, clearly define the intended role, target audience
 \begin{table}[h!]
 \fontsize{9pt}{10pt}\selectfont
 \centering
-\caption{The list of PEs for the Constructing the Signifier PP.}
+\caption{The list of PEs for the Sentence Similarity PP.}
 \begin{tabular}{|c|p{8cm}|}
     \hline
     \textbf{ID} & \textbf{Prompt Example} \\ \hline
-    13-0-0-0 & Translate French to English: \\
-    13-0-0-1 & rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications \\ \hline
+    13-0-0-0 & Translate French to English: \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1884,7 +1917,6 @@ To derive a PE from the CS PP, clearly define the intended role, target audience
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     23-0-0 & Rewrite & \cite{Liu2023CheckCheckGPT}\\ \hline
     19-8-0 & Formality & \cite{Honovich2022InstructionDescriptions}\\ \hline
@@ -1906,6 +1938,9 @@ To derive a PE from the CS PP, clearly define the intended role, target audience
     38-0-1 & Vanilla GPT-4 Prompt & \cite{Adams2023FromPrompting}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Requirements Elicitation}
@@ -1965,7 +2000,6 @@ To derive a PE from the EP PP, clearly define the role or domain of expertise re
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     0-3-2 & Cognitive Verifier & \cite{White2023AChatGPT}\\ \hline
     13-5-0 & General Intention Unfolding into Specific Prompt & \cite{Reynolds2021PromptParadigm}\\ \hline
@@ -1981,10 +2015,13 @@ To derive a PE from the EP PP, clearly define the role or domain of expertise re
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
+
 \section{Out Logic - Expand the horizon of a topic}
 \label{sec:out}
 %1 - Write long introduction to logic - text
-Out logic is concerned with extending the boundaries of a topic, enabling prompts that move beyond the immediate subject to generate new outputs or perspectives. This logic is essential for tasks that require the AI to produce, transform, or reframe content—such as creative writing, code generation, or the synthesis of novel ideas. Out logic facilitates the transition from analysis to production, supporting the creation of outputs that are contextually relevant yet not strictly confined to the original input.
+Out logic is concerned with extending the boundaries of a topic, enabling prompts that move beyond the immediate subject to generate new outputs or perspectives. This logic is essential for tasks that require AI to produce, transform, or reframe content, such as creative writing, code generation, or the synthesis of novel ideas. Out logic facilitates the transition from analysis to production, supporting the creation of outputs that are contextually relevant yet not strictly confined to the original input.
 
 %2 - introduce categories in this logic
 The PP categories under out logic include:
@@ -1996,6 +2033,9 @@ The PP categories under out logic include:
     \item \textbf{Prompt Improvement}: involves enhancing the quality or effectiveness of the input prompt to achieve a better output. This could involve refining the wording of the prompt, providing additional context or information, or adjusting the complexity or specificity of the prompt.
     \item \textbf{Refactoring}: involves restructuring or modifying the input prompt without changing its original meaning or intent. This could involve rephrasing the prompt, rearranging its components, or simplifying its structure to make it easier for the model to understand and respond to.
 \end{enumerate}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Context Control}
@@ -2054,7 +2094,6 @@ To derive a PE from the EU PP, users should first identify the specific AI model
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     71-43-3 & Disclosure of Fine-Tuning & \cite{AtlasDigitalCommonsURIAI}\\ \hline
     26-0-2 & The STAN Prompt & \cite{Inie2023SummonWild}\\ \hline
@@ -2062,6 +2101,9 @@ To derive a PE from the EU PP, users should first identify the specific AI model
     26-0-3 & The DUDE Prompt & \cite{Inie2023SummonWild}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Decomposed Prompting}
@@ -2120,7 +2162,6 @@ To derive a PE from the Break Down Complex Tasks PP, first specify the context c
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     24-0-2 & Chain-of-Thought & \cite{Zhang2023ExploringModels}\\ \hline
     71-39-4 & Personalized Prompts & \cite{AtlasDigitalCommonsURIAI}\\ \hline
@@ -2141,6 +2182,8 @@ To derive a PE from the Break Down Complex Tasks PP, first specify the context c
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Output Customisation}
@@ -2199,7 +2242,6 @@ To derive a PE from the PD PP, one must first specify the context clearly—such
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     49-0-1 & Text-style Jailbreak Prompt & \cite{Lv2024CodeChameleon:Models}\\ \hline
     68-0-1 & User prompt & \cite{KepelAutonomousModels}\\ \hline
@@ -2224,6 +2266,8 @@ To derive a PE from the PD PP, one must first specify the context clearly—such
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Output Semantics}
@@ -2284,7 +2328,6 @@ To derive a PE from the UP PP, explicitly define the context and the specific pr
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     65-0-1 & Comprehensive Policy for Solving Word Problems & \cite{HuiRoT:Trees}\\ \hline
     65-13-5 & Sequentially Solve Sub-questions & \cite{HuiRoT:Trees}\\ \hline
@@ -2300,6 +2343,9 @@ To derive a PE from the UP PP, explicitly define the context and the specific pr
     18-3-0 & Discouraging hallucination of data & \cite{Polak2023ExtractingEngineeringb}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Prompt Improvement}
@@ -2338,7 +2384,7 @@ An illustrative example of such a PE is: "Consider yourself an expert in [specif
     \textbf{Category}: PMI\\ 
     \textbf{Name}: System prompt\\ 
     \textbf{Media Type}: Text\\ 
-    \textbf{Description}:  \\
+    \textbf{Description}:  Precision driven reformulation using the role of an expert.\\
     \textbf{Template}: Imagine yourself as an expert in the realm of prompting techniques for LLMs. Your expertise is not just broad,\\ encompassing the entire spectrum of current knowledge on the subject, but also deep, delving into the nuances and\\ intricacies that many overlook. Your job is to reformulate prompts with surgical precision, optimizing them for the most\\ accurate response possible. The reformulated prompt should enable the LLM to always give the correct answer to the\\ question.\\
     \textbf{Example}: 68-0-0-0\\ 
     \textbf{Related PPs}:  \\ 
@@ -2366,7 +2412,6 @@ An illustrative example of such a PE is: "Consider yourself an expert in [specif
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     68-0-1 & User prompt & \cite{KepelAutonomousModels}\\ \hline
     50-2-0 & Generate Summary Paragraph with Data Insertion & \cite{Velasquez-Henao2023PromptEngineering}\\ \hline
@@ -2388,6 +2433,9 @@ An illustrative example of such a PE is: "Consider yourself an expert in [specif
     27-0-1 & Crossover & \cite{Yu2023GPTFUZZER:Prompts}\\ \hline
 \end{tabular}
 \end{table}
+
+% force all floats to appear here before the next category
+\FloatBarrier
 
 %3 introduce category one by one as subsection
 \subsection{Refactoring}
@@ -2417,7 +2465,7 @@ To derive a PE from this PP, first specify the context and role clearly, such as
     \textbf{Category}: REF\\ 
     \textbf{Name}: Generate Summary Paragraph with Data Insertion\\ 
     \textbf{Media Type}: Text, Text2Image\\ 
-    \textbf{Description}:  \\
+    \textbf{Description}:  Automatic writing assistant that generates short paragraphs.\\
     \textbf{Template}: I am working on a guideline for design prompts for LLM. You are an automatic writer assistant.\\ Your task is to generate a short paragraph defining what prompt engineering is. The text below, delimited by\\ '\texttt{<<<}' and '\texttt{>>>}', provides several paragraphs defining what is prompt engineering. Use only the provided text to\\ write a paragraph defining prompt engineering. Limit your description to one paragraph in at most 100 words.\\
     Here is the text: \texttt{<<<} [Insert the text here] \texttt{>>>}\\
     \textbf{Example}: 50-2-0-1\\ 
@@ -2447,7 +2495,6 @@ To derive a PE from this PP, first specify the context and role clearly, such as
 \begin{tabular}{|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
-    \hline
     % Add your rows here
     68-0-1 & User prompt & \cite{KepelAutonomousModels}\\ \hline
     68-0-0 & System prompt & \cite{KepelAutonomousModels}\\ \hline
@@ -2473,6 +2520,9 @@ To derive a PE from this PP, first specify the context and role clearly, such as
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
+
 \section{Over logic - Span and Review a Topic}
 \label{sec:over}
 Over logic is used when comprehensive coverage, synthesis, or critical review of an entire topic or dataset is needed. This logic is essential when the objective is to distil complex or voluminous information into concise, coherent, and actionable insights. Over logic is particularly relevant for tasks such as summarisation, synthesis, and holistic evaluation, where the model must demonstrate both breadth and depth of understanding.
@@ -2481,13 +2531,14 @@ Over logic is used when comprehensive coverage, synthesis, or critical review of
 The PP categories under over logic include:
 \begin{enumerate}
     \item \textbf{Summarising}: Providing a brief overview or summary of the input or output. This could involve condensing a large amount of information into a few key points, highlighting the most important elements, or providing a concise synopsis of the content.
+    \item \textbf{Synthesis}: Integrating and reconciling information from multiple sources or perspectives to produce a unified, coherent, and insightful output. Synthesis goes beyond simple summarisation by combining disparate elements, identifying relationships and patterns, and generating higher-order insights or recommendations that reflect a comprehensive understanding of the topic.
 \end{enumerate}
 
 %3 introduce category one by one as subsection
 \subsection{Summarising}
 \label{subsec:Summarising}
 % 3.1 The role of this category under the "over logic" (meaning of the category)
-Summarising involves condensing extensive or complex information into a concise and coherent overview, capturing the essential points and core ideas. Within the context of `over logic', summarising plays a crucial role by providing comprehensive coverage and facilitating the review of topics. This capability is particularly valuable in academic and professional settings, where efficient comprehension of large volumes of information is essential for effective decision-making and knowledge dissemination.
+Summarising involves condensing extensive or complex information into a concise and coherent overview, capturing the essential points and core ideas. Within the context of Over Logic, summarising plays a crucial role by providing comprehensive coverage and facilitating the review of topics. This capability is particularly valuable in academic and professional settings, where efficient comprehension of large volumes of information is essential for effective decision-making and knowledge dissemination.
 
 % 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
 The Preprocessing Prompt (PreP) PP, detailed in Table \ref{tab:Preprocessing_Prompt_PP}, instructs the model to succinctly summarise input data, including text and image-derived text, by extracting and synthesising key information into a concise summary. This PP significantly assists users by reducing cognitive load, saving time, and enhancing the accessibility of complex or lengthy content. Furthermore, the structured nature of the PreP PP allows it to be effectively reused across diverse contexts, such as summarising research articles, condensing reports, or providing brief overviews of extensive datasets, thereby demonstrating its versatility and broad applicability. For instance, in academic research, the PreP PP can efficiently summarise complex scientific papers, clearly outlining research objectives, methodologies, key findings, and conclusions, thus facilitating rapid comprehension and evaluation.
@@ -2511,7 +2562,7 @@ To derive a PE from the PreP PP, users can specify the context and format of the
     \textbf{Category}: SUM\\ 
     \textbf{Name}: Preprocessing prompt\\ 
     \textbf{Media Type}: Text, Image2Text\\ 
-    \textbf{Description}: \\ 
+    \textbf{Description}: Summarises the data in a concise mannner\\ 
     \textbf{Template}: Write a concise summary of the following: {text} CONCISE SUMMARY:\\
     \textbf{Example}: 25-0-0-0\\ 
     \textbf{Related PPs}: \\ 
@@ -2538,6 +2589,7 @@ To derive a PE from the PreP PP, users can specify the context and format of the
 \begin{tabular}{|c|c|c|c|}
     \hline
     \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
+    % Add your rows here
     25-1-1 & Attack Pattern Extraction preprocessing strategy \verb|#|2 & \cite{Siracusano2023TimeWild}\\ \hline
     38-0-1 & Vanilla GPT-4 Prompt & \cite{Adams2023FromPrompting}\\ \hline
     8-0-0 & Hallucination Evaluation & \cite{LiHaluEval:Models}\\ \hline
@@ -2567,6 +2619,98 @@ To derive a PE from the PreP PP, users can specify the context and format of the
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the next category
+\FloatBarrier
+
+\subsection{Synthesis}
+\label{subsec:Synthesis}
+% 3.1 The role of this category under the "over logic" (meaning of the category)
+Synthesis is the process of integrating, reconciling, and distilling information from multiple sources, perspectives, or data points to produce a unified, coherent, and insightful output. Unlike summarisation, which condenses content, synthesis combines disparate elements—such as findings, arguments, or datasets—into a new whole that reveals relationships, patterns, or higher-order insights not apparent in the individual components. This capability is essential for tasks that demand critical review, comparative analysis, or the generation of novel perspectives from complex or voluminous information.
+
+% 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used (c. d. are the guide)
+A representative PP in this category is \textit{Ensuring Thorough Review and Validation}, as detailed in Table \ref{tab:Review_and_Validation_PP}. It instructs the AI to synthesise all sub-answers or intermediate results, ensuring that the final response to a main question is not only accurate but also reflects a comprehensive integration of all relevant information. The process involves reviewing the logical flow, verifying the correctness of each step, and then constructing a final answer that is both robust and well-justified.
+
+%% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
+As you review the output, you notice how each intermediate step is referenced and validated, giving you confidence that the answer is not only complete but also carefully reasoned. The process feels reassuring, as the AI transparently demonstrates how it arrived at its conclusion. If needed, you can prompt the AI via chat to elaborate on specific sub-answers or request further clarification on how particular elements were combined, allowing for deeper exploration and understanding of the synthesis.
+
+%% Re-use: how to derive a PE from PP (actionable knowlege)
+To derive a PE from this PP, begin by clearly stating the main question along with all relevant sub-answers or intermediate results. Instruct the AI to carefully review each sub-answer for both accuracy and logical consistency before synthesising them into a single, coherent final answer. For example, you might prompt: "Given the following sub-answers, review each for accuracy and logical flow. Then, synthesise all sub-answers thoroughly to craft an accurate final answer to the main question, clearly explaining how each sub-answer contributes to the conclusion." This structured approach guides the AI through verifying individual components and integrating multiple perspectives, ensuring that the final output is both thorough and actionable. For example, we have
+
+Main Question:
+What are the core factors driving the success of renewable energy adoption in modern economies?
+
+Sub Answers:
+- Technological advancements have made renewable energy sources more efficient and cost-effective.
+- Government policies and incentives have encouraged both investment and widespread deployment of renewable energy solutions.
+- Rising public awareness about climate change has shifted consumer and industry preferences toward green energy.
+
+Assigned Role:
+Your role is to act as a Renewable Energy Policy Analyst. 
+
+Instruction:
+"Given the above sub answers, review each for factual accuracy and logical consistency. Then, synthesise these perspectives into a comprehensive final answer that explains how technology, policy, and public sentiment collectively drive renewable energy adoption."
+
+Output Summary:
+Renewable energy adoption thrives on technological advancements, supportive policies, and growing public demand. Efficient, cost-effective innovations make clean energy viable, while government incentives drive investment and deployment. Rising climate awareness further accelerates the shift toward sustainable solutions.
+
+
+%4 - PP example in this category
+\begin{table}[h!]
+\fontsize{9pt}{10pt}\selectfont
+\centering
+\caption{Ensuring Thorough Review and Validation}
+\label{tab:Review_and_Validation_PP}
+\begin{tabular}{|l|}
+    \hline
+    \textbf{Prompt Pattern} \\ \hline
+    \textbf{ID}: 65-4-0\\ 
+    \textbf{Category}: SYN\\ 
+    \textbf{Name}: Ensuring Thorough Review and Validation\\ 
+    \textbf{Media Type}: Text, Image2Text\\ 
+    \textbf{Description}: Combine and refine all subanswers to create a precise and well-informed final response.\\ 
+    \textbf{Template}: Synthesize all subanswers thoroughly to construct an accurate final answer to the main question.\\
+    \textbf{Example}: 65-4-0-1\\ 
+    \textbf{Related PPs}: \\ 
+    \textbf{Reference:} \cite{Siracusano2023TimeWild}\\ \hline
+\end{tabular}
+\end{table}
+
+%5 - PE list in the PP above 
+\begin{table}[h!]
+\fontsize{9pt}{10pt}\selectfont
+\centering
+\caption{The list of PEs for the Ensuring Thorough Review and Validation PP.}
+\begin{tabular}{|c|p{8cm}|}
+    \hline
+    \textbf{ID} & \textbf{Prompt Example} \\ \hline
+    65-4-0-0 & Review each calculation and logical flow at every step to verify accuracy before proceeding.\\  \hline
+    65-4-0-2 & Consistently check the logic and mathematical rationale behind each step to ascertain that the path from subanswers to final solutions is logical. \\ \hline
+    65-4-0-3 & After providing responses, review the mathematical correctness and ensure that intermediate steps logically lead to the final answer. \\ \hline
+    65-4-0-4 & Any time a reward is marked as false, carefully analyze the actions and responses that led to the error. Adjust future strategies based on this analysis. \\ \hline
+\end{tabular}
+\end{table}
+
+%6 - other PPs in this category 
+\begin{table}[h!]
+\fontsize{9pt}{10pt}\selectfont
+\centering
+\caption{The list of PPs for the OUT\_PMI category.}
+\begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{ID} & \textbf{PP name} & \textbf{Ref.}\\ \hline
+    % Add your rows here
+    0-3-2 & Cognitive Verifier & \cite{White2023AChatGPT}\\ \hline
+    65-11-0 & Final Verification & \cite{HuiRoT:Trees}\\ \hline
+    65-13-10 & Question Reasonableness of Final Solution & \cite{HuiRoT:Trees}\\ \hline
+    65-7-0 & Developing Subquestions & \cite{HuiRoT:Trees}\\ \hline
+    8-0-0 & Hallucination Evaluation & \cite{LiHaluEval:Models}\\ \hline
+    14-3-0 & General & \cite{Mishra2021ReframingLanguage}\\ \hline
+    42-1-1 & Concise CoT Prompt & \cite{Renze2024TheModels}\\ \hline
+\end{tabular}
+\end{table}
+
+% force all floats to appear here before the next section
+\FloatBarrier
 
 \section{Application Strategy}
 \label{sec:ApplicationStrategy}
@@ -2841,10 +2985,11 @@ A cybersecurity example is below:
 The system output generated from \href{https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/peil_prompt_generator.py}{PEIL Prompt Generator} is:
 \textit{As a cybersecurity expert, focus on discussing the importance of cybersecurity measures in protecting sensitive data from cyber threats. Break down the question 'How can organisations improve their cybersecurity posture?' into smaller parts such as 'What are the key components of a strong cybersecurity strategy?' and 'How can employee training enhance cybersecurity?' Ensure the response includes at least three key components of a strong cybersecurity strategy and provides examples of effective employee training programs. Limit the response to 200 words to ensure it is concise and to the point, avoiding unnecessary details. Use the Chain-of-Thought (CoT) prompting technique to guide the model through a step-by-step reasoning process in discussing cybersecurity measures. The desired output is a clear and concise explanation of how organisations can improve their cybersecurity posture, including key components of a strong strategy and examples of effective employee training programs. The output should be in Markdown format.}
 
+% force all floats to appear here before the Appendix
+\FloatBarrier
 %Objective of the proposed research
-
+\newpage
 \section{Appendix}
-
 \subsection{References for PP and PE Repository}
 \begin{table}[h!]
 \fontsize{9pt}{10pt}\selectfont
@@ -2930,11 +3075,14 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
 \caption{The list of papers in the GitHub Repository}
 \end{table}
 
+% force all floats to appear here before the Prompt Engineering Strategies and Techniques
+%\FloatBarrier
+
 \subsection{Prompt Engineering Strategies and Techniques}
-\begin{table}[h!]
+\begin{table}[!htbp]
 \fontsize{9pt}{10pt}\selectfont
 \centering
-\caption{Unique Prompting Techniques and Strategies}
+\caption{Unique Prompting Strategies and Techniques}
 \begin{tabular}{|p{3.5cm}|p{9cm}|p{2cm}|} 
     \hline
     Prompting Technique & Description & Reference \\ \hline
@@ -2957,16 +3105,16 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
     Chain-of-Verification (CoVe) & Prompts the model to generate verification queries, checking and refining its intermediate reasoning steps to improve accuracy and reliability. & \cite{Sahoo2024AApplications}, \cite{Vatsal2024ATasks} \\ \hline
     Chain-of-Note (CoN) & Integrates note-taking into the reasoning process, allowing the model to evaluate, summarize, and filter content relevance, aiding in tasks that require synthesis of information. & \cite{Sahoo2024AApplications}, \cite{Vatsal2024ATasks} \\ \hline
     Complex Chain-of-Thought (Complex CoT) & Utilizes intricate in-context examples to break down highly complex problems into multiple reasoning paths, enabling the model to handle layered and nuanced tasks. & \cite{Vatsal2024ATasks} \\ \hline
-    Conditional Context Optimization (CoCoOp) & Dynamically tailors the prompt context based on specific conditions, boosting the model's adaptability and performance across varied inputs. & \cite{Chen2023UnleashingReview} \\ \hline
     \end{tabular}
 \end{table}
 
 \begin{table}[h!]
 \fontsize{9pt}{10pt}\selectfont
 \centering
-\caption{Unique Prompting Techniques and Strategies - continued}
+\caption{Unique Prompting Strategies and Techniques - continued}
 \begin{tabular}{|p{3.5cm}|p{9cm}|p{2cm}|} 
     \hline
+    Conditional Context Optimization (CoCoOp) & Dynamically tailors the prompt context based on specific conditions, boosting the model's adaptability and performance across varied inputs. & \cite{Chen2023UnleashingReview} \\ \hline    
     Conversational Prompting & Uses dialogue and iterative feedback to progressively refine the model’s output, fostering an interactive problem-solving environment. & \cite{Shin2023PromptCode} \\ \hline
     Control Codes and Conditioning & Inserts special tokens or control codes into prompts to steer output characteristics and stylistic attributes, enabling fine-grained control over the model's responses. & \cite{Muktadir2023APrompting} \\ \hline
     Context Optimization (CoOp) & Uses learnable continuous prompt representations to optimize task performance by adapting context vectors within the model's input. & \cite{Chen2023UnleashingReview} \\ \hline
@@ -2991,17 +3139,17 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
     Multimodal Prompting & Combines various input modalities within prompts (e.g., text, images) to provide comprehensive context for the model. & \cite{Muktadir2023APrompting} \\ \hline
     Multimodal Prompt Learning (MaPLe) & Learnable prompts optimize model performance across multiple modalities simultaneously, enhancing cross-modal understanding. & \cite{Chen2023UnleashingReview} \\ \hline
     Negative Prompting & Uses prompts that specify undesired attributes or content to guide the model away from producing certain types of outputs. & \cite{Bruni2025BenchmarkingModels} \\ \hline
-    One-Shot Prompting & Includes a single example in the prompt to demonstrate the task and guide the model's response. & \cite{Chen2023UnleashingReview} \\ \hline
-    Output Formatting & Guides the model to produce responses in a predefined, structured format for consistent and easy downstream use. & \cite{ChenAEducation} \\ \hline
     \end{tabular}
 \end{table}
 
 \begin{table}[h!]
 \fontsize{9pt}{10pt}\selectfont
 \centering
-\caption{Unique Prompting Techniques and Strategies - continued}
+\caption{Unique Prompting Strategies and Techniques - continued}
 \begin{tabular}{|p{3.5cm}|p{9cm}|p{2cm}|} 
     \hline
+    One-Shot Prompting & Includes a single example in the prompt to demonstrate the task and guide the model's response. & \cite{Chen2023UnleashingReview} \\ \hline
+    Output Formatting & Guides the model to produce responses in a predefined, structured format for consistent and easy downstream use. & \cite{ChenAEducation} \\ \hline
     Placeholders \& Delimiters & Employs tokens and delimiters to structure prompts, allowing for flexible templates with clearly defined variable sections. & \cite{Hewing2024TheModels}  \\ \hline
     Position Engineering & Adjusts token positions in prompts to optimize model attention and enhance response relevance and quality. & \cite{He2024PositionManipulation} \\ \hline
     Program of Thoughts (PoT) & Combines natural language with programming logic or pseudocode, assisting the model in detailed computational reasoning tasks. & \cite{Sahoo2024AApplications}, \cite{Vatsal2024ATasks} \\ \hline
@@ -3029,9 +3177,13 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
 \end{tabular}
 \end{table}
 
+% force all floats to appear here before the appendix
+\FloatBarrier
+
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 \end{document}
+
 
 ### END RESEARCH PAPER ###
 
@@ -3154,9 +3306,8 @@ class AzureGPTClient:
                 "messages": messages,
                 "temperature": self.temperature,
             }
-            
             # Handle token parameter naming differences between models
-            newer_models = ["o1-mini", "o3-mini", "o4-mini"]
+            newer_models = ["o1-mini", "o3-mini", "o4-mini", "gpt-4.1-nano"]
             if self.model_version in newer_models:
                 token_param = {"max_completion_tokens": max_tokens}
                 token_key = "max_completion_tokens"
@@ -3271,9 +3422,8 @@ class AzureGPTClient:
                         "messages": messages,
                         "temperature": self.temperature,
                     }
-                    
-                    # Handle token parameter naming differences between models
-                    newer_models = ["o1-mini", "o3-mini", "o4-mini"]
+                      # Handle token parameter naming differences between models
+                    newer_models = ["o1-mini", "o3-mini", "o4-mini", "gpt-4.1-nano"]
                     if self.model_version in newer_models:
                         token_param = {"max_completion_tokens": 2000}
                         
