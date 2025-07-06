@@ -811,7 +811,30 @@ CATEGORY_TEMPLATES = {
 #############################################
 
 # Template structure for generating LaTeX write-ups
-# This follows the academic format with sections 3.1, 3.2, etc.
+# This follows the academic format with different templates based on arguments:
+#
+# LOGIC OVERVIEW MODE (only -logic provided):
+#   Uses "section_introduction" template which includes:
+#   - Section header with logic name and subtitle
+#   %1 - Write long introduction to the logic - text
+#   - Long introduction to the logic
+#   %2 - introduce categories under this logic
+#   - Enumerated list of categories under this logic
+#
+# CATEGORY-SPECIFIC MODE (-logic and -category provided):
+#   Uses "category_subsection" template which includes:
+#   % 3.1 the role of this category under the "{logic_name_lower}-logic" (meaning of the category)
+#   - Subsection header with category name
+#   - Category role description under the logic
+#   % 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
+#   % Add label to reference the table
+#   - PP analysis (introduction, function, benefits, reusability)
+#   %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
+#   - Human feeling response
+#   %% Re-use: how to derive a PE from PP
+#   - Reuse guidance
+#   %4 - PP example in this category
+#   - LaTeX table of representative prompt patterns
 
 LATEX_WRITEUP_TEMPLATE = {
     "section_introduction": """
@@ -837,10 +860,10 @@ The PP categories under {logic_name_lower} logic include:
 % Add label to reference the table
 {pp_analysis}
 
-%% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
+% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
 {human_feeling_response}
 
-%% Re-use: how to derive a PE from PP
+% Re-use: how to derive a PE from PP
 {reuse_guidance}
 
 %4 - PP example in this category
@@ -1419,7 +1442,10 @@ To apply the Rotation Prediction PP in a given context, select images containing
 # DEFAULT SYSTEM MESSAGE                    #
 #############################################
 DEFAULT_SYSTEM_MESSAGE = '''
-As a Senior PhD researcher and expert in prompt engineering, your task is to generate comprehensive academic write-ups for prompt pattern categorisation. 
+You are a world top ranking university PhD student in the field of AI application, conducting leading edge research and writing a research paper on “The Way to Talk to AI: A Dictionary of Prompt Patterns to LLMs”
+
+The proposed logic to construct the dictionary toward the best convenience and effectiveness of human to AI communication is to apply English language logic of Across, At, Beyond, In, Out and Over to build a dictionary of prompt pattern (PP), each with multiple prompt examples (PEs)
+
 
 You specialize in:
 - Academic writing for top-tier journals and conferences
@@ -1486,17 +1512,17 @@ class CategorisationWriteUpClient:
     
     def generate_writeup(self, 
                         logic: str,
-                        category: str,
-                        task: str,
+                        category: Optional[str] = None,
+                        task: str = None,
                         system_message: Optional[str] = None,
                         context: Optional[str] = None,
                         temperature: float = 0.7) -> str:
         """
-        Generate a write-up for the specified prompt pattern category.
+        Generate a write-up for the specified prompt pattern category or logic overview.
         
         Args:
             logic: The logic layer (In, Out, Over, Across, Beyond, At)
-            category: The specific PP category under the logic
+            category: Optional specific PP category under the logic (if None, generates logic overview)
             task: The specific task/request for the write-up
             system_message: Optional custom system message
             context: Optional additional context
@@ -1509,8 +1535,17 @@ class CategorisationWriteUpClient:
         if logic not in LOGIC_DEFINITIONS:
             raise ValueError(f"Invalid logic '{logic}'. Must be one of: {list(LOGIC_DEFINITIONS.keys())}")
         
-        # Build the prompt
-        prompt = self._build_writeup_prompt(logic, category, task, context)
+        # Validate category if provided
+        if category and not validate_category(logic, category):
+            raise ValueError(f"Invalid category '{category}' for logic '{logic}'")
+        
+        # Build the prompt based on whether category is provided
+        if category:
+            # Generate category-specific write-up
+            prompt = self._build_category_writeup_prompt(logic, category, task, context)
+        else:
+            # Generate logic overview write-up
+            prompt = self._build_logic_writeup_prompt(logic, task, context)
         
         # Use custom system message or default
         system_msg = system_message or DEFAULT_SYSTEM_MESSAGE
@@ -1520,9 +1555,82 @@ class CategorisationWriteUpClient:
         
         return response
     
-    def _build_writeup_prompt(self, logic: str, category: str, task: str, 
-                            context: Optional[str] = None) -> str:
-        """Build the comprehensive prompt for write-up generation."""
+    def _build_logic_writeup_prompt(self, logic: str, task: str = None, 
+                                   context: Optional[str] = None) -> str:
+        """Build prompt for logic overview write-up (when only -logic is provided)."""
+        
+        logic_info = LOGIC_DEFINITIONS[logic]
+        logic_data = LOGIC_WRITEUP_DATA.get(logic, {})
+        
+        # Build default task if not provided
+        if not task:
+            task = f"Generate a comprehensive academic write-up for the '{logic}' logic layer, including an introduction to the logic and overview of all categories under this logic. Use the section_introduction template structure."
+        
+        prompt_parts = [
+            f"# Prompt Pattern Logic Overview Write-Up Request",
+            f"",
+            f"## Context",
+            f"You are generating an academic write-up for prompt pattern logic overview research.",
+            f"This should follow the 'section_introduction' template structure for logic-only write-ups.",
+            f"",
+            f"## Logic Details",
+            f"- **Logic Layer**: {logic}",
+            f"- **Logic Description**: {logic_info['description']}",
+            f"- **Logic Focus**: {logic_info['focus']}",
+        ]
+        
+        # Add logic-specific data if available
+        if logic_data:
+            prompt_parts.extend([
+                f"- **Logic Subtitle**: {logic_data.get('logic_subtitle', '')}",
+                f"- **Logic Label**: {logic_data.get('logic_label', logic.lower())}",
+            ])
+        
+        # Add categories under this logic
+        if logic in CATEGORY_TEMPLATES:
+            categories = CATEGORY_TEMPLATES[logic]
+            prompt_parts.extend([
+                f"",
+                f"## Categories under {logic} Logic",
+            ])
+            for i, (category_key, category_data) in enumerate(categories.items(), 1):
+                category_name = category_key.replace('_', ' ').title()
+                prompt_parts.append(f"{i}. **{category_name}**: {category_data['description']}")
+        
+        prompt_parts.extend([
+            f"",
+            f"## Task",
+            f"{task}",
+            f"",
+            f"## Template Structure to Follow",
+            f"Use the 'section_introduction' template which includes:",
+            f"- Section header with logic name and subtitle",
+            f"- Long introduction to the logic",
+            f"- Enumerated list of categories under this logic",
+            f""
+        ])
+        
+        if context:
+            prompt_parts.extend([
+                f"## Additional Context",
+                f"{context}",
+                f""
+            ])
+        
+        prompt_parts.extend([
+            f"## Requirements",
+            f"- Generate a comprehensive logic overview write-up",
+            f"- Use LaTeX formatting following the section_introduction template",
+            f"- Follow Australian English standards",
+            f"- Include detailed logic introduction and category enumeration",
+            f"- Ensure publication-quality output"
+        ])
+        
+        return "\n".join(prompt_parts)
+    
+    def _build_category_writeup_prompt(self, logic: str, category: str, task: str, 
+                                     context: Optional[str] = None) -> str:
+        """Build prompt for category-specific write-up (when both -logic and -category are provided)."""
         
         logic_info = LOGIC_DEFINITIONS[logic]
         
@@ -1531,11 +1639,16 @@ class CategorisationWriteUpClient:
         if logic in CATEGORY_TEMPLATES and category in CATEGORY_TEMPLATES[logic]:
             category_data = CATEGORY_TEMPLATES[logic][category]
         
+        # Build default task if not provided
+        if not task:
+            task = f"Generate a comprehensive academic write-up for the '{category}' category under the '{logic}' logic layer. Use the category_subsection template structure."
+        
         prompt_parts = [
-            f"# Prompt Pattern Categorisation Write-Up Request",
+            f"# Prompt Pattern Category Write-Up Request",
             f"",
             f"## Context",
-            f"You are generating an academic write-up for prompt pattern categorisation research.",
+            f"You are generating an academic write-up for a specific prompt pattern category.",
+            f"This should follow the 'category_subsection' template structure for category-specific write-ups.",
             f"",
             f"## Categorisation Details",
             f"- **Logic Layer**: {logic}",
@@ -1555,6 +1668,15 @@ class CategorisationWriteUpClient:
             f"",
             f"## Task",
             f"{task}",
+            f"",
+            f"## Template Structure to Follow",
+            f"Use the 'category_subsection' template which includes:",
+            f"- Subsection header with category name",
+            f"- Category role description under the logic",
+            f"- PP analysis (introduction, function, benefits, reusability)",
+            f"- Human feeling response",
+            f"- Reuse guidance",
+            f"- LaTeX table of representative prompt patterns",
             f""
         ])
         
@@ -1598,11 +1720,11 @@ class CategorisationWriteUpClient:
         
         prompt_parts.extend([
             f"## Requirements",
-            f"- Generate a comprehensive academic write-up",
-            f"- Use LaTeX formatting for mathematical content",
+            f"- Generate a comprehensive category-specific write-up",
+            f"- Use LaTeX formatting following the category_subsection template",
             f"- Follow Australian English standards",
-            f"- Structure the content logically with clear sections",
-            f"- Include relevant examples and analysis",
+            f"- Structure the content with subsection, role description, PP analysis, human feeling, and reuse guidance",
+            f"- Include the LaTeX table of representative prompt patterns",
             f"- Ensure publication-quality output"
         ])
         
@@ -1992,60 +2114,58 @@ def generate_complete_logic_latex_writeup(logic: str) -> str:
     return complete_writeup
 
 def generate_logic_template(logic: str) -> str:
-    """Generate a template structure for a specific logic that can be filled in."""
+    """Generate a template structure for a specific logic that can be filled in using LATEX_WRITEUP_TEMPLATE."""
     if logic not in LOGIC_DEFINITIONS:
         return f"Error: Logic '{logic}' not found in definitions"
     
     logic_info = LOGIC_DEFINITIONS[logic]
     categories = CATEGORY_TEMPLATES.get(logic, {})
     
-    template = f"""
-% Template for {logic} Logic Write-up
-% Use this template to create comprehensive write-ups following the academic structure
-
-\\section{{{logic} Logic - [SUBTITLE_HERE]}}
-\\label{{sec:{logic.lower()}}}
-%1 - Write long introduction to the logic - text
-{logic_info['description']}
-
-%2 - introduce categories under this logic
-The PP categories under {logic.lower()} logic include:
-\\begin{{enumerate}}
-"""
+    # Build category enumeration items using the template
+    category_items = []
+    for category_key, category_data in categories.items():
+        item = LATEX_WRITEUP_TEMPLATE["category_enumeration_item"].format(
+            category_name=category_key.replace('_', ' ').title(),
+            category_description=category_data['description']
+        )
+        category_items.append(item)
     
-    for i, (category_key, category_data) in enumerate(categories.items(), 1):
-        category_name = category_key.replace('_', ' ').title()
-        template += f"    \\item \\textbf{{{category_name}}}: {category_data['description']}\n"
+    # Use the section_introduction template for logic overview
+    section_intro = LATEX_WRITEUP_TEMPLATE["section_introduction"].format(
+        logic_name=logic,
+        logic_subtitle="[SUBTITLE_HERE]",
+        logic_label=logic.lower(),
+        logic_description=logic_info['description'],
+        logic_name_lower=logic.lower(),
+        category_enumeration="\n".join(category_items)
+    )
     
-    template += """\\end{enumerate}
-
-%3 introduce category one by one as subsection
-"""
-    
+    # Add individual category subsections using the template
+    category_sections = []
     for category_key, category_data in categories.items():
         category_name = category_key.replace('_', ' ').title()
-        template += f"""
-\\subsection{{{category_name}}}
-\\label{{subsec:{category_name}}}
-% 3.1 the role of this category under the "{logic.lower()}-logic" (meaning of the category)
-[ADD_CATEGORY_ROLE_DESCRIPTION]
-
-% 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
-% Add label to reference the table
-[ADD_PP_ANALYSIS]
-
-%% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-[ADD_HUMAN_FEELING_RESPONSE]
-
-%% Re-use: how to derive a PE from PP
-[ADD_REUSE_GUIDANCE]
-
-%4 - PP example in this category
-{category_data['latex_table']}
-
-"""
+        
+        # Use the category_subsection template for each category
+        category_section = LATEX_WRITEUP_TEMPLATE["category_subsection"].format(
+            category_name=category_name,
+            category_label=category_key,
+            logic_name_lower=logic.lower(),
+            category_role_description="[ADD_CATEGORY_ROLE_DESCRIPTION]",
+            pp_analysis="[ADD_PP_ANALYSIS]",
+            human_feeling_response="[ADD_HUMAN_FEELING_RESPONSE]",
+            reuse_guidance="[ADD_REUSE_GUIDANCE]",
+            latex_table=category_data['latex_table']
+        )
+        category_sections.append(category_section)
     
-    return template
+    # Combine section introduction with category subsections
+    full_template = section_intro + "\n" + "\n".join(category_sections)
+    
+    return f"""% Template for {logic} Logic Write-up
+% Use this template to create comprehensive write-ups following the academic structure
+% This template uses the LATEX_WRITEUP_TEMPLATE structure
+
+{full_template}"""
 
 def generate_single_category_latex_writeup(logic: str, category: str) -> str:
     """Generate a LaTeX write-up for a single category within a logic."""
@@ -2111,51 +2231,34 @@ def generate_single_category_latex_writeup(logic: str, category: str) -> str:
     return header + category_writeup
 
 def generate_category_template(logic: str, category: str) -> str:
-    """Generate a template for a specific category that can be filled in."""
+    """Generate a template for a specific category that can be filled in using LATEX_WRITEUP_TEMPLATE."""
     if not validate_category(logic, category):
         return f"Error: Category '{category}' not found under logic '{logic}'"
     
     category_data = CATEGORY_TEMPLATES[logic][category]
     category_name = category.replace('_', ' ').title()
     
-    template = f"""% Template for {category_name} Category under {logic} Logic
+    # Use the category_subsection template
+    template = LATEX_WRITEUP_TEMPLATE["category_subsection"].format(
+        category_name=category_name,
+        category_label=category,
+        logic_name_lower=logic.lower(),
+        category_role_description="[ADD_DETAILED_CATEGORY_ROLE_DESCRIPTION]",
+        pp_analysis="[ADD_PP_ANALYSIS]",
+        human_feeling_response="[ADD_HUMAN_FEELING_RESPONSE]",
+        reuse_guidance="[ADD_REUSE_GUIDANCE]",
+        latex_table=category_data['latex_table']
+    )
+    
+    return f"""% Template for {category_name} Category under {logic} Logic
 % Use this template to create comprehensive write-ups following the academic structure
+% This template uses the LATEX_WRITEUP_TEMPLATE structure
 
-\\subsection{{{category_name}}}
-\\label{{subsec:{category_name}}}
-% 3.1 the role of this category under the "{logic.lower()}-logic" (meaning of the category)
-{category_data['description']}
-
-[ADD_DETAILED_CATEGORY_ROLE_DESCRIPTION]
-
-% 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
-% Add label to reference the table
-[ADD_PP_ANALYSIS]
-a) **Pattern Introduction**: [Describe how the pattern is introduced]
-b) **Pattern Function**: [Explain what the pattern does]
-c) **Human Benefit**: [Describe how it helps users]
-d) **Reusability**: [Explain how it can be adapted]
-
-%% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
-[ADD_HUMAN_FEELING_RESPONSE]
-When encountering outputs from this pattern, users typically experience [FEELING_DESCRIPTION]. 
-The response [EMOTIONAL_IMPACT] and provides [COGNITIVE_BENEFIT].
-
-%% Re-use: how to derive a PE from PP
-[ADD_REUSE_GUIDANCE]
-To derive a Prompt Example (PE) from this Prompt Pattern (PP):
-1. [REUSE_STEP_1]
-2. [REUSE_STEP_2] 
-3. [REUSE_STEP_3]
-
-%4 - PP example in this category
-{category_data['latex_table']}
+{template}
 
 % Keywords: {', '.join(category_data['keywords'])}
 % Examples: {', '.join(category_data['examples']) if category_data['examples'] else 'Not yet defined'}
 """
-    
-    return template
 
 #############################################
 # MAIN FUNCTION AND ARGUMENT PARSING       #
@@ -2169,7 +2272,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=""":
 Examples:
-  # Basic usage
+  # Logic overview (uses section_introduction template)
+  python categorisation_write_up.py -logic "Beyond"
+  
+  # Category-specific write-up (uses category_subsection template)
   python categorisation_write_up.py -logic "In" -category "context_control" -task "Generate write-up for context control patterns"
   
   # With category data (LaTeX table included)
@@ -2178,7 +2284,10 @@ Examples:
   # Interactive chat mode
   python categorisation_write_up.py -chat -logic "Across" -category "classification"
   
-  # Output to file
+  # Output to file - logic overview
+  python categorisation_write_up.py -logic "Beyond" -outputfile "beyond_logic_overview.tex"
+  
+  # Output to file - category specific
   python categorisation_write_up.py -logic "Beyond" -category "synthesis" -outputfile "beyond_synthesis_writeup.tex"
   
   # List available logics
@@ -2217,9 +2326,9 @@ Examples:
     parser.add_argument('-logic', type=str, 
                        help='Logic layer (In, Out, Over, Across, Beyond, At)')
     parser.add_argument('-category', type=str,
-                       help='PP category under the specified logic')
+                       help='PP category under the specified logic (optional - if not provided, generates logic overview)')
     parser.add_argument('-task', type=str,
-                       help='Specific task/request for the write-up')
+                       help='Specific task/request for the write-up (optional - auto-generated if not provided)')
     
     # Optional content arguments
     parser.add_argument('-context', type=str,
@@ -2418,7 +2527,10 @@ def execute_writeup_task(client: CategorisationWriteUpClient, args) -> Optional[
         # Build task if not provided
         task = args.task
         if not task:
-            task = f"Generate a comprehensive academic write-up for the '{args.category}' category under the '{args.logic}' logic layer. Include detailed analysis, examples, and LaTeX formatting suitable for publication."
+            if args.category:
+                task = f"Generate a comprehensive academic write-up for the '{args.category}' category under the '{args.logic}' logic layer. Include detailed analysis, examples, and LaTeX formatting suitable for publication."
+            else:
+                task = f"Generate a comprehensive academic write-up for the '{args.logic}' logic layer, including an introduction to the logic and overview of all categories under this logic. Use LaTeX formatting suitable for publication."
         
         # Generate write-up
         result = client.generate_writeup(
