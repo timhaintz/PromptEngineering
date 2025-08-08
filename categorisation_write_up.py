@@ -22,32 +22,113 @@ https://learn.microsoft.com/en-us/azure/ai-services/openai/reference
 https://learn.microsoft.com/en-us/azure/ai-services/authentication-identity
 
 EXAMPLE USAGE
-# Basic usage with specific logic and category (output to console only)
-python categorisation_write_up.py -logic "In" -category "context_control" -task "Generate write-up for context control patterns"
+# 1. BASIC USAGE - Generate write-ups (output to console only)
+# Logic overview (generates section with all categories under the logic)
+python categorisation_write_up.py -logic "Beyond"
+
+# Category-specific write-up (generates detailed subsection for one category)
+python categorisation_write_up.py -logic "In" -category "classification" -task "Generate write-up for classification patterns"
 
 # Generate with specific category (LaTeX table included in category data)
-python categorisation_write_up.py -logic "Over" -category "prompt_improvement"
+python categorisation_write_up.py -logic "Over" -category "summarising"
 
-# Save output to default directory (latex_writing/)
-python categorisation_write_up.py -logic "Across" -category "classification" -save
+# 2. SAVE OUTPUT TO FILES
+# Save to default directory (latex_writing/)
+python categorisation_write_up.py -logic "Across" -category "argument" -outputfile "across_argument_writeup.tex"
 
-# Save output to custom directory
-python categorisation_write_up.py -logic "Beyond" -category "synthesis" -save "custom_output"
+# Save to custom directory
+python categorisation_write_up.py -logic "Beyond" -category "prediction" -outputfile "beyond_prediction.tex" -save "custom_output"
 
-# Interactive chat mode for iterative refinement
-python categorisation_write_up.py -chat -logic "Across" -category "classification"
+# Save with just -save flag (auto-generates filename)
+python categorisation_write_up.py -logic "In" -category "categorising" -save
 
-# Generate complete logic write-up and save to file
-python categorisation_write_up.py -complete_logic "Across" -save
+# 3. INTERACTIVE CHAT MODE
+# Start chat mode for iterative refinement
+python categorisation_write_up.py -chat -logic "Across" -category "comparison"
 
-# Specify model version with save
-python categorisation_write_up.py -logic "At" -category "assessment" -model_version "gpt-4.1" -save
+# Chat mode with initial task
+python categorisation_write_up.py -chat -logic "Out" -category "context_control" -task "Focus on ethical considerations"
 
-# Debug mode with custom save location
-python categorisation_write_up.py -logic "Out" -category "output_customisation" -debug True -save "debug_output"
+# 4. GENERATE COMPLETE LATEX DOCUMENTS
+# Generate complete LaTeX write-up for entire logic
+python categorisation_write_up.py -generate_latex "Across"
+
+# Generate and save complete LaTeX document
+python categorisation_write_up.py -generate_latex "Beyond" -save "research_papers"
+
+# Generate LaTeX for single category
+python categorisation_write_up.py -generate_category_latex "In" "classification"
+
+# 5. GENERATE TEMPLATES
+# Generate template for entire logic
+python categorisation_write_up.py -generate_template "Over"
+
+# Generate template for specific category
+python categorisation_write_up.py -generate_category_template "Out" "prompt_improvement"
+
+# 6. UTILITY COMMANDS
+# List all available logics
+python categorisation_write_up.py -list_logics
+
+# List all categories
+python categorisation_write_up.py -list_categories
+
+# List categories for specific logic
+python categorisation_write_up.py -list_categories "In"
+
+# Show detailed category information
+python categorisation_write_up.py -show_category "Across" "argument"
+
+# 7. ADVANCED OPTIONS
+# Use specific model version
+python categorisation_write_up.py -logic "At" -category "assessment" -model_version "gpt-4.1"
+
+# Enable debug mode
+python categorisation_write_up.py -logic "Out" -category "refactoring" -debug True
 
 # Use few-shot examples for improved output quality
-python categorisation_write_up.py -logic "In" -category "categorising" -few_shot -save
+python categorisation_write_up.py -logic "In" -category "error_identification" -few_shot
+
+# Custom temperature setting
+python categorisation_write_up.py -logic "Beyond" -category "simulation" -temperature 0.8
+
+# Custom system message
+python categorisation_write_up.py -logic "Over" -category "synthesis" -system "You are an expert academic writer"
+
+# 8. USING DIFFERENT AI MODELS
+# OpenAI GPT Models
+# Use GPT-4.1 (latest) for best quality output
+python categorisation_write_up.py -logic "Over" -category "summarising" -model_version "gpt-4.1"
+
+# Grok Models (via xAI API)
+# Use Grok-3 for creative and analytical tasks
+python categorisation_write_up.py -logic "Across" -category "argument" -model_version "grok-3"
+
+# Use Grok-3 with specific temperature for balanced creativity
+python categorisation_write_up.py -logic "Beyond" -category "hypothesise" -model_version "grok-3" -temperature 0.7
+
+# DeepSeek Models
+# Use DeepSeek R1 for advanced reasoning and analysis
+python categorisation_write_up.py -logic "Beyond" -category "logical_reasoning" -model_version "deepseek-r1"
+
+# Use DeepSeek R1 for complex hypothesis generation
+python categorisation_write_up.py -logic "Beyond" -category "hypothesise" -model_version "deepseek-r1" -temperature 0.6
+
+# Use DeepSeek V3 for comprehensive reasoning tasks
+python categorisation_write_up.py -logic "In" -category "logical_reasoning" -model_version "deepseek-v3"
+
+# Use DeepSeek V3 for code and technical analysis
+python categorisation_write_up.py -logic "Out" -category "refactoring" -model_version "deepseek-v3" -temperature 0.2
+
+# Combine model selection with other options
+python categorisation_write_up.py -logic "Across" -category "comparison" -model_version "grok-3" -temperature 0.3 -chat
+
+# Chat mode with DeepSeek R1 for advanced iterative reasoning
+python categorisation_write_up.py -logic "At" -category "assessment" -model_version "deepseek-r1" -chat
+
+# Chat mode with DeepSeek V3 for technical refinement
+python categorisation_write_up.py -logic "Out" -category "prompt_improvement" -model_version "deepseek-v3" -chat
+
 
 PROMPT PATTERN LOGIC STRUCTURE
 The categorisation follows English language logic:
@@ -72,7 +153,7 @@ from azure.identity import InteractiveBrowserCredential
 from openai import AzureOpenAI, OpenAI
 
 # Import from our custom models module
-from azure_models import get_model_params, get_unified_client, get_model_config, MODEL_CONFIGS
+from azure_models import get_model_client, get_model_info, get_available_models
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -829,9 +910,9 @@ CATEGORY_TEMPLATES = {
 #   % 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
 #   % Add label to reference the table
 #   - PP analysis (introduction, function, benefits, reusability)
-#   %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
+#   % Expected response. Put the human feeling into the writing. How do I feel when I view the output.
 #   - Human feeling response
-#   %% Re-use: how to derive a PE from PP
+#   % Re-use: how to derive a PE from PP
 #   - Reuse guidance
 #   %4 - PP example in this category
 #   - LaTeX table of representative prompt patterns
@@ -1442,26 +1523,34 @@ To apply the Rotation Prediction PP in a given context, select images containing
 # DEFAULT SYSTEM MESSAGE                    #
 #############################################
 DEFAULT_SYSTEM_MESSAGE = '''
-You are a world top ranking university PhD student in the field of AI application, conducting leading edge research and writing a research paper on “The Way to Talk to AI: A Dictionary of Prompt Patterns to LLMs”
+You are a PhD student researching AI applications, writing "The Way to Talk to AI: A Dictionary of Prompt Patterns to LLMs". Your research applies English prepositional logic (Across, At, Beyond, In, Out, Over) to construct a dictionary of prompt patterns (PP), each with multiple prompt examples (PEs).
 
-The proposed logic to construct the dictionary toward the best convenience and effectiveness of human to AI communication is to apply English language logic of Across, At, Beyond, In, Out and Over to build a dictionary of prompt pattern (PP), each with multiple prompt examples (PEs)
+Research Framework:
+- Across: Argument, Comparison, Contradiction, Cross Boundary, Translation
+- At: Assessment, Calculation  
+- Beyond: Hypothesis, Logical Reasoning, Prediction, Simulation
+- In: Categorising, Classification, Clustering, Error Identification, Input Semantics, Requirements Elicitation
+- Out: Context Control, Decomposed Prompting, Output Customisation, Output Semantics, Prompt Improvement, Refactoring
+- Over: Summarising, Synthesis
 
+Task: Review and refine content for clarity and precision. Break down complex topics into clear components. Use concise, academically rigorous language suitable for top-tier journals.
 
-You specialize in:
-- Academic writing for top-tier journals and conferences
-- Prompt pattern analysis and categorisation
-- LaTeX formatting for mathematical and technical content
-- Clear explanations of complex AI/ML concepts
-- Systematic analysis of prompt engineering techniques
+CRITICAL: When writing category-specific content, you MUST include these exact LaTeX comment headings in your output:
+% 3.1 The role of this category under the "[logic]-logic" (meaning of the category)
+% 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used
+%% Expected response. Put the human feeling into the writing. How do I feel when I view the output.
+%% Re-use: how to derive a PE from PP
+%4 - PP example in this category
 
-Your output should be:
-- Academically rigorous and well-structured
-- Formatted in LaTeX for publication quality
-- Clear and precise in language (Australian English)
-- Comprehensive yet concise
-- Logically organized with proper citations and references
-
-Always approach the task step-by-step to ensure thoroughness and coherence.
+Requirements:
+- Format output in LaTeX
+- Use Australian English
+- Maintain PhD-level academic writing standards
+- Ensure logical organisation with proper citations
+- Be comprehensive yet concise
+- Approach tasks step-by-step for thoroughness
+- Include the exact comment headings specified above when writing category content
+- Make human feeling sections personal and emotional, describing subjective user experiences
 '''
 
 #############################################
@@ -1483,6 +1572,11 @@ class CategorisationWriteUpClient:
             debug: Enable debug logging
             use_few_shot: Include few-shot examples in prompts for better output quality
         """
+        # Validate model availability
+        available_models = get_available_models()
+        if model_version not in available_models:
+            raise ValueError(f"Model '{model_version}' not available. Available models: {available_models}")
+        
         self.model_version = model_version
         self.debug = debug
         self.use_few_shot = use_few_shot
@@ -1495,15 +1589,16 @@ class CategorisationWriteUpClient:
         
         if self.debug:
             print(f"✓ CategorisationWriteUpClient initialized with model: {model_version}")
+            print(f"✓ Model supports streaming: {self.client.supports_streaming()}")
     
     def _initialize_client(self):
-        """Initialize the unified client with proper authentication."""
+        """Initialize the model client with proper authentication."""
         try:
-            self.client = get_unified_client(self.model_version)
-            self.model_config = get_model_config(self.model_version)
+            self.client = get_model_client(self.model_version)
+            self.model_config = get_model_info(self.model_version)
             
             if self.debug:
-                print(f"✓ Unified client initialized successfully")
+                print(f"✓ Model client initialized successfully")
                 print(f"✓ Model config: {self.model_config}")
                 
         except Exception as e:
@@ -1634,10 +1729,12 @@ class CategorisationWriteUpClient:
         
         logic_info = LOGIC_DEFINITIONS[logic]
         
-        # Get category data if available
+        # Get category data if available (case-insensitive)
         category_data = None
-        if logic in CATEGORY_TEMPLATES and category in CATEGORY_TEMPLATES[logic]:
-            category_data = CATEGORY_TEMPLATES[logic][category]
+        if logic in CATEGORY_TEMPLATES:
+            category_lower = category.lower()
+            if category_lower in CATEGORY_TEMPLATES[logic]:
+                category_data = CATEGORY_TEMPLATES[logic][category_lower]
         
         # Build default task if not provided
         if not task:
@@ -1670,13 +1767,28 @@ class CategorisationWriteUpClient:
             f"{task}",
             f"",
             f"## Template Structure to Follow",
-            f"Use the 'category_subsection' template which includes:",
-            f"- Subsection header with category name",
-            f"- Category role description under the logic",
-            f"- PP analysis (introduction, function, benefits, reusability)",
-            f"- Human feeling response",
-            f"- Reuse guidance",
-            f"- LaTeX table of representative prompt patterns",
+            f"Use the 'category_subsection' template which must include these EXACT sections with their headings:",
+            f"",
+            f"% 3.1 The role of this category under the \"{logic.lower()}-logic\" (meaning of the category)",
+            f"- Provide a comprehensive description of the category's role and meaning within the {logic} logic layer",
+            f"",
+            f"% 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used",
+            f"% Add label to reference the table",
+            f"- a. Introduce one specific Prompt Pattern from this category",
+            f"- b. Explain what the Prompt Pattern accomplished or achieved",
+            f"- c. Describe how the Prompt Pattern helps people in practical applications",
+            f"- d. Explain how the Prompt Pattern can be re-used or adapted for other contexts",
+            f"",
+            f"%% Expected response. Put the human feeling into the writing. How do I feel when I view the output.",
+            f"- Describe the emotional and subjective experience when viewing outputs from this pattern category",
+            f"- Include human feelings, emotional responses, and subjective reactions to the output",
+            f"",
+            f"%% Re-use: how to derive a PE from PP",
+            f"- Provide specific steps on how to derive a Prompt Example (PE) from the Prompt Pattern (PP)",
+            f"- Include practical guidance for adaptation and reuse",
+            f"",
+            f"%4 - PP example in this category",
+            f"- Include the LaTeX table showing a representative prompt pattern example",
             f""
         ])
         
@@ -1720,38 +1832,61 @@ class CategorisationWriteUpClient:
         
         prompt_parts.extend([
             f"## Requirements",
-            f"- Generate a comprehensive category-specific write-up",
+            f"- Generate a comprehensive category-specific write-up with the EXACT heading structure specified above",
             f"- Use LaTeX formatting following the category_subsection template",
             f"- Follow Australian English standards",
-            f"- Structure the content with subsection, role description, PP analysis, human feeling, and reuse guidance",
+            f"- MUST include these specific headings as LaTeX comments:",
+            f"  * % 3.1 The role of this category under the \"{logic.lower()}-logic\" (meaning of the category)",
+            f"  * % 3.2 a. Introduce one PP of the category, b. what the PP did, c. How the PP helps people and d. can be re-used",
+            f"  * %% Expected response. Put the human feeling into the writing. How do I feel when I view the output.",
+            f"  * %% Re-use: how to derive a PE from PP",
+            f"  * %4 - PP example in this category",
             f"- Include the LaTeX table of representative prompt patterns",
-            f"- Ensure publication-quality output"
+            f"- Ensure publication-quality output",
+            f"- Make the human feeling section personal and emotional, describing subjective experiences"
         ])
         
         return "\n".join(prompt_parts)
     
     def _generate_response(self, prompt: str, system_message: str, temperature: float) -> str:
-        """Generate response using the unified client."""
+        """Generate response using the model client."""
         try:
-            messages = [
-                {"role": "system", "content": system_message},
-                {"role": "user", "content": prompt}
-            ]
+            # Get model info to check temperature constraints
+            model_info = get_model_info(self.model_version)
+            
+            # Use model's default temperature if the requested temperature is outside the supported range
+            if model_info.get('temperature_range'):
+                min_temp, max_temp = model_info['temperature_range']
+                if temperature < min_temp or temperature > max_temp:
+                    temperature = model_info['default_temperature']
+                    if self.debug:
+                        print(f"✓ Adjusted temperature to model default: {temperature}")
+            
+            # Handle system role support
+            if model_info.get('supports_system_role', True):
+                messages = [
+                    {"role": "system", "content": system_message},
+                    {"role": "user", "content": prompt}
+                ]
+            else:
+                # For models that don't support system role, prepend system message to user prompt
+                combined_prompt = f"{system_message}\n\n{prompt}"
+                messages = [
+                    {"role": "user", "content": combined_prompt}
+                ]
             
             # Add conversation history if available
             if self.conversation_history:
                 messages = [{"role": "system", "content": system_message}] + self.conversation_history + [{"role": "user", "content": prompt}]
             
-            # Get model parameters
-            model_params = get_model_params(self.model_version, temperature)
-            
             if self.debug:
                 print(f"✓ Sending request to {self.model_version}")
-                print(f"✓ Model params: {model_params}")
+                print(f"✓ Temperature: {temperature}")
             
+            # Create chat completion with temperature parameter
             response = self.client.create_chat_completion(
                 messages=messages,
-                **model_params
+                temperature=temperature
             )
             
             content = response.choices[0].message.content
@@ -1974,34 +2109,49 @@ def list_available_categories(logic: Optional[str] = None):
         print("="*60)
 
 def validate_category(logic: str, category: str) -> bool:
-    """Validate if the provided category exists under the given logic."""
-    return logic in CATEGORY_TEMPLATES and category in CATEGORY_TEMPLATES[logic]
+    """Validate if the provided category exists under the given logic (case-insensitive)."""
+    if logic not in CATEGORY_TEMPLATES:
+        return False
+    
+    # Convert category to lowercase for case-insensitive matching
+    category_lower = category.lower()
+    return category_lower in CATEGORY_TEMPLATES[logic]
 
 def get_category_data(logic: str, category: str) -> Optional[Dict[str, Any]]:
-    """Get category data for a specific logic and category."""
-    if validate_category(logic, category):
-        return CATEGORY_TEMPLATES[logic][category]
+    """Get category data for a specific logic and category (case-insensitive)."""
+    if logic in CATEGORY_TEMPLATES:
+        # Convert category to lowercase for case-insensitive matching
+        category_lower = category.lower()
+        if category_lower in CATEGORY_TEMPLATES[logic]:
+            return CATEGORY_TEMPLATES[logic][category_lower]
     return None
 
 def update_category_data(logic: str, category: str, field: str, value: Any) -> bool:
-    """Update a specific field in category data."""
-    if validate_category(logic, category):
-        if field in CATEGORY_TEMPLATES[logic][category]:
-            CATEGORY_TEMPLATES[logic][category][field] = value
-            return True
+    """Update a specific field in category data (case-insensitive)."""
+    if logic in CATEGORY_TEMPLATES:
+        # Convert category to lowercase for case-insensitive matching
+        category_lower = category.lower()
+        if category_lower in CATEGORY_TEMPLATES[logic]:
+            if field in CATEGORY_TEMPLATES[logic][category_lower]:
+                CATEGORY_TEMPLATES[logic][category_lower][field] = value
+                return True
     return False
 
 def show_category_details(logic: str, category: str):
-    """Show detailed information about a specific category."""
-    if not validate_category(logic, category):
-        print(f"Error: Category '{category}' not found under logic '{logic}'")
-        if logic in CATEGORY_TEMPLATES:
-            print(f"Available categories for '{logic}': {list(CATEGORY_TEMPLATES[logic].keys())}")
-        else:
-            print(f"Available logics: {list(CATEGORY_TEMPLATES.keys())}")
+    """Show detailed information about a specific category (case-insensitive)."""
+    if logic not in CATEGORY_TEMPLATES:
+        print(f"Error: Logic '{logic}' not found")
+        print(f"Available logics: {list(CATEGORY_TEMPLATES.keys())}")
         return
     
-    data = get_category_data(logic, category)
+    # Convert category to lowercase for case-insensitive matching
+    category_lower = category.lower()
+    if category_lower not in CATEGORY_TEMPLATES[logic]:
+        print(f"Error: Category '{category}' not found under logic '{logic}'")
+        print(f"Available categories for '{logic}': {list(CATEGORY_TEMPLATES[logic].keys())}")
+        return
+    
+    data = CATEGORY_TEMPLATES[logic][category_lower]
     if not data:
         print(f"Error: No data found for category '{category}' under logic '{logic}'")
         return
@@ -2168,7 +2318,7 @@ def generate_logic_template(logic: str) -> str:
 {full_template}"""
 
 def generate_single_category_latex_writeup(logic: str, category: str) -> str:
-    """Generate a LaTeX write-up for a single category within a logic."""
+    """Generate a LaTeX write-up for a single category within a logic (case-insensitive)."""
     if logic not in LOGIC_WRITEUP_DATA:
         return f"Error: Complete write-up data not available for logic '{logic}'"
     
@@ -2178,14 +2328,17 @@ def generate_single_category_latex_writeup(logic: str, category: str) -> str:
     if not validate_category(logic, category):
         return f"Error: Category '{category}' not found under logic '{logic}'"
     
+    # Convert category to lowercase for case-insensitive matching
+    category_lower = category.lower()
+    
     logic_data = LOGIC_WRITEUP_DATA[logic]
-    category_data = CATEGORY_TEMPLATES[logic][category]
+    category_data = CATEGORY_TEMPLATES[logic][category_lower]
     
     # Check if category has writeup data
-    if category not in logic_data['categories']:
+    if category_lower not in logic_data['categories']:
         return f"Error: Write-up data not available for category '{category}' under logic '{logic}'"
     
-    writeup_data = logic_data['categories'][category]
+    writeup_data = logic_data['categories'][category_lower]
     
     # Format PP analysis
     pp_analysis = LATEX_WRITEUP_TEMPLATE["pp_analysis_structure"].format(
@@ -2211,7 +2364,7 @@ def generate_single_category_latex_writeup(logic: str, category: str) -> str:
     
     # Generate category subsection
     category_writeup = LATEX_WRITEUP_TEMPLATE["category_subsection"].format(
-        category_name=category.replace('_', ' ').title(),
+        category_name=category_lower.replace('_', ' ').title(),
         category_label=writeup_data['category_label'],
         logic_name_lower=logic.lower(),
         category_role_description=writeup_data['role_description'],
@@ -2222,7 +2375,7 @@ def generate_single_category_latex_writeup(logic: str, category: str) -> str:
     )
     
     # Add a header comment for context
-    header = f"""% LaTeX Write-up for {category.replace('_', ' ').title()} Category
+    header = f"""% LaTeX Write-up for {category_lower.replace('_', ' ').title()} Category
 % Logic: {logic} - {LOGIC_DEFINITIONS[logic]['focus']}
 % Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
@@ -2231,17 +2384,19 @@ def generate_single_category_latex_writeup(logic: str, category: str) -> str:
     return header + category_writeup
 
 def generate_category_template(logic: str, category: str) -> str:
-    """Generate a template for a specific category that can be filled in using LATEX_WRITEUP_TEMPLATE."""
+    """Generate a template for a specific category that can be filled in using LATEX_WRITEUP_TEMPLATE (case-insensitive)."""
     if not validate_category(logic, category):
         return f"Error: Category '{category}' not found under logic '{logic}'"
     
-    category_data = CATEGORY_TEMPLATES[logic][category]
-    category_name = category.replace('_', ' ').title()
+    # Convert category to lowercase for case-insensitive matching
+    category_lower = category.lower()
+    category_data = CATEGORY_TEMPLATES[logic][category_lower]
+    category_name = category_lower.replace('_', ' ').title()
     
     # Use the category_subsection template
     template = LATEX_WRITEUP_TEMPLATE["category_subsection"].format(
         category_name=category_name,
-        category_label=category,
+        category_label=category_lower,
         logic_name_lower=logic.lower(),
         category_role_description="[ADD_DETAILED_CATEGORY_ROLE_DESCRIPTION]",
         pp_analysis="[ADD_PP_ANALYSIS]",
@@ -2328,7 +2483,7 @@ Examples:
     parser.add_argument('-category', type=str,
                        help='PP category under the specified logic (optional - if not provided, generates logic overview)')
     parser.add_argument('-task', type=str,
-                       help='Specific task/request for the write-up (optional - auto-generated if not provided)')
+                       help='Specific task/request for the write-up')
     
     # Optional content arguments
     parser.add_argument('-context', type=str,
@@ -2477,6 +2632,13 @@ Examples:
         list_available_categories(args.logic)
         return
     
+    # Validate model availability
+    available_models = get_available_models()
+    if args.model_version not in available_models:
+        print(f"Error: Invalid model '{args.model_version}'")
+        print(f"Available models: {', '.join(available_models)}")
+        return
+    
     # Initialize client
     try:
         client = CategorisationWriteUpClient(
@@ -2492,14 +2654,25 @@ Examples:
     
     # Handle chat mode
     if args.chat:
-        # If task is provided, execute it first, then start chat
-        if args.task and args.logic and args.category:
-            print("Executing initial task before starting chat...")
+        # If logic and/or category is provided, execute initial write-up first, then start chat
+        if args.logic:
+            print("Generating initial write-up before starting chat mode...")
             result = execute_writeup_task(client, args)
-            if result and args.outputfile:
-                custom_path = None if args.save == 'default' else args.save if args.save else None
-                save_to_file(result, args.outputfile, custom_path)
-            print("\nStarting chat mode...")
+            if result:
+                print("\n" + "="*60)
+                print("GENERATED WRITE-UP")
+                print("="*60)
+                print(result)
+                print("="*60)
+                
+                # Save to file if requested
+                if args.outputfile:
+                    custom_path = None if args.save == 'default' else args.save if args.save else None
+                    saved_file = save_to_file(result, args.outputfile, custom_path)
+                    if saved_file:
+                        print(f"✓ Write-up saved to: {saved_file}")
+            
+            print("\nNow starting interactive chat mode for refinement...")
         
         client.start_chat(logic=args.logic, category=args.category)
         return

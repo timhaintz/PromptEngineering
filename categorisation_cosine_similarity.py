@@ -91,7 +91,7 @@ clustering_example = '''Find a common characteristic for the given objects.'''
 
 error_identification_example = '''From now on, when you generate an answer, create a set of facts that the answer depends on that should be fact-checked and list this set of facts at the end of your output. Only include facts related to cybersecurity.'''
 
-input_semantics_example = '''rephrase this paragraph so that a 2nd grader can understand it, emphasizing real-world applications'''
+input_semantics_example = '''Rate the semantic similarity of two input sentences on a scale of 0 - definitely not to 5 - perfectly.'''
 
 requirements_elicitation_example = '''Identify experts in the field, generate answers as if the experts wrote them, and combine the experts' answers by collaborative decision-making.'''
 
@@ -110,6 +110,8 @@ refactoring_example = '''I am working on a guideline for design prompts for LLM.
 
 # Over logic section - SUM
 summarising_example = '''Write a concise summary of the following: {text} CONCISE SUMMARY:'''
+
+synthesis_example = '''Synthesize all subanswers thoroughly to construct an accurate final answer to the main question.'''
 
 # endregion
 
@@ -217,7 +219,7 @@ if __name__ == "__main__":
     ##############################################
     # Define the input string and JSON file path #
     ##############################################
-    input_string = refactoring_example # prediction_example # category_definitions.summarising
+    input_string = input_semantics_example # synthesis_example # prediction_example # category_definitions.summarising
     json_file = 'promptpatterns.json'
     
     # Create the parser
