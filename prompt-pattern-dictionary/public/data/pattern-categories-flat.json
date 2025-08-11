@@ -1,0 +1,343 @@
+[
+  {
+    "name": "Argument",
+    "slug": "argument",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Across",
+    "logicSlug": "across"
+  },
+  {
+    "name": "Comparison",
+    "slug": "comparison",
+    "patternCount": 1,
+    "patterns": [
+      {
+        "id": "20-0-0",
+        "name": "What round had a higher attendance: SF 2nd Leg or QFR?",
+        "description": "",
+        "exampleCount": 3
+      }
+    ],
+    "logic": "Across",
+    "logicSlug": "across"
+  },
+  {
+    "name": "Contradiction",
+    "slug": "contradiction",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Across",
+    "logicSlug": "across"
+  },
+  {
+    "name": "Cross Boundary",
+    "slug": "cross-boundary",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Across",
+    "logicSlug": "across"
+  },
+  {
+    "name": "Translation",
+    "slug": "translation",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Across",
+    "logicSlug": "across"
+  },
+  {
+    "name": "Assessment",
+    "slug": "assessment",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "At",
+    "logicSlug": "at"
+  },
+  {
+    "name": "Calculation",
+    "slug": "calculation",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "At",
+    "logicSlug": "at"
+  },
+  {
+    "name": "Hypothesise",
+    "slug": "hypothesise",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Beyond",
+    "logicSlug": "beyond"
+  },
+  {
+    "name": "Logical Reasoning",
+    "slug": "logical-reasoning",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Beyond",
+    "logicSlug": "beyond"
+  },
+  {
+    "name": "Prediction",
+    "slug": "prediction",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Beyond",
+    "logicSlug": "beyond"
+  },
+  {
+    "name": "Simulation",
+    "slug": "simulation",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Beyond",
+    "logicSlug": "beyond"
+  },
+  {
+    "name": "Categorising",
+    "slug": "categorising",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "In",
+    "logicSlug": "in"
+  },
+  {
+    "name": "Classification",
+    "slug": "classification",
+    "patternCount": 1,
+    "patterns": [
+      {
+        "id": "18-0-0",
+        "name": "Initial relevancy prompt",
+        "description": "",
+        "exampleCount": 1
+      }
+    ],
+    "logic": "In",
+    "logicSlug": "in"
+  },
+  {
+    "name": "Clustering",
+    "slug": "clustering",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "In",
+    "logicSlug": "in"
+  },
+  {
+    "name": "Error Identification",
+    "slug": "error-identification",
+    "patternCount": 3,
+    "patterns": [
+      {
+        "id": "0-0-0",
+        "name": "Fact Check List",
+        "description": "",
+        "exampleCount": 4
+      },
+      {
+        "id": "0-0-0",
+        "name": "Reflection",
+        "description": "",
+        "exampleCount": 4
+      },
+      {
+        "id": "2-0-0",
+        "name": "Reflection",
+        "description": "",
+        "exampleCount": 3
+      }
+    ],
+    "logic": "In",
+    "logicSlug": "in"
+  },
+  {
+    "name": "Input Semantics",
+    "slug": "input-semantics",
+    "patternCount": 1,
+    "patterns": [
+      {
+        "id": "0-0-0",
+        "name": "Meta Language Creation",
+        "description": "",
+        "exampleCount": 2
+      }
+    ],
+    "logic": "In",
+    "logicSlug": "in"
+  },
+  {
+    "name": "Requirements Elicitation",
+    "slug": "requirements-elicitation",
+    "patternCount": 3,
+    "patterns": [
+      {
+        "id": "1-0-0",
+        "name": "Requirements Simulator",
+        "description": "",
+        "exampleCount": 7
+      },
+      {
+        "id": "1-0-0",
+        "name": "Specification Disambiguation",
+        "description": "",
+        "exampleCount": 4
+      },
+      {
+        "id": "1-0-0",
+        "name": "Change Request Simulation",
+        "description": "",
+        "exampleCount": 6
+      }
+    ],
+    "logic": "In",
+    "logicSlug": "in"
+  },
+  {
+    "name": "Context Control",
+    "slug": "context-control",
+    "patternCount": 1,
+    "patterns": [
+      {
+        "id": "0-0-0",
+        "name": "Context Manager",
+        "description": "",
+        "exampleCount": 7
+      }
+    ],
+    "logic": "Out",
+    "logicSlug": "out"
+  },
+  {
+    "name": "Decomposed Prompting",
+    "slug": "decomposed-prompting",
+    "patternCount": 5,
+    "patterns": [
+      {
+        "id": "6-0-0",
+        "name": "Decomposed Prompt",
+        "description": "",
+        "exampleCount": 1
+      },
+      {
+        "id": "6-0-0",
+        "name": "Hierarchical Decomposition",
+        "description": "",
+        "exampleCount": 1
+      },
+      {
+        "id": "6-0-0",
+        "name": "Recursive Decomposition",
+        "description": "",
+        "exampleCount": 2
+      },
+      {
+        "id": "6-0-0",
+        "name": "External API Calls",
+        "description": "",
+        "exampleCount": 2
+      },
+      {
+        "id": "6-0-0",
+        "name": "Letter Concatenation",
+        "description": "",
+        "exampleCount": 1
+      }
+    ],
+    "logic": "Out",
+    "logicSlug": "out"
+  },
+  {
+    "name": "Output Customisation",
+    "slug": "output-customisation",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Out",
+    "logicSlug": "out"
+  },
+  {
+    "name": "Output Semantics",
+    "slug": "output-semantics",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Out",
+    "logicSlug": "out"
+  },
+  {
+    "name": "Prompt Improvement",
+    "slug": "prompt-improvement",
+    "patternCount": 5,
+    "patterns": [
+      {
+        "id": "0-0-0",
+        "name": "Question Refinement",
+        "description": "",
+        "exampleCount": 4
+      },
+      {
+        "id": "0-0-0",
+        "name": "Alternative Approaches",
+        "description": "",
+        "exampleCount": 2
+      },
+      {
+        "id": "0-0-0",
+        "name": "Cognitive Verifier",
+        "description": "",
+        "exampleCount": 5
+      },
+      {
+        "id": "0-0-0",
+        "name": "Refusal Breaker",
+        "description": "",
+        "exampleCount": 4
+      },
+      {
+        "id": "2-0-0",
+        "name": "Question Refinement",
+        "description": "",
+        "exampleCount": 4
+      }
+    ],
+    "logic": "Out",
+    "logicSlug": "out"
+  },
+  {
+    "name": "Refactoring",
+    "slug": "refactoring",
+    "patternCount": 2,
+    "patterns": [
+      {
+        "id": "1-0-0",
+        "name": "Pseudo-code Refactoring",
+        "description": "",
+        "exampleCount": 4
+      },
+      {
+        "id": "1-0-0",
+        "name": "Data-guided Refactoring",
+        "description": "",
+        "exampleCount": 4
+      }
+    ],
+    "logic": "Out",
+    "logicSlug": "out"
+  },
+  {
+    "name": "Summarising",
+    "slug": "summarising",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Over",
+    "logicSlug": "over"
+  },
+  {
+    "name": "Synthesis",
+    "slug": "synthesis",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "Over",
+    "logicSlug": "over"
+  }
+]

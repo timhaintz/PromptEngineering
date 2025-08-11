@@ -1,0 +1,195 @@
+/**
+ * Pattern Detail Page
+ *
+ * Route: /pattern/{paperId}/{categoryIndex}/{patternIndex}
+ * Anchors: #example-{paperId}-{categoryIndex}-{patternIndex}-{exampleIndex}
+ */
+
+import fs from 'fs';
+import path from 'path';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
+interface Example {
+  id: string;
+  index: number;
+  content: string;
+}
+
+interface Pattern {
+  id: string; // e.g., 10-29-0
+  patternName: string;
+  category: string;
+  description?: string;
+  examples: Example[];
+  paper: { title: string; authors: string[]; url: string; apaReference?: string };
+  tags: string[];
+}
+
+type SimilarPatterns = { similar: Record<string, { id: string; similarity: number }[]> };
+type SimilarExamples = { similar: Record<string, { id: string; similarity: number }[]> };
+
+// Minimal normalized pattern shape used here
+interface NormalizedPattern {
+  id: string;
+  template?: {
+    role?: string;
+    context?: string;
+    action?: string;
+    format?: string;
+    response?: string;
+  };
+}
+
+function loadJson<T = unknown>(rel: string): T | null {
+  const filePath = path.join(process.cwd(), rel);
+  if (!fs.existsSync(filePath)) return null;
+  return JSON.parse(fs.readFileSync(filePath, 'utf8')) as T;
+}
+
+function idParts(patternId: string): { paperId: string; categoryIndex: string; patternIndex: string } {
+  const [paperId, categoryIndex, patternIndex] = patternId.split('-');
+  return { paperId, categoryIndex, patternIndex };
+}
+
+function categoryToSlug(category: string): string {
+  return category.toLowerCase().replace(/\s+/g, '-');
+}
+
+function exampleAnchor(fullIndex: string): string {
+  return `example-${fullIndex}`;
+}
+
+export default async function PatternDetail({ params }: { params: Promise<{ paperId: string; categoryIndex: string; patternIndex: string }> }) {
+  const { paperId, categoryIndex, patternIndex } = await params;
+  const targetId = `${paperId}-${categoryIndex}-${patternIndex}`;
+
+  // Load data
+  const patterns = loadJson<Pattern[]>('public/data/patterns.json') || [];
+  const similarPatterns = loadJson<SimilarPatterns>('public/data/similar-patterns.json');
+  const similarExamples = loadJson<SimilarExamples>('public/data/similar-examples.json');
+  const normalized = loadJson<NormalizedPattern[] | null>('public/data/normalized-patterns.json');
+
+  const pattern = patterns.find(p => p.id === targetId);
+  if (!pattern) return notFound();
+
+  const norm = Array.isArray(normalized) ? normalized.find((p) => p.id === targetId) : null;
+
+  const categorySlug = categoryToSlug(pattern.category);
+
+  const patternLink = (id: string) => {
+    const parts = idParts(id);
+    return `/pattern/${parts.paperId}/${parts.categoryIndex}/${parts.patternIndex}`;
+  };
+
+  const exampleLink = (fullIndex: string) => {
+    const [pId, cIdx, patIdx] = fullIndex.split('-');
+    return `/pattern/${pId}/${cIdx}/${patIdx}#${exampleAnchor(fullIndex)}`;
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-4 py-16">
+        <div className="mb-6">
+          <Link href={`/category/${categorySlug}`} className="text-blue-600 hover:text-blue-800 inline-flex items-center">← Back to {pattern.category}</Link>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="flex items-start justify-between">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-3 mb-2">
+                <h1 className="text-2xl font-bold text-gray-900">{pattern.patternName}</h1>
+                <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-xs font-medium">ID: {pattern.id}</span>
+                <Link href={`/category/${categorySlug}`} className="inline-flex items-center rounded-full bg-gray-100 text-gray-700 border border-gray-200 px-2 py-0.5 text-xs font-medium hover:bg-blue-50">{pattern.category}</Link>
+              </div>
+              {pattern.description && <p className="text-gray-700 mb-3">{pattern.description}</p>}
+
+              {/* Template (from normalized if available) */}
+              {norm?.template && (
+                <div className="mb-4 text-sm">
+                  <h2 className="font-semibold text-gray-900 mb-2">Template</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {norm.template.role && <div><span className="font-medium">Role:</span> {norm.template.role}</div>}
+                    {norm.template.context && <div><span className="font-medium">Context:</span> {norm.template.context}</div>}
+                    {norm.template.action && <div><span className="font-medium">Action:</span> {norm.template.action}</div>}
+                    {norm.template.format && <div><span className="font-medium">Format:</span> {norm.template.format}</div>}
+                    {norm.template.response && <div className="md:col-span-2"><span className="font-medium">Response:</span> {norm.template.response}</div>}
+                  </div>
+                </div>
+              )}
+
+              {/* Tags */}
+              {pattern.tags?.length ? (
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {pattern.tags.slice(0, 8).map(tag => (
+                    <span key={tag} className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">{tag}</span>
+                  ))}
+                </div>
+              ) : null}
+
+              {/* Examples */}
+              <div className="mt-4">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">Examples ({pattern.examples.length})</h2>
+                <div className="space-y-3">
+                  {pattern.examples.map(ex => {
+                    const fullIndex = `${pattern.id}-${ex.index}`;
+                    const similars = similarExamples?.similar?.[fullIndex] || [];
+                    return (
+                      <div key={ex.id} id={exampleAnchor(fullIndex)} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
+                        <div className="flex items-start gap-2">
+                          <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">{fullIndex}</span>
+                          <p className="text-gray-800 text-sm break-words">{ex.content}</p>
+                        </div>
+                        {similars.length ? (
+                          <div className="mt-2 text-[11px] text-gray-600">
+                            <div className="font-semibold text-gray-800 mb-1">Similar Examples</div>
+                            <div className="flex flex-wrap gap-1.5">
+                              {similars.slice(0, 8).map(se => (
+                                <Link key={se.id} href={exampleLink(se.id)} className="inline-flex items-center rounded bg-gray-100 px-1.5 py-0.5 border border-gray-200 hover:bg-blue-50">
+                                  <span className="font-mono mr-1">{se.id}</span>
+                                  <span className="text-gray-500">{se.similarity.toFixed(2)}</span>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Reference */}
+              <div className="mt-6 border-t pt-4 text-sm text-gray-700">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                  <div>
+                    <strong>Source:</strong>
+                    <a href={pattern.paper.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 ml-1">{pattern.paper.title}</a>
+                  </div>
+                  <div>
+                    <strong>Authors:</strong> {pattern.paper.authors.slice(0, 3).join(', ')}{pattern.paper.authors.length > 3 ? ' et al.' : ''}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Similar Patterns */}
+          {similarPatterns?.similar?.[pattern.id]?.length ? (
+            <div className="mt-6">
+              <div className="font-semibold text-gray-900 mb-2">Similar Patterns</div>
+              <div className="flex flex-wrap gap-2 text-xs">
+                {similarPatterns.similar[pattern.id].slice(0, 10).map(sp => (
+                  <Link key={sp.id} href={patternLink(sp.id)} className="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 hover:bg-blue-50 border border-gray-200">
+                    <span className="font-mono mr-1">{sp.id}</span>
+                    <span className="text-gray-500">{sp.similarity.toFixed(2)}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2025-07-30T08:02:40.566201",
+  "model": "embedding-3",
+  "modelInfo": {
+    "name": "embedding-3",
+    "type": "azure_openai",
+    "auth_type": "managed_identity",
+    "supports_streaming": false,
+    "supports_system_role": true,
+    "supported_features": [
+      "embedding"
+    ],
+    "max_tokens_limit": 8191,
+    "default_temperature": null,
+    "temperature_range": null
+  },
+  "apiCalls": 221,
+  "totalTokensUsed": 16513,
+  "averageTokensPerCall": 74.71945701357465,
+  "failedPatterns": 0,
+  "failedExamples": 0,
+  "circuitBreakerTriggered": false,
+  "consecutiveFailures": 0,
+  "errors": {
+    "patterns": [],
+    "examples": []
+  }
+}
