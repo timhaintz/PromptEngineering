@@ -399,7 +399,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 - ID: string (required)
 - Category: string (required)
 - Name: string (required)
-- Media Type: 'text' | 'image' | 'audio' | 'video' | 'multimodal' (default 'text')
+- Media Type: one of ["Text Only", "Text2Audio", "Text2Image", "Text2Video", "Audio2Text", "Image2Text", "Video2Text"] (default "Text Only")
 - Description: string (optional)
 - Template: object (optional)
   - role?: string
@@ -412,15 +412,13 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 - Turn: 'single' | 'multi' (optional)
 - Prompt Examples: string[] (required when available)
 - Related Patterns: string[] (pattern IDs) (optional)
-- Reference: {
-  title: string; authors: string[]; url: string; apa?: string
-} (required)
+- Reference: { title: string; authors: string[]; url: string; apa?: string } (required)
 
 ### 2. Data Source Mapping
 - ID → promptpatterns.json id (e.g., "71-26-6").
 - Category → promptpatterns.json category.
 - Name → promptpatterns.json patternName.
-- Media Type → derive from tags/content; default 'text'. If category implies multimodality (e.g., Visual/Multimodal), set 'multimodal' or specific media.
+- Media Type → derive from tags/content; default "Text Only". If content implies multimodality, choose the specific mapping above.
 - Description → promptpatterns.json description.
 - Template → parsed from examples; see heuristics below.
 - Application → derive from tags and paper context in promptpatterns.json.
@@ -471,9 +469,28 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 - Reference: paper metadata (title, authors, url, apaReference)
 
 ### 6. Operational Notes
-- Documentation-first: this schema guides data normalization without enforcing immediate code changes.
-- Embeddings: reuse existing artifacts; do not regenerate.
-- Future work: add a non-executed transform spec to produce a normalized JSON conforming to this schema at build time.
+- Documentation-first: this schema guides data normalization across code and docs.
+- Embeddings: reuse existing artifacts; do not regenerate unless requested.
+- Build integration: a normalization step generates `public/data/normalized-patterns.json` during `scripts/build-data.js` execution using `scripts/transform-normalized-pp.js`.
+
+### 7. Optional AI Enrichment
+- An optional GPT-5 enrichment pass can fill missing fields (template, application, dependentLLM, turn) using `scripts/enrich-normalized-pp.py`.
+- Trigger via build flag: `--enrich` (with optional `--enrich-limit <n>`).
+- Scope enrichment to specific fields with: `--enrich-fields <csv>` where values are any of `template,application,dependentLLM,turn`.
+- Outputs metadata on enriched patterns:
+  - `aiAssisted: true`
+  - `aiAssistedFields: string[]`
+  - `aiAssistedModel: string`
+  - `aiAssistedAt: ISO timestamp`
+- UI badge: An “AI-assisted” badge is displayed on Pattern Detail pages when enrichment is present, with a disclaimer noting potential inaccuracies.
+ - Example commands:
+   - `node scripts/build-data.js --enrich`
+   - `node scripts/build-data.js --enrich --enrich-limit 20`
+  - `node scripts/build-data.js --enrich --enrich-fields template,application`
+
+#### Runtime Notes
+- Python environment: The data pipeline auto-detects uv and prefers `uv run` for Python scripts when available (or when `uv.lock` is present). You can force uv with the environment variable `USE_UV=1`.
+- GPT-5 temperature: Azure GPT-5 accepts only the default temperature. The pipeline avoids setting `temperature` for GPT-5 and will retry without it if the service rejects the parameter.
 
 ### Enhanced URL Structure
 - Homepage: `/`

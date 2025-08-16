@@ -124,3 +124,25 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+## Prompt Pattern Dictionary (Web App)
+
+The `prompt-pattern-dictionary/` subfolder contains a Next.js application and a data pipeline to build a searchable dictionary of prompt patterns.
+
+Key build notes:
+- Data pipeline script: `prompt-pattern-dictionary/scripts/build-data.js`
+- Python steps (embeddings, categorization, enrichment) auto-detect and prefer `uv run` when available. To force uv on Windows PowerShell:
+
+```powershell
+$env:USE_UV = "1"
+node .\prompt-pattern-dictionary\scripts\build-data.js --enrich --enrich-limit 10 --enrich-fields template
+```
+
+- Enrichment flags:
+  - `--enrich` to enable optional enrichment via Azure OpenAI (GPT-5)
+  - `--enrich-limit <n>` to cap items processed
+  - `--enrich-fields <csv>` to scope fields: `template,application,dependentLLM,turn`
+
+- GPT-5 temperature behavior: The enrichment pipeline does not set `temperature` for GPT-5 (Azure requires default temperature). The client also retries without `temperature` if the service rejects the parameter.

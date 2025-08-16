@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawn } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 const { promisify } = require('util');
 
 // File paths
@@ -18,6 +18,34 @@ const STATS_FILE = path.join(OUTPUT_DIR, 'stats.json');
 const PYTHON_SCRIPT = path.join(__dirname, 'generate-pattern-categories.py');
 const EMBEDDING_SCRIPT = path.join(__dirname, 'generate-embeddings-similarity.py');
 const SEMANTIC_ANALYSIS_SCRIPT = path.join(__dirname, 'run-semantic-analysis.py');
+const NORMALIZE_SCRIPT = path.join(__dirname, 'transform-normalized-pp.js');
+const ENRICH_SCRIPT = path.join(__dirname, 'enrich-normalized-pp.py');
+
+// Repo root (two levels up from this scripts folder)
+const REPO_ROOT = path.join(__dirname, '..', '..');
+
+/**
+ * Choose how to run Python scripts:
+ * - Prefer `uv run` when available or when uv.lock exists or USE_UV env is set
+ * - Fallback to venv python if present
+ * - Finally fallback to system python
+ */
+function getPythonInvoker() {
+  const useUv = !!process.env.USE_UV
+    || fs.existsSync(path.join(REPO_ROOT, 'uv.lock'))
+    || (spawnSync('uv', ['--version'], { stdio: 'ignore' }).status === 0);
+
+  if (useUv) {
+    return { command: 'uv', preArgs: ['run'] };
+  }
+
+  const venvPythonPath = path.join(REPO_ROOT, 'venv', 'Scripts', 'python.exe');
+  if (fs.existsSync(venvPythonPath)) {
+    return { command: venvPythonPath, preArgs: [] };
+  }
+
+  return { command: 'python', preArgs: [] };
+}
 
 /**
  * Check if embeddings already exist
@@ -54,12 +82,8 @@ async function generateEmbeddings(forceRegenerate = false) {
   
   return new Promise((resolve, reject) => {
     console.log('🔮 Generating embeddings with Azure OpenAI...');
-    
-    // Use venv Python executable if available, fallback to system python
-    const venvPythonPath = path.join(__dirname, '../../venv/Scripts/python.exe');
-    const pythonCommand = fs.existsSync(venvPythonPath) ? venvPythonPath : 'python';
-    
-    const python = spawn(pythonCommand, [EMBEDDING_SCRIPT], {
+    const inv = getPythonInvoker();
+    const python = spawn(inv.command, [...inv.preArgs, EMBEDDING_SCRIPT], {
       cwd: path.dirname(EMBEDDING_SCRIPT),
       stdio: ['pipe', 'pipe', 'pipe']
     });
@@ -104,11 +128,8 @@ async function runSemanticAnalysis() {
   console.log('🔮 Running semantic similarity analysis...');
   
   return new Promise((resolve, reject) => {
-    // Use venv Python executable if available, fallback to system python
-    const venvPythonPath = path.join(__dirname, '../../venv/Scripts/python.exe');
-    const pythonCommand = fs.existsSync(venvPythonPath) ? venvPythonPath : 'python';
-    
-    const pythonProcess = spawn(pythonCommand, [SEMANTIC_ANALYSIS_SCRIPT], {
+  const inv = getPythonInvoker();
+  const pythonProcess = spawn(inv.command, [...inv.preArgs, SEMANTIC_ANALYSIS_SCRIPT], {
       stdio: 'inherit',
       cwd: path.dirname(SEMANTIC_ANALYSIS_SCRIPT)
     });
@@ -137,12 +158,8 @@ async function runSemanticAnalysis() {
 async function generateHierarchicalCategories() {
   return new Promise((resolve, reject) => {
     console.log('🐍 Generating hierarchical pattern categories with Python script...');
-    
-    // Use venv Python executable if available, fallback to system python
-    const venvPythonPath = path.join(__dirname, '../../venv/Scripts/python.exe');
-    const pythonCommand = fs.existsSync(venvPythonPath) ? venvPythonPath : 'python';
-    
-    const python = spawn(pythonCommand, [PYTHON_SCRIPT], {
+  const inv = getPythonInvoker();
+  const python = spawn(inv.command, [...inv.preArgs, PYTHON_SCRIPT], {
       cwd: path.dirname(PYTHON_SCRIPT),
       stdio: ['pipe', 'pipe', 'pipe']
     });
@@ -221,10 +238,47 @@ async function processData(options = {}) {
   console.log(`📊 Processed ${stats.totalPatterns} patterns from ${stats.totalPapers} papers`);
   console.log(`📁 Output files written to ${OUTPUT_DIR}`);
 
+  // Run normalization step to produce normalized-patterns.json
+  try {
+    console.log('🧩 Generating normalized-patterns.json...');
+    const nodeCmd = process.execPath; // current Node executable
+    await new Promise((resolve) => {
+      const cp = spawn(nodeCmd, [NORMALIZE_SCRIPT], {
+        cwd: path.dirname(NORMALIZE_SCRIPT),
+        stdio: 'inherit'
+      });
+      cp.on('close', () => resolve());
+      cp.on('error', () => resolve());
+    });
+  } catch (e) {
+    console.log('⚠️  Normalization step failed, continuing without normalized-patterns.json');
+  }
+
   // Run semantic analysis if requested
   if (options.runSemanticAnalysis) {
     console.log('\n🔍 Running semantic similarity analysis...');
     await runSemanticAnalysis();
+  }
+
+  // Optional enrichment step using Azure OpenAI (gpt-5)
+  if (options.enrich) {
+    console.log('\n🧠 Running optional AI enrichment (gpt-5) ...');
+    const inv = getPythonInvoker();
+    await new Promise((resolve) => {
+      const args = [...inv.preArgs, ENRICH_SCRIPT];
+      if (options.enrichLimit) {
+        args.push('--limit', String(options.enrichLimit));
+      }
+      if (options.enrichFields && options.enrichFields.length > 0) {
+        args.push('--enrich-fields', options.enrichFields.join(','));
+      }
+      const cp = spawn(inv.command, args, {
+        cwd: path.dirname(ENRICH_SCRIPT),
+        stdio: 'inherit'
+      });
+      cp.on('close', () => resolve());
+      cp.on('error', () => resolve());
+    });
   }
 }
 
@@ -394,7 +448,20 @@ async function main() {
     const args = process.argv.slice(2);
     const options = {
       forceEmbeddings: args.includes('--force-embeddings'),
-      runSemanticAnalysis: args.includes('--semantic-analysis')
+      runSemanticAnalysis: args.includes('--semantic-analysis'),
+      enrich: args.includes('--enrich'),
+      enrichLimit: (() => {
+        const idx = args.indexOf('--enrich-limit');
+        if (idx !== -1 && args[idx + 1]) return parseInt(args[idx + 1], 10);
+        return undefined;
+      })(),
+      enrichFields: (() => {
+        const idx = args.indexOf('--enrich-fields');
+        if (idx !== -1 && args[idx + 1]) {
+          return args[idx + 1].split(',').map(s => s.trim()).filter(Boolean);
+        }
+        return undefined;
+      })()
     };
 
     if (args.includes('--help') || args.includes('-h')) {
@@ -403,6 +470,9 @@ async function main() {
       console.log('Options:');
       console.log('  --force-embeddings     Regenerate embeddings even if they already exist');
       console.log('  --semantic-analysis    Run semantic similarity analysis after data processing');
+  console.log('  --enrich               Run optional AI enrichment (gpt-5) to suggest missing fields');
+  console.log('  --enrich-limit <n>     Limit number of patterns to enrich in this run');
+  console.log('  --enrich-fields <csv>  Comma-separated list of fields to enrich (template,application,dependentLLM,turn)');
       console.log('  --help, -h            Show this help message');
       process.exit(0);
     }

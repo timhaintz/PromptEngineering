@@ -525,15 +525,27 @@ class AzureOpenAIClient(BaseModelClient):
                 **kwargs
             }
             
-            # Add temperature if supported
+            # Add temperature only if model supports non-default values.
+            # Some Azure models (e.g., gpt-5, o*-mini) only accept default temperature and reject explicit values.
             if self.config.default_temperature is not None:
-                params.setdefault("temperature", self.config.default_temperature)
+                strict_default_only = self.config.name in {"gpt-5", "o1-mini", "o3-mini", "o4-mini"}
+                if not strict_default_only:
+                    params.setdefault("temperature", self.config.default_temperature)
             
             # Add reasoning effort for o-series models
             if self.config.reasoning_effort:
                 params["reasoning_effort"] = self.config.reasoning_effort
             
-            response = self.client.chat.completions.create(**params)
+            try:
+                response = self.client.chat.completions.create(**params)
+            except Exception as e:
+                # Retry once without temperature if server rejects it
+                msg = str(e)
+                if "temperature" in msg and ("unsupported" in msg.lower() or "does not support" in msg.lower()):
+                    params.pop("temperature", None)
+                    response = self.client.chat.completions.create(**params)
+                else:
+                    raise
             
             if stream:
                 return self._wrap_streaming_response(response)
