@@ -11,6 +11,7 @@ const path = require('path');
 const DATA_DIR = path.join(__dirname, '..', 'public', 'data');
 const PATTERNS_FILE = path.join(DATA_DIR, 'patterns.json');
 const SIMILARITY_FILE = path.join(DATA_DIR, 'similarity-analysis.json');
+const SIMILAR_PATTERNS_FILE = path.join(DATA_DIR, 'similar-patterns.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'normalized-patterns.json');
 
 function loadJson(file) {
@@ -18,13 +19,40 @@ function loadJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf-8'));
 }
 
+// Map to required media types for the PRD
+// Allowed values: "Text Only", "Text2Audio", "Text2Image", "Text2Video", "Audio2Text", "Image2Text", "Video2Text"
 function inferMediaType(pattern) {
   const cat = (pattern.category || '').toLowerCase();
   const tags = (pattern.tags || []).map(t => String(t).toLowerCase());
-  if (cat.includes('visual') || cat.includes('image') || tags.some(t => /visual|image|multimodal/.test(t))) {
-    return 'multimodal';
+  const textBlob = [pattern.description || '', ...(pattern.examples || []).map(e => (e?.content || ''))].join(' ').toLowerCase();
+
+  const has = (re) => re.test(textBlob) || tags.some(t => re.test(t)) || re.test(cat);
+
+  // Text to Image
+  if (has(/image|vision|visual|graphviz|dall-?e|stable\s*diffusion|draw|diagram|visualize/)) {
+    return 'Text2Image';
   }
-  return 'text';
+  // Text to Audio
+  if (has(/audio\s*(generation|synthesis)|text\s*to\s*speech|tts/)) {
+    return 'Text2Audio';
+  }
+  // Text to Video
+  if (has(/video\s*(generation|synthesis)|text\s*to\s*video/)) {
+    return 'Text2Video';
+  }
+  // Image to Text (captioning, OCR)
+  if (has(/ocr|caption|describe\s+(the\s+)?image|alt[-\s]?text|image\s*to\s*text/)) {
+    return 'Image2Text';
+  }
+  // Audio to Text (ASR)
+  if (has(/transcribe|speech\s*to\s*text|asr|audio\s*to\s*text/)) {
+    return 'Audio2Text';
+  }
+  // Video to Text (summarization)
+  if (has(/summarize\s+(this\s+)?video|video\s*to\s*text|transcript\s+video/)) {
+    return 'Video2Text';
+  }
+  return 'Text Only';
 }
 
 function inferTurn(examples) {
@@ -55,17 +83,10 @@ function parseTemplate(exampleText) {
   return template;
 }
 
-function relatedPatterns(simMap, patternId) {
-  if (!simMap || !patternId) return [];
-  const entry = simMap[patternId];
-  if (!entry) return [];
-  // If full neighbor list not present, fallback to bestMatch only
-  const best = entry.bestMatch ? [entry.bestMatch] : [];
-  // Note: similarity-analysis.json may not include explicit neighbor IDs; we only return [] here.
-  // Future enhancement: compute nearest neighbors from embeddings if available.
-  return best
-    .filter(Boolean)
-    .map(b => ({ category: b.category, similarity: b.similarity }));
+function relatedPatternsFromSimilar(similarMap, patternId, limit = 8) {
+  if (!similarMap || !patternId) return [];
+  const arr = similarMap[patternId] || [];
+  return arr.slice(0, limit).map(x => x.id);
 }
 
 function normalizeExampleText(example) {
@@ -81,6 +102,8 @@ function normalize() {
   const patterns = loadJson(PATTERNS_FILE) || [];
   const sim = loadJson(SIMILARITY_FILE) || {};
   const simMap = sim.patterns || {};
+  const simPatterns = loadJson(SIMILAR_PATTERNS_FILE) || null;
+  const similarMap = simPatterns && simPatterns.similar ? simPatterns.similar : null;
 
   const normalized = patterns.map(p => {
     const firstExample = normalizeExampleText(p.examples && p.examples[0]);
@@ -96,7 +119,9 @@ function normalize() {
       dependentLLM: null,
       turn: inferTurn(p.examples),
       promptExamples: (p.examples || []).map(normalizeExampleText).filter(Boolean),
-      related: relatedPatterns(simMap, p.id),
+      // Prefer similar-patterns.json for linkable related IDs; fallback to similarity-analysis bestMatch otherwise
+      related: (similarMap ? relatedPatternsFromSimilar(similarMap, p.id) : [])
+        || [],
       reference: {
         title: p.paper?.title || '',
         authors: p.paper?.authors || [],

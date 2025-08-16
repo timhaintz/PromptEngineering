@@ -32,6 +32,9 @@ type SimilarExamples = { similar: Record<string, { id: string; similarity: numbe
 // Minimal normalized pattern shape used here
 interface NormalizedPattern {
   id: string;
+  name?: string;
+  category?: string;
+  mediaType?: string;
   template?: {
     role?: string;
     context?: string;
@@ -39,6 +42,16 @@ interface NormalizedPattern {
     format?: string;
     response?: string;
   };
+  application?: string[];
+  dependentLLM?: string | null;
+  turn?: 'single' | 'multi' | string;
+  promptExamples?: string[];
+  related?: string[];
+  reference?: { title?: string; authors?: string[]; url?: string; apa?: string };
+  aiAssisted?: boolean;
+  aiAssistedFields?: string[];
+  aiAssistedModel?: string;
+  aiAssistedAt?: string;
 }
 
 function loadJson<T = unknown>(rel: string): T | null {
@@ -68,12 +81,16 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
   const patterns = loadJson<Pattern[]>('public/data/patterns.json') || [];
   const similarPatterns = loadJson<SimilarPatterns>('public/data/similar-patterns.json');
   const similarExamples = loadJson<SimilarExamples>('public/data/similar-examples.json');
-  const normalized = loadJson<NormalizedPattern[] | null>('public/data/normalized-patterns.json');
+  const normalized = loadJson<{ patterns: NormalizedPattern[] } | NormalizedPattern[] | null>('public/data/normalized-patterns.json');
 
   const pattern = patterns.find(p => p.id === targetId);
   if (!pattern) return notFound();
 
-  const norm = Array.isArray(normalized) ? normalized.find((p) => p.id === targetId) : null;
+  const norm = Array.isArray(normalized)
+    ? normalized.find((p) => p.id === targetId)
+    : (normalized && 'patterns' in (normalized as any)
+        ? (normalized as any).patterns.find((p: NormalizedPattern) => p.id === targetId)
+        : null);
 
   const categorySlug = categoryToSlug(pattern.category);
 
@@ -101,8 +118,43 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
                 <h1 className="text-2xl font-bold text-gray-900">{pattern.patternName}</h1>
                 <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-xs font-medium">ID: {pattern.id}</span>
                 <Link href={`/category/${categorySlug}`} className="inline-flex items-center rounded-full bg-gray-100 text-gray-700 border border-gray-200 px-2 py-0.5 text-xs font-medium hover:bg-blue-50">{pattern.category}</Link>
+                {norm?.aiAssisted ? (
+                  <span title={`AI-assisted fields: ${(norm.aiAssistedFields || []).join(', ')}`}
+                        className="inline-flex items-center rounded-full bg-yellow-50 text-yellow-800 border border-yellow-200 px-2 py-0.5 text-[10px] font-semibold">
+                    AI-assisted
+                  </span>
+                ) : null}
               </div>
               {pattern.description && <p className="text-gray-700 mb-3">{pattern.description}</p>}
+
+              {/* Media Type, Application, Dependent LLM, Turn */}
+              {(norm?.mediaType || norm?.application?.length || typeof norm?.dependentLLM !== 'undefined' || norm?.turn) && (
+                <div className="mb-4 text-sm">
+                  <h2 className="font-semibold text-gray-900 mb-2">Pattern Metadata</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {norm?.mediaType && <div><span className="font-medium">Media Type:</span> {norm.mediaType}</div>}
+                    {norm?.turn && <div><span className="font-medium">Turn:</span> {norm.turn === 'multi' ? 'Multi' : 'Single'}</div>}
+                    {typeof norm?.dependentLLM !== 'undefined' && (
+                      <div className="md:col-span-2"><span className="font-medium">Dependent LLM:</span> {norm?.dependentLLM || 'N/A'}</div>
+                    )}
+                    {norm?.application?.length ? (
+                      <div className="md:col-span-2">
+                        <span className="font-medium">Application:</span>
+                        <div className="mt-1 flex flex-wrap gap-1.5">
+                          {norm.application.map((a: string) => (
+                            <span key={a} className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded border">{a}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                  {norm?.aiAssisted ? (
+                    <div className="mt-2 text-xs text-gray-600">
+                      This section may include AI-assisted fields inferred by {norm.aiAssistedModel || 'an LLM'} and could be incorrect.
+                    </div>
+                  ) : null}
+                </div>
+              )}
 
               {/* Template (from normalized if available) */}
               {norm?.template && (
@@ -127,9 +179,9 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
                 </div>
               ) : null}
 
-              {/* Examples */}
+              {/* Prompt Examples */}
               <div className="mt-4">
-                <h2 className="text-lg font-semibold text-gray-900 mb-2">Examples ({pattern.examples.length})</h2>
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">Prompt Examples ({pattern.examples.length})</h2>
                 <div className="space-y-3">
                   {pattern.examples.map(ex => {
                     const fullIndex = `${pattern.id}-${ex.index}`;
@@ -159,17 +211,36 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
                 </div>
               </div>
 
+              {/* Related PPs */}
+              {norm?.related?.length ? (
+                <div className="mt-6">
+                  <div className="font-semibold text-gray-900 mb-2">Related PPs</div>
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    {norm.related.map((rid: string) => (
+                      <Link key={rid} href={patternLink(rid)} className="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 hover:bg-blue-50 border border-gray-200">
+                        <span className="font-mono">{rid}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
               {/* Reference */}
               <div className="mt-6 border-t pt-4 text-sm text-gray-700">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                   <div>
                     <strong>Source:</strong>
-                    <a href={pattern.paper.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 ml-1">{pattern.paper.title}</a>
+                    <a href={(norm?.reference?.url || pattern.paper.url)} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 ml-1">{norm?.reference?.title || pattern.paper.title}</a>
                   </div>
                   <div>
-                    <strong>Authors:</strong> {pattern.paper.authors.slice(0, 3).join(', ')}{pattern.paper.authors.length > 3 ? ' et al.' : ''}
+                    <strong>Authors:</strong> {(norm?.reference?.authors?.length ? norm.reference.authors : pattern.paper.authors).slice(0, 3).join(', ')}{(norm?.reference?.authors?.length ? norm.reference.authors : pattern.paper.authors).length > 3 ? ' et al.' : ''}
                   </div>
                 </div>
+                {norm?.reference?.apa ? (
+                  <div className="mt-2 text-xs text-gray-600">
+                    <strong>APA:</strong> {norm.reference.apa}
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
