@@ -78,22 +78,22 @@ export default async function HomePage() {
           
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto mb-12">
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            <Link href="/patterns" className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
               <div className="text-2xl font-bold text-blue-600">{actualPatternCount}</div>
               <div className="text-sm text-gray-600">Patterns</div>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            </Link>
+            <Link href="/papers" className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
               <div className="text-2xl font-bold text-green-600">73</div>
               <div className="text-sm text-gray-600">Papers</div>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            </Link>
+            <Link href="/logic" className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
               <div className="text-2xl font-bold text-purple-600">{patternCategories.logics.length}</div>
               <div className="text-sm text-gray-600">Logic Layers</div>
-            </div>
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            </Link>
+            <Link href="/categories" className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
               <div className="text-2xl font-bold text-orange-600">{patternCategories.meta.totalCategories}</div>
               <div className="text-sm text-gray-600">Categories</div>
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -204,10 +204,12 @@ export default async function HomePage() {
 
         {/* Browse by Category */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-8 text-center">
-            Browse by Category
-          </h2>
-          
+          <div className="flex items-baseline justify-between mb-2">
+            <h2 className="text-3xl font-semibold text-gray-900 text-center md:text-left">
+              Browse by Category
+            </h2>
+            <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
+          </div>
           {/* Logic Groups */}
           <div className="space-y-8">
             {patternCategories.logics.map((logic: Logic) => (

@@ -73,6 +73,13 @@ function exampleAnchor(fullIndex: string): string {
   return `example-${fullIndex}`;
 }
 
+function hasNormalizedObjectPatterns(val: unknown): val is { patterns: NormalizedPattern[] } {
+  if (!val || typeof val !== 'object') return false;
+  // Use a safe structural check without resorting to 'any'
+  const obj = val as { patterns?: unknown };
+  return Array.isArray(obj.patterns);
+}
+
 export default async function PatternDetail({ params }: { params: Promise<{ paperId: string; categoryIndex: string; patternIndex: string }> }) {
   const { paperId, categoryIndex, patternIndex } = await params;
   const targetId = `${paperId}-${categoryIndex}-${patternIndex}`;
@@ -86,10 +93,10 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
   const pattern = patterns.find(p => p.id === targetId);
   if (!pattern) return notFound();
 
-  const norm = Array.isArray(normalized)
-    ? normalized.find((p) => p.id === targetId)
-    : (normalized && 'patterns' in (normalized as any)
-        ? (normalized as any).patterns.find((p: NormalizedPattern) => p.id === targetId)
+  const norm: NormalizedPattern | null = Array.isArray(normalized)
+    ? (normalized.find((p) => p.id === targetId) || null)
+    : (hasNormalizedObjectPatterns(normalized)
+        ? (normalized.patterns.find((p) => p.id === targetId) || null)
         : null);
 
   const categorySlug = categoryToSlug(pattern.category);
@@ -131,7 +138,7 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
               {(norm?.mediaType || norm?.application?.length || typeof norm?.dependentLLM !== 'undefined' || norm?.turn) && (
                 <div className="mb-4 text-sm">
                   <h2 className="font-semibold text-gray-900 mb-2">Pattern Metadata</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-800">
                     {norm?.mediaType && <div><span className="font-medium">Media Type:</span> {norm.mediaType}</div>}
                     {norm?.turn && <div><span className="font-medium">Turn:</span> {norm.turn === 'multi' ? 'Multi' : 'Single'}</div>}
                     {typeof norm?.dependentLLM !== 'undefined' && (
@@ -142,14 +149,14 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
                         <span className="font-medium">Application:</span>
                         <div className="mt-1 flex flex-wrap gap-1.5">
                           {norm.application.map((a: string) => (
-                            <span key={a} className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded border">{a}</span>
+                            <span key={a} className="inline-block bg-gray-100 text-gray-900 text-xs px-2 py-0.5 rounded border">{a}</span>
                           ))}
                         </div>
                       </div>
                     ) : null}
                   </div>
                   {norm?.aiAssisted ? (
-                    <div className="mt-2 text-xs text-gray-600">
+                    <div className="mt-2 text-xs text-gray-700">
                       This section may include AI-assisted fields inferred by {norm.aiAssistedModel || 'an LLM'} and could be incorrect.
                     </div>
                   ) : null}
@@ -160,7 +167,7 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
               {norm?.template && (
                 <div className="mb-4 text-sm">
                   <h2 className="font-semibold text-gray-900 mb-2">Template</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-800">
                     {norm.template.role && <div><span className="font-medium">Role:</span> {norm.template.role}</div>}
                     {norm.template.context && <div><span className="font-medium">Context:</span> {norm.template.context}</div>}
                     {norm.template.action && <div><span className="font-medium">Action:</span> {norm.template.action}</div>}
