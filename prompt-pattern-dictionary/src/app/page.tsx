@@ -1,43 +1,11 @@
 import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
-import { loadPatternCategories, loadSemanticOverrides } from '@/lib/data/categories';
 import SearchInterface from '@/components/search/SearchInterface';
+import { loadPatternCategories, loadSemanticOverrides } from '@/lib/data/categories';
+import type { PatternCategoriesData, Category, Logic } from '@/lib/data/categories';
 
-interface Pattern {
-  id: string;
-  name: string;
-  description: string;
-  exampleCount: number;
-}
-
-interface Category {
-  name: string;
-  slug: string;
-  description: string;
-  patternCount: number;
-  patterns: Pattern[];
-  hasLatexTable: boolean;
-}
-
-interface Logic {
-  name: string;
-  slug: string;
-  description: string;
-  focus: string;
-  detailedDescription: string;
-  categories: Category[];
-}
-
-interface PatternCategoriesData {
-  meta: {
-    generatedAt: string;
-    description: string;
-    totalLogics: number;
-    totalCategories: number;
-  };
-  logics: Logic[];
-}
+// Use shared types from lib/data/categories to avoid duplication
 
 async function getPatternCategories(): Promise<PatternCategoriesData> {
   return loadPatternCategories();

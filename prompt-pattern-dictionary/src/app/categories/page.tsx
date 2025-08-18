@@ -1,9 +1,6 @@
 import Link from 'next/link';
 import { loadPatternCategories, loadSemanticOverrides, applySemanticCounts } from '@/lib/data/categories';
-
-interface Category { name: string; slug: string; patternCount: number }
-interface Logic { name: string; slug: string; categories: Category[] }
-interface PatternCategoriesData { logics: Logic[]; meta: { totalCategories: number } }
+import type { Category, PatternCategoriesData } from '@/lib/data/categories';
 
 export default async function CategoriesPage() {
   const data = loadPatternCategories() as PatternCategoriesData;
