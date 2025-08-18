@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
+import { loadPatternCategories, loadSemanticOverrides } from '@/lib/data/categories';
 import SearchInterface from '@/components/search/SearchInterface';
 
 interface Pattern {
@@ -39,9 +40,7 @@ interface PatternCategoriesData {
 }
 
 async function getPatternCategories(): Promise<PatternCategoriesData> {
-  const filePath = path.join(process.cwd(), 'public', 'data', 'pattern-categories.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  return JSON.parse(fileContents);
+  return loadPatternCategories();
 }
 
 async function getActualPatternsCount(): Promise<number> {
@@ -54,13 +53,7 @@ async function getActualPatternsCount(): Promise<number> {
 export default async function HomePage() {
   const patternCategories = await getPatternCategories();
   // Load semantic assignments if available to override counts
-  let semantic: null | { categories: Record<string, { patternCount: number }> } = null;
-  const semanticPath = path.join(process.cwd(), 'public', 'data', 'semantic-assignments.json');
-  if (fs.existsSync(semanticPath)) {
-    try {
-      semantic = JSON.parse(fs.readFileSync(semanticPath, 'utf8'));
-    } catch {}
-  }
+  const semantic = loadSemanticOverrides();
   const actualPatternCount = await getActualPatternsCount();
 
   return (
@@ -208,7 +201,15 @@ export default async function HomePage() {
             <h2 className="text-3xl font-semibold text-gray-900 text-center md:text-left">
               Browse by Category
             </h2>
-            <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
+            <div className="flex items-center gap-3">
+              {semantic && (
+                <span title="Counts use semantic category assignments"
+                      className="inline-flex items-center gap-1 text-xs bg-purple-100 text-purple-700 border border-purple-200 rounded px-2 py-1">
+                  Semantic counts
+                </span>
+              )}
+              <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
+            </div>
           </div>
           {/* Logic Groups */}
           <div className="space-y-8">
