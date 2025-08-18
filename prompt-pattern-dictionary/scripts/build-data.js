@@ -26,24 +26,34 @@ const REPO_ROOT = path.join(__dirname, '..', '..');
 
 /**
  * Choose how to run Python scripts:
- * - Prefer `uv run` when available or when uv.lock exists or USE_UV env is set
- * - Fallback to venv python if present
- * - Finally fallback to system python
+ * - Prefer the currently activated Python ("python" on PATH). The user activates env at repo root.
+ * - Only use `uv run` when explicitly requested via USE_UV=1.
+ * - Optionally fall back to repo venv python if present and python command is unavailable (rare).
  */
 function getPythonInvoker() {
-  const useUv = !!process.env.USE_UV
-    || fs.existsSync(path.join(REPO_ROOT, 'uv.lock'))
-    || (spawnSync('uv', ['--version'], { stdio: 'ignore' }).status === 0);
-
-  if (useUv) {
+  // Explicit opt-in to uv
+  if (String(process.env.USE_UV).toLowerCase() === '1' || String(process.env.USE_UV).toLowerCase() === 'true') {
     return { command: 'uv', preArgs: ['run'] };
   }
 
+  // Default: use the activated environment's python
+  // This assumes the user ran the activation script in the shell invoking npm.
+  const pythonOnPath = spawnSync('python', ['--version'], { stdio: 'ignore' });
+  if (pythonOnPath.status === 0) {
+    return { command: 'python', preArgs: [] };
+  }
+
+  // Fallback: repo venv if available
   const venvPythonPath = path.join(REPO_ROOT, 'venv', 'Scripts', 'python.exe');
   if (fs.existsSync(venvPythonPath)) {
     return { command: venvPythonPath, preArgs: [] };
   }
 
+  // Last resort: try "py -3" on Windows or plain python
+  if (process.platform === 'win32') {
+    const py3 = spawnSync('py', ['-3', '--version'], { stdio: 'ignore' });
+    if (py3.status === 0) return { command: 'py', preArgs: ['-3'] };
+  }
   return { command: 'python', preArgs: [] };
 }
 
