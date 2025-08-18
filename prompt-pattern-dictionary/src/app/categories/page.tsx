@@ -14,6 +14,18 @@ function loadJson<T>(rel: string): T {
 export default async function CategoriesPage() {
   const data = loadJson<PatternCategoriesData>('public/data/pattern-categories.json');
   const categories: Category[] = data.logics.flatMap(l => l.categories);
+
+  // Align counts with Home "Browse by Category" by applying semantic overrides when available
+  let semantic: null | { categories: Record<string, { patternCount: number }> } = null;
+  const semanticPath = path.join(process.cwd(), 'public', 'data', 'semantic-assignments.json');
+  if (fs.existsSync(semanticPath)) {
+    try {
+      semantic = JSON.parse(fs.readFileSync(semanticPath, 'utf8'));
+    } catch {
+      // ignore JSON parse issues and fall back to base counts
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
@@ -23,7 +35,7 @@ export default async function CategoriesPage() {
             <Link key={c.slug} href={`/category/${c.slug}`} className="block bg-white rounded p-4 border hover:border-blue-300 hover:bg-blue-50">
               <div className="flex items-center justify-between">
                 <span className="text-blue-700 font-medium">{c.name}</span>
-                <span className="text-xs text-gray-600">{c.patternCount} patterns</span>
+                <span className="text-xs text-gray-600">{(semantic?.categories?.[c.slug]?.patternCount ?? c.patternCount)} patterns</span>
               </div>
             </Link>
           ))}
