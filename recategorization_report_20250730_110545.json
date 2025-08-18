@@ -1,0 +1,499 @@
+{
+  "generation_info": {
+    "timestamp": "2025-07-30T11:05:45.499362",
+    "script_version": "1.0.0",
+    "approach": "Dual categorization (patterns + examples)",
+    "semantic_analysis_source": {
+      "generatedAt": "2025-07-30T10:41:23.793343",
+      "analysisType": "existing_embeddings_semantic_similarity",
+      "totalPatterns": 801,
+      "totalExamples": 1659,
+      "categories": 25
+    }
+  },
+  "statistics": {
+    "total_patterns": 906,
+    "patterns_with_semantic_category": 801,
+    "pattern_categorization_coverage": 88.41059602649007,
+    "total_examples": 1659,
+    "examples_with_semantic_category": 1659,
+    "example_categorization_coverage": 100.0,
+    "pattern_category_changes": 793,
+    "example_pattern_mismatches": 851
+  },
+  "category_distribution": {
+    "patterns": {
+      "Translation": 32,
+      "Output Customisation": 20,
+      "Cross Boundary": 52,
+      "Decomposed Prompting": 79,
+      "Synthesis": 11,
+      "Error Identification": 25,
+      "Assessment": 30,
+      "Refactoring": 76,
+      "Logical Reasoning": 52,
+      "Simulation": 17,
+      "Context Control": 29,
+      "Requirements Elicitation": 10,
+      "Summarising": 43,
+      "Clustering": 2,
+      "Hypothesise": 57,
+      "Calculation": 75,
+      "Contradiction": 6,
+      "Prediction": 76,
+      "Input Semantics": 6,
+      "Comparison": 21,
+      "Classification": 10,
+      "Output Semantics": 2,
+      "Categorising": 2,
+      "Prompt Improvement": 56,
+      "Argument": 12
+    },
+    "examples": {
+      "Refactoring": 142,
+      "Cross Boundary": 116,
+      "Output Semantics": 8,
+      "Output Customisation": 35,
+      "Decomposed Prompting": 110,
+      "Requirements Elicitation": 28,
+      "Summarising": 119,
+      "Simulation": 53,
+      "Context Control": 45,
+      "Prediction": 166,
+      "Error Identification": 53,
+      "Hypothesise": 125,
+      "Prompt Improvement": 78,
+      "Assessment": 72,
+      "Synthesis": 41,
+      "Logical Reasoning": 97,
+      "Calculation": 197,
+      "Comparison": 51,
+      "Translation": 45,
+      "Clustering": 5,
+      "Argument": 33,
+      "Contradiction": 16,
+      "Categorising": 11,
+      "Input Semantics": 10,
+      "Classification": 3
+    }
+  },
+  "analysis": {
+    "pattern_category_changes": [
+      {
+        "pattern_id": "0-0-0",
+        "pattern_name": "Meta Language Creation",
+        "original_category": "Input Semantics",
+        "semantic_category": "Translation",
+        "confidence": 0.3673
+      },
+      {
+        "pattern_id": "0-1-0",
+        "pattern_name": "Output Automater",
+        "original_category": "Output Customization",
+        "semantic_category": "Output Customisation",
+        "confidence": 0.3512
+      },
+      {
+        "pattern_id": "0-1-1",
+        "pattern_name": "Persona",
+        "original_category": "Output Customization",
+        "semantic_category": "Cross Boundary",
+        "confidence": 0.2748
+      },
+      {
+        "pattern_id": "0-1-2",
+        "pattern_name": "Visualization Generator",
+        "original_category": "Output Customization",
+        "semantic_category": "Decomposed Prompting",
+        "confidence": 0.3108
+      },
+      {
+        "pattern_id": "0-1-3",
+        "pattern_name": "Recipe",
+        "original_category": "Output Customization",
+        "semantic_category": "Synthesis",
+        "confidence": 0.2417
+      },
+      {
+        "pattern_id": "0-1-4",
+        "pattern_name": "Template",
+        "original_category": "Output Customization",
+        "semantic_category": "Output Customisation",
+        "confidence": 0.3517
+      },
+      {
+        "pattern_id": "0-2-1",
+        "pattern_name": "Reflection",
+        "original_category": "Error Identification",
+        "semantic_category": "Assessment",
+        "confidence": 0.362
+      },
+      {
+        "pattern_id": "0-3-0",
+        "pattern_name": "Question Refinement",
+        "original_category": "Prompt Improvement",
+        "semantic_category": "Refactoring",
+        "confidence": 0.4569
+      },
+      {
+        "pattern_id": "0-3-1",
+        "pattern_name": "Alternative Approaches",
+        "original_category": "Prompt Improvement",
+        "semantic_category": "Refactoring",
+        "confidence": 0.3251
+      },
+      {
+        "pattern_id": "0-3-2",
+        "pattern_name": "Cognitive Verifier",
+        "original_category": "Prompt Improvement",
+        "semantic_category": "Logical Reasoning",
+        "confidence": 0.3562
+      },
+      {
+        "pattern_id": "0-3-3",
+        "pattern_name": "Refusal Breaker",
+        "original_category": "Prompt Improvement",
+        "semantic_category": "Refactoring",
+        "confidence": 0.3287
+      },
+      {
+        "pattern_id": "0-4-0",
+        "pattern_name": "Flipped Interaction",
+        "original_category": "Interaction",
+        "semantic_category": "Refactoring",
+        "confidence": 0.2822
+      },
+      {
+        "pattern_id": "0-4-1",
+        "pattern_name": "Game Play",
+        "original_category": "Interaction",
+        "semantic_category": "Simulation",
+        "confidence": 0.3552
+      },
+      {
+        "pattern_id": "0-4-2",
+        "pattern_name": "Infinite Generation",
+        "original_category": "Interaction",
+        "semantic_category": "Output Customisation",
+        "confidence": 0.323
+      },
+      {
+        "pattern_id": "1-0-0",
+        "pattern_name": "Requirements Simulator",
+        "original_category": "Requirements Elicitation",
+        "semantic_category": "Simulation",
+        "confidence": 0.4203
+      },
+      {
+        "pattern_id": "1-0-2",
+        "pattern_name": "Change Request Simulation",
+        "original_category": "Requirements Elicitation",
+        "semantic_category": "Simulation",
+        "confidence": 0.4098
+      },
+      {
+        "pattern_id": "1-1-0",
+        "pattern_name": "API Generator",
+        "original_category": "System Design and Simulation",
+        "semantic_category": "Output Customisation",
+        "confidence": 0.2292
+      },
+      {
+        "pattern_id": "1-1-1",
+        "pattern_name": "API Simulator",
+        "original_category": "System Design and Simulation",
+        "semantic_category": "Simulation",
+        "confidence": 0.3571
+      },
+      {
+        "pattern_id": "1-1-2",
+        "pattern_name": "Few-shot Example Generator",
+        "original_category": "System Design and Simulation",
+        "semantic_category": "Summarising",
+        "confidence": 0.2795
+      },
+      {
+        "pattern_id": "1-1-3",
+        "pattern_name": "Domain-Specific Language (DSL) Creation",
+        "original_category": "System Design and Simulation",
+        "semantic_category": "Translation",
+        "confidence": 0.2812
+      }
+    ],
+    "example_pattern_mismatches": [
+      {
+        "pattern_id": "0-0-0",
+        "pattern_name": "Meta Language Creation",
+        "example_index": 0,
+        "pattern_category": "Translation",
+        "example_category": "Refactoring",
+        "pattern_confidence": 0.3673,
+        "example_confidence": 0.2566
+      },
+      {
+        "pattern_id": "0-0-0",
+        "pattern_name": "Meta Language Creation",
+        "example_index": 1,
+        "pattern_category": "Translation",
+        "example_category": "Cross Boundary",
+        "pattern_confidence": 0.3673,
+        "example_confidence": 0.2391
+      },
+      {
+        "pattern_id": "0-1-0",
+        "pattern_name": "Output Automater",
+        "example_index": 0,
+        "pattern_category": "Output Customisation",
+        "example_category": "Output Semantics",
+        "pattern_confidence": 0.3512,
+        "example_confidence": 0.3489
+      },
+      {
+        "pattern_id": "0-1-0",
+        "pattern_name": "Output Automater",
+        "example_index": 2,
+        "pattern_category": "Output Customisation",
+        "example_category": "Refactoring",
+        "pattern_confidence": 0.3512,
+        "example_confidence": 0.2252
+      },
+      {
+        "pattern_id": "0-1-1",
+        "pattern_name": "Persona",
+        "example_index": 1,
+        "pattern_category": "Cross Boundary",
+        "example_category": "Output Customisation",
+        "pattern_confidence": 0.2748,
+        "example_confidence": 0.4056
+      },
+      {
+        "pattern_id": "0-1-1",
+        "pattern_name": "Persona",
+        "example_index": 2,
+        "pattern_category": "Cross Boundary",
+        "example_category": "Refactoring",
+        "pattern_confidence": 0.2748,
+        "example_confidence": 0.2417
+      },
+      {
+        "pattern_id": "0-1-1",
+        "pattern_name": "Persona",
+        "example_index": 3,
+        "pattern_category": "Cross Boundary",
+        "example_category": "Refactoring",
+        "pattern_confidence": 0.2748,
+        "example_confidence": 0.26
+      },
+      {
+        "pattern_id": "0-1-2",
+        "pattern_name": "Visualization Generator",
+        "example_index": 0,
+        "pattern_category": "Decomposed Prompting",
+        "example_category": "Output Customisation",
+        "pattern_confidence": 0.3108,
+        "example_confidence": 0.2153
+      },
+      {
+        "pattern_id": "0-1-3",
+        "pattern_name": "Recipe",
+        "example_index": 0,
+        "pattern_category": "Synthesis",
+        "example_category": "Cross Boundary",
+        "pattern_confidence": 0.2417,
+        "example_confidence": 0.2358
+      },
+      {
+        "pattern_id": "0-1-3",
+        "pattern_name": "Recipe",
+        "example_index": 1,
+        "pattern_category": "Synthesis",
+        "example_category": "Requirements Elicitation",
+        "pattern_confidence": 0.2417,
+        "example_confidence": 0.2341
+      },
+      {
+        "pattern_id": "0-1-3",
+        "pattern_name": "Recipe",
+        "example_index": 2,
+        "pattern_category": "Synthesis",
+        "example_category": "Decomposed Prompting",
+        "pattern_confidence": 0.2417,
+        "example_confidence": 0.2401
+      },
+      {
+        "pattern_id": "0-1-3",
+        "pattern_name": "Recipe",
+        "example_index": 3,
+        "pattern_category": "Synthesis",
+        "example_category": "Summarising",
+        "pattern_confidence": 0.2417,
+        "example_confidence": 0.2413
+      },
+      {
+        "pattern_id": "0-1-3",
+        "pattern_name": "Recipe",
+        "example_index": 4,
+        "pattern_category": "Synthesis",
+        "example_category": "Refactoring",
+        "pattern_confidence": 0.2417,
+        "example_confidence": 0.2903
+      },
+      {
+        "pattern_id": "0-1-3",
+        "pattern_name": "Recipe",
+        "example_index": 5,
+        "pattern_category": "Synthesis",
+        "example_category": "Simulation",
+        "pattern_confidence": 0.2417,
+        "example_confidence": 0.1468
+      },
+      {
+        "pattern_id": "0-1-4",
+        "pattern_name": "Template",
+        "example_index": 1,
+        "pattern_category": "Output Customisation",
+        "example_category": "Context Control",
+        "pattern_confidence": 0.3517,
+        "example_confidence": 0.2827
+      },
+      {
+        "pattern_id": "0-1-4",
+        "pattern_name": "Template",
+        "example_index": 3,
+        "pattern_category": "Output Customisation",
+        "example_category": "Summarising",
+        "pattern_confidence": 0.3517,
+        "example_confidence": 0.2441
+      },
+      {
+        "pattern_id": "0-1-4",
+        "pattern_name": "Template",
+        "example_index": 4,
+        "pattern_category": "Output Customisation",
+        "example_category": "Prediction",
+        "pattern_confidence": 0.3517,
+        "example_confidence": 0.2442
+      },
+      {
+        "pattern_id": "0-2-0",
+        "pattern_name": "Fact Check List",
+        "example_index": 0,
+        "pattern_category": "Error Identification",
+        "example_category": "Output Semantics",
+        "pattern_confidence": 0.3551,
+        "example_confidence": 0.3394
+      },
+      {
+        "pattern_id": "0-2-0",
+        "pattern_name": "Fact Check List",
+        "example_index": 1,
+        "pattern_category": "Error Identification",
+        "example_category": "Context Control",
+        "pattern_confidence": 0.3551,
+        "example_confidence": 0.3281
+      },
+      {
+        "pattern_id": "0-2-0",
+        "pattern_name": "Fact Check List",
+        "example_index": 3,
+        "pattern_category": "Error Identification",
+        "example_category": "Context Control",
+        "pattern_confidence": 0.3551,
+        "example_confidence": 0.2865
+      }
+    ],
+    "total_pattern_changes": 793,
+    "total_example_mismatches": 851
+  },
+  "insights": {
+    "most_common_pattern_categories": [
+      [
+        "Decomposed Prompting",
+        79
+      ],
+      [
+        "Refactoring",
+        76
+      ],
+      [
+        "Prediction",
+        76
+      ],
+      [
+        "Calculation",
+        75
+      ],
+      [
+        "Hypothesise",
+        57
+      ],
+      [
+        "Prompt Improvement",
+        56
+      ],
+      [
+        "Cross Boundary",
+        52
+      ],
+      [
+        "Logical Reasoning",
+        52
+      ],
+      [
+        "Summarising",
+        43
+      ],
+      [
+        "Translation",
+        32
+      ]
+    ],
+    "most_common_example_categories": [
+      [
+        "Calculation",
+        197
+      ],
+      [
+        "Prediction",
+        166
+      ],
+      [
+        "Refactoring",
+        142
+      ],
+      [
+        "Hypothesise",
+        125
+      ],
+      [
+        "Summarising",
+        119
+      ],
+      [
+        "Cross Boundary",
+        116
+      ],
+      [
+        "Decomposed Prompting",
+        110
+      ],
+      [
+        "Logical Reasoning",
+        97
+      ],
+      [
+        "Prompt Improvement",
+        78
+      ],
+      [
+        "Assessment",
+        72
+      ]
+    ],
+    "category_diversity": {
+      "pattern_categories_used": 25,
+      "example_categories_used": 25,
+      "total_available_categories": 25
+    }
+  }
+}

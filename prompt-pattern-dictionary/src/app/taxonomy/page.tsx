@@ -21,25 +21,33 @@ export default async function TaxonomyPage() {
           <p className="text-gray-700">Logic layers and categories derived from papers</p>
         </div>
 
-        <div className="space-y-6 max-w-4xl mx-auto">
-          {data.logics.map(l => (
-            <div key={l.slug} className="bg-white rounded-lg p-4 shadow border">
-              <div className="mb-2">
-                <div className="text-lg font-semibold text-gray-900">{l.name} Logic</div>
-                <div className="text-sm text-gray-700">{l.focus}</div>
-              </div>
-              <ul className="list-disc ml-6 text-gray-900">
-                {l.categories.map(c => (
-                  <li key={c.slug} className="my-1">
-                    <Link href={`/category/${c.slug}`} className="text-blue-700 hover:text-blue-900">
-                      {c.name}
-                    </Link>
-                    <span className="text-xs text-gray-600 ml-2">({c.patternCount} patterns)</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="space-y-4 max-w-4xl mx-auto">
+          {data.logics.map(l => {
+            const total = l.categories.reduce((acc, c) => acc + (c.patternCount || 0), 0);
+            return (
+              <details key={l.slug} className="bg-white rounded-lg p-4 shadow border" open>
+                <summary className="cursor-pointer list-none">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-lg font-semibold text-gray-900">{l.name} Logic</div>
+                      <div className="text-sm text-gray-700">{l.focus}</div>
+                    </div>
+                    <div className="text-xs text-gray-600">{total} patterns • {l.categories.length} categories</div>
+                  </div>
+                </summary>
+                <ul className="list-disc ml-6 mt-3 text-gray-900">
+                  {l.categories.map(c => (
+                    <li key={c.slug} className="my-1">
+                      <Link href={`/category/${c.slug}`} className="text-blue-700 hover:text-blue-900">
+                        {c.name}
+                      </Link>
+                      <span className="text-xs text-gray-600 ml-2">({c.patternCount} patterns)</span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -1,0 +1,371 @@
+{
+    "Source": {
+        "Titles": [
+            {
+                "id":0,
+                "Title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+                "APAReference": "White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., ... & Schmidt, D. C. (2023). A prompt pattern catalog to enhance prompt engineering with chatgpt. arXiv preprint arXiv:2302.11382.",
+                "Authors": [
+                    "Jules White",
+                    "Quchen Fu",
+                    "Sam Hays",
+                    "Michael Sandborn",
+                    "Carlos Olea",
+                    "Henry Gilbert",
+                    "Ashraf Elnashar",
+                    "Jesse Spencer-Smith",
+                    "Douglas C. Schmidt"
+                ],
+                "URLReference": "https://arxiv.org/abs/2302.11382",
+                "datetimeAddedToDB": "2023-07-22T12:00:00.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Input Semantics",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Meta Language Creation",
+                                "ExamplePrompts": [
+                                    "When I say X, I mean Y (or would like you to do Y)",
+                                    "From now on, whenever I type two identifiers separated by a “→”, I am describing a graph. For example, “a → b” is describing a graph with nodes “a” and “b” and an edge between them. If I separate identifiers by “-[w:2, z:3]→”, I am adding properties of the edge, such as a weight or label."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Output Customization",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Output Automater",
+                                "ExamplePrompts": [
+                                    "Whenever you produce an output that has at least one step to take and the following properties (alternatively, always do this)",
+                                    "Produce an executable artifact of type X that will automate these steps",
+                                    "From now on, whenever you generate code that spans more than one file, generate a Python script that can be run to automatically create the specified files or make changes to existing files to insert the generated code."
+                                ]
+                            },
+                            {
+                                "PatternName": "Persona",
+                                "ExamplePrompts": [
+                                    "Act as persona X",
+                                    "Provide outputs that persona X would create",
+                                    "From now on, act as a security reviewer. Pay close attention to the security details of any code that we look at. Provide outputs that a security reviewer would regarding the code.",
+                                    "You are going to pretend to be a Linux terminal for a computer that has been compromised by an attacker. When I type in a command, you are going to output the corresponding text that the Linux terminal would produce."
+                                ]
+                            },
+                            {
+                                "PatternName": "Visualization Generator",
+                                "ExamplePrompts": [
+                                    "Generate an X that I can provide to tool Y to visualize it",
+                                    "Whenever I ask you to visualize something, please create either a Graphviz Dot file or DALL-E prompt that I can use to create the visualization. Choose the appropriate tools based on what needs to be visualized."
+                                ]
+                            },
+                            {
+                                "PatternName": "Recipe",
+                                "ExamplePrompts": [
+                                    "I would like to achieve X",
+                                    "I know that I need to perform steps A,B,C",
+                                    "Provide a complete sequence of steps for me",
+                                    "Fill in any missing steps",
+                                    "Identify any unnecessary steps",
+                                    "I am trying to deploy an application to the cloud. I know that I need to install the necessary dependencies on a virtual machine for my application. I know that I need to sign up for an AWS account. Please provide a complete sequence of steps. Please fill in any missing steps. Please identify any unnecessary steps."
+                                ]
+                            },
+                            {
+                                "PatternName": "Template",
+                                "ExamplePrompts": [
+                                    "I am going to provide a template for your output",
+                                    "X is my placeholder for content",
+                                    "Try to fit the output into one or more of the placeholders that I list",
+                                    "Please preserve the formatting and overall template that I provide",
+                                    "This is the template: PATTERN with PLACEHOLDERS",
+                                    "I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting  and overall template that I provide at https://myapi.com/NAME/profile/JOB"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Error Identification",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Fact Check List",
+                                "ExamplePrompts": [
+                                    "Generate a set of facts that are contained in the output",
+                                    "The set of facts should be inserted in a specific point in the output",
+                                    "The set of facts should be the fundamental facts that could undermine the veracity of the output if any of them are incorrect",
+                                    "From now on, when you generate an answer, create a set of facts that the answer depends on that should be fact-checked and list this set of facts at the end of your output. Only include facts related to cybersecurity."
+                                ]
+                            },
+                            {
+                                "PatternName": "Reflection",
+                                "ExamplePrompts": [
+                                    "Whenever you generate an answer",
+                                    "Explain the reasoning and assumptions behind your answer",
+                                    "(Optional) ...so that I can improve my question",
+                                    "When you provide an answer, please explain the reasoning and assumptions behind your selection of software frameworks. If possible, use specific examples or evidence with associated code samples to support your answer of why the framework is the best selection for the task. Moreover, please address any potential ambiguities or limitations in your answer, in order to provide a more complete and accurate response."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Prompt Improvement",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Question Refinement",
+                                "ExamplePrompts": [
+                                    "Within scope X, suggest a better version of the question to use instead",
+                                    "(Optional) prompt me if I would like to use the better version instead",
+                                    "From now on, whenever I ask a question about a software artifact's security, suggest a better version of the question to use that incorporates information specific to security risks in the language or framework that I am using instead and ask me if I would like to use your question instead.",
+                                    "Whenever I ask a question about how to write some code, suggest a better version of my question that asks how to write the code in a way that minimizes my dependencies on external libraries."
+                                ]
+                            },
+                            {
+                                "PatternName": "Alternative Approaches",
+                                "ExamplePrompts": [
+                                    "Within scope X, if there are alternative ways to accomplish the same thing, list the best alternate approaches \n (Optional) compare/contrast the pros and cons of each approach \n (Optional) include the original way that I asked \n (Optional) prompt me for which approach I would like to use",
+                                    "Whenever I ask you to deploy an application to a specific cloud service, if there are alternative services to accomplish the same thing with the same cloud service provider, list the best alternative services and when compare/contrast the pros and cons of each approach with respect to cost, availability, and maintenance effort and include the original way that I asked. Then ask me which approach I would like to proceed with."
+                                ]
+                            },
+                            {
+                                "PatternName": "Cognitive Verifier",
+                                "ExamplePrompts": [
+                                    "When you are asked a question, follow these rules",
+                                    "Generate a number of additional questions that would help more accurately answer the question",
+                                    "Combine the answers to the individual questions to produce the final answer to the overall question",
+                                    "When I ask you a question, generate three additional questions that would help you give a more accurate answer. When I have answered the three questions, combine the answers to produce the final answers to my original question.",
+                                    "When I ask you a question, generate three additional questions that would help you give a more accurate answer. Assume that I know little about the topic that we are discussing and please define any terms that are not general knowledge. When I have answered the three questions, combine the answers to produce the final answers to my original question."
+                                ]
+                            },
+                            {
+                                "PatternName": "Refusal Breaker",
+                                "ExamplePrompts": [
+                                    "Whenever you can't answer a question",
+                                    "Explain why you can't answer the question",
+                                    "Provide one or more alternative wordings of the question that you could answer",
+                                    "Whenever you can't answer a question, explain why and provide one or more alternate wordings of the question that you can't answer so that I can improve my questions."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Interaction",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Flipped Interaction",
+                                "ExamplePrompts": [
+                                    "I would like you to ask me questions to achieve X",
+                                    "You should ask questions until this condition is met or to achieve this goal (alternatively, forever)",
+                                    "(Optional) ask me the questions one at a time, two at a time, etc.",
+                                    "From now on, I would like you to ask me questions to deploy a Python application to AWS. When you have enough information to deploy the application, create a Python script to automate the deployment."
+                                ]
+                            },
+                            {
+                                "PatternName": "Game Play",
+                                "ExamplePrompts": [
+                                    "Create a game for me around X",
+                                    "One or more fundamental rules of the game",
+                                    "We are going to play a cybersecurity game. You are going to pretend to be a Linux terminal for a computer that has been compromised by an attacker. When I type in a command, you are going to output the corresponding text that the Linux terminal would produce. I am going to use commands to try and figure out how the system was compromised. The attack should have done one or more of the following things: (1) launched new processes, (2) changed files, (3) opened new ports to receive communication, (4) created new outbound connections, (5) changed passwords, (6) created new user accounts, or (7) read and stolen information. To start the game, print a scenario of what happened that led to my investigation and make the description have clues that I can use to get started."
+                                ]
+                            },
+                            {
+                                "PatternName": "Infinite Generation",
+                                "ExamplePrompts": [
+                                    "I would like you to generate output forever, X output(s) at a time.",
+                                    "(Optional) here is how to use the input I provide between outputs.",
+                                    "(Optional) stop when I ask you to.",
+                                    "From now on, I want you to generate a name and job until I say stop. I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting and overall template that I provide: https://myapi.com/NAME/profile/JOB"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Context Control",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Context Manager",
+                                "ExamplePrompts": [
+                                    "Within scope X",
+                                    "Please consider Y",
+                                    "Please ignore Z",
+                                    "(Optional) start over",
+                                    "When analyzing the following pieces of code, only consider security aspects.",
+                                    "When analyzing the following pieces of code, do not consider formatting or naming conventions.",
+                                    "Ignore everything that we have discussed. Start over."
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id":1,
+                "Title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+                "APAReference": "White, J., Hays, S., Fu, Q., Spencer-Smith, J., & Schmidt, D. C. (2023). Chatgpt prompt patterns for improving code quality, refactoring, requirements elicitation, and software design. arXiv preprint arXiv:2303.07839.",
+                "Authors": [
+                    "Jules White",
+                    "Sam Hays",
+                    "Quchen Fu",
+                    "Jesse Spencer-Smith",
+                    "Douglas C. Schmidt"
+                ],
+                "URLReference": "https://arxiv.org/abs/2303.07839",
+                "datetimeAddedToDB": "2023-07-22T12:00:00.000Z",
+                "CategoriesAndPatterns": [
+                    {
+                        "PatternCategory": "Requirements Elicitation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Requirements Simulator",
+                                "ExamplePrompts": [
+                                    "I want you to act as the system",
+                                    "Use the requirements to guide your behavior",
+                                    "I will ask you to do X, and you will tell me if X is possible given the requirements.",
+                                    "If X is possible, explain why using the requirements.",
+                                    "If I can't do X based on the requirements, write the missing requirements needed in format Y.",
+                                    "Now, I want you to act as this system. Use the requirements to guide your behavior. I am going to say, I want to do X, and you will tell me if X is possible given the requirements. If X is possible, provide a step-by-step set of instructions on how I would accomplish it and provide additional details that would help implement the requirement. If I can't do X based on the requirements, write the missing requirements to make it possible as user stories.",
+                                    "Now, I want you to act as this system in a text based simulator of the system. Use the requirements to guide your behavior. You will describe the user interface for the system, based on the requirements, and what I can do on each screen. I am going to say, I want to do X, and you will tell me if X is possible given the requirements and the current screen. If X is possible, provide a step-by-step set of instructions how I would accomplish it and provide additional details that would help implement the requirement. If I can't do X based on the requirements, write the missing requirements to make it possible as user stories. Whenever the state of the user interface changes, update the user on what they are looking at. Tell me what I am looking at in the system and ask me what I want to do."
+                                ]
+                            },
+                            {
+                                "PatternName": "Specification Disambiguation",
+                                "ExamplePrompts": [
+                                    "Within this scope",
+                                    "Consider these requirements or specifications",
+                                    "Point out any areas of ambiguity or potentially unintended outcomes",
+                                    "The following will represent system requirements. Point out any areas that could be construed as ambiguous or lead to unintended outcomes. Provide ways in which the language can be more precise."
+                                ]
+                            },
+                            {
+                                "PatternName": "Change Request Simulation",
+                                "ExamplePrompts": [
+                                    "My software system architecture is X",
+                                    "The system must adhere to these constraints",
+                                    "I want you to simulate a change to the system that I will describe",
+                                    "Describe the impact of that change in terms of Q",
+                                    "This is the change to my system",
+                                    "My software system uses the OpenAPI specification that you generated earlier. I want you to simulate a change where a new mandatory field needs to be added to the prompts. List which functions and which files will need to be modified."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "System Design and Simulation",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "API Generator",
+                                "ExamplePrompts": [
+                                    "Using system description X",
+                                    "Generate an API specification for the system",
+                                    "The API specification should be in format Y",
+                                    "Generate an OpenAPI specification for a web application that would implement the listed requirements."
+                                ]
+                            },
+                            {
+                                "PatternName": "API Simulator",
+                                "ExamplePrompts": [
+                                    "Act as the described system using specification X",
+                                    "I will type in requests to the API in format Y",
+                                    "You will respond with the appropriate response in format Z based on specification X",
+                                    "Act as this web application based on the OpenAPI specification. I will type in HTTP requests in plain text and you will respond with the appropriate HTTP response based on the OpenAPI specification."
+                                ]
+                            },
+                            {
+                                "PatternName": "Few-shot Example Generator",
+                                "ExamplePrompts": [
+                                    "I am going to provide you system X",
+                                    "Create a set of N examples that demonstrate usage of system X",
+                                    "Make the examples as complete as possible in their coverage",
+                                    "(Optionally) The examples should be based on the public interfaces of system X",
+                                    "(Optionally) The examples should focus on X",
+                                    "I am going to provide you code. Create a set of 10 examples that demonstrate usage of this OpenAPI specification related to registration of new users.",
+                                    "I am going to provide you code. Create a set of 10 examples that demonstrate usage of this code. Make the examples as complete as possible in their coverage. The examples should be based on the public interfaces of the code."
+                                ]
+                            },
+                            {
+                                "PatternName": "Domain-Specific Language (DSL) Creation",
+                                "ExamplePrompts": [
+                                    "I want you to create a domain-specific language for X",
+                                    "The syntax of the language must adhere to the following constraints",
+                                    "Explain the language to me and provide some examples",
+                                    "I want you to create a domain-specific language to document requirements. The syntax of the language should be based on YAML. Explain the language to me and provide some examples."
+                                ]
+                            },
+                            {
+                                "PatternName": "Architectural Possibilities",
+                                "ExamplePrompts": [
+                                    "I am developing a software system with X for Y",
+                                    "The system must adhere to these constraints",
+                                    "Describe N possible architectures for this system",
+                                    "Describe the architecture in terms of Q",
+                                    "I am developing a python web application using FastApi that allows users to publish interesting ChatGPT prompts, similar to twitter. Describe three possible architectures for this system. Describe the architecture with respect to modules and the functionality that each module contains."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Code Quality",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Code Clustering",
+                                "ExamplePrompts": [
+                                    "Within scope X",
+                                    "I want you to write or refactor code in a way that separates code with property Y from code that has property Z.",
+                                    "These are examples of code with property Y.",
+                                    "These are examples of code with property Z.",
+                                    "Whenever I ask you to write code, I want you to write code in a way that separates functions with side-effects, such as file system, database, or network access, from the functions without side-effects."
+                                ]
+                            },
+                            {
+                                "PatternName": "Intermediate Abstraction",
+                                "ExamplePrompts": [
+                                    "If you write or refactor code with property X that uses other code with property Y",
+                                    "(Optionally) Define property X",
+                                    "(Optionally) Define property Y",
+                                    "Insert an intermediate abstraction Z between X and Y",
+                                    "(Optionally) Abstraction Z should have these properties",
+                                    "Whenever I ask you to write code, I want you to separate the business logic as much as possible from any underlying 3rd-party libraries. Whenever business logic uses a 3rd-party library, please write an intermediate abstraction that the business logic uses instead so that the 3rd-party library could be replaced with an alternate library if needed."
+                                ]
+                            },
+                            {
+                                "PatternName": "Principled Code",
+                                "ExamplePrompts": [
+                                    "Within this scope generate, refactor, or create code to adhere to named Principle X",
+                                    "From now on, whenever you write, refactor, or review code, make sure it adheres to SOLID design principles."
+                                ]
+                            },
+                            {
+                                "PatternName": "Hidden Assumptions",
+                                "ExamplePrompts": [
+                                    "Within this scope",
+                                    "List the assumptions that this code makes",
+                                    "(Optionally) Estimate how hard it would be to change these assumptions or their likelyhood of changing",
+                                    "List the assumptions that this code makes and how hard it would be to change each of them given the current code structure.",
+                                    "List the assumptions in this code that make it difficult to change from a MongoDB database to MySQL."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "PatternCategory": "Refactoring",
+                        "PromptPatterns": [
+                            {
+                                "PatternName": "Pseudo-code Refactoring",
+                                "ExamplePrompts": [
+                                    "Refactor the code",
+                                    "So that it matches this pseudo-code",
+                                    "Match the structure of the pseudo-code as closely as possible",
+                                    "Refactor the following code to match the following psuedo-code. Match the structure of the pseudo-code as closely as possible. files = scan_features() for file in files: print file name for file in files: load feature mount router create_openapi() main():launch app"
+                                ]
+                            },
+                            {
+                                "PatternName": "Data-guided Refactoring",
+                                "ExamplePrompts": [
+                                    "Refactor the code",
+                                    "So that its input, output, or stored data format is X",
+                                    "Provide one or more examples of X",
+                                    "Let's refactor execute graph so that graph has the following format {'graph':{ ...current graph format... }, 'sorted nodes': { 'a': ['b','c'...],...}}"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+         

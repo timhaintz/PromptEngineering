@@ -1,0 +1,53 @@
+digraph AI_Agent_Architectures {
+    rankdir=LR;
+    node [shape=box, style=filled, color=lightblue];
+
+    subgraph cluster_0 {
+        label = "Single Agent Architectures";
+        style=filled;
+        color=lightgrey;
+        
+        ReAct [label="ReAct"];
+        RAISE [label="RAISE"];
+        Reflexion [label="Reflexion"];
+        AutoGPT_P [label="AutoGPT+P"];
+        LATS [label="LATS"];
+        
+        ReAct -> RAISE [label="Memory Mechanism"];
+        ReAct -> Reflexion [label="Self-Reflection"];
+        AutoGPT_P -> LATS [label="Tree Search"];
+    }
+
+    subgraph cluster_1 {
+        label = "Multi-Agent Architectures";
+        style=filled;
+        color=lightgrey;
+        
+        Embodied_LLM [label="Embodied LLM Agents"];
+        DyLAN [label="DyLAN"];
+        AgentVerse [label="AgentVerse"];
+        MetaGPT [label="MetaGPT"];
+        
+        Embodied_LLM -> DyLAN [label="Dynamic Teams"];
+        AgentVerse -> MetaGPT [label="Structured Outputs"];
+    }
+
+    subgraph cluster_2 {
+        label = "Key Components";
+        style=dashed;
+        color=grey;
+        
+        Reasoning [label="Reasoning"];
+        Planning [label="Planning"];
+        Tool_Calling [label="Tool Calling"];
+        Feedback [label="Feedback"];
+        Leadership [label="Leadership"];
+        Communication [label="Communication"];
+        
+        Reasoning -> Planning;
+        Planning -> Tool_Calling;
+        Tool_Calling -> Feedback;
+        Feedback -> Leadership;
+        Leadership -> Communication;
+    }
+}

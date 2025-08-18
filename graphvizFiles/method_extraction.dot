@@ -1,0 +1,32 @@
+digraph G {
+    node [shape=box]; // Set the default node shape to box for better readability
+
+    // Define nodes
+    DownloadPDF [label="Download Prompt Engineering PDF Papers"];
+    ScanPapers [label="Manually Scan Papers for PEs and PPs"];
+    ExtractText [label="Extract Text from PDF using extractTextFromPDF.py"];
+    ProcessText [label="Process Text using Azure OpenAI GPT model"];
+    ZeroShot [label="Zero-Shot prompting with expected JSON output"];
+    FewShot [label="Few-Shot prompting with expected JSON output"];
+    ManualConfirm [label="Manually Confirm PPs and PEs"];
+    AddToJSON [label="Add PPs and PEs to promptpatterns.json"];
+    DecisionZeroShot [label="Zero-Shot Successful?", shape=diamond, height=1]; // Decision node for Zero-Shot
+    DecisionFewShot [label="Few-Shot Successful?", shape=diamond, height=1]; // New decision node for Few-Shot
+    ManualExtraction [label="Manual Extraction"]; // New node for manual extraction
+
+    // Define edges
+    DownloadPDF -> ScanPapers;
+    ScanPapers -> ExtractText;
+    ExtractText -> ProcessText;
+    ProcessText -> ZeroShot;
+    ZeroShot -> DecisionZeroShot;
+    DecisionZeroShot -> FewShot [label="No"];
+    DecisionZeroShot -> ManualConfirm [label="Yes"];
+    FewShot -> DecisionFewShot;
+    DecisionFewShot -> ManualConfirm [label="Yes"];
+    DecisionFewShot -> ManualExtraction [label="No"]; // Edge for unsuccessful Few-Shot
+    ManualExtraction -> ManualConfirm; // Assuming manual extraction leads to manual confirmation
+
+    ManualConfirm -> AddToJSON;
+
+}

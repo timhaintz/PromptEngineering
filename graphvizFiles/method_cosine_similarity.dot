@@ -1,0 +1,26 @@
+digraph G {
+    // Define nodes
+    "Import promptpatterns.json file" [shape=box];
+    "Choose comparison method" [shape=diamond, height=1];
+    "Category Definition & PEs" [shape=box];
+    "PE & PEs" [shape=box];
+    "Choose result filtering method" [shape=diamond, height=1];
+    "top_n results" [shape=box];
+    "Cosine Similarity threshold -1 to 1" [shape=box];
+    "Generate Embeddings" [shape=box];
+    "Cosine Similarity - Loop through promptpatterns.json" [shape=box];
+    "Output based on promptpatterns.json" [shape=box, label="OUTPUT:\nN value:\nPromptExample:\nPromptPattern:\nAuthors:\nTitle:\nPE Index:\nCosineSimilarity:"];
+
+    // Define edges
+    "Import promptpatterns.json file" -> "Choose comparison method";
+    "Choose comparison method" -> "Category Definition & PEs";
+    "Choose comparison method" -> "PE & PEs";
+    "Category Definition & PEs" -> "Choose result filtering method";
+    "PE & PEs" -> "Choose result filtering method";
+    "Choose result filtering method" -> "top_n results";
+    "Choose result filtering method" -> "Cosine Similarity threshold -1 to 1";
+    "top_n results" -> "Generate Embeddings";
+    "Cosine Similarity threshold -1 to 1" -> "Generate Embeddings";
+    "Generate Embeddings" -> "Cosine Similarity - Loop through promptpatterns.json";
+    "Cosine Similarity - Loop through promptpatterns.json" -> "Output based on promptpatterns.json";
+}

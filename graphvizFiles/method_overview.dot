@@ -1,0 +1,24 @@
+digraph G {
+    rankdir=LR;
+
+    subgraph cluster_0 {
+        rank=same;
+        node [style=filled,color=lightgrey,shape=box];
+        "Collect Prompt Engineering Resources" -> "Coding AI to help extract PPs and PEs" -> "Extract PPs and PEs - Human Verified";
+        label = "Row 1";
+        style=invis;
+    }
+
+    subgraph cluster_1 {
+        rank=same;
+        node [style=filled,shape=box];
+        "Code Logic Between Human and AI" -> "PP and PE Categorisation as per Logic" -> "Name and Index System" -> "Add to GitHub Taxonomy";
+        label = "Row 2";
+        style=invis;
+    }
+
+    "Collect Prompt Engineering Resources" -> "Code Logic Between Human and AI" [style=invis];
+    "Coding AI to help extract PPs and PEs" -> "PP and PE Categorisation as per Logic" [style=invis];
+    "Extract PPs and PEs - Human Verified" -> "Name and Index System" [style=invis];
+    "Extract PPs and PEs - Human Verified" -> "Name and Index System" [style=invis];
+}

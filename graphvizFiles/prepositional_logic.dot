@@ -1,0 +1,14 @@
+digraph G {
+    "Prepositional Logic" -> "Across";
+    "Prepositional Logic" -> "At";
+    "Prepositional Logic" -> "Beyond";
+    "Prepositional Logic" -> "In";
+    "Prepositional Logic" -> "Out";
+    "Prepositional Logic" -> "Over";
+    "Across" -> "Bridge the gap between topics";
+    "At" -> "Discover the topic";
+    "Beyond" -> "Extend the limits of a topic";
+    "In" -> "Dive into the topic";
+    "Out" -> "Expand the horizon of a topic";
+    "Over" -> "Span and review a topic";
+}
