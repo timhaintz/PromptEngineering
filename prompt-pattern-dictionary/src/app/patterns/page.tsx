@@ -107,7 +107,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
           <form method="get" className="bg-white rounded-lg p-3 shadow border flex flex-col md:flex-row md:items-end gap-3">
             <div className="flex flex-col">
               <label htmlFor="sort" className="text-xs text-gray-600">Sort</label>
-              <select id="sort" name="sort" defaultValue={sort} className="border rounded px-2 py-1 text-sm">
+              <select id="sort" name="sort" defaultValue={sort} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
                 <option value="name_asc">Name (A→Z)</option>
                 <option value="name_desc">Name (Z→A)</option>
                 <option value="examples_asc">Examples (Few→Many)</option>
@@ -116,21 +116,21 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
             </div>
             <div className="flex flex-col">
               <label htmlFor="logic" className="text-xs text-gray-600">Logic</label>
-              <select id="logic" name="logic" defaultValue={logicFilter} className="border rounded px-2 py-1 text-sm">
+              <select id="logic" name="logic" defaultValue={logicFilter} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
                 <option value="">All</option>
                 {logicOptions.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
               </select>
             </div>
             <div className="flex flex-col">
               <label htmlFor="category" className="text-xs text-gray-600">Category</label>
-              <select id="category" name="category" defaultValue={categoryFilter} className="border rounded px-2 py-1 text-sm">
+              <select id="category" name="category" defaultValue={categoryFilter} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
                 <option value="">All</option>
                 {visibleCategoryOptions.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
               </select>
             </div>
             <div className="flex flex-col">
               <label htmlFor="turn" className="text-xs text-gray-600">Turn</label>
-              <select id="turn" name="turn" defaultValue={turnFilter} className="border rounded px-2 py-1 text-sm">
+              <select id="turn" name="turn" defaultValue={turnFilter} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
                 <option value="">All</option>
                 <option value="single">Single</option>
                 <option value="multi">Multi</option>
