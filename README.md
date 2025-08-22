@@ -146,3 +146,50 @@ node .\prompt-pattern-dictionary\scripts\build-data.js --enrich --enrich-limit 1
   - `--enrich-fields <csv>` to scope fields: `template,application,dependentLLM,turn`
 
 - GPT-5 temperature behavior: The enrichment pipeline does not set `temperature` for GPT-5 (Azure requires default temperature). The client also retries without `temperature` if the service rejects the parameter.
+
+### Build and Run (Windows PowerShell)
+
+Run these from the repository root unless noted.
+
+1) Install dependencies for the web app:
+
+```powershell
+cd .\prompt-pattern-dictionary
+npm install
+```
+
+2) Build data (required before first run and whenever source JSON changes):
+
+```powershell
+# Optional: prefer uv for any Python steps in the pipeline
+$env:USE_UV = "1"
+node .\scripts\build-data.js
+```
+
+3) Start in development mode:
+
+```powershell
+npm run dev
+# Open http://localhost:3000
+```
+
+4) Build for production and start the server:
+
+```powershell
+npm run build
+npm start
+# Open http://localhost:3000
+```
+
+Notes:
+- The `npm run build` script runs the full pipeline: data transform, normalized schema, semantic categories, and `next build`.
+- Use `npm run export` if you want a static export (files in `prompt-pattern-dictionary/out`).
+
+### Known issue: OneDrive/OneNote locking `.next` folder
+
+If the repo is inside a OneDrive-synced directory (including OneNote notebooks), the `.next` build folder may be locked or partially synced, causing build or dev server errors (e.g., EBUSY/EPERM on Windows).
+
+Workarounds:
+- Exclude the project (or at least the `.next` folder) from OneDrive sync.
+- Move the project outside OneDrive-synced paths (recommended for Next.js development).
+- If a lock occurs, close OneNote/OneDrive temporarily, delete `.next`, and re-run `npm run dev` or `npm run build`.

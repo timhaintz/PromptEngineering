@@ -134,88 +134,104 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
               </div>
               {pattern.description && <p className="text-gray-700 mb-3">{pattern.description}</p>}
 
-              {/* Media Type, Application, Dependent LLM, Turn */}
-              {(norm?.mediaType || norm?.application?.length || typeof norm?.dependentLLM !== 'undefined' || norm?.turn) && (
+              {/* Left-column labels: Media Type, Dependent LLM, Application, Turn, Template */}
+              {(norm?.mediaType || norm?.application?.length || typeof norm?.dependentLLM !== 'undefined' || norm?.turn || norm?.template) && (
                 <div className="mb-4 text-sm">
-                  <h2 className="font-semibold text-gray-900 mb-2">Pattern Metadata</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-800">
-                    {norm?.mediaType && <div><span className="font-medium">Media Type:</span> {norm.mediaType}</div>}
-                    {norm?.turn && <div><span className="font-medium">Turn:</span> {norm.turn === 'multi' ? 'Multi' : 'Single'}</div>}
+                  <dl className="grid grid-cols-1 md:grid-cols-[max-content_1fr] gap-x-4 gap-y-1 items-start text-gray-800">
+                    {norm?.mediaType && (
+                      <>
+                        <dt className="font-semibold text-slate-800">Media Type:</dt>
+                        <dd className="mb-1">{norm.mediaType}</dd>
+                      </>
+                    )}
                     {typeof norm?.dependentLLM !== 'undefined' && (
-                      <div className="md:col-span-2"><span className="font-medium">Dependent LLM:</span> {norm?.dependentLLM || 'N/A'}</div>
+                      <>
+                        <dt className="font-semibold text-slate-800">Dependent LLM:</dt>
+                        <dd className="mb-1">{norm?.dependentLLM || 'N/A'}</dd>
+                      </>
                     )}
                     {norm?.application?.length ? (
-                      <div className="md:col-span-2">
-                        <span className="font-medium">Application:</span>
-                        <div className="mt-1 flex flex-wrap gap-1.5">
-                          {norm.application.map((a: string) => (
-                            <span key={a} className="inline-block bg-gray-100 text-gray-900 text-xs px-2 py-0.5 rounded border">{a}</span>
-                          ))}
-                        </div>
-                      </div>
+                      <>
+                        <dt className="font-semibold text-slate-800">Application:</dt>
+                        <dd className="mb-1">
+                          <span className="inline-flex flex-wrap gap-1.5">
+                            {norm.application.map((a: string) => (
+                              <span key={a} className="inline-block bg-gray-100 text-gray-900 text-xs px-2 py-0.5 rounded border">{a}</span>
+                            ))}
+                          </span>
+                        </dd>
+                      </>
                     ) : null}
-                  </div>
+                    {norm?.turn && (
+                      <>
+                        <dt className="font-semibold text-slate-800">Turn:</dt>
+                        <dd className="mb-1">{norm.turn === 'multi' ? 'Multi' : 'Single'}</dd>
+                      </>
+                    )}
+                    {norm?.template && (
+                      <>
+                        <dt className="font-semibold text-slate-800">Template:</dt>
+                        <dd className="mb-1">
+                          <details>
+                            <summary className="cursor-pointer select-none text-blue-700 hover:text-blue-900">Show template</summary>
+                            <div className="mt-2 whitespace-pre-wrap text-gray-800">
+                              {[
+                                norm.template.role ? `Role: ${norm.template.role}` : null,
+                                norm.template.context ? `Context: ${norm.template.context}` : null,
+                                norm.template.action ? `Action: ${norm.template.action}` : null,
+                                norm.template.format ? `Format: ${norm.template.format}` : null,
+                                norm.template.response ? `Response: ${norm.template.response}` : null,
+                              ].filter(Boolean).join('\n')}
+                            </div>
+                          </details>
+                        </dd>
+                      </>
+                    )}
+                  </dl>
                   {norm?.aiAssisted ? (
                     <div className="mt-2 text-xs text-gray-700">
-                      This section may include AI-assisted fields inferred by {norm.aiAssistedModel || 'an LLM'} and could be incorrect.
+                      Some fields may be AI-assisted (model: {norm.aiAssistedModel || 'LLM'}) and could contain inaccuracies.
                     </div>
                   ) : null}
                 </div>
               )}
 
-              {/* Template (from normalized if available) */}
-              {norm?.template && (
-                <div className="mb-4 text-sm">
-                  <h2 className="font-semibold text-gray-900 mb-2">Template</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-800">
-                    {norm.template.role && <div><span className="font-medium">Role:</span> {norm.template.role}</div>}
-                    {norm.template.context && <div><span className="font-medium">Context:</span> {norm.template.context}</div>}
-                    {norm.template.action && <div><span className="font-medium">Action:</span> {norm.template.action}</div>}
-                    {norm.template.format && <div><span className="font-medium">Format:</span> {norm.template.format}</div>}
-                    {norm.template.response && <div className="md:col-span-2"><span className="font-medium">Response:</span> {norm.template.response}</div>}
-                  </div>
-                </div>
-              )}
-
-              {/* Tags */}
-              {pattern.tags?.length ? (
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {pattern.tags.slice(0, 8).map(tag => (
-                    <span key={tag} className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">{tag}</span>
-                  ))}
-                </div>
-              ) : null}
-
-              {/* Prompt Examples */}
+              {/* Prompt Examples (collapsible with +/-) */}
               <div className="mt-4">
-                <h2 className="text-lg font-semibold text-gray-900 mb-2">Prompt Examples ({pattern.examples.length})</h2>
-                <div className="space-y-3">
-                  {pattern.examples.map(ex => {
-                    const fullIndex = `${pattern.id}-${ex.index}`;
-                    const similars = similarExamples?.similar?.[fullIndex] || [];
-                    return (
-                      <div key={ex.id} id={exampleAnchor(fullIndex)} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
-                        <div className="flex items-start gap-2">
-                          <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">{fullIndex}</span>
-                          <p className="text-gray-800 text-sm break-words">{ex.content}</p>
-                        </div>
-                        {similars.length ? (
-                          <div className="mt-2 text-[11px] text-gray-600">
-                            <div className="font-semibold text-gray-800 mb-1">Similar Examples</div>
-                            <div className="flex flex-wrap gap-1.5">
-                              {similars.slice(0, 8).map(se => (
-                                <Link key={se.id} href={exampleLink(se.id)} className="inline-flex items-center rounded bg-gray-100 px-1.5 py-0.5 border border-gray-200 hover:bg-blue-50">
-                                  <span className="font-mono mr-1">{se.id}</span>
-                                  <span className="text-gray-500">{se.similarity.toFixed(2)}</span>
-                                </Link>
-                              ))}
-                            </div>
+                <details open>
+                  <summary className="text-lg font-semibold text-gray-900 cursor-pointer select-none">
+                    Prompt Examples ({pattern.examples.length})
+                  </summary>
+                  <div className="mt-2 space-y-3">
+                    {pattern.examples.map(ex => {
+                      const fullIndex = `${pattern.id}-${ex.index}`;
+                      const similars = similarExamples?.similar?.[fullIndex] || [];
+                      return (
+                        <div key={ex.id} id={exampleAnchor(fullIndex)} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
+                          <div className="flex items-start gap-2">
+                            <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">{fullIndex}</span>
+                            <p className="text-gray-800 text-sm break-words">{ex.content}</p>
                           </div>
-                        ) : null}
-                      </div>
-                    );
-                  })}
-                </div>
+                          {similars.length ? (
+                            <div className="mt-2 text-[11px] text-gray-600">
+                              <details>
+                                <summary className="font-semibold text-gray-800 cursor-pointer select-none">Similar Examples</summary>
+                                <div className="mt-1 flex flex-wrap gap-1.5">
+                                  {similars.slice(0, 8).map(se => (
+                                    <Link key={se.id} href={exampleLink(se.id)} className="inline-flex items-center rounded bg-gray-100 px-1.5 py-0.5 border border-gray-200 hover:bg-blue-50">
+                                      <span className="font-mono mr-1">{se.id}</span>
+                                      <span className="text-gray-500">{se.similarity.toFixed(2)}</span>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </details>
+                            </div>
+                          ) : null}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </details>
               </div>
 
               {/* Related PPs */}

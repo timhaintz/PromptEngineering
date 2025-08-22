@@ -58,12 +58,56 @@ Create the definitive reference tool for cybersecurity prompt engineering patter
 - **Cross-references** to related patterns
 - **Security implications** and warnings where relevant
 
+##### 2.1.1 Prompt Pattern page layout (UI spec)
+Applies to Prompt Pattern pages only.
+
+- Remove the "Pattern Metadata" header block entirely.
+- Keep and display the Pattern ID near the title area as a muted badge: `ID: <patternId>` (e.g., `ID: 1-1-0`).
+- Present the following keys in a single left-column label layout with bold labels and values on the right:
+  - Media Type:
+  - Dependent LLM:
+  - Application: (render tags inline on the same line, as chips/pills; do not wrap label to a new line)
+  - Turn:
+  - Template:
+- Recommended markup: definition list `<dl>` with `<dt>` for the left column and `<dd>` for the right column; recommended fixed label width (e.g., 10–12ch) so values align.
+- Styling guidance (Tailwind): `grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1`, `dt font-semibold text-slate-700 dark:text-slate-200`.
+- Template value supports multiline code/prompt; collapse after ~3 lines with a "Show more" control for long content.
+
 #### 2.2 Example Management
 - **Multiple examples** per pattern with individual indexing
 - **Code/prompt formatting** with syntax highlighting
 - **Copy-to-clipboard** functionality
 - **Example variations** and modifications
 - **Context explanations** for complex examples
+
+##### 2.2.1 Prompt Examples section behavior
+- The entire "Prompt Examples (N)" section is collapsible via a +/- toggle button next to the section heading.
+  - Default state: expanded. Remember the last state per pattern in `localStorage`.
+  - Accessibility: use a `<button aria-expanded>` control; update `aria-controls` to point at the examples container.
+- Each prompt example row/card includes a control to expand/collapse its "Similar Examples" list.
+  - Use a chevron or +/- icon at the right end of the example header. Default state: collapsed.
+  - When expanded, show a horizontal list of chips containing `ExampleID SimilarityScore` (e.g., `1-1-2-0 0.54`). Clicking a chip navigates to that example.
+  - Keep the Prompt Example ID visible on the example itself (as a small badge near the example title/first line).
+
+##### 2.2.2 Prompt Example card template (UI)
+Structure and required elements for each example in the list/grid:
+
+- Header row
+  - [Badge] Example ID (e.g., `1-1-0-0`)
+  - [Title/First line] Truncated first sentence of the prompt (or explicit example title, if present)
+  - [Actions]
+    - Copy button (copies the full prompt text)
+    - Expand Similar Examples toggle (chevron or +/-)
+- Body
+  - Prompt text with syntax highlighting; preserve whitespace and code fences
+  - Optional context/notes below the prompt, if available
+- Similar Examples panel (collapsible)
+  - Chips: `ExampleID Score` (score to two decimals). On hover, show full example name; on click, navigate.
+  - For long lists, enable horizontal scroll on small screens.
+- Accessibility
+  - All interactive icons are buttons with labels (`aria-label`, `title`).
+  - Keyboard: Enter/Space toggles collapsibles; copy button is focusable.
+  - Provide `aria-live="polite"` toast/snackbar when a copy action succeeds.
 
 ### 3. Content Organization
 
