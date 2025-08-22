@@ -32,7 +32,7 @@ function cosineSimilarity(a, b) {
   }
   const mag = Math.sqrt(na) * Math.sqrt(nb);
   return mag === 0 ? 0 : dot / mag;
-}
+} 
 
 function safeMkdir(dir) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
