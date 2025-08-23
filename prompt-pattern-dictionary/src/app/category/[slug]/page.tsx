@@ -116,6 +116,27 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
+  // Derive related categories using semantic similarity across patterns in this category
+  const relatedCategoryScores: Record<string, { slug: string; name: string; score: number; count: number }> = {};
+  if (semantic?.patterns) {
+    for (const p of categoryPatterns) {
+      const sem = semantic.patterns[p.id];
+      if (!sem?.topCategories) continue;
+      for (const tc of sem.topCategories) {
+        if (!tc?.slug || tc.slug === slug) continue;
+        const key = tc.slug;
+        if (!relatedCategoryScores[key]) {
+          relatedCategoryScores[key] = { slug: tc.slug, name: tc.name, score: 0, count: 0 };
+        }
+        relatedCategoryScores[key].score += (typeof tc.similarity === 'number' ? tc.similarity : 0);
+        relatedCategoryScores[key].count += 1;
+      }
+    }
+  }
+  const relatedCategories = Object.values(relatedCategoryScores)
+    .sort((a, b) => b.score - a.score || b.count - a.count)
+    .slice(0, 8);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
@@ -283,26 +304,28 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           ))}
         </div>
 
-        {/* Related Categories */}
-        <div className="mt-12 bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Explore Other Categories
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[...new Set(allPatterns.map(p => p.category))]
-              .filter(cat => cat !== categoryName)
-              .slice(0, 8)
-              .map((category) => (
+        {/* Related Categories (semantic) */}
+        {relatedCategories.length > 0 && (
+          <div className="mt-12 bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-gray-900">Related Categories (semantic)</h3>
+              <Link href="/semantic" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {relatedCategories.map(rc => (
                 <Link
-                  key={category}
-                  href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-blue-600 hover:text-blue-800 text-sm p-2 rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                  key={rc.slug}
+                  href={`/category/${rc.slug}`}
+                  className="flex items-center justify-between gap-2 text-blue-700 hover:text-blue-900 text-sm p-2 rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                  title={`Aggregate similarity score: ${rc.score.toFixed(2)} • from ${rc.count} pattern(s)`}
                 >
-                  {category}
+                  <span>{rc.name}</span>
+                  <span className="text-[10px] text-gray-600 bg-gray-100 rounded px-1.5 py-0.5 border">{rc.score.toFixed(2)}</span>
                 </Link>
               ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

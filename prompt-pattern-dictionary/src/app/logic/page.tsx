@@ -1,24 +1,42 @@
-import fs from 'fs';
-import path from 'path';
 import Link from 'next/link';
-
-interface Category { name: string; slug: string; patternCount: number }
-interface Logic { name: string; slug: string; focus: string; categories: Category[] }
-interface PatternCategoriesData { logics: Logic[]; meta: { totalCategories: number } }
-
-function loadJson<T>(rel: string): T {
-  const filePath = path.join(process.cwd(), rel);
-  return JSON.parse(fs.readFileSync(filePath, 'utf8')) as T;
-}
+import {
+  loadPatternCategories,
+  loadSemanticOverrides,
+  applySemanticCounts,
+  type PatternCategoriesData,
+  type Category,
+  type Logic,
+} from '@/lib/data/categories';
 
 export default async function LogicPage() {
-  const data = loadJson<PatternCategoriesData>('public/data/pattern-categories.json');
+  // Load base taxonomy (dictionary) and semantic overrides for counts
+  const data: PatternCategoriesData = loadPatternCategories();
+  const semantic = loadSemanticOverrides();
+  // Apply semantic counts per logic's categories to ensure consistency with Browse/Categories pages
+  const logics: Logic[] = data.logics.map(l => ({
+    ...l,
+    categories: applySemanticCounts(l.categories, semantic) as Category[],
+  }));
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Logic Layers ({data.logics.length})</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">Logic Layers ({data.logics.length})</h1>
+          <div className="flex items-center gap-3">
+            {semantic && (
+              <span
+                title="Counts use semantic category assignments"
+                className="inline-flex items-center gap-1 text-xs bg-purple-100 text-purple-700 border border-purple-200 rounded px-2 py-1"
+              >
+                Semantic counts
+              </span>
+            )}
+            <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
+            <Link href="/semantic" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
+          </div>
+        </div>
         <div className="space-y-6">
-          {data.logics.map(l => (
+          {logics.map(l => (
             <div key={l.slug} className="bg-white rounded-lg p-6 shadow">
               <div className="mb-2">
                 <h2 className="text-xl font-semibold text-gray-900">{l.name} Logic</h2>
