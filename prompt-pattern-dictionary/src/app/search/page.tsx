@@ -152,12 +152,7 @@ function SearchResults() {
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="mb-8">
-          <Link 
-            href="/"
-            className="text-blue-600 hover:text-blue-800 mb-4 inline-flex items-center"
-          >
-            ← Back to Home
-          </Link>
+          
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Search Results
           </h1>

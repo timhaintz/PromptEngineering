@@ -7,7 +7,6 @@
 import { Suspense } from 'react';
 import fs from 'fs';
 import path from 'path';
-import Link from 'next/link';
 import SemanticCategoryMatrix from '@/components/semantic/SemanticCategoryMatrix';
 import { EnhancedPattern } from '@/types/patterns';
 
@@ -24,13 +23,7 @@ export default async function SemanticAnalysisPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <Link 
-            href="/"
-            className="text-blue-600 hover:text-blue-800 mb-4 inline-flex items-center"
-          >
-            ← Back to Home
-          </Link>
+  <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Semantic Category Analysis
           </h1>
