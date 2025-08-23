@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import TopNav from "@/components/navigation/TopNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {/* Global, consistent top-left navigation with Back and Home */}
+        <TopNav />
+        {/* Offset main content to clear the fixed nav height */}
+        <div className="pt-14">
+          {children}
+        </div>
       </body>
     </html>
   );
