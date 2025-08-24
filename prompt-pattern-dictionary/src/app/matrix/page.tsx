@@ -113,14 +113,14 @@ export default async function MatrixPage() {
             </thead>
             <tbody>
               {rows.map(row => (
-                <>
-                  <tr key={row.logic.slug} className="bg-gray-100">
+                <tbody key={`group-${row.logic.slug}`}>
+                  <tr className="bg-gray-100">
                     <td colSpan={1 + semanticColumns.length} className="p-3 font-medium text-gray-900 border-t">
                       {row.logic.name} Logic
                     </td>
                   </tr>
                   {row.categories.map(rc => (
-                    <tr key={rc.category.slug} className="hover:bg-blue-50">
+                    <tr key={`cat-${row.logic.slug}-${rc.category.slug}`} className="hover:bg-blue-50">
                       <td className="sticky left-0 bg-white z-10 p-3 border-t">
                         <div>
                           <Link href={`/category/${rc.category.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">
@@ -147,7 +147,7 @@ export default async function MatrixPage() {
                       })}
                     </tr>
                   ))}
-                </>
+                </tbody>
               ))}
             </tbody>
           </table>
