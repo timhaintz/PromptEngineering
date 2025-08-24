@@ -9,7 +9,7 @@ interface Pattern { id: string; patternName: string; category: string }
 
 interface SemanticAssignments {
   categories: Record<string, { slug: string; name: string; patternCount: number; patterns: { id: string; name: string; similarity: number }[] }>;
-  patterns: Record<string, { id: string; bestCategory: { slug: string; name: string; similarity: number } }>
+  patterns: Record<string, { id: string; name?: string; currentCategory?: string | null; bestCategory: { slug: string; name: string; similarity: number } }>
 }
 
 interface Category { name: string; slug: string; patternCount: number }
@@ -29,7 +29,21 @@ export default async function MatrixPage() {
   // Build a map for fast lookups
   const patternById = new Map(patterns.map(p => [p.id, p] as const));
 
-  // Collect all semantic category slugs used by bestCategory
+  // Helper: normalize a category name to slug and fix known spelling variants
+  const toSlug = (name: string) =>
+    name
+      .toLowerCase()
+      .replace(/&/g, 'and')
+      .replace(/\s+/g, '-')
+      .replace(/customization/g, 'customisation');
+
+  // Build a quick lookup of taxonomy category slugs set for row validation
+  const taxonomySlugs = new Set<string>();
+  for (const l of taxonomy.logics) {
+    for (const c of l.categories) taxonomySlugs.add(c.slug);
+  }
+
+  // Collect all semantic category slugs used by bestCategory (columns)
   const semanticSlugs = new Set<string>();
   for (const pId of Object.keys(semantic.patterns)) {
     const best = semantic.patterns[pId]?.bestCategory?.slug;
@@ -46,18 +60,27 @@ export default async function MatrixPage() {
     }))
   }));
 
-  // Count patterns into matrix
+  // Count patterns into matrix using semantic bestCategory and robust row mapping
   for (const [pId, sem] of Object.entries(semantic.patterns)) {
     const bestSlug = sem?.bestCategory?.slug;
     if (!bestSlug) continue;
-    const pat = patternById.get(pId);
-    if (!pat) continue;
 
-    // Find taxonomy row/col by matching the original category of the pattern
-    const catSlug = pat.category.toLowerCase().replace(/\s+/g, '-');
+    // Determine the taxonomy row category slug for this pattern
+    const pat = patternById.get(pId);
+    const currentName = sem?.currentCategory || pat?.category;
+    if (!currentName) continue;
+    let rowSlug = toSlug(currentName);
+    if (!taxonomySlugs.has(rowSlug)) {
+      // Try matching by display name against taxonomy
+      for (const l of taxonomy.logics) {
+        const found = l.categories.find(c => c.name.toLowerCase() === currentName.toLowerCase());
+        if (found) { rowSlug = found.slug; break; }
+      }
+    }
+    if (!taxonomySlugs.has(rowSlug)) continue; // skip if we can't map to a taxonomy row
 
     for (const row of rows) {
-      const cat = row.categories.find(rc => rc.category.slug === catSlug);
+      const cat = row.categories.find(rc => rc.category.slug === rowSlug);
       if (cat && typeof cat.counts[bestSlug] === 'number') {
         cat.counts[bestSlug] += 1;
         break;
@@ -131,7 +154,7 @@ export default async function MatrixPage() {
         </div>
 
         <p className="text-xs text-gray-600 mt-3">
-          Counts per cell represent patterns whose best semantic category falls into the column, grouped by the original taxonomy category in the row.
+          Counts per cell use semantic best-category assignments (columns). Rows are the original taxonomy categories mapped from each pattern&apos;s current/original category. This aligns with &quot;Semantic counts&quot; used across the site.
         </p>
       </div>
     </div>

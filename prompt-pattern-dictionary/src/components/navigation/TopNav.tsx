@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const tabs = [
-  { href: '/', label: 'Home' },
   { href: '/logic', label: 'Logic' },
   { href: '/categories', label: 'Categories' },
   { href: '/patterns', label: 'Patterns' },
@@ -37,7 +36,7 @@ export default function TopNav() {
         <div className="flex-1 overflow-x-auto">
           <nav aria-label="Primary" className="flex items-center gap-1 min-w-max">
             {tabs.map(tab => {
-              const isActive = tab.href === '/' ? pathname === '/' : pathname.startsWith(tab.href);
+              const isActive = pathname.startsWith(tab.href);
               return (
                 <Link
                   key={tab.href}

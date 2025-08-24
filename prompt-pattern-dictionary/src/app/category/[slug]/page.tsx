@@ -6,6 +6,7 @@
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import fs from 'fs';
 import path from 'path';
 
@@ -141,6 +142,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
+        {/** Breadcrumbs **/}
+        <Breadcrumbs />
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {categoryName}

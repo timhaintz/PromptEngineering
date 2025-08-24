@@ -8,6 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import { notFound } from 'next/navigation';
 
 interface Example {
@@ -114,9 +115,7 @@ export default async function PatternDetail({ params }: { params: Promise<{ pape
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
-        <div className="mb-6">
-          <Link href={`/category/${categorySlug}`} className="text-blue-600 hover:text-blue-800 inline-flex items-center">← Back to {pattern.category}</Link>
-        </div>
+        <Breadcrumbs />
 
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-start justify-between">

@@ -1,13 +1,14 @@
 /**
- * Search Results Page
- * 
- * Displays search results with filtering and pattern details
+ * Search Page (smart)
+ * - Blank by default (no results until a query or filter is set)
+ * - Search type dropdown: Logic | Category | Prompt Pattern | Prompt Example
+ * - Dynamic filters based on type
  */
 
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useMemo, useState, useEffect, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 interface Pattern {
@@ -16,110 +17,111 @@ interface Pattern {
   description: string;
   category: string;
   original_paper_category?: string;
-  semantic_categorization?: {
-    category: string;
-    confidence: number;
-    top_alternatives: Array<{
-      category: string;
-      similarity: number;
-    }>;
-  };
-  examples: Array<{
-    id: string;
-    content: string | object;
-    index: number;
-    semantic_categorization?: {
-      category: string;
-      confidence: number;
-      top_alternatives: Array<{
-        category: string;
-        similarity: number;
-      }>;
-    };
-  }>;
-  paper: {
-    apaReference: string;
-    title?: string;
-    authors?: string[];
-    url?: string;
-  };
+  semantic_categorization?: { category: string; confidence: number };
+  examples: Array<{ id: string; content: string | object; index: number }>;
+  paper: { apaReference: string; title?: string; authors?: string[]; url?: string };
   tags: string[];
   searchableContent: string;
 }
 
+type Logic = { name: string; slug: string; focus: string; categories: { name: string; slug: string; patternCount: number }[] };
+type PatternCategoriesData = { logics: Logic[] };
+type SemanticAssignments = { categories: Record<string, { name: string; slug: string; logic?: string; patternCount: number }> };
+
+type SearchType = 'logic' | 'category' | 'pattern' | 'example';
+
 function SearchResults() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const query = searchParams.get('q') || '';
+  const type = (searchParams.get('type') as SearchType) || 'pattern';
   const [patterns, setPatterns] = useState<Pattern[]>([]);
-  const [filteredPatterns, setFilteredPatterns] = useState<Pattern[]>([]);
+  const [catData, setCatData] = useState<PatternCategoriesData | null>(null);
+  const [semantic, setSemantic] = useState<SemanticAssignments | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categoryType, setCategoryType] = useState<'original' | 'semantic'>('original');
+  const [logicFilter, setLogicFilter] = useState<string>('');
 
   useEffect(() => {
-    const loadPatterns = async () => {
+    const loadAll = async () => {
       try {
-        const response = await fetch('/data/patterns.json');
-        const data = await response.json();
-        setPatterns(data);
-        
-        // Filter patterns based on search query
-        if (query) {
-          const filtered = data.filter((pattern: Pattern) => 
-            pattern.patternName.toLowerCase().includes(query.toLowerCase()) ||
-            pattern.description.toLowerCase().includes(query.toLowerCase()) ||
-            pattern.category.toLowerCase().includes(query.toLowerCase()) ||
-            pattern.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
-            pattern.examples.some(example => {
-              const content = typeof example.content === 'string' ? example.content : JSON.stringify(example.content);
-              return content.toLowerCase().includes(query.toLowerCase());
-            })
-          );
-          setFilteredPatterns(filtered);
-        } else {
-          setFilteredPatterns(data);
-        }
+        const [pRes, cRes, sRes] = await Promise.all([
+          fetch('/data/patterns.json'),
+          fetch('/data/pattern-categories.json'),
+          fetch('/data/semantic-assignments.json').catch(() => null),
+        ]);
+        const pData = await pRes.json();
+        setPatterns(pData);
+        if (cRes) setCatData(await cRes.json());
+        if (sRes && 'ok' in sRes && sRes.ok) setSemantic(await sRes.json());
       } catch (error) {
-        console.error('Error loading patterns:', error);
+        console.error('Error loading search data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    loadPatterns();
-  }, [query]);
+    loadAll();
+  }, []);
 
-  useEffect(() => {
-    const baseFiltered = query ? patterns.filter((pattern: Pattern) => 
-      pattern.patternName.toLowerCase().includes(query.toLowerCase()) ||
-      pattern.description.toLowerCase().includes(query.toLowerCase()) ||
-      pattern.category.toLowerCase().includes(query.toLowerCase()) ||
-      (pattern.semantic_categorization?.category.toLowerCase().includes(query.toLowerCase())) ||
-      pattern.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
-      pattern.examples.some(example => {
-        const content = typeof example.content === 'string' ? example.content : JSON.stringify(example.content);
-        return content.toLowerCase().includes(query.toLowerCase());
-      }) ||
-      pattern.searchableContent.toLowerCase().includes(query.toLowerCase())
-    ) : patterns;
-
-    if (selectedCategory === 'all') {
-      setFilteredPatterns(baseFiltered);
-    } else {
-      const categoryFiltered = baseFiltered.filter(pattern => {
-        if (categoryType === 'semantic') {
-          return pattern.semantic_categorization?.category === selectedCategory;
-        } else {
-          return (pattern.original_paper_category || pattern.category) === selectedCategory;
-        }
-      });
-      setFilteredPatterns(categoryFiltered);
-    }
-  }, [selectedCategory, categoryType, patterns, query]);
-
-  const originalCategories = [...new Set(patterns.map(p => p.original_paper_category || p.category))].sort();
-  const semanticCategories = [...new Set(patterns.map(p => p.semantic_categorization?.category).filter(Boolean))].sort();
+  const originalCategories = useMemo(() => [...new Set(patterns.map(p => p.original_paper_category || p.category))].sort(), [patterns]);
+  const semanticCategories = useMemo(() => [...new Set(patterns.map(p => p.semantic_categorization?.category).filter(Boolean))].sort(), [patterns]);
   const categories = categoryType === 'semantic' ? semanticCategories : originalCategories;
+
+  // Derived results for patterns/examples
+  const filteredPatterns = useMemo(() => {
+    if ((type === 'pattern' || type === 'example') && (!query && !selectedCategory)) return [];
+    const text = query.toLowerCase();
+    const inCategory = (p: Pattern) => {
+      if (!selectedCategory) return true;
+      return categoryType === 'semantic'
+        ? p.semantic_categorization?.category === selectedCategory
+        : (p.original_paper_category || p.category) === selectedCategory;
+    };
+    if (type === 'pattern') {
+      return patterns.filter(p => inCategory(p) && (
+        p.patternName.toLowerCase().includes(text) ||
+        p.description.toLowerCase().includes(text) ||
+        p.category.toLowerCase().includes(text) ||
+        (p.semantic_categorization?.category?.toLowerCase().includes(text)) ||
+        p.tags.some(t => t.toLowerCase().includes(text)) ||
+        p.searchableContent.toLowerCase().includes(text)
+      ));
+    }
+    if (type === 'example') {
+      return patterns.filter(p => inCategory(p) && p.examples.some(ex => {
+        const content = typeof ex.content === 'string' ? ex.content : JSON.stringify(ex.content);
+        return content.toLowerCase().includes(text);
+      }));
+    }
+    return [];
+  }, [patterns, query, selectedCategory, categoryType, type]);
+
+  // Category search data
+  const logicList = useMemo(() => catData?.logics ?? [], [catData]);
+  const origCatOptions = useMemo(() => logicList.flatMap(l => l.categories.map(c => ({ ...c, logicSlug: l.slug, logicName: l.name }))), [logicList]);
+  const semCatOptions = useMemo(() => {
+    if (!semantic?.categories) return [] as Array<{ slug: string; name: string; patternCount: number; logicSlug?: string; logicName?: string }>;
+    return Object.values(semantic.categories).map(c => ({ slug: c.slug, name: c.name, patternCount: c.patternCount, logicSlug: c.logic, logicName: c.logic ? logicList.find(l => l.slug === c.logic)?.name : undefined }));
+  }, [semantic, logicList]);
+  const categoryResults = useMemo(() => {
+    if (type !== 'category') return [] as Array<{ slug: string; name: string; patternCount: number; logicSlug?: string; logicName?: string }>;
+    if (!query && !logicFilter) return [];
+    const text = query.toLowerCase();
+    const source = categoryType === 'semantic' ? semCatOptions : origCatOptions;
+    return source.filter(c => (
+      (!logicFilter || c.logicSlug === logicFilter) && c.name.toLowerCase().includes(text)
+    ));
+  }, [type, categoryType, semCatOptions, origCatOptions, query, logicFilter]);
+
+  // Logic search results
+  const logicResults = useMemo(() => {
+    if (type !== 'logic') return [] as Logic[];
+    if (!query) return [];
+    const text = query.toLowerCase();
+    return logicList.filter(l => l.name.toLowerCase().includes(text) || l.focus.toLowerCase().includes(text));
+  }, [type, query, logicList]);
 
   const getPatternRoute = (patternId: string | undefined): string | undefined => {
     if (!patternId) return undefined;
@@ -150,233 +152,262 @@ function SearchResults() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
-        {/* Header */}
-        <div className="mb-8">
-          
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Search Results
-          </h1>
-          {query && (
-            <p className="text-gray-600">
-              Showing results for &quot;<strong>{query}</strong>&quot; 
-              ({filteredPatterns.length} patterns found)
-            </p>
-          )}
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-gray-900">Search</h1>
         </div>
 
-        {/* Filters */}
-        <div className="mb-6">
-          <div className="bg-white rounded-lg shadow-md p-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Category Type Toggle */}
+        {/* Controls */}
+        <div className="mb-6 bg-white rounded-lg shadow-md p-4">
+          <div className="flex flex-col md:flex-row gap-3 md:items-end">
+            <div className="flex-1">
+              <label htmlFor="search-input" className="block text-sm font-medium text-gray-700 mb-1">Search text</label>
+              <input id="search-input" defaultValue={query} onChange={(e) => {
+                const params = new URLSearchParams(Array.from(searchParams.entries()));
+                params.set('q', e.target.value);
+                params.set('type', type);
+                router.replace(`/search?${params.toString()}`);
+              }} placeholder="Type to search..." className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            </div>
+            <div>
+              <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">Search type</label>
+              <select id="type" value={type} onChange={(e) => {
+                const params = new URLSearchParams(Array.from(searchParams.entries()));
+                params.set('type', e.target.value);
+                router.replace(`/search?${params.toString()}`);
+              }} className="w-48 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <option value="pattern">Prompt Pattern</option>
+                <option value="example">Prompt Example</option>
+                <option value="category">Category</option>
+                <option value="logic">Logic</option>
+              </select>
+            </div>
+            {(type === 'pattern' || type === 'example' || type === 'category') && (
               <div>
-                <label htmlFor="category-type" className="block text-sm font-medium text-gray-700 mb-2">
-                  Category Type:
-                </label>
-                <select
-                  id="category-type"
-                  value={categoryType}
-                  onChange={(e) => {
-                    setCategoryType(e.target.value as 'original' | 'semantic');
-                    setSelectedCategory('all'); // Reset category selection
-                  }}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="original">Original Paper Categories</option>
-                  <option value="semantic">Semantic AI Categories</option>
+                <label htmlFor="category-type-select" className="block text-sm font-medium text-gray-700 mb-1">Category type</label>
+                <select id="category-type-select" value={categoryType} onChange={(e) => setCategoryType(e.target.value as 'original' | 'semantic')} className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <option value="original">Original Paper</option>
+                  <option value="semantic">Semantic AI</option>
                 </select>
               </div>
-              
-              {/* Category Filter */}
+            )}
+            {(type === 'pattern' || type === 'example') && (
               <div>
-                <label htmlFor="category-filter" className="block text-sm font-medium text-gray-700 mb-2">
-                  Filter by Category:
-                </label>
-                <select
-                  id="category-filter"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="all">All Categories</option>
-                  {categories.map(category => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
+                <label htmlFor="category-filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter by category</label>
+                <select id="category-filter-select" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <option value="">All</option>
+                  {categories.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
-              
-              {/* Results Count */}
-              <div className="flex items-end">
-                <div className="text-sm text-gray-600">
-                  <strong>{filteredPatterns.length}</strong> patterns found
-                  {categoryType === 'semantic' && (
-                    <div className="text-xs text-blue-600 mt-1">
-                      Using AI semantic categories
-                    </div>
-                  )}
-                </div>
+            )}
+            {type === 'category' && (
+              <div>
+                <label htmlFor="logic-filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter by logic</label>
+                <select id="logic-filter-select" value={logicFilter} onChange={(e) => setLogicFilter(e.target.value)} className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <option value="">All</option>
+                  {logicList.map(l => <option key={l.slug} value={l.slug}>{l.name}</option>)}
+                </select>
               </div>
+            )}
+            <div className="ml-auto text-sm text-gray-600">
+              {type === 'pattern' || type === 'example'
+                ? (filteredPatterns.length > 0 ? `${filteredPatterns.length} result(s)` : 'No results yet')
+                : type === 'category'
+                  ? (categoryResults.length > 0 ? `${categoryResults.length} category(s)` : 'No results yet')
+                  : (logicResults.length > 0 ? `${logicResults.length} logic group(s)` : 'No results yet')}
             </div>
           </div>
         </div>
 
-        {/* Results */}
-        <div className="space-y-6">
-          {filteredPatterns.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No patterns found</h3>
-              <p className="text-gray-600">
-                Try adjusting your search terms or selecting a different category.
-              </p>
-            </div>
-          ) : (
-            filteredPatterns.map((pattern) => (
-              <div key={pattern.id} className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      {(() => {
-                        const route = getPatternRoute(pattern.id);
-                        return route ? (
-                          <Link href={route} className="text-xl font-semibold text-blue-700 hover:text-blue-900">
-                            {pattern.patternName}
-                          </Link>
-                        ) : (
-                          <h3 className="text-xl font-semibold text-gray-900">{pattern.patternName}</h3>
-                        );
-                      })()}
-                      {pattern.id && (
-                        <span className="shrink-0 inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-xs font-medium">
-                          ID: {pattern.id}
-                        </span>
-                      )}
+        {/* Pattern/Example Results */}
+        {(type === 'pattern' || type === 'example') && (
+          <div className="space-y-6">
+            {filteredPatterns.length === 0 ? (
+              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">
+                Start by entering a query or choose filters above.
+              </div>
+            ) : (
+              filteredPatterns.map((pattern) => (
+                <div key={pattern.id} className="bg-white rounded-lg shadow-md p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-2">
+                        {(() => {
+                          const route = getPatternRoute(pattern.id);
+                          return route ? (
+                            <Link href={route} className="text-xl font-semibold text-blue-700 hover:text-blue-900">
+                              {pattern.patternName}
+                            </Link>
+                          ) : (
+                            <h3 className="text-xl font-semibold text-gray-900">{pattern.patternName}</h3>
+                          );
+                        })()}
+                        {pattern.id && (
+                          <span className="shrink-0 inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-xs font-medium">
+                            ID: {pattern.id}
+                          </span>
+                        )}
+                      </div>
+                      <span className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                        {pattern.category}
+                      </span>
                     </div>
-                    <span className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
-                      {pattern.category}
-                    </span>
                   </div>
-                </div>
 
-                {pattern.description && (
-                  <p className="text-gray-700 mb-4">{pattern.description}</p>
-                )}
+                  {pattern.description && (
+                    <p className="text-gray-700 mb-4">{pattern.description}</p>
+                  )}
 
-                {pattern.examples.length > 0 && (
-                  <div className="mb-4">
-                    <h4 className="text-md font-medium text-gray-900 mb-2">Examples:</h4>
-                    <div className="space-y-2">
-                      {pattern.examples.slice(0, 2).map((example) => {
-                        const fullIndex = (typeof example.index === 'number' && pattern.id)
-                          ? `${pattern.id}-${example.index}`
-                          : undefined;
-                        const route = getPatternRoute(pattern.id);
-                        const anchor = pattern.id && typeof example.index === 'number' ? getExampleAnchor(pattern.id, example.index) : undefined;
-                        const href = route && anchor ? `${route}${anchor}` : route;
-                        return (
-                          <div key={example.id} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
-                            <div className="flex items-start gap-2">
-                              {fullIndex && (
-                                <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">
-                                  {fullIndex}
-                                </span>
-                              )}
-                              {typeof example.content === 'string' ? (
-                                href ? (
-                                  <Link href={href} className="text-blue-700 hover:text-blue-900 text-sm">
-                                    {example.content}
-                                  </Link>
+                  {pattern.examples.length > 0 && (
+                    <div className="mb-4">
+                      <h4 className="text-md font-medium text-gray-900 mb-2">Examples:</h4>
+                      <div className="space-y-2">
+                        {pattern.examples.slice(0, 2).map((example) => {
+                          const fullIndex = (typeof example.index === 'number' && pattern.id)
+                            ? `${pattern.id}-${example.index}`
+                            : undefined;
+                          const route = getPatternRoute(pattern.id);
+                          const anchor = pattern.id && typeof example.index === 'number' ? getExampleAnchor(pattern.id, example.index) : undefined;
+                          const href = route && anchor ? `${route}${anchor}` : route;
+                          return (
+                            <div key={example.id} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
+                              <div className="flex items-start gap-2">
+                                {fullIndex && (
+                                  <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">
+                                    {fullIndex}
+                                  </span>
+                                )}
+                                {typeof example.content === 'string' ? (
+                                  href ? (
+                                    <Link href={href} className="text-blue-700 hover:text-blue-900 text-sm">
+                                      {example.content}
+                                    </Link>
+                                  ) : (
+                                    <p className="text-gray-700 text-sm">{example.content}</p>
+                                  )
                                 ) : (
-                                  <p className="text-gray-700 text-sm">{example.content}</p>
-                                )
-                              ) : (
-                                <div className="text-gray-700 text-sm">
-                                  <div className="font-medium mb-2">Complex Example:</div>
-                                  {href ? (
-                                    <Link href={href} className="block">
+                                  <div className="text-gray-700 text-sm">
+                                    <div className="font-medium mb-2">Complex Example:</div>
+                                    {href ? (
+                                      <Link href={href} className="block">
+                                        <pre className="whitespace-pre-wrap text-xs bg-gray-100 p-2 rounded max-h-32 overflow-y-auto">
+                                          {JSON.stringify(example.content, null, 2)}
+                                        </pre>
+                                      </Link>
+                                    ) : (
                                       <pre className="whitespace-pre-wrap text-xs bg-gray-100 p-2 rounded max-h-32 overflow-y-auto">
                                         {JSON.stringify(example.content, null, 2)}
                                       </pre>
-                                    </Link>
-                                  ) : (
-                                    <pre className="whitespace-pre-wrap text-xs bg-gray-100 p-2 rounded max-h-32 overflow-y-auto">
-                                      {JSON.stringify(example.content, null, 2)}
-                                    </pre>
-                                  )}
-                                </div>
-                              )}
+                                    )}
+                                  </div>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
-                      {pattern.examples.length > 2 && (
-                        <p className="text-sm text-gray-500">
-                          +{pattern.examples.length - 2} more examples
-                        </p>
-                      )}
+                          );
+                        })}
+                        {pattern.examples.length > 2 && (
+                          <p className="text-sm text-gray-500">
+                            +{pattern.examples.length - 2} more examples
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                <div className="border-t pt-4">
-                  <div className="flex justify-between items-center text-sm text-gray-600">
-                    <div>
-                      <strong>Source:</strong> 
-                      {pattern.paper.url ? (
-                        <a 
-                          href={pattern.paper.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 ml-1"
-                        >
-                          {pattern.paper.title || pattern.paper.apaReference}
-                        </a>
-                      ) : (
-                        <span className="ml-1">{pattern.paper.title || pattern.paper.apaReference}</span>
-                      )}
-                    </div>
-                    {pattern.paper.authors && (
+                  <div className="border-t pt-4">
+                    <div className="flex justify-between items-center text-sm text-gray-600">
                       <div>
-                        <strong>Authors:</strong> {pattern.paper.authors.join(', ')}
+                        <strong>Source:</strong>
+                        {pattern.paper.url ? (
+                          <a href={pattern.paper.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 ml-1">
+                            {pattern.paper.title || pattern.paper.apaReference}
+                          </a>
+                        ) : (
+                          <span className="ml-1">{pattern.paper.title || pattern.paper.apaReference}</span>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  
-                  {/* Semantic categorization info */}
-                  {pattern.semantic_categorization && (
-                    <div className="mt-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-600">Semantic Category:</span>
-                        <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
-                          {pattern.semantic_categorization.category}
-                        </span>
-                        <span className="text-gray-500">
-                          ({(pattern.semantic_categorization.confidence * 100).toFixed(1)}% confidence)
-                        </span>
-                      </div>
-                      {pattern.original_paper_category !== pattern.semantic_categorization.category && (
-                        <div className="text-xs text-orange-600 mt-1">
-                          ↗ Changed from: {pattern.original_paper_category || pattern.category}
+                      {pattern.paper.authors && (
+                        <div>
+                          <strong>Authors:</strong> {pattern.paper.authors.join(', ')}
                         </div>
                       )}
                     </div>
-                  )}
-                  {(() => {
-                    const route = getPatternRoute(pattern.id);
-                    return route ? (
-                      <div className="mt-3">
-                        <Link href={route} className="inline-flex items-center text-blue-700 hover:text-blue-900 text-sm">
-                          View details →
-                        </Link>
+                    {pattern.semantic_categorization && (
+                      <div className="mt-2 text-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-600">Semantic Category:</span>
+                          <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
+                            {pattern.semantic_categorization.category}
+                          </span>
+                          <span className="text-gray-500">
+                            ({(pattern.semantic_categorization.confidence * 100).toFixed(1)}% confidence)
+                          </span>
+                        </div>
+                        {pattern.original_paper_category !== pattern.semantic_categorization.category && (
+                          <div className="text-xs text-orange-600 mt-1">
+                            ↗ Changed from: {pattern.original_paper_category || pattern.category}
+                          </div>
+                        )}
                       </div>
-                    ) : null;
-                  })()}
+                    )}
+                    {(() => {
+                      const route = getPatternRoute(pattern.id);
+                      return route ? (
+                        <div className="mt-3">
+                          <Link href={route} className="inline-flex items-center text-blue-700 hover:text-blue-900 text-sm">
+                            View details →
+                          </Link>
+                        </div>
+                      ) : null;
+                    })()}
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
-        </div>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* Category results */}
+        {type === 'category' && (
+          <div className="space-y-3">
+            {categoryResults.length === 0 ? (
+              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">Start by entering a query or choose filters above.</div>
+            ) : (
+              categoryResults.map(c => (
+                <div key={c.slug} className="bg-white rounded p-4 border shadow-sm flex items-center justify-between">
+                  <div>
+                    <Link href={`/category/${c.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">{c.name}</Link>
+                    {c.logicName && <span className="ml-2 text-xs text-gray-600">({c.logicName})</span>}
+                  </div>
+                  <div className="text-xs text-gray-600">{c.patternCount ?? 0} patterns</div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* Logic results */}
+        {type === 'logic' && (
+          <div className="space-y-4">
+            {logicResults.length === 0 ? (
+              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">Start by entering a query.</div>
+            ) : (
+              logicResults.map(l => (
+                <div key={l.slug} className="bg-white rounded-lg p-6 shadow">
+                  <div className="mb-1 text-lg font-semibold text-gray-900">{l.name} Logic</div>
+                  <div className="text-sm text-gray-700 mb-3">{l.focus}</div>
+                  <div className="flex flex-wrap gap-2">
+                    {l.categories.map(c => (
+                      <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center rounded bg-gray-50 px-2 py-1 border hover:bg-blue-50 text-sm">
+                        {c.name}
+                        <span className="ml-2 text-[10px] text-gray-600">{c.patternCount}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
