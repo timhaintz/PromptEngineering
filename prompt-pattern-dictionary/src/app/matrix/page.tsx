@@ -43,6 +43,19 @@ export default async function MatrixPage() {
     for (const c of l.categories) taxonomySlugs.add(c.slug);
   }
 
+  // Helper: map a human name to a taxonomy slug if possible
+  const nameToTaxonomySlug = (name?: string | null): string | undefined => {
+    if (!name) return undefined;
+    const slugGuess = toSlug(name);
+    if (taxonomySlugs.has(slugGuess)) return slugGuess;
+    // Try matching by display name against taxonomy (case-insensitive)
+    for (const l of taxonomy.logics) {
+      const found = l.categories.find(c => c.name.toLowerCase() === name.toLowerCase());
+      if (found) return found.slug;
+    }
+    return undefined;
+  };
+
   // Collect all semantic category slugs used by bestCategory (columns)
   const semanticSlugs = new Set<string>();
   for (const pId of Object.keys(semantic.patterns)) {
@@ -67,17 +80,11 @@ export default async function MatrixPage() {
 
     // Determine the taxonomy row category slug for this pattern
     const pat = patternById.get(pId);
-    const currentName = sem?.currentCategory || pat?.category;
-    if (!currentName) continue;
-    let rowSlug = toSlug(currentName);
-    if (!taxonomySlugs.has(rowSlug)) {
-      // Try matching by display name against taxonomy
-      for (const l of taxonomy.logics) {
-        const found = l.categories.find(c => c.name.toLowerCase() === currentName.toLowerCase());
-        if (found) { rowSlug = found.slug; break; }
-      }
-    }
-    if (!taxonomySlugs.has(rowSlug)) continue; // skip if we can't map to a taxonomy row
+    // Prefer semantic currentCategory ONLY if it maps to a known taxonomy slug; otherwise, fall back to the original pattern category
+    const fromSemantic = nameToTaxonomySlug(sem?.currentCategory);
+    const fromPattern = nameToTaxonomySlug(pat?.category);
+    const rowSlug = fromSemantic || fromPattern;
+    if (!rowSlug) continue; // skip if we can't map to a taxonomy row
 
     for (const row of rows) {
       const cat = row.categories.find(rc => rc.category.slug === rowSlug);
@@ -111,45 +118,44 @@ export default async function MatrixPage() {
                 ))}
               </tr>
             </thead>
-            <tbody>
-              {rows.map(row => (
-                <tbody key={`group-${row.logic.slug}`}>
-                  <tr className="bg-gray-100">
-                    <td colSpan={1 + semanticColumns.length} className="p-3 font-medium text-gray-900 border-t">
-                      {row.logic.name} Logic
+            {/* Multiple tbody sections are valid HTML. Render one group per logic to avoid nested tbody hydration issues. */}
+            {rows.map(row => (
+              <tbody key={`group-${row.logic.slug}`}>
+                <tr className="bg-gray-100">
+                  <td colSpan={1 + semanticColumns.length} className="p-3 font-medium text-gray-900 border-t">
+                    {row.logic.name} Logic
+                  </td>
+                </tr>
+                {row.categories.map(rc => (
+                  <tr key={`cat-${row.logic.slug}-${rc.category.slug}`} className="hover:bg-blue-50">
+                    <td className="sticky left-0 bg-white z-10 p-3 border-t">
+                      <div>
+                        <Link href={`/category/${rc.category.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">
+                          {rc.category.name}
+                        </Link>
+                      </div>
                     </td>
+                    {semanticColumns.map(col => {
+                      const count = rc.counts[col] || 0;
+                      const intensity = Math.min(1, count / 12); // normalize for simple heat effect
+                      const bg = intensity === 0 ? 'bg-white' : intensity < 0.25 ? 'bg-blue-50' : intensity < 0.5 ? 'bg-blue-100' : intensity < 0.75 ? 'bg-blue-200' : 'bg-blue-300';
+                      const href = count > 0 ? `/category/${col}` : undefined;
+                      return (
+                        <td key={col} className={`p-3 border-t ${bg}`}>
+                          {count > 0 ? (
+                            <Link href={href!} className="inline-flex items-center justify-center w-8 h-6 rounded text-gray-800" title={`${count} pattern(s)`}>
+                              {count}
+                            </Link>
+                          ) : (
+                            <span className="inline-block w-8 h-6 text-gray-400 text-center">0</span>
+                          )}
+                        </td>
+                      );
+                    })}
                   </tr>
-                  {row.categories.map(rc => (
-                    <tr key={`cat-${row.logic.slug}-${rc.category.slug}`} className="hover:bg-blue-50">
-                      <td className="sticky left-0 bg-white z-10 p-3 border-t">
-                        <div>
-                          <Link href={`/category/${rc.category.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">
-                            {rc.category.name}
-                          </Link>
-                        </div>
-                      </td>
-                      {semanticColumns.map(col => {
-                        const count = rc.counts[col] || 0;
-                        const intensity = Math.min(1, count / 12); // normalize for simple heat effect
-                        const bg = intensity === 0 ? 'bg-white' : intensity < 0.25 ? 'bg-blue-50' : intensity < 0.5 ? 'bg-blue-100' : intensity < 0.75 ? 'bg-blue-200' : 'bg-blue-300';
-                        const href = count > 0 ? `/category/${col}` : undefined;
-                        return (
-                          <td key={col} className={`p-3 border-t ${bg}`}>
-                            {count > 0 ? (
-                              <Link href={href!} className="inline-flex items-center justify-center w-8 h-6 rounded text-gray-800" title={`${count} pattern(s)`}>
-                                {count}
-                              </Link>
-                            ) : (
-                              <span className="inline-block w-8 h-6 text-gray-400 text-center">0</span>
-                            )}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </tbody>
-              ))}
-            </tbody>
+                ))}
+              </tbody>
+            ))}
           </table>
         </div>
 
