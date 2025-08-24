@@ -306,7 +306,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <div className="mt-12 bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-semibold text-gray-900">Related Categories (semantic)</h3>
-              <Link href="/semantic" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
+              <Link href="/matrix" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {relatedCategories.map(rc => (

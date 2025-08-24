@@ -173,21 +173,21 @@ function SearchResults() {
         <div className="mb-6 bg-white rounded-lg shadow-md p-4">
           <div className="flex flex-col md:flex-row gap-3 md:items-end">
             <div className="flex-1">
-              <label htmlFor="search-input" className="block text-sm font-medium text-gray-700 mb-1">Search text</label>
+              <label htmlFor="search-input" className="block text-sm font-medium text-gray-800 mb-1">Search text</label>
               <input id="search-input" defaultValue={query} onChange={(e) => {
                 const params = new URLSearchParams(Array.from(searchParams.entries()));
                 params.set('q', e.target.value);
                 params.set('type', type);
                 router.replace(`/search?${params.toString()}`);
-              }} placeholder="Type to search..." className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              }} placeholder="Type to search..." className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 placeholder-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
             </div>
             <div>
-              <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">Search type</label>
+              <label htmlFor="type" className="block text-sm font-medium text-gray-800 mb-1">Search type</label>
               <select id="type" value={type} onChange={(e) => {
                 const params = new URLSearchParams(Array.from(searchParams.entries()));
                 params.set('type', e.target.value);
                 router.replace(`/search?${params.toString()}`);
-              }} className="w-48 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              }} className="w-48 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 <option value="pattern">Prompt Pattern</option>
                 <option value="example">Prompt Example</option>
                 <option value="category">Category</option>
@@ -196,7 +196,7 @@ function SearchResults() {
             </div>
             {(type === 'pattern' || type === 'example' || type === 'category') && (
               <div>
-                <label htmlFor="category-type-select" className="block text-sm font-medium text-gray-700 mb-1">Category type</label>
+                <label htmlFor="category-type-select" className="block text-sm font-medium text-gray-800 mb-1">Category type</label>
                 <select
                   id="category-type-select"
                   value={categoryType}
@@ -207,7 +207,7 @@ function SearchResults() {
                     params.set('catType', val);
                     router.replace(`/search?${params.toString()}`);
                   }}
-                  className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-56 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="original">Original Paper</option>
                   <option value="semantic">Semantic AI</option>
@@ -216,7 +216,7 @@ function SearchResults() {
             )}
             {(type === 'pattern' || type === 'example') && (
               <div>
-                <label htmlFor="category-filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter by category</label>
+                <label htmlFor="category-filter-select" className="block text-sm font-medium text-gray-800 mb-1">Filter by category</label>
                 <select
                   id="category-filter-select"
                   value={selectedCategory}
@@ -227,7 +227,7 @@ function SearchResults() {
                     if (val) params.set('cat', val); else params.delete('cat');
                     router.replace(`/search?${params.toString()}`);
                   }}
-                  className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-56 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All</option>
                   {categories.map(c => <option key={c} value={c}>{c}</option>)}
@@ -236,7 +236,7 @@ function SearchResults() {
             )}
             {type === 'category' && (
               <div>
-                <label htmlFor="logic-filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter by logic</label>
+                <label htmlFor="logic-filter-select" className="block text-sm font-medium text-gray-800 mb-1">Filter by logic</label>
                 <select
                   id="logic-filter-select"
                   value={logicFilter}
@@ -247,14 +247,14 @@ function SearchResults() {
                     if (val) params.set('logic', val); else params.delete('logic');
                     router.replace(`/search?${params.toString()}`);
                   }}
-                  className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-56 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All</option>
                   {logicList.map(l => <option key={l.slug} value={l.slug}>{l.name}</option>)}
                 </select>
               </div>
             )}
-            <div className="ml-auto flex items-end gap-3 text-sm text-gray-600">
+            <div className="ml-auto flex items-end gap-3 text-sm text-gray-800">
               <span>
                 {type === 'pattern' || type === 'example'
                   ? (filteredPatterns.length > 0 ? `${filteredPatterns.length} result(s)` : 'No results yet')
@@ -264,7 +264,7 @@ function SearchResults() {
               </span>
               <button
                 type="button"
-                className="inline-flex items-center rounded border px-2 py-1 text-xs bg-white hover:bg-gray-50"
+                className="inline-flex items-center rounded border border-gray-300 px-2 py-1 text-xs bg-white text-gray-800 hover:bg-gray-50"
                 onClick={() => {
                   const params = new URLSearchParams();
                   params.set('type', 'pattern');
@@ -284,7 +284,7 @@ function SearchResults() {
         {(type === 'pattern' || type === 'example') && (
           <div className="space-y-6">
             {filteredPatterns.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">
+              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-700">
                 Start by entering a query or choose filters above.
               </div>
             ) : (

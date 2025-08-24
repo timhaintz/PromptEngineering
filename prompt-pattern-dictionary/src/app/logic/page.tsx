@@ -32,7 +32,7 @@ export default async function LogicPage() {
               </span>
             )}
             <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
-            <Link href="/semantic" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
+            <Link href="/matrix" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
           </div>
         </div>
         <div className="space-y-6">
