@@ -236,8 +236,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                               <div className="font-semibold text-gray-800 mb-1">Similar Examples</div>
                               <div className="flex flex-wrap gap-1.5">
                                 {similarExamples.similar[fullIndex].map(se => {
-                                  const [pId, cIdx, patIdx] = se.id.split('-');
-                                  const href = `/pattern/${pId}/${cIdx}/${patIdx}#example-${se.id}`;
+                                  const [pId, cIdx, patIdx, exIdx] = se.id.split('-');
+                                  const href = `/papers/${pId}#e-${cIdx}-${patIdx}-${exIdx}`;
                                   return (
                                   <Link key={se.id} href={href} className="inline-flex items-center rounded bg-gray-100 px-1.5 py-0.5 border border-gray-200 hover:bg-blue-50">
                                     <span className="font-mono mr-1">{se.id}</span>
@@ -285,7 +285,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     <div className="flex flex-wrap gap-2">
                       {similar.similar[pattern.id].slice(0, 5).map(sp => {
                         const [pId, cIdx, patIdx] = sp.id.split('-');
-                        const href = `/pattern/${pId}/${cIdx}/${patIdx}`;
+                        const href = `/papers/${pId}#p-${cIdx}-${patIdx}`;
                         return (
                         <Link key={sp.id} href={href} className="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 hover:bg-blue-50 border border-gray-200">
                           <span className="font-mono mr-1">{sp.id}</span>

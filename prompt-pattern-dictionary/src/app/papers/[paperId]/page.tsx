@@ -42,9 +42,9 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map(p => {
               const parts = idParts(p.id);
-              const href = `/pattern/${parts.paperId}/${parts.categoryIndex}/${parts.patternIndex}`;
+              const anchor = `p-${parts.categoryIndex}-${parts.patternIndex}`;
               return (
-                <Link key={p.id} href={href} className="block bg-gray-50 rounded-lg p-4 border hover:border-blue-300 hover:shadow">
+                <a key={p.id} href={`#${anchor}`} className="block bg-gray-50 rounded-lg p-4 border hover:border-blue-300 hover:shadow">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <h3 className="text-md font-semibold text-gray-900 truncate">{p.patternName}</h3>
@@ -53,7 +53,46 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
                     </div>
                     <span className="text-[10px] text-gray-500 font-mono">{p.id}</span>
                   </div>
-                </Link>
+                </a>
+              );
+            })}
+          </div>
+
+          <h2 className="text-lg font-semibold text-gray-900 mt-8 mb-3">Details</h2>
+          <div className="space-y-4">
+            {filtered.map(p => {
+              const parts = idParts(p.id);
+              const anchor = `p-${parts.categoryIndex}-${parts.patternIndex}`;
+              return (
+                <div key={p.id} id={anchor} className="border rounded-lg p-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="text-sm text-gray-500 font-mono mb-1">{p.id}</div>
+                      <div className="text-lg font-semibold text-gray-900">{p.patternName}</div>
+                      <div className="text-xs text-gray-600 mb-2">Category: {p.category}</div>
+                    </div>
+                    <a href={`#${anchor}`} className="text-blue-600 text-xs hover:text-blue-800">Permalink</a>
+                  </div>
+                  {p.description && <p className="text-gray-700 mt-2">{p.description}</p>}
+                  {p.examples?.length ? (
+                    <div className="mt-3">
+                      <div className="text-sm font-medium text-gray-900 mb-2">Examples</div>
+                      <ul className="space-y-2">
+                        {p.examples.map(ex => {
+                          const exAnchor = `e-${parts.categoryIndex}-${parts.patternIndex}-${ex.index}`;
+                          return (
+                            <li key={ex.id} id={exAnchor} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
+                              <div className="flex items-start gap-2">
+                                <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">{`${p.id}-${ex.index}`}</span>
+                                <span className="text-sm text-gray-800 whitespace-pre-wrap">{ex.content}</span>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ) : null}
+                </div>
               );
             })}
           </div>

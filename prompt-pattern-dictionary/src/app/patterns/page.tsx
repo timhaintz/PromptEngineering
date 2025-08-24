@@ -284,7 +284,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
           {filtered.map(p => {
             const norm = normMap.get(p.id);
             const parts = idParts(p.id);
-            const href = `/pattern/${parts.paperId}/${parts.categoryIndex}/${parts.patternIndex}`;
+            const href = `/papers/${parts.paperId}#p-${parts.categoryIndex}-${parts.patternIndex}`;
             return (
               <Link key={p.id} href={href} className="block bg-white rounded-lg p-4 border hover:border-blue-300 hover:shadow">
                 <div className="flex items-start justify-between gap-2">

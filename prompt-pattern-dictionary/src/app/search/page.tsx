@@ -35,6 +35,9 @@ function SearchResults() {
   const router = useRouter();
   const query = searchParams.get('q') || '';
   const type = (searchParams.get('type') as SearchType) || 'pattern';
+  const urlCategoryType = (searchParams.get('catType') as 'original' | 'semantic') || 'original';
+  const urlSelectedCategory = searchParams.get('cat') || '';
+  const urlLogic = searchParams.get('logic') || '';
   const [patterns, setPatterns] = useState<Pattern[]>([]);
   const [catData, setCatData] = useState<PatternCategoriesData | null>(null);
   const [semantic, setSemantic] = useState<SemanticAssignments | null>(null);
@@ -42,6 +45,14 @@ function SearchResults() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categoryType, setCategoryType] = useState<'original' | 'semantic'>('original');
   const [logicFilter, setLogicFilter] = useState<string>('');
+
+  // Sync state from URL on load and when URL changes
+  useEffect(() => {
+    if (categoryType !== urlCategoryType) setCategoryType(urlCategoryType);
+    if (selectedCategory !== urlSelectedCategory) setSelectedCategory(urlSelectedCategory);
+    if (logicFilter !== urlLogic) setLogicFilter(urlLogic);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlCategoryType, urlSelectedCategory, urlLogic]);
 
   useEffect(() => {
     const loadAll = async () => {
@@ -129,12 +140,14 @@ function SearchResults() {
     if (parts.length < 3) return undefined;
     const [paperId, categoryIndex, patternIndex] = parts;
     if (!paperId || !categoryIndex || !patternIndex) return undefined;
-    return `/pattern/${paperId}/${categoryIndex}/${patternIndex}`;
+    return `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`;
   };
 
   const getExampleAnchor = (patternId: string, exampleIndex: number | undefined): string | undefined => {
     if (typeof exampleIndex !== 'number') return undefined;
-    return `#example-${patternId}-${exampleIndex}`;
+    const [paperId, cIdx, pIdx] = patternId.split('-');
+    if (!paperId || !cIdx || !pIdx) return undefined;
+    return `#e-${cIdx}-${pIdx}-${exampleIndex}`;
   };
 
   if (loading) {
@@ -184,7 +197,18 @@ function SearchResults() {
             {(type === 'pattern' || type === 'example' || type === 'category') && (
               <div>
                 <label htmlFor="category-type-select" className="block text-sm font-medium text-gray-700 mb-1">Category type</label>
-                <select id="category-type-select" value={categoryType} onChange={(e) => setCategoryType(e.target.value as 'original' | 'semantic')} className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select
+                  id="category-type-select"
+                  value={categoryType}
+                  onChange={(e) => {
+                    const val = e.target.value as 'original' | 'semantic';
+                    setCategoryType(val);
+                    const params = new URLSearchParams(Array.from(searchParams.entries()));
+                    params.set('catType', val);
+                    router.replace(`/search?${params.toString()}`);
+                  }}
+                  className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
                   <option value="original">Original Paper</option>
                   <option value="semantic">Semantic AI</option>
                 </select>
@@ -193,7 +217,18 @@ function SearchResults() {
             {(type === 'pattern' || type === 'example') && (
               <div>
                 <label htmlFor="category-filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter by category</label>
-                <select id="category-filter-select" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select
+                  id="category-filter-select"
+                  value={selectedCategory}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setSelectedCategory(val);
+                    const params = new URLSearchParams(Array.from(searchParams.entries()));
+                    if (val) params.set('cat', val); else params.delete('cat');
+                    router.replace(`/search?${params.toString()}`);
+                  }}
+                  className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
                   <option value="">All</option>
                   {categories.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -202,18 +237,45 @@ function SearchResults() {
             {type === 'category' && (
               <div>
                 <label htmlFor="logic-filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter by logic</label>
-                <select id="logic-filter-select" value={logicFilter} onChange={(e) => setLogicFilter(e.target.value)} className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select
+                  id="logic-filter-select"
+                  value={logicFilter}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setLogicFilter(val);
+                    const params = new URLSearchParams(Array.from(searchParams.entries()));
+                    if (val) params.set('logic', val); else params.delete('logic');
+                    router.replace(`/search?${params.toString()}`);
+                  }}
+                  className="w-56 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
                   <option value="">All</option>
                   {logicList.map(l => <option key={l.slug} value={l.slug}>{l.name}</option>)}
                 </select>
               </div>
             )}
-            <div className="ml-auto text-sm text-gray-600">
-              {type === 'pattern' || type === 'example'
-                ? (filteredPatterns.length > 0 ? `${filteredPatterns.length} result(s)` : 'No results yet')
-                : type === 'category'
-                  ? (categoryResults.length > 0 ? `${categoryResults.length} category(s)` : 'No results yet')
-                  : (logicResults.length > 0 ? `${logicResults.length} logic group(s)` : 'No results yet')}
+            <div className="ml-auto flex items-end gap-3 text-sm text-gray-600">
+              <span>
+                {type === 'pattern' || type === 'example'
+                  ? (filteredPatterns.length > 0 ? `${filteredPatterns.length} result(s)` : 'No results yet')
+                  : type === 'category'
+                    ? (categoryResults.length > 0 ? `${categoryResults.length} category(s)` : 'No results yet')
+                    : (logicResults.length > 0 ? `${logicResults.length} logic group(s)` : 'No results yet')}
+              </span>
+              <button
+                type="button"
+                className="inline-flex items-center rounded border px-2 py-1 text-xs bg-white hover:bg-gray-50"
+                onClick={() => {
+                  const params = new URLSearchParams();
+                  params.set('type', 'pattern');
+                  router.replace(`/search?${params.toString()}`);
+                  setSelectedCategory('');
+                  setCategoryType('original');
+                  setLogicFilter('');
+                }}
+              >
+                Clear all
+              </button>
             </div>
           </div>
         </div>
