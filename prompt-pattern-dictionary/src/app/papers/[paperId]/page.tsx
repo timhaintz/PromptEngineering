@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
 import { notFound } from 'next/navigation';
 
 interface Example { id: string; index: number; content: string }
@@ -19,6 +20,9 @@ function idParts(patternId: string): { paperId: string; categoryIndex: string; p
 export default async function PaperDetail({ params }: { params: Promise<{ paperId: string }> }) {
   const { paperId } = await params;
   const patterns = loadJson<Pattern[]>('public/data/patterns.json');
+  const normalized = loadJson<{ patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string[]; turn?: string | null; template?: Record<string, string> | null }> }>('public/data/normalized-patterns.json');
+  const similar = loadJson<{ similar: SimilarMap }>('public/data/similar-examples.json');
+  const similarPatterns = loadJson<{ similar: SimilarPatternsMap }>('public/data/similar-patterns.json');
   const filtered = patterns.filter(p => p.paper.id === paperId);
   if (!filtered.length) return notFound();
 
@@ -63,35 +67,32 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
             {filtered.map(p => {
               const parts = idParts(p.id);
               const anchor = `p-${parts.categoryIndex}-${parts.patternIndex}`;
+              // map of first example id for each pattern in the entire dataset
+              // build once outside loop for perf if needed; here simple inline
+              const firstExampleMap: Record<string, string | undefined> = Object.fromEntries(
+                patterns.map(pp => [pp.id, pp.examples[0]?.id])
+              );
+              const attrs: NormalizedAttrs | null = (() => {
+                const n = normalized.patterns.find(x => x.id === p.id);
+                if (!n) return null;
+                return {
+                  mediaType: n.mediaType ?? null,
+                  dependentLLM: n.dependentLLM ?? null,
+                  application: n.application ?? null,
+                  turn: n.turn ?? null,
+                  template: n.template ?? null,
+                };
+              })();
               return (
-                <div key={p.id} id={anchor} className="border rounded-lg p-4">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="text-sm text-gray-500 font-mono mb-1">{p.id}</div>
-                      <div className="text-lg font-semibold text-gray-900">{p.patternName}</div>
-                      <div className="text-xs text-gray-600 mb-2">Category: {p.category}</div>
-                    </div>
-                    <a href={`#${anchor}`} className="text-blue-600 text-xs hover:text-blue-800">Permalink</a>
-                  </div>
-                  {p.description && <p className="text-gray-700 mt-2">{p.description}</p>}
-                  {p.examples?.length ? (
-                    <div className="mt-3">
-                      <div className="text-sm font-medium text-gray-900 mb-2">Examples</div>
-                      <ul className="space-y-2">
-                        {p.examples.map(ex => {
-                          const exAnchor = `e-${parts.categoryIndex}-${parts.patternIndex}-${ex.index}`;
-                          return (
-                            <li key={ex.id} id={exAnchor} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
-                              <div className="flex items-start gap-2">
-                                <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">{`${p.id}-${ex.index}`}</span>
-                                <span className="text-sm text-gray-800 whitespace-pre-wrap">{ex.content}</span>
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  ) : null}
+                <div key={p.id} id={anchor}>
+                  <PatternDetail
+                    pattern={{ id: p.id, patternName: p.patternName, description: p.description, category: p.category, examples: p.examples }}
+                    attrs={attrs}
+                    similar={similar.similar}
+                    similarPatterns={similarPatterns.similar}
+                    patternFirstExample={firstExampleMap}
+                    showSimilarPatterns={true}
+                  />
                 </div>
               );
             })}

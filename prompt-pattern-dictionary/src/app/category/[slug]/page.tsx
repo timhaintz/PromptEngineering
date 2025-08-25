@@ -7,6 +7,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
+import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
 import fs from 'fs';
 import path from 'path';
 
@@ -68,6 +69,14 @@ async function getSimilarExamples(): Promise<SimilarExamples | null> {
   return JSON.parse(fileContents);
 }
 
+type NormalizedPatterns = { patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string[]; turn?: string | null; template?: Record<string, string> | null }> };
+async function getNormalized(): Promise<NormalizedPatterns | null> {
+  const filePath = path.join(process.cwd(), 'public', 'data', 'normalized-patterns.json');
+  if (!fs.existsSync(filePath)) return null;
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  return JSON.parse(fileContents);
+}
+
 type CategoryEmbeddings = {
   metadata: {
     totalCategories: number;
@@ -99,6 +108,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const semantic = await getSemanticAssignments();
   const similar = await getSimilarPatterns();
   const similarExamples = await getSimilarExamples();
+  const normalized = await getNormalized();
   const categoryMeta = await getCategoryDescription(slug);
 
   // Prefer semantic assignments; fallback to original if missing
@@ -168,137 +178,34 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </div>
         </div>
 
-        {/* Patterns Grid */}
-        <div className="space-y-6">
-          {categoryPatterns.map((pattern) => (
-            <div key={pattern.id} id={`pattern-${pattern.id}`} className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-semibold text-gray-900">
-                      {pattern.patternName}
-                    </h3>
-                    {/* Pattern index/id */}
-                    {pattern.id && (
-                      <span className="shrink-0 inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-xs font-medium">
-                        ID: {pattern.id}
-                      </span>
-                    )}
-                    {/* Semantic score badge */}
-                    {semantic?.patterns?.[pattern.id]?.bestCategory?.slug === slug && (
-                      <span title={`Semantic similarity score to ${categoryName}`}
-                        className="shrink-0 inline-flex items-center rounded-full bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 text-xs font-medium">
-                        sim: {semantic.patterns[pattern.id].bestCategory.similarity.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {pattern.tags.slice(0, 5).map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+        {/* Patterns (unified look) */}
+        <div className="space-y-4">
+          {categoryPatterns.map(p => {
+            const n = normalized?.patterns.find(x => x.id === p.id);
+            const attrs: NormalizedAttrs | null = n ? {
+              mediaType: n.mediaType ?? null,
+              dependentLLM: n.dependentLLM ?? null,
+              application: n.application ?? null,
+              turn: n.turn ?? null,
+              template: n.template ?? null,
+            } : null;
+            const allFirstExamples = Object.fromEntries(allPatterns.map(pp => [pp.id, pp.examples[0]?.id]));
+            return (
+              <div key={p.id} id={`pattern-${p.id}`} className="bg-white rounded-lg shadow">
+                <PatternDetail
+                  pattern={{ id: p.id, patternName: p.patternName, description: p.description, category: p.category, examples: p.examples }}
+                  attrs={attrs}
+                  similar={(similarExamples?.similar ?? {}) as SimilarMap}
+                  similarPatterns={(similar?.similar ?? {}) as SimilarPatternsMap}
+                  patternFirstExample={allFirstExamples}
+                  context="category"
+                  paperTitle={p.paper.title}
+                  paperUrl={p.paper.url}
+                  showSimilarPatterns={true}
+                />
               </div>
-
-              {pattern.description && (
-                <p className="text-gray-700 mb-4">{pattern.description}</p>
-              )}
-
-              {pattern.examples.length > 0 && (
-                <div className="mb-4">
-                  <h4 className="text-md font-medium text-gray-900 mb-2">
-                    Examples ({pattern.examples.length}):
-                  </h4>
-                  <div className="space-y-2">
-                    {pattern.examples.slice(0, 3).map((example) => {
-                      const fullIndex = typeof example.index === 'number' && pattern.id
-                        ? `${pattern.id}-${example.index}`
-                        : undefined;
-                      return (
-                        <div key={example.id} id={fullIndex ? `example-${fullIndex}` : undefined} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
-                          <div className="flex items-start gap-2">
-                            {/* Example full index badge (pattern.id-example.index) */}
-                            {fullIndex && (
-                              <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">
-                                {fullIndex}
-                              </span>
-                            )}
-                            <p className="text-gray-700 text-sm break-words">{example.content}</p>
-                          </div>
-                          {/* Similar examples */}
-                          {fullIndex && similarExamples?.similar?.[fullIndex]?.length ? (
-                            <div className="mt-2 text-[11px] text-gray-600">
-                              <div className="font-semibold text-gray-800 mb-1">Similar Examples</div>
-                              <div className="flex flex-wrap gap-1.5">
-                                {similarExamples.similar[fullIndex].map(se => {
-                                  const [pId, cIdx, patIdx, exIdx] = se.id.split('-');
-                                  const href = `/papers/${pId}#e-${cIdx}-${patIdx}-${exIdx}`;
-                                  return (
-                                  <Link key={se.id} href={href} className="inline-flex items-center rounded bg-gray-100 px-1.5 py-0.5 border border-gray-200 hover:bg-blue-50">
-                                    <span className="font-mono mr-1">{se.id}</span>
-                                    <span className="text-gray-500">{se.similarity.toFixed(2)}</span>
-                                  </Link>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          ) : null}
-                        </div>
-                      );
-                    })}
-                    {pattern.examples.length > 3 && (
-                      <p className="text-sm text-gray-500">
-                        +{pattern.examples.length - 3} more examples available
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              <div className="border-t pt-4">
-                <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center text-sm text-gray-600 space-y-2 sm:space-y-0">
-                  <div>
-                    <strong>Source:</strong> 
-                    <a 
-                      href={pattern.paper.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 ml-1"
-                    >
-                      {pattern.paper.title}
-                    </a>
-                  </div>
-                  <div>
-                    <strong>Authors:</strong> {pattern.paper.authors.slice(0, 3).join(', ')}
-                    {pattern.paper.authors.length > 3 && ' et al.'}
-                  </div>
-                </div>
-                {/* Similar Patterns */}
-                {similar?.similar?.[pattern.id]?.length ? (
-                  <div className="mt-3 text-xs text-gray-600">
-                    <div className="font-semibold text-gray-800 mb-1">Similar Patterns</div>
-                    <div className="flex flex-wrap gap-2">
-                      {similar.similar[pattern.id].slice(0, 5).map(sp => {
-                        const [pId, cIdx, patIdx] = sp.id.split('-');
-                        const href = `/papers/${pId}#p-${cIdx}-${patIdx}`;
-                        return (
-                        <Link key={sp.id} href={href} className="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 hover:bg-blue-50 border border-gray-200">
-                          <span className="font-mono mr-1">{sp.id}</span>
-                          <span className="text-gray-500">{sp.similarity.toFixed(2)}</span>
-                        </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Related Categories (semantic) */}
