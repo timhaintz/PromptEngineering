@@ -18,6 +18,23 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
 - **Responsive Design**: Optimized for desktop and mobile devices
 - **AI-Assisted Enrichment (Optional)**: Fill missing pattern fields with Azure OpenAI (GPT-5) and display an “AI-assisted” badge with disclaimer
 
+### Recent UI/UX Updates
+
+- **Unified Pattern View**: A shared PatternDetail component renders patterns identically on both paper pages and category pages.
+	- Collapsible Template and Prompt Examples; defaults are compact and persist per pattern via localStorage
+	- Example rows keep their ID badges; Template is shown as preformatted text when expanded
+- **Similarity Surfacing**:
+	- Per-example “Similar Examples” chips with IDs and similarity scores; links deep into the canonical paper example anchors
+	- Fallback when example-level data is missing uses “Similar Patterns” mapped to each pattern’s first example
+	- “Similar Patterns” section is collapsible and hidden by default on both paper and category pages
+- **Deep-Linking & Permalinks**: All pattern/example links resolve to /papers routes using stable anchors
+	- Patterns: `#p-{categoryIndex}-{patternIndex}`
+	- Examples: `#e-{categoryIndex}-{patternIndex}-{exampleIndex}`
+	- Category pages show an inline “Paper: Title” link next to the Permalink for quick source navigation
+- **Matrix Semantics**: Matrix counts now reflect semantic similarity category assignments with robust fallback to original taxonomy when needed
+- **Search UX**: Results categorized by type with filters, clean blank initial state, “Clear all,” and URL state persistence
+- **Accessibility**: Improved contrast and chevron-based toggles with appropriate ARIA controls
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -78,6 +95,20 @@ The application processes `../promptpatterns.json` to create:
 - Search indexes
 - Category listings
 - Cross-references
+
+#### Data Files and Semantics
+
+Processed artifacts in `public/data/` include:
+
+- `normalized-patterns.json`: Normalized attributes per pattern (mediaType, dependentLLM, application, turn, template)
+- `semantic-assignments.json`: Best semantic category assignments and scores used to compute matrix counts
+- `similar-examples.json`: Example-level similarity edges with top-k matches and scores
+- `similar-patterns.json`: Pattern-level similarity edges with top-k matches and scores
+- `stats.json`: Summary counts and last processing timestamp
+
+Notes:
+- Deep-links are canonicalized to `/papers/{paperId}` anchors for both patterns and examples
+- When example-level similar data is absent, the UI falls back to similar patterns and links to the first example of each similar pattern
 
 ### Optional AI Enrichment (GPT-5)
 
@@ -148,6 +179,10 @@ npm run export
 ```
 
 The static files will be generated in the `out/` directory, ready for GitHub Pages hosting.
+
+### Deep-Linking Behavior (Static Export)
+
+When exporting statically, deep links of the form `/papers/{paperId}#p-{c}-{p}` and `/papers/{paperId}#e-{c}-{p}-{e}` continue to resolve correctly in the generated `out/` bundle. Category-page links always route to the canonical paper anchor to avoid dead links.
 
 ## 🤝 Contributing
 
