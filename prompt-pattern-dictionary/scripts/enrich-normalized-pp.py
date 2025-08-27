@@ -40,6 +40,7 @@ except Exception as e:
 
 DATA_DIR = os.path.abspath(os.path.join(THIS_DIR, '..', 'public', 'data'))
 OUTPUT_FILE = os.path.join(DATA_DIR, 'normalized-patterns.json')
+APPLICATION_FALLBACK_NOTE_DEFAULT = "Unable to process due to Azure's Content Management Policy."
 
 SYSTEM_PROMPT = (
     "You are a careful data normalizer. Given a prompt pattern's description, examples, and current fields, "
@@ -116,6 +117,8 @@ def main():
     fields = ['template','application','dependentLLM','turn','usageSummary']
     force_all = False
     force_fields: List[str] = []
+    application_fallback_note = APPLICATION_FALLBACK_NOTE_DEFAULT
+    fill_missing_application_only = False
 
     # Parse args
     args = sys.argv[1:]
@@ -141,6 +144,12 @@ def main():
             parts = [x.strip() for x in raw.split(',') if x.strip()]
             allowed = {'template','application','dependentLLM','turn','usageSummary'}
             force_fields = [x for x in parts if x in allowed]
+        if a in ('--application-fallback-note',) and i + 1 < len(args):
+            # Allow overriding the fallback note text from CLI
+            application_fallback_note = args[i+1]
+        if a in ('--fill-missing-application', '--application-fill-missing-only'):
+            # Fast, no-AI pass: only set fallback note for patterns with empty/missing application
+            fill_missing_application_only = True
 
     if not os.path.exists(OUTPUT_FILE):
         print(f"No normalized-patterns.json found at {OUTPUT_FILE}. Nothing to enrich.")
@@ -151,6 +160,19 @@ def main():
     if not isinstance(patterns, list):
         print("normalized-patterns.json has unexpected format")
         return 1
+
+    # Fast no-AI mode: fill missing application only and exit
+    if fill_missing_application_only:
+        filled = 0
+        for p in patterns:
+            if 'application' in fields:
+                app = p.get('application')
+                if not app:
+                    p['application'] = [application_fallback_note]
+                    filled += 1
+        json.dump(data, open(OUTPUT_FILE, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+        print(f"Filled {filled} pattern(s) with application fallback note. No AI calls performed.")
+        return 0
 
     client = get_model_client(model_name)
 
@@ -182,12 +204,17 @@ def main():
                        .get('content')
                 )
             if not content:
-                print(f"[{p.get('id')}] No content in response; skipping.")
+                print(f"[{p.get('id')}] No content in response; applying application fallback if requested.")
+                if 'application' in fields:
+                    p['application'] = [application_fallback_note]
+                # Continue to next pattern without incrementing enriched_count (not AI-derived)
                 continue
 
             obj = extract_json(content)
             if not obj or not isinstance(obj, dict):
-                print(f"[{p.get('id')}] Could not parse JSON; skipping.")
+                print(f"[{p.get('id')}] Could not parse JSON; applying application fallback if requested.")
+                if 'application' in fields:
+                    p['application'] = [application_fallback_note]
                 continue
 
             updated_fields = []
@@ -206,7 +233,10 @@ def main():
                 p['aiAssistedAt'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
                 enriched_count += 1
         except Exception as e:
+            # Content filter or other failure; set application fallback note if requested
             print(f"[{p.get('id')}] Enrichment error: {e}")
+            if 'application' in fields:
+                p['application'] = [application_fallback_note]
             continue
 
     # Write back
