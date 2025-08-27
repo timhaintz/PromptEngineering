@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-  "build": "npm run build-data && npm run build-normalized && npm run build-semantic && next build",
+  "build": "npm run build-data && npm run build-semantic && next build",
   "build-data": "node scripts/build-data.js",
   "build-normalized": "node scripts/transform-normalized-pp.js",
   "build-semantic": "node scripts/generate-semantic-categories.js",

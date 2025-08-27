@@ -13,10 +13,14 @@ const PATTERNS_FILE = path.join(DATA_DIR, 'patterns.json');
 const SIMILARITY_FILE = path.join(DATA_DIR, 'similarity-analysis.json');
 const SIMILAR_PATTERNS_FILE = path.join(DATA_DIR, 'similar-patterns.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'normalized-patterns.json');
+const PRESERVE_ENRICHED = String(process.env.PRESERVE_ENRICHED ?? '1') !== '0';
 
 function loadJson(file) {
   if (!fs.existsSync(file)) return null;
-  return JSON.parse(fs.readFileSync(file, 'utf-8'));
+  const raw = fs.readFileSync(file, 'utf-8');
+  // Remove UTF-8 BOM if present to avoid JSON.parse errors on Windows
+  const cleaned = raw.replace(/^\uFEFF/, '');
+  return JSON.parse(cleaned);
 }
 
 // Map to required media types for the PRD
@@ -104,11 +108,43 @@ function normalize() {
   const simMap = sim.patterns || {};
   const simPatterns = loadJson(SIMILAR_PATTERNS_FILE) || null;
   const similarMap = simPatterns && simPatterns.similar ? simPatterns.similar : null;
+  // Load existing normalized file (if present) to preserve enriched fields
+  const existing = loadJson(OUTPUT_FILE);
+  const existingMap = existing && Array.isArray(existing.patterns)
+    ? Object.fromEntries(existing.patterns.map(p => [p.id, p]))
+    : {};
+
+  function mergePreservingEnriched(newItem, oldItem) {
+    if (!PRESERVE_ENRICHED || !oldItem) return newItem;
+    const oldEnrichedFields = new Set(Array.isArray(oldItem.aiAssistedFields) ? oldItem.aiAssistedFields : []);
+    const maybePreserve = (fieldName) => {
+      if (oldEnrichedFields.has(fieldName) && typeof oldItem[fieldName] !== 'undefined') {
+        newItem[fieldName] = oldItem[fieldName];
+      }
+    };
+    // Preserve known enrichable fields
+    maybePreserve('application');
+    maybePreserve('template');
+    maybePreserve('dependentLLM');
+    maybePreserve('turn');
+    // usageSummary may not exist on the base schema – copy if enriched
+    maybePreserve('usageSummary');
+
+    // Merge AI assistance metadata
+    if (oldItem.aiAssisted) newItem.aiAssisted = true;
+    const newFields = new Set(Array.isArray(newItem.aiAssistedFields) ? newItem.aiAssistedFields : []);
+    oldEnrichedFields.forEach(f => newFields.add(f));
+    if (newFields.size > 0) newItem.aiAssistedFields = Array.from(newFields);
+    if (oldItem.aiAssistedModel && !newItem.aiAssistedModel) newItem.aiAssistedModel = oldItem.aiAssistedModel;
+    if (oldItem.aiAssistedAt && !newItem.aiAssistedAt) newItem.aiAssistedAt = oldItem.aiAssistedAt;
+
+    return newItem;
+  }
 
   const normalized = patterns.map(p => {
     const firstExample = normalizeExampleText(p.examples && p.examples[0]);
     const tpl = parseTemplate(firstExample);
-    return {
+    const base = {
       id: p.id,
       category: p.category,
       name: p.patternName,
@@ -129,6 +165,7 @@ function normalize() {
         apa: p.paper?.apaReference || ''
       }
     };
+    return mergePreservingEnriched(base, existingMap[p.id]);
   });
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify({ metadata: { count: normalized.length, generatedAt: new Date().toISOString() }, patterns: normalized }, null, 2));

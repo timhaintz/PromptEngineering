@@ -255,7 +255,8 @@ async function processData(options = {}) {
     await new Promise((resolve) => {
       const cp = spawn(nodeCmd, [NORMALIZE_SCRIPT], {
         cwd: path.dirname(NORMALIZE_SCRIPT),
-        stdio: 'inherit'
+        stdio: 'inherit',
+        env: { ...process.env, PRESERVE_ENRICHED: process.env.PRESERVE_ENRICHED ?? '1' }
       });
       cp.on('close', () => resolve());
       cp.on('error', () => resolve());
