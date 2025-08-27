@@ -289,6 +289,9 @@ async function processData(options = {}) {
       if (options.enrichForceFields && options.enrichForceFields.length > 0) {
         args.push('--enrich-force-fields', options.enrichForceFields.join(','));
       }
+      if (options.enrichNoFallback) {
+        args.push('--no-fallback');
+      }
       const cp = spawn(inv.command, args, {
         cwd: path.dirname(ENRICH_SCRIPT),
         stdio: 'inherit'
@@ -486,7 +489,8 @@ async function main() {
           return args[idx + 1].split(',').map(s => s.trim()).filter(Boolean);
         }
         return undefined;
-      })()
+      })(),
+      enrichNoFallback: args.includes('--enrich-no-fallback')
     };
 
     if (args.includes('--help') || args.includes('-h')) {
@@ -500,6 +504,7 @@ async function main() {
   console.log('  --enrich-fields <csv>  Comma-separated list of fields to enrich (template,application,dependentLLM,turn,usageSummary)');
   console.log('  --enrich-force        Force enrichment even if fields already populated');
   console.log('  --enrich-force-fields <csv>  Force enrichment for specific fields (e.g., application,usageSummary)');
+  console.log('  --enrich-no-fallback  Do not write fallback messages on errors/content filter; leave fields unchanged');
   console.log('  --help, -h            Show this help message');
       process.exit(0);
     }

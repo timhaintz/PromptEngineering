@@ -49,7 +49,7 @@ SYSTEM_PROMPT = (
     "- Do NOT hallucinate. If unsure, omit the key entirely.\n"
     "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude).\n"
     "- template fields should be concise.\n"
-    "- application: 1-5 short domain/task tags, lowercase kebab-case preferred.\n"
+    "- application: RETURN EXACTLY TWO POLISHED SENTENCES AS AN ARRAY OF TWO STRINGS. Each sentence must be imperative, clear, and actionable, grounded in the provided description and examples; avoid placeholders like 'X', 'Y', '<...>', '[...]' (use phrases like 'your scope', 'constraints, environment, domain' instead); avoid quotes around directives; ~35–45 words total. Do NOT return tags.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
 )
@@ -118,6 +118,7 @@ def main():
     force_all = False
     force_fields: List[str] = []
     application_fallback_note = APPLICATION_FALLBACK_NOTE_DEFAULT
+    disable_fallback = False
     fill_missing_application_only = False
 
     # Parse args
@@ -147,6 +148,9 @@ def main():
         if a in ('--application-fallback-note',) and i + 1 < len(args):
             # Allow overriding the fallback note text from CLI
             application_fallback_note = args[i+1]
+        if a in ('--no-fallback', '--disable-fallback'):
+            # Do not write any fallback message on errors or content filter blocks
+            disable_fallback = True
         if a in ('--fill-missing-application', '--application-fill-missing-only'):
             # Fast, no-AI pass: only set fallback note for patterns with empty/missing application
             fill_missing_application_only = True
@@ -168,7 +172,12 @@ def main():
             if 'application' in fields:
                 app = p.get('application')
                 if not app:
-                    p['application'] = [application_fallback_note]
+                    # Only fill when fallback is enabled
+                    if not disable_fallback:
+                        p['application'] = [application_fallback_note]
+                    else:
+                        # Leave as missing/empty when fallback is disabled
+                        continue
                     filled += 1
         json.dump(data, open(OUTPUT_FILE, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
         print(f"Filled {filled} pattern(s) with application fallback note. No AI calls performed.")
@@ -205,7 +214,7 @@ def main():
                 )
             if not content:
                 print(f"[{p.get('id')}] No content in response; applying application fallback if requested.")
-                if 'application' in fields:
+                if 'application' in fields and not disable_fallback:
                     p['application'] = [application_fallback_note]
                 # Continue to next pattern without incrementing enriched_count (not AI-derived)
                 continue
@@ -213,7 +222,7 @@ def main():
             obj = extract_json(content)
             if not obj or not isinstance(obj, dict):
                 print(f"[{p.get('id')}] Could not parse JSON; applying application fallback if requested.")
-                if 'application' in fields:
+                if 'application' in fields and not disable_fallback:
                     p['application'] = [application_fallback_note]
                 continue
 
@@ -222,8 +231,31 @@ def main():
                 if key not in fields:
                     continue
                 if key in obj and obj[key] is not None and obj[key] != {} and obj[key] != []:
-                    # Overwrite on force; otherwise normal behavior still overwrites with model output
-                    p[key] = obj[key]
+                    # Normalize types and overwrite
+                    if key == 'application':
+                        # Ensure application is an array of exactly two sentence strings when possible
+                        val = obj[key]
+                        if isinstance(val, str):
+                            val = [val]
+                        elif isinstance(val, list):
+                            # Coerce non-strings to strings and strip empties
+                            val = [str(x).strip() for x in val if str(x).strip()]
+                        else:
+                            val = [str(val)]
+
+                        # If we got a single string that may contain two sentences, try to split
+                        if len(val) == 1:
+                            s = val[0]
+                            parts = [seg.strip() for seg in re.split(r"(?<=[.!?])\s+", s) if seg.strip()]
+                            if len(parts) >= 2:
+                                val = parts[:2]
+                        # If we got more than two, keep first two
+                        if len(val) > 2:
+                            val = val[:2]
+                        p[key] = val
+                    else:
+                        # Overwrite with model output for other fields
+                        p[key] = obj[key]
                     updated_fields.append(key)
 
             if updated_fields:
@@ -235,7 +267,7 @@ def main():
         except Exception as e:
             # Content filter or other failure; set application fallback note if requested
             print(f"[{p.get('id')}] Enrichment error: {e}")
-            if 'application' in fields:
+            if 'application' in fields and not disable_fallback:
                 p['application'] = [application_fallback_note]
             continue
 

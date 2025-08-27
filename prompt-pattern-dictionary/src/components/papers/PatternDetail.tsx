@@ -100,6 +100,24 @@ export default function PatternDetail({
 
   const appTags = attrs?.application && attrs.application.length ? attrs.application : null;
   const [paperId, categoryIndex, patternIndex] = pattern.id.split('-');
+  const isPolicyFallback = useMemo(() => {
+    if (!appTags || appTags.length !== 1) return false;
+    const t = (appTags[0] || '').toLowerCase();
+    return t.includes("unable to process") && t.includes("content management policy");
+  }, [appTags]);
+
+  // Heuristic: if application items are long or contain punctuation/spaces like phrases,
+  // render as a small list instead of chips. Keep chips for short tag-like items.
+  const renderAsList = useMemo(() => {
+    if (!appTags) return false;
+    // If any item looks like a sentence/phrase, prefer list
+    return appTags.some(s => {
+      if (!s) return false;
+      const trimmed = s.trim();
+      // Consider long (> 28 chars) or contains a period/semicolon/comma as phrase-like
+      return trimmed.length > 28 || /[\.;,]/.test(trimmed);
+    });
+  }, [appTags]);
 
   return (
     <div className="border rounded-lg p-4">
@@ -145,13 +163,26 @@ export default function PatternDetail({
         <dt className="font-semibold text-slate-700">Application:</dt>
         <dd className="text-gray-800">
           {appTags ? (
-            <div className="flex flex-wrap gap-2">
-              {appTags.map((t, idx) => (
-                <span key={idx} className="inline-flex items-center rounded-full bg-gray-100 text-gray-800 px-2 py-0.5 text-xs border">
-                  {t}
-                </span>
-              ))}
-            </div>
+            isPolicyFallback ? (
+              <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
+                <span className="font-semibold">Notice:</span>
+                <span>{appTags[0]}</span>
+              </div>
+            ) : renderAsList ? (
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                {appTags.map((t, idx) => (
+                  <li key={idx} className="leading-snug">{t}</li>
+                ))}
+              </ul>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {appTags.map((t, idx) => (
+                  <span key={idx} className="inline-flex items-center rounded-full bg-gray-100 text-gray-800 px-2 py-0.5 text-xs border">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )
           ) : (
             'N/A'
           )}
