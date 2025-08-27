@@ -4,10 +4,11 @@
 Optional enrichment for normalized prompt patterns using Azure OpenAI (gpt-5).
 - Reads public/data/normalized-patterns.json (object with { metadata, patterns })
 - For patterns with missing fields, asks the model to suggest values for:
-  - template { role, context, action, format, response }
-  - application (array of domain/task tags)
-  - dependentLLM (only if explicitly referenced in the provided text, else null)
-  - turn ("single" or "multi", only if clear)
+    - template { role, context, action, format, response }
+    - application (array of domain/task tags)
+    - dependentLLM (only if explicitly referenced in the provided text, else null)
+    - turn ("single" or "multi", only if clear)
+    - usageSummary (1–2 sentences explaining how to apply the pattern in real-world use)
 - Writes back the same file with merged fields plus aiAssisted metadata.
 
 Usage:
@@ -42,13 +43,14 @@ OUTPUT_FILE = os.path.join(DATA_DIR, 'normalized-patterns.json')
 
 SYSTEM_PROMPT = (
     "You are a careful data normalizer. Given a prompt pattern's description, examples, and current fields, "
-    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", \"dependentLLM\", \"turn\"}. "
+    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", \"dependentLLM\", \"turn\", \"usageSummary\"}. "
     "Rules: \n"
     "- Do NOT hallucinate. If unsure, omit the key entirely.\n"
     "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude).\n"
     "- template fields should be concise.\n"
     "- application: 1-5 short domain/task tags, lowercase kebab-case preferred.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
+    "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
 )
 
 def extract_json(text: str) -> Optional[Dict[str, Any]]:
@@ -69,9 +71,8 @@ def extract_json(text: str) -> Optional[Dict[str, Any]]:
 
 
 def build_user_payload(p: Dict[str, Any]) -> str:
-    # Limit example lengths to keep tokens small
+    # Include all examples as requested; keep as-is without truncation
     examples = p.get('promptExamples', []) or []
-    examples = [e[:800] for e in examples[:2]]
 
     payload = {
         "id": p.get('id'),
@@ -104,13 +105,17 @@ def should_enrich(p: Dict[str, Any], fields: List[str]) -> bool:
             return True
         if f == 'turn' and not p.get('turn'):
             return True
+        if f == 'usageSummary' and not p.get('usageSummary'):
+            return True
     return False
 
 
 def main():
     model_name = 'gpt-5'
     limit = None
-    fields = ['template','application','dependentLLM','turn']
+    fields = ['template','application','dependentLLM','turn','usageSummary']
+    force_all = False
+    force_fields: List[str] = []
 
     # Parse args
     args = sys.argv[1:]
@@ -125,10 +130,17 @@ def main():
         if a in ('--fields','--enrich-fields') and i + 1 < len(args):
             raw = args[i+1]
             parts = [x.strip() for x in raw.split(',') if x.strip()]
-            allowed = {'template','application','dependentLLM','turn'}
+            allowed = {'template','application','dependentLLM','turn','usageSummary'}
             chosen = [x for x in parts if x in allowed]
             if chosen:
                 fields = chosen
+        if a in ('--force','--enrich-force'):
+            force_all = True
+        if a in ('--force-fields','--enrich-force-fields') and i + 1 < len(args):
+            raw = args[i+1]
+            parts = [x.strip() for x in raw.split(',') if x.strip()]
+            allowed = {'template','application','dependentLLM','turn','usageSummary'}
+            force_fields = [x for x in parts if x in allowed]
 
     if not os.path.exists(OUTPUT_FILE):
         print(f"No normalized-patterns.json found at {OUTPUT_FILE}. Nothing to enrich.")
@@ -146,7 +158,9 @@ def main():
     for p in patterns:
         if limit is not None and enriched_count >= limit:
             break
-        if not should_enrich(p, fields):
+        # Decide whether to call model: if force_all OR force_fields intersect requested fields, always call.
+        must_force = force_all or (bool(set(force_fields) & set(fields)))
+        if not must_force and not should_enrich(p, fields):
             continue
 
         messages = [
@@ -177,10 +191,11 @@ def main():
                 continue
 
             updated_fields = []
-            for key in ['template', 'application', 'dependentLLM', 'turn']:
+            for key in ['template', 'application', 'dependentLLM', 'turn', 'usageSummary']:
                 if key not in fields:
                     continue
                 if key in obj and obj[key] is not None and obj[key] != {} and obj[key] != []:
+                    # Overwrite on force; otherwise normal behavior still overwrites with model output
                     p[key] = obj[key]
                     updated_fields.append(key)
 

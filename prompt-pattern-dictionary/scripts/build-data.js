@@ -282,6 +282,12 @@ async function processData(options = {}) {
       if (options.enrichFields && options.enrichFields.length > 0) {
         args.push('--enrich-fields', options.enrichFields.join(','));
       }
+      if (options.enrichForce) {
+        args.push('--enrich-force');
+      }
+      if (options.enrichForceFields && options.enrichForceFields.length > 0) {
+        args.push('--enrich-force-fields', options.enrichForceFields.join(','));
+      }
       const cp = spawn(inv.command, args, {
         cwd: path.dirname(ENRICH_SCRIPT),
         stdio: 'inherit'
@@ -471,6 +477,14 @@ async function main() {
           return args[idx + 1].split(',').map(s => s.trim()).filter(Boolean);
         }
         return undefined;
+      })(),
+      enrichForce: args.includes('--enrich-force') || args.includes('--force'),
+      enrichForceFields: (() => {
+        const idx = args.indexOf('--enrich-force-fields');
+        if (idx !== -1 && args[idx + 1]) {
+          return args[idx + 1].split(',').map(s => s.trim()).filter(Boolean);
+        }
+        return undefined;
       })()
     };
 
@@ -482,8 +496,10 @@ async function main() {
       console.log('  --semantic-analysis    Run semantic similarity analysis after data processing');
   console.log('  --enrich               Run optional AI enrichment (gpt-5) to suggest missing fields');
   console.log('  --enrich-limit <n>     Limit number of patterns to enrich in this run');
-  console.log('  --enrich-fields <csv>  Comma-separated list of fields to enrich (template,application,dependentLLM,turn)');
-      console.log('  --help, -h            Show this help message');
+  console.log('  --enrich-fields <csv>  Comma-separated list of fields to enrich (template,application,dependentLLM,turn,usageSummary)');
+  console.log('  --enrich-force        Force enrichment even if fields already populated');
+  console.log('  --enrich-force-fields <csv>  Force enrichment for specific fields (e.g., application,usageSummary)');
+  console.log('  --help, -h            Show this help message');
       process.exit(0);
     }
 
