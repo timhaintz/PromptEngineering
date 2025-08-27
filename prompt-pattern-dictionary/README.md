@@ -34,6 +34,7 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
 - **Matrix Semantics**: Matrix counts now reflect semantic similarity category assignments with robust fallback to original taxonomy when needed
 - **Search UX**: Results categorized by type with filters, clean blank initial state, “Clear all,” and URL state persistence
 - **Accessibility**: Improved contrast and chevron-based toggles with appropriate ARIA controls
+ - **How to apply**: A concise 1–2 sentence usage summary is shown inline under Application when available; generated via optional enrichment.
 
 ## 🚀 Quick Start
 
@@ -101,6 +102,7 @@ The application processes `../promptpatterns.json` to create:
 Processed artifacts in `public/data/` include:
 
 - `normalized-patterns.json`: Normalized attributes per pattern (mediaType, dependentLLM, application, turn, template)
+	- When enrichment is enabled, may also include: `usageSummary`, `aiAssisted`, `aiAssistedFields`, `aiAssistedModel`, `aiAssistedAt`
 - `semantic-assignments.json`: Best semantic category assignments and scores used to compute matrix counts
 - `similar-examples.json`: Example-level similarity edges with top-k matches and scores
 - `similar-patterns.json`: Pattern-level similarity edges with top-k matches and scores
@@ -112,7 +114,7 @@ Notes:
 
 ### Optional AI Enrichment (GPT-5)
 
-You can optionally enrich normalized pattern data using Azure OpenAI (GPT-5) to infer missing fields like Template (Role, Context, Action, Format, Response), Application tags, Dependent LLM (only when explicitly cited), and Turn.
+You can optionally enrich normalized pattern data using Azure OpenAI (GPT-5) to infer missing fields like Template (Role, Context, Action, Format, Response), Application tags, Dependent LLM (only when explicitly cited), Turn, and a concise 1–2 sentence Usage Summary explaining how to apply the pattern.
 
 - What it does:
 	- Updates `public/data/normalized-patterns.json`
@@ -121,7 +123,7 @@ You can optionally enrich normalized pattern data using Azure OpenAI (GPT-5) to 
 
 - Scope to fields:
 
-You can restrict enrichment to only certain fields using `--enrich-fields` with a comma-separated list. Allowed values: `template,application,dependentLLM,turn`.
+You can restrict enrichment to only certain fields using `--enrich-fields` with a comma-separated list. Allowed values: `template,application,dependentLLM,turn,usageSummary`.
 
 - How to run (npm):
 
@@ -141,7 +143,7 @@ npm run build-data -- --enrich --enrich-fields template,application
 ```bash
 node scripts/build-data.js --enrich
 node scripts/build-data.js --enrich --enrich-limit 25
-node scripts/build-data.js --enrich --enrich-fields template,application
+node scripts/build-data.js --enrich --enrich-fields template,application,usageSummary
 ```
 
 - Using uv for Python steps (Windows PowerShell):

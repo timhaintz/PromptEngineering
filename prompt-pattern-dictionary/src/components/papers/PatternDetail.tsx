@@ -18,6 +18,11 @@ export interface NormalizedAttrs {
   application?: string[] | null;
   turn?: string | null;
   template?: Record<string, string> | null;
+  usageSummary?: string | null;
+  aiAssisted?: boolean;
+  aiAssistedFields?: string[] | null;
+  aiAssistedModel?: string | null;
+  aiAssistedAt?: string | null;
 }
 
 export interface SimilarMap { [exampleId: string]: Array<{ id: string; similarity: number }>; }
@@ -104,6 +109,18 @@ export default function PatternDetail({
           <div className="flex items-center gap-2">
             <div className="text-lg font-semibold text-gray-900 break-words">{pattern.patternName}</div>
             <ExampleIdBadge id={`ID: ${pattern.id}`} />
+            {attrs?.aiAssisted && (attrs.aiAssistedFields || []).includes('usageSummary') && (
+              <span
+                className="inline-flex items-center rounded bg-amber-100 text-amber-800 px-1.5 py-0.5 text-[10px] font-medium border border-amber-200"
+                title={
+                  attrs.aiAssistedModel
+                    ? `AI-assisted (usage summary) • ${attrs.aiAssistedModel}${attrs.aiAssistedAt ? ` • ${attrs.aiAssistedAt}` : ''}`
+                    : 'AI-assisted (usage summary)'
+                }
+              >
+                AI-assisted
+              </span>
+            )}
           </div>
         </div>
         {attrs?.turn && (
@@ -137,6 +154,11 @@ export default function PatternDetail({
             </div>
           ) : (
             'N/A'
+          )}
+          {attrs?.usageSummary && (
+            <div className="mt-2 text-gray-700 text-sm">
+              <span className="font-semibold">How to apply:</span> {attrs.usageSummary}
+            </div>
           )}
         </dd>
 
