@@ -218,6 +218,10 @@ def main():
         ]
 
         try:
+            pid = p.get('id')
+            # Log the pattern ID before making the API call so it's easy to correlate with HTTP logs
+            print(f"[{pid}] REQUEST: chat.completions -> {model_name}")
+            sys.stdout.flush()
             # Do not pass temperature explicitly to support models that only allow default
             resp = client.create_chat_completion(messages, stream=False)
             # azure_models clients typically return OpenAI-like response
@@ -231,7 +235,7 @@ def main():
                        .get('content')
                 )
             if not content:
-                print(f"[{p.get('id')}] No content in response; applying application fallback if requested.")
+                print(f"[{pid}] RESPONSE: no content; applying fallback if enabled.")
                 if 'application' in fields and not disable_fallback:
                     p['application'] = [application_fallback_note]
                 # Continue to next pattern without incrementing enriched_count (not AI-derived)
@@ -239,7 +243,7 @@ def main():
 
             obj = extract_json(content)
             if not obj or not isinstance(obj, dict):
-                print(f"[{p.get('id')}] Could not parse JSON; applying application fallback if requested.")
+                print(f"[{pid}] RESPONSE: unparsable JSON; applying fallback if enabled.")
                 if 'application' in fields and not disable_fallback:
                     p['application'] = [application_fallback_note]
                 continue
@@ -279,6 +283,7 @@ def main():
                     updated_fields.append(key)
 
             if updated_fields:
+                print(f"[{pid}] RESPONSE: OK; updated {', '.join(updated_fields)}")
                 p['aiAssisted'] = True
                 p['aiAssistedFields'] = sorted(list(set((p.get('aiAssistedFields') or []) + updated_fields)))
                 p['aiAssistedModel'] = model_name
@@ -286,7 +291,7 @@ def main():
                 enriched_count += 1
         except Exception as e:
             # Content filter or other failure; set application fallback note if requested
-            print(f"[{p.get('id')}] Enrichment error: {e}")
+            print(f"[{p.get('id')}] ERROR: {e}")
             if 'application' in fields and not disable_fallback:
                 p['application'] = [application_fallback_note]
             continue

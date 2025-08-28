@@ -485,6 +485,13 @@ async function main() {
         }
         return undefined;
       })(),
+      enrichIds: (() => {
+        const idx = args.indexOf('--enrich-ids');
+        if (idx !== -1 && args[idx + 1]) {
+          return args[idx + 1].split(',').map(s => s.trim()).filter(Boolean);
+        }
+        return undefined;
+      })(),
       enrichForce: args.includes('--enrich-force') || args.includes('--force'),
       enrichForceFields: (() => {
         const idx = args.indexOf('--enrich-force-fields');
@@ -504,6 +511,7 @@ async function main() {
       console.log('  --semantic-analysis    Run semantic similarity analysis after data processing');
   console.log('  --enrich               Run optional AI enrichment (gpt-5) to suggest missing fields');
   console.log('  --enrich-limit <n>     Limit number of patterns to enrich in this run');
+  console.log('  --enrich-ids <csv>     Comma-separated list of pattern IDs to enrich (e.g., 0-1-0,3-2-1)');
   console.log('  --enrich-fields <csv>  Comma-separated list of fields to enrich (template,application,dependentLLM,turn,usageSummary)');
   console.log('  --enrich-force        Force enrichment even if fields already populated');
   console.log('  --enrich-force-fields <csv>  Force enrichment for specific fields (e.g., application,usageSummary)');
