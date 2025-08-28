@@ -49,7 +49,9 @@ SYSTEM_PROMPT = (
     "- Do NOT hallucinate. If unsure, omit the key entirely.\n"
     "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude).\n"
     "- template fields should be concise.\n"
-    "- application: RETURN EXACTLY TWO POLISHED SENTENCES AS AN ARRAY OF TWO STRINGS. Each sentence must be imperative, clear, and actionable, grounded in the provided description and examples; avoid placeholders like 'X', 'Y', '<...>', '[...]' (use phrases like 'your scope', 'constraints, environment, domain' instead); avoid quotes around directives; ~35–45 words total. Do NOT return tags.\n"
+    "- application: RETURN EXACTLY TWO SHORT SENTENCES as [\"Sentence 1\", \"Sentence 2\"]. Use plain English and active voice. "
+    "Each sentence must be simple (one main clause), concrete, and easy to scan. Avoid jargon, lists, parentheses, semicolons, em dashes, and placeholders. "
+    "Stay grounded in the description and examples, and prefer ≤ 18 words per sentence. Do NOT return tags.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
 )
@@ -120,6 +122,7 @@ def main():
     application_fallback_note = APPLICATION_FALLBACK_NOTE_DEFAULT
     disable_fallback = False
     fill_missing_application_only = False
+    selected_ids = None  # Optional set of IDs to target
 
     # Parse args
     args = sys.argv[1:]
@@ -154,6 +157,11 @@ def main():
         if a in ('--fill-missing-application', '--application-fill-missing-only'):
             # Fast, no-AI pass: only set fallback note for patterns with empty/missing application
             fill_missing_application_only = True
+        if a == '--ids' and i + 1 < len(args):
+            raw = args[i+1]
+            parts = [x.strip() for x in raw.split(',') if x.strip()]
+            if parts:
+                selected_ids = set(parts)
 
     if not os.path.exists(OUTPUT_FILE):
         print(f"No normalized-patterns.json found at {OUTPUT_FILE}. Nothing to enrich.")
@@ -186,9 +194,19 @@ def main():
     client = get_model_client(model_name)
 
     enriched_count = 0
+    def clamp_sentence(s: str, max_words: int = 18, max_chars: int = 160) -> str:
+        words = s.split()
+        if len(words) > max_words:
+            s = ' '.join(words[:max_words]) + '…'
+        if len(s) > max_chars:
+            s = s[:max_chars].rstrip() + '…'
+        return s
+
     for p in patterns:
         if limit is not None and enriched_count >= limit:
             break
+        if selected_ids is not None and p.get('id') not in selected_ids:
+            continue
         # Decide whether to call model: if force_all OR force_fields intersect requested fields, always call.
         must_force = force_all or (bool(set(force_fields) & set(fields)))
         if not must_force and not should_enrich(p, fields):
@@ -252,6 +270,8 @@ def main():
                         # If we got more than two, keep first two
                         if len(val) > 2:
                             val = val[:2]
+                        # Clamp verbosity for readability
+                        val = [clamp_sentence(x) for x in val]
                         p[key] = val
                     else:
                         # Overwrite with model output for other fields

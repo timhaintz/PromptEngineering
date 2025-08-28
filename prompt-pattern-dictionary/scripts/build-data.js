@@ -280,6 +280,9 @@ async function processData(options = {}) {
       if (options.enrichLimit) {
         args.push('--limit', String(options.enrichLimit));
       }
+      if (options.enrichIds && options.enrichIds.length > 0) {
+        args.push('--ids', options.enrichIds.join(','));
+      }
       if (options.enrichFields && options.enrichFields.length > 0) {
         args.push('--enrich-fields', options.enrichFields.join(','));
       }
