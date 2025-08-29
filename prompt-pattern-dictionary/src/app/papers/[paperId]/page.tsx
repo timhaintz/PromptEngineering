@@ -78,6 +78,7 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
                 return {
                   mediaType: n.mediaType ?? null,
                   dependentLLM: n.dependentLLM ?? null,
+                  // Ensure application is always mapped from normalized top-level field
                   application: n.application ?? null,
                   turn: n.turn ?? null,
                   template: n.template ?? null,

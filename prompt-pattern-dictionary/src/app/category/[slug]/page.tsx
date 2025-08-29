@@ -182,18 +182,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div className="space-y-4">
           {categoryPatterns.map(p => {
             const n = normalized?.patterns.find(x => x.id === p.id);
-            const attrs: NormalizedAttrs | null = n ? {
-              mediaType: n.mediaType ?? null,
-              dependentLLM: n.dependentLLM ?? null,
-              application: n.application ?? null,
-              turn: n.turn ?? null,
-              template: n.template ?? null,
-              usageSummary: n.usageSummary ?? null,
-              aiAssisted: n.aiAssisted ?? false,
-              aiAssistedFields: n.aiAssistedFields ?? null,
-              aiAssistedModel: n.aiAssistedModel ?? null,
-              aiAssistedAt: n.aiAssistedAt ?? null,
-            } : null;
+              const attrs: NormalizedAttrs | null = n ? {
+                  mediaType: n.mediaType ?? null,
+                  dependentLLM: n.dependentLLM ?? null,
+                  // Ensure application is always mapped from normalized top-level field
+                  application: n.application ?? null,
+                  turn: n.turn ?? null,
+                  template: n.template ?? null,
+                  usageSummary: n.usageSummary ?? null,
+                  aiAssisted: n.aiAssisted ?? false,
+                  aiAssistedFields: n.aiAssistedFields ?? null,
+                  aiAssistedModel: n.aiAssistedModel ?? null,
+                  aiAssistedAt: n.aiAssistedAt ?? null,
+              } : null;
             const allFirstExamples = Object.fromEntries(allPatterns.map(pp => [pp.id, pp.examples[0]?.id]));
             return (
               <div key={p.id} id={`pattern-${p.id}`} className="bg-white rounded-lg shadow">
