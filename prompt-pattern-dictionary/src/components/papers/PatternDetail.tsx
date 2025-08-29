@@ -15,7 +15,7 @@ export interface PatternBasics {
 export interface NormalizedAttrs {
   mediaType?: string | null;
   dependentLLM?: string | null;
-  application?: string[] | null;
+  application?: string | string[] | null;
   turn?: string | null;
   template?: Record<string, string> | null;
   usageSummary?: string | null;
@@ -98,13 +98,23 @@ export default function PatternDetail({
     return lines.length ? lines.join('\n') : 'N/A';
   }, [attrs?.template]);
 
-  const appTags = attrs?.application && attrs.application.length ? attrs.application : null;
+  const appVal = attrs?.application;
+  const applicationString = typeof appVal === 'string' && appVal.trim() ? appVal.trim() : null;
+  const appTags = Array.isArray(appVal) && appVal.length ? appVal : null;
   const [paperId, categoryIndex, patternIndex] = pattern.id.split('-');
   const isPolicyFallback = useMemo(() => {
-    if (!appTags || appTags.length !== 1) return false;
-    const t = (appTags[0] || '').toLowerCase();
-    return t.includes("unable to process") && t.includes("content management policy");
-  }, [appTags]);
+    const note = "unable to process";
+    const policy = "content management policy";
+    if (applicationString) {
+      const t = applicationString.toLowerCase();
+      return t.includes(note) && t.includes(policy);
+    }
+    if (appTags && appTags.length === 1) {
+      const t = (appTags[0] || '').toLowerCase();
+      return t.includes(note) && t.includes(policy);
+    }
+    return false;
+  }, [applicationString, appTags]);
 
   // Heuristic: if application items are long or contain punctuation/spaces like phrases,
   // render as a small list instead of chips. Keep chips for short tag-like items.
@@ -162,13 +172,15 @@ export default function PatternDetail({
 
         <dt className="font-semibold text-slate-700">Application:</dt>
         <dd className="text-gray-800">
-          {appTags ? (
-            isPolicyFallback ? (
-              <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
-                <span className="font-semibold">Notice:</span>
-                <span>{appTags[0]}</span>
-              </div>
-            ) : renderAsList ? (
+          {isPolicyFallback ? (
+            <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
+              <span className="font-semibold">Notice:</span>
+              <span>{applicationString ?? (appTags ? appTags[0] : '')}</span>
+            </div>
+          ) : applicationString ? (
+            <p className="text-sm whitespace-pre-wrap">{applicationString}</p>
+          ) : appTags ? (
+            renderAsList ? (
               <ul className="list-disc pl-5 space-y-1 text-sm">
                 {appTags.map((t, idx) => (
                   <li key={idx} className="leading-snug">{t}</li>
@@ -183,9 +195,7 @@ export default function PatternDetail({
                 ))}
               </div>
             )
-          ) : (
-            'N/A'
-          )}
+          ) : 'N/A'}
           {attrs?.usageSummary && (
             <div className="mt-2 text-gray-700 text-sm">
               <span className="font-semibold">How to apply:</span> {attrs.usageSummary}
