@@ -20,7 +20,7 @@ function idParts(patternId: string): { paperId: string; categoryIndex: string; p
 export default async function PaperDetail({ params }: { params: Promise<{ paperId: string }> }) {
   const { paperId } = await params;
   const patterns = loadJson<Pattern[]>('public/data/patterns.json');
-  const normalized = loadJson<{ patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string[]; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> }>('public/data/normalized-patterns.json');
+  const normalized = loadJson<{ patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string | string[]; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> }>('public/data/normalized-patterns.json');
   const similar = loadJson<{ similar: SimilarMap }>('public/data/similar-examples.json');
   const similarPatterns = loadJson<{ similar: SimilarPatternsMap }>('public/data/similar-patterns.json');
   const filtered = patterns.filter(p => p.paper.id === paperId);

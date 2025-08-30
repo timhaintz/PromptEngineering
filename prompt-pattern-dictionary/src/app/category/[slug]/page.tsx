@@ -69,7 +69,7 @@ async function getSimilarExamples(): Promise<SimilarExamples | null> {
   return JSON.parse(fileContents);
 }
 
-type NormalizedPatterns = { patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string[]; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> };
+type NormalizedPatterns = { patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string | string[]; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> };
 async function getNormalized(): Promise<NormalizedPatterns | null> {
   const filePath = path.join(process.cwd(), 'public', 'data', 'normalized-patterns.json');
   if (!fs.existsSync(filePath)) return null;
