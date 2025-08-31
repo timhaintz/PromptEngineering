@@ -49,9 +49,9 @@ SYSTEM_PROMPT = (
     "- Do NOT hallucinate. If unsure, omit the key entirely.\n"
     "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude).\n"
     "- template fields should be concise.\n"
-    "- application: RETURN EXACTLY TWO SHORT SENTENCES as [\"Sentence 1\", \"Sentence 2\"]. Use plain English and active voice. "
-    "Each sentence must be simple (one main clause), concrete, and easy to scan. Avoid jargon, lists, parentheses, semicolons, em dashes, and placeholders. "
-    "Stay grounded in the description and examples, and prefer ≤ 18 words per sentence. Do NOT return tags.\n"
+    "- application: RETURN A SINGLE STRING containing ONE short sentence, or TWO short sentences if a second is needed for clarity. "
+    "Use plain English and active voice. Keep each sentence simple (one main clause), concrete, and easy to scan. Avoid jargon, lists, parentheses, semicolons, em dashes, and placeholders. "
+    "Stay grounded in the description and examples. Prefer ≤ 18 words per sentence. Do NOT return tags.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
 )
@@ -202,6 +202,30 @@ def main():
             s = s[:max_chars].rstrip() + '…'
         return s
 
+    def normalize_application_to_string(value: Any) -> str:
+        """Convert model output (string or list) into a single crisp string of up to two sentences."""
+        # Turn into a raw text
+        if isinstance(value, list):
+            # Join list elements with commas for better readability when input is a tag list
+            raw = ', '.join([str(x).strip() for x in value if str(x).strip()])
+        else:
+            raw = str(value or '').strip()
+
+        if not raw:
+            return ''
+
+        # Split into sentences and cap at two
+        parts = [seg.strip() for seg in re.split(r"(?<=[.!?])\s+", raw) if seg.strip()]
+        if len(parts) > 2:
+            parts = parts[:2]
+        # Clamp each sentence for brevity
+        parts = [clamp_sentence(p) for p in parts]
+        # Join back to a single string; ensure trailing punctuation
+        out = ' '.join(parts).strip()
+        if out and out[-1] not in '.!?':
+            out += '.'
+        return out
+
     for p in patterns:
         if limit is not None and enriched_count >= limit:
             break
@@ -237,7 +261,8 @@ def main():
             if not content:
                 print(f"[{pid}] RESPONSE: no content; applying fallback if enabled.")
                 if 'application' in fields and not disable_fallback:
-                    p['application'] = [application_fallback_note]
+                    # Write fallback as a single string, not an array
+                    p['application'] = application_fallback_note
                 # Continue to next pattern without incrementing enriched_count (not AI-derived)
                 continue
 
@@ -245,7 +270,8 @@ def main():
             if not obj or not isinstance(obj, dict):
                 print(f"[{pid}] RESPONSE: unparsable JSON; applying fallback if enabled.")
                 if 'application' in fields and not disable_fallback:
-                    p['application'] = [application_fallback_note]
+                    # Write fallback as a single string, not an array
+                    p['application'] = application_fallback_note
                 continue
 
             updated_fields = []
@@ -255,28 +281,8 @@ def main():
                 if key in obj and obj[key] is not None and obj[key] != {} and obj[key] != []:
                     # Normalize types and overwrite
                     if key == 'application':
-                        # Ensure application is an array of exactly two sentence strings when possible
-                        val = obj[key]
-                        if isinstance(val, str):
-                            val = [val]
-                        elif isinstance(val, list):
-                            # Coerce non-strings to strings and strip empties
-                            val = [str(x).strip() for x in val if str(x).strip()]
-                        else:
-                            val = [str(val)]
-
-                        # If we got a single string that may contain two sentences, try to split
-                        if len(val) == 1:
-                            s = val[0]
-                            parts = [seg.strip() for seg in re.split(r"(?<=[.!?])\s+", s) if seg.strip()]
-                            if len(parts) >= 2:
-                                val = parts[:2]
-                        # If we got more than two, keep first two
-                        if len(val) > 2:
-                            val = val[:2]
-                        # Clamp verbosity for readability
-                        val = [clamp_sentence(x) for x in val]
-                        p[key] = val
+                        # Convert to a single string (1–2 sentences)
+                        p[key] = normalize_application_to_string(obj[key])
                     else:
                         # Overwrite with model output for other fields
                         p[key] = obj[key]
@@ -293,12 +299,20 @@ def main():
             # Content filter or other failure; set application fallback note if requested
             print(f"[{p.get('id')}] ERROR: {e}")
             if 'application' in fields and not disable_fallback:
-                p['application'] = [application_fallback_note]
+                # Write fallback as a single string, not an array
+                p['application'] = application_fallback_note
             continue
+
+    # Final coercion pass: ensure application is ALWAYS a single string
+    coerced = 0
+    for p in patterns:
+        if isinstance(p.get('application'), list):
+            p['application'] = normalize_application_to_string(p.get('application'))
+            coerced += 1
 
     # Write back
     json.dump(data, open(OUTPUT_FILE, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
-    print(f"Enrichment complete. Updated {enriched_count} pattern(s).")
+    print(f"Enrichment complete. Updated {enriched_count} pattern(s). Coerced {coerced} application field(s) to string.")
     return 0
 
 
