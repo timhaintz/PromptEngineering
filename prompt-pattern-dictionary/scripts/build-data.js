@@ -20,6 +20,7 @@ const EMBEDDING_SCRIPT = path.join(__dirname, 'generate-embeddings-similarity.py
 const SEMANTIC_ANALYSIS_SCRIPT = path.join(__dirname, 'run-semantic-analysis.py');
 const NORMALIZE_SCRIPT = path.join(__dirname, 'transform-normalized-pp.js');
 const ENRICH_SCRIPT = path.join(__dirname, 'enrich-normalized-pp.py');
+const NORMALIZED_OUTPUT_FILE = path.join(OUTPUT_DIR, 'normalized-patterns.json');
 
 // Repo root (two levels up from this scripts folder)
 const REPO_ROOT = path.join(__dirname, '..', '..');
@@ -303,6 +304,41 @@ async function processData(options = {}) {
       cp.on('error', () => resolve());
     });
   }
+
+  // Optional coercion step to normalize any array-shaped Application fields to a standard notice
+  if (options.coerceApplicationArrays) {
+    try {
+      console.log('\n🧹 Coercing array-shaped Application fields to notice...');
+      const notice = 'Unable to process due to Azure OpenAI content management policy.';
+      if (fs.existsSync(NORMALIZED_OUTPUT_FILE)) {
+        const raw = fs.readFileSync(NORMALIZED_OUTPUT_FILE, 'utf8');
+        const data = JSON.parse(raw);
+        const list = Array.isArray(data) ? data : (Array.isArray(data.patterns) ? data.patterns : []);
+        let arraysBefore = 0;
+        for (const p of list) {
+          if (Array.isArray(p.application) && p.application.length) {
+            arraysBefore++;
+          }
+        }
+        let changed = 0;
+        if (arraysBefore > 0) {
+          for (const p of list) {
+            if (Array.isArray(p.application) && p.application.length) {
+              p.application = notice;
+              changed++;
+            }
+          }
+          const out = Array.isArray(data) ? list : { ...data, patterns: list };
+          fs.writeFileSync(NORMALIZED_OUTPUT_FILE, JSON.stringify(out, null, 2) + '\n');
+        }
+        console.log(`✅ Coercion complete. Arrays before: ${arraysBefore}, changed: ${changed}`);
+      } else {
+        console.log('ℹ️  No normalized-patterns.json found to coerce');
+      }
+    } catch (e) {
+      console.log('⚠️  Coercion step failed, continuing build...', e?.message || e);
+    }
+  }
 }
 
 /**
@@ -473,6 +509,7 @@ async function main() {
       forceEmbeddings: args.includes('--force-embeddings'),
       runSemanticAnalysis: args.includes('--semantic-analysis'),
       enrich: args.includes('--enrich'),
+      coerceApplicationArrays: args.includes('--coerce-application-arrays'),
       enrichLimit: (() => {
         const idx = args.indexOf('--enrich-limit');
         if (idx !== -1 && args[idx + 1]) return parseInt(args[idx + 1], 10);
@@ -516,6 +553,7 @@ async function main() {
   console.log('  --enrich-force        Force enrichment even if fields already populated');
   console.log('  --enrich-force-fields <csv>  Force enrichment for specific fields (e.g., application,usageSummary)');
   console.log('  --enrich-no-fallback  Do not write fallback messages on errors/content filter; leave fields unchanged');
+  console.log('  --coerce-application-arrays  Replace any array-shaped Application with a standard content-filter notice');
   console.log('  --help, -h            Show this help message');
       process.exit(0);
     }
