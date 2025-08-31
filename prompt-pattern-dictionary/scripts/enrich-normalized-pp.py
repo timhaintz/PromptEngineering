@@ -10,6 +10,8 @@ Optional enrichment for normalized prompt patterns using Azure OpenAI (gpt-5).
     - turn ("single" or "multi", only if clear)
     - usageSummary (1–2 sentences explaining how to apply the pattern in real-world use)
 - Writes back the same file with merged fields plus aiAssisted metadata.
+- Adds attrs.templateRawBracketed: a single-line bracketed string like
+    "[Role: ..., Context: ..., Action: ..., Format: ..., Response: ...]" for export and UI display.
 
 Usage:
   python enrich-normalized-pp.py [--model gpt-5] [--limit N]
@@ -41,19 +43,24 @@ except Exception as e:
 DATA_DIR = os.path.abspath(os.path.join(THIS_DIR, '..', 'public', 'data'))
 OUTPUT_FILE = os.path.join(DATA_DIR, 'normalized-patterns.json')
 APPLICATION_FALLBACK_NOTE_DEFAULT = "Unable to process due to Azure's Content Management Policy."
+TEMPLATE_CONTENT_FILTER_NOTE = APPLICATION_FALLBACK_NOTE_DEFAULT
+TEMPLATE_NA = "N/A"
 
 SYSTEM_PROMPT = (
     "You are a careful data normalizer. Given a prompt pattern's description, examples, and current fields, "
-    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", \"dependentLLM\", \"turn\", \"usageSummary\"}. "
+    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", \"dependentLLM\", \"turn\", \"usageSummary\", \"templateRawBracketed\"}. "
     "Rules: \n"
     "- Do NOT hallucinate. If unsure, omit the key entirely.\n"
     "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude).\n"
-    "- template fields should be concise.\n"
+    "- template: ALWAYS return an object with EXACTLY the five keys {role, context, action, format, response}. "
+    "For any part that is not present in the source, set the value to 'N/A' (uppercase) — do not leave it blank. Keep values concise phrases.\n"
     "- application: RETURN A SINGLE STRING containing ONE short sentence, or TWO short sentences if a second is needed for clarity. "
     "Use plain English and active voice. Keep each sentence simple (one main clause), concrete, and easy to scan. Avoid jargon, lists, parentheses, semicolons, em dashes, and placeholders. "
     "Stay grounded in the description and examples. Prefer ≤ 18 words per sentence. Do NOT return tags.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
+    "- templateRawBracketed: Return a SINGLE LINE exactly in the form [Role: <...>, Context: <...>, Action: <...>, Format: <...>, Response: <...>]. "
+    "Always include all five segments in that order and use 'N/A' where a part is not present. Do NOT include newlines.\n"
 )
 
 def extract_json(text: str) -> Optional[Dict[str, Any]]:
@@ -116,7 +123,7 @@ def should_enrich(p: Dict[str, Any], fields: List[str]) -> bool:
 def main():
     model_name = 'gpt-5'
     limit = None
-    fields = ['template','application','dependentLLM','turn','usageSummary']
+    fields = ['template','application','dependentLLM','turn','usageSummary','templateRawBracketed']
     force_all = False
     force_fields: List[str] = []
     application_fallback_note = APPLICATION_FALLBACK_NOTE_DEFAULT
@@ -226,6 +233,41 @@ def main():
             out += '.'
         return out
 
+    def _clean_cell(v: Any) -> str:
+        s = str(v or '').strip()
+        s = re.sub(r"\s+", " ", s)
+        return s if s else TEMPLATE_NA
+
+    def force_template_five_keys(tpl_in: Any) -> Dict[str, str]:
+        tpl = tpl_in if isinstance(tpl_in, dict) else {}
+        keys = ['role', 'context', 'action', 'format', 'response']
+        out: Dict[str, str] = {}
+        for k in keys:
+            out[k] = _clean_cell(tpl.get(k, TEMPLATE_NA))
+            if not out[k]:
+                out[k] = TEMPLATE_NA
+        return out
+
+    def build_bracketed_from_template(tpl_dict: Dict[str, str]) -> str:
+        # tpl_dict must already be normalized by force_template_five_keys
+        return (
+            f"[Role: {tpl_dict['role']}, Context: {tpl_dict['context']}, "
+            f"Action: {tpl_dict['action']}, Format: {tpl_dict['format']}, "
+            f"Response: {tpl_dict['response']}]"
+        )
+
+    def set_template_bracket_and_object(pat: Dict[str, Any], text_for_all_fields: str):
+        """Set both templateRawBracketed and template object with the provided text for all five keys."""
+        normalized = force_template_five_keys({
+            'role': text_for_all_fields,
+            'context': text_for_all_fields,
+            'action': text_for_all_fields,
+            'format': text_for_all_fields,
+            'response': text_for_all_fields,
+        })
+        pat['template'] = normalized
+        pat['templateRawBracketed'] = build_bracketed_from_template(normalized)
+
     for p in patterns:
         if limit is not None and enriched_count >= limit:
             break
@@ -263,6 +305,9 @@ def main():
                 if 'application' in fields and not disable_fallback:
                     # Write fallback as a single string, not an array
                     p['application'] = application_fallback_note
+                if not disable_fallback:
+                    # Generic failure -> set template to N/A for all five
+                    set_template_bracket_and_object(p, TEMPLATE_NA)
                 # Continue to next pattern without incrementing enriched_count (not AI-derived)
                 continue
 
@@ -272,10 +317,13 @@ def main():
                 if 'application' in fields and not disable_fallback:
                     # Write fallback as a single string, not an array
                     p['application'] = application_fallback_note
+                if not disable_fallback:
+                    # Generic failure -> set template to N/A for all five
+                    set_template_bracket_and_object(p, TEMPLATE_NA)
                 continue
 
             updated_fields = []
-            for key in ['template', 'application', 'dependentLLM', 'turn', 'usageSummary']:
+            for key in ['template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'templateRawBracketed']:
                 if key not in fields:
                     continue
                 if key in obj and obj[key] is not None and obj[key] != {} and obj[key] != []:
@@ -283,10 +331,23 @@ def main():
                     if key == 'application':
                         # Convert to a single string (1–2 sentences)
                         p[key] = normalize_application_to_string(obj[key])
+                    elif key == 'template':
+                        # Ensure exactly five keys with N/A defaults
+                        p[key] = force_template_five_keys(obj[key])
+                    elif key == 'templateRawBracketed':
+                        # Ensure single line bracketed form; strip whitespace/newlines
+                        raw = str(obj[key]).strip().replace('\n', ' ')
+                        p['templateRawBracketed'] = raw
                     else:
                         # Overwrite with model output for other fields
                         p[key] = obj[key]
                     updated_fields.append(key)
+
+            # Ensure bracketed string exists and matches the normalized template when template was updated
+            if 'template' in updated_fields and isinstance(p.get('template'), dict):
+                tpl_norm = force_template_five_keys(p.get('template'))
+                p['template'] = tpl_norm
+                p['templateRawBracketed'] = build_bracketed_from_template(tpl_norm)
 
             if updated_fields:
                 print(f"[{pid}] RESPONSE: OK; updated {', '.join(updated_fields)}")
@@ -298,9 +359,18 @@ def main():
         except Exception as e:
             # Content filter or other failure; set application fallback note if requested
             print(f"[{p.get('id')}] ERROR: {e}")
-            if 'application' in fields and not disable_fallback:
-                # Write fallback as a single string, not an array
-                p['application'] = application_fallback_note
+            if not disable_fallback:
+                # Determine if it was a content filter issue
+                msg = (str(e) or '').lower()
+                is_content_filter = ('content' in msg and ('policy' in msg or 'filter' in msg)) or 'content management policy' in msg
+                if 'application' in fields:
+                    # Use explicit content management note for application to match prior behavior
+                    p['application'] = application_fallback_note if is_content_filter else p.get('application') or ''
+                # For template fields, follow requested rules
+                if is_content_filter:
+                    set_template_bracket_and_object(p, TEMPLATE_CONTENT_FILTER_NOTE)
+                else:
+                    set_template_bracket_and_object(p, TEMPLATE_NA)
             continue
 
     # Final coercion pass: ensure application is ALWAYS a single string

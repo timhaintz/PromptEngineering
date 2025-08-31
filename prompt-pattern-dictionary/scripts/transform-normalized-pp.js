@@ -125,6 +125,10 @@ function normalize() {
     // Preserve known enrichable fields
     maybePreserve('application');
     maybePreserve('template');
+    // Preserve the raw bracketed template string if it was enriched
+    if (typeof oldItem.templateRawBracketed !== 'undefined') {
+      newItem.templateRawBracketed = oldItem.templateRawBracketed;
+    }
     maybePreserve('dependentLLM');
     maybePreserve('turn');
     // usageSummary may not exist on the base schema – copy if enriched

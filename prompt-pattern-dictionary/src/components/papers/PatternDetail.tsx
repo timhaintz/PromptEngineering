@@ -19,6 +19,8 @@ export interface NormalizedAttrs {
   turn?: string | null;
   template?: Record<string, string> | null;
   usageSummary?: string | null;
+  // New: raw single-line bracketed template representation for export/display
+  templateRawBracketed?: string | null;
   aiAssisted?: boolean;
   aiAssistedFields?: string[] | null;
   aiAssistedModel?: string | null;
@@ -73,6 +75,7 @@ export default function PatternDetail({
   const [examplesOpen, setExamplesOpen] = useState(false); // default condensed per user
   const [templateOpen, setTemplateOpen] = useState(false); // default collapsed
   const [similarPatternsOpen, setSimilarPatternsOpen] = useState(false); // default collapsed
+  const [bracketOpen, setBracketOpen] = useState(false); // optional bracketed view toggle
 
   // Remember examples panel state per pattern id
   useEffect(() => {
@@ -236,7 +239,27 @@ export default function PatternDetail({
         </dt>
         <dd className="text-gray-800">
           {templateOpen ? (
-            <pre id={`tpl-${pattern.id}`} className="whitespace-pre-wrap bg-gray-50 p-2 rounded border text-sm">{templateText}</pre>
+            <div id={`tpl-${pattern.id}`} className="space-y-2">
+              <pre className="whitespace-pre-wrap bg-gray-50 p-2 rounded border text-sm">{templateText}</pre>
+              {attrs?.templateRawBracketed ? (
+                <div className="text-xs text-gray-700">
+                  <button
+                    type="button"
+                    onClick={() => setBracketOpen(v => !v)}
+                    className="text-blue-700 hover:text-blue-900 underline"
+                    aria-controls={`tplb-${pattern.id}`}
+                    title={bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
+                  >
+                    {bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
+                  </button>
+                  {bracketOpen && (
+                    <div id={`tplb-${pattern.id}`} className="mt-1 font-mono break-words bg-white border rounded p-2">
+                      {attrs.templateRawBracketed}
+                    </div>
+                  )}
+                </div>
+              ) : null}
+            </div>
           ) : (
             <span className="text-gray-500 select-none">(collapsed)</span>
           )}
