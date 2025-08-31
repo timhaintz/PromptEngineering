@@ -134,7 +134,19 @@ export default function PatternDetail({
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 group">
+            {/* Hover-only permalink chain icon (larger, like docs anchors) */}
+            <a
+              href={context === 'paper' ? `#p-${categoryIndex}-${patternIndex}` : `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`}
+              className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-500 hover:text-blue-700 focus:opacity-100"
+              title="Permalink"
+              aria-label="Permalink"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 mr-1">
+                <path d="M10.59 13.41a1 1 0 010-1.41l3.3-3.3a3 3 0 114.24 4.24l-1.65 1.65a1 1 0 11-1.41-1.41l1.65-1.65a1 1 0 10-1.42-1.42l-3.3 3.3a1 1 0 01-1.41 0z"/>
+                <path d="M13.41 10.59a1 1 0 010 1.41l-3.3 3.3a3 3 0 11-4.24-4.24l1.65-1.65a1 1 0 111.41 1.41L7.29 12.3a1 1 0 101.42 1.42l3.3-3.3a1 1 0 011.41 0z"/>
+              </svg>
+            </a>
             <div className="text-lg font-semibold text-gray-900 break-words">{pattern.patternName}</div>
             <ExampleIdBadge id={`ID: ${pattern.id}`} />
             {attrs?.aiAssisted && (attrs.aiAssistedFields || []).includes('usageSummary') && (
@@ -151,19 +163,23 @@ export default function PatternDetail({
             )}
           </div>
         </div>
-        {attrs?.turn && (
-          <div className="shrink-0 self-start">
-            <span className="inline-flex items-center rounded bg-indigo-100 text-indigo-700 px-2 py-0.5 text-xs font-medium" title="Turn">
-              Turn: {attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)}
-            </span>
-          </div>
-        )}
+        {/* Removed Turn badge from header */}
       </div>
 
       {pattern.description && <p className="text-gray-700 mt-2 whitespace-pre-wrap">{pattern.description}</p>}
 
       {/* Definition list attributes */}
       <dl className="mt-3 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1">
+        {/* Show Reference only on category pages */}
+        {context === 'category' && paperTitle && paperUrl ? (
+          <>
+            <dt className="font-semibold text-slate-700">Reference:</dt>
+            <dd className="text-gray-800">
+              <a href={paperUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">{paperTitle}</a>
+            </dd>
+          </>
+        ) : null}
+
         <dt className="font-semibold text-slate-700">Media Type:</dt>
         <dd className="text-gray-800">{attrs?.mediaType || 'N/A'}</dd>
 
@@ -203,8 +219,8 @@ export default function PatternDetail({
           )}
         </dd>
 
-        <dt className="font-semibold text-slate-700">Turn:</dt>
-        <dd className="text-gray-800">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
+  <dt className="font-semibold text-slate-700">Turn:</dt>
+  <dd className="text-gray-800">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
 
         <dt className="font-semibold text-slate-700 flex items-center">
           <button
@@ -242,23 +258,7 @@ export default function PatternDetail({
             </button>
             <div className="text-sm font-semibold text-gray-900">Prompt Examples ({pattern.examples.length})</div>
           </div>
-          <div className="flex items-center gap-3">
-            <a
-              href={context === 'paper' ? `#p-${categoryIndex}-${patternIndex}` : `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`}
-              className="text-blue-600 text-xs hover:text-blue-800"
-            >
-              Permalink
-            </a>
-            {context === 'category' && (
-              <a
-                href={`/papers/${paperId}`}
-                className="text-blue-600 text-xs hover:text-blue-800"
-                title={paperUrl ? `Source: ${paperUrl}` : undefined}
-              >
-                Paper: {paperTitle || paperId}
-              </a>
-            )}
-          </div>
+          {/* Right-side actions removed: Permalink text and Paper link are no longer shown. */}
         </div>
 
         {examplesOpen && (
