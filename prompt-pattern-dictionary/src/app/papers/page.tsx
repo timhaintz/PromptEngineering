@@ -31,18 +31,29 @@ export default async function PapersPage() {
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Papers ({papers.length})</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {papers.map(p => (
-            <div key={p.paperId} className="bg-white rounded-lg p-4 border hover:border-blue-300 hover:shadow">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <h2 className="text-md font-semibold text-gray-900 mb-1 break-words">{p.title}</h2>
-                  <div className="text-xs text-gray-600 mb-2">{p.authors.slice(0,4).join(', ')}{p.authors.length > 4 ? ' et al.' : ''}</div>
-                  <div className="text-xs text-gray-600">Patterns: {p.count}</div>
+            <div key={p.paperId} className="relative">
+              {/* Main clickable tile */}
+              <Link
+                href={`/papers/${p.paperId}`}
+                className="block bg-white rounded-lg p-4 border hover:border-blue-300 hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-200"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <h2 className="text-md font-semibold text-gray-900 mb-1 break-words">{p.title}</h2>
+                    <div className="text-xs text-gray-600 mb-2">{p.authors.slice(0,4).join(', ')}{p.authors.length > 4 ? ' et al.' : ''}</div>
+                    <div className="text-xs text-gray-600">Patterns: {p.count}</div>
+                  </div>
                 </div>
-                <div className="flex flex-col items-end gap-1">
-                  <Link href={`/papers/${p.paperId}`} className="text-blue-600 text-xs hover:text-blue-800">View patterns</Link>
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-gray-600 text-xs hover:text-gray-800">Source</a>
-                </div>
-              </div>
+              </Link>
+              {/* Keep Source link, positioned over the card */}
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-2 right-2 text-gray-600 text-xs hover:text-gray-800 bg-white/80 backdrop-blur rounded px-1"
+              >
+                Source
+              </a>
             </div>
           ))}
         </div>
