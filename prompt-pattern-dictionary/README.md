@@ -64,6 +64,18 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the dictionary.
 
+### Start in production
+
+To run the site in production mode (optimized build):
+
+```bash
+# Build the app (includes data processing & semantic artifacts)
+npm run build
+
+# Start the production server
+npm run start
+```
+
 ## 📁 Project Structure
 
 ```
@@ -85,6 +97,7 @@ prompt-pattern-dictionary/
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
+- `npm run start` - Start the production server (after `npm run build`)
 - `npm run build-data` - Process source JSON into optimized format
 - `npm run lint` - Run ESLint
 - `npm test` - Run tests
