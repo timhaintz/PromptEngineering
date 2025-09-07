@@ -1,10 +1,7 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React from 'react';
-
-// We'll lazy-load a Mermaid component (client-only) for accessibility & performance.
-// Placeholder dynamic import; if a dedicated component is later added we can swap.
-// For now we simply render a <pre><code> block; enhancement TODO.
+import MermaidDiagram from '@/components/diagram/MermaidDiagram';
+import OrientationTOC from '@/components/navigation/OrientationTOC';
 
 export const metadata = {
   title: 'Orientation | Prompt Pattern Dictionary',
@@ -35,18 +32,8 @@ export default function OrientationPage() {
         <h1 id="orientation-intro" className="text-4xl font-bold text-gray-900 mb-4">Orientation</h1>
         <p className="text-gray-700 max-w-2xl mb-10">A guided starting point for exploring, selecting, and adapting prompt patterns. Use this page to understand structure, lifecycle, and how to compose patterns effectively.</p>
 
-        {/* In-page mini navigation similar to OED (simple list) */}
-        <nav aria-label="Orientation sections" className="mb-12">
-          <ul className="flex flex-wrap gap-2 text-sm">
-            {sections.map(s => (
-              <li key={s.id}>
-                <a href={`#${s.id}`} className="inline-block px-3 py-1 rounded-full bg-white border border-gray-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        {/* In-page mini navigation with scrollspy */}
+        <OrientationTOC sections={sections} />
 
         <div className="prose prose-slate max-w-none">
           <section id="quick-start">
@@ -69,28 +56,13 @@ export default function OrientationPage() {
               <p>Each entry follows a consistent schema so you can scan and compare quickly. The Template always exposes five canonical keys (<code>role</code>, <code>context</code>, <code>action</code>, <code>format</code>, <code>response</code>) plus a bracketed one-line synthesis.</p>
               <div className="my-6 p-4 rounded-lg bg-white border border-indigo-200 shadow-sm">
                 <p className="text-sm font-semibold text-indigo-700 mb-2">Structure Diagram</p>
-                {/* Accessible Mermaid code block. Enhancement: client-side render with mermaid library. */}
-                <pre className="overflow-x-auto text-xs leading-relaxed" aria-label="Mermaid diagram source">
-{`flowchart LR
-    A[Pattern Name]:::title --> B[Intent / Purpose]
-    B --> C[Template (5 keys)]
-    C --> C1[role]
-    C --> C2[context]
-    C --> C3[action]
-    C --> C4[format]
-    C --> C5[response]
-    C --> C6[Bracketed Summary]
-    A --> D[Application]
-    A --> E[Examples & Similar]
-    A --> F[Adaptation Notes]
-    A --> G[Evaluation / Quality Hints]
-    A --> H[Tags / Category]
-
-    classDef title fill:#1e3a8a,stroke:#1e3a8a,stroke-width:1,color:#fff;
-    classDef keys fill:#eef2ff,stroke:#4338ca,color:#1e1b4b;
-    class C,C1,C2,C3,C4,C5,C6 keys;`}
-                </pre>
-                <p className="mt-2 text-xs text-gray-500">(Diagram rendered as code for now. Future enhancement: live Mermaid rendering.)</p>
+                <div id="diagram-desc" className="sr-only">Diagram showing relationships: Pattern Name connects to Intent/Purpose, Template (with five keys and bracketed summary), Application, Examples & Similar, Adaptation Notes, Evaluation/Quality Hints, and Tags/Category.</div>
+                <MermaidDiagram
+                  describedById="diagram-desc"
+                  className="mermaid"
+                  chart={`flowchart LR\n    A[Pattern Name]:::title --> B[Intent / Purpose]\n    B --> C[Template (5 keys)]\n    C --> C1[role]\n    C --> C2[context]\n    C --> C3[action]\n    C --> C4[format]\n    C --> C5[response]\n    C --> C6[Bracketed Summary]\n    A --> D[Application]\n    A --> E[Examples & Similar]\n    A --> F[Adaptation Notes]\n    A --> G[Evaluation / Quality Hints]\n    A --> H[Tags / Category]\n\n    classDef title fill:#1e3a8a,stroke:#1e3a8a,stroke-width:1,color:#fff;\n    classDef keys fill:#eef2ff,stroke:#4338ca,color:#1e1b4b;\n    class C,C1,C2,C3,C4,C5,C6 keys;`}
+                />
+                <p className="mt-2 text-xs text-gray-500">Rendered client-side with Mermaid; accessible fallback includes textual description.</p>
               </div>
             </section>
 

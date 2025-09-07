@@ -8,6 +8,7 @@ const tabs = [
   { href: '/categories', label: 'Categories' },
   { href: '/patterns', label: 'Patterns' },
   { href: '/papers', label: 'Papers' },
+  { href: '/orientation', label: 'Orientation' },
   { href: '/matrix', label: 'Matrix' },
   { href: '/semantic', label: 'Semantic' },
   { href: '/taxonomy', label: 'Taxonomy' },
