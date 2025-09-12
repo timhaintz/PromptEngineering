@@ -24,3 +24,16 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Anchor offset: ensure in-page hash navigation leaves headings unobscured (future fixed headers) */
+/* Applies to orientation & general content headings */
+h1[id], h2[id], h3[id], h4[id] {
+  scroll-margin-top: 5.5rem; /* approx height for potential future sticky nav */
+}
+
+/* Print tweaks for cheat sheet (light mode assumption) */
+@media print {
+  .no-print { display: none !important; }
+  body { font-size: 12px; line-height: 1.3; }
+  a { text-decoration: none; color: #000; }
+}

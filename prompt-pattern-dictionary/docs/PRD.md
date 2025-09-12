@@ -273,43 +273,68 @@ Research Paper
 
 ## Implementation Phases
 
+### Current Status (September 2025)
+Foundation and core content processing are largely complete. We have:
+- Implemented repository structure, navigation, page templates (patterns, papers, categories, search, comparison placeholders, semantic explorer, playground).
+- Normalization & enrichment pipeline with five-key Template enforcement (role, context, action, format, response) and AI‑assisted augmentation metadata.
+- Generated embeddings, semantic category assignments, similarity maps (patterns & examples) and surfaced related patterns/examples in UI.
+- Added Orientation hub (with lifecycle, adaptation, evaluation, FAQ, glossary) and accessibility-focused enhancements (scrollspy TOC, keyboard tips, ARIA labeling, dynamic Mermaid diagram description, AI‑assisted provenance badges).
+- Implemented pattern detail component with collapsible template, bracketed form toggle, examples (state remembered), similar examples fallback via similar patterns.
+- Implemented search page with multi-mode (pattern, category, logic, example) and client-side filtering over prebuilt indexes.
+- Added comparison route scaffolding and semantic explorer groundwork (data artifacts present).
+- Data build scripts regenerate normalized/artifact JSON deterministically each build.
+
+In progress / upcoming:
+- Dedicated Accessibility & Responsible Use section (planned; partially addressed inline in Orientation).
+- Cheat Sheet condensed orientation page (planned next).
+- Real-time multi-pattern interactive comparison UI (back-end data prepared; UI advanced features pending).
+- Playground live embedding invocation (currently static/placeholder descriptive content).
+- Advanced visualization components (heatmap, scatter, network) not yet implemented.
+
+Below phase checklists updated to reflect present state.
+
 ### Phase 1: Foundation
-- [ ] Set up repository structure and development environment
-- [ ] Design information architecture and URL structure
-- [ ] Create basic page templates and navigation
-- [ ] Implement core search functionality
-- [ ] Build pattern display components
+- [x] Set up repository structure and development environment
+- [x] Design information architecture and URL structure
+- [x] Create basic page templates and navigation
+- [x] Implement core search functionality (client-side index + multi-type search)
+- [x] Build pattern display components (PatternDetail with examples & similarity)
+- [x] Establish data build & normalization pipeline
+- [x] Introduce Orientation / onboarding documentation
 
 ### Phase 2: Content & Search
-- [ ] Process `../promptpatterns.json` into searchable format
-- [ ] Implement advanced search filters and categories
-- [ ] Create individual pattern pages with full details
-- [ ] Add cross-references and related pattern suggestions
-- [ ] Implement responsive design and mobile optimization
-- [ ] **Generate embeddings and similarity scores using Azure OpenAI**
-- [ ] **Build semantic categorization system**
+- [x] Process `../promptpatterns.json` into searchable format
+- [x] Implement advanced search filters and categories (pattern/category/logic/example modes)
+- [x] Create individual pattern pages with full details (including enrichment & collapsibles)
+- [x] Add cross-references and related pattern suggestions (similar patterns/examples)
+- [x] Implement responsive design and basic mobile-friendly layout
+- [x] **Generate embeddings and similarity scores using Azure OpenAI**
+- [x] **Build semantic categorization system** (semantic assignments + category embeddings)
+- [ ] Add boolean operators & auto-complete (planned)
+- [ ] Paper citation export (planned)
 
 ### Phase 3: Similarity & Comparison Features
-- [ ] **Implement real-time pattern comparison (2-10 patterns)**
-- [ ] **Build prompt testing playground with live embedding generation**
-- [ ] **Create similarity visualization components (heatmaps, scatter plots, networks)**
+- [ ] **Implement real-time pattern comparison (2-10 patterns)** (scaffold exists; UI logic pending)
+- [ ] **Build prompt testing playground with live embedding generation** (page stub + description; no live calls yet)
+- [ ] **Create similarity visualization components (heatmaps, scatter, network)**
 - [ ] **Add export functionality for research data**
 - [ ] **Implement clustering and statistical analysis tools**
-- [ ] Add interactive features (copy, share, bookmark)
-- [ ] Implement accessibility features
+- [ ] Add interactive features (copy examples already partially present; share/bookmark pending)
+- [x] Implement accessibility features (baseline: headings structure, focusable toggles, aria labels, provenance badges) – further audits planned
 
 ### Phase 4: Enhancement & Polish
 - [ ] Add analytics and user tracking
-- [ ] Optimize performance and SEO for similarity features
+- [ ] Optimize performance and SEO for similarity features (core pages partially optimized by Next.js defaults)
 - [ ] **Performance optimization for large-scale similarity calculations**
 - [ ] **Advanced clustering algorithms and research analytics**
 - [ ] User testing and feedback implementation
+- [ ] Accessibility conformance pass (WCAG 2.1 AA) & color contrast revalidation
 
 ### Phase 5: Launch & Iteration
 - [ ] Beta testing with select users
 - [ ] **Research community feedback on comparison features**
 - [ ] Bug fixes and performance optimization
-- [ ] Documentation and help content
+- [ ] Documentation and help content (Orientation in place; cheat sheet & responsible use section planned)
 - [ ] Public launch and marketing
 - [ ] Community feedback integration
 

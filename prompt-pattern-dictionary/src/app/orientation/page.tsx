@@ -19,6 +19,7 @@ const sections = [
   { id: 'adaptation', label: 'Adaptation' },
   { id: 'anti-patterns', label: 'Anti-Patterns' },
   { id: 'quality-evaluation', label: 'Quality' },
+  { id: 'accessibility-responsible-use', label: 'Accessibility' },
   { id: 'glossary', label: 'Glossary' },
   { id: 'faq', label: 'FAQ' },
   { id: 'feedback', label: 'Feedback' },
@@ -32,6 +33,7 @@ export default function OrientationPage() {
   <h1 id="orientation-intro" className="text-4xl font-bold text-gray-900 mb-4">Orientation</h1>
   <p className="text-gray-700 max-w-3xl mb-6">Welcome. This guide helps you confidently explore, evaluate, adapt, and combine prompt patterns. It is designed to be <strong>concise, systematic, inclusive, and accessible</strong>. You can jump straight to a section using the in‑page navigation, use your browser's find feature (<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>F</kbd>), or navigate by headings with assistive technologies.</p>
   <p className="text-gray-600 text-sm max-w-3xl mb-10">Keyboard tips: Press <kbd>Tab</kbd> to reach the mini navigation chips, <kbd>Shift+Tab</kbd> to move backwards, and use native browser heading navigation (e.g. <kbd>H</kbd> in many screen reader modes). All expandable elements (such as templates and example groups) expose clear button labels and ARIA relationships.</p>
+  <p className="text-xs text-gray-500 max-w-3xl mb-6">Need a printable reference? A condensed <Link href="/orientation/cheatsheet" className="text-blue-600 underline">Cheat Sheet</Link> page is available (beta).</p>
 
         {/* In-page mini navigation with scrollspy */}
         <OrientationTOC sections={sections} />
@@ -235,6 +237,31 @@ export default function OrientationPage() {
                 <p><strong>Evaluation Harness:</strong> Start with a CSV/JSON golden set (10–50 rows). Add edge cases representing dialectal variation, varied names, and counterfactuals.</p>
                 <p><strong>Change Discipline:</strong> If more than one structural edit occurs, re-baseline; track a diff log (date, change, metric deltas).</p>
                 <p><strong>Automation Tip:</strong> Consider scripting a validation pass that checks for required keys and JSON parse success before human review.</p>
+              </div>
+            </section>
+
+            <section id="accessibility-responsible-use">
+              <h2>Accessibility & Responsible Use</h2>
+              <div className="space-y-3 text-sm">
+                <p>This project aims to support equitable, auditable, and safe prompt engineering practice. Use patterns in ways that respect user dignity, privacy, and legal constraints.</p>
+                <h3 className="text-sm font-semibold mt-4">Accessibility Practices</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li><strong>Structure:</strong> All interactive toggles are buttons with discernible text or labels; headings are hierarchical; focus order follows visual order.</li>
+                  <li><strong>Keyboard:</strong> Pattern detail expansion (examples, template, bracket form) is fully keyboard operable.</li>
+                  <li><strong>Color Contrast:</strong> Palette targets WCAG AA; report any insufficient contrast combinations.</li>
+                  <li><strong>Motion / Load:</strong> Mermaid diagrams render progressively with textual fallback.</li>
+                  <li><strong>Assistive Navigation:</strong> Anchors include scroll margin (offset) for reduced visual occlusion.</li>
+                </ul>
+                <h3 className="text-sm font-semibold mt-4">Responsible Use Guidelines</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li><strong>No Harmful Generation:</strong> Do not adapt patterns to produce disallowed or abusive content.</li>
+                  <li><strong>Bias Monitoring:</strong> Evaluate outputs against diverse demographic and contextual inputs.</li>
+                  <li><strong>Transparency:</strong> Preserve AI-assisted metadata; do not remove provenance indicators.</li>
+                  <li><strong>Data Minimization:</strong> Avoid embedding sensitive personal data in examples or placeholders.</li>
+                  <li><strong>Audit Trails:</strong> Version prompts; log rationale for structural changes.</li>
+                </ul>
+                <h3 className="text-sm font-semibold mt-4">Escalation & Reporting</h3>
+                <p>Report potential misuse, accessibility barriers, or biased outcomes via the repository issue tracker. Include reproduction steps, environment (model version), and anonymized sample input/output where possible.</p>
               </div>
             </section>
 
