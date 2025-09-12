@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import MermaidDiagram from '@/components/diagram/MermaidDiagram';
 import OrientationTOC from '@/components/navigation/OrientationTOC';
+import OrientationSideNav from '@/components/navigation/OrientationSideNav';
 
 export const metadata = {
   title: 'Orientation | Prompt Pattern Dictionary',
@@ -9,38 +10,48 @@ export const metadata = {
 };
 
 const sections = [
-  { id: 'orientation-intro', label: 'Intro' },
-  { id: 'quick-start', label: 'Quick Start' },
-  { id: 'what-is-a-pattern', label: 'What Is a Pattern' },
-  { id: 'pattern-anatomy', label: 'Anatomy' },
-  { id: 'lifecycle', label: 'Lifecycle' },
-  { id: 'choosing-patterns', label: 'Choosing' },
-  { id: 'combining-patterns', label: 'Combining' },
-  { id: 'adaptation', label: 'Adaptation' },
-  { id: 'anti-patterns', label: 'Anti-Patterns' },
-  { id: 'quality-evaluation', label: 'Quality' },
-  { id: 'accessibility-responsible-use', label: 'Accessibility' },
-  { id: 'glossary', label: 'Glossary' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'feedback', label: 'Feedback' },
-  { id: 'next-steps', label: 'Next Steps' }
+  { id: 'quick-start', label: 'Quick Start', number: '1' },
+  { id: 'what-is-a-pattern', label: 'What Is a Pattern', number: '2' },
+  { id: 'pattern-anatomy', label: 'Pattern Anatomy', number: '3' },
+  { id: 'lifecycle', label: 'Lifecycle', number: '4' },
+  { id: 'choosing-patterns', label: 'Choosing Patterns', number: '5' },
+  { id: 'combining-patterns', label: 'Combining Patterns', number: '6' },
+  { id: 'adaptation', label: 'Adaptation & Remix', number: '7' },
+  { id: 'anti-patterns', label: 'Anti-Patterns', number: '8' },
+  { id: 'quality-evaluation', label: 'Quality & Evaluation', number: '9' },
+  { id: 'accessibility-responsible-use', label: 'Accessibility & Responsible Use', number: '10' },
+  { id: 'glossary', label: 'Glossary', number: '11' },
+  { id: 'faq', label: 'FAQ', number: '12' },
+  { id: 'feedback', label: 'Feedback', number: '13' },
+  { id: 'next-steps', label: 'Next Steps', number: '14' }
 ];
 
 export default function OrientationPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50">
-      <div className="container mx-auto px-4 py-10 lg:py-16">
-  <h1 id="orientation-intro" className="text-4xl font-bold text-gray-900 mb-4">Orientation</h1>
-  <p className="text-gray-700 max-w-3xl mb-6">Welcome. This guide helps you confidently explore, evaluate, adapt, and combine prompt patterns. It is designed to be <strong>concise, systematic, inclusive, and accessible</strong>. You can jump straight to a section using the in‑page navigation, use your browser's find feature (<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>F</kbd>), or navigate by headings with assistive technologies.</p>
-  <p className="text-gray-600 text-sm max-w-3xl mb-10">Keyboard tips: Press <kbd>Tab</kbd> to reach the mini navigation chips, <kbd>Shift+Tab</kbd> to move backwards, and use native browser heading navigation (e.g. <kbd>H</kbd> in many screen reader modes). All expandable elements (such as templates and example groups) expose clear button labels and ARIA relationships.</p>
-  <p className="text-xs text-gray-500 max-w-3xl mb-6">Need a printable reference? A condensed <Link href="/orientation/cheatsheet" className="text-blue-600 underline">Cheat Sheet</Link> page is available (beta).</p>
-
-        {/* In-page mini navigation with scrollspy */}
-        <OrientationTOC sections={sections} />
-
-        <div className="prose prose-slate max-w-none">
-          <section id="quick-start">
-            <h2>Quick Start</h2>
+    <div className="min-h-screen bg-white">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-indigo-700 text-white px-3 py-1 rounded">Skip to content</a>
+      <div className="mx-auto max-w-7xl px-4 py-10 lg:py-14">
+        <header className="mb-10 border-b pb-6">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 mb-4">Orientation</h1>
+          <p className="text-slate-700 max-w-4xl text-lg leading-relaxed">A structured guide to help you explore, evaluate, adapt, and combine prompt patterns safely and effectively. Model interaction should be <strong>auditable</strong>, <strong>measurable</strong>, and <strong>responsible</strong>. Use the navigation to jump to numbered sections or read linearly.</p>
+          <div className="mt-4 flex flex-wrap gap-6 text-sm text-slate-600">
+            <div><strong>Printable:</strong> <Link href="/orientation/cheatsheet" className="text-indigo-600 hover:underline">Cheat Sheet</Link></div>
+            <div><strong>Keyboard:</strong> Tab to links; use heading navigation (e.g. screen reader H shortcut).</div>
+            <div><strong>Transparency:</strong> AI‑assisted fields display provenance badges.</div>
+          </div>
+        </header>
+        {/* Mobile / small screen chip navigation */}
+        <div className="lg:hidden mb-8">
+          <OrientationTOC sections={sections} />
+        </div>
+        <div className="grid lg:grid-cols-[240px_1fr] gap-10" id="main-layout">
+          <aside className="hidden lg:block" aria-label="Section navigation">
+            <OrientationSideNav sections={sections} />
+          </aside>
+          <main id="main-content" className="min-w-0">
+            <div className="prose prose-slate max-w-none">
+          <section id="quick-start" className="scroll-mt-24">
+            <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">1.</span> Quick Start</h2>
             <ol className="list-decimal pl-6 space-y-1">
               <li><strong>State your task</strong>: e.g., “Extract product defects”, “Compare legal clauses”, “Score sentiment”.</li>
               <li><strong>Filter / scan relevant categories</strong>: Use category pages or search. Similarity suggestions can broaden the candidate list.</li>
@@ -63,8 +74,8 @@ export default function OrientationPage() {
             </div>
           </section>
 
-          <section id="what-is-a-pattern">
-            <h2>What Is a Prompt Pattern?</h2>
+          <section id="what-is-a-pattern" className="scroll-mt-24">
+            <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">2.</span> What Is a Prompt Pattern?</h2>
             <p>A prompt pattern is a <strong>reusable, named design structure</strong> for interacting with a language model so that behavior is <em>predictable, inspectable, and improvable</em>. It captures <em>intent</em>, <em>structural scaffolding</em>, and <em>adaptation guidance</em>. Think of patterns as <strong>primitives</strong> for assembling reliable language workflows—not secret incantations.</p>
             <p className="mt-3">Why they matter:</p>
             <ul className="list-disc pl-5 space-y-1">
@@ -75,8 +86,8 @@ export default function OrientationPage() {
             </ul>
           </section>
 
-            <section id="pattern-anatomy">
-              <h2>Anatomy of a Pattern</h2>
+            <section id="pattern-anatomy" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">3.</span> Pattern Anatomy</h2>
               <p>Each entry follows a consistent schema to support scanning and comparison. The Template exposes five canonical keys (<code>role</code>, <code>context</code>, <code>action</code>, <code>format</code>, <code>response</code>) plus an optional single‑line <em>bracketed synthesis</em>. Additional normalized attributes provide discoverability, provenance, and evaluation hooks.</p>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
                 <div className="p-4 rounded border bg-white shadow-sm">
@@ -151,8 +162,8 @@ export default function OrientationPage() {
               </div>
             </section>
 
-            <section id="lifecycle">
-              <h2>Pattern Lifecycle</h2>
+            <section id="lifecycle" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">4.</span> Lifecycle</h2>
               <ol className="list-decimal pl-6 space-y-1 text-sm">
                 <li><strong>Need Framing</strong>: Clarify measurable outcome and constraints.</li>
                 <li><strong>Candidate Selection</strong>: 1–3 patterns aligned with task archetype.</li>
@@ -166,8 +177,8 @@ export default function OrientationPage() {
               <p className="mt-3 text-sm text-gray-700"><strong>Drift Indicator:</strong> If failure clusters reappear or confidence declines, re-open the adaptation phase—do not silently patch in production.</p>
             </section>
 
-            <section id="choosing-patterns">
-              <h2>Choosing the Right Pattern</h2>
+            <section id="choosing-patterns" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">5.</span> Choosing Patterns</h2>
               <div className="space-y-3 text-sm">
                 <p><strong>Map task → Archetype:</strong> e.g. “Summarize transcripts” → Transformation; “Rank policy risks” → Evaluation; “Suggest refactors” → Reasoning / Refactoring hybrid.</p>
                 <p><strong>Heuristics:</strong></p>
@@ -181,8 +192,8 @@ export default function OrientationPage() {
               </div>
             </section>
 
-            <section id="combining-patterns">
-              <h2>Combining Patterns</h2>
+            <section id="combining-patterns" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">6.</span> Combining Patterns</h2>
               <p className="text-sm">Compose multi-step flows deliberately. Each link should produce a constrained artifact consumed safely by the next step.</p>
               <table className="text-xs mt-3 border w-full">
                 <thead>
@@ -203,8 +214,8 @@ export default function OrientationPage() {
               <p className="mt-3 text-sm"><strong>Tip:</strong> Validate each stage independently before chaining. Avoid premature parallelization.</p>
             </section>
 
-            <section id="adaptation">
-              <h2>Adaptation & Remix</h2>
+            <section id="adaptation" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">7.</span> Adaptation & Remix</h2>
               <ul className="list-disc pl-5 space-y-1 text-sm">
                 <li><strong>Preserve structural keys</strong>; modify content, not the scaffold labels.</li>
                 <li><strong>Use versioned placeholders</strong> (<code>{'{{CLAUSE_A}}'}</code>, <code>{'{{CLAUSE_B}}'}</code>) so diffs are meaningful.</li>
@@ -216,8 +227,8 @@ export default function OrientationPage() {
               <p className="mt-3 text-xs text-gray-600">If a pattern diverges heavily, consider naming it explicitly (fork) to preserve lineage.</p>
             </section>
 
-            <section id="anti-patterns">
-              <h2>Anti-Patterns & Pitfalls</h2>
+            <section id="anti-patterns" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">8.</span> Anti-Patterns & Pitfalls</h2>
               <ul className="list-disc pl-5 space-y-1 text-sm">
                 <li><strong>Overloaded Mega-Prompt</strong>: Multiple tasks → split & chain.</li>
                 <li><strong>Hidden Criteria</strong>: Implicit judgment rules → move into explicit <code>format</code> or <code>response</code> instructions.</li>
@@ -229,8 +240,8 @@ export default function OrientationPage() {
               </ul>
             </section>
 
-            <section id="quality-evaluation">
-              <h2>Quality & Evaluation</h2>
+            <section id="quality-evaluation" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">9.</span> Quality & Evaluation</h2>
               <div className="space-y-3 text-sm">
                 <p><strong>Suggested Metrics:</strong> accuracy, precision/recall (for extraction), structural compliance, rationale completeness, latency, token efficiency.</p>
                 <p><strong>Failure Mode Taxonomy:</strong> (a) Misclassification (b) Missing field (c) Hallucinated field (d) Formatting drift (e) Biased or exclusionary phrasing.</p>
@@ -240,8 +251,8 @@ export default function OrientationPage() {
               </div>
             </section>
 
-            <section id="accessibility-responsible-use">
-              <h2>Accessibility & Responsible Use</h2>
+            <section id="accessibility-responsible-use" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">10.</span> Accessibility & Responsible Use</h2>
               <div className="space-y-3 text-sm">
                 <p>This project aims to support equitable, auditable, and safe prompt engineering practice. Use patterns in ways that respect user dignity, privacy, and legal constraints.</p>
                 <h3 className="text-sm font-semibold mt-4">Accessibility Practices</h3>
@@ -265,8 +276,8 @@ export default function OrientationPage() {
               </div>
             </section>
 
-            <section id="glossary">
-              <h2>Glossary</h2>
+            <section id="glossary" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">11.</span> Glossary</h2>
               <dl className="space-y-2 text-sm">
                 <div>
                   <dt className="font-medium">Pattern</dt>
@@ -303,8 +314,8 @@ export default function OrientationPage() {
               </dl>
             </section>
 
-            <section id="faq">
-              <h2>FAQ</h2>
+            <section id="faq" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">12.</span> FAQ</h2>
               <details className="group border rounded mb-2 p-3 bg-white">
                 <summary className="cursor-pointer font-medium">Why five template keys?</summary>
                 <p className="mt-2 text-sm">They balance expressive coverage (intent, situational framing, required action, output schema, expected shape/tone) with cognitive load. More keys lowered adoption; fewer reduced precision.</p>
@@ -327,13 +338,13 @@ export default function OrientationPage() {
               </details>
             </section>
 
-            <section id="feedback">
-              <h2>Feedback & Continuous Improvement</h2>
+            <section id="feedback" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">13.</span> Feedback & Continuous Improvement</h2>
               <p className="text-sm">Spotted ambiguity, accessibility gaps, missing inclusive examples, or structural drift? Please open an issue or PR. Reference the pattern ID(s), describe the observed issue, and (if possible) include a minimal reproducible example. Community stewardship maintains reliability.</p>
             </section>
 
-            <section id="next-steps">
-              <h2>Next Steps</h2>
+            <section id="next-steps" className="scroll-mt-24">
+              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">14.</span> Next Steps</h2>
               <ul className="list-disc pl-5 text-sm space-y-1">
                 <li><Link href="/patterns" className="text-blue-600 hover:underline">Browse patterns</Link> and shortlist 2–3 for your task.</li>
                 <li>Create a tiny evaluation set (edge + typical cases) and record baseline outputs.</li>
@@ -341,6 +352,8 @@ export default function OrientationPage() {
                 <li>Share findings—improvements are welcomed.</li>
               </ul>
             </section>
+            </div>{/* prose end */}
+          </main>
         </div>
       </div>
     </div>
