@@ -4,178 +4,45 @@ import MermaidDiagram from '@/components/diagram/MermaidDiagram';
 import OrientationTOC from '@/components/navigation/OrientationTOC';
 import OrientationSideNav from '@/components/navigation/OrientationSideNav';
 
+import Link from 'next/link';
+import { ORIENTATION_SECTIONS } from './data/sections';
+import OrientationNav from './components/OrientationNav';
+
 export const metadata = {
   title: 'Orientation | Prompt Pattern Dictionary',
-  description: 'Guided starting point for exploring, selecting, and adapting prompt patterns.'
+  description: 'Hub for Orientation sections, quick start, and consolidated view.'
 };
 
-const sections = [
-  { id: 'quick-start', label: 'Quick Start', number: '1' },
-  { id: 'what-is-a-pattern', label: 'What Is a Pattern', number: '2' },
-  { id: 'pattern-anatomy', label: 'Pattern Anatomy', number: '3' },
-  { id: 'lifecycle', label: 'Lifecycle', number: '4' },
-  { id: 'choosing-patterns', label: 'Choosing Patterns', number: '5' },
-  { id: 'combining-patterns', label: 'Combining Patterns', number: '6' },
-  { id: 'adaptation', label: 'Adaptation & Remix', number: '7' },
-  { id: 'anti-patterns', label: 'Anti-Patterns', number: '8' },
-  { id: 'quality-evaluation', label: 'Quality & Evaluation', number: '9' },
-  { id: 'accessibility-responsible-use', label: 'Accessibility & Responsible Use', number: '10' },
-  { id: 'glossary', label: 'Glossary', number: '11' },
-  { id: 'faq', label: 'FAQ', number: '12' },
-  { id: 'feedback', label: 'Feedback', number: '13' },
-  { id: 'next-steps', label: 'Next Steps', number: '14' }
-];
-
-export default function OrientationPage() {
+export default function OrientationHubPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-indigo-700 text-white px-3 py-1 rounded">Skip to content</a>
-      <div className="mx-auto max-w-7xl px-4 py-10 lg:py-14">
-        <header className="mb-10 border-b pb-6">
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 mb-4">Orientation</h1>
-          <p className="text-slate-700 max-w-4xl text-lg leading-relaxed">A structured guide to help you explore, evaluate, adapt, and combine prompt patterns safely and effectively. Model interaction should be <strong>auditable</strong>, <strong>measurable</strong>, and <strong>responsible</strong>. Use the navigation to jump to numbered sections or read linearly.</p>
-          <div className="mt-4 flex flex-wrap gap-6 text-sm text-slate-600">
-            <div><strong>Printable:</strong> <Link href="/orientation/cheatsheet" className="text-indigo-600 hover:underline">Cheat Sheet</Link></div>
-            <div><strong>Keyboard:</strong> Tab to links; use heading navigation (e.g. screen reader H shortcut).</div>
-            <div><strong>Transparency:</strong> AI‑assisted fields display provenance badges.</div>
+    <div>
+      <h1 className="text-4xl font-bold tracking-tight text-slate-900 mb-6">Orientation</h1>
+      <p className="text-slate-700 max-w-3xl leading-relaxed mb-6">Use this hub to jump into focused sections or view the full consolidated page. Each section is deliberately concise and accessible; the <em>All Sections</em> view preserves original anchor stability.</p>
+      <div className="mb-10">
+        <OrientationNav variant="inline" />
+      </div>
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {ORIENTATION_SECTIONS.map(sec => (
+          <div key={sec.slug} className="border rounded-lg p-4 bg-white shadow-sm hover:shadow transition-shadow">
+            <h2 className="font-semibold text-slate-900 text-lg flex items-baseline gap-2"><span className="text-slate-400 tabular-nums">{sec.number}.</span>{sec.title}</h2>
+            <p className="text-sm text-slate-600 mt-1 mb-3">{sec.description}</p>
+            <Link href={`/orientation/${sec.slug}`} className="text-indigo-600 text-sm font-medium hover:underline">Open Section →</Link>
           </div>
-        </header>
-        {/* Mobile / small screen chip navigation */}
-        <div className="lg:hidden mb-8">
-          <OrientationTOC sections={sections} />
+        ))}
+        <div className="border rounded-lg p-4 bg-indigo-50 shadow-sm hover:shadow transition-shadow">
+          <h2 className="font-semibold text-slate-900 text-lg flex items-baseline gap-2">All Sections</h2>
+          <p className="text-sm text-slate-700 mt-1 mb-3">Read the complete Orientation content in one scrollable page (original format with anchors).</p>
+            <Link href="/orientation/all" className="text-indigo-700 text-sm font-medium hover:underline">View All →</Link>
         </div>
-        <div className="grid lg:grid-cols-[240px_1fr] gap-10" id="main-layout">
-          <aside className="hidden lg:block" aria-label="Section navigation">
-            <OrientationSideNav sections={sections} />
-          </aside>
-          <main id="main-content" className="min-w-0">
-            <div className="prose prose-slate max-w-none">
-          <section id="quick-start" className="scroll-mt-24">
-            <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">1.</span> Quick Start</h2>
-            <ol className="list-decimal pl-6 space-y-1">
-              <li><strong>State your task</strong>: e.g., “Extract product defects”, “Compare legal clauses”, “Score sentiment”.</li>
-              <li><strong>Filter / scan relevant categories</strong>: Use category pages or search. Similarity suggestions can broaden the candidate list.</li>
-              <li><strong>Open 1–2 candidate patterns</strong> and expand the Template (keep its structural keys intact).</li>
-              <li><strong>Insert your domain variables</strong> (use explicit placeholders like <code>{'{{TEXT_BLOCK}}'}</code>).</li>
-              <li><strong>Run on a tiny evaluation set</strong> (3–5 representative examples) before large scale use.</li>
-              <li><strong>Record baseline metrics</strong> (accuracy, coverage, failure modes) – write them down.</li>
-              <li><strong>Iterate structurally first</strong> (reorder, clarify intent) before stylistic tuning.</li>
-              <li><strong>Lock and label version</strong> when stable; avoid silent drift.</li>
-            </ol>
-            <div className="mt-4 p-3 rounded border bg-white shadow-sm text-sm text-gray-700">
-              <p className="font-semibold mb-1">Principles:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li><strong>Clarity over cleverness</strong> – explicit instructions reduce hallucination risk.</li>
-                <li><strong>Single responsibility</strong> – one pattern, one job; chain instead of overloading.</li>
-                <li><strong>Measured change</strong> – modify one aspect at a time; re‑test.</li>
-                <li><strong>Inclusive data</strong> – test with varied names, dialects, and contexts.</li>
-                <li><strong>Document provenance</strong> – note if AI assisted any field.</li>
-              </ul>
-            </div>
-          </section>
-
-          <section id="what-is-a-pattern" className="scroll-mt-24">
-            <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">2.</span> What Is a Prompt Pattern?</h2>
-            <p>A prompt pattern is a <strong>reusable, named design structure</strong> for interacting with a language model so that behavior is <em>predictable, inspectable, and improvable</em>. It captures <em>intent</em>, <em>structural scaffolding</em>, and <em>adaptation guidance</em>. Think of patterns as <strong>primitives</strong> for assembling reliable language workflows—not secret incantations.</p>
-            <p className="mt-3">Why they matter:</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><strong>Shared vocabulary</strong> improves collaboration.</li>
-              <li><strong>Structure reduces ambiguity</strong> and unintended model drift.</li>
-              <li><strong>Comparability</strong> allows systematic evaluation.</li>
-              <li><strong>Traceability</strong> helps audit and mitigate harmful or biased behavior.</li>
-            </ul>
-          </section>
-
-            <section id="pattern-anatomy" className="scroll-mt-24">
-              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">3.</span> Pattern Anatomy</h2>
-              <p>Each entry follows a consistent schema to support scanning and comparison. The Template exposes five canonical keys (<code>role</code>, <code>context</code>, <code>action</code>, <code>format</code>, <code>response</code>) plus an optional single‑line <em>bracketed synthesis</em>. Additional normalized attributes provide discoverability, provenance, and evaluation hooks.</p>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="p-4 rounded border bg-white shadow-sm">
-                  <h3 className="text-sm font-semibold mb-2">Field Overview</h3>
-                  <dl className="text-sm space-y-2">
-                    <div>
-                      <dt className="font-medium">Pattern Name</dt>
-                      <dd>Human-readable identifier of the design strategy.</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Description</dt>
-                      <dd>Short narrative explaining purpose & scope.</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Media Type</dt>
-                      <dd>Primary input modality assumption (e.g., text).</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Dependent LLM</dt>
-                      <dd>If behavior relies on a model feature (e.g., tool use).</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Application</dt>
-                      <dd>Tags or scenario phrases describing contexts of use.</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Usage Summary</dt>
-                      <dd>Plain-language “how to apply” guidance (may be AI-assisted).</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Turn</dt>
-                      <dd>Indicates if pattern expects multi-turn setup.</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Template</dt>
-                      <dd>Structured 5-key scaffold; expand to view; may include bracketed single-line form.</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Examples</dt>
-                      <dd>Canonical prompt instances; expandable; similarity links surface nearest neighbors.</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">Similar Patterns</dt>
-                      <dd>Embeddings-based related entries for exploration.</dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium">AI-Assisted Badge</dt>
-                      <dd>Signals fields generated or refined with model help, supporting transparency.</dd>
-                    </div>
-                  </dl>
-                </div>
-                <div className="p-4 rounded border bg-white shadow-sm">
-                  <h3 className="text-sm font-semibold mb-2">Usage Guidance</h3>
-                  <ul className="list-disc pl-5 space-y-1 text-sm">
-                    <li><strong>Do not remove structural keys</strong>; populate them concretely.</li>
-                    <li><strong>Keep placeholders explicit</strong> (avoid implicit variable names).</li>
-                    <li><strong>Separate examples from instructions</strong>—don’t bury rules inside an example unless evaluating in-context demonstration.</li>
-                    <li><strong>Record changes</strong> to monitor regression risk.</li>
-                    <li><strong>Avoid domain stereotypes</strong> in examples; favor neutral or diverse representations.</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="my-6 p-4 rounded-lg bg-white border border-indigo-200 shadow-sm">
-                <p className="text-sm font-semibold text-indigo-700 mb-2">Structure Diagram</p>
-                <div id="diagram-desc" className="sr-only">Diagram showing relationships: Pattern Name connects to Intent/Purpose, Template (with five keys and bracketed summary), Application, Examples & Similar, Adaptation Notes, Evaluation/Quality Hints, and Tags/Category.</div>
-                <MermaidDiagram
-                  describedById="diagram-desc"
-                  className="mermaid"
-                  chart={`flowchart LR\n    A[Pattern Name]:::title --> B[Intent / Purpose]\n    B --> C[Template (5 keys)]\n    C --> C1[role]\n    C --> C2[context]\n    C --> C3[action]\n    C --> C4[format]\n    C --> C5[response]\n    C --> C6[Bracketed Summary]\n    A --> D[Application]\n    A --> E[Examples & Similar]\n    A --> F[Adaptation Notes]\n    A --> G[Evaluation / Quality Hints]\n    A --> H[Tags / Category]\n\n    classDef title fill:#1e3a8a,stroke:#1e3a8a,stroke-width:1,color:#fff;\n    classDef keys fill:#eef2ff,stroke:#4338ca,color:#1e1b4b;\n    class C,C1,C2,C3,C4,C5,C6 keys;`}
-                />
-                <p className="mt-2 text-xs text-gray-500">Rendered client-side with Mermaid; accessible fallback includes textual description.</p>
-              </div>
-            </section>
-
-            <section id="lifecycle" className="scroll-mt-24">
-              <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">4.</span> Lifecycle</h2>
-              <ol className="list-decimal pl-6 space-y-1 text-sm">
-                <li><strong>Need Framing</strong>: Clarify measurable outcome and constraints.</li>
-                <li><strong>Candidate Selection</strong>: 1–3 patterns aligned with task archetype.</li>
-                <li><strong>Minimal Adaptation</strong>: Insert domain specifics; keep structure intact.</li>
-                <li><strong>Pilot Evaluation</strong>: Run against a stratified micro‑set (edge + typical cases).</li>
-                <li><strong>Error Analysis</strong>: Categorize failures (ambiguity, formatting, bias, hallucination).</li>
-                <li><strong>Targeted Refinement</strong>: Adjust keys; avoid piling adjectives.</li>
-                <li><strong>Version Freeze</strong>: Tag as v1.x; store alongside metrics.</li>
-                <li><strong>Monitoring</strong>: Periodic spot checks & drift watch (especially after model updates).</li>
-              </ol>
-              <p className="mt-3 text-sm text-gray-700"><strong>Drift Indicator:</strong> If failure clusters reappear or confidence declines, re-open the adaptation phase—do not silently patch in production.</p>
-            </section>
+        <div className="border rounded-lg p-4 bg-white shadow-sm hover:shadow transition-shadow">
+          <h2 className="font-semibold text-slate-900 text-lg flex items-baseline gap-2">Cheat Sheet</h2>
+          <p className="text-sm text-slate-600 mt-1 mb-3">Condensed printable reference (5‑Key template, lifecycle, evaluation metrics, anti‑patterns, responsible use).</p>
+            <Link href="/orientation/cheatsheet" className="text-indigo-600 text-sm font-medium hover:underline">Open Cheat Sheet →</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
             <section id="choosing-patterns" className="scroll-mt-24">
               <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">5.</span> Choosing Patterns</h2>
