@@ -35,6 +35,11 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
 - **Search UX**: Results categorized by type with filters, clean blank initial state, “Clear all,” and URL state persistence
 - **Accessibility**: Improved contrast and chevron-based toggles with appropriate ARIA controls
  - **How to apply**: A concise 1–2 sentence usage summary is shown inline under Application when available; generated via optional enrichment.
+ - **Orientation Layout (OED-Inspired)**: Refactored Orientation page to a two-column grid with a sticky numbered side navigation (desktop) and chip navigation (mobile), mirroring reference dictionary usage guides.
+ - **Cheat Sheet Page**: Added `/orientation/cheatsheet` printable condensed reference (5-Key template, lifecycle, evaluation metrics, anti‑patterns, responsible use).
+ - **Accessibility & Responsible Use Section**: Dedicated section consolidating inclusive design, bias monitoring, provenance, and escalation guidance.
+ - **Sticky Side Navigation**: IntersectionObserver-driven highlight state with scroll offset margin for unobscured anchored headings.
+ - **Numbered Sections & Skip Link**: Added ordered heading numbering for cognitive mapping plus a skip-to-content link for keyboard and screen reader efficiency.
 
 ## 🚀 Quick Start
 
