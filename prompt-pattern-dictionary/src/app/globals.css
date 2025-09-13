@@ -1,16 +1,95 @@
 @import "tailwindcss";
 
+/* Design Tokens (Phase 1) */
 :root {
+  /* Color (base light) */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
+  --color-muted: #555555;
+  --color-border: #d9d9dd;
+  --color-surface: #f7f7f9;
+  --color-surface-alt: #eceef2;
+  --color-accent: #004f9e;
+  --color-accent-hover: #0068d1;
+  --color-danger: #b3261e;
+  --color-focus: #2f66ff;
+  --color-link: #0645ad;
+  --color-link-hover: #0b62e0;
+
+  /* Typography scale (rem) */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: clamp(1.03rem, 0.9rem + 0.4vw, 1.125rem); /* ~17–18px responsive */
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 1.875rem;
+  --line-height-base: 1.55;
+  --line-height-tight: 1.25;
+
+  /* Spacing scale (px) */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Layout */
+  --prose-max-width: 72ch;
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Transitions & motion */
+  --transition-fast: 120ms cubic-bezier(.4,0,.2,1);
+  --transition-base: 180ms cubic-bezier(.4,0,.2,1);
+
+  /* Focus outline */
+  --focus-ring: 2px solid var(--color-focus);
+
+  /* Theme mode flag */
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark Theme */
+html[data-theme="dark"] {
+  --background: #0f1115;
+  --foreground: #ececec;
+  --color-muted: #a9b0bb;
+  --color-border: #2c323a;
+  --color-surface: #181b21;
+  --color-surface-alt: #22262d;
+  --color-accent: #5ba4ff;
+  --color-accent-hover: #8bc0ff;
+  --color-danger: #ff5449;
+  --color-focus: #84b3ff;
+  --color-link: #7fb9ff;
+  --color-link-hover: #a6ccff;
+  color-scheme: dark;
 }
+
+/* High Contrast Theme */
+html[data-theme="hc"] {
+  --background: #000000;
+  --foreground: #ffffff;
+  --color-muted: #f2f2f2;
+  --color-border: #ffffff;
+  --color-surface: #000000;
+  --color-surface-alt: #111111;
+  --color-accent: #ffff00; /* Yellow on black for strong affordance */
+  --color-accent-hover: #ffe84a;
+  --color-danger: #ff3b30;
+  --color-focus: #ffbf00;
+  --color-link: #00b7ff;
+  --color-link-hover: #33c9ff;
+  color-scheme: dark;
+}
+
+/* Removed unsupported @theme inline block; Tailwind theme extension should occur in config if needed */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -22,7 +101,60 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prose width utility (can be applied via class) */
+.prose-read {
+  max-width: var(--prose-max-width);
+}
+
+/* Focus outline normalization */
+*:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Link styles */
+a {
+  color: var(--color-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+a:hover, a:focus-visible { color: var(--color-link-hover); }
+
+/* Buttons baseline (non-Tailwind elements) */
+button:not([class]) {
+  font: inherit;
+  background: var(--color-accent);
+  color: #fff;
+  border: 1px solid var(--color-accent);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+button:not([class]):hover { background: var(--color-accent-hover); }
+button:not([class]):focus-visible { outline: var(--focus-ring); }
+
+/* Muted text utility */
+.text-muted { color: var(--color-muted); }
+
+/* Surfaces */
+.surface { background: var(--color-surface); }
+.surface-alt { background: var(--color-surface-alt); }
+
+/* Border utility */
+.border-base { border-color: var(--color-border); }
+
+/* Reduced motion adjustments */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 0ms !important; scroll-behavior: auto !important; }
 }
 
 /* Anchor offset: ensure in-page hash navigation leaves headings unobscured (future fixed headers) */

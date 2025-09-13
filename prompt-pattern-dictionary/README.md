@@ -41,6 +41,26 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
  - **Sticky Side Navigation**: IntersectionObserver-driven highlight state with scroll offset margin for unobscured anchored headings.
  - **Numbered Sections & Skip Link**: Added ordered heading numbering for cognitive mapping plus a skip-to-content link for keyboard and screen reader efficiency.
 
+### Accessibility & Theming Roadmap (In Progress)
+
+The project is formalizing a site-wide accessibility and readability strategy beyond the Orientation page. Key commitments and upcoming changes:
+
+- **Standards Target**: WCAG 2.2 Level AA (with selective AAA where feasible: higher contrast, link purpose, visual presentation) + WAI-ARIA best practices.
+- **Font Stack**: Use `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif` for performance, clarity, and user familiarity. (No non-essential web fonts.)
+- **Design Tokens**: Introduce a centralized token layer (typography scale, spacing scale, color roles, focus ring, radii) consumed by Tailwind utilities and custom CSS vars.
+- **Three Display Modes**: Light, Dark, and a distinct High-Contrast theme (not just dark with brighter colors) – each user-selectable and persisted; initial mode respects `prefers-color-scheme`.
+- **Readability Controls**: UI panel to adjust font size (S / M / L), content width (narrow/normal), and theme/contrast; honors `prefers-reduced-motion`.
+- **Consistent Prose Width**: Long-form text constrained to ~70–75ch for optimal line length; Orientation overview will remain optionally “all-in-one” but each section will also get its own dedicated page.
+- **Hybrid Orientation Architecture**: Multi-page `/orientation/{slug}` entries (Quick Start, Anatomy, Lifecycle, Evaluation, Anti-Patterns, Responsible Use, Glossary, FAQ) + an “All Sections” overview + existing Cheat Sheet.
+- **Navigation Enhancements**: Multiple skip links (to Main Content, Section Navigation, Search). Landmarks (`header`, `nav`, `main`) and ARIA labels clarified.
+- **Interactive Components Audit**: Standardize collapsibles/disclosures, chips, copy buttons, and similarity toggles with proper `<button aria-expanded>` semantics and visible focus states.
+- **Live Regions**: Polite announcements for copy success, search result count changes, and user preference changes (font size, theme).
+- **Accessibility Automation**: axe-core + (optional) Playwright keyboard traversal tests integrated into CI, failing builds on critical/serious violations.
+- **Documentation**: A new `docs/ACCESSIBILITY.md` file (added) tracks the checklist, rationale, exceptions, and testing tooling.
+- **Footer (OED-Inspired)**: Planned global footer with grouped links (About, Using the Dictionary, Accessibility Statement, Data & Provenance, License, Feedback) and a brief provenance note for AI-assisted fields.
+
+These items will roll out incrementally; PRD has been updated with the new requirements.
+
 ## 🚀 Quick Start
 
 ### Prerequisites

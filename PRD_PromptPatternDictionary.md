@@ -97,6 +97,28 @@ Research Paper
 - **Bookmark functionality** for favorite patterns
 - **Reading progress** tracking
 
+##### 4.1.1 Accessibility & Readability Expansion (Added)
+
+Adopt a site-wide accessibility program (WCAG 2.2 AA + selected AAA) with these commitments:
+
+- System font stack for performance: `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif`.
+- Three distinct display modes: Light, Dark, High-Contrast (HC ≥7:1 text contrast) with user toggle & persistence.
+- Readability controls: font size scaling (S/M/L), width mode (narrow/prose), theme selection; respect `prefers-color-scheme` & `prefers-reduced-motion`.
+- Prose line length constrained to ~70–75ch for orientation & docs content.
+- Unified focus outline (2px) and multiple skip links (Main, Section Nav, Search).
+- Accessible disclosures for collapsibles (`<button aria-expanded>` + `aria-controls`).
+- Live regions for copy success, search result count, preference change announcements.
+- AI provenance badges link to explanation; footer carries disclaimer.
+- CI axe-core scan on core pages; build fails on critical/serious violations.
+- `docs/ACCESSIBILITY.md` tracks WCAG mapping, exceptions, audit logs.
+- Hybrid Orientation: multi-page `/orientation/{slug}` + all-in-one; legacy hash anchors redirected.
+
+Acceptance (Phase 1): Lighthouse Accessibility ≥95 (home/search/pattern) and zero critical/serious axe issues.
+
+##### 4.1.2 Global Footer (Added)
+
+Add OED-style footer with grouped links (About, Using the Dictionary, Accessibility & Responsible Use, Data & Provenance, Contribute, License & Legal), build/version metadata, and AI-assisted disclaimer. Mobile: collapsible groups.
+
 #### 4.2 Interactive Elements
 - **Interactive examples** where users can modify prompts
 - **Copy examples** with attribution
@@ -112,6 +134,8 @@ Research Paper
 - **Styling**: Tailwind CSS or styled-components for responsive design
 - **Search**: Client-side search with Lunr.js or Flexsearch
 - **Hosting**: GitHub Pages with custom domain
+ - **Design Tokens (Added)**: Central token layer for typography, spacing, color roles, focus ring, radii; exposed via Tailwind config & CSS vars.
+ - **Theme Infra (Added)**: `<html data-theme>` attribute switching (light|dark|hc); low-cost JS bundle (<5KB gzipped) for persistence only.
 
 #### 5.2 Data Management
 - **Source Data**: `promptpatterns.json` as single source of truth

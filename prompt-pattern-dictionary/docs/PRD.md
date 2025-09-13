@@ -141,6 +141,35 @@ Research Paper
 - **Bookmark functionality** for favorite patterns
 - **Reading progress** tracking
 
+##### 4.1.1 Accessibility & Readability Expansion (Added)
+
+Site-wide accessibility commitments (phase rollout) aligning with WCAG 2.2 Level AA + selective AAA and ARIA Authoring Practices:
+
+- **Standards**: WCAG 2.2 AA minimum; attempt AAA for contrast (1.4.6/1.4.8) and link purpose (2.4.9) where reasonable.
+- **Font Stack**: `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif` (fast, familiar, user OS rendering).
+- **Base Typography**: Clamp base size to 17–18px with line-height ~1.55; semantic CSS variable tokens (e.g., `--font-size-sm`, `--font-size-base`, `--font-size-lg`).
+- **Line Length**: Long-form prose (orientation, docs) constrained to 70–75ch; pattern tables/examples exempt.
+- **Display Modes**: Three modes: Light, Dark, High-Contrast (distinct palette, ≥7:1 text contrast). High-Contrast is not just Dark with brighter text.
+- **User Controls**: Readability control tray (font size, width, theme/contrast) persisted via localStorage; initial theme respects `prefers-color-scheme`; motion settings respect `prefers-reduced-motion`.
+- **Skip Links**: At least: Skip to Main, Skip to Section Navigation (when present), Skip to Search.
+- **Landmarks**: Single `<main>` per page; labeled navs (e.g., `<nav aria-label="Primary">`, `<nav aria-label="Orientation sections">`).
+- **Focusable & Visible**: Consistent 2px outline for all interactive elements, tokenized per theme; no focus suppression.
+- **Disclosures**: Collapsible sections and example panels use `<button aria-expanded>` + `aria-controls` semantics; state persisted where helpful.
+- **Live Regions**: `aria-live="polite"` for copy success, search result count changes, preference updates (e.g., “Font size set to Large”).
+- **Interactive Chips**: Converted to `<a>` (navigation) or `<button>` (action); no reliance on color alone for selection.
+- **Provenance**: AI-assisted fields surfaced with badge linking to explanation; footer carries disclaimer.
+- **Automation**: Integrate axe-core scan in CI (core routes: home, search, pattern detail, orientation overview, cheat sheet) failing build on critical/serious issues.
+- **Documentation**: Maintain `docs/ACCESSIBILITY.md` with WCAG mapping, exceptions, audit dates, regression checklist.
+- **Performance Budget**: Readability/theming script <5KB gzipped; avoid layout shift >0.1 CLS.
+- **Orientation Hybrid**: Multi-page `/orientation/{slug}` plus consolidated “All Sections” page; legacy hash anchors redirect.
+
+Acceptance (Phase 1):
+1. Lighthouse Accessibility ≥95 on home, search, pattern detail (Light & Dark).
+2. axe-core: zero critical/serious issues on audited pages.
+3. Theme + font size persisted & restored on reload.
+4. Skip links keyboard accessible & visible.
+5. All disclosures keyboard operable with correct `aria-expanded` state.
+
 #### 4.2 Interactive Elements
 - **Interactive examples** where users can modify prompts
 - **Copy examples** with attribution
@@ -210,6 +239,23 @@ Research Paper
 - **Embedding Generation**: < 3 seconds for user prompt embedding via Azure OpenAI
 - **Visualization Rendering**: < 500ms for heatmaps and scatter plots
 - **Export Generation**: < 2 seconds for comparison data export
+ - **Accessibility Bundle (Added)**: Theme/readability enhancement JS < 5KB gzipped, deferred; axe scan runtime <15s in CI.
+
+### 6. Global Footer (Added)
+
+Introduce an OED-inspired footer on every page:
+
+- **Sections**: About • Using the Dictionary • Accessibility & Responsible Use • Data & Provenance • Contribute • License & Legal.
+- **Elements**: Version/build timestamp, GitHub repo link, AI-assisted disclaimer, link to `ACCESSIBILITY.md` and orientation cheat sheet.
+- **Structure**: `<footer role="contentinfo">` with semantic headings (no skipped levels) and lists of links.
+- **Mobile**: Each section collapsible (disclosure pattern) to reduce vertical scroll.
+- **Accessibility**: Each disclosure uses `<button aria-expanded>`; focus order remains logical; all links have descriptive text.
+- **Contrast**: Meets defined contrast in Light, Dark, and High-Contrast themes.
+
+Footer Acceptance:
+1. Keyboard only user can access all footer links without encountering off-screen focus.
+2. High-Contrast palette passes ≥7:1 for body text and ≥4.5:1 for link text.
+3. AI provenance disclaimer clearly stated and programmatically associated with badge via `aria-describedby` where used.
 
 ## Detailed User Stories
 
