@@ -14,6 +14,11 @@ This repository contains a collection of Python scripts and tools designed for v
 - [Directory Structure](#directory-structure)
 - [Contributing](#contributing)
 - [License](#license)
+- [Prompt Pattern Dictionary (Web App)](#prompt-pattern-dictionary-web-app)
+  - [Orientation Architecture](#orientation-architecture)
+  - [Readability & Theming Controls](#readability--theming-controls)
+  - [Legacy Anchor Redirect Behavior](#legacy-anchor-redirect-behavior)
+  - [Extending the Preference System](#extending-the-preference-system)
 
 ## Installation
 
@@ -193,3 +198,52 @@ Workarounds:
 - Exclude the project (or at least the `.next` folder) from OneDrive sync.
 - Move the project outside OneDrive-synced paths (recommended for Next.js development).
 - If a lock occurs, close OneNote/OneDrive temporarily, delete `.next`, and re-run `npm run dev` or `npm run build`.
+
+### Orientation Architecture
+
+The Orientation content (how to use the dictionary) was refactored from a single long page into a hybrid, multi-page structure:
+
+- Hub: `/orientation` – overview cards linking to each section plus links to “All Sections” and the Cheat Sheet.
+- Per-section routes: `/orientation/{slug}` – focused pages (quick-start, what-is-a-pattern, pattern-anatomy, lifecycle, choosing-patterns, combining-patterns, adaptation, anti-patterns, quality-evaluation, accessibility-responsible-use, glossary, faq, feedback, next-steps).
+- Consolidated legacy view: `/orientation/all` – full scrollable content (retains original anchors for deep link continuity).
+- Printable / rapid reference: `/orientation/cheatsheet` – condensed key constructs and workflows.
+
+Sections are metadata-driven via `ORIENTATION_SECTIONS` (number, slug, title, component). Navigation components (sidebar + inline chip set) render from this single source of truth; the pager component wires previous/next traversal.
+
+### Readability & Theming Controls
+
+User-adjustable preferences enhance accessibility and reading comfort:
+
+- Font scale: data attribute `data-font-scale` applied to `<html>` with supported values -1, 0, 1, 2 (base, + steps). CSS scales body text and headings accordingly.
+- Width mode: `data-width-mode` = `default` | `relaxed`; relaxed widens prose up to ~85ch for users needing fewer line wraps.
+- Theme / contrast: `data-theme` = `light` | `dark` | `hc` (high contrast) with a `system` option that removes the attribute and defers to `prefers-color-scheme` media queries.
+- Persistence: Stored under localStorage key `orientation:readability:v1`; hydration script replays settings and applies attributes with minimal layout shift.
+- UI: `ReadabilityControls` component (toolbar) with buttons for font scaling, width toggle, and a select for theme mode. Appears in orientation layout (sidebar desktop + inline mobile). Can be reused site‑wide later.
+
+### Legacy Anchor Redirect Behavior
+
+A lightweight client component (`LegacyHashRedirect`) preserves backward compatibility for old single-page anchors:
+
+1. On mount, it inspects `window.location.hash`.
+2. If the hash matches a known section slug and you are not already on that route, it `router.replace()` to `/orientation/{slug}`.
+3. If the hash does not match a known slug and you are not on `/orientation/all`, it redirects to `/orientation/all#hash`, ensuring deep links to sub‑headings still land meaningfully.
+4. If already on `/orientation/all`, no action is taken.
+
+This maintains existing external links and bookmarks without server‑side redirects. A future enhancement may introduce explicit server (or Next.js middleware) 301 mappings for improved SEO signals—tracked as a backlog item.
+
+### Extending the Preference System
+
+To add a new user preference:
+
+1. Extend the `usePreferences` hook (under `prompt-pattern-dictionary/src/app/orientation/hooks/`) with state, localStorage serialization, and dataset syncing.
+2. Choose a descriptive `data-*` attribute name; keep attribute count minimal (prefer reusing existing tokens vs. additive bespoke classes).
+3. Update the `ReadabilityControls` UI (or create a new modular control) with accessible semantics (button labels, `aria-pressed`, or form elements as appropriate).
+4. Document the accepted values and rationale in this README (and optionally in a dedicated `docs/ACCESSIBILITY.md` or `docs/PREFERENCES.md`).
+5. Add non-destructive CSS tied to the attribute in `globals.css` guarded by clear comments.
+
+Guardrails:
+- Avoid preferences that require layout reflow more than once per interaction.
+- Provide reversible changes (toggle or reset option) if adding multi-step controls.
+- Maintain WCAG contrast compliance across all themes and states.
+
+---

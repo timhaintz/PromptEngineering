@@ -103,7 +103,7 @@ Adopt a site-wide accessibility program (WCAG 2.2 AA + selected AAA) with these 
 
 - System font stack for performance: `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif`.
 - Three distinct display modes: Light, Dark, High-Contrast (HC ≥7:1 text contrast) with user toggle & persistence.
-- Readability controls: font size scaling (S/M/L), width mode (narrow/prose), theme selection; respect `prefers-color-scheme` & `prefers-reduced-motion`.
+- Readability controls: font size scaling (S/M/L/XL via numeric scale), width mode (narrow/prose), theme selection; respect `prefers-color-scheme` & `prefers-reduced-motion`.
 - Prose line length constrained to ~70–75ch for orientation & docs content.
 - Unified focus outline (2px) and multiple skip links (Main, Section Nav, Search).
 - Accessible disclosures for collapsibles (`<button aria-expanded>` + `aria-controls`).
@@ -111,7 +111,7 @@ Adopt a site-wide accessibility program (WCAG 2.2 AA + selected AAA) with these 
 - AI provenance badges link to explanation; footer carries disclaimer.
 - CI axe-core scan on core pages; build fails on critical/serious violations.
 - `docs/ACCESSIBILITY.md` tracks WCAG mapping, exceptions, audit logs.
-- Hybrid Orientation: multi-page `/orientation/{slug}` + all-in-one; legacy hash anchors redirected.
+- Hybrid Orientation: multi-page `/orientation/{slug}` + all-in-one; legacy hash anchors redirect.
 
 Acceptance (Phase 1): Lighthouse Accessibility ≥95 (home/search/pattern) and zero critical/serious axe issues.
 
@@ -149,7 +149,61 @@ Add OED-style footer with grouped links (About, Using the Dictionary, Accessibil
 - **Mobile Performance**: Lighthouse score > 90
 - **Offline Capability**: Service worker for cached content
 
-## Detailed User Stories
+### 5.4 Preference & Readability System (Added)
+
+A unified preference system powers Orientation readability and will later expand site‑wide.
+
+Data Contract:
+- LocalStorage key: `orientation:readability:v1`
+- Stored shape:
+```json
+{
+  "fontScale": 0,        // integer: -1,0,1,2
+  "widthMode": "default", // "default" | "relaxed"
+  "theme": "system"       // "system" | "light" | "dark" | "hc"
+}
+```
+- DOM attributes on `<html>`:
+  - `data-font-scale` (always present; defaults 0)
+  - `data-width-mode` (`default` or `relaxed`)
+  - `data-theme` (absent when `system` to defer to media query)
+
+Behavior:
+- Hydration script (hook effect) applies attributes after mount to avoid FOUC; minimal transition except where a user already persisted a preference.
+- Font scaling uses stepped rem multipliers (body + headings) defined in `globals.css` under comment block `/* Font scaling */`.
+- High-contrast theme ensures ≥7:1 contrast for primary text on background, ≥4.5:1 for UI elements; tokens will be audited.
+
+Extensibility Guidelines:
+1. New preference keys MUST be additive and backward-compatible; previous stored objects parse without errors (ignore unknown keys).
+2. Use boolean flags OR small enumerations; avoid free-form strings to keep CSS selectors constrained.
+3. CSS must degrade gracefully if attribute is missing.
+4. Provide an accessible control (button, select, checkbox) with proper labeling (`aria-pressed`, `aria-label`, or visible text).
+5. Add docs updates (README + PRD) listing new attribute values.
+
+Planned Future Preferences (Backlog):
+- `data-line-height` (normal | relaxed) for users needing increased spacing.
+- `data-serif` (on) optional reading mode font stack.
+- `data-motion` (reduce) bridging to `prefers-reduced-motion` with explicit toggle.
+
+### 5.5 Legacy Hash Redirect (Added)
+
+Legacy deep links from the pre-refactor single Orientation page are preserved client-side.
+
+Mechanism:
+- Component: `LegacyHashRedirect` executes after mount.
+- Mapping: If `window.location.hash.substring(1)` matches a section slug -> navigate to new route.
+- Fallback: Unknown hashes route to `/orientation/all#hash` retaining context.
+- SEO Consideration: Because this is client-side, search engines may treat old links as soft navigations; optional future improvement is a server or middleware redirect map returning 301 for known anchors.
+
+Risks & Mitigations:
+- Flash of incorrect content (brief): Acceptable; minimal due to early effect.
+- Potential analytics duplication: Use `replaceState` semantics to avoid extra pageview where applicable.
+
+### 5.6 Orientation Metadata Source (Added)
+
+`ORIENTATION_SECTIONS` centralizes number ordering, slugs, titles, and component references. All navigation constructs (sidebar nav, inline nav, section pager, hub & all pages) consume this array. Single authoritative index reduces drift and enables future programmatic generation of a JSON manifest for search indexing or progressive disclosure.
+
+### Detailed User Stories
 
 ### As a Prompt Engineer
 - I want to search for "jailbreaking" patterns so I can understand security vulnerabilities
@@ -334,6 +388,12 @@ Data sourcing: The build process writes `public/data/normalized-patterns.json` v
 - Real-time collaboration features
 - Integration with LLM providers for testing
 - Academic partnership program
+
+## Next Documentation Steps (Added)
+- Add server/middleware 301 redirect map for most frequently referenced legacy anchors (SEO improvement).
+- Expand `docs/ACCESSIBILITY.md` with token contrast matrix for all themes.
+- Introduce `docs/PREFERENCES.md` once additional preferences (line-height, motion) are implemented.
+- Document planned automated accessibility CI (axe-core script & Jest wrapper) with thresholds.
 
 ## Conclusion
 
