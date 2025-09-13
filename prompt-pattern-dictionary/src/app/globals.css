@@ -108,6 +108,25 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Font scaling via data attribute (applies a multiplier to base size). */
+html[data-font-scale="-1"] body { font-size: calc(var(--font-size-base) * 0.93); }
+html[data-font-scale="1"] body { font-size: calc(var(--font-size-base) * 1.07); }
+html[data-font-scale="2"] body { font-size: calc(var(--font-size-base) * 1.15); }
+
+/* Width mode adjustments */
+html[data-width-mode="relaxed"] :where(.prose, .prose-read) { max-width: 85ch; }
+
+/* Optional heading scaling alignment (relative to body for readability) */
+html[data-font-scale="-1"] h1 { font-size: clamp(1.8rem, 1.6rem + 1vw, 2.2rem); }
+html[data-font-scale="-1"] h2 { font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem); }
+html[data-font-scale="1"] h1 { font-size: clamp(2.1rem, 1.9rem + 1.1vw, 2.6rem); }
+html[data-font-scale="1"] h2 { font-size: clamp(1.55rem, 1.35rem + 0.65vw, 1.85rem); }
+html[data-font-scale="2"] h1 { font-size: clamp(2.25rem, 2.1rem + 1.2vw, 2.85rem); }
+html[data-font-scale="2"] h2 { font-size: clamp(1.65rem, 1.5rem + 0.7vw, 2rem); }
+
+/* Smooth theme & preference transitions */
+html, body { transition: background-color var(--transition-base), color var(--transition-base); }
+
 /* Prose width utility (can be applied via class) */
 .prose-read {
   max-width: var(--prose-max-width);
