@@ -35,7 +35,7 @@ export default function OrientationTOC({ sections }: OrientationTOCProps) {
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
-                className={`inline-block px-3 py-1 rounded-full border focus:outline-none focus:ring-2 focus:ring-gray-700 transition-colors ${isActive ? 'bg-gray-900 text-white border-gray-900 hover:bg-black' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+                className={`inline-block px-3 py-1 rounded-full border focus:outline-none focus:ring-2 focus:ring-gray-700 transition-colors ${isActive ? 'bg-white text-gray-900 border-gray-900 font-semibold hover:bg-gray-100' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-100'}`}
                 aria-current={isActive ? 'true' : undefined}
               >
                 {s.label}
