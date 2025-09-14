@@ -43,7 +43,7 @@ export default function TopNav() {
                   key={tab.href}
                   aria-current={isActive ? 'page' : undefined}
                   href={tab.href}
-                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${isActive ? 'bg-blue-800 text-white border-blue-900 hover:bg-blue-900' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}
+                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${isActive ? 'bg-gray-900 text-white border-gray-900 hover:bg-gray-900' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}
                 >
                   {tab.label}
                 </Link>

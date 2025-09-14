@@ -37,7 +37,7 @@ export default async function HomePage() {
             Discover, learn, and apply proven prompt patterns from academic research.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Link href="/patterns" className="inline-flex items-center gap-2 rounded-md bg-blue-700 text-white px-6 py-3 font-medium shadow hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
+            <Link href="/patterns" className="inline-flex items-center gap-2 rounded-md bg-gray-900 text-white px-6 py-3 font-medium shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
               Browse Patterns
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
