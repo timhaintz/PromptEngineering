@@ -15,18 +15,18 @@ export default function SectionPager({ slug }: Props) {
           <Link href={`/orientation/${prev.slug}`} className="group inline-flex items-center gap-2 text-slate-600 hover:text-indigo-700">
             <span aria-hidden="true" className="text-indigo-600 group-hover:translate-x-[-2px] transition-transform">←</span>
             <span className="flex flex-col leading-tight">
-              <span className="text-xs uppercase tracking-wide text-slate-400">Previous</span>
+              <span className="text-xs uppercase tracking-wide text-slate-600">Previous</span>
               <span>{prev.number}. {prev.title}</span>
             </span>
           </Link>
         )}
       </div>
-      <div className="text-xs text-slate-400 flex-1 text-center hidden md:block">Orientation</div>
+  <div className="text-xs text-slate-600 flex-1 text-center hidden md:block">Orientation</div>
       <div>
         {next && (
           <Link href={`/orientation/${next.slug}`} className="group inline-flex items-center gap-2 text-slate-600 hover:text-indigo-700">
             <span className="flex flex-col items-end leading-tight">
-              <span className="text-xs uppercase tracking-wide text-slate-400">Next</span>
+              <span className="text-xs uppercase tracking-wide text-slate-600">Next</span>
               <span>{next.number}. {next.title}</span>
             </span>
             <span aria-hidden="true" className="text-indigo-600 group-hover:translate-x-[2px] transition-transform">→</span>

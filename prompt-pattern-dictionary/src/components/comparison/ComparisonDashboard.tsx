@@ -208,7 +208,7 @@ export default function ComparisonDashboard({ className = '' }: ComparisonDashbo
                   </button>
                   <button
                     onClick={handleExportData}
-                    className="px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors"
+                    className="px-3 py-2 text-sm font-medium text-white bg-blue-800 rounded-md hover:bg-blue-900 transition-colors"
                     aria-label="Export comparison data as JSON"
                   >
                     Export JSON

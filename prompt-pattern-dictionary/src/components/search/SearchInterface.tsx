@@ -53,7 +53,7 @@ export default function SearchInterface({ className = '' }: SearchInterfaceProps
           />
           <button 
             onClick={handleSearch}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors"
           >
             Search
           </button>

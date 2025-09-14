@@ -44,7 +44,7 @@ export default function OrientationSideNav({ sections }: OrientationSideNavProps
                 className={`flex gap-2 rounded px-2 py-1 leading-snug border-l-4 transition-colors ${isActive ? 'bg-indigo-50 border-indigo-600 text-indigo-800 font-medium' : 'border-transparent text-slate-700 hover:bg-slate-50 hover:border-slate-300'}`}
                 aria-current={isActive ? 'true' : undefined}
               >
-                {s.number && <span className="text-slate-400 w-6 tabular-nums text-right select-none">{s.number}</span>}
+                {s.number && <span className="text-slate-600 w-6 tabular-nums text-right select-none">{s.number}</span>}
                 <span className="flex-1">{s.label}</span>
               </a>
             </li>

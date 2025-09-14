@@ -234,7 +234,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
               <label htmlFor="enriched" className="text-sm text-gray-700">Enriched only</label>
             </div>
             <div className="flex items-center gap-2">
-              <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded">Apply</button>
+              <button type="submit" className="bg-blue-800 hover:bg-blue-900 text-white text-sm px-3 py-1 rounded">Apply</button>
               <Link href="/patterns" className="text-sm text-gray-600 hover:text-gray-800">Reset</Link>
             </div>
           </form>

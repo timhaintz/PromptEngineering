@@ -18,7 +18,7 @@ export default function OrientationHubPage() {
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {ORIENTATION_SECTIONS.map(sec => (
           <div key={sec.slug} className="border rounded-lg p-4 bg-white shadow-sm hover:shadow transition-shadow">
-            <h2 className="font-semibold text-slate-900 text-lg flex items-baseline gap-2"><span className="text-slate-400 tabular-nums">{sec.number}.</span>{sec.title}</h2>
+            <h2 className="font-semibold text-slate-900 text-lg flex items-baseline gap-2"><span className="text-slate-600 tabular-nums">{sec.number}.</span>{sec.title}</h2>
             <p className="text-sm text-slate-600 mt-1 mb-3">{sec.description}</p>
             <Link href={`/orientation/${sec.slug}`} className="text-indigo-600 text-sm font-medium hover:underline">Open Section →</Link>
           </div>

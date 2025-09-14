@@ -22,10 +22,10 @@ export default function OrientationAllPage() {
       <div className="prose prose-slate max-w-none">
         {ORIENTATION_SECTIONS.map(sec => (
           <section id={sec.id} key={sec.id} className="scroll-mt-24 mb-14">
-            <h2 className="flex items-baseline gap-2"><span className="text-slate-400 font-medium">{sec.number}.</span> {sec.title}</h2>
+            <h2 className="flex items-baseline gap-2"><span className="text-slate-600 font-medium">{sec.number}.</span> {sec.title}</h2>
             {/* Real content will replace placeholders during migration */}
             {sec.component}
-            <div className="mt-6 text-xs text-slate-400">Section slug: {sec.slug}</div>
+            <div className="mt-6 text-xs text-slate-600">Section slug: {sec.slug}</div>
           </section>
         ))}
       </div>

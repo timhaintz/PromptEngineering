@@ -295,7 +295,7 @@ export default function SimilarityPlayground({ className = '' }: SimilarityPlayg
                   <div className="mt-2">
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className={`bg-blue-600 h-2 rounded-full transition-all duration-300 ${getSimilarityBarWidthClass(result.similarity)}`}
+                        className={`bg-blue-800 h-2 rounded-full transition-all duration-300 ${getSimilarityBarWidthClass(result.similarity)}`}
                       ></div>
                     </div>
                   </div>
