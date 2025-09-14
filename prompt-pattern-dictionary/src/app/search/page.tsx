@@ -10,6 +10,8 @@
 import { useMemo, useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { parseBooleanQuery, evaluateBooleanQuery } from '@/lib/search/booleanQuery';
+import React from 'react';
 
 interface Pattern {
   id: string;
@@ -45,6 +47,9 @@ function SearchResults() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categoryType, setCategoryType] = useState<'original' | 'semantic'>('original');
   const [logicFilter, setLogicFilter] = useState<string>('');
+  const [useBoolean, setUseBoolean] = useState<boolean>(false);
+  const [fuzzyDistance, setFuzzyDistance] = useState<number>(0);
+  const [showHelp, setShowHelp] = useState<boolean>(false);
 
   // Sync state from URL on load and when URL changes
   useEffect(() => {
@@ -81,6 +86,44 @@ function SearchResults() {
   const categories = categoryType === 'semantic' ? semanticCategories : originalCategories;
 
   // Derived results for patterns/examples
+  const { root: booleanAst } = useMemo(() => {
+    if (!useBoolean || !query.trim()) return { root: null } as any;
+    return parseBooleanQuery(query);
+  }, [query, useBoolean]);
+
+  const highlightTerms = useMemo(() => {
+    if (!query) return [] as string[];
+    if (useBoolean && booleanAst) {
+      // Re-parse to collect term nodes for highlighting
+      const { terms } = parseBooleanQuery(query);
+      return terms.map(t => t.value).filter(Boolean).slice(0, 15); // cap to avoid excessive spans
+    }
+    // Simple token split for legacy mode
+    return query.toLowerCase().split(/\s+/).filter(w => w && w.length > 1).slice(0, 15);
+  }, [query, useBoolean, booleanAst]);
+
+  function applyHighlight(text: string): React.ReactNode {
+    if (!highlightTerms.length) return <>{text}</>;
+    const lower = text.toLowerCase();
+    let parts: Array<{ segment: string; match: boolean }> = [{ segment: text, match: false }];
+    highlightTerms.forEach(term => {
+      const newParts: typeof parts = [];
+      const tLower = term.toLowerCase();
+      parts.forEach(p => {
+        if (p.match) { newParts.push(p); return; }
+        let startIdx = 0; let idx;
+        while ((idx = p.segment.toLowerCase().indexOf(tLower, startIdx)) !== -1) {
+          if (idx > startIdx) newParts.push({ segment: p.segment.slice(startIdx, idx), match: false });
+          newParts.push({ segment: p.segment.slice(idx, idx + term.length), match: true });
+          startIdx = idx + term.length;
+        }
+        if (startIdx < p.segment.length) newParts.push({ segment: p.segment.slice(startIdx), match: false });
+      });
+      parts = newParts;
+    });
+    return <>{parts.map((p, i) => p.match ? <mark key={i} className="bg-yellow-200 text-gray-900 rounded px-0.5 shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">{p.segment}</mark> : p.segment)}</>;
+  }
+
   const filteredPatterns = useMemo(() => {
     if ((type === 'pattern' || type === 'example') && (!query && !selectedCategory)) return [];
     const text = query.toLowerCase();
@@ -90,24 +133,40 @@ function SearchResults() {
         ? p.semantic_categorization?.category === selectedCategory
         : (p.original_paper_category || p.category) === selectedCategory;
     };
+    const patternMatchesBoolean = (p: Pattern) => {
+      if (!booleanAst) return true; // handled earlier
+      const fieldStrings: string[] = [
+        p.patternName, p.description, p.category, p.searchableContent,
+        p.tags.join(' '), p.semantic_categorization?.category || '',
+        ...p.examples.map(ex => typeof ex.content === 'string' ? ex.content : JSON.stringify(ex.content))
+      ].map(s => s.toLowerCase());
+      return evaluateBooleanQuery(booleanAst, { fields: fieldStrings, defaultFuzzy: fuzzyDistance });
+    };
+
     if (type === 'pattern') {
       return patterns.filter(p => inCategory(p) && (
-        p.patternName.toLowerCase().includes(text) ||
-        p.description.toLowerCase().includes(text) ||
-        p.category.toLowerCase().includes(text) ||
-        (p.semantic_categorization?.category?.toLowerCase().includes(text)) ||
-        p.tags.some(t => t.toLowerCase().includes(text)) ||
-        p.searchableContent.toLowerCase().includes(text)
+        useBoolean
+          ? patternMatchesBoolean(p)
+          : (
+            p.patternName.toLowerCase().includes(text) ||
+            p.description.toLowerCase().includes(text) ||
+            p.category.toLowerCase().includes(text) ||
+            (p.semantic_categorization?.category?.toLowerCase().includes(text)) ||
+            p.tags.some(t => t.toLowerCase().includes(text)) ||
+            p.searchableContent.toLowerCase().includes(text)
+          )
       ));
     }
     if (type === 'example') {
-      return patterns.filter(p => inCategory(p) && p.examples.some(ex => {
-        const content = typeof ex.content === 'string' ? ex.content : JSON.stringify(ex.content);
-        return content.toLowerCase().includes(text);
-      }));
+      return patterns.filter(p => inCategory(p) && (
+        useBoolean ? patternMatchesBoolean(p) : p.examples.some(ex => {
+          const content = typeof ex.content === 'string' ? ex.content : JSON.stringify(ex.content);
+            return content.toLowerCase().includes(text);
+          })
+      ));
     }
     return [];
-  }, [patterns, query, selectedCategory, categoryType, type]);
+  }, [patterns, query, selectedCategory, categoryType, type, useBoolean, booleanAst, fuzzyDistance]);
 
   // Category search data
   const logicList = useMemo(() => catData?.logics ?? [], [catData]);
@@ -179,8 +238,38 @@ function SearchResults() {
                 params.set('q', e.target.value);
                 params.set('type', type);
                 router.replace(`/search?${params.toString()}`);
-              }} placeholder="Type to search..." className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 placeholder-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              }} placeholder={useBoolean ? 'e.g. chain AND reasoning NOT "few shot" prompt~1' : 'Type to search...'} className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 placeholder-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
             </div>
+            {/* Boolean + Fuzzy Controls */}
+            {(type === 'pattern' || type === 'example') && (
+              <div className="flex flex-col gap-2 pt-6 md:pt-0">
+                <label className="inline-flex items-center gap-2 text-sm text-gray-800">
+                  <input type="checkbox" className="h-4 w-4" checked={useBoolean} onChange={(e) => setUseBoolean(e.target.checked)} />
+                  Boolean + Fuzzy
+                </label>
+                <div className="flex items-center gap-2 text-xs text-gray-700">
+                  <label htmlFor="fuzzy-distance" className="text-gray-700">Fuzzy</label>
+                  <input id="fuzzy-distance" type="number" min={0} max={3} value={fuzzyDistance} disabled={!useBoolean} onChange={(e) => setFuzzyDistance(Math.max(0, Math.min(3, parseInt(e.target.value || '0', 10))))} className="w-14 border border-gray-300 rounded px-1 py-0.5 disabled:opacity-40" />
+                  <button type="button" onClick={() => setShowHelp(s => !s)} className="text-blue-600 hover:text-blue-800">Help?</button>
+                </div>
+              </div>
+            )}
+            {showHelp && (
+              <div className="absolute z-20 mt-24 md:mt-20 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 w-full md:w-96 bg-white border border-gray-300 shadow-lg rounded p-3 text-xs text-gray-700 space-y-2">
+                <div className="flex justify-between items-center">
+                  <strong className="text-gray-900">Boolean & Fuzzy Syntax</strong>
+                  <button onClick={() => setShowHelp(false)} className="text-gray-500 hover:text-gray-800">✕</button>
+                </div>
+                <ul className="list-disc pl-4 space-y-1">
+                  <li><code>AND</code>, <code>OR</code>, <code>NOT</code> (NOT has highest precedence).</li>
+                  <li>Phrases: <code>"chain of thought"</code></li>
+                  <li>Fuzzy: <code>prompt~1</code> (edit distance ≤ 1). Global fuzzy applied if checkbox set.</li>
+                  <li>Implicit AND between adjacent terms.</li>
+                  <li>Examples: <code>reasoning AND (NOT translation)</code> (parentheses future).</li>
+                </ul>
+                <p className="text-[11px] text-gray-500">Parentheses not yet supported; logic evaluates NOT {'>'} AND {'>'} OR.</p>
+              </div>
+            )}
             <div>
               <label htmlFor="type" className="block text-sm font-medium text-gray-800 mb-1">Search type</label>
               <select id="type" value={type} onChange={(e) => {
@@ -316,7 +405,7 @@ function SearchResults() {
                   </div>
 
                   {pattern.description && (
-                    <p className="text-gray-700 mb-4">{pattern.description}</p>
+                    <p className="text-gray-700 mb-4">{applyHighlight(pattern.description)}</p>
                   )}
 
                   {pattern.examples.length > 0 && (
@@ -341,10 +430,10 @@ function SearchResults() {
                                 {typeof example.content === 'string' ? (
                                   href ? (
                                     <Link href={href} className="text-blue-700 hover:text-blue-900 text-sm">
-                                      {example.content}
+                                      {applyHighlight(example.content)}
                                     </Link>
                                   ) : (
-                                    <p className="text-gray-700 text-sm">{example.content}</p>
+                                    <p className="text-gray-700 text-sm">{applyHighlight(example.content)}</p>
                                   )
                                 ) : (
                                   <div className="text-gray-700 text-sm">
