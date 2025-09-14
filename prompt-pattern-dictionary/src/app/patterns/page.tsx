@@ -256,7 +256,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
         <div className="mb-4 flex flex-wrap items-center gap-1">
           <span className="text-xs text-gray-600 mr-2">Jump to:</span>
           {letters.map(l => (
-            <Link key={l} href={buildQuery(params, { letter: l === letterFilter ? '' : l })} className={`inline-block px-2 py-1 text-xs rounded border ${l === letterFilter ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'}`}>
+            <Link key={l} href={buildQuery(params, { letter: l === letterFilter ? '' : l })} className={`inline-block px-2 py-1 text-xs rounded border ${l === letterFilter ? 'bg-blue-700 text-white border-blue-800' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'}`}>
               {l}
             </Link>
           ))}
@@ -271,9 +271,9 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
               const newTags = has ? selectedTags.filter(t => t.toLowerCase() !== tag.toLowerCase()) : [...selectedTags, tag];
               const href = buildQuery(params, { tags: joinTagsCsv(newTags) });
               return (
-                <Link key={tag} href={href} className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${has ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'}`}> 
+                <Link key={tag} href={href} className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${has ? 'bg-blue-700 text-white border-blue-800' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'}`}> 
                   <span>{tag}</span>
-                  <span className="opacity-70">{count}</span>
+                  <span className="text-slate-600">{count}</span>
                 </Link>
               );
             })}

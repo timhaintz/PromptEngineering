@@ -283,7 +283,7 @@ export default function ComparisonDashboard({ className = '' }: ComparisonDashbo
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">
+                  <div className="text-2xl font-bold text-green-700">
                     {(comparison.statistics.averageSimilarity * 100).toFixed(1)}%
                   </div>
                   <div className="text-sm text-gray-600">Average Similarity</div>

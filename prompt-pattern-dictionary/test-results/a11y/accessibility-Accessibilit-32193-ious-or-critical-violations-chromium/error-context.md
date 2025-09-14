@@ -1,0 +1,263 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation "Global navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Go to homepage" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5] [cursor=pointer]
+        - generic [ref=e7] [cursor=pointer]: Home
+      - navigation "Primary" [ref=e9]:
+        - link "Orientation" [ref=e10] [cursor=pointer]:
+          - /url: /orientation
+        - link "Logic" [ref=e11] [cursor=pointer]:
+          - /url: /logic
+        - link "Categories" [ref=e12] [cursor=pointer]:
+          - /url: /categories
+        - link "Patterns" [ref=e13] [cursor=pointer]:
+          - /url: /patterns
+        - link "Papers" [ref=e14] [cursor=pointer]:
+          - /url: /papers
+        - link "Matrix" [ref=e15] [cursor=pointer]:
+          - /url: /matrix
+        - link "Semantic" [ref=e16] [cursor=pointer]:
+          - /url: /semantic
+        - link "Taxonomy" [ref=e17] [cursor=pointer]:
+          - /url: /taxonomy
+        - link "Search" [ref=e18] [cursor=pointer]:
+          - /url: /search
+  - generic [ref=e21]:
+    - generic [ref=e22]:
+      - heading "Prompt Pattern Dictionary" [level=1] [ref=e23]
+      - paragraph [ref=e24]: A comprehensive, searchable collection of prompt engineering patterns. Discover, learn, and apply proven prompt patterns from academic research.
+      - generic [ref=e25]:
+        - link "Browse Patterns" [ref=e26] [cursor=pointer]:
+          - /url: /patterns
+          - text: Browse Patterns
+          - img [ref=e27] [cursor=pointer]
+        - link "Orientation / How to Use" [ref=e29] [cursor=pointer]:
+          - /url: /orientation
+          - text: Orientation / How to Use
+          - img [ref=e30] [cursor=pointer]
+      - generic [ref=e32]:
+        - link "906 Patterns" [ref=e33] [cursor=pointer]:
+          - /url: /patterns
+          - generic [ref=e34] [cursor=pointer]: "906"
+          - generic [ref=e35] [cursor=pointer]: Patterns
+        - link "73 Papers" [ref=e36] [cursor=pointer]:
+          - /url: /papers
+          - generic [ref=e37] [cursor=pointer]: "73"
+          - generic [ref=e38] [cursor=pointer]: Papers
+        - link "6 Logic Layers" [ref=e39] [cursor=pointer]:
+          - /url: /logic
+          - generic [ref=e40] [cursor=pointer]: "6"
+          - generic [ref=e41] [cursor=pointer]: Logic Layers
+        - link "25 Categories" [ref=e42] [cursor=pointer]:
+          - /url: /categories
+          - generic [ref=e43] [cursor=pointer]: "25"
+          - generic [ref=e44] [cursor=pointer]: Categories
+    - generic [ref=e46]:
+      - heading "Search Prompt Patterns" [level=2] [ref=e47]
+      - generic [ref=e48]:
+        - textbox "Search for patterns, categories, or techniques..." [ref=e49]
+        - button "Search" [ref=e50]
+      - generic [ref=e51]:
+        - paragraph [ref=e52]: "Popular searches:"
+        - generic [ref=e53]:
+          - button "jailbreak" [ref=e54]
+          - button "persona" [ref=e55]
+          - button "template" [ref=e56]
+          - button "security" [ref=e57]
+          - button "output customization" [ref=e58]
+          - button "fact check" [ref=e59]
+    - generic [ref=e60]:
+      - heading "AI-Powered Analysis Tools" [level=2] [ref=e61]
+      - generic [ref=e62]:
+        - link "Semantic Category Matrix Explore dual categorization with AI-powered semantic analysis. Compare original paper categories with semantic categories and discover pattern-example relationships. Explore Matrix" [ref=e63] [cursor=pointer]:
+          - /url: /semantic
+          - generic [ref=e64] [cursor=pointer]:
+            - img [ref=e67] [cursor=pointer]
+            - generic [ref=e69] [cursor=pointer]:
+              - heading "Semantic Category Matrix" [level=3] [ref=e70] [cursor=pointer]
+              - paragraph [ref=e71] [cursor=pointer]: Explore dual categorization with AI-powered semantic analysis. Compare original paper categories with semantic categories and discover pattern-example relationships.
+              - generic [ref=e72] [cursor=pointer]:
+                - text: Explore Matrix
+                - img [ref=e73] [cursor=pointer]
+        - link "Pattern Comparison Compare multiple patterns side-by-side using semantic similarity analysis. Discover relationships and validate your approach with quantitative similarity scores. Compare Patterns" [ref=e75] [cursor=pointer]:
+          - /url: /comparison
+          - generic [ref=e76] [cursor=pointer]:
+            - img [ref=e79] [cursor=pointer]
+            - generic [ref=e81] [cursor=pointer]:
+              - heading "Pattern Comparison" [level=3] [ref=e82] [cursor=pointer]
+              - paragraph [ref=e83] [cursor=pointer]: Compare multiple patterns side-by-side using semantic similarity analysis. Discover relationships and validate your approach with quantitative similarity scores.
+              - generic [ref=e84] [cursor=pointer]:
+                - text: Compare Patterns
+                - img [ref=e85] [cursor=pointer]
+        - link "Similarity Playground Describe your prompt goal in natural language and discover the most relevant patterns using AI-powered semantic search and similarity matching. Try Playground" [ref=e87] [cursor=pointer]:
+          - /url: /playground
+          - generic [ref=e88] [cursor=pointer]:
+            - img [ref=e91] [cursor=pointer]
+            - generic [ref=e93] [cursor=pointer]:
+              - heading "Similarity Playground" [level=3] [ref=e94] [cursor=pointer]
+              - paragraph [ref=e95] [cursor=pointer]: Describe your prompt goal in natural language and discover the most relevant patterns using AI-powered semantic search and similarity matching.
+              - generic [ref=e96] [cursor=pointer]:
+                - text: Try Playground
+                - img [ref=e97] [cursor=pointer]
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - heading "Browse by Category" [level=2] [ref=e101]
+        - generic [ref=e102]:
+          - generic "Counts use semantic category assignments" [ref=e103]: Semantic counts
+          - link "View Taxonomy" [ref=e104] [cursor=pointer]:
+            - /url: /taxonomy
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - heading "Across Logic" [level=3] [ref=e108]
+            - paragraph [ref=e109]: Multiple domains/disciplines integration
+          - generic [ref=e110]:
+            - link "Argument 12 patterns" [ref=e111] [cursor=pointer]:
+              - /url: /category/argument
+              - heading "Argument" [level=4] [ref=e112] [cursor=pointer]
+              - paragraph [ref=e113] [cursor=pointer]: 12 patterns
+            - link "Comparison 21 patterns" [ref=e114] [cursor=pointer]:
+              - /url: /category/comparison
+              - heading "Comparison" [level=4] [ref=e115] [cursor=pointer]
+              - paragraph [ref=e116] [cursor=pointer]: 21 patterns
+            - link "Contradiction 6 patterns" [ref=e117] [cursor=pointer]:
+              - /url: /category/contradiction
+              - heading "Contradiction" [level=4] [ref=e118] [cursor=pointer]
+              - paragraph [ref=e119] [cursor=pointer]: 6 patterns
+            - link "Cross Boundary 52 patterns" [ref=e120] [cursor=pointer]:
+              - /url: /category/cross-boundary
+              - heading "Cross Boundary" [level=4] [ref=e121] [cursor=pointer]
+              - paragraph [ref=e122] [cursor=pointer]: 52 patterns
+            - link "Translation 32 patterns" [ref=e123] [cursor=pointer]:
+              - /url: /category/translation
+              - heading "Translation" [level=4] [ref=e124] [cursor=pointer]
+              - paragraph [ref=e125] [cursor=pointer]: 32 patterns
+        - generic [ref=e126]:
+          - generic [ref=e127]:
+            - heading "At Logic" [level=3] [ref=e128]
+            - paragraph [ref=e129]: Specific context/scenario targeting
+          - generic [ref=e130]:
+            - link "Assessment 30 patterns" [ref=e131] [cursor=pointer]:
+              - /url: /category/assessment
+              - heading "Assessment" [level=4] [ref=e132] [cursor=pointer]
+              - paragraph [ref=e133] [cursor=pointer]: 30 patterns
+            - link "Calculation 75 patterns" [ref=e134] [cursor=pointer]:
+              - /url: /category/calculation
+              - heading "Calculation" [level=4] [ref=e135] [cursor=pointer]
+              - paragraph [ref=e136] [cursor=pointer]: 75 patterns
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - heading "Beyond Logic" [level=3] [ref=e139]
+            - paragraph [ref=e140]: Boundary-pushing capabilities/innovation
+          - generic [ref=e141]:
+            - link "Hypothesise 57 patterns" [ref=e142] [cursor=pointer]:
+              - /url: /category/hypothesise
+              - heading "Hypothesise" [level=4] [ref=e143] [cursor=pointer]
+              - paragraph [ref=e144] [cursor=pointer]: 57 patterns
+            - link "Logical Reasoning 52 patterns" [ref=e145] [cursor=pointer]:
+              - /url: /category/logical-reasoning
+              - heading "Logical Reasoning" [level=4] [ref=e146] [cursor=pointer]
+              - paragraph [ref=e147] [cursor=pointer]: 52 patterns
+            - link "Prediction 76 patterns" [ref=e148] [cursor=pointer]:
+              - /url: /category/prediction
+              - heading "Prediction" [level=4] [ref=e149] [cursor=pointer]
+              - paragraph [ref=e150] [cursor=pointer]: 76 patterns
+            - link "Simulation 17 patterns" [ref=e151] [cursor=pointer]:
+              - /url: /category/simulation
+              - heading "Simulation" [level=4] [ref=e152] [cursor=pointer]
+              - paragraph [ref=e153] [cursor=pointer]: 17 patterns
+        - generic [ref=e154]:
+          - generic [ref=e155]:
+            - heading "In Logic" [level=3] [ref=e156]
+            - paragraph [ref=e157]: Internal/self-reflection within systems
+          - generic [ref=e158]:
+            - link "Categorising 2 patterns" [ref=e159] [cursor=pointer]:
+              - /url: /category/categorising
+              - heading "Categorising" [level=4] [ref=e160] [cursor=pointer]
+              - paragraph [ref=e161] [cursor=pointer]: 2 patterns
+            - link "Classification 10 patterns" [ref=e162] [cursor=pointer]:
+              - /url: /category/classification
+              - heading "Classification" [level=4] [ref=e163] [cursor=pointer]
+              - paragraph [ref=e164] [cursor=pointer]: 10 patterns
+            - link "Clustering 2 patterns" [ref=e165] [cursor=pointer]:
+              - /url: /category/clustering
+              - heading "Clustering" [level=4] [ref=e166] [cursor=pointer]
+              - paragraph [ref=e167] [cursor=pointer]: 2 patterns
+            - link "Error Identification 25 patterns" [ref=e168] [cursor=pointer]:
+              - /url: /category/error-identification
+              - heading "Error Identification" [level=4] [ref=e169] [cursor=pointer]
+              - paragraph [ref=e170] [cursor=pointer]: 25 patterns
+            - link "Input Semantics 6 patterns" [ref=e171] [cursor=pointer]:
+              - /url: /category/input-semantics
+              - heading "Input Semantics" [level=4] [ref=e172] [cursor=pointer]
+              - paragraph [ref=e173] [cursor=pointer]: 6 patterns
+            - link "Requirements Elicitation 10 patterns" [ref=e174] [cursor=pointer]:
+              - /url: /category/requirements-elicitation
+              - heading "Requirements Elicitation" [level=4] [ref=e175] [cursor=pointer]
+              - paragraph [ref=e176] [cursor=pointer]: 10 patterns
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - heading "Out Logic" [level=3] [ref=e179]
+            - paragraph [ref=e180]: Output generation (creative/code)
+          - generic [ref=e181]:
+            - link "Context Control 29 patterns" [ref=e182] [cursor=pointer]:
+              - /url: /category/context-control
+              - heading "Context Control" [level=4] [ref=e183] [cursor=pointer]
+              - paragraph [ref=e184] [cursor=pointer]: 29 patterns
+            - link "Decomposed Prompting 79 patterns" [ref=e185] [cursor=pointer]:
+              - /url: /category/decomposed-prompting
+              - heading "Decomposed Prompting" [level=4] [ref=e186] [cursor=pointer]
+              - paragraph [ref=e187] [cursor=pointer]: 79 patterns
+            - link "Output Customisation 20 patterns" [ref=e188] [cursor=pointer]:
+              - /url: /category/output-customisation
+              - heading "Output Customisation" [level=4] [ref=e189] [cursor=pointer]
+              - paragraph [ref=e190] [cursor=pointer]: 20 patterns
+            - link "Output Semantics 2 patterns" [ref=e191] [cursor=pointer]:
+              - /url: /category/output-semantics
+              - heading "Output Semantics" [level=4] [ref=e192] [cursor=pointer]
+              - paragraph [ref=e193] [cursor=pointer]: 2 patterns
+            - link "Prompt Improvement 56 patterns" [ref=e194] [cursor=pointer]:
+              - /url: /category/prompt-improvement
+              - heading "Prompt Improvement" [level=4] [ref=e195] [cursor=pointer]
+              - paragraph [ref=e196] [cursor=pointer]: 56 patterns
+            - link "Refactoring 76 patterns" [ref=e197] [cursor=pointer]:
+              - /url: /category/refactoring
+              - heading "Refactoring" [level=4] [ref=e198] [cursor=pointer]
+              - paragraph [ref=e199] [cursor=pointer]: 76 patterns
+        - generic [ref=e200]:
+          - generic [ref=e201]:
+            - heading "Over Logic" [level=3] [ref=e202]
+            - paragraph [ref=e203]: Comprehensive coverage/oversight/review
+          - generic [ref=e204]:
+            - link "Summarising 43 patterns" [ref=e205] [cursor=pointer]:
+              - /url: /category/summarising
+              - heading "Summarising" [level=4] [ref=e206] [cursor=pointer]
+              - paragraph [ref=e207] [cursor=pointer]: 43 patterns
+            - link "Synthesis 11 patterns" [ref=e208] [cursor=pointer]:
+              - /url: /category/synthesis
+              - heading "Synthesis" [level=4] [ref=e209] [cursor=pointer]
+              - paragraph [ref=e210] [cursor=pointer]: 11 patterns
+    - generic [ref=e211]:
+      - heading "Why Use This Dictionary?" [level=2] [ref=e212]
+      - generic [ref=e213]:
+        - generic [ref=e214]:
+          - img [ref=e216]
+          - heading "Research-Based" [level=3] [ref=e218]
+          - paragraph [ref=e219]: All patterns are extracted from peer-reviewed academic research papers with proper citations.
+        - generic [ref=e220]:
+          - img [ref=e222]
+          - heading "Practical Examples" [level=3] [ref=e224]
+          - paragraph [ref=e225]: Each pattern includes real-world examples you can copy and adapt for your use cases.
+        - generic [ref=e226]:
+          - img [ref=e228]
+          - heading "Security Focused" [level=3] [ref=e230]
+          - paragraph [ref=e231]: Specialized in cybersecurity applications with security considerations for each pattern.
+  - button "Open Next.js Dev Tools" [ref=e237] [cursor=pointer]:
+    - img [ref=e238] [cursor=pointer]
+  - alert [ref=e241]
+```

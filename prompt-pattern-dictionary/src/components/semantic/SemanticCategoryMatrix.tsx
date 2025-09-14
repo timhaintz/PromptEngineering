@@ -118,7 +118,7 @@ export default function SemanticCategoryMatrix({ patterns, className = '' }: Sem
           <div className="text-sm text-gray-600">Total Patterns</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-bold text-green-600">{statistics.categoryChanges}</div>
+          <div className="text-2xl font-bold text-green-700">{statistics.categoryChanges}</div>
           <div className="text-sm text-gray-600">Category Changes</div>
         </div>
         <div className="text-center">
@@ -255,7 +255,7 @@ export default function SemanticCategoryMatrix({ patterns, className = '' }: Sem
               {topTransitions.map((transition, idx) => (
                 <tr key={idx} className="border-b">
                   <td className="py-2 text-blue-600">{transition.original}</td>
-                  <td className="py-2 text-green-600">{transition.semantic}</td>
+                  <td className="py-2 text-green-700">{transition.semantic}</td>
                   <td className="py-2 text-right font-medium">{transition.count}</td>
                   <td className="py-2 text-center">
                     {transition.isChange ? (

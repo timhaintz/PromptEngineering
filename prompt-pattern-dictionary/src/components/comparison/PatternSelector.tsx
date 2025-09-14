@@ -121,7 +121,7 @@ export default function PatternSelector({
               </span>
             </div>
             {canCompare && (
-              <span className="text-green-600 text-sm font-medium">
+              <span className="text-green-700 text-sm font-medium">
                 Ready to compare!
               </span>
             )}

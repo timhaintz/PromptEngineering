@@ -20,7 +20,7 @@ export default function OrientationNav({ variant = 'sidebar' }: Props) {
             return (
               <li key={s.slug}>
                 <Link href={`/orientation/${s.slug}`} className={`flex gap-2 rounded px-2 py-1 border-l-4 leading-snug transition-colors ${active ? 'bg-indigo-50 border-indigo-600 text-indigo-800 font-medium' : 'border-transparent text-slate-700 hover:bg-slate-50 hover:border-slate-300'}`} aria-current={active ? 'page' : undefined}>
-                  <span className="text-slate-400 w-6 tabular-nums text-right select-none">{s.number}.</span>
+                  <span className="text-slate-600 w-6 tabular-nums text-right select-none">{s.number}.</span>
                   <span className="flex-1">{s.title}</span>
                 </Link>
               </li>

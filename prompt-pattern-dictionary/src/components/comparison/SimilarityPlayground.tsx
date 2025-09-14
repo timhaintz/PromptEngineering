@@ -62,7 +62,7 @@ export default function SimilarityPlayground({ className = '' }: SimilarityPlayg
 
   const getConfidenceColor = (confidence: 'high' | 'medium' | 'low') => {
     switch (confidence) {
-      case 'high': return 'text-green-600 bg-green-100';
+  case 'high': return 'text-green-700 bg-green-100';
       case 'medium': return 'text-yellow-600 bg-yellow-100';
       case 'low': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';

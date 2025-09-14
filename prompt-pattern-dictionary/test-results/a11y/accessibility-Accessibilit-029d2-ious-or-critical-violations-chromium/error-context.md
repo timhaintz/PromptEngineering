@@ -1,0 +1,163 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation "Global navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Go to homepage" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5] [cursor=pointer]
+        - generic [ref=e7] [cursor=pointer]: Home
+      - navigation "Primary" [ref=e9]:
+        - link "Orientation" [ref=e10] [cursor=pointer]:
+          - /url: /orientation
+        - link "Logic" [ref=e11] [cursor=pointer]:
+          - /url: /logic
+        - link "Categories" [ref=e12] [cursor=pointer]:
+          - /url: /categories
+        - link "Patterns" [ref=e13] [cursor=pointer]:
+          - /url: /patterns
+        - link "Papers" [ref=e14] [cursor=pointer]:
+          - /url: /papers
+        - link "Matrix" [ref=e15] [cursor=pointer]:
+          - /url: /matrix
+        - link "Semantic" [ref=e16] [cursor=pointer]:
+          - /url: /semantic
+        - link "Taxonomy" [ref=e17] [cursor=pointer]:
+          - /url: /taxonomy
+        - link "Search" [ref=e18] [cursor=pointer]:
+          - /url: /search
+  - generic [ref=e21]:
+    - generic [ref=e22]:
+      - heading "Categories (25)" [level=1] [ref=e23]
+      - generic "Counts use semantic category assignments" [ref=e24]: Semantic counts
+    - generic [ref=e25]:
+      - link "Argument 12 patterns" [ref=e26] [cursor=pointer]:
+        - /url: /category/argument
+        - generic [ref=e27] [cursor=pointer]:
+          - generic [ref=e28] [cursor=pointer]: Argument
+          - generic [ref=e29] [cursor=pointer]: 12 patterns
+      - link "Comparison 21 patterns" [ref=e30] [cursor=pointer]:
+        - /url: /category/comparison
+        - generic [ref=e31] [cursor=pointer]:
+          - generic [ref=e32] [cursor=pointer]: Comparison
+          - generic [ref=e33] [cursor=pointer]: 21 patterns
+      - link "Contradiction 6 patterns" [ref=e34] [cursor=pointer]:
+        - /url: /category/contradiction
+        - generic [ref=e35] [cursor=pointer]:
+          - generic [ref=e36] [cursor=pointer]: Contradiction
+          - generic [ref=e37] [cursor=pointer]: 6 patterns
+      - link "Cross Boundary 52 patterns" [ref=e38] [cursor=pointer]:
+        - /url: /category/cross-boundary
+        - generic [ref=e39] [cursor=pointer]:
+          - generic [ref=e40] [cursor=pointer]: Cross Boundary
+          - generic [ref=e41] [cursor=pointer]: 52 patterns
+      - link "Translation 32 patterns" [ref=e42] [cursor=pointer]:
+        - /url: /category/translation
+        - generic [ref=e43] [cursor=pointer]:
+          - generic [ref=e44] [cursor=pointer]: Translation
+          - generic [ref=e45] [cursor=pointer]: 32 patterns
+      - link "Assessment 30 patterns" [ref=e46] [cursor=pointer]:
+        - /url: /category/assessment
+        - generic [ref=e47] [cursor=pointer]:
+          - generic [ref=e48] [cursor=pointer]: Assessment
+          - generic [ref=e49] [cursor=pointer]: 30 patterns
+      - link "Calculation 75 patterns" [ref=e50] [cursor=pointer]:
+        - /url: /category/calculation
+        - generic [ref=e51] [cursor=pointer]:
+          - generic [ref=e52] [cursor=pointer]: Calculation
+          - generic [ref=e53] [cursor=pointer]: 75 patterns
+      - link "Hypothesise 57 patterns" [ref=e54] [cursor=pointer]:
+        - /url: /category/hypothesise
+        - generic [ref=e55] [cursor=pointer]:
+          - generic [ref=e56] [cursor=pointer]: Hypothesise
+          - generic [ref=e57] [cursor=pointer]: 57 patterns
+      - link "Logical Reasoning 52 patterns" [ref=e58] [cursor=pointer]:
+        - /url: /category/logical-reasoning
+        - generic [ref=e59] [cursor=pointer]:
+          - generic [ref=e60] [cursor=pointer]: Logical Reasoning
+          - generic [ref=e61] [cursor=pointer]: 52 patterns
+      - link "Prediction 76 patterns" [ref=e62] [cursor=pointer]:
+        - /url: /category/prediction
+        - generic [ref=e63] [cursor=pointer]:
+          - generic [ref=e64] [cursor=pointer]: Prediction
+          - generic [ref=e65] [cursor=pointer]: 76 patterns
+      - link "Simulation 17 patterns" [ref=e66] [cursor=pointer]:
+        - /url: /category/simulation
+        - generic [ref=e67] [cursor=pointer]:
+          - generic [ref=e68] [cursor=pointer]: Simulation
+          - generic [ref=e69] [cursor=pointer]: 17 patterns
+      - link "Categorising 2 patterns" [ref=e70] [cursor=pointer]:
+        - /url: /category/categorising
+        - generic [ref=e71] [cursor=pointer]:
+          - generic [ref=e72] [cursor=pointer]: Categorising
+          - generic [ref=e73] [cursor=pointer]: 2 patterns
+      - link "Classification 10 patterns" [ref=e74] [cursor=pointer]:
+        - /url: /category/classification
+        - generic [ref=e75] [cursor=pointer]:
+          - generic [ref=e76] [cursor=pointer]: Classification
+          - generic [ref=e77] [cursor=pointer]: 10 patterns
+      - link "Clustering 2 patterns" [ref=e78] [cursor=pointer]:
+        - /url: /category/clustering
+        - generic [ref=e79] [cursor=pointer]:
+          - generic [ref=e80] [cursor=pointer]: Clustering
+          - generic [ref=e81] [cursor=pointer]: 2 patterns
+      - link "Error Identification 25 patterns" [ref=e82] [cursor=pointer]:
+        - /url: /category/error-identification
+        - generic [ref=e83] [cursor=pointer]:
+          - generic [ref=e84] [cursor=pointer]: Error Identification
+          - generic [ref=e85] [cursor=pointer]: 25 patterns
+      - link "Input Semantics 6 patterns" [ref=e86] [cursor=pointer]:
+        - /url: /category/input-semantics
+        - generic [ref=e87] [cursor=pointer]:
+          - generic [ref=e88] [cursor=pointer]: Input Semantics
+          - generic [ref=e89] [cursor=pointer]: 6 patterns
+      - link "Requirements Elicitation 10 patterns" [ref=e90] [cursor=pointer]:
+        - /url: /category/requirements-elicitation
+        - generic [ref=e91] [cursor=pointer]:
+          - generic [ref=e92] [cursor=pointer]: Requirements Elicitation
+          - generic [ref=e93] [cursor=pointer]: 10 patterns
+      - link "Context Control 29 patterns" [ref=e94] [cursor=pointer]:
+        - /url: /category/context-control
+        - generic [ref=e95] [cursor=pointer]:
+          - generic [ref=e96] [cursor=pointer]: Context Control
+          - generic [ref=e97] [cursor=pointer]: 29 patterns
+      - link "Decomposed Prompting 79 patterns" [ref=e98] [cursor=pointer]:
+        - /url: /category/decomposed-prompting
+        - generic [ref=e99] [cursor=pointer]:
+          - generic [ref=e100] [cursor=pointer]: Decomposed Prompting
+          - generic [ref=e101] [cursor=pointer]: 79 patterns
+      - link "Output Customisation 20 patterns" [ref=e102] [cursor=pointer]:
+        - /url: /category/output-customisation
+        - generic [ref=e103] [cursor=pointer]:
+          - generic [ref=e104] [cursor=pointer]: Output Customisation
+          - generic [ref=e105] [cursor=pointer]: 20 patterns
+      - link "Output Semantics 2 patterns" [ref=e106] [cursor=pointer]:
+        - /url: /category/output-semantics
+        - generic [ref=e107] [cursor=pointer]:
+          - generic [ref=e108] [cursor=pointer]: Output Semantics
+          - generic [ref=e109] [cursor=pointer]: 2 patterns
+      - link "Prompt Improvement 56 patterns" [ref=e110] [cursor=pointer]:
+        - /url: /category/prompt-improvement
+        - generic [ref=e111] [cursor=pointer]:
+          - generic [ref=e112] [cursor=pointer]: Prompt Improvement
+          - generic [ref=e113] [cursor=pointer]: 56 patterns
+      - link "Refactoring 76 patterns" [ref=e114] [cursor=pointer]:
+        - /url: /category/refactoring
+        - generic [ref=e115] [cursor=pointer]:
+          - generic [ref=e116] [cursor=pointer]: Refactoring
+          - generic [ref=e117] [cursor=pointer]: 76 patterns
+      - link "Summarising 43 patterns" [ref=e118] [cursor=pointer]:
+        - /url: /category/summarising
+        - generic [ref=e119] [cursor=pointer]:
+          - generic [ref=e120] [cursor=pointer]: Summarising
+          - generic [ref=e121] [cursor=pointer]: 43 patterns
+      - link "Synthesis 11 patterns" [ref=e122] [cursor=pointer]:
+        - /url: /category/synthesis
+        - generic [ref=e123] [cursor=pointer]:
+          - generic [ref=e124] [cursor=pointer]: Synthesis
+          - generic [ref=e125] [cursor=pointer]: 11 patterns
+  - button "Open Next.js Dev Tools" [ref=e131] [cursor=pointer]:
+    - img [ref=e132] [cursor=pointer]
+  - alert [ref=e135]
+```

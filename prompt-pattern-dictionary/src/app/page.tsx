@@ -37,7 +37,7 @@ export default async function HomePage() {
             Discover, learn, and apply proven prompt patterns from academic research.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Link href="/patterns" className="inline-flex items-center gap-2 rounded-md bg-blue-600 text-white px-6 py-3 font-medium shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <Link href="/patterns" className="inline-flex items-center gap-2 rounded-md bg-blue-700 text-white px-6 py-3 font-medium shadow hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
               Browse Patterns
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
@@ -54,7 +54,7 @@ export default async function HomePage() {
               <div className="text-sm text-gray-600">Patterns</div>
             </Link>
             <Link href="/papers" className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
-              <div className="text-2xl font-bold text-green-600">73</div>
+              <div className="text-2xl font-bold text-green-700">73</div>
               <div className="text-sm text-gray-600">Papers</div>
             </Link>
             <Link href="/logic" className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
@@ -148,7 +148,7 @@ export default async function HomePage() {
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
@@ -161,7 +161,7 @@ export default async function HomePage() {
                     Describe your prompt goal in natural language and discover the most relevant 
                     patterns using AI-powered semantic search and similarity matching.
                   </p>
-                  <div className="flex items-center text-green-600 font-medium">
+                  <div className="flex items-center text-green-700 font-medium">
                     Try Playground
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -244,7 +244,7 @@ export default async function HomePage() {
             
             <div className="bg-white rounded-lg p-6 shadow-md">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>

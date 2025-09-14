@@ -70,7 +70,7 @@ export default function PlaygroundPage() {
             
             <div className="text-center">
               <div className="mx-auto h-12 w-12 flex items-center justify-center bg-green-100 rounded-lg mb-4">
-                <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>

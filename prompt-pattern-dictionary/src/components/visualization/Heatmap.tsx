@@ -31,7 +31,7 @@ function colorForSimilarity(similarity: number): string {
 function opacityBucket(similarity: number): string {
   if (similarity >= 0.9) return 'opacity-100';
   if (similarity >= 0.75) return 'opacity-80';
-  if (similarity >= 0.6) return 'opacity-70';
+  if (similarity >= 0.6) return 'text-slate-600';
   if (similarity >= 0.45) return 'opacity-60';
   if (similarity >= 0.3) return 'opacity-50';
   if (similarity >= 0.15) return 'opacity-40';
