@@ -25,7 +25,7 @@ const QuickStart = () => (
       <li><strong>Iterate structurally first</strong> (reorder, clarify intent) before stylistic tuning.</li>
       <li><strong>Lock and label version</strong> when stable; avoid silent drift.</li>
     </ol>
-    <div className="mt-4 p-3 rounded border bg-white shadow-sm text-sm text-gray-700">
+  <div className="mt-4 p-3 rounded border border-muted bg-surface-1 shadow-sm text-sm text-secondary">
       <p className="font-semibold mb-1">Principles:</p>
       <ul className="list-disc pl-5 space-y-1">
         <li><strong>Clarity over cleverness</strong> – explicit instructions reduce hallucination risk.</li>
@@ -55,7 +55,7 @@ const PatternAnatomy = () => (
   <div>
     <p>Each entry follows a consistent schema to support scanning and comparison. The Template exposes five canonical keys (<code>role</code>, <code>context</code>, <code>action</code>, <code>format</code>, <code>response</code>) plus an optional single‑line <em>bracketed synthesis</em>. Additional normalized attributes provide discoverability, provenance, and evaluation hooks.</p>
     <div className="mt-4 grid gap-4 md:grid-cols-2">
-      <div className="p-4 rounded border bg-white shadow-sm">
+  <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
         <h3 className="text-sm font-semibold mb-2">Field Overview</h3>
         <dl className="text-sm space-y-2">
           <div>
@@ -104,7 +104,7 @@ const PatternAnatomy = () => (
           </div>
         </dl>
       </div>
-      <div className="p-4 rounded border bg-white shadow-sm">
+  <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
         <h3 className="text-sm font-semibold mb-2">Usage Guidance</h3>
         <ul className="list-disc pl-5 space-y-1 text-sm">
           <li><strong>Do not remove structural keys</strong>; populate them concretely.</li>
@@ -115,15 +115,15 @@ const PatternAnatomy = () => (
         </ul>
       </div>
     </div>
-    <div className="my-6 p-4 rounded-lg bg-white border border-indigo-200 shadow-sm">
-      <p className="text-sm font-semibold text-indigo-700 mb-2">Structure Diagram</p>
+    <div className="my-6 p-4 rounded-lg bg-surface-1 border border-muted shadow-sm">
+      <p className="text-sm font-semibold text-accent mb-2">Structure Diagram</p>
       <div id="diagram-desc" className="sr-only">Diagram showing relationships: Pattern Name connects to Intent/Purpose, Template (with five keys and bracketed summary), Application, Examples & Similar, Adaptation Notes, Evaluation/Quality Hints, and Tags/Category.</div>
       <MermaidDiagram
         describedById="diagram-desc"
         className="mermaid"
         chart={`flowchart LR\n    A[Pattern Name]:::title --> B[Intent / Purpose]\n    B --> C[Template (5 keys)]\n    C --> C1[role]\n    C --> C2[context]\n    C --> C3[action]\n    C --> C4[format]\n    C --> C5[response]\n    C --> C6[Bracketed Summary]\n    A --> D[Application]\n    A --> E[Examples & Similar]\n    A --> F[Adaptation Notes]\n    A --> G[Evaluation / Quality Hints]\n    A --> H[Tags / Category]\n\n    classDef title fill:#1e3a8a,stroke:#1e3a8a,stroke-width:1,color:#fff;\n    classDef keys fill:#eef2ff,stroke:#4338ca,color:#1e1b4b;\n    class C,C1,C2,C3,C4,C5,C6 keys;`}
       />
-      <p className="mt-2 text-xs text-gray-500">Rendered client-side with Mermaid; accessible fallback includes textual description.</p>
+  <p className="mt-2 text-xs text-muted">Rendered client-side with Mermaid; accessible fallback includes textual description.</p>
     </div>
   </div>
 );
@@ -140,7 +140,7 @@ const Lifecycle = () => (
       <li><strong>Version Freeze</strong>: Tag as v1.x; store alongside metrics.</li>
       <li><strong>Monitoring</strong>: Periodic spot checks & drift watch (especially after model updates).</li>
     </ol>
-    <p className="mt-3 text-sm text-gray-700"><strong>Drift Indicator:</strong> If failure clusters reappear or confidence declines, re-open the adaptation phase—do not silently patch in production.</p>
+  <p className="mt-3 text-sm text-secondary"><strong>Drift Indicator:</strong> If failure clusters reappear or confidence declines, re-open the adaptation phase—do not silently patch in production.</p>
   </div>
 );
 
@@ -191,7 +191,7 @@ const Adaptation = () => (
       <li><strong>Ethical adaptation</strong>: Avoid reinforcing stereotypes; stress neutral or diverse entities.</li>
       <li><strong>Re-run evaluation</strong> after each structural shift (no “silent merges”).</li>
     </ul>
-    <p className="mt-3 text-xs text-gray-600">If a pattern diverges heavily, consider naming it explicitly (fork) to preserve lineage.</p>
+  <p className="mt-3 text-xs text-muted">If a pattern diverges heavily, consider naming it explicitly (fork) to preserve lineage.</p>
   </div>
 );
 
@@ -309,14 +309,14 @@ const FAQ = () => (
 
 const Feedback = () => (
   <div>
-    <p className="text-sm">Spotted ambiguity, accessibility gaps, missing inclusive examples, or structural drift? Please open an issue or PR. Reference the pattern ID(s), describe the observed issue, and (if possible) include a minimal reproducible example. Community stewardship maintains reliability.</p>
+  <p className="text-sm text-secondary">Spotted ambiguity, accessibility gaps, missing inclusive examples, or structural drift? Please open an issue or PR. Reference the pattern ID(s), describe the observed issue, and (if possible) include a minimal reproducible example. Community stewardship maintains reliability.</p>
   </div>
 );
 
 const NextSteps = () => (
   <div>
     <ul className="list-disc pl-5 text-sm space-y-1">
-      <li><Link href="/patterns" className="text-blue-600 hover:underline">Browse patterns</Link> and shortlist 2–3 for your task.</li>
+  <li><Link href="/patterns" className="text-accent hover:underline">Browse patterns</Link> and shortlist 2–3 for your task.</li>
       <li>Create a tiny evaluation set (edge + typical cases) and record baseline outputs.</li>
       <li>Introduce structured adaptation with version tags.</li>
       <li>Share findings—improvements are welcomed.</li>

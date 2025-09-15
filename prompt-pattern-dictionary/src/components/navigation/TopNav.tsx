@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
 
 const tabs = [
   { href: '/orientation', label: 'Orientation' },
@@ -19,12 +20,12 @@ export default function TopNav() {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Global navigation" className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <nav aria-label="Global navigation" className="fixed top-0 left-0 right-0 z-50 bg-surface-1/80 backdrop-blur border-b border-muted">
       <div className="container mx-auto px-3 py-2 flex items-center gap-3">
         {/* Home button with house icon */}
         <Link
           href="/"
-          className="inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-sm text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 shrink-0"
+          className="inline-flex items-center gap-1 rounded-md border border-muted bg-surface-2 px-2.5 py-1.5 text-sm text-secondary shadow-sm hover:bg-surface-hover focus-ring shrink-0 transition-colors"
           aria-label="Go to homepage"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true" role="img" aria-label="Home icon">
@@ -43,14 +44,18 @@ export default function TopNav() {
                   key={tab.href}
                   aria-current={isActive ? 'page' : undefined}
                   href={tab.href}
-                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${isActive ? 'bg-white text-gray-900 border-gray-900 font-semibold hover:bg-gray-100' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}
-                  style={isActive ? { backgroundColor: '#ffffff', color: '#111111' } : undefined}
+                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors focus-ring ${isActive ? 'active-pill font-medium' : 'bg-surface-2 text-secondary border-muted hover:bg-surface-hover'}`}
                 >
                   {tab.label}
                 </Link>
               );
             })}
           </nav>
+        </div>
+
+        {/* Theme Switcher */}
+        <div className="shrink-0">
+          <ThemeSwitcher />
         </div>
       </div>
     </nav>

@@ -1,0 +1,124 @@
+:root {
+  /* LIGHT (default) */
+  --color-bg-base: #F8FAFC;
+  --color-surface-1: #FFFFFF;
+  --color-surface-2: #F1F5F9;
+  --color-surface-hover: #E2E8F0;
+  --color-border-muted: #D5DDE5;
+  --color-border-strong: #94A3B8;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #334155;
+  /* Muted text must still meet 4.5:1 on white; darken from slate-500 (#64748B) to slate-600 (#475569) */
+  --color-text-muted: #475569;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-active-bg: #DBEAFE;
+  --color-focus-ring: #2563EB;
+  --color-focus-ring-outer: #FFFFFF;
+  --color-danger: #B91C1C;
+  --color-success: #15803D;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg-base: #0F1115;
+    --color-surface-1: #161B21;
+    --color-surface-2: #1E252C;
+    --color-surface-hover: #242D36;
+    --color-border-muted: #2E3944;
+    --color-border-strong: #455464;
+    --color-text-primary: #F4F6F9;
+    --color-text-secondary: #CBD4DE;
+    --color-text-muted: #94A3B4;
+    --color-accent: #3B82F6;
+    --color-accent-hover: #60A5FA;
+    --color-accent-active-bg: rgba(59,130,246,0.14);
+    --color-focus-ring: #FFFFFF;
+    --color-focus-ring-outer: #2563EB;
+    --color-danger: #DC2626;
+    --color-success: #16A34A;
+  }
+}
+
+html[data-theme='light'] {
+  /* explicit light override (if user forces) */
+  --color-bg-base: #F8FAFC;
+  --color-surface-1: #FFFFFF;
+  --color-surface-2: #F1F5F9;
+  --color-surface-hover: #E2E8F0;
+  --color-border-muted: #D5DDE5;
+  --color-border-strong: #94A3B8;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-active-bg: #DBEAFE;
+  --color-focus-ring: #2563EB;
+  --color-focus-ring-outer: #FFFFFF;
+  --color-danger: #B91C1C;
+  --color-success: #15803D;
+}
+
+html[data-theme='dark'] {
+  --color-bg-base: #0F1115;
+  --color-surface-1: #161B21;
+  --color-surface-2: #1E252C;
+  --color-surface-hover: #242D36;
+  --color-border-muted: #2E3944;
+  --color-border-strong: #455464;
+  --color-text-primary: #F4F6F9;
+  --color-text-secondary: #CBD4DE;
+  --color-text-muted: #94A3B4;
+  --color-accent: #3B82F6;
+  --color-accent-hover: #60A5FA;
+  --color-accent-active-bg: rgba(59,130,246,0.14);
+  --color-focus-ring: #FFFFFF;
+  --color-focus-ring-outer: #2563EB;
+  --color-danger: #DC2626;
+  --color-success: #16A34A;
+}
+
+html[data-theme='high-contrast'] {
+  --color-bg-base: #000000;
+  --color-surface-1: #000000;
+  --color-surface-2: #1A1A1A;
+  --color-surface-hover: #262626;
+  --color-border-muted: #FFFFFF;
+  --color-border-strong: #FFD700;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #FFFFFF;
+  --color-text-muted: #FFFFFFCC;
+  --color-accent: #00A2FF;
+  --color-accent-hover: #FFFFFF;
+  --color-accent-active-bg: #FFFFFF;
+  --color-focus-ring: #FFFFFF;
+  --color-focus-ring-outer: #FFBF00;
+  --color-danger: #FF3B30;
+  --color-success: #32D74B;
+}
+
+@media (forced-colors: active) {
+  html:not([data-theme]) {
+    --color-bg-base: Canvas;
+    --color-text-primary: CanvasText;
+    --color-accent: LinkText;
+    --color-border-muted: GrayText;
+    --color-focus-ring: Highlight;
+  }
+}
+
+/* Utility layer (optional) */
+.bg-base { background-color: var(--color-bg-base); }
+.bg-surface-1 { background-color: var(--color-surface-1); }
+.bg-surface-2 { background-color: var(--color-surface-2); }
+.bg-surface-hover { background-color: var(--color-surface-hover); }
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.border-muted { border-color: var(--color-border-muted); }
+.border-strong { border-color: var(--color-border-strong); }
+.focus-ring:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset:2px; box-shadow:0 0 0 4px var(--color-focus-ring-outer); }
+
+/* Active nav pill pattern */
+.active-pill { background: var(--color-accent-active-bg); border:1px solid var(--color-accent); color: var(--color-text-primary); }

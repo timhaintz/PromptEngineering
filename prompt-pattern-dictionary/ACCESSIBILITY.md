@@ -15,6 +15,11 @@ This project includes an automated accessibility (a11y) and contrast auditing se
 | `npm run a11y:contrast` | Generate contrast report (does not fail). |
 | `npm run a11y:contrast:fail` | Run contrast audit and exit non‑zero if any AA failures. |
 
+## Multi-Theme Coverage
+The automated axe-core suite now executes each audited route under three visual themes: `light`, `dark`, and `high-contrast`. The Playwright spec (`tests/a11y/accessibility.spec.ts`) programmatically sets the `data-theme` attribute on the document root before running axe for each theme, ensuring color contrast and structural accessibility regressions are caught across all supported modes.
+
+If you introduce a new theme token set, simply add its identifier to the `THEMES` array in the spec to include it in future scans.
+
 ## Adding Routes
 Edit `tests/a11y/accessibility.spec.ts` and append to the `ROUTES` array.
 

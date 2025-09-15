@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 interface PrefState {
   fontScale: number; // -1,0,1,2
   widthMode: 'default' | 'relaxed';
-  theme: 'light' | 'dark' | 'hc' | 'system';
+  theme: 'light' | 'dark' | 'high-contrast' | 'system';
 }
 
 const KEY = 'orientation:readability:v1';
@@ -14,8 +14,16 @@ function load(): PrefState {
   try {
     const raw = window.localStorage.getItem(KEY);
     if (!raw) return { fontScale: 0, widthMode: 'default', theme: 'system' };
-    const parsed = JSON.parse(raw) as PrefState;
-    return { fontScale: Math.min(2, Math.max(-1, parsed.fontScale)), widthMode: parsed.widthMode === 'relaxed' ? 'relaxed' : 'default', theme: ['light','dark','hc','system'].includes(parsed.theme) ? parsed.theme : 'system' };
+    const parsed = JSON.parse(raw) as any;
+    // Backward compatibility: migrate legacy 'hc' to 'high-contrast'
+    let theme = parsed.theme;
+    if (theme === 'hc') theme = 'high-contrast';
+    if (!['light','dark','high-contrast','system'].includes(theme)) theme = 'system';
+    return {
+      fontScale: Math.min(2, Math.max(-1, parsed.fontScale ?? 0)),
+      widthMode: parsed.widthMode === 'relaxed' ? 'relaxed' : 'default',
+      theme
+    };
   } catch {
     return { fontScale: 0, widthMode: 'default', theme: 'system' };
   }
