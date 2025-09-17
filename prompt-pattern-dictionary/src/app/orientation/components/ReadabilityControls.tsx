@@ -35,7 +35,12 @@ export default function ReadabilityControls() {
         id="theme-select"
         className="px-1 py-1 border border-muted rounded bg-surface-2 text-xs text-primary hover:bg-surface-hover"
         value={theme}
-        onChange={e => setTheme(e.target.value as any)}
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+          const val = e.target.value;
+          if (val === 'system' || val === 'light' || val === 'dark' || val === 'high-contrast') {
+            setTheme(val);
+          }
+        }}
       >
         <option value="system">System</option>
         <option value="light">Light</option>

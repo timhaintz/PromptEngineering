@@ -20,6 +20,8 @@ The automated axe-core suite now executes each audited route under three visual 
 
 If you introduce a new theme token set, simply add its identifier to the `THEMES` array in the spec to include it in future scans.
 
+For a detailed overview of the semantic design token system, high-contrast strategy, and extension guidelines, see `docs/THEMING.md`.
+
 ## Adding Routes
 Edit `tests/a11y/accessibility.spec.ts` and append to the `ROUTES` array.
 

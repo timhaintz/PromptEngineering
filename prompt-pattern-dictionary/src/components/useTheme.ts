@@ -13,6 +13,14 @@ function getSystemPref(): ThemeMode {
 export function useTheme() {
   const [theme, setTheme] = useState<ThemeMode | null>(null);
 
+  const applyTheme = useCallback((mode: ThemeMode) => {
+    setTheme(mode);
+    if (typeof document !== "undefined") {
+      document.documentElement.setAttribute("data-theme", mode === "high-contrast" ? "high-contrast" : mode);
+    }
+    try { window.localStorage.setItem(STORAGE_KEY, mode); } catch {}
+  }, []);
+
   // Initialize
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -23,15 +31,7 @@ export function useTheme() {
     } catch {
       applyTheme(getSystemPref());
     }
-  }, []);
-
-  const applyTheme = useCallback((mode: ThemeMode) => {
-    setTheme(mode);
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-theme", mode === "high-contrast" ? "high-contrast" : mode);
-    }
-    try { window.localStorage.setItem(STORAGE_KEY, mode); } catch {}
-  }, []);
+  }, [applyTheme]);
 
   return { theme, setTheme: applyTheme };
 }

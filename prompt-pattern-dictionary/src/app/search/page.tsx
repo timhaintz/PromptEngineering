@@ -87,7 +87,7 @@ function SearchResults() {
 
   // Derived results for patterns/examples
   const { root: booleanAst } = useMemo(() => {
-    if (!useBoolean || !query.trim()) return { root: null } as any;
+    if (!useBoolean || !query.trim()) return { root: null } as { root: null };
     return parseBooleanQuery(query);
   }, [query, useBoolean]);
 
@@ -104,7 +104,6 @@ function SearchResults() {
 
   function applyHighlight(text: string): React.ReactNode {
     if (!highlightTerms.length) return <>{text}</>;
-    const lower = text.toLowerCase();
     let parts: Array<{ segment: string; match: boolean }> = [{ segment: text, match: false }];
     highlightTerms.forEach(term => {
       const newParts: typeof parts = [];
@@ -262,12 +261,12 @@ function SearchResults() {
                 </div>
                 <ul className="list-disc pl-4 space-y-1">
                   <li><code>AND</code>, <code>OR</code>, <code>NOT</code> (NOT has highest precedence).</li>
-                  <li>Phrases: <code>"chain of thought"</code></li>
+                  <li>Phrases: <code>&quot;chain of thought&quot;</code></li>
                   <li>Fuzzy: <code>prompt~1</code> (edit distance ≤ 1). Global fuzzy applied if checkbox set.</li>
                   <li>Implicit AND between adjacent terms.</li>
                   <li>Examples: <code>reasoning AND (NOT translation)</code> (parentheses future).</li>
                 </ul>
-                <p className="text-[11px] text-gray-500">Parentheses not yet supported; logic evaluates NOT {'>'} AND {'>'} OR.</p>
+                <p className="text-[11px] text-gray-500">Parentheses not yet supported; logic evaluates NOT &gt; AND &gt; OR.</p>
               </div>
             )}
             <div>

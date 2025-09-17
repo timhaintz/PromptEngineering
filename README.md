@@ -216,7 +216,7 @@ User-adjustable preferences enhance accessibility and reading comfort:
 
 - Font scale: data attribute `data-font-scale` applied to `<html>` with supported values -1, 0, 1, 2 (base, + steps). CSS scales body text and headings accordingly.
 - Width mode: `data-width-mode` = `default` | `relaxed`; relaxed widens prose up to ~85ch for users needing fewer line wraps.
-- Theme / contrast: `data-theme` = `light` | `dark` | `hc` (high contrast) with a `system` option that removes the attribute and defers to `prefers-color-scheme` media queries.
+- Theme / contrast: `data-theme` = `light` | `dark` | `high-contrast` with a `system` option that removes the attribute and defers to `prefers-color-scheme` media queries. (The legacy value `hc` is auto-migrated if found in saved preferences.) See `docs/THEMING.md` for full token architecture.
 - Persistence: Stored under localStorage key `orientation:readability:v1`; hydration script replays settings and applies attributes with minimal layout shift.
 - UI: `ReadabilityControls` component (toolbar) with buttons for font scaling, width toggle, and a select for theme mode. Appears in orientation layout (sidebar desktop + inline mobile). Can be reused site‑wide later.
 

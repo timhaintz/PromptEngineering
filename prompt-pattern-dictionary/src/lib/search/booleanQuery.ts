@@ -149,8 +149,10 @@ function termFromRaw(raw: string): TermNode | NotNode {
   return negated ? { type: 'NOT', child: node } : node;
 }
 
-function isNode(obj: any): obj is Node {
-  return obj && typeof obj === 'object' && 'type' in obj && obj.type !== 'AND' && obj.type !== 'OR' || (obj.type === 'AND' || obj.type === 'OR' || obj.type === 'NOT' || obj.type === 'TERM');
+function isNode(obj: unknown): obj is Node {
+  if (!obj || typeof obj !== 'object') return false;
+  const t = (obj as { type?: string }).type;
+  return t === 'TERM' || t === 'NOT' || t === 'AND' || t === 'OR';
 }
 
 function collectTerms(node: Node, acc: TermNode[]) {

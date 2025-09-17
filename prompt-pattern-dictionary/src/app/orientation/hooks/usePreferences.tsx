@@ -14,11 +14,12 @@ function load(): PrefState {
   try {
     const raw = window.localStorage.getItem(KEY);
     if (!raw) return { fontScale: 0, widthMode: 'default', theme: 'system' };
-    const parsed = JSON.parse(raw) as any;
+  const parsed: Partial<PrefState> & { theme?: string } = JSON.parse(raw);
     // Backward compatibility: migrate legacy 'hc' to 'high-contrast'
-    let theme = parsed.theme;
-    if (theme === 'hc') theme = 'high-contrast';
-    if (!['light','dark','high-contrast','system'].includes(theme)) theme = 'system';
+    let tempTheme: string | undefined = parsed.theme;
+    if (tempTheme === 'hc') tempTheme = 'high-contrast';
+    const allowed = new Set(['light','dark','high-contrast','system']);
+    const theme: PrefState['theme'] = allowed.has(tempTheme || '') ? (tempTheme as PrefState['theme']) : 'system';
     return {
       fontScale: Math.min(2, Math.max(-1, parsed.fontScale ?? 0)),
       widthMode: parsed.widthMode === 'relaxed' ? 'relaxed' : 'default',
