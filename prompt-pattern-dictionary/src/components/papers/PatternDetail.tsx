@@ -198,7 +198,50 @@ export default function PatternDetail({
         <dt className="font-semibold text-slate-700">Dependent LLM:</dt>
         <dd className="text-gray-800">{attrs?.dependentLLM ?? 'N/A'}</dd>
 
-  <dt className="font-semibold text-slate-700">Application:</dt>
+  <dt className="font-semibold text-slate-700">Turn:</dt>
+  <dd className="text-gray-800">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
+
+        <dt className="font-semibold text-slate-700 flex items-center">
+          <button
+            type="button"
+            onClick={() => setTemplateOpen(v => !v)}
+            className="mr-1 text-gray-700 hover:text-gray-900"
+            aria-controls={`tpl-${pattern.id}`}
+            title={templateOpen ? 'Hide template' : 'Show template'}
+          >
+            <span className="text-sm">{templateOpen ? '▾' : '▸'}</span>
+          </button>
+          Template:
+        </dt>
+        <dd className="text-gray-800">
+          {templateOpen ? (
+            <div id={`tpl-${pattern.id}`} className="space-y-2">
+              <pre className="whitespace-pre-wrap bg-gray-50 p-2 rounded border text-sm">{templateText}</pre>
+              {attrs?.templateRawBracketed ? (
+                <div className="text-xs text-gray-700">
+                  <button
+                    type="button"
+                    onClick={() => setBracketOpen(v => !v)}
+                    className="text-blue-700 hover:text-blue-900 underline"
+                    aria-controls={`tplb-${pattern.id}`}
+                    title={bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
+                  >
+                    {bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
+                  </button>
+                  {bracketOpen && (
+                    <div id={`tplb-${pattern.id}`} className="mt-1 font-mono break-words bg-white border rounded p-2">
+                      {attrs.templateRawBracketed}
+                    </div>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          ) : (
+            <span className="text-gray-500 select-none">(collapsed)</span>
+          )}
+        </dd>
+        {/* Application moved under Template */}
+        <dt className="font-semibold text-slate-700">Application:</dt>
         <dd className="text-gray-800">
           {isPolicyFallback ? (
             <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
@@ -240,49 +283,6 @@ export default function PatternDetail({
                 ))}
               </div>
             </div>
-          )}
-        </dd>
-
-  <dt className="font-semibold text-slate-700">Turn:</dt>
-  <dd className="text-gray-800">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
-
-        <dt className="font-semibold text-slate-700 flex items-center">
-          <button
-            type="button"
-            onClick={() => setTemplateOpen(v => !v)}
-            className="mr-1 text-gray-700 hover:text-gray-900"
-            aria-controls={`tpl-${pattern.id}`}
-            title={templateOpen ? 'Hide template' : 'Show template'}
-          >
-            <span className="text-sm">{templateOpen ? '▾' : '▸'}</span>
-          </button>
-          Template:
-        </dt>
-        <dd className="text-gray-800">
-          {templateOpen ? (
-            <div id={`tpl-${pattern.id}`} className="space-y-2">
-              <pre className="whitespace-pre-wrap bg-gray-50 p-2 rounded border text-sm">{templateText}</pre>
-              {attrs?.templateRawBracketed ? (
-                <div className="text-xs text-gray-700">
-                  <button
-                    type="button"
-                    onClick={() => setBracketOpen(v => !v)}
-                    className="text-blue-700 hover:text-blue-900 underline"
-                    aria-controls={`tplb-${pattern.id}`}
-                    title={bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
-                  >
-                    {bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
-                  </button>
-                  {bracketOpen && (
-                    <div id={`tplb-${pattern.id}`} className="mt-1 font-mono break-words bg-white border rounded p-2">
-                      {attrs.templateRawBracketed}
-                    </div>
-                  )}
-                </div>
-              ) : null}
-            </div>
-          ) : (
-            <span className="text-gray-500 select-none">(collapsed)</span>
           )}
         </dd>
       </dl>
