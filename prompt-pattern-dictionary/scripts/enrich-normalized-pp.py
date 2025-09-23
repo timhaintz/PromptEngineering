@@ -48,7 +48,7 @@ TEMPLATE_NA = "N/A"
 
 SYSTEM_PROMPT = (
     "You are a careful data normalizer. Given a prompt pattern's description, examples, and current fields, "
-    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", \"dependentLLM\", \"turn\", \"usageSummary\", \"templateRawBracketed\"}. "
+    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", \"dependentLLM\", \"turn\", \"usageSummary\", \"templateRawBracketed\", \"applicationTasksString\"}. "
     "Rules: \n"
     "- Do NOT hallucinate. If unsure, omit the key entirely.\n"
     "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude).\n"
@@ -57,6 +57,7 @@ SYSTEM_PROMPT = (
     "- application: RETURN A SINGLE STRING containing ONE short sentence, or TWO short sentences if a second is needed for clarity. "
     "Use plain English and active voice. Keep each sentence simple (one main clause), concrete, and easy to scan. Avoid jargon, lists, parentheses, semicolons, em dashes, and placeholders. "
     "Stay grounded in the description and examples. Prefer ≤ 18 words per sentence. Do NOT return tags.\n"
+    "- applicationTasksString: OPTIONAL. If you can confidently produce 1–8 concise tasks (prefer 8) for the pattern's media type, return a single comma+space separated string: 'task1, task2, ...'. Each task ≤5 words, DISTINCT, ACTIONABLE, and VERB-LED. REQUIRED DISTRIBUTION: provide 3–4 general cross-domain actions AND 4–5 industry/vertical-specific activities referencing DIFFERENT domains (e.g., finance, insurance, healthcare, legal, cybersecurity, supply chain, education). Include at most 2 tasks from any single domain. Prefer concrete entity nouns (claim, invoice, patient record, contract, firewall log) over abstract nouns. Avoid vague noun-only labels unless a verb adds no value.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
     "- templateRawBracketed: Return a SINGLE LINE exactly in the form [Role: <...>, Context: <...>, Action: <...>, Format: <...>, Response: <...>]. "
@@ -113,6 +114,8 @@ def should_enrich(p: Dict[str, Any], fields: List[str]) -> bool:
                 return True
         if f == 'application' and not p.get('application'):
             return True
+        if f == 'applicationTasksString' and not p.get('applicationTasksString'):
+            return True
         if f == 'turn' and not p.get('turn'):
             return True
         if f == 'usageSummary' and not p.get('usageSummary'):
@@ -123,52 +126,69 @@ def should_enrich(p: Dict[str, Any], fields: List[str]) -> bool:
 def main():
     model_name = 'gpt-5'
     limit = None
-    fields = ['template','application','dependentLLM','turn','usageSummary','templateRawBracketed']
+    fields = ['template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'templateRawBracketed', 'applicationTasksString']
     force_all = False
     force_fields: List[str] = []
     application_fallback_note = APPLICATION_FALLBACK_NOTE_DEFAULT
     disable_fallback = False
     fill_missing_application_only = False
     selected_ids = None  # Optional set of IDs to target
+    application_tasks_only = False
+    force_application_tasks = False
 
     # Parse args
     args = sys.argv[1:]
     for i, a in enumerate(args):
         if a == '--model' and i + 1 < len(args):
-            model_name = args[i+1]
+            model_name = args[i + 1]
+            continue
         if a == '--limit' and i + 1 < len(args):
             try:
-                limit = int(args[i+1])
+                limit = int(args[i + 1])
             except Exception:
                 pass
-        if a in ('--fields','--enrich-fields') and i + 1 < len(args):
-            raw = args[i+1]
+            continue
+        if a in ('--fields', '--enrich-fields') and i + 1 < len(args):
+            raw = args[i + 1]
             parts = [x.strip() for x in raw.split(',') if x.strip()]
-            allowed = {'template','application','dependentLLM','turn','usageSummary'}
+            allowed = {'template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'applicationTasksString'}
             chosen = [x for x in parts if x in allowed]
             if chosen:
                 fields = chosen
-        if a in ('--force','--enrich-force'):
+            continue
+        if a in ('--force', '--enrich-force'):
             force_all = True
-        if a in ('--force-fields','--enrich-force-fields') and i + 1 < len(args):
-            raw = args[i+1]
+            continue
+        if a in ('--force-fields', '--enrich-force-fields') and i + 1 < len(args):
+            raw = args[i + 1]
             parts = [x.strip() for x in raw.split(',') if x.strip()]
-            allowed = {'template','application','dependentLLM','turn','usageSummary'}
+            allowed = {'template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'applicationTasksString'}
             force_fields = [x for x in parts if x in allowed]
+            continue
         if a in ('--application-fallback-note',) and i + 1 < len(args):
-            # Allow overriding the fallback note text from CLI
-            application_fallback_note = args[i+1]
+            application_fallback_note = args[i + 1]
+            continue
         if a in ('--no-fallback', '--disable-fallback'):
-            # Do not write any fallback message on errors or content filter blocks
             disable_fallback = True
+            continue
         if a in ('--fill-missing-application', '--application-fill-missing-only'):
-            # Fast, no-AI pass: only set fallback note for patterns with empty/missing application
             fill_missing_application_only = True
+            continue
+        if a == '--applicationtasks-only':
+            application_tasks_only = True
+            fields = ['applicationTasksString']
+            continue
+        if a == '--force-applicationtasks':
+            force_application_tasks = True
+            if 'applicationTasksString' not in force_fields:
+                force_fields.append('applicationTasksString')
+            continue
         if a == '--ids' and i + 1 < len(args):
-            raw = args[i+1]
+            raw = args[i + 1]
             parts = [x.strip() for x in raw.split(',') if x.strip()]
             if parts:
                 selected_ids = set(parts)
+            continue
 
     if not os.path.exists(OUTPUT_FILE):
         print(f"No normalized-patterns.json found at {OUTPUT_FILE}. Nothing to enrich.")
@@ -232,6 +252,82 @@ def main():
         if out and out[-1] not in '.!?':
             out += '.'
         return out
+
+    def normalize_application_tasks(value: Any) -> str:
+        """Normalize model output for applicationTasksString into a canonical comma+space separated list.
+        Rules enforced:
+          - 1–8 tasks (truncate beyond 8)
+          - Each task <= 5 words (truncate if longer)
+          - Remove empty/duplicate tasks (case-insensitive)
+        Returns empty string if nothing valid remains.
+        """
+        if value is None:
+            return ''
+        if isinstance(value, dict):  # unexpected
+            value = list(value.values())
+        if isinstance(value, list):
+            candidates = []
+            for v in value:
+                if isinstance(v, str):
+                    candidates.extend([p.strip() for p in re.split(r",|;|\n", v) if p.strip()])
+                else:
+                    candidates.append(str(v).strip())
+        else:
+            # string or other
+            candidates = [p.strip() for p in re.split(r",|;|\n", str(value)) if p.strip()]
+
+        tasks: List[str] = []
+        seen = set()
+        for c in candidates:
+            if not c:
+                continue
+            # drop surrounding quotes or numbering
+            c = re.sub(r"^\d+\.|^[\-•]\s*", "", c).strip().strip('"').strip("'")
+            # truncate to 5 words
+            words = c.split()
+            if not words:
+                continue
+            if len(words) > 5:
+                c = ' '.join(words[:5])
+            key = c.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            tasks.append(c)
+            if len(tasks) >= 8:
+                break
+        return ', '.join(tasks)
+
+    # Phrase diversification state (only in-memory for current run)
+    generic_phrase_primary = 'clarify user intent'
+    generic_alternatives = [
+        'Elicit missing details',
+        'Identify user goal',
+        'Confirm task objective',
+        'Disambiguate request scope',
+        'Capture success criteria'
+    ]
+    generic_usage_count = 0
+
+    def diversify_generic_tasks(task_string: str) -> str:
+        """Limit repetition of a single generic phrase (e.g., 'Clarify user intent').
+        Keep the first occurrence across the run; thereafter substitute rotating alternatives.
+        """
+        nonlocal generic_usage_count
+        if not task_string:
+            return task_string
+        parts = [p.strip() for p in task_string.split(',')]
+        changed = False
+        for i, t in enumerate(parts):
+            if t.lower() == generic_phrase_primary:
+                if generic_usage_count >= 1:
+                    alt_index = (generic_usage_count - 1) % len(generic_alternatives)
+                    parts[i] = generic_alternatives[alt_index]
+                    changed = True
+                generic_usage_count += 1
+        if changed:
+            return ', '.join(parts)
+        return task_string
 
     def _clean_cell(v: Any) -> str:
         s = str(v or '').strip()
@@ -323,7 +419,7 @@ def main():
                 continue
 
             updated_fields = []
-            for key in ['template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'templateRawBracketed']:
+            for key in ['template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'templateRawBracketed', 'applicationTasksString']:
                 if key not in fields:
                     continue
                 if key in obj and obj[key] is not None and obj[key] != {} and obj[key] != []:
@@ -331,6 +427,11 @@ def main():
                     if key == 'application':
                         # Convert to a single string (1–2 sentences)
                         p[key] = normalize_application_to_string(obj[key])
+                    elif key == 'applicationTasksString':
+                        norm_tasks = normalize_application_tasks(obj[key])
+                        if norm_tasks:
+                            # Diversify generic phrase usage before assigning
+                            p[key] = diversify_generic_tasks(norm_tasks)
                     elif key == 'template':
                         # Ensure exactly five keys with N/A defaults
                         p[key] = force_template_five_keys(obj[key])
