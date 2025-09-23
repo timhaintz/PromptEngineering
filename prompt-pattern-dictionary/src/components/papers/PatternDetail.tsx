@@ -273,9 +273,9 @@ export default function PatternDetail({
             </div>
           )}
           {tasks.length > 0 && (
-            <div className="mt-2">
-              <div className="text-sm font-semibold text-slate-700">Application tasks</div>
-              <div className="mt-1 flex flex-wrap gap-2" aria-label="Application tasks list">
+            <div className="mt-3">
+              <div className="text-sm font-semibold text-slate-700">Application Domains and Tasks:</div>
+              <div className="mt-1 flex flex-wrap gap-2" aria-label="Application domains and tasks list">
                 {tasks.map((t, i) => (
                   <span key={i} className="inline-flex items-center rounded-full bg-blue-50 text-blue-800 px-2 py-0.5 text-xs border border-blue-200">
                     {t}
