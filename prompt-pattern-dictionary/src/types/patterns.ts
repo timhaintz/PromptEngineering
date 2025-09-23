@@ -76,7 +76,10 @@ export interface NormalizedPromptPattern {
     format?: string;
     response?: string;
   };
-  application?: string[];
+  // In data, application can be a single narrative string (preferred) or legacy array of tags
+  application?: string | string[];
+  // New: concise actionable tasks (comma+space separated), optional
+  applicationTasksString?: string;
   dependentLLM?: string | null;
   turn?: 'single' | 'multi';
   promptExamples: string[];

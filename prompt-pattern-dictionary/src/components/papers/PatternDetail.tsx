@@ -16,6 +16,7 @@ export interface NormalizedAttrs {
   mediaType?: string | null;
   dependentLLM?: string | null;
   application?: string | string[] | null;
+  applicationTasksString?: string | null;
   turn?: string | null;
   template?: Record<string, string> | null;
   usageSummary?: string | null;
@@ -104,6 +105,14 @@ export default function PatternDetail({
   const appVal = attrs?.application;
   const applicationString = typeof appVal === 'string' && appVal.trim() ? appVal.trim() : null;
   const appTags = Array.isArray(appVal) && appVal.length ? appVal : null;
+  // Split tasks string into individual tasks (comma+space separated)
+  const tasks = useMemo(() => {
+    const raw = attrs?.applicationTasksString || '';
+    return raw
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+  }, [attrs?.applicationTasksString]);
   const [paperId, categoryIndex, patternIndex] = pattern.id.split('-');
   const isPolicyFallback = useMemo(() => {
     const note = "unable to process";
@@ -189,7 +198,7 @@ export default function PatternDetail({
         <dt className="font-semibold text-slate-700">Dependent LLM:</dt>
         <dd className="text-gray-800">{attrs?.dependentLLM ?? 'N/A'}</dd>
 
-        <dt className="font-semibold text-slate-700">Application:</dt>
+  <dt className="font-semibold text-slate-700">Application:</dt>
         <dd className="text-gray-800">
           {isPolicyFallback ? (
             <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
@@ -218,6 +227,18 @@ export default function PatternDetail({
           {attrs?.usageSummary && (
             <div className="mt-2 text-gray-700 text-sm">
               <span className="font-semibold">How to apply:</span> {attrs.usageSummary}
+            </div>
+          )}
+          {tasks.length > 0 && (
+            <div className="mt-2">
+              <div className="text-sm font-semibold text-slate-700">Application tasks</div>
+              <div className="mt-1 flex flex-wrap gap-2" aria-label="Application tasks list">
+                {tasks.map((t, i) => (
+                  <span key={i} className="inline-flex items-center rounded-full bg-blue-50 text-blue-800 px-2 py-0.5 text-xs border border-blue-200">
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
           )}
         </dd>
