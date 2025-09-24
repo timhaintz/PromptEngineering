@@ -125,6 +125,8 @@ function normalize() {
     // Preserve known enrichable fields
     maybePreserve('application');
     maybePreserve('template');
+  // Preserve application domain/task chips string when enriched
+  maybePreserve('applicationTasksString');
     // Preserve the raw bracketed template string if it was enriched
     if (typeof oldItem.templateRawBracketed !== 'undefined') {
       newItem.templateRawBracketed = oldItem.templateRawBracketed;
@@ -133,6 +135,12 @@ function normalize() {
     maybePreserve('turn');
     // usageSummary may not exist on the base schema – copy if enriched
     maybePreserve('usageSummary');
+
+    // Unconditionally preserve applicationTasksString if it existed previously,
+    // even if aiAssistedFields didn't explicitly list it (backward compatibility)
+    if (typeof oldItem.applicationTasksString !== 'undefined') {
+      newItem.applicationTasksString = oldItem.applicationTasksString;
+    }
 
     // Merge AI assistance metadata
     if (oldItem.aiAssisted) newItem.aiAssisted = true;
