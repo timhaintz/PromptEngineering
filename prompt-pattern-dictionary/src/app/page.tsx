@@ -76,7 +76,7 @@ export default async function HomePage() {
               <div className="text-2xl font-bold text-accent">{actualPatternCount}</div>
               <div className="text-sm text-secondary">Patterns</div>
             </Link>
-            <Link href="/search?mode=example" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted" aria-label={`View all ${totalExamples} prompt examples`}>
+            <Link href="/examples" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted" aria-label={`View all ${totalExamples} prompt examples`}>
               <div className="text-2xl font-bold text-success">{totalExamples}</div>
               <div className="text-sm text-secondary">Examples</div>
             </Link>
