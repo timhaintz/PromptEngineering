@@ -9,6 +9,7 @@ const tabs = [
   { href: '/logic', label: 'Logic' },
   { href: '/categories', label: 'Categories' },
   { href: '/patterns', label: 'Patterns' },
+  { href: '/papers', label: 'Papers' },
   { href: '/examples', label: 'Examples' },
   { href: '/matrix', label: 'Matrix' },
   { href: '/semantic', label: 'Semantic' },
