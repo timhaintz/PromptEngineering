@@ -11,11 +11,22 @@ async function getPatternCategories(): Promise<PatternCategoriesData> {
   return loadPatternCategories();
 }
 
-async function getActualPatternsCount(): Promise<number> {
+interface RawPattern { examples?: { id: string; content: string }[] }
+
+async function loadRawPatterns(): Promise<RawPattern[]> {
   const filePath = path.join(process.cwd(), 'public', 'data', 'patterns.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
-  const patterns = JSON.parse(fileContents);
+  return JSON.parse(fileContents);
+}
+
+async function getActualPatternsCount(): Promise<number> {
+  const patterns = await loadRawPatterns();
   return patterns.length;
+}
+
+async function getTotalExamplesCount(): Promise<number> {
+  const patterns = await loadRawPatterns();
+  return patterns.reduce((sum, p) => sum + (p.examples?.length || 0), 0);
 }
 
 export default async function HomePage() {
@@ -23,6 +34,7 @@ export default async function HomePage() {
   // Load semantic assignments if available to override counts
   const semantic = loadSemanticOverrides();
   const actualPatternCount = await getActualPatternsCount();
+  const totalExamples = await getTotalExamplesCount();
 
   return (
   <div className="min-h-screen bg-base">
@@ -59,14 +71,14 @@ export default async function HomePage() {
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto mb-12" aria-label="Dataset statistics">
             <Link href="/patterns" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted">
               <div className="text-2xl font-bold text-accent">{actualPatternCount}</div>
               <div className="text-sm text-secondary">Patterns</div>
             </Link>
-            <Link href="/papers" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted">
-              <div className="text-2xl font-bold text-success">73</div>
-              <div className="text-sm text-secondary">Papers</div>
+            <Link href="/search?mode=example" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted" aria-label={`View all ${totalExamples} prompt examples`}>
+              <div className="text-2xl font-bold text-success">{totalExamples}</div>
+              <div className="text-sm text-secondary">Examples</div>
             </Link>
             <Link href="/logic" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted">
               <div className="text-2xl font-bold text-accent">{patternCategories.logics.length}</div>
