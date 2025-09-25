@@ -28,6 +28,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script
+          // Prevent FOUC for theme; minimal inline script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {try {const k='pe-theme';const stored=localStorage.getItem(k);const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;let mode=stored||'system';let eff=mode==='system'?(prefersDark?'dark':'light'):mode;document.documentElement.setAttribute('data-theme', eff==='high-contrast'?'high-contrast':eff);} catch(e) {}})();`
+          }}
+        />
         {/* Global, consistent top-left navigation with Back and Home */}
         <TopNav />
         {/* Offset main content to clear the fixed nav height */}

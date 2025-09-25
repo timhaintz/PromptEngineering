@@ -290,7 +290,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <h2 className="text-lg font-semibold text-gray-900 truncate">{p.patternName}</h2>
+                      <h2 className="text-lg font-semibold text-gray-900 break-words whitespace-normal flex-1">{p.patternName}</h2>
                       <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-[10px] font-semibold">{p.category}</span>
                       {norm?.aiAssisted ? (
                         <span title={`AI-assisted fields: ${(norm.aiAssistedFields || []).join(', ')}`}

@@ -40,6 +40,11 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
  - **Accessibility & Responsible Use Section**: Dedicated section consolidating inclusive design, bias monitoring, provenance, and escalation guidance.
  - **Sticky Side Navigation**: IntersectionObserver-driven highlight state with scroll offset margin for unobscured anchored headings.
  - **Numbered Sections & Skip Link**: Added ordered heading numbering for cognitive mapping plus a skip-to-content link for keyboard and screen reader efficiency.
+ - **Pattern Title Wrapping**: Removed legacy truncation so full pattern names are always visible for better information scent.
+ - **Theme System Overhaul**: Added compact icon-only Theme Switcher with accessible radiogroup supporting Light, Dark, System (auto) and planned High-Contrast; user preference persisted; pre-hydration script eliminates flash-of-unstyled-theme (FOUC).
+ - **Tokenized Dark Search Panel**: Homepage search interface migrated from fixed light colors to design tokens (bg-surface-*), ensuring seamless Dark/System mode parity.
+ - **Application Task Chips**: New `applicationTasksString` rendered as actionable chips under “Application Domains and Tasks” on pattern detail views, complementing the narrative Application field.
+ - **Data Preservation**: Normalization pipeline updated to non-destructively retain enriched fields (including `applicationTasksString`) across rebuilds.
 
 ### Accessibility & Theming Roadmap (In Progress)
 
@@ -140,7 +145,7 @@ The application processes `../promptpatterns.json` to create:
 Processed artifacts in `public/data/` include:
 
 - `normalized-patterns.json`: Normalized attributes per pattern (mediaType, dependentLLM, application, turn, template)
-	- When enrichment is enabled, may also include: `usageSummary`, `aiAssisted`, `aiAssistedFields`, `aiAssistedModel`, `aiAssistedAt`
+	- When enrichment is enabled, may also include: `usageSummary`, `applicationTasksString`, `aiAssisted`, `aiAssistedFields`, `aiAssistedModel`, `aiAssistedAt`
 - `semantic-assignments.json`: Best semantic category assignments and scores used to compute matrix counts
 - `similar-examples.json`: Example-level similarity edges with top-k matches and scores
 - `similar-patterns.json`: Pattern-level similarity edges with top-k matches and scores
@@ -224,6 +229,11 @@ Example (formatted as stored):
 ```
 clarify user intent, map tokens to actions, confirm notation understanding, tag invoice line items, annotate patient record fields, label insurance claim statuses, mark contract clause references, parse firewall log events
 ```
+
+UI Rendering:
+- Displayed (when present) beneath the Application section of a pattern as a horizontal / wrapping set of compact chips.
+- Chips are order-preserving, non-interactive today (future enhancement: clickable task → filtered search).
+- Complements (does not replace) the narrative `application` sentences for human-readable context.
 
 #### Enrichment Flags for Task Generation
 

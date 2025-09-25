@@ -329,6 +329,9 @@ Foundation and core content processing are largely complete. We have:
 - Implemented search page with multi-mode (pattern, category, logic, example) and client-side filtering over prebuilt indexes.
 - Added comparison route scaffolding and semantic explorer groundwork (data artifacts present).
 - Data build scripts regenerate normalized/artifact JSON deterministically each build.
+ - Introduced `applicationTasksString` enrichment (diversified actionable task list) with preservation in normalization pipeline.
+ - Reworked Theme Switcher (radiogroup Light / Dark / System) + zero-FOUC pre-hydration script; dark-mode parity for homepage search panel.
+ - Removed pattern name truncation to allow full title wrapping.
 
 In progress / upcoming:
 - Dedicated Accessibility & Responsible Use section (planned; partially addressed inline in Orientation).
@@ -523,6 +526,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
   - format?: string
   - response?: string
 - Application: string[] (optional)
+- Application Tasks: string (comma+space separated actionable tasks) (optional, `applicationTasksString`)
 - Dependent LLM: string | null (optional)
 - Turn: 'single' | 'multi' (optional)
 - Prompt Examples: string[] (required when available)
