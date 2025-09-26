@@ -23,8 +23,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // We render a placeholder data-theme that will be immediately updated by the inline script.
+  // suppressHydrationWarning avoids React flagging the server/client mismatch once script sets the final value.
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
