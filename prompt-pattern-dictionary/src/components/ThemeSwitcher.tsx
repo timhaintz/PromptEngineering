@@ -74,8 +74,10 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
   }, [open, theme]);
 
   const select = (value: ThemeMode) => {
+    // Apply theme but keep panel open to allow rapid comparison unless same value clicked
+    const wasSame = value === theme;
     setTheme(value);
-    closePanel();
+    if (wasSame) closePanel();
   };
 
   return (
