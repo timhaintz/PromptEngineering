@@ -117,6 +117,7 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
                   <span className="shrink-0">{m.icon}</span>
                   <span className="flex-1">{m.label}</span>
                   <span aria-hidden className="text-xs">✓</span>
+                  <span className="sr-only">(Active)</span>
                 </button>
               );
             }
