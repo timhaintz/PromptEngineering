@@ -91,11 +91,19 @@ html[data-theme='high-contrast'] {
   --color-text-muted: #FFFFFFCC;
   --color-accent: #00A2FF;
   --color-accent-hover: #FFFFFF;
-  --color-accent-active-bg: #FFFFFF;
+  /* Active background in HC previously white → text washed out; use outline + dark fill */
+  --color-accent-active-bg: #1A1A1A;
   --color-focus-ring: #FFFFFF;
   --color-focus-ring-outer: #FFBF00;
   --color-danger: #FF3B30;
   --color-success: #32D74B;
+}
+
+/* High Contrast active pill needs explicit stronger outline for discoverability */
+html[data-theme='high-contrast'] .active-pill {
+  background: #1A1A1A !important;
+  color: #FFFFFF !important;
+  border: 2px solid #FFBF00 !important;
 }
 
 @media (forced-colors: active) {
