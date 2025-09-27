@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTheme, ThemeMode } from "./useTheme";
 
 const MODES: { label: string; value: ThemeMode; short: string; icon: React.ReactElement }[] = [
@@ -48,8 +48,7 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
       if (e.key === 'Escape') closePanel();
       if (['ArrowDown','ArrowUp','Home','End'].includes(e.key)) {
         e.preventDefault();
-        const enabled = MODES.map((m,i)=>({i,m}));
-        const currentIndex = MODES.findIndex(m => m.value === theme) || 0;
+  const currentIndex = MODES.findIndex(m => m.value === theme) || 0;
         let targetIndex = currentIndex;
         if (e.key === 'ArrowDown') targetIndex = (currentIndex + 1) % MODES.length;
         if (e.key === 'ArrowUp') targetIndex = (currentIndex - 1 + MODES.length) % MODES.length;

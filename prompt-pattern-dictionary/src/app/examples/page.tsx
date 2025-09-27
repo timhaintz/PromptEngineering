@@ -14,7 +14,7 @@ interface RawPattern {
   id: string;
   patternName: string;
   category: string;
-  examples?: { id: string; content: string }[];
+  examples?: { id: string; content: unknown }[];
 }
 
 function loadPatterns(): RawPattern[] {
@@ -28,7 +28,9 @@ function buildExampleIndex(): PatternExampleEntry[] {
   const entries: PatternExampleEntry[] = [];
   for (const p of patterns) {
     for (const ex of p.examples || []) {
-      const excerpt = ex.content
+      if (typeof ex.content !== 'string') continue;
+      const raw = ex.content;
+      const excerpt = raw
         .replace(/\s+/g, ' ') // collapse whitespace
         .slice(0, 140)
         .trim();
@@ -37,7 +39,7 @@ function buildExampleIndex(): PatternExampleEntry[] {
         patternId: p.id,
         patternName: p.patternName,
         category: p.category,
-        excerpt: excerpt + (ex.content.length > 140 ? '…' : ''),
+        excerpt: excerpt + (raw.length > 140 ? '…' : ''),
       });
     }
   }
@@ -53,9 +55,22 @@ export const metadata = {
 
 const PAGE_SIZE = 100; // initial conservative page size; adjust if needed
 
-export default function ExamplesPage({ searchParams }: { searchParams: { page?: string; q?: string; group?: string } }) {
-  const page = Math.max(1, parseInt(searchParams.page || '1', 10));
-  const query = (searchParams.q || '').trim().toLowerCase();
+// NOTE: Next.js 15 internal type generation currently expects `searchParams` to be assignable
+// to `Promise<any> | undefined` (seen in .next/types/... checkFields). Our earlier explicit
+// union including a plain object caused a constraint failure. Using `any` keeps compatibility
+// while we normalize at runtime and still retain some local safety below.
+// When Next exposes a stable PageProps type that includes the object form again, we can tighten this.
+// Define a minimal structural type that is still broad enough for Next.js internals.
+// We include an index signature (string -> unknown) so we can refine later.
+// Optionally promise-like to satisfy internal PageProps constraint.
+export default async function ExamplesPage({ searchParams }: { searchParams?: Promise<unknown> }) {
+  // Resolve (or no-op) the search params; Next may provide a promise.
+  const resolved = searchParams ? await searchParams : undefined;
+  const sp = (resolved && typeof resolved === 'object' ? resolved : {}) as Record<string, string | string[] | undefined>;
+  const pageParam = Array.isArray(sp.page) ? sp.page[0] : sp.page;
+  const qParam = Array.isArray(sp.q) ? sp.q[0] : sp.q;
+  const page = Math.max(1, parseInt(pageParam || '1', 10));
+  const query = (qParam || '').trim().toLowerCase();
   const all = buildExampleIndex();
 
   const filtered = query
