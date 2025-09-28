@@ -18,7 +18,7 @@ export default async function LogicPage() {
     categories: applySemanticCounts(l.categories, semantic) as Category[],
   }));
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div className="min-h-screen bg-base">
       <div className="container mx-auto px-4 py-16">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Logic Layers ({data.logics.length})</h1>

@@ -130,3 +130,44 @@ html[data-theme='high-contrast'] .active-pill {
 
 /* Active nav pill pattern */
 .active-pill { background: var(--color-accent-active-bg); border:1px solid var(--color-accent); color: var(--color-text-primary); }
+
+/* -------------------------------------------------------------
+  Transitional Overrides (Legacy Hardcoded Tailwind Classes)
+  Many pages still use fixed light-mode classes like bg-white, bg-gray-50,
+  text-gray-700, border-gray-300 which ignore the token system in dark / HC.
+  These overrides remap the most common ones to semantic tokens under dark
+  and high-contrast themes so the page background and cards are coherent.
+  Goal: Remove this block after refactoring components to use token utilities
+  (e.g., bg-surface-1 / bg-surface-2 / text-primary / border-muted).
+-------------------------------------------------------------- */
+html[data-theme='dark'] .bg-white { background-color: var(--color-surface-1) !important; }
+html[data-theme='dark'] .bg-gray-50 { background-color: var(--color-surface-2) !important; }
+html[data-theme='dark'] .bg-blue-50 { background-color: var(--color-surface-2) !important; }
+html[data-theme='dark'] .bg-blue-100 { background-color: var(--color-surface-hover) !important; }
+html[data-theme='dark'] .bg-blue-200 { background-color: var(--color-surface-hover) !important; }
+html[data-theme='dark'] .bg-blue-300 { background-color: var(--color-surface-hover) !important; }
+
+html[data-theme='dark'] .text-gray-900,
+html[data-theme='dark'] .text-gray-800,
+html[data-theme='dark'] .text-gray-700,
+html[data-theme='dark'] .text-gray-600 { color: var(--color-text-primary) !important; }
+html[data-theme='dark'] .text-gray-500 { color: var(--color-text-secondary) !important; }
+
+html[data-theme='dark'] .border-gray-300,
+html[data-theme='dark'] .border-gray-200 { border-color: var(--color-border-muted) !important; }
+html[data-theme='dark'] .border-blue-300 { border-color: var(--color-accent) !important; }
+
+/* High-Contrast adjustments reuse dark overrides; ensure white surfaces collapse */
+html[data-theme='high-contrast'] .bg-white,
+html[data-theme='high-contrast'] .bg-gray-50,
+html[data-theme='high-contrast'] .bg-blue-50,
+html[data-theme='high-contrast'] .bg-blue-100,
+html[data-theme='high-contrast'] .bg-blue-200,
+html[data-theme='high-contrast'] .bg-blue-300 { background-color: var(--color-bg-base) !important; }
+html[data-theme='high-contrast'] .text-gray-900,
+html[data-theme='high-contrast'] .text-gray-800,
+html[data-theme='high-contrast'] .text-gray-700,
+html[data-theme='high-contrast'] .text-gray-600,
+html[data-theme='high-contrast'] .text-gray-500 { color: var(--color-text-primary) !important; }
+html[data-theme='high-contrast'] .border-gray-300,
+html[data-theme='high-contrast'] .border-gray-200 { border-color: var(--color-border-strong) !important; }

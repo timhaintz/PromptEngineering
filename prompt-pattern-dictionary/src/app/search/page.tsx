@@ -210,7 +210,7 @@ function SearchResults() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div className="min-h-screen bg-base">
         <div className="container mx-auto px-4 py-16">
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -221,7 +221,7 @@ function SearchResults() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div className="min-h-screen bg-base">
       <div className="container mx-auto px-4 py-16">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900">Search</h1>
@@ -566,7 +566,7 @@ function SearchResults() {
 export default function SearchPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div className="min-h-screen bg-base">
         <div className="container mx-auto px-4 py-16">
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>

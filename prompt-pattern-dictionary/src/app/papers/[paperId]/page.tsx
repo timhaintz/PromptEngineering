@@ -29,7 +29,7 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
   const paper = filtered[0].paper;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div className="min-h-screen bg-base">
       <div className="container mx-auto px-4 py-16">
         <div className="mb-6">
           <Link href="/papers" className="text-blue-600 hover:text-blue-800">← Back to Papers</Link>
