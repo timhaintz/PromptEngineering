@@ -228,7 +228,7 @@ function SearchResults() {
         </div>
 
         {/* Controls */}
-        <div className="mb-6 bg-white rounded-lg shadow-md p-4">
+  <div className="mb-6 rounded-lg shadow-md p-4 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
           <div className="flex flex-col md:flex-row gap-3 md:items-end">
             <div className="flex-1">
               <label htmlFor="search-input" className="block text-sm font-medium text-gray-800 mb-1">Search text</label>

@@ -32,7 +32,7 @@ export default async function TaxonomyPage() {
           {data.logics.map(l => {
             const total = l.categories.reduce((acc, c) => acc + (semantic?.categories?.[c.slug]?.patternCount ?? c.patternCount ?? 0), 0);
             return (
-              <details key={l.slug} className="bg-white rounded-lg p-4 shadow border" open>
+              <details key={l.slug} className="rounded-lg p-4 shadow border bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors" open>
                 <summary className="cursor-pointer list-none">
                   <div className="flex items-center justify-between">
                     <div>

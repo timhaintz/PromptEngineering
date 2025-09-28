@@ -187,7 +187,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
       <div className="container mx-auto px-4 py-16">
         <div className="mb-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <h1 className="text-2xl font-bold text-gray-900">All Patterns ({filtered.length})</h1>
-          <form method="get" className="bg-white rounded-lg p-3 shadow border flex flex-col md:flex-row md:items-end gap-3">
+          <form method="get" className="rounded-lg p-3 shadow border flex flex-col md:flex-row md:items-end gap-3 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 hc:border-slate-500 transition-colors">
             <div className="flex flex-col">
               <label htmlFor="q" className="text-xs text-gray-600">Search</label>
               <input
@@ -195,12 +195,12 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
                 name="q"
                 defaultValue={params.q || ''}
                 placeholder="Search name, description, tags, paper"
-                className="border border-gray-300 rounded px-2 py-1 text-sm w-56 bg-white text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400"
+                className="border rounded px-2 py-1 text-sm w-56 bg-white text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 dark:placeholder-slate-400 hc:bg-black/60 hc:text-white hc:border-slate-500"
               />
             </div>
             <div className="flex flex-col">
               <label htmlFor="sort" className="text-xs text-gray-600">Sort</label>
-              <select id="sort" name="sort" defaultValue={sort} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
+              <select id="sort" name="sort" defaultValue={sort} className="border rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 hc:bg-black/60 hc:text-white hc:border-slate-500">
                 <option value="name_asc">Name (A→Z)</option>
                 <option value="name_desc">Name (Z→A)</option>
                 <option value="examples_asc">Examples (Few→Many)</option>
@@ -209,21 +209,21 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
             </div>
             <div className="flex flex-col">
               <label htmlFor="logic" className="text-xs text-gray-600">Logic</label>
-              <select id="logic" name="logic" defaultValue={logicFilter} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
+              <select id="logic" name="logic" defaultValue={logicFilter} className="border rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 hc:bg-black/60 hc:text-white hc:border-slate-500">
                 <option value="">All</option>
                 {logicOptions.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
               </select>
             </div>
             <div className="flex flex-col">
               <label htmlFor="category" className="text-xs text-gray-600">Category</label>
-              <select id="category" name="category" defaultValue={categoryFilter} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
+              <select id="category" name="category" defaultValue={categoryFilter} className="border rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 hc:bg-black/60 hc:text-white hc:border-slate-500">
                 <option value="">All</option>
                 {visibleCategoryOptions.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
               </select>
             </div>
             <div className="flex flex-col">
               <label htmlFor="turn" className="text-xs text-gray-600">Turn</label>
-              <select id="turn" name="turn" defaultValue={turnFilter} className="border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400">
+              <select id="turn" name="turn" defaultValue={turnFilter} className="border rounded px-2 py-1 text-sm bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 hc:bg-black/60 hc:text-white hc:border-slate-500">
                 <option value="">All</option>
                 <option value="single">Single</option>
                 <option value="multi">Multi</option>
@@ -244,7 +244,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
         {activeBadges.length ? (
           <div className="mb-4 flex flex-wrap gap-2">
             {activeBadges.map((b, i) => (
-              <Link key={i} href={b.removeHref || '/patterns'} className="inline-flex items-center gap-1 bg-white border rounded-full px-2 py-1 text-xs text-gray-700 hover:border-blue-300">
+              <Link key={i} href={b.removeHref || '/patterns'} className="inline-flex items-center gap-1 border rounded-full px-2 py-1 text-xs text-gray-700 hover:border-blue-300 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 hc:bg-black/60 hc:text-white hc:border-slate-500">
                 <span>{b.label}</span>
                 <span className="text-gray-500">×</span>
               </Link>
@@ -256,7 +256,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
         <div className="mb-4 flex flex-wrap items-center gap-1">
           <span className="text-xs text-gray-600 mr-2">Jump to:</span>
           {letters.map(l => (
-            <Link key={l} href={buildQuery(params, { letter: l === letterFilter ? '' : l })} className={`inline-block px-2 py-1 text-xs rounded border ${l === letterFilter ? 'bg-blue-700 text-white border-blue-800' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'}`}>
+            <Link key={l} href={buildQuery(params, { letter: l === letterFilter ? '' : l })} className={`inline-block px-2 py-1 text-xs rounded border transition-colors ${l === letterFilter ? 'bg-blue-700 text-white border-blue-800' : 'bg-white text-gray-700 border-gray-300 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 hover:border-blue-300 hc:bg-black/60 hc:text-white hc:border-slate-500'}`}>
               {l}
             </Link>
           ))}
@@ -271,7 +271,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
               const newTags = has ? selectedTags.filter(t => t.toLowerCase() !== tag.toLowerCase()) : [...selectedTags, tag];
               const href = buildQuery(params, { tags: joinTagsCsv(newTags) });
               return (
-                <Link key={tag} href={href} className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${has ? 'bg-blue-700 text-white border-blue-800' : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'}`}> 
+                <Link key={tag} href={href} className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs transition-colors ${has ? 'bg-blue-700 text-white border-blue-800' : 'bg-white text-gray-700 border-gray-300 dark:bg-slate-700 dark:text-slate-100 dark:border-slate-500 hover:border-blue-300 hc:bg-black/60 hc:text-white hc:border-slate-500'}`}> 
                   <span>{tag}</span>
                   <span className="text-slate-600">{count}</span>
                 </Link>
@@ -286,7 +286,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
             const parts = idParts(p.id);
             const href = `/papers/${parts.paperId}#p-${parts.categoryIndex}-${parts.patternIndex}`;
             return (
-              <Link key={p.id} href={href} className="block bg-white rounded-lg p-4 border hover:border-blue-300 hover:shadow">
+              <Link key={p.id} href={href} className="block rounded-lg p-4 border hover:border-blue-300 hover:shadow bg-white dark:bg-slate-800 dark:border-slate-600 dark:hover:border-blue-400 hc:bg-black/70 hc:border-slate-500 transition-colors">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">

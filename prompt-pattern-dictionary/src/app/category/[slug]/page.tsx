@@ -197,7 +197,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               } : null;
             const allFirstExamples = Object.fromEntries(allPatterns.map(pp => [pp.id, pp.examples[0]?.id]));
             return (
-              <div key={p.id} id={`pattern-${p.id}`} className="bg-white rounded-lg shadow">
+              <div key={p.id} id={`pattern-${p.id}`} className="rounded-lg shadow bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
                 <PatternDetail
                   pattern={{ id: p.id, patternName: p.patternName, description: p.description, category: p.category, examples: p.examples }}
                   attrs={attrs}
@@ -216,7 +216,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         {/* Related Categories (semantic) */}
         {relatedCategories.length > 0 && (
-          <div className="mt-12 bg-white rounded-lg shadow-md p-6">
+          <div className="mt-12 rounded-lg shadow-md p-6 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-semibold text-gray-900">Related Categories (semantic)</h3>
               <Link href="/matrix" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>

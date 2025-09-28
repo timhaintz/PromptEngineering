@@ -33,7 +33,7 @@ export default async function PapersPage() {
           {papers.map(p => (
             <div key={p.paperId} className="relative group">
               {/* Visual card content */}
-              <div className="bg-white rounded-lg p-4 border group-hover:border-blue-300 group-hover:shadow pointer-events-none">
+              <div className="rounded-lg p-4 border group-hover:border-blue-300 group-hover:shadow pointer-events-none bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <h2 className="text-md font-semibold text-gray-900 mb-1 break-words">{p.title}</h2>

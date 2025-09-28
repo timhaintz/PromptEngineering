@@ -22,7 +22,7 @@ export default async function CategoriesPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {categories.map(c => (
-            <Link key={c.slug} href={`/category/${c.slug}`} className="block bg-white rounded p-4 border hover:border-blue-300 hover:bg-blue-50">
+            <Link key={c.slug} href={`/category/${c.slug}`} className="block rounded p-4 border hover:border-blue-300 hover:bg-blue-50 bg-white dark:bg-slate-800 dark:border-slate-600 dark:hover:bg-slate-700 hc:bg-black/70 hc:border-slate-500 hc:hover:bg-black/55 transition-colors">
               <div className="flex items-center justify-between">
                 <span className="text-blue-700 font-medium">{c.name}</span>
                 <span className="text-xs text-gray-600">{c.patternCount} patterns</span>

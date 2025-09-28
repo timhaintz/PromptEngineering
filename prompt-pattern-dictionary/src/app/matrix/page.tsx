@@ -106,11 +106,11 @@ export default async function MatrixPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow overflow-x-auto">
+  <div className="rounded-lg shadow overflow-x-auto bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
           <table className="min-w-full text-sm">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50 dark:bg-slate-700 hc:bg-black/60 transition-colors">
               <tr>
-                <th className="sticky left-0 bg-gray-50 z-10 text-left p-3 font-semibold text-gray-700 border-b">Logic / Category</th>
+                <th className="sticky left-0 z-10 text-left p-3 font-semibold border-b bg-gray-50 dark:bg-slate-700 hc:bg-black/60 text-gray-700 dark:text-slate-200 hc:text-white transition-colors">Logic / Category</th>
                 {semanticColumns.map(col => (
                   <th key={col} className="p-3 text-left font-semibold text-gray-700 border-b">
                     <Link href={`/category/${col}`} className="text-blue-700 hover:text-blue-900">{col.replace(/-/g,' ')}</Link>
@@ -121,14 +121,14 @@ export default async function MatrixPage() {
             {/* Multiple tbody sections are valid HTML. Render one group per logic to avoid nested tbody hydration issues. */}
             {rows.map(row => (
               <tbody key={`group-${row.logic.slug}`}>
-                <tr className="bg-gray-100">
+                <tr className="bg-gray-100 dark:bg-slate-600/60 hc:bg-black/50 transition-colors">
                   <td colSpan={1 + semanticColumns.length} className="p-3 font-medium text-gray-900 border-t">
                     {row.logic.name} Logic
                   </td>
                 </tr>
                 {row.categories.map(rc => (
                   <tr key={`cat-${row.logic.slug}-${rc.category.slug}`} className="hover:bg-blue-50">
-                    <td className="sticky left-0 bg-white z-10 p-3 border-t">
+                    <td className="sticky left-0 z-10 p-3 border-t bg-white dark:bg-slate-700 hc:bg-black/60 transition-colors">
                       <div>
                         <Link href={`/category/${rc.category.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">
                           {rc.category.name}

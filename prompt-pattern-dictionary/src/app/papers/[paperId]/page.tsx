@@ -35,7 +35,7 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
           <Link href="/papers" className="text-blue-600 hover:text-blue-800">← Back to Papers</Link>
         </div>
 
-        <div className="bg-white rounded-lg p-6 shadow">
+  <div className="rounded-lg p-6 shadow bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
           <div className="mb-4">
             <h1 className="text-2xl font-bold text-gray-900">{paper.title}</h1>
             <div className="text-sm text-gray-600">{paper.authors.join(', ')}</div>
