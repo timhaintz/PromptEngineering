@@ -6,6 +6,7 @@ This project includes an automated accessibility (a11y) and contrast auditing se
 - **axe-core + Playwright** tests scan core routes for WCAG 2.0/2.1 A/AA violations (serious & critical impacts cause soft test failures).
 - **Contrast audit script** parses design token colors in `src/app/globals.css` and checks key foreground tokens against background/surface tokens.
 - **Baseline report generation**: CI can run `npm run test:a11y` and archive results; contrast audit can fail the build with `--fail` flag.
+- **Theme & Preference Provider**: A global `ThemeProvider` manages persisted theme mode (`pe-theme`) and separately tracks the last applied effective theme (`pe-theme-effective`) for analytics/debug. An inline pre-hydration script sets both `data-theme` and `data-theme-mode` before paint to eliminate FOUC. The deprecated `useTheme` hook has been removed to prevent divergence—add new theme variants by extending the provider enum and adding token sets; tests should assert new mode presence in the axe multi-theme matrix.
 
 ## Scripts
 | Command | Purpose |
@@ -17,6 +18,11 @@ This project includes an automated accessibility (a11y) and contrast auditing se
 
 ## Multi-Theme Coverage
 The automated axe-core suite now executes each audited route under three visual themes: `light`, `dark`, and `high-contrast`. The Playwright spec (`tests/a11y/accessibility.spec.ts`) programmatically sets the `data-theme` attribute on the document root before running axe for each theme, ensuring color contrast and structural accessibility regressions are caught across all supported modes.
+
+Theme persistence is verified via a Jest + JSDOM unit test (`tests/themePersistence.test.tsx`) that asserts:
+1. Stored mode re-applies on mount.
+2. Effective theme key (`pe-theme-effective`) mirrors the applied resolved mode (important for `system` → light/dark resolution).
+3. DOM attributes `data-theme` and `data-theme-mode` reflect the current state and survive re-renders.
 
 If you introduce a new theme token set, simply add its identifier to the `THEMES` array in the spec to include it in future scans.
 
@@ -42,6 +48,7 @@ The script:
 - Add keyboard tab order test (custom script) ensuring all interactive elements are reachable.
 - Expand contrast audit to parse dark / high contrast theme blocks separately.
 - Add ARIA role landmark coverage report.
+- Extend Jest preference tests to cover upcoming readability attributes (font scale, width mode) and reduced‑motion toggling.
 
 ## CI Example (GitHub Actions Snippet)
 ```yaml
