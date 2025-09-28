@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TopNav from "@/components/navigation/TopNav";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,17 +32,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <script
-          // Prevent FOUC for theme; minimal inline script
           dangerouslySetInnerHTML={{
-            __html: `(() => {try {const k='pe-theme';const stored=localStorage.getItem(k);const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;let mode=stored||'system';let eff=mode==='system'?(prefersDark?'dark':'light'):mode;document.documentElement.setAttribute('data-theme', eff==='high-contrast'?'high-contrast':eff);} catch(e) {}})();`
-          }}
-        />
-        {/* Global, consistent top-left navigation with Back and Home */}
-        <TopNav />
-        {/* Offset main content to clear the fixed nav height */}
-        <div className="pt-14">
-          {children}
-        </div>
+            __html: `(() => {try {const K='pe-theme';const stored=localStorage.getItem(K)||'system';const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;const eff=stored==='system'?(prefersDark?'dark':'light'):stored;document.documentElement.setAttribute('data-theme', eff);document.documentElement.setAttribute('data-theme-mode', stored);}catch(e){}})();`
+          }} />
+        <ThemeProvider>
+          <TopNav />
+          <div className="pt-14">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

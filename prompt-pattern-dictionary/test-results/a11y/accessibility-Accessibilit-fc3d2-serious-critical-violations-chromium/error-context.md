@@ -1,0 +1,302 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation "Global navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Go to homepage" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5] [cursor=pointer]
+        - generic [ref=e7] [cursor=pointer]: Home
+      - navigation "Primary" [ref=e9]:
+        - link "Orientation" [ref=e10] [cursor=pointer]:
+          - /url: /orientation
+        - link "Logic" [ref=e11] [cursor=pointer]:
+          - /url: /logic
+        - link "Categories" [ref=e12] [cursor=pointer]:
+          - /url: /categories
+        - link "Patterns" [ref=e13] [cursor=pointer]:
+          - /url: /patterns
+        - link "Papers" [ref=e14] [cursor=pointer]:
+          - /url: /papers
+        - link "Matrix" [ref=e15] [cursor=pointer]:
+          - /url: /matrix
+        - link "Semantic" [ref=e16] [cursor=pointer]:
+          - /url: /semantic
+        - link "Taxonomy" [ref=e17] [cursor=pointer]:
+          - /url: /taxonomy
+        - link "Search" [ref=e18] [cursor=pointer]:
+          - /url: /search
+      - group "Color theme" [ref=e20]:
+        - generic [ref=e21]: Color theme
+        - generic [ref=e22]:
+          - radio "Light" [checked] [ref=e23]
+          - generic [ref=e24] [cursor=pointer]: Light
+        - generic [ref=e25]:
+          - radio "Dark" [ref=e26]
+          - generic [ref=e27] [cursor=pointer]: Dark
+        - generic [ref=e28]:
+          - radio "High Contrast" [ref=e29]
+          - generic [ref=e30] [cursor=pointer]: High Contrast
+  - generic [ref=e33]:
+    - complementary [ref=e34]:
+      - generic "Readability controls" [ref=e35]:
+        - group "Font size" [ref=e36]:
+          - button "A−" [ref=e37]
+          - generic [ref=e38]: Base
+          - button "A+" [ref=e39]
+        - button "Relax content width" [ref=e40]: Relax Width
+        - generic [ref=e41]: Theme
+        - combobox "Theme Theme" [ref=e42]:
+          - option "System" [selected]
+          - option "Light"
+          - option "Dark"
+          - option "High Contrast"
+      - navigation "Orientation sections" [ref=e43]:
+        - list [ref=e44]:
+          - listitem [ref=e45]:
+            - link "1. Quick Start" [ref=e46] [cursor=pointer]:
+              - /url: /orientation/quick-start
+              - generic [ref=e47] [cursor=pointer]: "1."
+              - generic [ref=e48] [cursor=pointer]: Quick Start
+          - listitem [ref=e49]:
+            - link "2. What Is a Pattern" [ref=e50] [cursor=pointer]:
+              - /url: /orientation/what-is-a-pattern
+              - generic [ref=e51] [cursor=pointer]: "2."
+              - generic [ref=e52] [cursor=pointer]: What Is a Pattern
+          - listitem [ref=e53]:
+            - link "3. Pattern Anatomy" [ref=e54] [cursor=pointer]:
+              - /url: /orientation/pattern-anatomy
+              - generic [ref=e55] [cursor=pointer]: "3."
+              - generic [ref=e56] [cursor=pointer]: Pattern Anatomy
+          - listitem [ref=e57]:
+            - link "4. Lifecycle" [ref=e58] [cursor=pointer]:
+              - /url: /orientation/lifecycle
+              - generic [ref=e59] [cursor=pointer]: "4."
+              - generic [ref=e60] [cursor=pointer]: Lifecycle
+          - listitem [ref=e61]:
+            - link "5. Choosing Patterns" [ref=e62] [cursor=pointer]:
+              - /url: /orientation/choosing-patterns
+              - generic [ref=e63] [cursor=pointer]: "5."
+              - generic [ref=e64] [cursor=pointer]: Choosing Patterns
+          - listitem [ref=e65]:
+            - link "6. Combining Patterns" [ref=e66] [cursor=pointer]:
+              - /url: /orientation/combining-patterns
+              - generic [ref=e67] [cursor=pointer]: "6."
+              - generic [ref=e68] [cursor=pointer]: Combining Patterns
+          - listitem [ref=e69]:
+            - link "7. Adaptation & Remix" [ref=e70] [cursor=pointer]:
+              - /url: /orientation/adaptation
+              - generic [ref=e71] [cursor=pointer]: "7."
+              - generic [ref=e72] [cursor=pointer]: Adaptation & Remix
+          - listitem [ref=e73]:
+            - link "8. Anti-Patterns" [ref=e74] [cursor=pointer]:
+              - /url: /orientation/anti-patterns
+              - generic [ref=e75] [cursor=pointer]: "8."
+              - generic [ref=e76] [cursor=pointer]: Anti-Patterns
+          - listitem [ref=e77]:
+            - link "9. Quality & Evaluation" [ref=e78] [cursor=pointer]:
+              - /url: /orientation/quality-evaluation
+              - generic [ref=e79] [cursor=pointer]: "9."
+              - generic [ref=e80] [cursor=pointer]: Quality & Evaluation
+          - listitem [ref=e81]:
+            - link "10. Accessibility & Responsible Use" [ref=e82] [cursor=pointer]:
+              - /url: /orientation/accessibility-responsible-use
+              - generic [ref=e83] [cursor=pointer]: "10."
+              - generic [ref=e84] [cursor=pointer]: Accessibility & Responsible Use
+          - listitem [ref=e85]:
+            - link "11. Glossary" [ref=e86] [cursor=pointer]:
+              - /url: /orientation/glossary
+              - generic [ref=e87] [cursor=pointer]: "11."
+              - generic [ref=e88] [cursor=pointer]: Glossary
+          - listitem [ref=e89]:
+            - link "12. FAQ" [ref=e90] [cursor=pointer]:
+              - /url: /orientation/faq
+              - generic [ref=e91] [cursor=pointer]: "12."
+              - generic [ref=e92] [cursor=pointer]: FAQ
+          - listitem [ref=e93]:
+            - link "13. Feedback" [ref=e94] [cursor=pointer]:
+              - /url: /orientation/feedback
+              - generic [ref=e95] [cursor=pointer]: "13."
+              - generic [ref=e96] [cursor=pointer]: Feedback
+          - listitem [ref=e97]:
+            - link "14. Next Steps" [ref=e98] [cursor=pointer]:
+              - /url: /orientation/next-steps
+              - generic [ref=e99] [cursor=pointer]: "14."
+              - generic [ref=e100] [cursor=pointer]: Next Steps
+          - listitem [ref=e101]:
+            - link "All Sections" [ref=e102] [cursor=pointer]:
+              - /url: /orientation/all
+          - listitem [ref=e103]:
+            - link "Cheat Sheet" [ref=e104] [cursor=pointer]:
+              - /url: /orientation/cheatsheet
+    - generic [ref=e107]:
+      - generic [ref=e108]:
+        - heading "Orientation Cheat Sheet" [level=1] [ref=e109]
+        - generic [ref=e110]:
+          - link "Full Orientation" [ref=e111] [cursor=pointer]:
+            - /url: /orientation
+          - button "Print" [ref=e112]
+      - paragraph [ref=e113]: Concise reference for day-to-day prompt pattern work. See full Orientation for rationale and extended guidance.
+      - generic [ref=e114]:
+        - generic [ref=e115]:
+          - heading "5-Key Template" [level=2] [ref=e116]
+          - list [ref=e117]:
+            - listitem [ref=e118]:
+              - generic [ref=e119]: •
+              - generic [ref=e120]: "role: Persona / perspective"
+            - listitem [ref=e121]:
+              - generic [ref=e122]: •
+              - generic [ref=e123]: "context: Background / constraints"
+            - listitem [ref=e124]:
+              - generic [ref=e125]: •
+              - generic [ref=e126]: "action: Explicit task verb"
+            - listitem [ref=e127]:
+              - generic [ref=e128]: •
+              - generic [ref=e129]: "format: Output structure or schema"
+            - listitem [ref=e130]:
+              - generic [ref=e131]: •
+              - generic [ref=e132]: "response: Desired content style or limits"
+        - generic [ref=e133]:
+          - heading "Lifecycle" [level=2] [ref=e134]
+          - list [ref=e135]:
+            - listitem [ref=e136]:
+              - generic [ref=e137]: •
+              - generic [ref=e138]: Frame measurable task
+            - listitem [ref=e139]:
+              - generic [ref=e140]: •
+              - generic [ref=e141]: Select 1–3 candidate patterns
+            - listitem [ref=e142]:
+              - generic [ref=e143]: •
+              - generic [ref=e144]: Minimal adaptation (placeholders)
+            - listitem [ref=e145]:
+              - generic [ref=e146]: •
+              - generic [ref=e147]: Pilot eval (edge + typical)
+            - listitem [ref=e148]:
+              - generic [ref=e149]: •
+              - generic [ref=e150]: Analyze failure modes
+            - listitem [ref=e151]:
+              - generic [ref=e152]: •
+              - generic [ref=e153]: Targeted structural refinements
+            - listitem [ref=e154]:
+              - generic [ref=e155]: •
+              - generic [ref=e156]: Version + freeze
+            - listitem [ref=e157]:
+              - generic [ref=e158]: •
+              - generic [ref=e159]: Monitor drift
+        - generic [ref=e160]:
+          - heading "Evaluation Metrics" [level=2] [ref=e161]
+          - list [ref=e162]:
+            - listitem [ref=e163]:
+              - generic [ref=e164]: •
+              - generic [ref=e165]: Accuracy / precision / recall
+            - listitem [ref=e166]:
+              - generic [ref=e167]: •
+              - generic [ref=e168]: Structural compliance
+            - listitem [ref=e169]:
+              - generic [ref=e170]: •
+              - generic [ref=e171]: Rationale completeness
+            - listitem [ref=e172]:
+              - generic [ref=e173]: •
+              - generic [ref=e174]: Latency & token cost
+            - listitem [ref=e175]:
+              - generic [ref=e176]: •
+              - generic [ref=e177]: Bias / disparity checks
+        - generic [ref=e178]:
+          - heading "Failure Modes" [level=2] [ref=e179]
+          - list [ref=e180]:
+            - listitem [ref=e181]:
+              - generic [ref=e182]: •
+              - generic [ref=e183]: Misclassification
+            - listitem [ref=e184]:
+              - generic [ref=e185]: •
+              - generic [ref=e186]: Missing field
+            - listitem [ref=e187]:
+              - generic [ref=e188]: •
+              - generic [ref=e189]: Hallucinated detail
+            - listitem [ref=e190]:
+              - generic [ref=e191]: •
+              - generic [ref=e192]: Format drift
+            - listitem [ref=e193]:
+              - generic [ref=e194]: •
+              - generic [ref=e195]: Biased phrasing
+        - generic [ref=e196]:
+          - heading "Adaptation Rules" [level=2] [ref=e197]
+          - list [ref=e198]:
+            - listitem [ref=e199]:
+              - generic [ref=e200]: •
+              - generic [ref=e201]: Keep 5 keys stable
+            - listitem [ref=e202]:
+              - generic [ref=e203]: •
+              - generic [ref=e204]: Use explicit placeholders
+            - listitem [ref=e205]:
+              - generic [ref=e206]: •
+              - generic [ref=e207]: Limit examples (2–3 crisp)
+            - listitem [ref=e208]:
+              - generic [ref=e209]: •
+              - generic [ref=e210]: Record rationale per change
+            - listitem [ref=e211]:
+              - generic [ref=e212]: •
+              - generic [ref=e213]: Re-test after each structural edit
+        - generic [ref=e214]:
+          - heading "Combining Patterns (Flow)" [level=2] [ref=e215]
+          - list [ref=e216]:
+            - listitem [ref=e217]:
+              - generic [ref=e218]: •
+              - generic [ref=e219]: Decompose → Extract → Reason → Verify
+            - listitem [ref=e220]:
+              - generic [ref=e221]: •
+              - generic [ref=e222]: Validate each stage independently
+            - listitem [ref=e223]:
+              - generic [ref=e224]: •
+              - generic [ref=e225]: Constrain intermediate outputs
+        - generic [ref=e226]:
+          - heading "Responsible Use" [level=2] [ref=e227]
+          - list [ref=e228]:
+            - listitem [ref=e229]:
+              - generic [ref=e230]: •
+              - generic [ref=e231]: Avoid harmful intent
+            - listitem [ref=e232]:
+              - generic [ref=e233]: •
+              - generic [ref=e234]: Preserve provenance metadata
+            - listitem [ref=e235]:
+              - generic [ref=e236]: •
+              - generic [ref=e237]: Audit diverse inputs
+            - listitem [ref=e238]:
+              - generic [ref=e239]: •
+              - generic [ref=e240]: Minimize sensitive data
+            - listitem [ref=e241]:
+              - generic [ref=e242]: •
+              - generic [ref=e243]: Version & log changes
+        - generic [ref=e244]:
+          - heading "Anti-Patterns" [level=2] [ref=e245]
+          - list [ref=e246]:
+            - listitem [ref=e247]:
+              - generic [ref=e248]: •
+              - generic [ref=e249]: Overloaded mega-prompt
+            - listitem [ref=e250]:
+              - generic [ref=e251]: •
+              - generic [ref=e252]: Hidden evaluation criteria
+            - listitem [ref=e253]:
+              - generic [ref=e254]: •
+              - generic [ref=e255]: Unbounded outputs
+            - listitem [ref=e256]:
+              - generic [ref=e257]: •
+              - generic [ref=e258]: Adjective churn
+            - listitem [ref=e259]:
+              - generic [ref=e260]: •
+              - generic [ref=e261]: Example bloat
+      - generic [ref=e262]: "Generated: 2025-09-15 • Feedback welcome – open an issue with suggestions."
+  - generic [ref=e267] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e268] [cursor=pointer]:
+      - img [ref=e269] [cursor=pointer]
+    - generic [ref=e272] [cursor=pointer]:
+      - button "Open issues overlay" [ref=e273] [cursor=pointer]:
+        - generic [ref=e274] [cursor=pointer]:
+          - generic [ref=e275] [cursor=pointer]: "0"
+          - generic [ref=e276] [cursor=pointer]: "1"
+        - generic [ref=e277] [cursor=pointer]: Issue
+      - button "Collapse issues badge" [ref=e278] [cursor=pointer]:
+        - img [ref=e279] [cursor=pointer]
+  - alert [ref=e281]
+```
