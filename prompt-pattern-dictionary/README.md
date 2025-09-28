@@ -48,6 +48,39 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
  - **Application Task Chips**: New `applicationTasksString` rendered as actionable chips under “Application Domains and Tasks” on pattern detail views, complementing the narrative Application field.
  - **Data Preservation**: Normalization pipeline updated to non-destructively retain enriched fields (including `applicationTasksString`) across rebuilds.
 
+### Theming Architecture (Unified Layout & Tokens)
+
+All pages now consume a single layout contract:
+
+| Layer | Responsibility | Implementation |
+|-------|----------------|----------------|
+| Pre-hydration script | Eliminates theme FOUC by setting `data-theme` + `data-theme-mode` before React mounts | Inline `<script>` in `layout.tsx` |
+| ThemeProvider | Stores selected & effective theme, syncs system + tabs | `src/components/ThemeProvider.tsx` |
+| PageShell | Structural wrapper: min-h-screen, spacing, width variants (default / narrow / wide / full) | `src/components/layout/PageShell.tsx` |
+| Design tokens | Semantic color + typography + spacing vars | `src/styles/theme.css` + `globals.css` |
+| Utilities | Reusable surfaces & inputs (`surface-card`, `input-base`, `pill-filter`, `chip-filter`) | `theme.css` (CSS, not Tailwind @apply) |
+| Regression tests | Guard against re‑introducing raw light backgrounds | `src/__tests__/theme.regression.test.tsx` |
+
+Key utility semantics:
+- `bg-base` sets the page background (`--color-bg-base`).
+- `surface-card` neutral elevated surface using `--color-surface-1` with tokenized border & shadow.
+- `surface-card-interactive` adds hover affordances & pointer.
+- `input-base` unifies light/dark/HC inputs (border, radius, focus ring token usage).
+- `pill-filter` & `chip-filter` standardize compact filter badges and active state styling.
+
+Refactor outcomes:
+- Removed page-specific gradient / gray wrappers (consistent dark & HC rendering).
+- Eliminated majority of hardcoded `bg-white`, `bg-gray-50`, `text-gray-*` classes in favor of tokens; a minimal legacy override remains only for stray print or transitional elements.
+- Centralized card & form styling decreased duplicate class chains (diff shows >100 LOC net simplification across pages).
+- Added regression assertions ensuring future contributors do not regress dark mode consistency.
+
+Extending the system:
+- Add new surface tiers (e.g., `--color-surface-3`) or status hues by defining tokens and creating a matching utility.
+- For complex interactive panels, compose from `surface-card` + bespoke component class instead of re‑inventing color values.
+- To theme new components, prefer tokens (`var(--color-*)`) or existing utilities before introducing raw Tailwind color classes.
+
+Migration note: If any legacy page/component still needs a rapid theme pass, wrap it in `PageShell` and replace light-mode background/border classes with either the appropriate utility or token CSS variables.
+
 ### Accessibility & Theming Roadmap (In Progress)
 
 The project is formalizing a site-wide accessibility and readability strategy beyond the Orientation page. Key commitments and upcoming changes:
