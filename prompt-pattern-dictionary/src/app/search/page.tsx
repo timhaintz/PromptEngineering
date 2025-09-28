@@ -11,6 +11,7 @@ import { useMemo, useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { parseBooleanQuery, evaluateBooleanQuery } from '@/lib/search/booleanQuery';
+import PageShell from '@/components/layout/PageShell';
 import React from 'react';
 
 interface Pattern {
@@ -221,14 +222,14 @@ function SearchResults() {
   }
 
   return (
-  <div className="min-h-screen bg-base">
+  <PageShell noContainer variant="wide">
       <div className="container mx-auto px-4 py-16">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900">Search</h1>
         </div>
 
         {/* Controls */}
-  <div className="mb-6 rounded-lg shadow-md p-4 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+  <div className="surface-card p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-3 md:items-end">
             <div className="flex-1">
               <label htmlFor="search-input" className="block text-sm font-medium text-gray-800 mb-1">Search text</label>
@@ -237,7 +238,7 @@ function SearchResults() {
                 params.set('q', e.target.value);
                 params.set('type', type);
                 router.replace(`/search?${params.toString()}`);
-              }} placeholder={useBoolean ? 'e.g. chain AND reasoning NOT "few shot" prompt~1' : 'Type to search...'} className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 placeholder-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              }} placeholder={useBoolean ? 'e.g. chain AND reasoning NOT "few shot" prompt~1' : 'Type to search...'} className="input-base w-full px-3 py-2" />
             </div>
             {/* Boolean + Fuzzy Controls */}
             {(type === 'pattern' || type === 'example') && (
@@ -254,7 +255,7 @@ function SearchResults() {
               </div>
             )}
             {showHelp && (
-              <div className="absolute z-20 mt-24 md:mt-20 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 w-full md:w-96 bg-white border border-gray-300 shadow-lg rounded p-3 text-xs text-gray-700 space-y-2">
+              <div className="absolute z-20 mt-24 md:mt-20 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 w-full md:w-96 surface-card p-3 text-xs space-y-2">
                 <div className="flex justify-between items-center">
                   <strong className="text-gray-900">Boolean & Fuzzy Syntax</strong>
                   <button onClick={() => setShowHelp(false)} className="text-gray-500 hover:text-gray-800">✕</button>
@@ -275,7 +276,7 @@ function SearchResults() {
                 const params = new URLSearchParams(Array.from(searchParams.entries()));
                 params.set('type', e.target.value);
                 router.replace(`/search?${params.toString()}`);
-              }} className="w-48 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              }} className="input-base w-48 px-3 py-2">
                 <option value="pattern">Prompt Pattern</option>
                 <option value="example">Prompt Example</option>
                 <option value="category">Category</option>
@@ -295,7 +296,7 @@ function SearchResults() {
                     params.set('catType', val);
                     router.replace(`/search?${params.toString()}`);
                   }}
-                  className="w-56 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="input-base w-56 px-3 py-2"
                 >
                   <option value="original">Original Paper</option>
                   <option value="semantic">Semantic AI</option>
@@ -315,7 +316,7 @@ function SearchResults() {
                     if (val) params.set('cat', val); else params.delete('cat');
                     router.replace(`/search?${params.toString()}`);
                   }}
-                  className="w-56 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="input-base w-56 px-3 py-2"
                 >
                   <option value="">All</option>
                   {categories.map(c => <option key={c} value={c}>{c}</option>)}
@@ -335,7 +336,7 @@ function SearchResults() {
                     if (val) params.set('logic', val); else params.delete('logic');
                     router.replace(`/search?${params.toString()}`);
                   }}
-                  className="w-56 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="input-base w-56 px-3 py-2"
                 >
                   <option value="">All</option>
                   {logicList.map(l => <option key={l.slug} value={l.slug}>{l.name}</option>)}
@@ -352,7 +353,7 @@ function SearchResults() {
               </span>
               <button
                 type="button"
-                className="inline-flex items-center rounded border border-gray-300 px-2 py-1 text-xs bg-white text-gray-800 hover:bg-gray-50"
+                className="pill-filter"
                 onClick={() => {
                   const params = new URLSearchParams();
                   params.set('type', 'pattern');
@@ -372,12 +373,12 @@ function SearchResults() {
         {(type === 'pattern' || type === 'example') && (
           <div className="space-y-6">
             {filteredPatterns.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-700">
+              <div className="surface-card p-8 text-center">
                 Start by entering a query or choose filters above.
               </div>
             ) : (
               filteredPatterns.map((pattern) => (
-                <div key={pattern.id} className="bg-white rounded-lg shadow-md p-6">
+                <div key={pattern.id} className="surface-card p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-2">
@@ -419,7 +420,7 @@ function SearchResults() {
                           const anchor = pattern.id && typeof example.index === 'number' ? getExampleAnchor(pattern.id, example.index) : undefined;
                           const href = route && anchor ? `${route}${anchor}` : route;
                           return (
-                            <div key={example.id} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
+                            <div key={example.id} className="p-3 rounded border-l-4 border-blue-500 bg-surface-2">
                               <div className="flex items-start gap-2">
                                 {fullIndex && (
                                   <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">
@@ -520,10 +521,10 @@ function SearchResults() {
         {type === 'category' && (
           <div className="space-y-3">
             {categoryResults.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">Start by entering a query or choose filters above.</div>
+              <div className="surface-card p-8 text-center">Start by entering a query or choose filters above.</div>
             ) : (
               categoryResults.map(c => (
-                <div key={c.slug} className="bg-white rounded p-4 border shadow-sm flex items-center justify-between">
+                <div key={c.slug} className="surface-card p-4 flex items-center justify-between">
                   <div>
                     <Link href={`/category/${c.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">{c.name}</Link>
                     {c.logicName && <span className="ml-2 text-xs text-gray-600">({c.logicName})</span>}
@@ -539,15 +540,15 @@ function SearchResults() {
         {type === 'logic' && (
           <div className="space-y-4">
             {logicResults.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-600">Start by entering a query.</div>
+              <div className="surface-card p-8 text-center">Start by entering a query.</div>
             ) : (
               logicResults.map(l => (
-                <div key={l.slug} className="bg-white rounded-lg p-6 shadow">
+                <div key={l.slug} className="surface-card p-6">
                   <div className="mb-1 text-lg font-semibold text-gray-900">{l.name} Logic</div>
                   <div className="text-sm text-gray-700 mb-3">{l.focus}</div>
                   <div className="flex flex-wrap gap-2">
                     {l.categories.map(c => (
-                      <Link key={c.slug} href={`/category/${c.slug}`} className="inline-flex items-center rounded bg-gray-50 px-2 py-1 border hover:bg-blue-50 text-sm">
+                      <Link key={c.slug} href={`/category/${c.slug}`} className="pill-filter text-sm">
                         {c.name}
                         <span className="ml-2 text-[10px] text-gray-600">{c.patternCount}</span>
                       </Link>
@@ -559,20 +560,20 @@ function SearchResults() {
           </div>
         )}
       </div>
-    </div>
+    </PageShell>
   );
 }
 
 export default function SearchPage() {
   return (
     <Suspense fallback={
-  <div className="min-h-screen bg-base">
+  <PageShell noContainer>
         <div className="container mx-auto px-4 py-16">
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
         </div>
-      </div>
+      </PageShell>
     }>
       <SearchResults />
     </Suspense>

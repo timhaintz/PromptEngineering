@@ -5,6 +5,7 @@ import '@testing-library/jest-dom';
 // Import pages (server components) – for simplicity test a couple representative ones.
 import LogicPage from '@/app/logic/page';
 import PatternsPage from '@/app/patterns/page';
+import SearchPage from '@/app/search/page';
 
 // Helper: force document to dark theme before each render
 beforeEach(() => {
@@ -31,5 +32,13 @@ describe('Dark theme regression', () => {
     expect(shell).toBeTruthy();
     // Ensure surface-card classes exist
     expect(container.querySelector('.surface-card')).toBeTruthy();
+  });
+
+  it('Search page uses PageShell and utilities', () => {
+    const { container } = render(<SearchPage />);
+    expect(container.querySelector('.min-h-screen')).toBeTruthy();
+    expect(container.querySelector('.surface-card')).toBeTruthy();
+    // Inputs should have input-base
+    expect(container.querySelector('.input-base')).toBeTruthy();
   });
 });
