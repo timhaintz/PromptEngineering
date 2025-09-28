@@ -8,6 +8,7 @@
 import { ComparisonDashboard } from '@/components/comparison';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import PageShell from '@/components/layout/PageShell';
 
 export const metadata: Metadata = {
   title: 'Pattern Comparison - Prompt Pattern Dictionary',
@@ -16,9 +17,9 @@ export const metadata: Metadata = {
 
 export default function ComparisonPage() {
   return (
-  <div className="min-h-screen bg-base">
+    <PageShell variant="wide" noContainer>
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="surface-card border-b rounded-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -47,7 +48,7 @@ export default function ComparisonPage() {
       </div>
 
       {/* Footer Info */}
-      <div className="mt-16 bg-white border-t">
+      <div className="mt-16 surface-card border-t rounded-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-600">
             <h3 className="text-lg font-medium text-gray-900 mb-4">
@@ -62,6 +63,6 @@ export default function ComparisonPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

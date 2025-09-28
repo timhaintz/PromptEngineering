@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import { loadSemanticOverrides, type SemanticAssignments } from '@/lib/data/categories';
+import PageShell from '@/components/layout/PageShell';
 
 interface Category { name: string; slug: string; patternCount: number }
 interface Logic { name: string; slug: string; focus: string; categories: Category[] }
@@ -16,8 +17,8 @@ export default async function TaxonomyPage() {
   const data = loadJson<PatternCategoriesData>('public/data/pattern-categories.json');
   const semantic: SemanticAssignments | null = loadSemanticOverrides();
   return (
-  <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-16">
+    <PageShell variant="narrow">
+      <div className="space-y-12">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">PP Taxonomy</h1>
           <p className="text-gray-700">Logic layers and categories derived from papers</p>
@@ -28,11 +29,11 @@ export default async function TaxonomyPage() {
           )}
         </div>
 
-        <div className="space-y-4 max-w-4xl mx-auto">
+  <div className="space-y-4 max-w-4xl mx-auto">
           {data.logics.map(l => {
             const total = l.categories.reduce((acc, c) => acc + (semantic?.categories?.[c.slug]?.patternCount ?? c.patternCount ?? 0), 0);
             return (
-              <details key={l.slug} className="rounded-lg p-4 shadow border bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors" open>
+              <details key={l.slug} className="surface-card p-4" open>
                 <summary className="cursor-pointer list-none">
                   <div className="flex items-center justify-between">
                     <div>
@@ -57,6 +58,6 @@ export default async function TaxonomyPage() {
           })}
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import PageShell from '@/components/layout/PageShell';
 
 interface Pattern { id: string; paper: { id: string; title: string; authors: string[]; url: string } }
 
@@ -26,14 +27,14 @@ export default async function PapersPage() {
   const papers = Array.from(byPaper.values()).sort((a, b) => a.title.localeCompare(b.title));
 
   return (
-  <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-16">
+    <PageShell>
+      <div className="space-y-12">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Papers ({papers.length})</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {papers.map(p => (
             <div key={p.paperId} className="relative group">
               {/* Visual card content */}
-              <div className="rounded-lg p-4 border group-hover:border-blue-300 group-hover:shadow pointer-events-none bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+              <div className="surface-card p-4 group-hover:border-[var(--color-accent)] group-hover:shadow-md pointer-events-none transition-colors">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <h2 className="text-md font-semibold text-gray-900 mb-1 break-words">{p.title}</h2>
@@ -63,6 +64,6 @@ export default async function PapersPage() {
           ))}
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

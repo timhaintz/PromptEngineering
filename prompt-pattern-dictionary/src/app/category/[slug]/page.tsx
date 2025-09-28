@@ -5,6 +5,7 @@
  */
 
 import { notFound } from 'next/navigation';
+import PageShell from '@/components/layout/PageShell';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
@@ -149,8 +150,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     .slice(0, 8);
 
   return (
-  <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-16">
+    <PageShell>
+      <div className="space-y-12">
         {/* Header */}
         {/** Breadcrumbs **/}
         <Breadcrumbs />
@@ -179,7 +180,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </div>
 
         {/* Patterns (unified look) */}
-        <div className="space-y-4">
+  <div className="space-y-4">
           {categoryPatterns.map(p => {
             const n = normalized?.patterns.find(x => x.id === p.id);
               const attrs: NormalizedAttrs | null = n ? {
@@ -197,7 +198,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               } : null;
             const allFirstExamples = Object.fromEntries(allPatterns.map(pp => [pp.id, pp.examples[0]?.id]));
             return (
-              <div key={p.id} id={`pattern-${p.id}`} className="rounded-lg shadow bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+              <div key={p.id} id={`pattern-${p.id}`} className="surface-card">
                 <PatternDetail
                   pattern={{ id: p.id, patternName: p.patternName, description: p.description, category: p.category, examples: p.examples }}
                   attrs={attrs}
@@ -216,7 +217,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         {/* Related Categories (semantic) */}
         {relatedCategories.length > 0 && (
-          <div className="mt-12 rounded-lg shadow-md p-6 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+          <div className="surface-card p-6 mt-12">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-semibold text-gray-900">Related Categories (semantic)</h3>
               <Link href="/matrix" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
@@ -237,6 +238,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </div>
         )}
       </div>
-    </div>
+    </PageShell>
   );
 }

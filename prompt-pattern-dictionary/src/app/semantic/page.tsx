@@ -9,6 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import SemanticCategoryMatrix from '@/components/semantic/SemanticCategoryMatrix';
 import { EnhancedPattern } from '@/types/patterns';
+import PageShell from '@/components/layout/PageShell';
 
 async function getPatternsData(): Promise<EnhancedPattern[]> {
   const filePath = path.join(process.cwd(), 'public', 'data', 'patterns.json');
@@ -20,8 +21,8 @@ export default async function SemanticAnalysisPage() {
   const patterns = await getPatternsData();
   
   return (
-  <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-8">
+    <PageShell>
+      <div className="space-y-12">
         {/* Header */}
   <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -36,7 +37,7 @@ export default async function SemanticAnalysisPage() {
 
         {/* Key Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="rounded-lg shadow-md p-6 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+          <div className="surface-card p-6">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -50,7 +51,7 @@ export default async function SemanticAnalysisPage() {
             </p>
           </div>
           
-          <div className="rounded-lg shadow-md p-6 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+          <div className="surface-card p-6">
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -64,7 +65,7 @@ export default async function SemanticAnalysisPage() {
             </p>
           </div>
           
-          <div className="rounded-lg shadow-md p-6 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+          <div className="surface-card p-6">
             <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -81,7 +82,7 @@ export default async function SemanticAnalysisPage() {
 
         {/* Semantic Matrix Component */}
         <Suspense fallback={
-          <div className="rounded-lg shadow-md p-8 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+          <div className="surface-card p-8">
             <div className="flex justify-center items-center h-32">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
               <span className="ml-3 text-gray-600">Loading semantic analysis...</span>
@@ -92,7 +93,7 @@ export default async function SemanticAnalysisPage() {
         </Suspense>
 
         {/* Usage Guide */}
-  <div className="rounded-lg shadow-md p-6 mt-8 bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+  <div className="surface-card p-6 mt-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">How to Use This Analysis</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -130,6 +131,6 @@ export default async function SemanticAnalysisPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

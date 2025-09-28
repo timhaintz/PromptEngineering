@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PageShell from '@/components/layout/PageShell';
 import {
   loadPatternCategories,
   loadSemanticOverrides,
@@ -18,8 +19,8 @@ export default async function LogicPage() {
     categories: applySemanticCounts(l.categories, semantic) as Category[],
   }));
   return (
-  <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-16">
+    <PageShell>
+      <div className="space-y-12">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Logic Layers ({data.logics.length})</h1>
           <div className="flex items-center gap-3">
@@ -37,14 +38,14 @@ export default async function LogicPage() {
         </div>
         <div className="space-y-6">
           {logics.map(l => (
-            <div key={l.slug} className="rounded-lg p-6 shadow bg-white dark:bg-slate-800 hc:bg-black/70 transition-colors">
+            <div key={l.slug} className="surface-card p-6">
               <div className="mb-2">
                 <h2 className="text-xl font-semibold text-gray-900">{l.name} Logic</h2>
                 <p className="text-sm text-gray-600">{l.focus}</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {l.categories.map(c => (
-                  <Link key={c.slug} href={`/category/${c.slug}`} className="block rounded p-3 border hover:border-blue-300 hover:bg-blue-50 bg-gray-50 dark:bg-slate-700 dark:border-slate-600 dark:hover:bg-slate-600 hc:bg-black/40 hc:border-slate-500 hc:hover:bg-black/55 transition-colors">
+                  <Link key={c.slug} href={`/category/${c.slug}`} className="block rounded p-3 border border-muted bg-surface-2 hover:border-[var(--color-accent)] hover:bg-surface-hover transition-colors">
                     <div className="flex items-center justify-between">
                       <span className="text-blue-700 font-medium">{c.name}</span>
                       <span className="text-xs text-gray-600">{c.patternCount} patterns</span>
@@ -56,6 +57,6 @@ export default async function LogicPage() {
           ))}
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

@@ -3,6 +3,7 @@ import path from 'path';
 import Link from 'next/link';
 import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
 import { notFound } from 'next/navigation';
+import PageShell from '@/components/layout/PageShell';
 
 interface Example { id: string; index: number; content: string }
 interface Pattern { id: string; patternName: string; description?: string; examples: Example[]; category: string; paper: { id: string; title: string; authors: string[]; url: string } }
@@ -29,13 +30,12 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
   const paper = filtered[0].paper;
 
   return (
-  <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-16">
+    <PageShell>
+      <div className="space-y-12">
         <div className="mb-6">
           <Link href="/papers" className="text-blue-600 hover:text-blue-800">← Back to Papers</Link>
         </div>
-
-  <div className="rounded-lg p-6 shadow bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+  <div className="surface-card p-6">
           <div className="mb-4">
             <h1 className="text-2xl font-bold text-gray-900">{paper.title}</h1>
             <div className="text-sm text-gray-600">{paper.authors.join(', ')}</div>
@@ -106,6 +106,6 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
           </div>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

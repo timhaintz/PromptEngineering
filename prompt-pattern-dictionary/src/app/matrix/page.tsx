@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import PageShell from '@/components/layout/PageShell';
 
 // Matrix view of Logic Layers (rows) x Semantic Categories (columns)
 // Counts represent number of patterns whose best semantic category = column, grouped by logic/category taxonomy
@@ -96,8 +97,8 @@ export default async function MatrixPage() {
   }
 
   return (
-  <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-16">
+    <PageShell>
+      <div className="space-y-12">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Taxonomy × Semantic Matrix</h1>
           <div className="flex items-center gap-3">
@@ -105,8 +106,7 @@ export default async function MatrixPage() {
             <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
           </div>
         </div>
-
-  <div className="rounded-lg shadow overflow-x-auto bg-white dark:bg-slate-800 dark:border-slate-600 hc:bg-black/70 transition-colors">
+  <div className="surface-card overflow-x-auto">
           <table className="min-w-full text-sm">
             <thead className="bg-gray-50 dark:bg-slate-700 hc:bg-black/60 transition-colors">
               <tr>
@@ -163,6 +163,6 @@ export default async function MatrixPage() {
           Counts per cell use semantic best-category assignments (columns). Rows are the original taxonomy categories mapped from each pattern&apos;s current/original category. This aligns with &quot;Semantic counts&quot; used across the site.
         </p>
       </div>
-    </div>
+    </PageShell>
   );
 }
