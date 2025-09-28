@@ -134,10 +134,10 @@ Research Paper
 ### 4. User Experience Features
 
 #### 4.1 Reading Experience
-- **Responsive design** optimized for desktop and mobile
+ **Display Modes**: Three modes: Light, Dark, High-Contrast (distinct palette, ≥7:1 text contrast). High-Contrast is not just Dark with brighter text. Centralized `ThemeProvider` persists selected mode in `pe-theme` and resolved effective variant (after system match) in `pe-theme-effective`; pre-hydration inline script sets `data-theme` + `data-theme-mode` to eliminate FOUC.
 - **Dark/Light mode** toggle
 - **Font size adjustment** for accessibility
-- **Print-friendly** views
+ - Reworked theming with centralized `ThemeProvider` (Light / Dark / System, High-Contrast scaffold) + zero-FOUC pre-hydration script setting `data-theme` (effective) and `data-theme-mode` (selected). Dual storage keys: `pe-theme`, `pe-theme-effective`; dark-mode parity for homepage search panel; cross-tab + system preference sync.
 - **Bookmark functionality** for favorite patterns
 - **Reading progress** tracking
 

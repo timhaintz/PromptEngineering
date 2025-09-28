@@ -41,7 +41,7 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
  - **Sticky Side Navigation**: IntersectionObserver-driven highlight state with scroll offset margin for unobscured anchored headings.
  - **Numbered Sections & Skip Link**: Added ordered heading numbering for cognitive mapping plus a skip-to-content link for keyboard and screen reader efficiency.
  - **Pattern Title Wrapping**: Removed legacy truncation so full pattern names are always visible for better information scent.
- - **Theme System Overhaul**: Added compact icon-only Theme Switcher with accessible radiogroup supporting Light, Dark, System (auto) and planned High-Contrast; user preference persisted; pre-hydration script eliminates flash-of-unstyled-theme (FOUC).
+ - **Theme System Overhaul**: Replaced per-component hook with a centralized `ThemeProvider` managing Light / Dark / System (auto) / planned High-Contrast. Persists user-selected mode in `pe-theme` and the resolved applied mode (after system evaluation) in `pe-theme-effective`. Pre-hydration inline script sets both `data-theme` (effective) and `data-theme-mode` (selected) to eliminate flash-of-unstyled-theme (FOUC) and enable analytics on divergence between chosen and resolved modes. Cross-tab + system preference changes sync instantly via `storage` + `matchMedia` listeners.
  - **Tokenized Dark Search Panel**: Homepage search interface migrated from fixed light colors to design tokens (bg-surface-*), ensuring seamless Dark/System mode parity.
  - **Application Task Chips**: New `applicationTasksString` rendered as actionable chips under “Application Domains and Tasks” on pattern detail views, complementing the narrative Application field.
  - **Data Preservation**: Normalization pipeline updated to non-destructively retain enriched fields (including `applicationTasksString`) across rebuilds.
@@ -53,7 +53,7 @@ The project is formalizing a site-wide accessibility and readability strategy be
 - **Standards Target**: WCAG 2.2 Level AA (with selective AAA where feasible: higher contrast, link purpose, visual presentation) + WAI-ARIA best practices.
 - **Font Stack**: Use `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif` for performance, clarity, and user familiarity. (No non-essential web fonts.)
 - **Design Tokens**: Introduce a centralized token layer (typography scale, spacing scale, color roles, focus ring, radii) consumed by Tailwind utilities and custom CSS vars.
-- **Three Display Modes**: Light, Dark, and a distinct High-Contrast theme (not just dark with brighter colors) – each user-selectable and persisted; initial mode respects `prefers-color-scheme`.
+- **Three Display Modes**: Light, Dark, and a distinct High-Contrast theme (not just dark with brighter colors) – user-selectable (stored in `pe-theme`) with resolved effective mode mirrored to `pe-theme-effective`; initial System selection respects `prefers-color-scheme` and records the evaluation.
 - **Readability Controls**: UI panel to adjust font size (S / M / L), content width (narrow/normal), and theme/contrast; honors `prefers-reduced-motion`.
 - **Consistent Prose Width**: Long-form text constrained to ~70–75ch for optimal line length; Orientation overview will remain optionally “all-in-one” but each section will also get its own dedicated page.
 - **Hybrid Orientation Architecture**: Multi-page `/orientation/{slug}` entries (Quick Start, Anatomy, Lifecycle, Evaluation, Anti-Patterns, Responsible Use, Glossary, FAQ) + an “All Sections” overview + existing Cheat Sheet.
@@ -64,7 +64,7 @@ The project is formalizing a site-wide accessibility and readability strategy be
 - **Documentation**: A new `docs/ACCESSIBILITY.md` file (added) tracks the checklist, rationale, exceptions, and testing tooling.
 - **Footer (OED-Inspired)**: Planned global footer with grouped links (About, Using the Dictionary, Accessibility Statement, Data & Provenance, License, Feedback) and a brief provenance note for AI-assisted fields.
 
-These items will roll out incrementally; PRD has been updated with the new requirements.
+These items will roll out incrementally; PRD has been updated with the new requirements. Automated verification: `tests/themePersistence.test.tsx` asserts persistence keys and DOM attributes after remount to guard against regressions.
 
 ## 🚀 Quick Start
 

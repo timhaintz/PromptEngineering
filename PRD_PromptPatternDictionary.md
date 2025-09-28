@@ -91,7 +91,7 @@ Research Paper
 
 #### 4.1 Reading Experience
 - **Responsive design** optimized for desktop and mobile
-- **Dark/Light mode** toggle
+- **Theming**: Centralized `ThemeProvider` manages Light / Dark / System (auto) / planned High-Contrast. Selected mode stored in `pe-theme`; resolved effective variant (post system evaluation) stored in `pe-theme-effective` for analytics & debugging. Inline pre-hydration script sets `data-theme` (effective) and `data-theme-mode` (selected) prior to paint to eliminate FOUC and avoid CLS. System changes (OS theme switch) and cross‑tab updates propagate via `matchMedia` + `storage` event listeners.
 - **Font size adjustment** for accessibility
 - **Print-friendly** views
 - **Bookmark functionality** for favorite patterns
@@ -102,7 +102,7 @@ Research Paper
 Adopt a site-wide accessibility program (WCAG 2.2 AA + selected AAA) with these commitments:
 
 - System font stack for performance: `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif`.
-- Three distinct display modes: Light, Dark, High-Contrast (HC ≥7:1 text contrast) with user toggle & persistence.
+- Three distinct display modes: Light, Dark, High-Contrast (HC ≥7:1 text contrast) with user toggle & persistence. Dual persistence keys (`pe-theme`, `pe-theme-effective`) capture both intent and applied result when System is selected.
 - Readability controls: font size scaling (S/M/L/XL via numeric scale), width mode (narrow/prose), theme selection; respect `prefers-color-scheme` & `prefers-reduced-motion`.
 - Prose line length constrained to ~70–75ch for orientation & docs content.
 - Unified focus outline (2px) and multiple skip links (Main, Section Nav, Search).
@@ -110,7 +110,7 @@ Adopt a site-wide accessibility program (WCAG 2.2 AA + selected AAA) with these 
 - Live regions for copy success, search result count, preference change announcements.
 - AI provenance badges link to explanation; footer carries disclaimer.
 - CI axe-core scan on core pages; build fails on critical/serious violations.
-- `docs/ACCESSIBILITY.md` tracks WCAG mapping, exceptions, audit logs.
+- `docs/ACCESSIBILITY.md` tracks WCAG mapping, exceptions, audit logs. Automated Jest + JSDOM test (`tests/themePersistence.test.tsx`) asserts persistence of both theme keys and correctness of `data-theme` / `data-theme-mode` attributes after remount.
 - Hybrid Orientation: multi-page `/orientation/{slug}` + all-in-one; legacy hash anchors redirect.
 
 Acceptance (Phase 1): Lighthouse Accessibility ≥95 (home/search/pattern) and zero critical/serious axe issues.
