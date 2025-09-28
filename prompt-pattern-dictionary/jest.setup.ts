@@ -1,12 +1,12 @@
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: (query) => ({
-    matches: query.includes('dark') ? false : false,
+  value: (query: string): MediaQueryList => ({
+    matches: query.includes('(prefers-color-scheme: dark)') ? false : false,
     media: query,
     onchange: null,
     addEventListener: () => {},
     removeEventListener: () => {},
-    addListener: () => {},
+    addListener: () => {}, // deprecated but included for libs expecting it
     removeListener: () => {},
     dispatchEvent: () => false
   })
