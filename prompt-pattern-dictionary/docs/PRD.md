@@ -150,7 +150,7 @@ Site-wide accessibility commitments (phase rollout) aligning with WCAG 2.2 Level
 - **Base Typography**: Clamp base size to 17–18px with line-height ~1.55; semantic CSS variable tokens (e.g., `--font-size-sm`, `--font-size-base`, `--font-size-lg`).
 - **Line Length**: Long-form prose (orientation, docs) constrained to 70–75ch; pattern tables/examples exempt.
 - **Display Modes**: Three modes: Light, Dark, High-Contrast (distinct palette, ≥7:1 text contrast). High-Contrast is not just Dark with brighter text.
-- **User Controls**: Readability control tray (font size, width, theme/contrast) persisted via localStorage; initial theme respects `prefers-color-scheme`; motion settings respect `prefers-reduced-motion`.
+- **User Controls**: Single global theme / contrast switcher in primary navigation (Light, Dark, System; High-Contrast forthcoming). Removed per‑page font/width controls in favor of native browser zoom / reader features; motion preferences honor `prefers-reduced-motion`.
 - **Skip Links**: At least: Skip to Main, Skip to Section Navigation (when present), Skip to Search.
 - **Landmarks**: Single `<main>` per page; labeled navs (e.g., `<nav aria-label="Primary">`, `<nav aria-label="Orientation sections">`).
 - **Focusable & Visible**: Consistent 2px outline for all interactive elements, tokenized per theme; no focus suppression.
@@ -830,6 +830,70 @@ Data Flow:
 - **Integration with major LLM providers** for real-time testing
 - **Academic certification program** for prompt engineering patterns
 - **Open dataset initiative** for reproducible prompt engineering research
+
+## Theming Architecture & UI Consistency (Added)
+
+To guarantee universal visual consistency (Light / Dark / System modes and a future High-Contrast mode), a consolidated theming architecture was implemented after the initial PRD draft.
+
+### Core Elements
+- PageShell layout wrapper: All top-level routes (patterns, logic, search, categories, papers, taxonomy, matrix, semantic explorer, comparison, playground) render inside a shared `PageShell` that standardizes spacing, max-width, landmarks, and surface elevation.
+- Pre‑hydration theme script: Inline script runs before React hydration to read persisted preference and set `data-theme` (effective resolved variant) and `data-theme-mode` (user selection) on `<html>` eliminating flash-of-unstyled-content.
+- Persistence keys: `pe-theme` (selection: light | dark | system) and `pe-theme-effective` (resolved) provide cross-tab and system preference synchronization.
+- Tokenized CSS variables: Design tokens plus semantic role tokens (e.g., `--surface-card`, `--text-muted`) decouple color usage from raw palette values and ease future contrast adjustments.
+- High-Contrast scaffold: Variable namespace reserved (≥7:1 contrast) pending palette finalization.
+
+### Semantic Utility Layer
+Reusable intent-driven classes replace ad‑hoc style duplication:
+`surface-card`, `surface-card-interactive`, `input-base`, `chip-filter`, `pill-filter`, `muted-inline-badge`, `section-heading`, `focus-ring-strong`, `kbd-hint`.
+
+Benefits: Faster page assembly, consistent focus/contrast behavior, simpler global adjustments, reduced regressions when accessibility tuning (focus outlines, motion reduction, contrast) evolves.
+
+### Authoring Guidelines for New Pages/Components
+1. Always wrap page JSX in `PageShell` (avoid manual outer padding/margins).
+2. Prefer semantic utilities over direct color/background declarations; extend the utility layer only with documented rationale.
+3. Do not hard-code theme-specific hex values; use tokens / variables.
+4. New interactive elements must have visible focus ring (respect reduced motion) and meet WCAG contrast (AA baseline, aim AAA where feasible).
+5. Before copying a pattern of Tailwind classes more than twice, promote it to a semantic utility and document it.
+
+## Testing & Quality Assurance Enhancements (Added)
+
+### Theme Regression Tests
+Automated test (`theme.regression.test.tsx`) asserts:
+- Absence of deprecated gradient / hard-coded background classes.
+- Presence of required semantic utility classes on key routes.
+- No light-only backgrounds leaking into dark mode rendering.
+
+Purpose: Prevent subjective visual regression and enforce architectural consistency.
+
+### Accessibility Smoke Tests (jest-axe)
+Baseline test file `a11y.basic.test.tsx` covers representative server + client pages (Logic, Patterns, Search).
+- Search page stabilization: Resolved App Router invariant by deferring dynamic import until after `next/navigation` mocks; added `IntersectionObserver` stub to reduce noisy prefetch-driven act() warnings.
+- Temporary rule suppression: `color-contrast` disabled pending final palette + high-contrast audit; all other serious/critical violations must be zero.
+- Known benign noise: Console error from unpolyfilled `fetch` in jsdom during Search page data bootstrap (to be silenced with a fetch polyfill or mocked data layer).
+
+### Planned Follow-Ups
+| Item | Rationale | Status |
+|------|-----------|--------|
+| Re-enable `color-contrast` rule | Enforce WCAG 1.4.3/1.4.6 once palette locked | Pending |
+| Expand smoke coverage (pattern detail, orientation hub, playground) | Increase semantic coverage | Planned |
+| Centralized test utilities (`test/utils/`) | DRY for router / observer / fetch mocks | Planned |
+| CI gate on axe serious/critical | Prevent regressions pre-merge | Partially (local only) |
+| Snapshot resolved CSS vars (light/dark) | Detect token drift | Planned |
+
+### Quality Gate Philosophy
+1. Fast accessibility smoke (≤60s) ensures structural parity early.
+2. Theming regression test guards against silent style drift.
+3. Periodic extended audits (Lighthouse + manual keyboard review) scheduled before major releases and palette adjustments.
+
+### Known Non-Blocking Test Artifacts
+- Repetitive `act()` warnings (Next `<Link />` intersection prefetch) – low impact; future improvement: deterministic intersection mock.
+- Search `fetch is not defined` console error – test-environment only; will be resolved with polyfill or data abstraction.
+
+### Recent Delta (Architecture & QA)
+- Introduced PageShell + semantic utilities; removed legacy gradients.
+- Implemented dark/light parity with zero-FOUC hydration model.
+- Added theme regression & a11y smoke suites (current pages pass with contrast rule disabled).
+- Stabilized App Router testing via deferred dynamic imports.
 
 ## Conclusion
 

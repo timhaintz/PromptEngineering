@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -6,6 +7,8 @@ import '@testing-library/jest-dom';
 import LogicPage from '@/app/logic/page';
 import PatternsPage from '@/app/patterns/page';
 import SearchPage from '@/app/search/page';
+import CategoriesPage from '@/app/categories/page';
+import PapersPage from '@/app/papers/page';
 
 // Helper: force document to dark theme before each render
 beforeEach(() => {
@@ -40,5 +43,19 @@ describe('Dark theme regression', () => {
     expect(container.querySelector('.surface-card')).toBeTruthy();
     // Inputs should have input-base
     expect(container.querySelector('.input-base')).toBeTruthy();
+  });
+
+  it('Categories page uses PageShell and surface cards', async () => {
+    const ui = await CategoriesPage();
+    const { container } = render(ui as any);
+    expect(container.querySelector('.min-h-screen')).toBeTruthy();
+    expect(container.querySelector('.surface-card')).toBeTruthy();
+  });
+
+  it('Papers page uses PageShell and surface cards', async () => {
+    const ui = await PapersPage();
+    const { container } = render(ui as any);
+    expect(container.querySelector('.min-h-screen')).toBeTruthy();
+    expect(container.querySelector('.surface-card')).toBeTruthy();
   });
 });

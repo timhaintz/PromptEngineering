@@ -11,3 +11,11 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: () => false
   })
 });
+
+// Optional: provide a noop ResizeObserver for components relying on it
+// @ts-ignore
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
