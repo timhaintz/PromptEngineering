@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { useTheme, ThemeMode } from "./useTheme";
+import { useThemeContext } from "./ThemeProvider";
+import type { ThemeMode } from "./ThemeProvider";
 
 const MODES: { label: string; value: ThemeMode; short: string; icon: React.ReactElement }[] = [
   {
@@ -30,7 +31,7 @@ const MODES: { label: string; value: ThemeMode; short: string; icon: React.React
 ];
 
 export function ThemeSwitcher({ className = "" }: { className?: string }) {
-  const { theme, setTheme } = useTheme();
+  const { mode: theme, setMode: setTheme } = useThemeContext();
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);

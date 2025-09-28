@@ -22,7 +22,7 @@ export default function TopNav() {
 
   return (
     <nav aria-label="Global navigation" className="fixed top-0 left-0 right-0 z-50 bg-surface-1/80 backdrop-blur border-b border-muted">
-      <div className="container mx-auto px-3 py-2 flex items-center gap-3">
+      <div className="container mx-auto px-4 py-2 flex items-center gap-2 md:gap-3">
         {/* Home button with house icon */}
         <Link
           href="/"
@@ -37,7 +37,7 @@ export default function TopNav() {
 
         {/* Tabs */}
         <div className="flex-1 overflow-x-auto">
-          <nav aria-label="Primary" className="flex items-center gap-1 min-w-max">
+          <nav aria-label="Primary" className="flex items-center gap-1 min-w-max pr-2">
             {tabs.map(tab => {
               const isActive = pathname.startsWith(tab.href);
               return (
@@ -55,7 +55,7 @@ export default function TopNav() {
         </div>
 
         {/* Theme Switcher */}
-        <div className="shrink-0">
+        <div className="shrink-0 flex items-center h-9">
           <ThemeSwitcher />
         </div>
       </div>
