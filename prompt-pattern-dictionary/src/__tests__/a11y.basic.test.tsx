@@ -2,26 +2,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { jest, describe, it, expect, beforeAll } from '@jest/globals';
-import { render } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import '@testing-library/jest-dom';
 
 // Mock next/navigation for client components that expect App Router context
-jest.mock('next/navigation', () => {
-  return {
-    useSearchParams: () => new URLSearchParams(''),
-    useRouter: () => ({
-      push: jest.fn(),
-      replace: jest.fn(),
-      prefetch: jest.fn(),
-      back: jest.fn(),
-    }),
-  };
-});
+jest.mock('next/navigation', () => ({
+  useSearchParams: () => new URLSearchParams(''),
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+    back: jest.fn(),
+  }),
+}));
+
+// Mock next/link to a simple anchor to avoid prefetch + IntersectionObserver side-effects that cause act warnings
+jest.mock('next/link', () => ({
+  __esModule: true,
+  default: ({ children, href, ...rest }: any) => <a href={typeof href === 'string' ? href : '#'} {...rest}>{children}</a>,
+}));
 
 
 // Stub IntersectionObserver to silence act() warnings originating from Next <Link /> prefetch logic
 beforeAll(() => {
+  // Stub IntersectionObserver
   if (!(global as any).IntersectionObserver) {
     class IO {
       observe() {}
@@ -30,7 +35,23 @@ beforeAll(() => {
     }
     ;(global as any).IntersectionObserver = IO as any;
   }
+  // Stub fetch so server component data loaders in SearchPage don't throw
+  if (!(global as any).fetch) {
+    (global as any).fetch = jest.fn(async () => ({ ok: true, json: async () => ([])}));
+  }
+  // Stub canvas getContext to silence jsdom "not implemented" during axe color-contrast scanning
+  if (!(HTMLCanvasElement.prototype as any).getContext) {
+    (HTMLCanvasElement.prototype as any).getContext = () => null;
+  }
 });
+
+// Small helper to allow effects + async state updates to settle before running axe
+async function flushAsyncEffects() {
+  // One macro-task tick
+  await act(async () => {
+    await new Promise(res => setTimeout(res, 0));
+  });
+}
 
 import LogicPage from '@/app/logic/page';
 import PatternsPage from '@/app/patterns/page';
@@ -43,26 +64,30 @@ beforeAll(async () => {
   SearchPage = mod.default ?? mod;
 });
 
-expect.extend(toHaveNoViolations);
+// Provide matcher as object for Jest extend
+expect.extend({ toHaveNoViolations: toHaveNoViolations as any });
 
 describe('Accessibility smoke tests', () => {
   it('Logic page has no critical a11y violations', async () => {
     const ui = await LogicPage();
     const { container } = render(ui as any);
-    const results = await axe(container, { rules: { 'color-contrast': { enabled: false } } });
-    expect(results).toHaveNoViolations();
+    await flushAsyncEffects();
+  const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
+  (expect as any)(results).toHaveNoViolations();
   });
 
   it('Patterns page has no critical a11y violations', async () => {
     const ui = await PatternsPage({ searchParams: {} } as any);
     const { container } = render(ui as any);
-    const results = await axe(container, { rules: { 'color-contrast': { enabled: false } } });
-    expect(results).toHaveNoViolations();
+    await flushAsyncEffects();
+  const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
+  (expect as any)(results).toHaveNoViolations();
   }, 15000);
 
   it('Search page has no critical a11y violations', async () => {
     const { container } = render(<SearchPage />);
-    const results = await axe(container, { rules: { 'color-contrast': { enabled: false } } });
-    expect(results).toHaveNoViolations();
+    await flushAsyncEffects();
+  const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
+  (expect as any)(results).toHaveNoViolations();
   }, 15000);
 });

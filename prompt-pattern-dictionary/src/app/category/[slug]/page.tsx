@@ -8,6 +8,8 @@ import { notFound } from 'next/navigation';
 import PageShell from '@/components/layout/PageShell';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
+import { PageHeader } from '@/components/ui/PageHeader';
+import Badge from '@/components/ui/Badge';
 import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
 import fs from 'fs';
 import path from 'path';
@@ -70,7 +72,7 @@ async function getSimilarExamples(): Promise<SimilarExamples | null> {
   return JSON.parse(fileContents);
 }
 
-type NormalizedPatterns = { patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string | string[]; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> };
+type NormalizedPatterns = { patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string | string[]; applicationTasksString?: string | null; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> };
 async function getNormalized(): Promise<NormalizedPatterns | null> {
   const filePath = path.join(process.cwd(), 'public', 'data', 'normalized-patterns.json');
   if (!fs.existsSync(filePath)) return null;
@@ -155,24 +157,17 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         {/* Header */}
         {/** Breadcrumbs **/}
         <Breadcrumbs />
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {categoryName}
-          </h1>
-          <div className="flex flex-col gap-2">
-            <div className="text-gray-600">
-              {categoryPatterns.length} pattern{categoryPatterns.length !== 1 ? 's' : ''} in this category
-            </div>
+        <div className="mb-6">
+          <PageHeader heading={categoryName} subtitle={`${categoryPatterns.length} pattern${categoryPatterns.length !== 1 ? 's' : ''}`} />
+          <div className="mt-3 flex flex-col gap-2">
             {categoryMeta?.logic && (
-              <div className="inline-flex items-center gap-2">
-                <span className="text-xs font-medium text-gray-500">Logic:</span>
-                <span className="inline-flex items-center rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 text-xs font-medium">
-                  {categoryMeta.logic}
-                </span>
+              <div className="inline-flex items-center gap-2 text-xs text-secondary">
+                <span className="text-muted">Logic:</span>
+                <Badge variant="category" className="text-[10px] font-semibold">{categoryMeta.logic}</Badge>
               </div>
             )}
             {categoryMeta?.description && (
-              <p className="text-sm text-gray-700 max-w-3xl whitespace-pre-wrap">
+              <p className="text-sm text-muted max-w-3xl whitespace-pre-wrap">
                 {categoryMeta.description}
               </p>
             )}
@@ -183,19 +178,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   <div className="space-y-4">
           {categoryPatterns.map(p => {
             const n = normalized?.patterns.find(x => x.id === p.id);
-              const attrs: NormalizedAttrs | null = n ? {
-                  mediaType: n.mediaType ?? null,
-                  dependentLLM: n.dependentLLM ?? null,
-                  // Ensure application is always mapped from normalized top-level field
-                  application: n.application ?? null,
-                  turn: n.turn ?? null,
-                  template: n.template ?? null,
-                  usageSummary: n.usageSummary ?? null,
-                  aiAssisted: n.aiAssisted ?? false,
-                  aiAssistedFields: n.aiAssistedFields ?? null,
-                  aiAssistedModel: n.aiAssistedModel ?? null,
-                  aiAssistedAt: n.aiAssistedAt ?? null,
-              } : null;
+        const attrs: NormalizedAttrs | null = n ? {
+          mediaType: n.mediaType ?? null,
+          dependentLLM: n.dependentLLM ?? null,
+          application: n.application ?? null,
+          applicationTasksString: n.applicationTasksString ?? null,
+          turn: n.turn ?? null,
+          template: n.template ?? null,
+          usageSummary: n.usageSummary ?? null,
+          aiAssisted: n.aiAssisted ?? false,
+          aiAssistedFields: n.aiAssistedFields ?? null,
+          aiAssistedModel: n.aiAssistedModel ?? null,
+          aiAssistedAt: n.aiAssistedAt ?? null,
+        } : null;
             const allFirstExamples = Object.fromEntries(allPatterns.map(pp => [pp.id, pp.examples[0]?.id]));
             return (
               <div key={p.id} id={`pattern-${p.id}`} className="surface-card">
@@ -219,19 +214,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         {relatedCategories.length > 0 && (
           <div className="surface-card p-6 mt-12">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-lg font-semibold text-gray-900">Related Categories (semantic)</h3>
-              <Link href="/matrix" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
+              <h3 className="text-lg font-semibold text-primary">Related Categories (semantic)</h3>
+              <Link href="/matrix" className="text-sm text-secondary hover:text-primary focus-ring rounded-sm px-1">Matrix</Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {relatedCategories.map(rc => (
                 <Link
                   key={rc.slug}
                   href={`/category/${rc.slug}`}
-                  className="flex items-center justify-between gap-2 text-blue-700 hover:text-blue-900 text-sm p-2 rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                  className="tile text-sm flex items-center justify-between gap-2 focus-ring"
                   title={`Aggregate similarity score: ${rc.score.toFixed(2)} • from ${rc.count} pattern(s)`}
                 >
-                  <span>{rc.name}</span>
-                  <span className="text-[10px] text-gray-600 bg-gray-100 rounded px-1.5 py-0.5 border">{rc.score.toFixed(2)}</span>
+                  <span className="truncate text-secondary">{rc.name}</span>
+                  <span className="text-[10px] badge-id">{rc.score.toFixed(2)}</span>
                 </Link>
               ))}
             </div>

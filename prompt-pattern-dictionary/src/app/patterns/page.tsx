@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import PageShell from '@/components/layout/PageShell';
+import { Card, CardGrid } from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import { PageHeader } from '@/components/ui/PageHeader';
 
 interface Example { id: string; index: number; content: string }
 interface Pattern { id: string; patternName: string; description?: string; examples: Example[]; category: string; paper: { title: string; authors: string[]; url: string }; tags?: string[] }
@@ -187,10 +190,10 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
     <PageShell>
       <div className="space-y-12">
         <div className="mb-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <h1 className="text-2xl font-bold text-gray-900">All Patterns ({filtered.length})</h1>
+          <PageHeader compact heading={<span>All Patterns <span className="text-muted font-normal">({filtered.length})</span></span>} />
           <form method="get" className="surface-card p-3 flex flex-col md:flex-row md:items-end gap-3">
             <div className="flex flex-col">
-              <label htmlFor="q" className="text-xs text-gray-600">Search</label>
+              <label htmlFor="q" className="text-xs text-muted">Search</label>
               <input
                 id="q"
                 name="q"
@@ -200,7 +203,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="sort" className="text-xs text-gray-600">Sort</label>
+              <label htmlFor="sort" className="text-xs text-muted">Sort</label>
               <select id="sort" name="sort" defaultValue={sort} className="input-base">
                 <option value="name_asc">Name (A→Z)</option>
                 <option value="name_desc">Name (Z→A)</option>
@@ -209,21 +212,21 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
               </select>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="logic" className="text-xs text-gray-600">Logic</label>
+              <label htmlFor="logic" className="text-xs text-muted">Logic</label>
               <select id="logic" name="logic" defaultValue={logicFilter} className="input-base">
                 <option value="">All</option>
                 {logicOptions.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
               </select>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="category" className="text-xs text-gray-600">Category</label>
+              <label htmlFor="category" className="text-xs text-muted">Category</label>
               <select id="category" name="category" defaultValue={categoryFilter} className="input-base">
                 <option value="">All</option>
                 {visibleCategoryOptions.map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
               </select>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="turn" className="text-xs text-gray-600">Turn</label>
+              <label htmlFor="turn" className="text-xs text-muted">Turn</label>
               <select id="turn" name="turn" defaultValue={turnFilter} className="input-base">
                 <option value="">All</option>
                 <option value="single">Single</option>
@@ -232,11 +235,11 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
             </div>
             <div className="flex items-center gap-2">
               <input type="checkbox" id="enriched" name="enriched" value="1" defaultChecked={onlyEnriched} className="h-4 w-4" />
-              <label htmlFor="enriched" className="text-sm text-gray-700">Enriched only</label>
+              <label htmlFor="enriched" className="text-sm text-muted">Enriched only</label>
             </div>
             <div className="flex items-center gap-2">
-              <button type="submit" className="bg-blue-800 hover:bg-blue-900 text-white text-sm px-3 py-1 rounded">Apply</button>
-              <Link href="/patterns" className="text-sm text-gray-600 hover:text-gray-800">Reset</Link>
+              <button type="submit" className="btn-primary text-sm px-3 py-1">Apply</button>
+              <Link href="/patterns" className="text-sm text-muted hover:underline">Reset</Link>
             </div>
           </form>
         </div>
@@ -247,7 +250,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
             {activeBadges.map((b, i) => (
               <Link key={i} href={b.removeHref || '/patterns'} className="chip-filter">
                 <span>{b.label}</span>
-                <span className="text-gray-500">×</span>
+                <span className="text-muted">×</span>
               </Link>
             ))}
           </div>
@@ -255,7 +258,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
 
         {/* Alphabet jump bar */}
         <div className="mb-4 flex flex-wrap items-center gap-1">
-          <span className="text-xs text-gray-600 mr-2">Jump to:</span>
+          <span className="text-xs text-muted mr-2">Jump to:</span>
           {letters.map(l => (
             <Link key={l} href={buildQuery(params, { letter: l === letterFilter ? '' : l })} className={`pill-filter ${l === letterFilter ? '!bg-[var(--color-accent)] !text-white !border-[var(--color-accent)]' : ''}`}>
               {l}
@@ -265,7 +268,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
 
         {/* Top tag chips */}
         <div className="mb-6">
-          <div className="text-xs text-gray-600 mb-1">Top tags</div>
+          <div className="text-xs text-muted mb-1">Top tags</div>
           <div className="flex flex-wrap gap-2">
             {topTags.map(({ tag, count }) => {
               const has = selectedTags.some(t => t.toLowerCase() === tag.toLowerCase());
@@ -274,43 +277,37 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
               return (
                 <Link key={tag} href={href} className={`chip-filter ${has ? '!bg-[var(--color-accent)] !text-white !border-[var(--color-accent)]' : ''}`}> 
                   <span>{tag}</span>
-                  <span className="text-slate-600">{count}</span>
+                  <span className="text-muted">{count}</span>
                 </Link>
               );
             })}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <CardGrid>
           {filtered.map(p => {
             const norm = normMap.get(p.id);
             const parts = idParts(p.id);
             const href = `/papers/${parts.paperId}#p-${parts.categoryIndex}-${parts.patternIndex}`;
             return (
-              <Link key={p.id} href={href} className="surface-card-interactive block p-4">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h2 className="text-lg font-semibold text-gray-900 break-words whitespace-normal flex-1">{p.patternName}</h2>
-                      <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-[10px] font-semibold">{p.category}</span>
-                      {norm?.aiAssisted ? (
-                        <span title={`AI-assisted fields: ${(norm.aiAssistedFields || []).join(', ')}`}
-                              className="inline-flex items-center rounded-full bg-yellow-50 text-yellow-800 border border-yellow-200 px-2 py-0.5 text-[10px] font-semibold">
-                          AI-assisted
-                        </span>
-                      ) : null}
-                    </div>
-                    {p.description ? (
-                      <p className="text-sm text-gray-700 mt-1 line-clamp-2">{p.description}</p>
-                    ) : null}
-                    <div className="mt-2 text-xs text-gray-600">Examples: {p.examples.length}{norm?.turn ? ` • ${norm.turn === 'multi' ? 'Multi' : 'Single'}` : ''}</div>
-                  </div>
-                  <span className="text-[10px] text-gray-500 font-mono">{p.id}</span>
+              <Card key={p.id} href={href} header={
+                <div className="flex items-center gap-2">
+                  <span className="break-words whitespace-normal flex-1 text-primary">{p.patternName}</span>
+                  <Badge variant="category" className="text-[10px] font-semibold">{p.category}</Badge>
+                  {norm?.aiAssisted && (
+                    <Badge variant="ai" className="text-[10px] font-semibold" title={`AI-assisted fields: ${(norm.aiAssistedFields || []).join(', ')}`}>AI-assisted</Badge>
+                  )}
                 </div>
-              </Link>
+              } meta={p.id} footer={
+                <>Examples: {p.examples.length}{norm?.turn ? ` • ${norm.turn === 'multi' ? 'Multi' : 'Single'}` : ''}</>
+              }>
+                {p.description && (
+                  <p className="text-sm text-muted mt-1 line-clamp-2">{p.description}</p>
+                )}
+              </Card>
             );
           })}
-        </div>
+        </CardGrid>
       </div>
     </PageShell>
   );

@@ -156,6 +156,19 @@ function normalize() {
   const normalized = patterns.map(p => {
     const firstExample = normalizeExampleText(p.examples && p.examples[0]);
     const tpl = parseTemplate(firstExample);
+    // Derive application tags (currently sourced from pattern.tags). These may be used
+    // both for the `application` array and to generate a stable applicationTasksString
+    // used by the UI for "Application Domains & Tasks" chips. Previously this field
+    // was only present if an enrichment step populated it; that made the section
+    // disappear on fresh builds. We now always generate a deterministic fallback.
+    const applicationTags = (p.tags || []).filter(t => t && String(t).length > 1);
+    // Fallback heuristic: treat the application tags themselves as tasks, de-duplicated,
+    // joined by comma+space. This ensures the section remains visible even without
+    // enrichment. If a preserved (enriched) value exists it will overwrite this in
+    // mergePreservingEnriched below.
+    const generatedTasksString = Array.from(new Set(applicationTags.map(t => String(t))))
+      .sort((a, b) => a.localeCompare(b))
+      .join(', ');
     const base = {
       id: p.id,
       category: p.category,
@@ -163,7 +176,9 @@ function normalize() {
       mediaType: inferMediaType(p),
       description: p.description || '',
       template: tpl,
-      application: (p.tags || []).filter(t => t && String(t).length > 1),
+      application: applicationTags,
+      // Always provide a tasks string fallback; enrichment (if any) can override.
+      applicationTasksString: generatedTasksString || null,
       dependentLLM: null,
       turn: inferTurn(p.examples),
       promptExamples: (p.examples || []).map(normalizeExampleText).filter(Boolean),

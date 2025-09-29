@@ -100,20 +100,20 @@ export default async function MatrixPage() {
     <PageShell>
       <div className="space-y-12">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Taxonomy × Semantic Matrix</h1>
-          <div className="flex items-center gap-3">
-            <Link href="/semantic" className="text-sm text-blue-600 hover:text-blue-800">Semantic Analysis</Link>
-            <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
+          <h1 className="text-2xl font-bold text-primary">Taxonomy × Semantic Matrix</h1>
+          <div className="flex items-center gap-3 text-sm">
+            <Link href="/semantic" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">Semantic Analysis</Link>
+            <Link href="/taxonomy" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">View Taxonomy</Link>
           </div>
         </div>
   <div className="surface-card overflow-x-auto">
           <table className="min-w-full text-sm">
-            <thead className="bg-gray-50 dark:bg-slate-700 hc:bg-black/60 transition-colors">
+            <thead className="bg-surface-1 transition-colors">
               <tr>
-                <th className="sticky left-0 z-10 text-left p-3 font-semibold border-b bg-gray-50 dark:bg-slate-700 hc:bg-black/60 text-gray-700 dark:text-slate-200 hc:text-white transition-colors">Logic / Category</th>
+                <th className="sticky left-0 z-10 text-left p-3 font-semibold border-b bg-surface-1 text-secondary transition-colors">Logic / Category</th>
                 {semanticColumns.map(col => (
-                  <th key={col} className="p-3 text-left font-semibold text-gray-700 border-b">
-                    <Link href={`/category/${col}`} className="text-blue-700 hover:text-blue-900">{col.replace(/-/g,' ')}</Link>
+                  <th key={col} className="p-3 text-left font-semibold text-secondary border-b">
+                    <Link href={`/category/${col}`} className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">{col.replace(/-/g,' ')}</Link>
                   </th>
                 ))}
               </tr>
@@ -121,16 +121,16 @@ export default async function MatrixPage() {
             {/* Multiple tbody sections are valid HTML. Render one group per logic to avoid nested tbody hydration issues. */}
             {rows.map(row => (
               <tbody key={`group-${row.logic.slug}`}>
-                <tr className="bg-gray-100 dark:bg-slate-600/60 hc:bg-black/50 transition-colors">
-                  <td colSpan={1 + semanticColumns.length} className="p-3 font-medium text-gray-900 border-t">
+                <tr className="bg-surface-2 transition-colors">
+                  <td colSpan={1 + semanticColumns.length} className="p-3 font-medium text-primary border-t">
                     {row.logic.name} Logic
                   </td>
                 </tr>
                 {row.categories.map(rc => (
-                  <tr key={`cat-${row.logic.slug}-${rc.category.slug}`} className="hover:bg-blue-50">
-                    <td className="sticky left-0 z-10 p-3 border-t bg-white dark:bg-slate-700 hc:bg-black/60 transition-colors">
+                  <tr key={`cat-${row.logic.slug}-${rc.category.slug}`} className="hover:bg-surface-hover">
+                    <td className="sticky left-0 z-10 p-3 border-t bg-surface-1 transition-colors">
                       <div>
-                        <Link href={`/category/${rc.category.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">
+                        <Link href={`/category/${rc.category.slug}`} className="text-secondary hover:text-primary font-medium focus-ring rounded-sm px-0.5">
                           {rc.category.name}
                         </Link>
                       </div>
@@ -138,16 +138,17 @@ export default async function MatrixPage() {
                     {semanticColumns.map(col => {
                       const count = rc.counts[col] || 0;
                       const intensity = Math.min(1, count / 12); // normalize for simple heat effect
-                      const bg = intensity === 0 ? 'bg-white' : intensity < 0.25 ? 'bg-blue-50' : intensity < 0.5 ? 'bg-blue-100' : intensity < 0.75 ? 'bg-blue-200' : 'bg-blue-300';
+                      const level = intensity === 0 ? 0 : intensity < 0.25 ? 1 : intensity < 0.5 ? 2 : intensity < 0.75 ? 3 : 4;
+                      const heatClass = `heat-${level}`;
                       const href = count > 0 ? `/category/${col}` : undefined;
                       return (
-                        <td key={col} className={`p-3 border-t ${bg}`}>
+                        <td key={col} className={`p-3 border-t ${heatClass}`}>
                           {count > 0 ? (
-                            <Link href={href!} className="inline-flex items-center justify-center w-8 h-6 rounded text-gray-800" title={`${count} pattern(s)`}>
+                            <Link href={href!} className="inline-flex items-center justify-center w-8 h-6 rounded text-secondary hover:text-primary focus-ring" title={`${count} pattern(s)`}>
                               {count}
                             </Link>
                           ) : (
-                            <span className="inline-block w-8 h-6 text-gray-400 text-center">0</span>
+                            <span className="inline-block w-8 h-6 text-muted text-center">0</span>
                           )}
                         </td>
                       );
@@ -159,7 +160,7 @@ export default async function MatrixPage() {
           </table>
         </div>
 
-        <p className="text-xs text-gray-600 mt-3">
+        <p className="text-xs text-muted mt-3">
           Counts per cell use semantic best-category assignments (columns). Rows are the original taxonomy categories mapped from each pattern&apos;s current/original category. This aligns with &quot;Semantic counts&quot; used across the site.
         </p>
       </div>

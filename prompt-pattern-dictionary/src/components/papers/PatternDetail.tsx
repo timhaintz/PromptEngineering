@@ -33,9 +33,7 @@ export interface SimilarPatternsMap { [patternId: string]: Array<{ id: string; s
 
 function ExampleIdBadge({ id }: { id: string }) {
   return (
-    <span className="inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">
-      {id}
-    </span>
+    <span className="badge-id text-[10px] font-semibold">{id}</span>
   );
 }
 
@@ -142,7 +140,7 @@ export default function PatternDetail({
   }, [appTags]);
 
   return (
-    <div className="border rounded-lg p-4">
+  <div className="surface-card p-4">
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -150,7 +148,7 @@ export default function PatternDetail({
             {/* Hover-only permalink chain icon (larger, like docs anchors) */}
             <a
               href={context === 'paper' ? `#p-${categoryIndex}-${patternIndex}` : `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`}
-              className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-500 hover:text-blue-700 focus:opacity-100"
+              className="opacity-0 group-hover:opacity-100 transition-opacity text-muted hover:text-secondary focus:opacity-100 focus-ring rounded-sm"
               title="Permalink"
               aria-label="Permalink"
             >
@@ -159,7 +157,7 @@ export default function PatternDetail({
                 <path d="M13.41 10.59a1 1 0 010 1.41l-3.3 3.3a3 3 0 11-4.24-4.24l1.65-1.65a1 1 0 111.41 1.41L7.29 12.3a1 1 0 101.42 1.42l3.3-3.3a1 1 0 011.41 0z"/>
               </svg>
             </a>
-            <div className="text-lg font-semibold text-gray-900 break-words">{pattern.patternName}</div>
+            <div className="text-lg font-semibold text-primary break-words">{pattern.patternName}</div>
             <ExampleIdBadge id={`ID: ${pattern.id}`} />
             {attrs?.aiAssisted && (attrs.aiAssistedFields || []).includes('usageSummary') && (
               <span
@@ -178,34 +176,34 @@ export default function PatternDetail({
         {/* Removed Turn badge from header */}
       </div>
 
-      {pattern.description && <p className="text-gray-700 mt-2 whitespace-pre-wrap">{pattern.description}</p>}
+  {pattern.description && <p className="text-secondary mt-2 whitespace-pre-wrap">{pattern.description}</p>}
 
       {/* Definition list attributes */}
-      <dl className="mt-3 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1">
+  <dl className="mt-3 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 text-sm">
         {/* Show Reference only on category pages */}
         {context === 'category' && paperTitle && paperUrl ? (
           <>
-            <dt className="font-semibold text-slate-700">Reference:</dt>
-            <dd className="text-gray-800">
-              <a href={paperUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">{paperTitle}</a>
+            <dt className="font-semibold text-secondary">Reference:</dt>
+            <dd className="text-secondary">
+              <a href={paperUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">{paperTitle}</a>
             </dd>
           </>
         ) : null}
 
-        <dt className="font-semibold text-slate-700">Media Type:</dt>
-        <dd className="text-gray-800">{attrs?.mediaType || 'N/A'}</dd>
+  <dt className="font-semibold text-secondary">Media Type:</dt>
+  <dd className="text-secondary">{attrs?.mediaType || 'N/A'}</dd>
 
-        <dt className="font-semibold text-slate-700">Dependent LLM:</dt>
-        <dd className="text-gray-800">{attrs?.dependentLLM ?? 'N/A'}</dd>
+  <dt className="font-semibold text-secondary">Dependent LLM:</dt>
+  <dd className="text-secondary">{attrs?.dependentLLM ?? 'N/A'}</dd>
 
-  <dt className="font-semibold text-slate-700">Turn:</dt>
-  <dd className="text-gray-800">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
+  <dt className="font-semibold text-secondary">Turn:</dt>
+  <dd className="text-secondary">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
 
-        <dt className="font-semibold text-slate-700 flex items-center">
+  <dt className="font-semibold text-secondary flex items-center">
           <button
             type="button"
             onClick={() => setTemplateOpen(v => !v)}
-            className="mr-1 text-gray-700 hover:text-gray-900"
+            className="mr-1 text-muted hover:text-secondary focus-ring rounded-sm"
             aria-controls={`tpl-${pattern.id}`}
             title={templateOpen ? 'Hide template' : 'Show template'}
           >
@@ -213,16 +211,16 @@ export default function PatternDetail({
           </button>
           Template:
         </dt>
-        <dd className="text-gray-800">
+  <dd className="text-secondary">
           {templateOpen ? (
             <div id={`tpl-${pattern.id}`} className="space-y-2">
-              <pre className="whitespace-pre-wrap bg-gray-50 p-2 rounded border text-sm">{templateText}</pre>
+              <pre className="whitespace-pre-wrap bg-surface-2 p-2 rounded border text-xs">{templateText}</pre>
               {attrs?.templateRawBracketed ? (
-                <div className="text-xs text-gray-700">
+                <div className="text-xs text-muted">
                   <button
                     type="button"
                     onClick={() => setBracketOpen(v => !v)}
-                    className="text-blue-700 hover:text-blue-900 underline"
+                    className="text-secondary hover:text-primary underline focus-ring rounded-sm px-0.5"
                     aria-controls={`tplb-${pattern.id}`}
                     title={bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
                   >
@@ -237,12 +235,12 @@ export default function PatternDetail({
               ) : null}
             </div>
           ) : (
-            <span className="text-gray-500 select-none">(collapsed)</span>
+            <span className="text-muted select-none">(collapsed)</span>
           )}
         </dd>
         {/* Application moved under Template */}
-        <dt className="font-semibold text-slate-700">Application:</dt>
-        <dd className="text-gray-800">
+  <dt className="font-semibold text-secondary">Application:</dt>
+  <dd className="text-secondary">
           {isPolicyFallback ? (
             <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
               <span className="font-semibold">Notice:</span>
@@ -252,7 +250,7 @@ export default function PatternDetail({
             <p className="text-sm whitespace-pre-wrap">{applicationString}</p>
           ) : appTags ? (
             renderAsList ? (
-              <ul className="list-disc pl-5 space-y-1 text-sm">
+              <ul className="list-disc pl-5 space-y-1">
                 {appTags.map((t, idx) => (
                   <li key={idx} className="leading-snug">{t}</li>
                 ))}
@@ -260,26 +258,22 @@ export default function PatternDetail({
             ) : (
               <div className="flex flex-wrap gap-2">
                 {appTags.map((t, idx) => (
-                  <span key={idx} className="inline-flex items-center rounded-full bg-gray-100 text-gray-800 px-2 py-0.5 text-xs border">
-                    {t}
-                  </span>
+                  <span key={idx} className="chip-task">{t}</span>
                 ))}
               </div>
             )
           ) : 'N/A'}
           {attrs?.usageSummary && (
-            <div className="mt-2 text-gray-700 text-sm">
+            <div className="mt-2 text-muted">
               <span className="font-semibold">How to apply:</span> {attrs.usageSummary}
             </div>
           )}
           {tasks.length > 0 && (
             <div className="mt-3">
-              <div className="text-sm font-semibold text-slate-700">Application Domains and Tasks:</div>
+              <div className="text-sm font-semibold text-secondary">Application Domains & Tasks:</div>
               <div className="mt-1 flex flex-wrap gap-2" aria-label="Application domains and tasks list">
                 {tasks.map((t, i) => (
-                  <span key={i} className="inline-flex items-center rounded-full bg-blue-50 text-blue-800 px-2 py-0.5 text-xs border border-blue-200">
-                    {t}
-                  </span>
+                  <span key={i} className="chip-task">{t}</span>
                 ))}
               </div>
             </div>
@@ -294,13 +288,13 @@ export default function PatternDetail({
             <button
               type="button"
               onClick={() => setExamplesOpen(v => !v)}
-              className="text-gray-700 hover:text-gray-900"
+              className="text-muted hover:text-secondary focus-ring rounded-sm"
               aria-controls={`ex-${pattern.id}`}
               title={examplesOpen ? 'Hide examples' : 'Show examples'}
             >
               <span className="text-base align-middle">{examplesOpen ? '▾' : '▸'}</span>
             </button>
-            <div className="text-sm font-semibold text-gray-900">Prompt Examples ({pattern.examples.length})</div>
+            <div className="text-sm font-semibold text-primary">Prompt Examples ({pattern.examples.length})</div>
           </div>
           {/* Right-side actions removed: Permalink text and Paper link are no longer shown. */}
         </div>
@@ -367,16 +361,16 @@ export default function PatternDetail({
 function ExampleRow({ patternId, ex, similar }: { patternId: string; ex: Example; similar: Array<{ id: string; similarity: number }> }) {
   const [open, setOpen] = useState(false); // default collapsed for similar examples
   return (
-    <li id={`e-${patternId.split('-')[1]}-${patternId.split('-')[2]}-${ex.index}`} className="bg-gray-50 p-3 rounded border-l-4 border-blue-500">
+  <li id={`e-${patternId.split('-')[1]}-${patternId.split('-')[2]}-${ex.index}`} className="p-3 rounded border-l-4 border-accent bg-surface-2">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-2 min-w-0">
           <ExampleIdBadge id={`${patternId}-${ex.index}`} />
-          <span className="text-sm text-gray-800 whitespace-pre-wrap break-words">{ex.content}</span>
+          <span className="text-sm text-secondary whitespace-pre-wrap break-words">{ex.content}</span>
         </div>
         <button
           type="button"
           onClick={() => setOpen(v => !v)}
-          className="text-gray-700 hover:text-gray-900 shrink-0"
+          className="text-muted hover:text-secondary shrink-0 focus-ring rounded-sm"
           aria-controls={`sim-${patternId}-${ex.index}`}
           title={open ? 'Hide similar examples' : 'Show similar examples'}
         >
@@ -385,18 +379,18 @@ function ExampleRow({ patternId, ex, similar }: { patternId: string; ex: Example
       </div>
       {open && (
         <div id={`sim-${patternId}-${ex.index}`} className="mt-2">
-          <div className="text-xs text-gray-600 mb-1">Similar Examples</div>
+          <div className="text-xs text-muted mb-1">Similar Examples</div>
           {similar.length ? (
             <div className="flex flex-wrap gap-2 overflow-x-auto">
               {similar.map((s, i) => (
-                <Link key={i} href={exampleLinkFromId(s.id)} title={s.id} className="inline-flex items-center gap-1 rounded-full bg-gray-100 text-gray-800 px-2 py-0.5 text-xs border">
+                <Link key={i} href={exampleLinkFromId(s.id)} title={s.id} className="chip-task focus-ring">
                   <span>{s.id}</span>
-                  <span className="text-gray-500">{formatScore(s.similarity)}</span>
+                  <span className="text-muted">{formatScore(s.similarity)}</span>
                 </Link>
               ))}
             </div>
           ) : (
-            <div className="text-xs text-gray-500">No similar examples</div>
+            <div className="text-xs text-muted">No similar examples</div>
           )}
         </div>
       )}

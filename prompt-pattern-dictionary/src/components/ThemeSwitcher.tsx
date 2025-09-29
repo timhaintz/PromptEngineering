@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { useThemeContext } from "./ThemeProvider";
-import type { ThemeMode } from "./ThemeProvider";
+import type { ThemeChoice } from "./ThemeProvider";
 
-const MODES: { label: string; value: ThemeMode; short: string; icon: React.ReactElement }[] = [
+const MODES: { label: string; value: ThemeChoice; short: string; icon: React.ReactElement }[] = [
   {
     label: "System (Auto)",
     value: "system",
@@ -31,7 +31,7 @@ const MODES: { label: string; value: ThemeMode; short: string; icon: React.React
 ];
 
 export function ThemeSwitcher({ className = "" }: { className?: string }) {
-  const { mode: theme, setMode: setTheme } = useThemeContext();
+  const { theme, setTheme } = useThemeContext();
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -73,7 +73,7 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
     };
   }, [open, theme]);
 
-  const select = (value: ThemeMode) => {
+  const select = (value: ThemeChoice) => {
     // Apply theme but keep panel open to allow rapid comparison unless same value clicked
     const wasSame = value === theme;
     setTheme(value);

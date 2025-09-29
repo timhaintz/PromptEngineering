@@ -129,5 +129,7 @@ h1[id], h2[id], h3[id], h4[id] {
 @media print {
   .no-print { display: none !important; }
   body { font-size: 12px; line-height: 1.3; }
-  a { text-decoration: none; color: #000; }
+  /* Preserve readable monochrome without forcing #000; browsers typically convert colors.
+     Remove underline for cleaner print while keeping original text color (will render dark). */
+  a { text-decoration: none; }
 }

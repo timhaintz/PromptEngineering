@@ -22,33 +22,28 @@ export default async function LogicPage() {
     <PageShell>
       <div className="space-y-12">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Logic Layers ({data.logics.length})</h1>
-          <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-primary">Logic Layers ({data.logics.length})</h1>
+          <div className="flex items-center gap-3 text-sm">
             {semantic && (
-              <span
-                title="Counts use semantic category assignments"
-                className="inline-flex items-center gap-1 text-xs bg-purple-100 text-purple-700 border border-purple-200 rounded px-2 py-1"
-              >
-                Semantic counts
-              </span>
+              <span title="Counts use semantic category assignments" className="badge-ai">Semantic counts</span>
             )}
-            <Link href="/taxonomy" className="text-sm text-blue-600 hover:text-blue-800">View Taxonomy</Link>
-            <Link href="/matrix" className="text-sm text-blue-600 hover:text-blue-800">Matrix</Link>
+            <Link href="/taxonomy" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">View Taxonomy</Link>
+            <Link href="/matrix" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">Matrix</Link>
           </div>
         </div>
         <div className="space-y-6">
           {logics.map(l => (
             <div key={l.slug} className="surface-card p-6">
               <div className="mb-2">
-                <h2 className="text-xl font-semibold text-gray-900">{l.name} Logic</h2>
-                <p className="text-sm text-gray-600">{l.focus}</p>
+                <h2 className="text-xl font-semibold text-primary">{l.name} Logic</h2>
+                <p className="text-sm text-muted">{l.focus}</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {l.categories.map(c => (
-                  <Link key={c.slug} href={`/category/${c.slug}`} className="block rounded p-3 border border-muted bg-surface-2 hover:border-[var(--color-accent)] hover:bg-surface-hover transition-colors">
+                  <Link key={c.slug} href={`/category/${c.slug}`} className="tile focus-ring">
                     <div className="flex items-center justify-between">
-                      <span className="text-blue-700 font-medium">{c.name}</span>
-                      <span className="text-xs text-gray-600">{c.patternCount} patterns</span>
+                      <span className="tile-title">{c.name}</span>
+                      <span className="tile-meta">{c.patternCount} patterns</span>
                     </div>
                   </Link>
                 ))}

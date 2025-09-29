@@ -1,6 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import PageShell from '@/components/layout/PageShell';
+import { PageHeader } from '@/components/ui/PageHeader';
+import Badge from '@/components/ui/Badge';
 
 interface PatternExampleEntry {
   exampleId: string;
@@ -87,16 +90,11 @@ export default async function ExamplesPage({ searchParams }: { searchParams?: Pr
   const slice = filtered.slice(start, start + PAGE_SIZE);
 
   return (
-    <div className="min-h-screen bg-base">
-      <div className="container mx-auto px-4 py-16">
-        <header className="mb-10 text-center">
-          <h1 className="text-4xl font-bold text-primary mb-3">All Prompt Examples</h1>
-          <p className="text-secondary max-w-2xl mx-auto">
-            An alphabetical, paginated index of every example across all patterns. Use the quick filter to narrow results. Each row links back to the parent pattern.
-          </p>
-        </header>
+    <PageShell>
+      <div className="space-y-8">
+        <PageHeader heading="All Prompt Examples" subtitle="Alphabetical, filterable index of every example. Each links to its parent pattern." />
 
-        <form role="search" className="mb-6 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center" aria-label="Filter examples">
+  <form role="search" className="mb-6 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center" aria-label="Filter examples">
           <label className="flex-1">
             <span className="sr-only">Search examples</span>
             <input
@@ -104,12 +102,12 @@ export default async function ExamplesPage({ searchParams }: { searchParams?: Pr
               name="q"
               defaultValue={query}
               placeholder="Filter by text, pattern, or category…"
-              className="w-full px-4 py-2 rounded-md border border-muted bg-surface-1 text-primary placeholder:text-tertiary focus-ring outline-none"
+              className="input-base w-full px-3 py-2"
             />
           </label>
-          <button type="submit" className="px-5 py-2 rounded-md bg-accent text-white font-medium hover:opacity-90 focus-ring">Filter</button>
+          <button type="submit" className="btn-primary">Filter</button>
           {query && (
-            <Link href="/examples" className="px-4 py-2 rounded-md border border-muted bg-surface-1 text-secondary hover:bg-surface-hover focus-ring" aria-label="Clear filter">Clear</Link>
+            <Link href="/examples" className="pill-filter" aria-label="Clear filter">Clear</Link>
           )}
         </form>
 
@@ -119,14 +117,14 @@ export default async function ExamplesPage({ searchParams }: { searchParams?: Pr
 
         <ul className="space-y-3" aria-label="Example list">
           {slice.map(example => (
-            <li key={example.exampleId} className="p-4 rounded-md bg-surface-1 border border-muted shadow-sm hover:shadow transition">
-              <div className="flex flex-wrap items-baseline gap-2 mb-1">
-                <code className="text-xs px-2 py-0.5 rounded bg-surface-2 border border-muted text-secondary" aria-label="Example ID">{example.exampleId}</code>
-                <Link href={`/papers/${example.patternId.split('-')[0]}#e-${example.patternId}-${example.exampleId.split('-').slice(-1)}`} className="text-sm text-accent hover:underline" aria-label="Go to example in paper">Open</Link>
-                <span className="text-xs px-2 py-0.5 rounded bg-surface-2 border border-muted text-secondary">{example.category}</span>
+            <li key={example.exampleId} className="surface-card p-4 hover:surface-card-hover transition">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <code className="badge-id" aria-label="Example ID">{example.exampleId}</code>
+                <Link href={`/papers/${example.patternId.split('-')[0]}#e-${example.patternId}-${example.exampleId.split('-').slice(-1)}`} className="pill-filter text-xs" aria-label="Go to example in paper">Open</Link>
+                <Badge variant="category" className="text-[10px] font-semibold">{example.category}</Badge>
               </div>
-              <div className="text-sm text-primary mb-1">{example.excerpt}</div>
-              <div className="text-xs text-tertiary">Pattern: <Link href={`/patterns?focus=${example.patternId}`} className="text-accent hover:underline">{example.patternName}</Link></div>
+              <div className="text-sm text-secondary mb-1">{example.excerpt}</div>
+              <div className="text-xs text-muted">Pattern: <Link href={`/patterns?focus=${example.patternId}`} className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">{example.patternName}</Link></div>
             </li>
           ))}
         </ul>
@@ -145,7 +143,7 @@ export default async function ExamplesPage({ searchParams }: { searchParams?: Pr
                 key={p}
                 href={href}
                 aria-current={isCurrent ? 'page' : undefined}
-                className={`min-w-[2.25rem] text-center rounded-md border px-2 py-1 text-sm focus-ring transition-colors ${isCurrent ? 'bg-accent text-white border-accent' : 'bg-surface-1 border-muted text-secondary hover:bg-surface-hover'}`}
+                className={`min-w-[2.25rem] text-center rounded-md border px-2 py-1 text-sm focus-ring transition-colors ${isCurrent ? 'active-pill' : 'bg-surface-1 border-muted text-secondary hover:bg-surface-hover'}`}
               >
                 {p}
               </Link>
@@ -153,6 +151,6 @@ export default async function ExamplesPage({ searchParams }: { searchParams?: Pr
           })}
         </nav>
       </div>
-    </div>
+    </PageShell>
   );
 }

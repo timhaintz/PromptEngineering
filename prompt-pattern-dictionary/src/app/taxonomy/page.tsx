@@ -20,10 +20,10 @@ export default async function TaxonomyPage() {
     <PageShell variant="narrow">
       <div className="space-y-12">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">PP Taxonomy</h1>
-          <p className="text-gray-700">Logic layers and categories derived from papers</p>
+          <h1 className="text-3xl font-bold text-primary">PP Taxonomy</h1>
+          <p className="text-secondary">Logic layers and categories derived from papers</p>
           {semantic && (
-            <div className="mt-2 inline-flex items-center gap-1 text-xs bg-purple-100 text-purple-700 border border-purple-200 rounded px-2 py-1" title="Counts use semantic category assignments when available">
+            <div className="mt-2 badge-ai" title="Counts use semantic category assignments when available">
               Semantic counts
             </div>
           )}
@@ -37,19 +37,19 @@ export default async function TaxonomyPage() {
                 <summary className="cursor-pointer list-none">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-lg font-semibold text-gray-900">{l.name} Logic</div>
-                      <div className="text-sm text-gray-700">{l.focus}</div>
+                      <div className="text-lg font-semibold text-primary">{l.name} Logic</div>
+                      <div className="text-sm text-muted">{l.focus}</div>
                     </div>
-                    <div className="text-xs text-gray-600">{total} patterns • {l.categories.length} categories</div>
+                    <div className="text-xs text-muted">{total} patterns • {l.categories.length} categories</div>
                   </div>
                 </summary>
-                <ul className="list-disc ml-6 mt-3 text-gray-900">
+                <ul className="list-disc ml-6 mt-3 text-primary">
                   {l.categories.map(c => (
                     <li key={c.slug} className="my-1">
-                      <Link href={`/category/${c.slug}`} className="text-blue-700 hover:text-blue-900">
+                      <Link href={`/category/${c.slug}`} className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">
                         {c.name}
                       </Link>
-                      <span className="text-xs text-gray-600 ml-2">({semantic?.categories?.[c.slug]?.patternCount ?? c.patternCount} patterns)</span>
+                      <span className="text-xs text-muted ml-2">({semantic?.categories?.[c.slug]?.patternCount ?? c.patternCount} patterns)</span>
                     </li>
                   ))}
                 </ul>

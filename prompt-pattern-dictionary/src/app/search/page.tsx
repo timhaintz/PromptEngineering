@@ -12,6 +12,10 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { parseBooleanQuery, evaluateBooleanQuery } from '@/lib/search/booleanQuery';
 import PageShell from '@/components/layout/PageShell';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { Card } from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import { Spinner } from '@/components/ui/Spinner';
 import React from 'react';
 
 interface Pattern {
@@ -121,7 +125,7 @@ function SearchResults() {
       });
       parts = newParts;
     });
-    return <>{parts.map((p, i) => p.match ? <mark key={i} className="bg-yellow-200 text-gray-900 rounded px-0.5 shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">{p.segment}</mark> : p.segment)}</>;
+    return <>{parts.map((p, i) => p.match ? <mark key={i} className="highlight-term">{p.segment}</mark> : p.segment)}</>;
   }
 
   const filteredPatterns = useMemo(() => {
@@ -211,12 +215,8 @@ function SearchResults() {
 
   if (loading) {
     return (
-  <div className="min-h-screen bg-base">
-        <div className="container mx-auto px-4 py-16">
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        </div>
+  <div className="min-h-screen flex items-center justify-center">
+        <Spinner size="lg" aria-label="Loading search data" />
       </div>
     );
   }
@@ -224,15 +224,13 @@ function SearchResults() {
   return (
   <PageShell noContainer variant="wide">
       <div className="container mx-auto px-4 py-16">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Search</h1>
-        </div>
+        <PageHeader heading="Search" compact />
 
         {/* Controls */}
   <div className="surface-card p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-3 md:items-end">
             <div className="flex-1">
-              <label htmlFor="search-input" className="block text-sm font-medium text-gray-800 mb-1">Search text</label>
+              <label htmlFor="search-input" className="block text-xs text-muted mb-1">Search text</label>
               <input id="search-input" defaultValue={query} onChange={(e) => {
                 const params = new URLSearchParams(Array.from(searchParams.entries()));
                 params.set('q', e.target.value);
@@ -243,22 +241,22 @@ function SearchResults() {
             {/* Boolean + Fuzzy Controls */}
             {(type === 'pattern' || type === 'example') && (
               <div className="flex flex-col gap-2 pt-6 md:pt-0">
-                <label className="inline-flex items-center gap-2 text-sm text-gray-800">
+                <label className="inline-flex items-center gap-2 text-sm text-secondary">
                   <input type="checkbox" className="h-4 w-4" checked={useBoolean} onChange={(e) => setUseBoolean(e.target.checked)} />
                   Boolean + Fuzzy
                 </label>
-                <div className="flex items-center gap-2 text-xs text-gray-700">
-                  <label htmlFor="fuzzy-distance" className="text-gray-700">Fuzzy</label>
+                <div className="flex items-center gap-2 text-xs text-muted">
+                  <label htmlFor="fuzzy-distance" className="text-muted">Fuzzy</label>
                   <input id="fuzzy-distance" type="number" min={0} max={3} value={fuzzyDistance} disabled={!useBoolean} onChange={(e) => setFuzzyDistance(Math.max(0, Math.min(3, parseInt(e.target.value || '0', 10))))} className="w-14 border border-gray-300 rounded px-1 py-0.5 disabled:opacity-40" />
-                  <button type="button" onClick={() => setShowHelp(s => !s)} className="text-blue-600 hover:text-blue-800">Help?</button>
+                  <button type="button" onClick={() => setShowHelp(s => !s)} className="text-secondary hover:text-primary focus-ring rounded px-1">Help?</button>
                 </div>
               </div>
             )}
             {showHelp && (
               <div className="absolute z-20 mt-24 md:mt-20 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 w-full md:w-96 surface-card p-3 text-xs space-y-2">
                 <div className="flex justify-between items-center">
-                  <strong className="text-gray-900">Boolean & Fuzzy Syntax</strong>
-                  <button onClick={() => setShowHelp(false)} className="text-gray-500 hover:text-gray-800">✕</button>
+                  <strong className="text-primary">Boolean & Fuzzy Syntax</strong>
+                  <button onClick={() => setShowHelp(false)} className="text-muted hover:text-secondary">✕</button>
                 </div>
                 <ul className="list-disc pl-4 space-y-1">
                   <li><code>AND</code>, <code>OR</code>, <code>NOT</code> (NOT has highest precedence).</li>
@@ -267,11 +265,11 @@ function SearchResults() {
                   <li>Implicit AND between adjacent terms.</li>
                   <li>Examples: <code>reasoning AND (NOT translation)</code> (parentheses future).</li>
                 </ul>
-                <p className="text-[11px] text-gray-500">Parentheses not yet supported; logic evaluates NOT &gt; AND &gt; OR.</p>
+                <p className="text-[11px] text-muted">Parentheses not yet supported; logic evaluates NOT &gt; AND &gt; OR.</p>
               </div>
             )}
             <div>
-              <label htmlFor="type" className="block text-sm font-medium text-gray-800 mb-1">Search type</label>
+              <label htmlFor="type" className="block text-xs text-muted mb-1">Search type</label>
               <select id="type" value={type} onChange={(e) => {
                 const params = new URLSearchParams(Array.from(searchParams.entries()));
                 params.set('type', e.target.value);
@@ -285,7 +283,7 @@ function SearchResults() {
             </div>
             {(type === 'pattern' || type === 'example' || type === 'category') && (
               <div>
-                <label htmlFor="category-type-select" className="block text-sm font-medium text-gray-800 mb-1">Category type</label>
+                <label htmlFor="category-type-select" className="block text-xs text-muted mb-1">Category type</label>
                 <select
                   id="category-type-select"
                   value={categoryType}
@@ -305,7 +303,7 @@ function SearchResults() {
             )}
             {(type === 'pattern' || type === 'example') && (
               <div>
-                <label htmlFor="category-filter-select" className="block text-sm font-medium text-gray-800 mb-1">Filter by category</label>
+                <label htmlFor="category-filter-select" className="block text-xs text-muted mb-1">Filter by category</label>
                 <select
                   id="category-filter-select"
                   value={selectedCategory}
@@ -325,7 +323,7 @@ function SearchResults() {
             )}
             {type === 'category' && (
               <div>
-                <label htmlFor="logic-filter-select" className="block text-sm font-medium text-gray-800 mb-1">Filter by logic</label>
+                <label htmlFor="logic-filter-select" className="block text-xs text-muted mb-1">Filter by logic</label>
                 <select
                   id="logic-filter-select"
                   value={logicFilter}
@@ -343,7 +341,7 @@ function SearchResults() {
                 </select>
               </div>
             )}
-            <div className="ml-auto flex items-end gap-3 text-sm text-gray-800">
+            <div className="ml-auto flex items-end gap-3 text-sm text-secondary">
               <span>
                 {type === 'pattern' || type === 'example'
                   ? (filteredPatterns.length > 0 ? `${filteredPatterns.length} result(s)` : 'No results yet')
@@ -351,7 +349,7 @@ function SearchResults() {
                     ? (categoryResults.length > 0 ? `${categoryResults.length} category(s)` : 'No results yet')
                     : (logicResults.length > 0 ? `${logicResults.length} logic group(s)` : 'No results yet')}
               </span>
-              <button
+                  <button
                 type="button"
                 className="pill-filter"
                 onClick={() => {
@@ -378,39 +376,35 @@ function SearchResults() {
               </div>
             ) : (
               filteredPatterns.map((pattern) => (
-                <div key={pattern.id} className="surface-card p-6">
+                <Card key={pattern.id} header={
+                  <div className="flex items-center gap-2">
+                    {(() => {
+                      const route = getPatternRoute(pattern.id);
+                      return route ? (
+                        <Link href={route} className="text-secondary hover:text-primary font-medium focus-ring rounded-sm px-0.5">
+                          {pattern.patternName}
+                        </Link>
+                      ) : (
+                        <span className="text-secondary font-medium">{pattern.patternName}</span>
+                      );
+                    })()}
+                    {pattern.id && (
+                      <Badge variant="generic" className="badge-id text-[10px]">ID: {pattern.id}</Badge>
+                    )}
+                    <Badge variant="category" className="text-[10px] font-semibold">{pattern.category}</Badge>
+                  </div>
+                }>
                   <div className="flex justify-between items-start mb-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
-                        {(() => {
-                          const route = getPatternRoute(pattern.id);
-                          return route ? (
-                            <Link href={route} className="text-xl font-semibold text-blue-700 hover:text-blue-900">
-                              {pattern.patternName}
-                            </Link>
-                          ) : (
-                            <h3 className="text-xl font-semibold text-gray-900">{pattern.patternName}</h3>
-                          );
-                        })()}
-                        {pattern.id && (
-                          <span className="shrink-0 inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 text-xs font-medium">
-                            ID: {pattern.id}
-                          </span>
-                        )}
-                      </div>
-                      <span className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
-                        {pattern.category}
-                      </span>
-                    </div>
+                    <div className="flex-1 min-w-0" />
                   </div>
 
                   {pattern.description && (
-                    <p className="text-gray-700 mb-4">{applyHighlight(pattern.description)}</p>
+                    <p className="text-muted mb-4">{applyHighlight(pattern.description)}</p>
                   )}
 
                   {pattern.examples.length > 0 && (
                     <div className="mb-4">
-                      <h4 className="text-md font-medium text-gray-900 mb-2">Examples:</h4>
+                      <h4 className="text-md font-medium text-primary mb-2">Examples:</h4>
                       <div className="space-y-2">
                         {pattern.examples.slice(0, 2).map((example) => {
                           const fullIndex = (typeof example.index === 'number' && pattern.id)
@@ -420,32 +414,32 @@ function SearchResults() {
                           const anchor = pattern.id && typeof example.index === 'number' ? getExampleAnchor(pattern.id, example.index) : undefined;
                           const href = route && anchor ? `${route}${anchor}` : route;
                           return (
-                            <div key={example.id} className="p-3 rounded border-l-4 border-blue-500 bg-surface-2">
+                            <div key={example.id} className="p-3 rounded border-l-4 border-accent">
                               <div className="flex items-start gap-2">
                                 {fullIndex && (
-                                  <span className="mt-0.5 inline-flex items-center rounded bg-gray-200 text-gray-800 px-1.5 py-0.5 text-[10px] font-semibold">
+                                  <span className="mt-0.5 inline-flex items-center rounded bg-surface-2 text-secondary px-1.5 py-0.5 text-[10px] font-semibold">
                                     {fullIndex}
                                   </span>
                                 )}
                                 {typeof example.content === 'string' ? (
                                   href ? (
-                                    <Link href={href} className="text-blue-700 hover:text-blue-900 text-sm">
+                                    <Link href={href} className="text-secondary hover:text-primary text-sm focus-ring rounded-sm px-0.5">
                                       {applyHighlight(example.content)}
                                     </Link>
                                   ) : (
-                                    <p className="text-gray-700 text-sm">{applyHighlight(example.content)}</p>
+                                    <p className="text-muted text-sm">{applyHighlight(example.content)}</p>
                                   )
                                 ) : (
-                                  <div className="text-gray-700 text-sm">
+                                  <div className="text-muted text-sm">
                                     <div className="font-medium mb-2">Complex Example:</div>
                                     {href ? (
                                       <Link href={href} className="block">
-                                        <pre className="whitespace-pre-wrap text-xs bg-gray-100 p-2 rounded max-h-32 overflow-y-auto">
+                                        <pre className="whitespace-pre-wrap text-xs bg-surface-2 p-2 rounded max-h-32 overflow-y-auto">
                                           {JSON.stringify(example.content, null, 2)}
                                         </pre>
                                       </Link>
                                     ) : (
-                                      <pre className="whitespace-pre-wrap text-xs bg-gray-100 p-2 rounded max-h-32 overflow-y-auto">
+                                      <pre className="whitespace-pre-wrap text-xs bg-surface-2 p-2 rounded max-h-32 overflow-y-auto">
                                         {JSON.stringify(example.content, null, 2)}
                                       </pre>
                                     )}
@@ -456,7 +450,7 @@ function SearchResults() {
                           );
                         })}
                         {pattern.examples.length > 2 && (
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-muted">
                             +{pattern.examples.length - 2} more examples
                           </p>
                         )}
@@ -465,11 +459,11 @@ function SearchResults() {
                   )}
 
                   <div className="border-t pt-4">
-                    <div className="flex justify-between items-center text-sm text-gray-600">
+                    <div className="flex justify-between items-center text-sm text-muted">
                       <div>
                         <strong>Source:</strong>
                         {pattern.paper.url ? (
-                          <a href={pattern.paper.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 ml-1">
+                          <a href={pattern.paper.url} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary ml-1 focus-ring rounded-sm px-0.5">
                             {pattern.paper.title || pattern.paper.apaReference}
                           </a>
                         ) : (
@@ -483,18 +477,16 @@ function SearchResults() {
                       )}
                     </div>
                     {pattern.semantic_categorization && (
-                      <div className="mt-2 text-sm">
+                      <div className="mt-2 text-sm text-secondary">
                         <div className="flex items-center gap-2">
-                          <span className="text-gray-600">Semantic Category:</span>
-                          <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
-                            {pattern.semantic_categorization.category}
-                          </span>
-                          <span className="text-gray-500">
+                          <span className="text-muted">Semantic Category:</span>
+                          <Badge variant="ai" className="text-[10px] font-semibold px-2 py-1">{pattern.semantic_categorization.category}</Badge>
+                          <span className="text-muted">
                             ({(pattern.semantic_categorization.confidence * 100).toFixed(1)}% confidence)
                           </span>
                         </div>
                         {pattern.original_paper_category !== pattern.semantic_categorization.category && (
-                          <div className="text-xs text-orange-600 mt-1">
+                          <div className="text-xs text-secondary mt-1">
                             ↗ Changed from: {pattern.original_paper_category || pattern.category}
                           </div>
                         )}
@@ -504,14 +496,14 @@ function SearchResults() {
                       const route = getPatternRoute(pattern.id);
                       return route ? (
                         <div className="mt-3">
-                          <Link href={route} className="inline-flex items-center text-blue-700 hover:text-blue-900 text-sm">
+                          <Link href={route} className="inline-flex items-center text-secondary hover:text-primary text-sm focus-ring rounded-sm px-0.5">
                             View details →
                           </Link>
                         </div>
                       ) : null;
                     })()}
                   </div>
-                </div>
+                </Card>
               ))
             )}
           </div>
@@ -524,13 +516,9 @@ function SearchResults() {
               <div className="surface-card p-8 text-center">Start by entering a query or choose filters above.</div>
             ) : (
               categoryResults.map(c => (
-                <div key={c.slug} className="surface-card p-4 flex items-center justify-between">
-                  <div>
-                    <Link href={`/category/${c.slug}`} className="text-blue-700 hover:text-blue-900 font-medium">{c.name}</Link>
-                    {c.logicName && <span className="ml-2 text-xs text-gray-600">({c.logicName})</span>}
-                  </div>
-                  <div className="text-xs text-gray-600">{c.patternCount ?? 0} patterns</div>
-                </div>
+                <Card key={c.slug} header={<Link href={`/category/${c.slug}`} className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">{c.name}</Link>} meta={`${c.patternCount ?? 0}`}> 
+                  {c.logicName && <div className="text-xs text-muted">Logic: {c.logicName}</div>}
+                </Card>
               ))
             )}
           </div>
@@ -543,18 +531,17 @@ function SearchResults() {
               <div className="surface-card p-8 text-center">Start by entering a query.</div>
             ) : (
               logicResults.map(l => (
-                <div key={l.slug} className="surface-card p-6">
-                  <div className="mb-1 text-lg font-semibold text-gray-900">{l.name} Logic</div>
-                  <div className="text-sm text-gray-700 mb-3">{l.focus}</div>
+                <Card key={l.slug} header={<span className="text-secondary font-medium">{l.name} Logic</span>}>
+                  <div className="text-sm text-muted mb-3">{l.focus}</div>
                   <div className="flex flex-wrap gap-2">
                     {l.categories.map(c => (
-                      <Link key={c.slug} href={`/category/${c.slug}`} className="pill-filter text-sm">
+                      <Link key={c.slug} href={`/category/${c.slug}`} className="pill-filter text-sm focus-ring rounded-sm px-1">
                         {c.name}
-                        <span className="ml-2 text-[10px] text-gray-600">{c.patternCount}</span>
+                        <span className="ml-2 text-[10px] text-muted">{c.patternCount}</span>
                       </Link>
                     ))}
                   </div>
-                </div>
+                </Card>
               ))
             )}
           </div>
@@ -566,15 +553,7 @@ function SearchResults() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={
-  <PageShell noContainer>
-        <div className="container mx-auto px-4 py-16">
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
-        </div>
-      </PageShell>
-    }>
+    <Suspense fallback={<div className="flex items-center justify-center h-64"><Spinner size="lg" /></div>}>
       <SearchResults />
     </Suspense>
   );

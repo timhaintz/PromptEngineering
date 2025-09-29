@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import PageShell from '@/components/layout/PageShell';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { Card, CardGrid } from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
 
 interface Pattern { id: string; paper: { id: string; title: string; authors: string[]; url: string } }
 
@@ -28,41 +31,28 @@ export default async function PapersPage() {
 
   return (
     <PageShell>
-      <div className="space-y-12">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Papers ({papers.length})</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {papers.map(p => (
-            <div key={p.paperId} className="relative group">
-              {/* Visual card content */}
-              <div className="surface-card p-4 group-hover:border-[var(--color-accent)] group-hover:shadow-md pointer-events-none transition-colors">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <h2 className="text-md font-semibold text-gray-900 mb-1 break-words">{p.title}</h2>
-                    <div className="text-xs text-gray-600 mb-1">{p.authors.slice(0,4).join(', ')}{p.authors.length > 4 ? ' et al.' : ''}</div>
-                    {/* Source link under authors */}
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="pointer-events-auto relative z-10 text-blue-600 text-xs hover:text-blue-800"
-                    >
-                      Source
-                    </a>
-                    <div className="text-xs text-gray-600 mt-2">Patterns: {p.count}</div>
-                  </div>
-                </div>
-              </div>
-              {/* Full-tile clickable overlay to paper details */}
-              <Link
-                href={`/papers/${p.paperId}`}
-                aria-label={`Open ${p.title}`}
-                className="absolute inset-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 z-0"
+      <div className="space-y-10">
+        <PageHeader heading="Papers" subtitle={`${papers.length} source paper${papers.length !== 1 ? 's' : ''}`} />
+        <CardGrid>
+          {papers.map(p => {
+            const authorLine = p.authors.slice(0,4).join(', ') + (p.authors.length > 4 ? ' et al.' : '');
+            return (
+              <Card
+                key={p.paperId}
+                header={<span className="block truncate" title={p.title}>{p.title}</span>}
+                meta={<span>{p.count}</span>}
+                className="surface-card-interactive"
               >
-                <span className="sr-only">Open paper</span>
-              </Link>
-            </div>
-          ))}
-        </div>
+                <div className="text-xs text-muted mb-2 truncate" title={authorLine}>{authorLine}</div>
+                <div className="flex items-center gap-2 text-xs">
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">Source</a>
+                  <Badge variant="generic" className="badge-id">Patterns: {p.count}</Badge>
+                  <Link href={`/papers/${p.paperId}`} className="ml-auto text-secondary hover:text-primary focus-ring rounded-sm px-1 text-[11px]">Open →</Link>
+                </div>
+              </Card>
+            );
+          })}
+        </CardGrid>
       </div>
     </PageShell>
   );

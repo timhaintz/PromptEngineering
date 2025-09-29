@@ -13,20 +13,19 @@ export default async function CategoriesPage() {
     <PageShell>
       <div className="space-y-12">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Categories ({categories.length})</h1>
+          <h1 className="text-2xl font-bold text-primary">Categories ({categories.length})</h1>
           {semantic && (
-            <span title="Counts use semantic category assignments"
-                  className="inline-flex items-center gap-1 text-xs bg-purple-100 text-purple-700 border border-purple-200 rounded px-2 py-1">
+            <span title="Counts use semantic category assignments" className="badge-ai">
               Semantic counts
             </span>
           )}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {categories.map(c => (
-            <Link key={c.slug} href={`/category/${c.slug}`} className="surface-card p-4 hover:border-[var(--color-accent)] transition-colors">
+            <Link key={c.slug} href={`/category/${c.slug}`} className="tile focus-ring">
               <div className="flex items-center justify-between">
-                <span className="text-blue-700 font-medium">{c.name}</span>
-                <span className="text-xs text-gray-600">{c.patternCount} patterns</span>
+                <span className="tile-title">{c.name}</span>
+                <span className="tile-meta">{c.patternCount} patterns</span>
               </div>
             </Link>
           ))}

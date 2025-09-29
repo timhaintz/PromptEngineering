@@ -19,3 +19,7 @@ global.ResizeObserver = class {
   unobserve() {}
   disconnect() {}
 };
+
+// Silence jsdom canvas getContext not implemented warnings encountered during axe color contrast scanning
+// jsdom defines getContext but throws; replace with benign stub.
+(HTMLCanvasElement.prototype as any).getContext = () => null;

@@ -16,6 +16,41 @@ beforeEach(() => {
 });
 
 describe('Dark theme regression', () => {
+  it('Dark theme tokens match expected refined palette', () => {
+    const style = getComputedStyle(document.documentElement);
+    const tokens: Record<string,string> = {
+      '--color-bg-base': style.getPropertyValue('--color-bg-base').trim(),
+      '--color-surface-1': style.getPropertyValue('--color-surface-1').trim(),
+      '--color-surface-2': style.getPropertyValue('--color-surface-2').trim(),
+      '--color-surface-hover': style.getPropertyValue('--color-surface-hover').trim(),
+      '--color-border-muted': style.getPropertyValue('--color-border-muted').trim(),
+      '--color-border-strong': style.getPropertyValue('--color-border-strong').trim(),
+      '--color-text-primary': style.getPropertyValue('--color-text-primary').trim(),
+      '--color-text-secondary': style.getPropertyValue('--color-text-secondary').trim(),
+      '--color-text-muted': style.getPropertyValue('--color-text-muted').trim(),
+      '--color-accent': style.getPropertyValue('--color-accent').trim(),
+      '--color-accent-hover': style.getPropertyValue('--color-accent-hover').trim(),
+      '--color-accent-active-bg': style.getPropertyValue('--color-accent-active-bg').trim(),
+      '--color-focus-ring': style.getPropertyValue('--color-focus-ring').trim(),
+      '--color-focus-ring-outer': style.getPropertyValue('--color-focus-ring-outer').trim(),
+    };
+    expect(tokens).toEqual({
+      '--color-bg-base': '#14181E',
+      '--color-surface-1': '#1B2027',
+      '--color-surface-2': '#232A33',
+      '--color-surface-hover': '#2B3540',
+      '--color-border-muted': '#313C47',
+      '--color-border-strong': '#526170',
+      '--color-text-primary': '#E9EDF2',
+      '--color-text-secondary': '#BAC5D1',
+      '--color-text-muted': '#8392A1',
+      '--color-accent': '#2E6FE0',
+      '--color-accent-hover': '#4D8CF0',
+      '--color-accent-active-bg': 'rgba(46, 111, 224, 0.10)',
+      '--color-focus-ring': '#F5F9FF',
+      '--color-focus-ring-outer': '#2E6FE0',
+    });
+  });
   it('Logic page should not render legacy light wrappers', async () => {
     const ui = await LogicPage();
     const { container } = render(ui as any);
