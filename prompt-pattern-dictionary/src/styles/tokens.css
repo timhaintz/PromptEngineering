@@ -1,0 +1,87 @@
+/* Primitive & Semantic Tokens */
+:root {
+  /* Primitive base (light) */
+  --color-base-bg: #ffffff;
+  --color-base-bg-alt: #f7f9fb;
+  --color-base-border: #d8dde3;
+  --color-base-border-strong: #c2c9d1;
+  --color-base-text: #0f1419;
+  --color-base-text-soft: #25313d;
+  --color-base-text-muted: #4b5b68;
+  --color-accent: #2563eb;
+  --color-accent-fg: #ffffff;
+  --color-warn-bg: #fff8e6;
+  --color-warn-border: #f6cf7b;
+  --color-warn-text: #8a6100;
+  --color-focus: #3b82f6;
+  --color-code-bg: #f5f7fa;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --shadow-card: 0 1px 2px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.08);
+
+  /* Semantic mapping (light) */
+  --surface-1: var(--color-base-bg);
+  --surface-2: var(--color-base-bg-alt);
+  --surface-card: #ffffff;
+  --surface-hover: #f1f5f9;
+  --border-default: var(--color-base-border);
+  --border-accent: #93c5fd;
+  --text-primary: var(--color-base-text);
+  --text-secondary: var(--color-base-text-soft);
+  --text-muted: var(--color-base-text-muted);
+  --accent: var(--color-accent);
+  --accent-fg: var(--color-accent-fg);
+  --focus-ring: var(--color-focus);
+  --code-bg: var(--color-code-bg);
+  --heat-0: #f1f5f9; /* very low */
+  --heat-1: #e0f2fe;
+  --heat-2: #bae6fd;
+  --heat-3: #7dd3fc;
+  --heat-4: #38bdf8;
+}
+
+[data-theme='dark'] {
+  --color-base-bg: #0e141a;
+  --color-base-bg-alt: #16202a;
+  --color-base-border: #27323d;
+  --color-base-border-strong: #35424f;
+  --color-base-text: #f2f6f9;
+  --color-base-text-soft: #dde6ee;
+  --color-base-text-muted: #9aa8b5;
+  --color-accent: #3b82f6;
+  --color-accent-fg: #ffffff;
+  --color-warn-bg: #2f2410;
+  --color-warn-border: #8a6100;
+  --color-warn-text: #f6d58a;
+  --color-focus: #60a5fa;
+  --color-code-bg: #1f2a33;
+
+  --surface-1: var(--color-base-bg);
+  --surface-2: var(--color-base-bg-alt);
+  --surface-card: #18222d;
+  --surface-hover: #22303d;
+  --border-default: var(--color-base-border);
+  --border-accent: #2563eb;
+  --text-primary: var(--color-base-text);
+  --text-secondary: var(--color-base-text-soft);
+  --text-muted: var(--color-base-text-muted);
+  --accent: var(--color-accent);
+  --accent-fg: var(--color-accent-fg);
+  --focus-ring: var(--color-focus);
+  --code-bg: var(--color-code-bg);
+  --heat-0: #1e2932;
+  --heat-1: #113044;
+  --heat-2: #0d4766;
+  --heat-3: #0a5e88;
+  --heat-4: #0876aa;
+}
+
+[data-theme='hc'] {
+  /* High contrast derives from dark but increases separation */
+  --surface-card: #0f1b24;
+  --surface-hover: #1d2a35;
+  --border-accent: #4095ff;
+  --focus-ring: #ffffff;
+  --text-muted: #b4c2ce;
+}
