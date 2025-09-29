@@ -40,7 +40,7 @@ describe('banned utility classes', () => {
     }
     if (offenders.length) {
       const details = offenders.map(o => `${o.file}:${o.line} => [${o.token}] ${o.snippet}`).join('\n');
-      fail(`Found banned palette classes. Replace with semantic tokens.\n${details}`);
+      throw new Error(`Found banned palette classes. Replace with semantic tokens.\n${details}`);
     }
   });
 });

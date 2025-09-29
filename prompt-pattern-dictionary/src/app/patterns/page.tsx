@@ -260,7 +260,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
         <div className="mb-4 flex flex-wrap items-center gap-1">
           <span className="text-xs text-muted mr-2">Jump to:</span>
           {letters.map(l => (
-            <Link key={l} href={buildQuery(params, { letter: l === letterFilter ? '' : l })} className={`pill-filter ${l === letterFilter ? '!bg-[var(--color-accent)] !text-white !border-[var(--color-accent)]' : ''}`}>
+            <Link key={l} href={buildQuery(params, { letter: l === letterFilter ? '' : l })} className={`pill-filter ${l === letterFilter ? '!bg-[var(--accent)] !text-white !border-[var(--accent)]' : ''}`}>
               {l}
             </Link>
           ))}
@@ -275,7 +275,7 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
               const newTags = has ? selectedTags.filter(t => t.toLowerCase() !== tag.toLowerCase()) : [...selectedTags, tag];
               const href = buildQuery(params, { tags: joinTagsCsv(newTags) });
               return (
-                <Link key={tag} href={href} className={`chip-filter ${has ? '!bg-[var(--color-accent)] !text-white !border-[var(--color-accent)]' : ''}`}> 
+                <Link key={tag} href={href} className={`chip-filter ${has ? '!bg-[var(--accent)] !text-white !border-[var(--accent)]' : ''}`}> 
                   <span>{tag}</span>
                   <span className="text-muted">{count}</span>
                 </Link>

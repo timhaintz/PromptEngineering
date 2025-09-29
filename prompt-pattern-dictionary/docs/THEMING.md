@@ -41,14 +41,14 @@ Tokens are grouped by functional purpose allowing palette evolution without comp
 
 | Category | Examples | Purpose |
 |----------|----------|---------|
-| Base / Surfaces | `--color-bg-base`, `--color-bg-subtle`, `--color-surface-raised` | Layering & elevation |
-| Borders / Separators | `--color-border`, `--color-border-strong`, `--color-border-focus` | Delineation & focus |
-| Text | `--color-fg-primary`, `--color-fg-secondary`, `--color-fg-muted`, `--color-fg-inverse` | Hierarchical typography |
-| Accent / Brand | `--color-accent`, `--color-accent-emphasis`, `--color-accent-hover` | Interactive / brand emphasis |
-| State / Feedback | `--color-danger`, `--color-warning`, `--color-success`, `--color-info` | Validation & status |
-| Focus | `--color-focus-ring` | Visible focus outline |
-| Code | `--color-code-bg`, `--color-code-border` | Code blocks & inline code |
-| Overlay / Backdrop | `--color-backdrop` | Dialog / dropdown layering |
+| Base / Surfaces | `--surface-1`, `--surface-2`, `--surface-card`, `--surface-hover` | Layering & elevation |
+| Borders / Separators | `--border-default`, `--border-strong` | Delineation & focus |
+| Text | `--text-primary`, `--text-secondary`, `--text-muted` | Hierarchical typography |
+| Accent / Brand | `--accent`, `--accent-hover`, `--accent-active-bg`, `--accent-fg` | Interactive / brand emphasis |
+| State / Feedback | (future) `--status-danger`, `--status-warning`, `--status-success` | Validation & status |
+| Focus | `--focus-ring`, `--focus-ring-outer` | Visible focus outline |
+| Code | `--code-bg` | Code blocks & inline code |
+| Overlay / Backdrop | (future) `--layer-backdrop` | Dialog / dropdown layering |
 | Heatmap (semantic) | `--heat-0`..`--heat-4` | Quantitative intensity scale |
 
 High Contrast (hc) elevates contrast ratios (≥7:1 for primary pairs) and may simplify gradients or neutral surfaces to ensure scannability.
@@ -70,7 +70,7 @@ High Contrast (hc) elevates contrast ratios (≥7:1 for primary pairs) and may s
 | Code | `--code-bg` | Inline/ block code background |
 | Heatmap | `--heat-0..4` | Relative intensity stops |
 
-See `tokens.css` for the full authoritative list.
+Legacy `--color-*` variable names have been removed; do not reintroduce them. See `tokens.css` for the authoritative semantic list.
 
 ## Utilities (Selected)
 | Class | Role |
@@ -138,9 +138,11 @@ Provided via `focus-ring` utility using outline + offset referencing `--focus-ri
 
 ## Regression Guardrails
 - `bannedClasses.test.ts` – fails build if deprecated raw palette utilities reappear.
+- `legacy.variables.ban.test.ts` – asserts no legacy `--color-*` variables re-enter code.
+- `contrast.tokens.test.ts` – validates minimum contrast for core text tiers (light & dark).
 - `data.integrity.test.ts` – ensures `applicationTasksString` present & non-empty.
 - (Planned) Token snapshot tests per mode.
-- (Planned) Computed contrast audit for each semantic pair.
+- (Planned) Expanded computed contrast audit across all semantic pairs & high contrast mode.
 
 ## Migration Notes
 Legacy stored theme `hc` is normalized to `high-contrast`/`hc` consistently. Do not reintroduce inconsistent identifiers.

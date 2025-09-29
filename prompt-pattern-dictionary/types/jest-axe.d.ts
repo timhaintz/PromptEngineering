@@ -1,4 +1,12 @@
-declare module 'jest-axe' {
+import 'jest-axe';
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toHaveNoViolations(): R;
+    }
+  }
+}
+export {};declare module 'jest-axe' {
   import { AxeResults, RunOptions } from 'axe-core';
   export const axe: (container: HTMLElement, options?: RunOptions) => Promise<AxeResults>;
   export const toHaveNoViolations: {

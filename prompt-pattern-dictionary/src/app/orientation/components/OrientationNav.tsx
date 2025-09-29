@@ -19,7 +19,7 @@ export default function OrientationNav({ variant = 'sidebar' }: Props) {
             const active = currentSlug === s.slug || (isAll && false);
             return (
               <li key={s.slug}>
-                <Link href={`/orientation/${s.slug}`} className={`flex gap-2 rounded px-2 py-1 border-l-4 leading-snug transition-colors focus-ring ${active ? 'bg-[var(--color-accent-active-bg)] border-[var(--color-accent)] text-primary font-medium' : 'border-transparent text-secondary hover:bg-surface-hover hover:border-muted'}`} aria-current={active ? 'page' : undefined}>
+                <Link href={`/orientation/${s.slug}`} className={`flex gap-2 rounded px-2 py-1 border-l-4 leading-snug transition-colors focus-ring ${active ? 'bg-[var(--accent-active-bg)] border-accent text-primary font-medium' : 'border-transparent text-secondary hover:bg-surface-hover hover:border-muted'}`} aria-current={active ? 'page' : undefined}>
                   <span className="text-secondary w-6 tabular-nums text-right select-none" aria-hidden="true">{s.number}.</span>
                   <span className="flex-1">{s.title}</span>
                 </Link>

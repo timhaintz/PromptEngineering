@@ -45,8 +45,8 @@
 /* prefer-color-scheme handled in theme.css */
 
 body {
-  background: var(--color-bg-base);
-  color: var(--color-text-primary);
+  background: var(--surface-1);
+  color: var(--text-primary);
   font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
@@ -79,40 +79,40 @@ html, body { transition: background-color var(--transition-base), color var(--tr
 }
 
 /* Focus outline normalization */
-*:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset:2px; }
+*:focus-visible { outline: 2px solid var(--focus-ring); outline-offset:2px; }
 
 /* Link styles */
 a {
-  color: var(--color-accent);
+  color: var(--accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: color var(--transition-fast);
 }
-a:hover, a:focus-visible { color: var(--color-accent-hover); }
+a:hover, a:focus-visible { color: var(--accent-hover); }
 
 /* Buttons baseline (non-Tailwind elements) */
 button:not([class]) {
   font: inherit;
-  background: var(--color-accent);
+  background: var(--accent);
   color: #fff;
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--accent);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: background var(--transition-fast), color var(--transition-fast);
 }
-button:not([class]):hover { background: var(--color-accent-hover); }
-button:not([class]):focus-visible { outline: 2px solid var(--color-focus-ring); }
+button:not([class]):hover { background: var(--accent-hover); }
+button:not([class]):focus-visible { outline: 2px solid var(--focus-ring); }
 
 /* Muted text utility */
-.text-muted { color: var(--color-text-muted); }
+.text-muted { color: var(--text-muted); }
 
 /* Surfaces */
-.surface { background: var(--color-surface-1); }
-.surface-alt { background: var(--color-surface-2); }
+.surface { background: var(--surface-1); }
+.surface-alt { background: var(--surface-2); }
 
 /* Border utility */
-.border-base { border-color: var(--color-border-muted); }
+.border-base { border-color: var(--border-default); }
 
 /* Reduced motion adjustments */
 @media (prefers-reduced-motion: reduce) {

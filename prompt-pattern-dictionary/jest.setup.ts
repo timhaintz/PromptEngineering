@@ -1,3 +1,12 @@
+// Global jest setup for polyfills used across tests
+import { TextEncoder, TextDecoder } from 'util';
+(global as any).TextEncoder = (global as any).TextEncoder || TextEncoder;
+(global as any).TextDecoder = (global as any).TextDecoder || TextDecoder;
+
+// Basic fetch stub (can be overridden per test)
+if (!(global as any).fetch) {
+  (global as any).fetch = jest.fn(async () => ({ ok: true, json: async () => ([])}));
+}
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: (query: string): MediaQueryList => ({

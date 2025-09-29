@@ -163,7 +163,7 @@ const Combining = () => (
     <p className="text-sm">Compose multi-step flows deliberately. Each link should produce a constrained artifact consumed safely by the next step.</p>
     <table className="text-xs mt-3 border w-full">
       <thead>
-        <tr className="bg-gray-100 text-gray-700">
+  <tr className="bg-surface-2 text-secondary">
           <th className="px-2 py-1 text-left font-semibold">Flow Stage</th>
           <th className="px-2 py-1 text-left font-semibold">Example Pattern</th>
           <th className="px-2 py-1 text-left font-semibold">Output Form</th>

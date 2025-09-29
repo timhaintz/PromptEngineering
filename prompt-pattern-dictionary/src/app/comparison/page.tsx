@@ -23,17 +23,17 @@ export default function ComparisonPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-primary">
                 Pattern Comparison
               </h1>
-              <p className="mt-2 text-lg text-gray-600">
+              <p className="mt-2 text-lg text-secondary">
                 Analyze similarities between prompt patterns using semantic embeddings
               </p>
             </div>
             <div className="flex items-center space-x-4">
               <Link
                 href="/"
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="text-accent hover:underline font-medium"
               >
                 ← Back to Dictionary
               </Link>
@@ -50,8 +50,8 @@ export default function ComparisonPage() {
       {/* Footer Info */}
       <div className="mt-16 surface-card border-t rounded-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-600">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">
+          <div className="text-center text-secondary">
+            <h3 className="text-lg font-medium text-primary mb-4">
               About Pattern Comparison
             </h3>
             <p className="max-w-3xl mx-auto text-sm leading-relaxed">

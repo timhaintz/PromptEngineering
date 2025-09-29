@@ -3,7 +3,8 @@
 import React from 'react';
 import { jest, describe, it, expect, beforeAll } from '@jest/globals';
 import { render, act } from '@testing-library/react';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
+import 'jest-axe/extend-expect';
 import '@testing-library/jest-dom';
 
 // Mock next/navigation for client components that expect App Router context
@@ -64,8 +65,7 @@ beforeAll(async () => {
   SearchPage = mod.default ?? mod;
 });
 
-// Provide matcher as object for Jest extend
-expect.extend({ toHaveNoViolations: toHaveNoViolations as any });
+// jest-axe matcher already registered via extend-expect import
 
 describe('Accessibility smoke tests', () => {
   it('Logic page has no critical a11y violations', async () => {
@@ -73,7 +73,7 @@ describe('Accessibility smoke tests', () => {
     const { container } = render(ui as any);
     await flushAsyncEffects();
   const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
-  (expect as any)(results).toHaveNoViolations();
+  expect(results).toHaveNoViolations();
   });
 
   it('Patterns page has no critical a11y violations', async () => {
@@ -81,13 +81,13 @@ describe('Accessibility smoke tests', () => {
     const { container } = render(ui as any);
     await flushAsyncEffects();
   const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
-  (expect as any)(results).toHaveNoViolations();
+  expect(results).toHaveNoViolations();
   }, 15000);
 
   it('Search page has no critical a11y violations', async () => {
     const { container } = render(<SearchPage />);
     await flushAsyncEffects();
   const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
-  (expect as any)(results).toHaveNoViolations();
+  expect(results).toHaveNoViolations();
   }, 15000);
 });

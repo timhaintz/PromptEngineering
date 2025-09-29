@@ -1,14 +1,24 @@
 // @jest-environment node
 import fs from 'fs';
 import path from 'path';
+import type { NormalizedPromptPattern } from '../types/patterns';
 
 describe('normalized-patterns data integrity', () => {
   const file = path.join(process.cwd(), 'public', 'data', 'normalized-patterns.json');
-  let data: any;
+  interface NormalizedPatternsFile {
+    patterns: NormalizedPromptPattern[];
+    // allow additional metadata keys without failing type checking
+    [key: string]: unknown;
+  }
+  let data: NormalizedPatternsFile;
   beforeAll(() => {
     expect(fs.existsSync(file)).toBe(true);
     const raw = fs.readFileSync(file, 'utf8');
-    data = JSON.parse(raw);
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== 'object' || !('patterns' in parsed) || !Array.isArray((parsed as { patterns?: unknown }).patterns)) {
+      throw new Error('normalized-patterns.json malformed: missing patterns array');
+    }
+    data = parsed as NormalizedPatternsFile;
   });
 
   it('has patterns array', () => {
