@@ -302,7 +302,8 @@ const FAQ = () => (
     </details>
     <details className="group border rounded p-3 bg-white">
       <summary className="cursor-pointer font-medium">How are similar patterns computed?</summary>
-      <p className="mt-2 text-sm">Vector embeddings over normalized text fields (name, description, usage-related content, examples). Scores surface exploratory neighbors, not authoritative taxonomy.</p>
+      <p className="mt-2 text-sm">Pattern similarity uses cosine similarity over an embedding composed of the pattern’s name, description, and up to the first three example prompts. Results are exploratory semantic neighbors—not a curated taxonomy.</p>
+      <p className="mt-2 text-sm">Separate per‑example embeddings are also generated for example‑to‑example cosine similarity; these appear in the UI under <span className="font-semibold">Similar Examples</span>.</p>
     </details>
   </div>
 );

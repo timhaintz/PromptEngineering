@@ -333,8 +333,16 @@ export default function PatternDetail({
             >
               <span className="text-base align-middle">{similarPatternsOpen ? '▾' : '▸'}</span>
             </button>
-            <div className="text-sm font-semibold text-gray-900">
-              Similar Patterns ({similarPatterns[pattern.id]?.length ?? 0})
+            <div className="text-sm font-semibold text-primary flex items-center gap-1">
+              <span>Similar Patterns ({similarPatterns[pattern.id]?.length ?? 0})</span>
+              <span
+                aria-label="Pattern similarity info"
+                role="img"
+                className="inline-block cursor-help text-secondary hover:text-primary"
+                title="Pattern similarity uses cosine similarity over an embedding composed of the pattern’s name, description, and up to the first three example prompts. Results are exploratory semantic neighbors—not a curated taxonomy. Separate per-example embeddings drive Similar Examples."
+              >
+                ℹ️
+              </span>
             </div>
           </div>
           {similarPatternsOpen && (

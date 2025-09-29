@@ -12,11 +12,11 @@ asgiref==3.8.1
 asttokens==3.0.0
 asyncer==0.0.8
 attrs==25.3.0
-autogen==0.8.5
-autogen-agentchat==0.5.1
-autogen-core==0.5.1
-autogen-ext==0.5.1
-av==14.2.0
+autogen==0.8.7
+autogen-agentchat==0.5.3
+autogen-core==0.5.3
+autogen-ext==0.5.3
+av==14.3.0
 azure-ai-inference==1.0.0b9
 azure-core==1.33.0
 azure-identity==1.21.0
@@ -164,7 +164,7 @@ posthog==3.23.0
 prance==23.6.21.0
 prompt_toolkit==3.0.50
 propcache==0.3.1
-protobuf==6.30.2
+protobuf==5.29.4
 prov==2.0.1
 pure_eval==0.2.3
 puremagic==1.28
