@@ -42,7 +42,6 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
  - **Numbered Sections & Skip Link**: Added ordered heading numbering for cognitive mapping plus a skip-to-content link for keyboard and screen reader efficiency.
  - **Pattern Title Wrapping**: Removed legacy truncation so full pattern names are always visible for better information scent.
  - **Theme System Overhaul**: Replaced per-component hook with a centralized `ThemeProvider` managing Light / Dark / System (auto) / planned High-Contrast. Persists user-selected mode in `pe-theme` and the resolved applied mode (after system evaluation) in `pe-theme-effective`. Pre-hydration inline script sets both `data-theme` (effective) and `data-theme-mode` (selected) to eliminate flash-of-unstyled-theme (FOUC) and enable analytics on divergence between chosen and resolved modes. Cross-tab + system preference changes sync instantly via `storage` + `matchMedia` listeners.
- - **Theme System Overhaul**: Replaced per-component hook with a centralized `ThemeProvider` managing Light / Dark / System (auto) / planned High-Contrast. Persists user-selected mode in `pe-theme` and the resolved applied mode (after system evaluation) in `pe-theme-effective`. Pre-hydration inline script sets both `data-theme` (effective) and `data-theme-mode` (selected) to eliminate flash-of-unstyled-theme (FOUC) and enable analytics on divergence between chosen and resolved modes. Cross-tab + system preference changes sync instantly via `storage` + `matchMedia` listeners.
  - **Deprecated Hook Removed**: Legacy `useTheme` hook fully removed; Jest updated to `next/jest` and Babel config dropped to restore SWC (improves build speed and resolves `next/font` conflict).
  - **Tokenized Dark Search Panel**: Homepage search interface migrated from fixed light colors to design tokens (bg-surface-*), ensuring seamless Dark/System mode parity.
  - **Application Task Chips**: New `applicationTasksString` rendered as actionable chips under “Application Domains and Tasks” on pattern detail views, complementing the narrative Application field.
@@ -296,6 +295,10 @@ python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --applicationta
 - [Folder Structure Guide](docs/FOLDER_STRUCTURE.md)
 - [API Documentation](docs/API.md)
 - [Deployment Guide](docs/DEPLOYMENT.md)
+- [Theming & Design Tokens (Canonical)](docs/THEMING.md)
+- [Accessibility & Readability Program](docs/ACCESSIBILITY.md)
+
+> Note: `docs/THEMING.md` and `docs/ACCESSIBILITY.md` are the single sources of truth. Any theming or accessibility changes must update those files. No other copies should exist elsewhere in the repository.
 
 ## 🌐 Deployment
 
