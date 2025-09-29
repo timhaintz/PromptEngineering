@@ -241,41 +241,43 @@ export default function PatternDetail({
         {/* Application moved under Template */}
   <dt className="font-semibold text-secondary">Application:</dt>
   <dd className="text-secondary">
-          {isPolicyFallback ? (
-            <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
-              <span className="font-semibold">Notice:</span>
-              <span>{applicationString ?? (appTags ? appTags[0] : '')}</span>
+          {/* Primary presentation: application tasks chips */}
+          {tasks.length > 0 ? (
+            <div className="flex flex-wrap gap-2" aria-label="Application tasks">
+              {tasks.map((t, i) => (
+                <span key={i} className="chip-task">{t}</span>
+              ))}
             </div>
-          ) : applicationString ? (
-            <p className="text-sm whitespace-pre-wrap">{applicationString}</p>
-          ) : appTags ? (
-            renderAsList ? (
-              <ul className="list-disc pl-5 space-y-1">
-                {appTags.map((t, idx) => (
-                  <li key={idx} className="leading-snug">{t}</li>
-                ))}
-              </ul>
-            ) : (
-              <div className="flex flex-wrap gap-2">
-                {appTags.map((t, idx) => (
-                  <span key={idx} className="chip-task">{t}</span>
-                ))}
-              </div>
-            )
-          ) : 'N/A'}
+          ) : (
+            // Fallback: preserve (but visually still show) legacy application data without deletion.
+            <>
+              {isPolicyFallback ? (
+                <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
+                  <span className="font-semibold">Notice:</span>
+                  <span>{applicationString ?? (appTags ? appTags[0] : '')}</span>
+                </div>
+              ) : applicationString ? (
+                <p className="text-sm whitespace-pre-wrap">{applicationString}</p>
+              ) : appTags ? (
+                renderAsList ? (
+                  <ul className="list-disc pl-5 space-y-1">
+                    {appTags.map((t, idx) => (
+                      <li key={idx} className="leading-snug">{t}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {appTags.map((t, idx) => (
+                      <span key={idx} className="chip-task">{t}</span>
+                    ))}
+                  </div>
+                )
+              ) : 'N/A'}
+            </>
+          )}
           {attrs?.usageSummary && (
             <div className="mt-2 text-muted">
               <span className="font-semibold">How to apply:</span> {attrs.usageSummary}
-            </div>
-          )}
-          {tasks.length > 0 && (
-            <div className="mt-3">
-              <div className="text-sm font-semibold text-secondary">Application Domains & Tasks:</div>
-              <div className="mt-1 flex flex-wrap gap-2" aria-label="Application domains and tasks list">
-                {tasks.map((t, i) => (
-                  <span key={i} className="chip-task">{t}</span>
-                ))}
-              </div>
             </div>
           )}
         </dd>
