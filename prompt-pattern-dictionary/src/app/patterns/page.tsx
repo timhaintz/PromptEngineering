@@ -289,21 +289,34 @@ export default async function PatternsPage({ searchParams }: { searchParams?: Pr
             const norm = normMap.get(p.id);
             const parts = idParts(p.id);
             const href = `/papers/${parts.paperId}#p-${parts.categoryIndex}-${parts.patternIndex}`;
+            const turnLabel = norm?.turn ? (norm.turn === 'multi' ? 'Multi-turn' : 'Single-turn') : null;
             return (
-              <Card key={p.id} href={href} header={
-                <div className="flex items-center gap-2">
-                  <span className="break-words whitespace-normal flex-1 text-primary">{p.patternName}</span>
+              <Card key={p.id} href={href}>
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <span className="flex-1 text-primary font-semibold break-words leading-snug" title={p.patternName}>{p.patternName}</span>
+                  <span className="badge-id text-[10px] font-semibold shrink-0">{p.id}</span>
+                </div>
+                <div className="flex flex-wrap gap-2 text-xs mb-2">
                   <Badge variant="category" className="text-[10px] font-semibold">{p.category}</Badge>
                   {norm?.aiAssisted && (
-                    <Badge variant="ai" className="text-[10px] font-semibold" title={`AI-assisted fields: ${(norm.aiAssistedFields || []).join(', ')}`}>AI-assisted</Badge>
+                    <Badge
+                      variant="ai"
+                      className="text-[10px] font-semibold"
+                      title={`AI-assisted fields: ${(norm.aiAssistedFields || []).join(', ')}`}
+                    >
+                      AI-assisted
+                    </Badge>
+                  )}
+                  {turnLabel && (
+                    <Badge variant="generic" className="text-[10px] font-semibold">{turnLabel}</Badge>
                   )}
                 </div>
-              } meta={p.id} footer={
-                <>Examples: {p.examples.length}{norm?.turn ? ` • ${norm.turn === 'multi' ? 'Multi' : 'Single'}` : ''}</>
-              }>
                 {p.description && (
-                  <p className="text-sm text-muted mt-1 line-clamp-2">{p.description}</p>
+                  <p className="text-sm text-muted line-clamp-2">{p.description}</p>
                 )}
+                <div className="mt-3 text-xs text-muted">
+                  Examples: {p.examples.length}
+                </div>
               </Card>
             );
           })}

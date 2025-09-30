@@ -1,10 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import Link from 'next/link';
 import PageShell from '@/components/layout/PageShell';
 import { PageHeader } from '@/components/ui/PageHeader';
-import { Card, CardGrid } from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
+import PapersGrid from '@/components/papers/PapersGrid';
 
 interface Pattern { id: string; paper: { id: string; title: string; authors: string[]; url: string } }
 
@@ -33,26 +31,7 @@ export default async function PapersPage() {
     <PageShell>
       <div className="space-y-10">
         <PageHeader heading="Papers" subtitle={`${papers.length} source paper${papers.length !== 1 ? 's' : ''}`} />
-        <CardGrid>
-          {papers.map(p => {
-            const authorLine = p.authors.slice(0,4).join(', ') + (p.authors.length > 4 ? ' et al.' : '');
-            return (
-              <Card
-                key={p.paperId}
-                header={<span className="block truncate" title={p.title}>{p.title}</span>}
-                meta={<span>{p.count}</span>}
-                className="surface-card-interactive"
-              >
-                <div className="text-xs text-muted mb-2 truncate" title={authorLine}>{authorLine}</div>
-                <div className="flex items-center gap-2 text-xs">
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">Source</a>
-                  <Badge variant="generic" className="badge-id">Patterns: {p.count}</Badge>
-                  <Link href={`/papers/${p.paperId}`} className="ml-auto text-secondary hover:text-primary focus-ring rounded-sm px-1 text-[11px]">Open →</Link>
-                </div>
-              </Card>
-            );
-          })}
-        </CardGrid>
+        <PapersGrid papers={papers} />
       </div>
     </PageShell>
   );

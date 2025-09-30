@@ -226,10 +226,10 @@ function SearchResults() {
       <div className="container mx-auto px-4 py-16">
         <PageHeader heading="Search" compact />
 
-        {/* Controls */}
+  {/* Controls */}
   <div className="surface-card p-4 mb-6">
-          <div className="flex flex-col md:flex-row gap-3 md:items-end">
-            <div className="flex-1">
+    <div className="flex flex-col md:flex-row md:flex-wrap gap-3 md:items-end">
+      <div className="flex-1 md:basis-full min-w-0">
               <label htmlFor="search-input" className="block text-xs text-muted mb-1">Search text</label>
               <input id="search-input" defaultValue={query} onChange={(e) => {
                 const params = new URLSearchParams(Array.from(searchParams.entries()));
