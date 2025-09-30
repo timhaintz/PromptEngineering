@@ -116,17 +116,26 @@ export default async function ExamplesPage({ searchParams }: { searchParams?: Pr
         </div>
 
         <ul className="space-y-3" aria-label="Example list">
-          {slice.map(example => (
-            <li key={example.exampleId} className="surface-card p-4 hover:surface-card-hover transition">
-              <div className="flex flex-wrap items-center gap-2 mb-2">
-                <code className="badge-id" aria-label="Example ID">{example.exampleId}</code>
-                <Link href={`/papers/${example.patternId.split('-')[0]}#e-${example.patternId}-${example.exampleId.split('-').slice(-1)}`} className="pill-filter text-xs" aria-label="Go to example in paper">Open</Link>
-                <Badge variant="category" className="text-[10px] font-semibold">{example.category}</Badge>
-              </div>
-              <div className="text-sm text-secondary mb-1">{example.excerpt}</div>
-              <div className="text-xs text-muted">Pattern: <Link href={`/patterns?focus=${example.patternId}`} className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">{example.patternName}</Link></div>
-            </li>
-          ))}
+          {slice.map(example => {
+            const [paperId, categoryIndex, patternIndex] = example.patternId.split('-');
+            const exampleIndex = example.exampleId.split('-').pop();
+            const exampleHref = paperId && categoryIndex && patternIndex && exampleIndex !== undefined
+              ? `/papers/${paperId}#e-${categoryIndex}-${patternIndex}-${exampleIndex}`
+              : undefined;
+            return (
+              <li key={example.exampleId} className="surface-card p-4 hover:surface-card-hover transition">
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <code className="badge-id" aria-label="Example ID">{example.exampleId}</code>
+                  {exampleHref && (
+                    <Link href={exampleHref} className="pill-filter text-xs" aria-label="Go to example in paper">Open</Link>
+                  )}
+                  <Badge variant="category" className="text-[10px] font-semibold">{example.category}</Badge>
+                </div>
+                <div className="text-sm text-secondary mb-1">{example.excerpt}</div>
+                <div className="text-xs text-muted">Pattern: <Link href={`/patterns?focus=${example.patternId}`} className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">{example.patternName}</Link></div>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Pagination */}

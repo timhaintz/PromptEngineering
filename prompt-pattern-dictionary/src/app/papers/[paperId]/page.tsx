@@ -91,7 +91,7 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
                 };
               })();
               return (
-                <div key={p.id} id={anchor}>
+                <div key={p.id} id={anchor} className="scroll-mt-28">
                   <PatternDetail
                     pattern={{ id: p.id, patternName: p.patternName, description: p.description, category: p.category, examples: p.examples }}
                     attrs={attrs}

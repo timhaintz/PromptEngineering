@@ -112,6 +112,25 @@ export default function PatternDetail({
       .filter(Boolean);
   }, [attrs?.applicationTasksString]);
   const [paperId, categoryIndex, patternIndex] = pattern.id.split('-');
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const hash = window.location.hash.replace('#', '');
+    const matchesShort = hash.startsWith(`e-${categoryIndex}-${patternIndex}-`);
+    const matchesFull = hash.startsWith(`e-${paperId}-${categoryIndex}-${patternIndex}-`);
+    if ((matchesShort || matchesFull) && !examplesOpen) {
+      setExamplesOpen(true);
+    }
+    const listener = () => {
+      const current = window.location.hash.replace('#', '');
+      if (current.startsWith(`e-${categoryIndex}-${patternIndex}-`) || current.startsWith(`e-${paperId}-${categoryIndex}-${patternIndex}-`)) {
+        setExamplesOpen(true);
+      }
+    };
+    window.addEventListener('hashchange', listener);
+    return () => window.removeEventListener('hashchange', listener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paperId, categoryIndex, patternIndex]);
+
   const isPolicyFallback = useMemo(() => {
     const note = "unable to process";
     const policy = "content management policy";
@@ -140,25 +159,25 @@ export default function PatternDetail({
   }, [appTags]);
 
   return (
-  <div className="surface-card p-4">
+  <div className="surface-card p-4 scroll-mt-28">
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2 group">
-            {/* Hover-only permalink chain icon (larger, like docs anchors) */}
+            <div className="text-lg font-semibold text-primary break-words">{pattern.patternName}</div>
+            <ExampleIdBadge id={`ID: ${pattern.id}`} />
+            {/* Permalink icon moved to end so title text aligns with definition list headings */}
             <a
               href={context === 'paper' ? `#p-${categoryIndex}-${patternIndex}` : `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`}
-              className="opacity-0 group-hover:opacity-100 transition-opacity text-muted hover:text-secondary focus:opacity-100 focus-ring rounded-sm"
+              className="opacity-0 group-hover:opacity-100 transition-opacity text-muted hover:text-secondary focus:opacity-100 focus-ring rounded-sm ml-1"
               title="Permalink"
               aria-label="Permalink"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 mr-1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M10.59 13.41a1 1 0 010-1.41l3.3-3.3a3 3 0 114.24 4.24l-1.65 1.65a1 1 0 11-1.41-1.41l1.65-1.65a1 1 0 10-1.42-1.42l-3.3 3.3a1 1 0 01-1.41 0z"/>
                 <path d="M13.41 10.59a1 1 0 010 1.41l-3.3 3.3a3 3 0 11-4.24-4.24l1.65-1.65a1 1 0 111.41 1.41L7.29 12.3a1 1 0 101.42 1.42l3.3-3.3a1 1 0 011.41 0z"/>
               </svg>
             </a>
-            <div className="text-lg font-semibold text-primary break-words">{pattern.patternName}</div>
-            <ExampleIdBadge id={`ID: ${pattern.id}`} />
             {attrs?.aiAssisted && (attrs.aiAssistedFields || []).includes('usageSummary') && (
               <span
                 className="inline-flex items-center rounded bg-amber-100 text-amber-800 px-1.5 py-0.5 text-[10px] font-medium border border-amber-200"
@@ -314,7 +333,13 @@ export default function PatternDetail({
                   .slice(0, 5) as Array<{ id: string; similarity: number }>;
               }
               return (
-                <ExampleRow key={ex.id} patternId={pattern.id} ex={ex} similar={exSims.length ? exSims : fallback} />
+                <ExampleRow
+                  key={ex.id}
+                  patternId={pattern.id}
+                  ex={ex}
+                  similar={exSims.length ? exSims : fallback}
+                  context={context}
+                />
               );
             })}
           </ul>
@@ -368,25 +393,141 @@ export default function PatternDetail({
 }
 
 
-function ExampleRow({ patternId, ex, similar }: { patternId: string; ex: Example; similar: Array<{ id: string; similarity: number }> }) {
+function ExampleRow({
+  patternId,
+  ex,
+  similar,
+  context,
+}: {
+  patternId: string;
+  ex: Example;
+  similar: Array<{ id: string; similarity: number }>;
+  context: 'paper' | 'category';
+}) {
   const [open, setOpen] = useState(false); // default collapsed for similar examples
+  const [copied, setCopied] = useState(false);
+  const [highlighted, setHighlighted] = useState(false);
+  const parts = patternId.split('-');
+  const cat = parts[1];
+  const pat = parts[2];
+  const exIdx = ex.index;
+  // Provide both short and full id forms for compatibility: #e-cat-pat-ex and #e-paper-cat-pat-ex
+  const shortId = `e-${cat}-${pat}-${exIdx}`;
+  const fullId = `e-${parts[0]}-${cat}-${pat}-${exIdx}`;
+  const sharePath = `/papers/${parts[0]}#${shortId}`;
+  const localHref = context === 'paper' ? `#${shortId}` : sharePath;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let timeout: number | undefined;
+    const applyHighlight = () => {
+      if (timeout) {
+        window.clearTimeout(timeout);
+      }
+      const hash = window.location.hash.replace('#', '');
+      if (hash === shortId || hash === fullId) {
+        const target = document.getElementById(shortId) || document.querySelector(`[data-alt-id="${fullId}"]`);
+        if (target && 'scrollIntoView' in target) {
+          (target as HTMLElement).scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
+        setHighlighted(true);
+        timeout = window.setTimeout(() => setHighlighted(false), 1600);
+      }
+    };
+    applyHighlight();
+    window.addEventListener('hashchange', applyHighlight);
+    return () => {
+      if (timeout) {
+        window.clearTimeout(timeout);
+      }
+      window.removeEventListener('hashchange', applyHighlight);
+    };
+  }, [shortId, fullId]);
+
+  const handleCopy = async () => {
+    if (typeof window === 'undefined') return;
+    const textToCopy = ex.content;
+    const complete = () => {
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    };
+    const fallbackCopy = () => {
+      if (typeof document === 'undefined') return false;
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      let success = false;
+      try {
+        success = document.execCommand('copy');
+      } catch {
+        success = false;
+      }
+      document.body.removeChild(textarea);
+      return success;
+    };
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(textToCopy);
+        complete();
+      } else if (fallbackCopy()) {
+        complete();
+      }
+    } catch {
+      if (fallbackCopy()) {
+        complete();
+      }
+    }
+  };
+
+  const rowClasses = `p-3 rounded border-l-4 border-accent bg-surface-2 scroll-mt-28 transition-shadow ${
+    highlighted ? 'ring-2 ring-accent ring-offset-2 shadow-sm' : ''
+  }`;
   return (
-  <li id={`e-${patternId.split('-')[1]}-${patternId.split('-')[2]}-${ex.index}`} className="p-3 rounded border-l-4 border-accent bg-surface-2">
+  <li id={shortId} data-alt-id={fullId} className={rowClasses} data-example-index={exIdx}>
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-2 min-w-0">
           <ExampleIdBadge id={`${patternId}-${ex.index}`} />
           <span className="text-sm text-secondary whitespace-pre-wrap break-words">{ex.content}</span>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen(v => !v)}
-          className="text-muted hover:text-secondary shrink-0 focus-ring rounded-sm"
-          aria-controls={`sim-${patternId}-${ex.index}`}
-          title={open ? 'Hide similar examples' : 'Show similar examples'}
-        >
-          <span className="text-sm">{open ? '▾' : '▸'}</span>
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <a
+            href={localHref}
+            className="text-muted hover:text-secondary focus-ring rounded-sm"
+            aria-label="Permalink to this example"
+            title="Permalink"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+              <path d="M10.59 13.41a1 1 0 010-1.41l3.3-3.3a3 3 0 114.24 4.24l-1.65 1.65a1 1 0 11-1.41-1.41l1.65-1.65a1 1 0 10-1.42-1.42l-3.3 3.3a1 1 0 01-1.41 0z" />
+              <path d="M13.41 10.59a1 1 0 010 1.41l-3.3 3.3a3 3 0 11-4.24-4.24l1.65-1.65a1 1 0 111.41 1.41L7.29 12.3a1 1 0 101.42 1.42l3.3-3.3a1 1 0 011.41 0z" />
+            </svg>
+          </a>
+          <button
+            type="button"
+            onClick={handleCopy}
+            className={`text-muted focus-ring rounded-sm transform-gpu transition-transform duration-150 ease-out hover:text-secondary hover:-translate-y-0.5 hover:scale-110 active:scale-95 ${copied ? 'text-primary animate-pulse' : ''}`}
+            title={copied ? 'Copied!' : 'Copy prompt example'}
+            aria-label={copied ? 'Prompt example copied' : 'Copy prompt example'}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+              <path d="M9 2a3 3 0 00-3 3v9a3 3 0 003 3h6a3 3 0 003-3V5a3 3 0 00-3-3H9zm0 2h6a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V5a1 1 0 011-1zm-4 6a1 1 0 00-2 0v6a5 5 0 005 5h8a5 5 0 005-5v-6a1 1 0 10-2 0v6a3 3 0 01-3 3H8a3 3 0 01-3-3v-6z" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpen(v => !v)}
+            className="text-muted hover:text-secondary shrink-0 focus-ring rounded-sm"
+            aria-controls={`sim-${patternId}-${ex.index}`}
+            title={open ? 'Hide similar examples' : 'Show similar examples'}
+          >
+            <span className="text-sm">{open ? '▾' : '▸'}</span>
+          </button>
+        </div>
       </div>
+  <span className="sr-only" aria-live="polite">{copied ? 'Prompt example copied to clipboard' : ''}</span>
       {open && (
         <div id={`sim-${patternId}-${ex.index}`} className="mt-2">
           <div className="text-xs text-muted mb-1">Similar Examples</div>
