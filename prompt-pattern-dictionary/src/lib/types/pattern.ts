@@ -1,5 +1,5 @@
 /**
- * TypeScript definitions for the Prompt Pattern Dictionary
+ * TypeScript definitions for the Ballarat AI Prompt Dictionary
  * Based on the structure of promptpatterns.json
  */
 

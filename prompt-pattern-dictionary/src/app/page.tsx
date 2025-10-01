@@ -42,7 +42,7 @@ export default async function HomePage() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-primary mb-4">
-            Prompt Pattern Dictionary
+            Ballarat AI Prompt Dictionary
           </h1>
           <p className="text-xl text-secondary max-w-3xl mx-auto mb-8">
             A comprehensive, searchable collection of prompt engineering patterns. 

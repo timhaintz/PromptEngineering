@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Prompt Pattern Dictionary",
-  description: "A searchable library of prompt patterns, papers, and examples organized by logic and category.",
+  title: "Ballarat AI Prompt Dictionary",
+  description: "Ballarat AI's searchable library of prompt patterns, papers, and examples organized by logic and category.",
 };
 
 export default function RootLayout({

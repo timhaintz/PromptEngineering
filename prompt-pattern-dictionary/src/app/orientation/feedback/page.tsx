@@ -2,7 +2,7 @@ import React from 'react';
 import { ORIENTATION_SECTIONS } from '../data/sections';
 import SectionPager from '../components/SectionPager';
 
-export const metadata = { title: 'Orientation – Feedback', description: 'Provide feedback about the prompt pattern dictionary.' };
+export const metadata = { title: 'Orientation – Feedback', description: 'Provide feedback about the Ballarat AI Prompt Dictionary.' };
 
 export default function FeedbackPage() {
   const meta = ORIENTATION_SECTIONS.find(s => s.slug === 'feedback')!;

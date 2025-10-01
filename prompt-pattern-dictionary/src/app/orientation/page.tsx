@@ -3,7 +3,7 @@ import { ORIENTATION_SECTIONS } from './data/sections';
 import OrientationNav from './components/OrientationNav';
 
 export const metadata = {
-  title: 'Orientation | Prompt Pattern Dictionary',
+  title: 'Orientation | Ballarat AI Prompt Dictionary',
   description: 'Hub for Orientation sections, quick start, and consolidated view.'
 };
 

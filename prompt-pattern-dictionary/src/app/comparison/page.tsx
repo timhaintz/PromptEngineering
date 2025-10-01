@@ -11,7 +11,7 @@ import Link from 'next/link';
 import PageShell from '@/components/layout/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Pattern Comparison - Prompt Pattern Dictionary',
+  title: 'Pattern Comparison - Ballarat AI Prompt Dictionary',
   description: 'Compare multiple prompt patterns using semantic similarity analysis to discover relationships and patterns.',
 };
 

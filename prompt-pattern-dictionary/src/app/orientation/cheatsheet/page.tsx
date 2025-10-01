@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Orientation Cheat Sheet | Prompt Pattern Dictionary',
+  title: 'Orientation Cheat Sheet | Ballarat AI Prompt Dictionary',
   description: 'Printable condensed reference for core prompt pattern usage principles.'
 };
 

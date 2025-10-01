@@ -85,7 +85,7 @@ export default function ComparisonDashboard({ className = '' }: ComparisonDashbo
       metadata: {
         totalPatterns: comparison.patterns.length,
         comparisonCount: comparison.patterns.length * (comparison.patterns.length - 1) / 2,
-        exportedBy: 'PromptPattern Dictionary'
+        exportedBy: 'Ballarat AI Prompt Dictionary'
       }
     };
 

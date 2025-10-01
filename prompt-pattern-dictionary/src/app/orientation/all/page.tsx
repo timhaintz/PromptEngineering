@@ -4,7 +4,7 @@ import OrientationNav from '../components/OrientationNav';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Orientation – All Sections | Prompt Pattern Dictionary',
+  title: 'Orientation – All Sections | Ballarat AI Prompt Dictionary',
   description: 'Complete consolidated Orientation reference (legacy single-page view).'
 };
 

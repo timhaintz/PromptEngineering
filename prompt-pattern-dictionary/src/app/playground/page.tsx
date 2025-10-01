@@ -11,7 +11,7 @@ import Link from 'next/link';
 import PageShell from '@/components/layout/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Similarity Playground - Prompt Pattern Dictionary',
+  title: 'Similarity Playground - Ballarat AI Prompt Dictionary',
   description: 'Find relevant prompt patterns by describing your task in natural language using semantic search.',
 };
 

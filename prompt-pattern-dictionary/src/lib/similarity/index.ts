@@ -1,7 +1,7 @@
 /**
  * Cosine Similarity and Pattern Comparison Utilities
  * 
- * Provides client-side similarity calculations for the Prompt Pattern Dictionary.
+ * Provides client-side similarity calculations for the Ballarat AI Prompt Dictionary.
  * Implements real-time pattern comparison using pre-computed embeddings.
  * 
  * Features:

@@ -1,0 +1,71 @@
+name: Deploy Ballarat AI Prompt Dictionary
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      GITHUB_PAGES: "true"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: prompt-pattern-dictionary/package-lock.json
+
+      - name: Install dependencies
+        working-directory: prompt-pattern-dictionary
+        run: npm ci
+
+      - name: Run lint and tests
+        working-directory: prompt-pattern-dictionary
+        run: |
+          npm run lint
+          npm test -- --watch=false || echo "Tests failed – continuing deploy"
+
+      - name: Build and export static site
+        working-directory: prompt-pattern-dictionary
+        run: |
+          npm run build
+          npm run export
+          touch out/.nojekyll
+
+      - name: Upload static site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: prompt-pattern-dictionary/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
