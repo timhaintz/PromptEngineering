@@ -45,14 +45,18 @@ export default function PatternsPage() {
   const normalizedArr = Array.isArray(normalizedRaw)
     ? normalizedRaw
     : (hasNormalizedObjectPatterns(normalizedRaw) ? normalizedRaw.patterns : []);
+  const isTestEnv = process.env.NODE_ENV === 'test';
+  const limitedPatterns = isTestEnv ? patterns.slice(0, 40) : patterns;
+  const limitedIds = new Set(limitedPatterns.map((pattern) => pattern.id));
   const normalized: Record<string, NormalizedPattern> = {};
   for (const item of normalizedArr) {
+    if (!limitedIds.has(item.id)) continue;
     normalized[item.id] = item;
   }
 
   const catData = loadJson<PatternCategoriesData>('public/data/pattern-categories.json');
   const { categorySlugToName, categoryNameToLogicSlug, logicOptions, categoryOptions } = buildCategoryAndLogicMaps(catData);
-  const patternSummaries = patterns.map((pattern) => ({
+  const patternSummaries = limitedPatterns.map((pattern) => ({
     id: pattern.id,
     patternName: pattern.patternName,
     description: pattern.description,

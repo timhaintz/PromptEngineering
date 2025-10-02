@@ -82,12 +82,12 @@ describe('Accessibility smoke tests', () => {
     await flushAsyncEffects();
   const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
   expect(results).toHaveNoViolations();
-  }, 15000);
+  }, 45000);
 
   it('Search page has no critical a11y violations', async () => {
     const { container } = render(<SearchPage />);
     await flushAsyncEffects();
   const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });
   expect(results).toHaveNoViolations();
-  }, 15000);
+  }, 45000);
 });

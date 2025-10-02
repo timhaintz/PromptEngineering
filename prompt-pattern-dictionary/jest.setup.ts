@@ -1,5 +1,22 @@
 // Global jest setup for polyfills used across tests
+import { jest } from '@jest/globals';
 import { TextEncoder, TextDecoder } from 'util';
+
+jest.mock('next/navigation', () => {
+  const actual = jest.requireActual('next/navigation') as Record<string, unknown>;
+  return {
+    ...actual,
+    useRouter: () => ({
+      push: jest.fn(),
+      replace: jest.fn(),
+      prefetch: jest.fn(() => Promise.resolve()),
+      back: jest.fn(),
+      forward: jest.fn(),
+      refresh: jest.fn(),
+    }),
+    useSearchParams: () => new URLSearchParams(),
+  };
+});
 (global as any).TextEncoder = (global as any).TextEncoder || TextEncoder;
 (global as any).TextDecoder = (global as any).TextDecoder || TextDecoder;
 

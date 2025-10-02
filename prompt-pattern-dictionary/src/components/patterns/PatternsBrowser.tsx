@@ -7,6 +7,7 @@ import PageShell from '@/components/layout/PageShell';
 import { Card, CardGrid } from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { withBasePath } from '@/utils/paths';
 
 type PatternSummary = {
   id: string;
@@ -412,7 +413,7 @@ export function PatternsBrowser({
           {sortedPatterns.map((pattern) => {
             const norm = normalized[pattern.id];
             const { paperId, categoryIndex, patternIndex } = idParts(pattern.id);
-            const href = `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`;
+            const href = withBasePath(`/papers/${paperId}#p-${categoryIndex}-${patternIndex}`);
             const turnLabel = norm?.turn ? (norm.turn === 'multi' ? 'Multi-turn' : 'Single-turn') : null;
             return (
               <Card key={pattern.id} href={href}>

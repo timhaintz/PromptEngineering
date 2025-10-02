@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { withBasePath } from '@/utils/paths';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   interactive?: boolean;
@@ -26,8 +27,9 @@ export const Card: React.FC<CardProps> = ({
   const padding = dense ? 'p-3' : 'p-4';
   const base = 'block focus-ring surface-card';
   const interactiveClass = interactive ? 'surface-card-interactive' : '';
+  const resolvedHref = href ? withBasePath(href) : undefined;
   const componentProps: Record<string, unknown> = { className: clsx(base, interactiveClass, padding, className), ...rest };
-  if (href && as === 'a') componentProps.href = href;
+  if (resolvedHref && as === 'a') componentProps.href = resolvedHref;
   const Comp = (as === 'a' ? 'a' : 'div');
   return (
     <Comp {...componentProps}>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
+import { withBasePath } from '@/utils/paths';
 
 export interface Example { id: string; index: number; content: string }
 export interface PatternBasics {
@@ -46,7 +47,7 @@ function exampleLinkFromId(exId: string) {
   const parts = exId.split('-');
   if (parts.length !== 4) return '#';
   const [p, b, c, d] = parts;
-  return `/papers/${p}#e-${b}-${c}-${d}`;
+  return withBasePath(`/papers/${p}#e-${b}-${c}-${d}`);
 }
 
 export default function PatternDetail({
@@ -168,7 +169,7 @@ export default function PatternDetail({
             <ExampleIdBadge id={`ID: ${pattern.id}`} />
             {/* Permalink icon moved to end so title text aligns with definition list headings */}
             <a
-              href={context === 'paper' ? `#p-${categoryIndex}-${patternIndex}` : `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`}
+              href={context === 'paper' ? `#p-${categoryIndex}-${patternIndex}` : withBasePath(`/papers/${paperId}#p-${categoryIndex}-${patternIndex}`)}
               className="opacity-0 group-hover:opacity-100 transition-opacity text-muted hover:text-secondary focus:opacity-100 focus-ring rounded-sm ml-1"
               title="Permalink"
               aria-label="Permalink"
@@ -375,7 +376,7 @@ export default function PatternDetail({
               <div className="flex flex-wrap gap-2">
                 {(similarPatterns[pattern.id] ?? []).slice(0, 8).map((sp, i) => {
                   const parts = sp.id.split('-');
-                  const href = parts.length === 3 ? `/papers/${parts[0]}#p-${parts[1]}-${parts[2]}` : '#';
+                  const href = parts.length === 3 ? withBasePath(`/papers/${parts[0]}#p-${parts[1]}-${parts[2]}`) : '#';
                   return (
                     <Link key={i} href={href} title={sp.id} className="inline-flex items-center gap-1 rounded-full bg-gray-100 text-gray-800 px-2 py-0.5 text-xs border hover:bg-blue-50">
                       <span className="font-mono">{sp.id}</span>
@@ -414,7 +415,7 @@ function ExampleRow({
   // Provide both short and full id forms for compatibility: #e-cat-pat-ex and #e-paper-cat-pat-ex
   const shortId = `e-${cat}-${pat}-${exIdx}`;
   const fullId = `e-${parts[0]}-${cat}-${pat}-${exIdx}`;
-  const sharePath = `/papers/${parts[0]}#${shortId}`;
+  const sharePath = withBasePath(`/papers/${parts[0]}#${shortId}`);
   const localHref = context === 'paper' ? `#${shortId}` : sharePath;
 
   useEffect(() => {
