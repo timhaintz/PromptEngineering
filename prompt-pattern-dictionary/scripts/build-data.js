@@ -23,7 +23,21 @@ const ENRICH_SCRIPT = path.join(__dirname, 'enrich-normalized-pp.py');
 const NORMALIZED_OUTPUT_FILE = path.join(OUTPUT_DIR, 'normalized-patterns.json');
 
 // Repo root (two levels up from this scripts folder)
-const REPO_ROOT = path.join(__dirname, '..', '..');
+const DEFAULT_REPO_ROOT = path.join(__dirname, '..', '..');
+const REPO_ROOT = process.env.GITHUB_WORKSPACE
+  ? path.resolve(process.env.GITHUB_WORKSPACE)
+  : DEFAULT_REPO_ROOT;
+
+function buildPythonEnv(overrides = {}) {
+  const pythonPath = process.env.PYTHONPATH
+    ? `${process.env.PYTHONPATH}${path.delimiter}${REPO_ROOT}`
+    : REPO_ROOT;
+  return {
+    ...process.env,
+    PYTHONPATH: pythonPath,
+    ...overrides,
+  };
+}
 
 /**
  * Choose how to run Python scripts:
@@ -96,7 +110,8 @@ async function generateEmbeddings(forceRegenerate = false) {
     const inv = getPythonInvoker();
     const python = spawn(inv.command, [...inv.preArgs, EMBEDDING_SCRIPT], {
       cwd: path.dirname(EMBEDDING_SCRIPT),
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['pipe', 'pipe', 'pipe'],
+      env: buildPythonEnv(),
     });
 
     let stdout = '';
@@ -142,7 +157,8 @@ async function runSemanticAnalysis() {
   const inv = getPythonInvoker();
   const pythonProcess = spawn(inv.command, [...inv.preArgs, SEMANTIC_ANALYSIS_SCRIPT], {
       stdio: 'inherit',
-      cwd: path.dirname(SEMANTIC_ANALYSIS_SCRIPT)
+      cwd: path.dirname(SEMANTIC_ANALYSIS_SCRIPT),
+      env: buildPythonEnv(),
     });
     
     pythonProcess.on('close', (code) => {
@@ -172,7 +188,8 @@ async function generateHierarchicalCategories() {
   const inv = getPythonInvoker();
   const python = spawn(inv.command, [...inv.preArgs, PYTHON_SCRIPT], {
       cwd: path.dirname(PYTHON_SCRIPT),
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['pipe', 'pipe', 'pipe'],
+      env: buildPythonEnv(),
     });
 
     let stdout = '';
@@ -298,7 +315,8 @@ async function processData(options = {}) {
       }
       const cp = spawn(inv.command, args, {
         cwd: path.dirname(ENRICH_SCRIPT),
-        stdio: 'inherit'
+        stdio: 'inherit',
+        env: buildPythonEnv(),
       });
       cp.on('close', () => resolve());
       cp.on('error', () => resolve());
