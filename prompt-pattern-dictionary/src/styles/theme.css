@@ -10,9 +10,10 @@
 
 /* High Contrast active pill needs explicit stronger outline for discoverability */
 html[data-theme='high-contrast'] .active-pill {
-  background: #1A1A1A !important;
-  color: #FFFFFF !important;
-  border: 2px solid #FFBF00 !important;
+  background: var(--accent) !important;
+  color: var(--accent-fg) !important;
+  border: 2px solid var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(255,213,0,0.35);
 }
 
 @media (forced-colors: active) {
@@ -134,7 +135,7 @@ html[data-theme='high-contrast'] .badge-category, html[data-theme='high-contrast
 }
  .btn-primary:hover { background: var(--accent-hover); }
  .btn-primary:focus-visible { outline:2px solid var(--focus-ring); outline-offset:2px; }
-html[data-theme='high-contrast'] .btn-primary { background: var(--accent); color: var(--text-primary); }
+html[data-theme='high-contrast'] .btn-primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
 
 /* Heatmap utility (used in matrix). Uses accent color with varying mix percentages */
 .heat-0 { background: transparent; }
@@ -178,7 +179,7 @@ html[data-theme='high-contrast'] .tile-meta { color:var(--text-secondary); }
   font-weight: 500;
 }
 html[data-theme='dark'] .highlight-term { color: var(--text-primary); }
-html[data-theme='high-contrast'] .highlight-term { background: var(--accent); color: var(--text-primary); }
+html[data-theme='high-contrast'] .highlight-term { background: var(--accent); color: var(--accent-fg); }
 
 /* Generic small id badge (mono) */
  .badge-id { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border-default); font-family: var(--font-geist-mono, monospace); }

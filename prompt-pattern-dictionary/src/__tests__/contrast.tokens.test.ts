@@ -9,9 +9,16 @@ import fs from 'fs';
 import path from 'path';
 
 // Strongly typed polyfill attachment (avoid 'any')
-const g: typeof globalThis & { TextEncoder?: typeof TextEncoder; TextDecoder?: typeof TextDecoder } = globalThis;
-if (!g.TextEncoder) g.TextEncoder = TextEncoder;
-if (!g.TextDecoder) g.TextDecoder = TextDecoder;
+const globalWithEncoding = globalThis as typeof globalThis & {
+  TextEncoder?: typeof TextEncoder;
+  TextDecoder?: typeof TextDecoder;
+};
+if (!globalWithEncoding.TextEncoder) {
+  globalWithEncoding.TextEncoder = TextEncoder as unknown as typeof globalWithEncoding.TextEncoder;
+}
+if (!globalWithEncoding.TextDecoder) {
+  globalWithEncoding.TextDecoder = TextDecoder as unknown as typeof globalWithEncoding.TextDecoder;
+}
 
 function luminance(hex: string): number {
   hex = hex.replace('#', '').trim();
@@ -70,5 +77,12 @@ describe('semantic token contrast (light/dark)', () => {
     expect(contrast(t.textPrimary, t.surface1)).toBeGreaterThanOrEqual(MIN_PRIMARY);
     expect(contrast(t.textSecondary, t.surface1)).toBeGreaterThanOrEqual(MIN_SECONDARY);
     expect(contrast(t.textMuted, t.surface1)).toBeGreaterThanOrEqual(MIN_MUTED);
+  });
+
+  test('high-contrast mode core text ratios', () => {
+    const t = extractComputedTokens('high-contrast');
+    expect(contrast(t.textPrimary, t.surface1)).toBeGreaterThanOrEqual(MIN_PRIMARY);
+    expect(contrast(t.textSecondary, t.surface1)).toBeGreaterThanOrEqual(MIN_PRIMARY);
+    expect(contrast(t.textMuted, t.surface1)).toBeGreaterThanOrEqual(MIN_SECONDARY);
   });
 });

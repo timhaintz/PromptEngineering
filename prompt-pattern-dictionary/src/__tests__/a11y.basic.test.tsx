@@ -77,7 +77,7 @@ describe('Accessibility smoke tests', () => {
   });
 
   it('Patterns page has no critical a11y violations', async () => {
-    const ui = await PatternsPage({ searchParams: {} } as any);
+    const ui = await PatternsPage();
     const { container } = render(ui as any);
     await flushAsyncEffects();
   const results = await axe(container, { rules: { 'color-contrast': { enabled: true } } });

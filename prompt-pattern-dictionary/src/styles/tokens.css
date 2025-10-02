@@ -84,15 +84,33 @@
 
 /* High Contrast Mode (explicit selection or forced-colors mediated) */
 [data-theme='high-contrast'], [data-theme='hc'] {
-  --surface-card: #0f1b24;
-  --surface-hover: #1d2a35;
-  --border-strong: #4095ff;
-  --accent: #4095ff;
-  --accent-hover: #66adff;
-  --accent-active-bg: rgba(64,149,255,0.25);
+  --surface-1: #05090f;
+  --surface-2: #0b121a;
+  --surface-card: #0f1824;
+  --surface-hover: #1a2735;
+
+  --border-default: #7fc2ff;
+  --border-strong: #ffffff;
+
+  --text-primary: #ffffff;
+  --text-secondary: #f2f8ff;
+  --text-muted: #d6e6ff;
+
+  --accent: #ffd500;
+  --accent-hover: #ffe352;
+  --accent-active-bg: rgba(255,213,0,0.45);
+  --accent-fg: #000000;
+
   --focus-ring: #ffffff;
-  --focus-ring-outer: #4095ff;
-  --text-muted: #b4c2ce;
+  --focus-ring-outer: #ffd500;
+
+  --code-bg: #03070c;
+
+  --heat-0: #0f1824;
+  --heat-1: #1a2735;
+  --heat-2: #22374b;
+  --heat-3: #2f4c66;
+  --heat-4: #3d6185;
 }
 
 /* Reduced motion preference */

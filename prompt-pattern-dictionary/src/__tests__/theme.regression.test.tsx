@@ -85,7 +85,7 @@ describe('Dark theme regression', () => {
   });
 
   it('Patterns page uses PageShell and token utilities', async () => {
-    const ui = await PatternsPage({ searchParams: Promise.resolve({}) } as any);
+    const ui = await PatternsPage();
     const { container } = render(ui as any);
     // Ensure the shell exists
     const shell = container.querySelector('.min-h-screen');
