@@ -44,11 +44,11 @@ jobs:
           npm run lint
           npm test -- --watch=false || echo "Tests failed – continuing deploy"
 
-      - name: Build and export static site
+      - name: Build static site
         working-directory: prompt-pattern-dictionary
         run: |
           npm run build
-          npm run export
+          mkdir -p out
           touch out/.nojekyll
 
       - name: Upload static site artifact
@@ -59,9 +59,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write
       id-token: write
