@@ -28,9 +28,9 @@ export interface Logic {
 
 export interface PatternCategoriesData {
   meta: {
-  generatedAt: string;
-  description: string;
-  totalLogics: number;
+    generatedAt: string;
+    description: string;
+    totalLogics: number;
     totalCategories: number;
   };
   logics: Logic[];
@@ -65,4 +65,17 @@ export function applySemanticCounts(categories: Category[], semantic: SemanticAs
     ...c,
     patternCount: semantic.categories[c.slug]?.patternCount ?? c.patternCount,
   }));
+}
+
+let cachedCategorySlugs: string[] | null = null;
+
+export function getAllCategorySlugs(): string[] {
+  if (cachedCategorySlugs) {
+    return cachedCategorySlugs;
+  }
+
+  const data = loadPatternCategories();
+  const slugs = data.logics.flatMap(logic => logic.categories.map(category => category.slug));
+  cachedCategorySlugs = Array.from(new Set(slugs)).sort();
+  return cachedCategorySlugs;
 }

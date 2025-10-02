@@ -13,6 +13,7 @@ import Badge from '@/components/ui/Badge';
 import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
 import fs from 'fs';
 import path from 'path';
+import { getAllCategorySlugs } from '@/lib/data/categories';
 
 interface Pattern {
   id: string;
@@ -36,6 +37,12 @@ interface CategoryPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getAllCategorySlugs().map(slug => ({ slug }));
 }
 
 async function getPatterns(): Promise<Pattern[]> {
@@ -151,6 +158,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     .sort((a, b) => b.score - a.score || b.count - a.count)
     .slice(0, 8);
 
+  const allFirstExamples = Object.fromEntries(allPatterns.map(pp => [pp.id, pp.examples[0]?.id]));
+  const normalizedMap = normalized
+    ? new Map(normalized.patterns.map(entry => [entry.id, entry] as const))
+    : new Map<string, NormalizedPatterns['patterns'][number]>();
+
   return (
     <PageShell>
       <div className="space-y-12">
@@ -177,21 +189,20 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         {/* Patterns (unified look) */}
   <div className="space-y-4">
           {categoryPatterns.map(p => {
-            const n = normalized?.patterns.find(x => x.id === p.id);
-        const attrs: NormalizedAttrs | null = n ? {
-          mediaType: n.mediaType ?? null,
-          dependentLLM: n.dependentLLM ?? null,
-          application: n.application ?? null,
-          applicationTasksString: n.applicationTasksString ?? null,
-          turn: n.turn ?? null,
-          template: n.template ?? null,
-          usageSummary: n.usageSummary ?? null,
-          aiAssisted: n.aiAssisted ?? false,
-          aiAssistedFields: n.aiAssistedFields ?? null,
-          aiAssistedModel: n.aiAssistedModel ?? null,
-          aiAssistedAt: n.aiAssistedAt ?? null,
-        } : null;
-            const allFirstExamples = Object.fromEntries(allPatterns.map(pp => [pp.id, pp.examples[0]?.id]));
+            const n = normalizedMap.get(p.id);
+            const attrs: NormalizedAttrs | null = n ? {
+              mediaType: n.mediaType ?? null,
+              dependentLLM: n.dependentLLM ?? null,
+              application: n.application ?? null,
+              applicationTasksString: n.applicationTasksString ?? null,
+              turn: n.turn ?? null,
+              template: n.template ?? null,
+              usageSummary: n.usageSummary ?? null,
+              aiAssisted: n.aiAssisted ?? false,
+              aiAssistedFields: n.aiAssistedFields ?? null,
+              aiAssistedModel: n.aiAssistedModel ?? null,
+              aiAssistedAt: n.aiAssistedAt ?? null,
+            } : null;
             return (
               <div key={p.id} id={`pattern-${p.id}`} className="surface-card">
                 <PatternDetail

@@ -1,4 +1,15 @@
 import { redirect } from 'next/navigation';
+import { getAllPatternTriples } from '@/lib/data/papers';
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getAllPatternTriples().map(({ paperId, categoryIndex, patternIndex }) => ({
+    paperId,
+    categoryIndex,
+    patternIndex,
+  }));
+}
 
 /**
  * Legacy deep pattern route: /pattern/{paperId}/{categoryIndex}/{patternIndex}

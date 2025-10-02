@@ -133,11 +133,11 @@ Open [http://localhost:3000](http://localhost:3000) to view the dictionary.
 To run the site in production mode (optimized build):
 
 ```bash
-# Build the app (includes data processing & semantic artifacts)
-npm run build
-
-# Start the production server
+# Build & serve the static export (includes data processing & semantic artifacts)
 npm run start
+
+# Already have an up-to-date build? Serve it without rebuilding.
+npm run preview
 ```
 
 ## 📁 Project Structure
@@ -161,7 +161,8 @@ prompt-pattern-dictionary/
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run start` - Start the production server (after `npm run build`)
+- `npm run start` - Build the site and serve the exported static output
+- `npm run preview` - Serve the existing `out/` directory without rebuilding
 - `npm run build-data` - Process source JSON into optimized format
 - `npm run lint` - Run ESLint
 - `npm test` - Run tests

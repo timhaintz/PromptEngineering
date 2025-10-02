@@ -4,9 +4,24 @@ import Link from 'next/link';
 import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
 import { notFound } from 'next/navigation';
 import PageShell from '@/components/layout/PageShell';
+import { getAllPaperIds } from '@/lib/data/papers';
 
 interface Example { id: string; index: number; content: string }
 interface Pattern { id: string; patternName: string; description?: string; examples: Example[]; category: string; paper: { id: string; title: string; authors: string[]; url: string } }
+interface NormalizedPattern {
+  id: string;
+  mediaType?: string;
+  dependentLLM?: string | null;
+  application?: string | string[];
+  turn?: string | null;
+  template?: Record<string, string> | null;
+  usageSummary?: string | null;
+  applicationTasksString?: string | null;
+  aiAssisted?: boolean;
+  aiAssistedFields?: string[];
+  aiAssistedModel?: string | null;
+  aiAssistedAt?: string | null;
+}
 
 function loadJson<T>(rel: string): T {
   const filePath = path.join(process.cwd(), rel);
@@ -18,16 +33,26 @@ function idParts(patternId: string): { paperId: string; categoryIndex: string; p
   return { paperId, categoryIndex, patternIndex };
 }
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getAllPaperIds().map((paperId) => ({ paperId }));
+}
+
 export default async function PaperDetail({ params }: { params: Promise<{ paperId: string }> }) {
   const { paperId } = await params;
   const patterns = loadJson<Pattern[]>('public/data/patterns.json');
-  const normalized = loadJson<{ patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string | string[]; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; applicationTasksString?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> }>('public/data/normalized-patterns.json');
+  const normalized = loadJson<{ patterns: NormalizedPattern[] }>('public/data/normalized-patterns.json');
   const similar = loadJson<{ similar: SimilarMap }>('public/data/similar-examples.json');
   const similarPatterns = loadJson<{ similar: SimilarPatternsMap }>('public/data/similar-patterns.json');
-  const filtered = patterns.filter(p => p.paper.id === paperId);
+  const filtered = patterns.filter((p) => p.paper.id === paperId);
   if (!filtered.length) return notFound();
 
   const paper = filtered[0].paper;
+  const firstExampleMap: Record<string, string | undefined> = Object.fromEntries(
+    patterns.map((pp) => [pp.id, pp.examples[0]?.id])
+  );
+  const normalizedMap = new Map(normalized.patterns.map((record) => [record.id, record]));
 
   return (
     <PageShell>
@@ -67,13 +92,8 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
             {filtered.map(p => {
               const parts = idParts(p.id);
               const anchor = `p-${parts.categoryIndex}-${parts.patternIndex}`;
-              // map of first example id for each pattern in the entire dataset
-              // build once outside loop for perf if needed; here simple inline
-              const firstExampleMap: Record<string, string | undefined> = Object.fromEntries(
-                patterns.map(pp => [pp.id, pp.examples[0]?.id])
-              );
               const attrs: NormalizedAttrs | null = (() => {
-                const n = normalized.patterns.find(x => x.id === p.id);
+                const n = normalizedMap.get(p.id);
                 if (!n) return null;
                 return {
                   mediaType: n.mediaType ?? null,
