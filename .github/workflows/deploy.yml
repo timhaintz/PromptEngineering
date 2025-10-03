@@ -3,6 +3,9 @@ name: Deploy Ballarat AI Prompt Dictionary
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'prompt-pattern-dictionary/**'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
