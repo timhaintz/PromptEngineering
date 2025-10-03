@@ -20,7 +20,7 @@ export default function TopNav() {
 
   return (
     <nav aria-label="Global navigation" className="fixed top-0 left-0 right-0 z-50 bg-surface-1/80 backdrop-blur border-b border-muted">
-      <div className="container mx-auto px-4 py-2 flex items-center gap-2 md:gap-3">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 md:gap-3">
         {/* Home button with house icon */}
         <Link
           href="/"
@@ -34,8 +34,11 @@ export default function TopNav() {
         </Link>
 
         {/* Tabs */}
-        <div className="flex-1 overflow-x-auto">
-          <nav aria-label="Primary" className="flex items-center gap-1 min-w-max pr-2">
+        <div className="flex-1 flex justify-center">
+          <nav
+            aria-label="Primary"
+            className="flex items-center gap-1 min-w-max overflow-x-auto md:overflow-visible px-1 md:px-0"
+          >
             {tabs.map(tab => {
               const isActive = pathname.startsWith(tab.href);
               return (
