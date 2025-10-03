@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Badge from '@/components/ui/Badge';
 import { PageHeader } from '@/components/ui/PageHeader';
-import { withBasePath } from '@/utils/paths';
 
 type PatternExampleEntry = {
   exampleId: string;
@@ -148,7 +147,7 @@ export function ExamplesBrowser({ entries }: ExamplesBrowserProps) {
           const [paperId, categoryIndex, patternIndex] = example.patternId.split('-');
           const exampleIndex = example.exampleId.split('-').pop();
             const exampleHref = paperId && categoryIndex && patternIndex && exampleIndex !== undefined
-              ? withBasePath(`/papers/${paperId}#e-${categoryIndex}-${patternIndex}-${exampleIndex}`)
+              ? `/papers/${paperId}#e-${categoryIndex}-${patternIndex}-${exampleIndex}`
             : undefined;
           return (
             <li key={example.exampleId} className="surface-card p-4 hover:surface-card-hover transition">

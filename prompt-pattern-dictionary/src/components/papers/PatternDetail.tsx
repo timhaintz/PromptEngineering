@@ -47,7 +47,7 @@ function exampleLinkFromId(exId: string) {
   const parts = exId.split('-');
   if (parts.length !== 4) return '#';
   const [p, b, c, d] = parts;
-  return withBasePath(`/papers/${p}#e-${b}-${c}-${d}`);
+  return `/papers/${p}#e-${b}-${c}-${d}`;
 }
 
 export default function PatternDetail({
@@ -376,7 +376,7 @@ export default function PatternDetail({
               <div className="flex flex-wrap gap-2">
                 {(similarPatterns[pattern.id] ?? []).slice(0, 8).map((sp, i) => {
                   const parts = sp.id.split('-');
-                  const href = parts.length === 3 ? withBasePath(`/papers/${parts[0]}#p-${parts[1]}-${parts[2]}`) : '#';
+                  const href = parts.length === 3 ? `/papers/${parts[0]}#p-${parts[1]}-${parts[2]}` : '#';
                   return (
                     <Link key={i} href={href} title={sp.id} className="inline-flex items-center gap-1 rounded-full bg-gray-100 text-gray-800 px-2 py-0.5 text-xs border hover:bg-blue-50">
                       <span className="font-mono">{sp.id}</span>
