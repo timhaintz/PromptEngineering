@@ -16,6 +16,7 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { Card } from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { Spinner } from '@/components/ui/Spinner';
+import { withBasePath } from '@/utils/paths';
 import React from 'react';
 
 interface Pattern {
@@ -49,12 +50,17 @@ function SearchResults() {
   const [catData, setCatData] = useState<PatternCategoriesData | null>(null);
   const [semantic, setSemantic] = useState<SemanticAssignments | null>(null);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState(query);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categoryType, setCategoryType] = useState<'original' | 'semantic'>('original');
   const [logicFilter, setLogicFilter] = useState<string>('');
   const [useBoolean, setUseBoolean] = useState<boolean>(false);
   const [fuzzyDistance, setFuzzyDistance] = useState<number>(0);
   const [showHelp, setShowHelp] = useState<boolean>(false);
+
+  useEffect(() => {
+    setSearchText(query);
+  }, [query]);
 
   // Sync state from URL on load and when URL changes
   useEffect(() => {
@@ -68,9 +74,9 @@ function SearchResults() {
     const loadAll = async () => {
       try {
         const [pRes, cRes, sRes] = await Promise.all([
-          fetch('/data/patterns.json'),
-          fetch('/data/pattern-categories.json'),
-          fetch('/data/semantic-assignments.json').catch(() => null),
+          fetch(withBasePath('/data/patterns.json')),
+          fetch(withBasePath('/data/pattern-categories.json')),
+          fetch(withBasePath('/data/semantic-assignments.json')).catch(() => null),
         ]);
         const pData = await pRes.json();
         setPatterns(pData);
@@ -229,15 +235,39 @@ function SearchResults() {
   {/* Controls */}
   <div className="surface-card p-4 mb-6">
     <div className="flex flex-col md:flex-row md:flex-wrap gap-3 md:items-end">
-      <div className="flex-1 md:basis-full min-w-0">
-              <label htmlFor="search-input" className="block text-xs text-muted mb-1">Search text</label>
-              <input id="search-input" defaultValue={query} onChange={(e) => {
-                const params = new URLSearchParams(Array.from(searchParams.entries()));
-                params.set('q', e.target.value);
-                params.set('type', type);
-                router.replace(`/search?${params.toString()}`);
-              }} placeholder={useBoolean ? 'e.g. chain AND reasoning NOT "few shot" prompt~1' : 'Type to search...'} className="input-base w-full px-3 py-2" />
-            </div>
+      <div className="basis-full md:max-w-full">
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            const params = new URLSearchParams(Array.from(searchParams.entries()));
+            const trimmed = searchText.trim();
+            if (trimmed) {
+              params.set('q', trimmed);
+            } else {
+              params.delete('q');
+            }
+            params.set('type', type);
+            router.replace(`/search?${params.toString()}`);
+          }}
+        >
+          <label htmlFor="search-input" className="block text-xs text-muted mb-1">Search text</label>
+          <div className="flex items-center gap-2 md:gap-3">
+            <input
+              id="search-input"
+              value={searchText}
+              onChange={(event) => setSearchText(event.target.value)}
+              placeholder={useBoolean ? 'e.g. chain AND reasoning NOT "few shot" prompt~1' : 'Type to search...'}
+              className="input-base w-full flex-1 px-3 py-2"
+            />
+            <button
+              type="submit"
+              className="btn-primary whitespace-nowrap px-4 py-2 shrink-0"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
             {/* Boolean + Fuzzy Controls */}
             {(type === 'pattern' || type === 'example') && (
               <div className="flex flex-col gap-2 pt-6 md:pt-0">
@@ -359,6 +389,7 @@ function SearchResults() {
                   setSelectedCategory('');
                   setCategoryType('original');
                   setLogicFilter('');
+                  setSearchText('');
                 }}
               >
                 Clear all
