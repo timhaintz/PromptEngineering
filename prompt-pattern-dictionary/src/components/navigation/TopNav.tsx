@@ -34,7 +34,7 @@ export default function TopNav() {
         </Link>
 
         {/* Tabs */}
-        <div className="flex-1 overflow-x-auto">
+        <div className="flex-1 overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
           <nav
             aria-label="Primary"
             className="flex items-center gap-1 min-w-max px-1 md:px-0 md:justify-center"
@@ -46,14 +46,14 @@ export default function TopNav() {
                   key={tab.href}
                   aria-current={isActive ? 'page' : undefined}
                   href={tab.href}
-                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors focus-ring ${isActive ? 'active-pill font-medium' : 'bg-surface-2 text-secondary border-muted hover:bg-surface-hover'}`}
+                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors focus-ring shrink-0 ${isActive ? 'active-pill font-medium' : 'bg-surface-2 text-secondary border-muted hover:bg-surface-hover'}`}
                 >
                   {tab.label}
                 </Link>
               );
             })}
             {/* Theme switcher access within scroll area on small screens */}
-            <div className="md:hidden ml-1">
+            <div className="md:hidden ml-1 shrink-0">
               <ThemeSwitcher />
             </div>
           </nav>
