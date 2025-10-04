@@ -34,7 +34,7 @@ export default function TopNav() {
         </Link>
 
         {/* Tabs */}
-        <div className="flex-1 overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div className="flex-1 overflow-x-auto overflow-y-visible" style={{ WebkitOverflowScrolling: 'touch' }}>
           <nav
             aria-label="Primary"
             className="flex items-center gap-1 min-w-max px-1 md:px-0 md:justify-center"
