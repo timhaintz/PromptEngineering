@@ -34,10 +34,10 @@ export default function TopNav() {
         </Link>
 
         {/* Tabs */}
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 overflow-x-auto">
           <nav
             aria-label="Primary"
-            className="flex items-center gap-1 min-w-max overflow-x-auto md:overflow-visible px-1 md:px-0"
+            className="flex items-center gap-1 min-w-max px-1 md:px-0 md:justify-center"
           >
             {tabs.map(tab => {
               const isActive = pathname.startsWith(tab.href);
@@ -52,11 +52,15 @@ export default function TopNav() {
                 </Link>
               );
             })}
+            {/* Theme switcher access within scroll area on small screens */}
+            <div className="md:hidden ml-1">
+              <ThemeSwitcher />
+            </div>
           </nav>
         </div>
 
         {/* Theme Switcher */}
-        <div className="shrink-0 flex items-center h-9">
+        <div className="hidden md:flex shrink-0 items-center h-9">
           <ThemeSwitcher />
         </div>
       </div>
