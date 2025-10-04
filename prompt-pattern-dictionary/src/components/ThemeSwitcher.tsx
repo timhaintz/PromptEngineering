@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useThemeContext } from "./ThemeProvider";
 import type { ThemeChoice } from "./ThemeProvider";
 
@@ -34,6 +35,7 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
   const { theme, setTheme } = useThemeContext();
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const radioRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -43,9 +45,13 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
   const openPanel = () => setOpen(true);
   const closePanel = () => { setOpen(false); triggerRef.current?.focus(); };
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Track viewport size for mobile overlay behaviour
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') return;
     const update = () => setIsMobile(window.innerWidth < 768);
     update();
     window.addEventListener('resize', update);
@@ -170,25 +176,28 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
           {panelContent}
         </div>
       )}
-      {open && isMobile && (
-        <div className="fixed inset-0 z-[100]">
-          <div
-            className="absolute inset-0 bg-surface-1/60 backdrop-blur-sm"
-            aria-hidden="true"
-            onClick={closePanel}
-          />
-          <div className="absolute top-16 right-3 left-3" role="dialog" aria-modal="true">
-            <div
-              ref={panelRef}
-              role="radiogroup"
-              aria-label="Color theme"
-              className="rounded-lg border border-muted bg-surface-1 shadow-xl p-1"
-            >
-              {panelContent}
-            </div>
-          </div>
-        </div>
-      )}
+      {open && isMobile && mounted && typeof document !== 'undefined'
+        ? createPortal(
+            <div className="fixed inset-0 z-[100] pointer-events-auto">
+              <div
+                className="absolute inset-0 bg-surface-1/60 backdrop-blur-sm"
+                aria-hidden="true"
+                onClick={closePanel}
+              />
+              <div className="absolute inset-x-3 top-20" role="dialog" aria-modal="true">
+                <div
+                  ref={panelRef}
+                  role="radiogroup"
+                  aria-label="Color theme"
+                  className="rounded-xl border border-muted bg-surface-1 shadow-2xl p-1"
+                >
+                  {panelContent}
+                </div>
+              </div>
+            </div>,
+            document.body
+          )
+        : null}
     </div>
   );
 }
