@@ -77,7 +77,12 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
       if (e.key === 'Escape') closePanel();
       if (['ArrowDown','ArrowUp','Home','End'].includes(e.key)) {
         e.preventDefault();
-  const currentIndex = MODES.findIndex(m => m.value === theme) || 0;
+        const activeEl = document.activeElement as HTMLElement | null;
+        let currentIndex = radioRefs.current.findIndex(btn => btn === activeEl);
+        if (currentIndex === -1) {
+          currentIndex = MODES.findIndex(m => m.value === theme);
+        }
+        if (currentIndex < 0) currentIndex = 0;
         let targetIndex = currentIndex;
         if (e.key === 'ArrowDown') targetIndex = (currentIndex + 1) % MODES.length;
         if (e.key === 'ArrowUp') targetIndex = (currentIndex - 1 + MODES.length) % MODES.length;
