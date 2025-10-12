@@ -73,6 +73,76 @@ Applies to Prompt Pattern pages only.
 - Styling guidance (Tailwind): `grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1`, `dt font-semibold text-slate-700 dark:text-slate-200`.
 - Template value supports multiline code/prompt; collapse after ~3 lines with a "Show more" control for long content.
 
+##### 2.1.2 AI Augmented metadata block (PEIL prompts)
+
+- Render an `AI Augmented` chip at the top of the enrichment block; retain the shaded background contrast agreed during layout reviews so provenance remains visually distinct from the research section.
+- Field order (all optional, show all labels even when values are absent):
+  - `General Explanation` - Explain Like I'm 12 summary (one short paragraph synthesised from research facts)
+  - `Media Type`
+  - `Dependent LLM`
+  - `Template` (always the research-derived template string; never regenerate this field during enrichment)
+  - `Domain and Industry Examples` (chips sourced by pairing the Template with existing application tags)
+  - `PEIL Prompts`
+- The Template value is already captured from the source papers during normalization and must be treated as the authoritative text. Enrichment steps may only fill gaps around it, not rewrite it.
+- When enrichment runs, call GPT-5 with the full pattern record (research excerpt, template, application metadata, prior AI fields). The model confirms existing values, fills any empty PEIL variables, and flags unclear items instead of fabricating unsupported claims.
+- Domain and industry examples are selected by crossing the Template with the application chips found in the research data; GPT-5 may suggest alternates only when a chip is missing, and should note when manual review is required.
+- PEIL prompt generation always grounds itself in the Template plus the chosen application/domain pairing. GPT-5 produces the remaining PEIL variables (role framing, context, instructions, conciseness) in a single pass so downstream automation receives a complete prompt payload.
+
+```mermaid
+flowchart TB
+  PatternCard["Prompt Pattern Entry"]
+  PatternCard --> ResearchBlock
+  PatternCard --> AISection
+
+  subgraph ResearchBlock ["Research Section\n(shaded • Research Original chip)"]
+    Title["Title (line)"]
+    Reference["Paper Reference (line)"]
+    PromptExamples["Prompt Examples\n(from paper + existing application chips)"]
+  end
+
+  subgraph AISection ["Augmented Section\n(unshaded • AI-Augmented chip)"]
+    GeneralExplanation["General Explanation:\nExplain Like I'm 12 Summary"]
+    MediaType["Media Type:"]
+    DepLLM["Dependent LLM:"]
+    TemplateLine["Template:"]
+    subgraph Applications ["Applications (current chips drive content)"]
+      DomainIndustry["Domain and Industry Examples\n(grounded in application chips)"]
+    end
+    PEIL["PEIL Prompts\n(generated via peil_prompt_generator.py using Template + Application)"]
+  end
+
+  PromptExamples -->|grounding| Applications
+  Applications -->|source data| PEIL
+  TemplateLine -->|input| PEIL
+```
+
+```text
++--------------------------------------------------------------------+
+| Prompt Pattern Entry                                               |
+|                                                                    |
+|  [Research Original]                                               |
+|  +--------------------------------------------------------------+  |
+|  | Title                                                       |  |
+|  | Paper Reference                                             |  |
+|  | Prompt Examples (drawn from paper + existing application    |  |
+|  | chips to keep usage grounded)                               |  |
+|  +--------------------------------------------------------------+  |
+|                                                                    |
+|  [AI Augmented]                                                    |
+|  General Explanation: Explain Like I'm 12 Summary                  |
+|  Media Type:                                                       |
+|  Dependent LLM:                                                    |
+|  Template:                                                         |
+|                                                                    |
+|  Applications (reuses current chips):                              |
+|    - Domain and Industry Examples                                  |
+|                                                                    |
+|  PEIL Prompts (via peil_prompt_generator.py;                       |
+|    use Template + Application to pick one domain +                 |
+|    industry vertical and populate PEIL variables)                  |
++--------------------------------------------------------------------+
+```
+
 #### 2.2 Example Management
 - **Multiple examples** per pattern with individual indexing
 - **Code/prompt formatting** with syntax highlighting

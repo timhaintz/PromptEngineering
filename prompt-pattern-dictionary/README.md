@@ -47,6 +47,63 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
  - **Application Task Chips**: New `applicationTasksString` rendered as actionable chips under “Application Domains and Tasks” on pattern detail views, complementing the narrative Application field.
  - **Data Preservation**: Normalization pipeline updated to non-destructively retain enriched fields (including `applicationTasksString`) across rebuilds.
 
+#### Pattern Detail Layout Reference
+
+```mermaid
+flowchart TB
+	PatternCard["Prompt Pattern Entry"]
+	PatternCard --> ResearchBlock
+	PatternCard --> AISection
+
+	subgraph ResearchBlock ["Research Section\n(shaded • Research Original chip)"]
+		Title["Title (line)"]
+		Reference["Paper Reference (line)"]
+		PromptExamples["Prompt Examples\n(from paper + existing application chips)"]
+	end
+
+	subgraph AISection ["Augmented Section\n(unshaded • AI-Augmented chip)"]
+		GeneralExplanation["General Explanation:\nExplain Like I'm 12 Summary"]
+		MediaType["Media Type:"]
+		DepLLM["Dependent LLM:"]
+		TemplateLine["Template:"]
+		subgraph Applications ["Applications (current chips drive content)"]
+			DomainIndustry["Domain and Industry Examples\n(grounded in application chips)"]
+		end
+		PEIL["PEIL Prompts\n(generated via peil_prompt_generator.py using Template + Application)"]
+	end
+
+	PromptExamples -->|grounding| Applications
+	Applications -->|source data| PEIL
+	TemplateLine -->|input| PEIL
+```
+
+```text
++--------------------------------------------------------------------+
+| Prompt Pattern Entry                                               |
+|                                                                    |
+|  [Research Original]                                               |
+|  +--------------------------------------------------------------+  |
+|  | Title                                                       |  |
+|  | Paper Reference                                             |  |
+|  | Prompt Examples (drawn from paper + existing application    |  |
+|  | chips to keep usage grounded)                               |  |
+|  +--------------------------------------------------------------+  |
+|                                                                    |
+|  [AI Augmented]                                                    |
+|  General Explanation: Explain Like I'm 12 Summary                  |
+|  Media Type:                                                       |
+|  Dependent LLM:                                                    |
+|  Template:                                                         |
+|                                                                    |
+|  Applications (reuses current chips):                              |
+|    - Domain and Industry Examples                                  |
+|                                                                    |
+|  PEIL Prompts (via peil_prompt_generator.py;                       |
+|    use Template + Application to pick one domain +                 |
+|    industry vertical and populate PEIL variables)                  |
++--------------------------------------------------------------------+
+```
+
 ### Theming Architecture (Unified Layout & Tokens)
 
 All pages now consume a single layout contract:
@@ -192,16 +249,18 @@ Notes:
 
 ### Optional AI Enrichment (GPT-5)
 
-You can optionally enrich normalized pattern data using Azure OpenAI (GPT-5) to infer missing fields like Template (Role, Context, Action, Format, Response), Application tags, Dependent LLM (only when explicitly cited), Turn, and a concise 1–2 sentence Usage Summary explaining how to apply the pattern.
+You can optionally enrich normalized pattern data using Azure OpenAI (GPT-5) to fill gaps in the AI-augmented metadata while preserving the research-authoritative fields. The Template (Role, Context, Action, Format, Response) now ships directly from the source papers via normalization; GPT-5 uses that template—along with application tags and prompt examples—to add whatever is missing (usage summary, dependent LLM call-outs, turn guidance, PEIL prompt variables, domain/industry pairings).
 
 - What it does:
 	- Updates `public/data/normalized-patterns.json`
 	- Adds metadata: `aiAssisted`, `aiAssistedFields`, `aiAssistedModel`, `aiAssistedAt`
+	- Treats the research-derived Template as read-only; the enrichment pass only supplements adjacent AI fields
+	- Uses GPT-5 to inspect the full record (research excerpt, template, application chips, prior enrichment) and synthesize the missing PEIL variables and `Domain and Industry Examples`
 	- Pattern pages show an “AI-assisted” badge and a small disclaimer noting fields may be incorrect
 
 - Scope to fields:
 
-You can restrict enrichment to only certain fields using `--enrich-fields` with a comma-separated list. Allowed values: `template,application,dependentLLM,turn,usageSummary`.
+You can restrict enrichment to only certain fields using `--enrich-fields` with a comma-separated list. Allowed values: `template,application,dependentLLM,turn,usageSummary`. Because the template is now populated during normalization, only use the `template` option for manual overrides.
 
 - How to run (npm):
 
@@ -235,7 +294,7 @@ node .\scripts\build-data.js --enrich --enrich-fields template --enrich-limit 5
 
 - GPT-5 temperature behavior:
 
-Azure GPT-5 deployments accept only the default temperature. The enrichment pipeline does not set `temperature` explicitly for GPT-5 (and will retry without it if the service rejects the parameter), so you won’t see 400 errors about unsupported temperature values.
+Azure GPT-5 deployments accept only the default temperature. The enrichment pipeline does not set `temperature` explicitly for GPT-5 (and will retry without it if the service rejects the parameter), so you won’t see 400 errors about unsupported temperature values. Each enrichment call includes the locked-in Template and application context so the model stays grounded while filling the remaining PEIL variables.
 
 - Requirements:
 	- Azure environment variables for endpoints/models must be set according to your `azure_models.py` registration
