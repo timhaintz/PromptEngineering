@@ -188,14 +188,19 @@ html[data-theme='high-contrast'] .highlight-term { background: var(--accent); co
  .border-accent { border-color: var(--accent) !important; }
 
 /* Small task / tag chip (application tasks) */
- .chip-task {
+.chip-task {
   display:inline-flex;align-items:center;gap:0.25rem;
   font-size:0.625rem;font-weight:600;line-height:1;
   background:var(--surface-2);
-  color:var(--text-secondary);
-  border:1px solid var(--border-default);
+  color:var(--text-primary);
+  border:1px solid var(--border-strong);
   border-radius:9999px;
   padding:0.25rem 0.5rem;
 }
-html[data-theme='dark'] .chip-task { background: var(--surface-1); color: var(--text-secondary); }
+html[data-theme='dark'] .chip-task { background: var(--surface-2); color: var(--text-primary); border-color: var(--border-strong); }
 html[data-theme='high-contrast'] .chip-task { background: var(--surface-1); color: var(--text-primary); border-color: var(--accent); }
+
+/* Pattern detail layered surfaces */
+.pattern-surface { background: var(--surface-pattern-base); }
+.research-surface { background: var(--surface-research); }
+.ai-surface { background: var(--surface-ai); }
