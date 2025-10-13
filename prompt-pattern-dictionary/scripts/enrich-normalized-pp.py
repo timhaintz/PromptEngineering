@@ -30,6 +30,16 @@ from typing import Any, Dict, List, Optional
 
 # Ensure repo root is on PYTHONPATH so we can import azure_models.py
 THIS_DIR = os.path.dirname(__file__)
+
+# Ensure local helper modules are importable
+if THIS_DIR not in sys.path:
+    sys.path.insert(0, THIS_DIR)
+
+try:
+    from peil_prompt_reference import build_full_peil_system_prompt
+except Exception as peil_err:
+    print(f"ERROR: Failed to import peil_prompt_reference: {peil_err}")
+    sys.exit(1)
 REPO_ROOT = os.path.abspath(os.path.join(THIS_DIR, '..', '..'))
 if REPO_ROOT not in sys.path:
     sys.path.insert(0, REPO_ROOT)
@@ -46,23 +56,39 @@ APPLICATION_FALLBACK_NOTE_DEFAULT = "Unable to process due to Azure's Content Ma
 TEMPLATE_CONTENT_FILTER_NOTE = APPLICATION_FALLBACK_NOTE_DEFAULT
 TEMPLATE_NA = "N/A"
 
-SYSTEM_PROMPT = (
+PEIL_REFERENCE_PROMPT = build_full_peil_system_prompt()
+
+BASE_SYSTEM_PROMPT = (
     "You are a careful data normalizer. Given a prompt pattern's description, examples, and current fields, "
-    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", \"dependentLLM\", \"turn\", \"usageSummary\", \"templateRawBracketed\", \"applicationTasksString\"}. "
-    "Rules: \n"
+    "infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {\"template\", \"application\", "
+    "\"dependentLLM\", \"turn\", \"usageSummary\", \"templateRawBracketed\", \"applicationTasksString\", "
+    "\"generalExplanation\", \"domainIndustryExamples\", \"peilPrompt\"}. Rules:\n"
     "- Do NOT hallucinate. If unsure, omit the key entirely.\n"
     "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude).\n"
     "- template: ALWAYS return an object with EXACTLY the five keys {role, context, action, format, response}. "
-    "For any part that is not present in the source, set the value to 'N/A' (uppercase) — do not leave it blank. Keep values concise phrases.\n"
+    "For any part that is not present in the source, set the value to 'N/A' (uppercase). Keep values concise phrases.\n"
     "- application: RETURN A SINGLE STRING containing ONE short sentence, or TWO short sentences if a second is needed for clarity. "
     "Use plain English and active voice. Keep each sentence simple (one main clause), concrete, and easy to scan. Avoid jargon, lists, parentheses, semicolons, em dashes, and placeholders. "
-    "Stay grounded in the description and examples. Prefer ≤ 18 words per sentence. Do NOT return tags.\n"
-    "- applicationTasksString: OPTIONAL. If you can confidently produce 1–8 concise tasks (prefer 8) for the pattern's media type, return a single comma+space separated string: 'task1, task2, ...'. Each task ≤5 words, DISTINCT, ACTIONABLE, and VERB-LED. REQUIRED DISTRhttp://192.168.0.122:3000/patternsIBUTION: provide 3–4 general cross-domain actions AND 4–5 industry/vertical-specific activities referencing DIFFERENT domains (e.g., finance, insurance, healthcare, legal, cybersecurity, supply chain, education). Include at most 2 tasks from any single domain. Prefer concrete entity nouns (claim, invoice, patient record, contract, firewall log) over abstract nouns. Avoid vague noun-only labels unless a verb adds no value.\n"
+    "Stay grounded in the description and examples. Prefer ≤ 18 words per sentence. Do NOT return tag lists.\n"
+    "- applicationTasksString: OPTIONAL. If you can confidently produce 1–8 concise tasks (prefer 8) for the pattern's media type, return a single comma+space separated string: 'task1, task2, ...'. "
+    "Each task ≤5 words, DISTINCT, ACTIONABLE, and VERB-LED. Provide 3–4 cross-domain tasks AND 4–5 industry-specific tasks covering different sectors. Avoid repeating the same domain more than twice.\n"
+    "- generalExplanation: 2 crisp sentences (≤22 words each) summarizing the pattern's intent, mechanics, and the user value. No fluff, no marketing tone.\n"
+    "- domainIndustryExamples: OPTIONAL. Produce one object per task listed in "
+    "applicationTasksString. Each object must include {task, prompt}. 'task' "
+    "must EXACTLY match the provided chip text (case-sensitive). 'prompt' is "
+    "1–2 grounded sentences (≤28 words each) that show how to ask the model "
+    "to perform that task using the pattern's description, template, and "
+    "examples. Use distinct industries whenever possible.\n"
+    "- peilPrompt: OPTIONAL. Return an object with keys {\"purpose\", \"execution\", \"input\", "
+    "\"levers\"}. Each value ≤16 words describing how to guide the pattern. The final prompt will "
+    "be two PEIL sentences assembled in this order.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
     "- templateRawBracketed: Return a SINGLE LINE exactly in the form [Role: <...>, Context: <...>, Action: <...>, Format: <...>, Response: <...>]. "
     "Always include all five segments in that order and use 'N/A' where a part is not present. Do NOT include newlines.\n"
 )
+
+SYSTEM_PROMPT = BASE_SYSTEM_PROMPT + "\n\n" + PEIL_REFERENCE_PROMPT
 
 def extract_json(text: str) -> Optional[Dict[str, Any]]:
     # Try direct parse
@@ -81,6 +107,16 @@ def extract_json(text: str) -> Optional[Dict[str, Any]]:
     return None
 
 
+def split_application_tasks_string(raw: Any) -> List[str]:
+    """Split a comma+space separated tasks string into a list of chip texts."""
+    if raw is None:
+        return []
+    if isinstance(raw, list):
+        return [str(x).strip() for x in raw if str(x).strip()]
+    parts = [p.strip() for p in str(raw).split(',')]
+    return [p for p in parts if p]
+
+
 def build_user_payload(p: Dict[str, Any]) -> str:
     # Include all examples as requested; keep as-is without truncation
     examples = p.get('promptExamples', []) or []
@@ -95,7 +131,14 @@ def build_user_payload(p: Dict[str, Any]) -> str:
             "application": p.get('application') or [],
             "dependentLLM": p.get('dependentLLM'),
             "turn": p.get('turn'),
+            "generalExplanation": p.get('generalExplanation'),
+            "domainIndustryExamples": p.get('domainIndustryExamples'),
+            "peilPrompt": p.get('peilPrompt'),
+            "usageSummary": p.get('usageSummary'),
         },
+        "applicationTasks": split_application_tasks_string(
+            p.get('applicationTasksString')
+        ),
         "examples": examples,
         "reference": p.get('reference') or {},
     }
@@ -120,13 +163,34 @@ def should_enrich(p: Dict[str, Any], fields: List[str]) -> bool:
             return True
         if f == 'usageSummary' and not p.get('usageSummary'):
             return True
+        if f == 'generalExplanation' and not p.get('generalExplanation'):
+            return True
+        if f == 'domainIndustryExamples':
+            di = p.get('domainIndustryExamples')
+            if not di or not isinstance(di, list):
+                return True
+            if isinstance(di, list) and not any(isinstance(item, dict) and item.get('task') and item.get('prompt') for item in di):
+                return True
+        if f == 'peilPrompt' and not p.get('peilPrompt'):
+            return True
     return False
 
 
 def main():
     model_name = 'gpt-5'
     limit = None
-    fields = ['template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'templateRawBracketed', 'applicationTasksString']
+    fields = [
+        'template',
+        'application',
+        'dependentLLM',
+        'turn',
+        'usageSummary',
+        'templateRawBracketed',
+        'applicationTasksString',
+        'generalExplanation',
+        'domainIndustryExamples',
+        'peilPrompt',
+    ]
     force_all = False
     force_fields: List[str] = []
     application_fallback_note = APPLICATION_FALLBACK_NOTE_DEFAULT
@@ -151,7 +215,18 @@ def main():
         if a in ('--fields', '--enrich-fields') and i + 1 < len(args):
             raw = args[i + 1]
             parts = [x.strip() for x in raw.split(',') if x.strip()]
-            allowed = {'template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'applicationTasksString'}
+            allowed = {
+                'template',
+                'application',
+                'dependentLLM',
+                'turn',
+                'usageSummary',
+                'applicationTasksString',
+                'generalExplanation',
+                'domainIndustryExamples',
+                'peilPrompt',
+                'templateRawBracketed',
+            }
             chosen = [x for x in parts if x in allowed]
             if chosen:
                 fields = chosen
@@ -162,7 +237,18 @@ def main():
         if a in ('--force-fields', '--enrich-force-fields') and i + 1 < len(args):
             raw = args[i + 1]
             parts = [x.strip() for x in raw.split(',') if x.strip()]
-            allowed = {'template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'applicationTasksString'}
+            allowed = {
+                'template',
+                'application',
+                'dependentLLM',
+                'turn',
+                'usageSummary',
+                'applicationTasksString',
+                'generalExplanation',
+                'domainIndustryExamples',
+                'peilPrompt',
+                'templateRawBracketed',
+            }
             force_fields = [x for x in parts if x in allowed]
             continue
         if a in ('--application-fallback-note',) and i + 1 < len(args):
@@ -298,6 +384,256 @@ def main():
                 break
         return ', '.join(tasks)
 
+    def normalize_general_explanation(value: Any) -> str:
+        text = str(value or '').strip()
+        if not text:
+            return ''
+        raw_sentences = re.split(r"(?<=[.!?])\s+", text)
+        sentences = [seg.strip() for seg in raw_sentences if seg.strip()]
+        if not sentences:
+            return ''
+        sentences = sentences[:2]
+        trimmed = [
+            clamp_sentence(sentence, max_words=22, max_chars=200)
+            for sentence in sentences
+        ]
+        out = ' '.join(trimmed)
+        if out and out[-1] not in '.!?':
+            out += '.'
+        return out
+
+    def normalize_prompt_example(value: Any) -> str:
+        text = str(value or '').strip()
+        if not text:
+            return ''
+        text = re.sub(r"\s+", " ", text)
+        sentences = [
+            seg.strip()
+            for seg in re.split(r"(?<=[.!?])\s+", text)
+            if seg.strip()
+        ]
+        if not sentences:
+            return ''
+        sentences = sentences[:2]
+        trimmed = [
+            clamp_sentence(sentence, max_words=28, max_chars=220)
+            for sentence in sentences
+        ]
+        out = ' '.join(trimmed).strip()
+        if out and out[-1] not in '.!?':
+            out += '.'
+        return out
+
+    def normalize_domain_examples(
+        value: Any,
+        expected_tasks: List[str],
+    ) -> List[Dict[str, str]]:
+        """Normalize domainIndustryExamples into {task, prompt} dicts."""
+        if value is None:
+            return []
+
+        entries: List[Dict[str, str]] = []
+
+        def push(task_val: str, prompt_val: str):
+            task = (task_val or '').strip()
+            prompt = (prompt_val or '').strip()
+            if not task or not prompt:
+                return
+            task_words = task.split()
+            if len(task_words) > 8:
+                task_trunc = ' '.join(task_words[:8])
+                task = task_trunc
+            key = (task.lower(), prompt.lower())
+            if key in seen:
+                return
+            seen.add(key)
+            entries.append({'task': task, 'prompt': prompt})
+
+        seen = set()
+
+        if isinstance(value, dict):
+            for k, v in value.items():
+                if isinstance(v, dict):
+                    task_source = v.get('task') or k
+                    prompt_source = v.get('prompt') or v.get('example') or ''
+                    push(task_source, prompt_source)
+                else:
+                    push(k, v)
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    task_val = (
+                        item.get('task')
+                        or item.get('scenario')
+                        or item.get('domain')
+                        or ''
+                    )
+                    prompt_val = (
+                        item.get('prompt')
+                        or item.get('example')
+                        or item.get('instruction')
+                        or ''
+                    )
+                    push(task_val, prompt_val)
+                elif isinstance(item, (list, tuple)) and len(item) >= 2:
+                    push(str(item[0]), str(item[1]))
+                else:
+                    parts = [
+                        p.strip()
+                        for p in re.split(r"\||;", str(item))
+                        if p.strip()
+                    ]
+                    if len(parts) >= 2:
+                        push(parts[0], parts[1])
+        else:
+            parts = [
+                p.strip()
+                for p in re.split(r"\n|\||;", str(value))
+                if p.strip()
+            ]
+            if len(parts) >= 2:
+                push(parts[0], parts[1])
+
+        if not expected_tasks:
+            return []
+
+        # Build lookup keyed by lower-case task for case-insensitive matching
+        lookup: Dict[str, str] = {}
+        for item in entries:
+            key = item['task'].lower()
+            if key not in lookup:
+                lookup[key] = item['prompt']
+        ordered: List[Dict[str, str]] = []
+        for task in expected_tasks:
+            needle = task.lower()
+            prompt_text = lookup.get(needle)
+            if not prompt_text:
+                return []
+            normalized_prompt = normalize_prompt_example(prompt_text)
+            if not normalized_prompt:
+                return []
+            ordered.append({'task': task, 'prompt': normalized_prompt})
+
+        return ordered
+
+    def normalize_peil_prompt(value: Any) -> str:
+        """Normalize PEIL prompt into two deterministic sentences."""
+
+        def clamp_clause(text: str, max_words: int = 16, max_chars: int = 160) -> str:
+            cleaned = re.sub(r"\s+", " ", text or '').strip()
+            if not cleaned:
+                return ''
+            words = cleaned.split()
+            if len(words) > max_words:
+                cleaned = ' '.join(words[:max_words]) + '…'
+            if len(cleaned) > max_chars:
+                cleaned = cleaned[:max_chars].rstrip() + '…'
+            return cleaned
+
+        def build_from_parts(parts: Dict[str, str]) -> str:
+            keys = ['purpose', 'execution', 'input', 'levers']
+            normalized_parts = {}
+            for key in keys:
+                normalized_parts[key] = clamp_clause(parts.get(key, ''))
+                if not normalized_parts[key]:
+                    return ''
+
+            sentence_one = (
+                f"Purpose: {normalized_parts['purpose']} "
+                f"Execution: {normalized_parts['execution']}"
+            ).strip()
+            if sentence_one and sentence_one[-1] not in '.!?':
+                sentence_one += '.'
+
+            sentence_two = (
+                f"Input: {normalized_parts['input']} "
+                f"Levers: {normalized_parts['levers']}"
+            ).strip()
+            if sentence_two and sentence_two[-1] not in '.!?':
+                sentence_two += '.'
+
+            combined = f"{sentence_one} {sentence_two}".strip()
+            words = combined.split()
+            if len(words) > 80:
+                # Prioritize trimming the Levers clause to respect the limit.
+                lever_words = normalized_parts['levers'].split()
+                while len(words) > 80 and lever_words:
+                    lever_words.pop()
+                    normalized_parts['levers'] = ' '.join(lever_words)
+                    if normalized_parts['levers']:
+                        sentence_two = (
+                            f"Input: {normalized_parts['input']} "
+                            f"Levers: {normalized_parts['levers']}"
+                        ).strip()
+                        if sentence_two and sentence_two[-1] not in '.!?':
+                            sentence_two += '.'
+                    combined = f"{sentence_one} {sentence_two}".strip()
+                    words = combined.split()
+                if len(words) > 80:
+                    # As a final safeguard, truncate the combined string.
+                    combined = ' '.join(words[:80])
+                    if combined[-1] not in '.!?':
+                        combined += '.'
+
+            return combined
+
+        if value is None:
+            return ''
+
+        if isinstance(value, dict):
+            lower_keys = {k.lower(): str(v or '').strip() for k, v in value.items()}
+            return build_from_parts(lower_keys)
+
+        text = str(value).strip()
+        if not text:
+            return ''
+        text = re.sub(r"\s+", " ", text)
+
+        def extract_clause(label: str, body: str) -> str:
+            pattern = re.compile(
+                rf"{label}\s*[:\-]\s*(.+?)(?=(Purpose|Execution|Input|Levers)\s*[:\-]|$)",
+                re.IGNORECASE,
+            )
+            match = pattern.search(body)
+            if match:
+                return match.group(1).strip().rstrip('.').strip()
+            return ''
+
+        extracted = {
+            'purpose': extract_clause('Purpose', text),
+            'execution': extract_clause('Execution', text),
+            'input': extract_clause('Input', text),
+            'levers': extract_clause('Levers', text),
+        }
+
+        # If extraction fails for any clause, fall back to clamped two-sentence form.
+        if all(extracted.values()):
+            return build_from_parts(extracted)
+
+        sentences = [
+            seg.strip()
+            for seg in re.split(r"(?<=[.!?])\s+", text)
+            if seg.strip()
+        ]
+        if not sentences:
+            return ''
+        sentences = sentences[:2]
+        trimmed = [
+            clamp_sentence(sentence, max_words=40, max_chars=220)
+            for sentence in sentences
+        ]
+        out = ' '.join(trimmed).strip()
+        if not out:
+            return ''
+        if out[-1] not in '.!?':
+            out += '.'
+        words = out.split()
+        if len(words) > 80:
+            out = ' '.join(words[:80])
+            if out[-1] not in '.!?':
+                out += '.'
+        return out
+
     # Phrase diversification state (only in-memory for current run)
     generic_phrase_primary = 'clarify user intent'
     generic_alternatives = [
@@ -310,9 +646,7 @@ def main():
     generic_usage_count = 0
 
     def diversify_generic_tasks(task_string: str) -> str:
-        """Limit repetition of a single generic phrase (e.g., 'Clarify user intent').
-        Keep the first occurrence across the run; thereafter substitute rotating alternatives.
-        """
+        """Reduce repeated generic tasks by rotating alternatives."""
         nonlocal generic_usage_count
         if not task_string:
             return task_string
@@ -321,7 +655,9 @@ def main():
         for i, t in enumerate(parts):
             if t.lower() == generic_phrase_primary:
                 if generic_usage_count >= 1:
-                    alt_index = (generic_usage_count - 1) % len(generic_alternatives)
+                    alt_index = (
+                        (generic_usage_count - 1) % len(generic_alternatives)
+                    )
                     parts[i] = generic_alternatives[alt_index]
                     changed = True
                 generic_usage_count += 1
@@ -352,14 +688,14 @@ def main():
             f"Response: {tpl_dict['response']}]"
         )
 
-    def set_template_bracket_and_object(pat: Dict[str, Any], text_for_all_fields: str):
-        """Set both templateRawBracketed and template object with the provided text for all five keys."""
+    def set_template_bracket_and_object(pat: Dict[str, Any], text_all: str):
+        """Set template fields to a shared placeholder value."""
         normalized = force_template_five_keys({
-            'role': text_for_all_fields,
-            'context': text_for_all_fields,
-            'action': text_for_all_fields,
-            'format': text_for_all_fields,
-            'response': text_for_all_fields,
+            'role': text_all,
+            'context': text_all,
+            'action': text_all,
+            'format': text_all,
+            'response': text_all,
         })
         pat['template'] = normalized
         pat['templateRawBracketed'] = build_bracketed_from_template(normalized)
@@ -369,8 +705,8 @@ def main():
             break
         if selected_ids is not None and p.get('id') not in selected_ids:
             continue
-        # Decide whether to call model: if force_all OR force_fields intersect requested fields, always call.
-        must_force = force_all or (bool(set(force_fields) & set(fields)))
+        # Decide whether to call the model.
+        must_force = force_all or bool(set(force_fields) & set(fields))
         if not must_force and not should_enrich(p, fields):
             continue
 
@@ -381,23 +717,21 @@ def main():
 
         try:
             pid = p.get('id')
-            # Log the pattern ID before making the API call so it's easy to correlate with HTTP logs
+            # Log pattern ID for tracing with API logs.
             print(f"[{pid}] REQUEST: chat.completions -> {model_name}")
             sys.stdout.flush()
-            # Do not pass temperature explicitly to support models that only allow default
+            # Do not pass temperature explicitly to support models with fixed defaults.
             resp = client.create_chat_completion(messages, stream=False)
             # azure_models clients typically return OpenAI-like response
             content = None
             if hasattr(resp, 'choices') and resp.choices:
                 content = getattr(resp.choices[0].message, 'content', None)
             if not content and isinstance(resp, dict):
-                content = (
-                    resp.get('choices', [{}])[0]
-                       .get('message', {})
-                       .get('content')
-                )
+                content = resp.get('choices', [{}])[0].get('message', {}).get('content')
             if not content:
-                print(f"[{pid}] RESPONSE: no content; applying fallback if enabled.")
+                print(
+                    f"[{pid}] RESPONSE: no content; applying fallback if enabled."
+                )
                 if 'application' in fields and not disable_fallback:
                     # Write fallback as a single string, not an array
                     p['application'] = application_fallback_note
@@ -409,7 +743,9 @@ def main():
 
             obj = extract_json(content)
             if not obj or not isinstance(obj, dict):
-                print(f"[{pid}] RESPONSE: unparsable JSON; applying fallback if enabled.")
+                print(
+                    f"[{pid}] RESPONSE: unparsable JSON; applying fallback if enabled."
+                )
                 if 'application' in fields and not disable_fallback:
                     # Write fallback as a single string, not an array
                     p['application'] = application_fallback_note
@@ -419,41 +755,89 @@ def main():
                 continue
 
             updated_fields = []
-            for key in ['template', 'application', 'dependentLLM', 'turn', 'usageSummary', 'templateRawBracketed', 'applicationTasksString']:
+            task_list = split_application_tasks_string(
+                p.get('applicationTasksString')
+            )
+            for key in [
+                'template',
+                'application',
+                'dependentLLM',
+                'turn',
+                'usageSummary',
+                'templateRawBracketed',
+                'applicationTasksString',
+                'generalExplanation',
+                'domainIndustryExamples',
+                'peilPrompt',
+            ]:
                 if key not in fields:
                     continue
-                if key in obj and obj[key] is not None and obj[key] != {} and obj[key] != []:
+                if (
+                    key in obj
+                    and obj[key] is not None
+                    and obj[key] != {}
+                    and obj[key] != []
+                ):
                     # Normalize types and overwrite
+                    updated = False
                     if key == 'application':
                         # Convert to a single string (1–2 sentences)
                         p[key] = normalize_application_to_string(obj[key])
+                        updated = True
                     elif key == 'applicationTasksString':
                         norm_tasks = normalize_application_tasks(obj[key])
                         if norm_tasks:
                             # Diversify generic phrase usage before assigning
                             p[key] = diversify_generic_tasks(norm_tasks)
+                            updated = True
+                            task_list = split_application_tasks_string(p[key])
                     elif key == 'template':
                         # Ensure exactly five keys with N/A defaults
                         p[key] = force_template_five_keys(obj[key])
+                        updated = True
                     elif key == 'templateRawBracketed':
                         # Ensure single line bracketed form; strip whitespace/newlines
                         raw = str(obj[key]).strip().replace('\n', ' ')
                         p['templateRawBracketed'] = raw
+                        updated = True
+                    elif key == 'generalExplanation':
+                        summary = normalize_general_explanation(obj[key])
+                        if summary:
+                            p[key] = summary
+                            updated = True
+                    elif key == 'domainIndustryExamples':
+                        examples_norm = normalize_domain_examples(
+                            obj[key],
+                            task_list,
+                        )
+                        if examples_norm:
+                            p[key] = examples_norm
+                            updated = True
+                    elif key == 'peilPrompt':
+                        prompt_text = normalize_peil_prompt(obj[key])
+                        if prompt_text:
+                            p[key] = prompt_text
+                            updated = True
                     else:
                         # Overwrite with model output for other fields
                         p[key] = obj[key]
-                    updated_fields.append(key)
+                        updated = True
 
-            # Ensure bracketed string exists and matches the normalized template when template was updated
+                    if updated:
+                        updated_fields.append(key)
+
+            # Ensure templateRawBracketed mirrors the normalized template when updated.
             if 'template' in updated_fields and isinstance(p.get('template'), dict):
                 tpl_norm = force_template_five_keys(p.get('template'))
                 p['template'] = tpl_norm
                 p['templateRawBracketed'] = build_bracketed_from_template(tpl_norm)
 
             if updated_fields:
-                print(f"[{pid}] RESPONSE: OK; updated {', '.join(updated_fields)}")
+                updated_fields_str = ', '.join(updated_fields)
+                print(f"[{pid}] RESPONSE: OK; updated {updated_fields_str}")
                 p['aiAssisted'] = True
-                p['aiAssistedFields'] = sorted(list(set((p.get('aiAssistedFields') or []) + updated_fields)))
+                combined_fields = (p.get('aiAssistedFields') or []) + updated_fields
+                p['aiAssistedFields'] = sorted(list(set(combined_fields)))
                 p['aiAssistedModel'] = model_name
                 p['aiAssistedAt'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
                 enriched_count += 1
