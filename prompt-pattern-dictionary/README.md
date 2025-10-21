@@ -292,6 +292,14 @@ $env:USE_UV = "1"
 node .\scripts\build-data.js --enrich --enrich-fields template --enrich-limit 5
 ```
 
+- Dry run previews (Python):
+
+```powershell
+python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --limit 10 --fields generalExplanation,peilPrompt --dry-run
+```
+
+The `--dry-run` flag calls Azure and prints the exact field updates without writing back to `public/data/normalized-patterns.json`.
+
 - GPT-5 temperature behavior:
 
 Azure GPT-5 deployments accept only the default temperature. The enrichment pipeline does not set `temperature` explicitly for GPT-5 (and will retry without it if the service rejects the parameter), so you won’t see 400 errors about unsupported temperature values. Each enrichment call includes the locked-in Template and application context so the model stays grounded while filling the remaining PEIL variables.

@@ -32,20 +32,8 @@ Create the definitive reference tool for cybersecurity prompt engineering patter
 ### 1. Search & Discovery
 
 #### 1.1 Advanced Search Functionality
-- **Free-text search** across pattern names, descriptions, and example prompts
-- **Category filtering** (Input Semantics, Output Customization, Jailbreaking, etc.)
-- **Paper source filtering** by author, publication date, or research paper
-- **Fuzzy search** for partial matches and typos
-- **Search suggestions** and auto-complete
-- **Boolean search** operators (AND, OR, NOT)
 
 #### 1.2 Browse & Navigation
-- **Category-based browsing** with expandable tree structure
-- **Research paper index** with paper details and all associated patterns
-- **Tag-based navigation** for related patterns
-- **"Related Patterns"** suggestions based on content similarity
-- **Recently viewed** patterns history
-
 ### 2. Dictionary-Style Interface
 
 #### 2.1 Pattern Entry Display
@@ -680,6 +668,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 #### Runtime Notes
 - Python environment: The data pipeline auto-detects uv and prefers `uv run` for Python scripts when available (or when `uv.lock` is present). You can force uv with the environment variable `USE_UV=1`.
 - GPT-5 temperature: Azure GPT-5 accepts only the default temperature. The pipeline avoids setting `temperature` for GPT-5 and will retry without it if the service rejects the parameter.
+- Dry run support: Pass `--dry-run` to `scripts/enrich-normalized-pp.py` to preview model output without mutating `public/data/normalized-patterns.json`; the script logs intended field updates and exits without writing files.
 
 ### Enhanced URL Structure
 - Homepage: `/`

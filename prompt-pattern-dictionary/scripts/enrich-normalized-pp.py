@@ -199,6 +199,7 @@ def main():
     selected_ids = None  # Optional set of IDs to target
     application_tasks_only = False
     force_application_tasks = False
+    dry_run = False
 
     # Parse args
     args = sys.argv[1:]
@@ -268,6 +269,9 @@ def main():
             force_application_tasks = True
             if 'applicationTasksString' not in force_fields:
                 force_fields.append('applicationTasksString')
+            continue
+        if a == '--dry-run':
+            dry_run = True
             continue
         if a == '--ids' and i + 1 < len(args):
             raw = args[i + 1]
@@ -732,12 +736,13 @@ def main():
                 print(
                     f"[{pid}] RESPONSE: no content; applying fallback if enabled."
                 )
-                if 'application' in fields and not disable_fallback:
-                    # Write fallback as a single string, not an array
-                    p['application'] = application_fallback_note
-                if not disable_fallback:
-                    # Generic failure -> set template to N/A for all five
-                    set_template_bracket_and_object(p, TEMPLATE_NA)
+                if not dry_run:
+                    if 'application' in fields and not disable_fallback:
+                        # Write fallback as a single string, not an array
+                        p['application'] = application_fallback_note
+                    if not disable_fallback:
+                        # Generic failure -> set template to N/A for all five
+                        set_template_bracket_and_object(p, TEMPLATE_NA)
                 # Continue to next pattern without incrementing enriched_count (not AI-derived)
                 continue
 
@@ -746,15 +751,17 @@ def main():
                 print(
                     f"[{pid}] RESPONSE: unparsable JSON; applying fallback if enabled."
                 )
-                if 'application' in fields and not disable_fallback:
-                    # Write fallback as a single string, not an array
-                    p['application'] = application_fallback_note
-                if not disable_fallback:
-                    # Generic failure -> set template to N/A for all five
-                    set_template_bracket_and_object(p, TEMPLATE_NA)
+                if not dry_run:
+                    if 'application' in fields and not disable_fallback:
+                        # Write fallback as a single string, not an array
+                        p['application'] = application_fallback_note
+                    if not disable_fallback:
+                        # Generic failure -> set template to N/A for all five
+                        set_template_bracket_and_object(p, TEMPLATE_NA)
                 continue
 
             updated_fields = []
+            dry_run_changes: Dict[str, Any] = {}
             task_list = split_application_tasks_string(
                 p.get('applicationTasksString')
             )
@@ -782,28 +789,46 @@ def main():
                     updated = False
                     if key == 'application':
                         # Convert to a single string (1–2 sentences)
-                        p[key] = normalize_application_to_string(obj[key])
-                        updated = True
+                        normalized_value = normalize_application_to_string(obj[key])
+                        if normalized_value:
+                            if dry_run:
+                                dry_run_changes[key] = normalized_value
+                            else:
+                                p[key] = normalized_value
+                            updated = True
                     elif key == 'applicationTasksString':
                         norm_tasks = normalize_application_tasks(obj[key])
                         if norm_tasks:
-                            # Diversify generic phrase usage before assigning
-                            p[key] = diversify_generic_tasks(norm_tasks)
+                            diversified = diversify_generic_tasks(norm_tasks)
+                            if dry_run:
+                                dry_run_changes[key] = diversified
+                            else:
+                                p[key] = diversified
                             updated = True
-                            task_list = split_application_tasks_string(p[key])
+                            task_list = split_application_tasks_string(diversified)
                     elif key == 'template':
                         # Ensure exactly five keys with N/A defaults
-                        p[key] = force_template_five_keys(obj[key])
+                        normalized_tpl = force_template_five_keys(obj[key])
+                        if dry_run:
+                            dry_run_changes[key] = normalized_tpl
+                        else:
+                            p[key] = normalized_tpl
                         updated = True
                     elif key == 'templateRawBracketed':
                         # Ensure single line bracketed form; strip whitespace/newlines
                         raw = str(obj[key]).strip().replace('\n', ' ')
-                        p['templateRawBracketed'] = raw
+                        if dry_run:
+                            dry_run_changes[key] = raw
+                        else:
+                            p['templateRawBracketed'] = raw
                         updated = True
                     elif key == 'generalExplanation':
                         summary = normalize_general_explanation(obj[key])
                         if summary:
-                            p[key] = summary
+                            if dry_run:
+                                dry_run_changes[key] = summary
+                            else:
+                                p[key] = summary
                             updated = True
                     elif key == 'domainIndustryExamples':
                         examples_norm = normalize_domain_examples(
@@ -811,40 +836,59 @@ def main():
                             task_list,
                         )
                         if examples_norm:
-                            p[key] = examples_norm
+                            if dry_run:
+                                dry_run_changes[key] = examples_norm
+                            else:
+                                p[key] = examples_norm
                             updated = True
                     elif key == 'peilPrompt':
                         prompt_text = normalize_peil_prompt(obj[key])
                         if prompt_text:
-                            p[key] = prompt_text
+                            if dry_run:
+                                dry_run_changes[key] = prompt_text
+                            else:
+                                p[key] = prompt_text
                             updated = True
                     else:
                         # Overwrite with model output for other fields
-                        p[key] = obj[key]
+                        if dry_run:
+                            dry_run_changes[key] = obj[key]
+                        else:
+                            p[key] = obj[key]
                         updated = True
 
                     if updated:
                         updated_fields.append(key)
 
             # Ensure templateRawBracketed mirrors the normalized template when updated.
-            if 'template' in updated_fields and isinstance(p.get('template'), dict):
+            if not dry_run and 'template' in updated_fields and isinstance(p.get('template'), dict):
                 tpl_norm = force_template_five_keys(p.get('template'))
                 p['template'] = tpl_norm
                 p['templateRawBracketed'] = build_bracketed_from_template(tpl_norm)
 
+            if dry_run and 'template' in updated_fields and 'template' in dry_run_changes:
+                tpl_norm = force_template_five_keys(dry_run_changes['template'])
+                dry_run_changes['template'] = tpl_norm
+                dry_run_changes['templateRawBracketed'] = build_bracketed_from_template(tpl_norm)
+
             if updated_fields:
                 updated_fields_str = ', '.join(updated_fields)
-                print(f"[{pid}] RESPONSE: OK; updated {updated_fields_str}")
-                p['aiAssisted'] = True
-                combined_fields = (p.get('aiAssistedFields') or []) + updated_fields
-                p['aiAssistedFields'] = sorted(list(set(combined_fields)))
-                p['aiAssistedModel'] = model_name
-                p['aiAssistedAt'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+                if dry_run:
+                    print(f"[{pid}] DRY RUN: would update {updated_fields_str}")
+                    if dry_run_changes:
+                        print(json.dumps(dry_run_changes, ensure_ascii=False, indent=2))
+                else:
+                    print(f"[{pid}] RESPONSE: OK; updated {updated_fields_str}")
+                    p['aiAssisted'] = True
+                    combined_fields = (p.get('aiAssistedFields') or []) + updated_fields
+                    p['aiAssistedFields'] = sorted(list(set(combined_fields)))
+                    p['aiAssistedModel'] = model_name
+                    p['aiAssistedAt'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
                 enriched_count += 1
         except Exception as e:
             # Content filter or other failure; set application fallback note if requested
             print(f"[{p.get('id')}] ERROR: {e}")
-            if not disable_fallback:
+            if not dry_run and not disable_fallback:
                 # Determine if it was a content filter issue
                 msg = (str(e) or '').lower()
                 is_content_filter = ('content' in msg and ('policy' in msg or 'filter' in msg)) or 'content management policy' in msg
@@ -857,6 +901,10 @@ def main():
                 else:
                     set_template_bracket_and_object(p, TEMPLATE_NA)
             continue
+
+    if dry_run:
+        print(f"Dry run complete. Would update {enriched_count} pattern(s). No files written.")
+        return 0
 
     # Final coercion pass: ensure application is ALWAYS a single string
     coerced = 0
