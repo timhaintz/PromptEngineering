@@ -72,9 +72,9 @@ Applies to Prompt Pattern pages only.
   - `Domain and Industry Examples` (chips sourced by pairing the Template with existing application tags)
   - `PEIL Prompts`
 - The Template value is already captured from the source papers during normalization and must be treated as the authoritative text. Enrichment steps may only fill gaps around it, not rewrite it.
-- When enrichment runs, call GPT-5 with the full pattern record (research excerpt, template, application metadata, prior AI fields). The model confirms existing values, fills any empty PEIL variables, and flags unclear items instead of fabricating unsupported claims.
+- When enrichment runs, call GPT-5 with the full pattern record (research excerpt, template, application metadata, prior AI fields). The model confirms existing values, then assembles a complete PEIL system prompt and flags unclear items instead of fabricating unsupported claims.
 - Domain and industry examples are selected by crossing the Template with the application chips found in the research data; GPT-5 may suggest alternates only when a chip is missing, and should note when manual review is required.
-- PEIL prompt generation always grounds itself in the Template plus the chosen application/domain pairing. GPT-5 produces the remaining PEIL variables (role framing, context, instructions, conciseness) in a single pass so downstream automation receives a complete prompt payload.
+- PEIL prompt generation always grounds itself in the Template plus the chosen application/domain pairing. GPT-5 returns a hybrid PEIL system prompt with a framing paragraph followed by unlabeled bullet rules, weaving in a single domain-specific scenario (never mixing domains) so downstream automation receives a ready-to-use instruction block aligned with the Bomble et al. (2025) and Han, Wu & Willard (2025) guidance.
 
 ```mermaid
 flowchart TB
@@ -96,7 +96,7 @@ flowchart TB
     subgraph Applications ["Applications (current chips drive content)"]
       DomainIndustry["Domain and Industry Examples\n(grounded in application chips)"]
     end
-    PEIL["PEIL Prompts\n(generated via peil_prompt_generator.py using Template + Application)"]
+    PEIL["PEIL Prompts\n(generated via peil_prompt_generator.py using Template + Application to produce a system prompt)"]
   end
 
   PromptExamples -->|grounding| Applications
@@ -126,8 +126,8 @@ flowchart TB
 |    - Domain and Industry Examples                                  |
 |                                                                    |
 |  PEIL Prompts (via peil_prompt_generator.py;                       |
-|    use Template + Application to pick one domain +                 |
-|    industry vertical and populate PEIL variables)                  |
+|    use Template + Application to generate a PEIL-structured        |
+|    system prompt ready for automation)                             |
 +--------------------------------------------------------------------+
 ```
 

@@ -69,7 +69,7 @@ flowchart TB
 		subgraph Applications ["Applications (current chips drive content)"]
 			DomainIndustry["Domain and Industry Examples\n(grounded in application chips)"]
 		end
-		PEIL["PEIL Prompts\n(generated via peil_prompt_generator.py using Template + Application)"]
+		PEIL["PEIL Prompts\n(generated via peil_prompt_generator.py using Template + Application to produce a system prompt)"]
 	end
 
 	PromptExamples -->|grounding| Applications
@@ -99,8 +99,8 @@ flowchart TB
 |    - Domain and Industry Examples                                  |
 |                                                                    |
 |  PEIL Prompts (via peil_prompt_generator.py;                       |
-|    use Template + Application to pick one domain +                 |
-|    industry vertical and populate PEIL variables)                  |
+|    use Template + Application to generate a PEIL-structured        |
+|    system prompt ready for automation)                             |
 +--------------------------------------------------------------------+
 ```
 
@@ -249,13 +249,13 @@ Notes:
 
 ### Optional AI Enrichment (GPT-5)
 
-You can optionally enrich normalized pattern data using Azure OpenAI (GPT-5) to fill gaps in the AI-augmented metadata while preserving the research-authoritative fields. The Template (Role, Context, Action, Format, Response) now ships directly from the source papers via normalization; GPT-5 uses that template—along with application tags and prompt examples—to add whatever is missing (usage summary, dependent LLM call-outs, turn guidance, PEIL prompt variables, domain/industry pairings).
+You can optionally enrich normalized pattern data using Azure OpenAI (GPT-5) to fill gaps in the AI-augmented metadata while preserving the research-authoritative fields. The Template (Role, Context, Action, Format, Response) now ships directly from the source papers via normalization; GPT-5 uses that template—along with application tags and prompt examples—to add whatever is missing (usage summary, dependent LLM call-outs, turn guidance, PEIL-formatted system prompt, domain/industry pairings).
 
 - What it does:
 	- Updates `public/data/normalized-patterns.json`
 	- Adds metadata: `aiAssisted`, `aiAssistedFields`, `aiAssistedModel`, `aiAssistedAt`
 	- Treats the research-derived Template as read-only; the enrichment pass only supplements adjacent AI fields
-	- Uses GPT-5 to inspect the full record (research excerpt, template, application chips, prior enrichment) and synthesize the missing PEIL variables and `Domain and Industry Examples`
+	- Uses GPT-5 to inspect the full record (research excerpt, template, application chips, prior enrichment) and synthesize a hybrid PEIL system prompt (framing paragraph + unlabeled bullet rules with one domain-focused scenario woven into the guidance) plus `Domain and Industry Examples`. The scenario stays within a single domain and will not mix multiple industries.
 	- Pattern pages show an “AI-assisted” badge and a small disclaimer noting fields may be incorrect
 
 - Scope to fields:
@@ -302,7 +302,7 @@ The `--dry-run` flag calls Azure and prints the exact field updates without writ
 
 - GPT-5 temperature behavior:
 
-Azure GPT-5 deployments accept only the default temperature. The enrichment pipeline does not set `temperature` explicitly for GPT-5 (and will retry without it if the service rejects the parameter), so you won’t see 400 errors about unsupported temperature values. Each enrichment call includes the locked-in Template and application context so the model stays grounded while filling the remaining PEIL variables.
+Azure GPT-5 deployments accept only the default temperature. The enrichment pipeline does not set `temperature` explicitly for GPT-5 (and will retry without it if the service rejects the parameter), so you won’t see 400 errors about unsupported temperature values. Each enrichment call includes the locked-in Template and application context so the model stays grounded while crafting the PEIL-formatted system prompt.
 
 - Requirements:
 	- Azure environment variables for endpoints/models must be set according to your `azure_models.py` registration

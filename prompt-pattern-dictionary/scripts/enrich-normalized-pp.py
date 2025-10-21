@@ -79,9 +79,19 @@ BASE_SYSTEM_PROMPT = (
     "1–2 grounded sentences (≤28 words each) that show how to ask the model "
     "to perform that task using the pattern's description, template, and "
     "examples. Use distinct industries whenever possible.\n"
-    "- peilPrompt: OPTIONAL. Return an object with keys {\"purpose\", \"execution\", \"input\", "
-    "\"levers\"}. Each value ≤16 words describing how to guide the pattern. The final prompt will "
-    "be two PEIL sentences assembled in this order.\n"
+    "- peilPrompt: OPTIONAL. Return a SINGLE STRING containing a complete system prompt built with the PEIL template. Format EXACTLY as seven newline-separated lines in this order:\n"
+    "  Role: …\n"
+    "  Provide Clear Context: …\n"
+    "  Break Down Complex Questions: …\n"
+    "  Provide Specific Instructions: …\n"
+    "  Define Conciseness: …\n"
+    "  Prompting Techniques From Research: …\n"
+    "  State Desired Output: …\n"
+    "Each clause must be a grounded, declarative sentence (≤28 words) that reflects the "
+    "pattern's template, application chips, and examples. Highlight the single most "
+    "impactful industry/domain scenario when appropriate so downstream automation gets "
+    "a concrete applied use case. Avoid placeholders, braces, bullet lists, or "
+    "references to the PEIL variable names themselves.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
     "- templateRawBracketed: Return a SINGLE LINE exactly in the form [Role: <...>, Context: <...>, Action: <...>, Format: <...>, Response: <...>]. "
@@ -520,11 +530,29 @@ def main():
 
         return ordered
 
-    def normalize_peil_prompt(value: Any) -> str:
-        """Normalize PEIL prompt into two deterministic sentences."""
+    def normalize_peil_prompt(
+        value: Any,
+        tasks: Optional[List[str]] = None,
+        domain_examples: Optional[List[Dict[str, Any]]] = None,
+    ) -> str:
+        """Normalize PEIL prompt into a canonical multi-line system prompt."""
 
-        def clamp_clause(text: str, max_words: int = 16, max_chars: int = 160) -> str:
-            cleaned = re.sub(r"\s+", " ", text or '').strip()
+        section_order = [
+            ("Role", "role"),
+            ("Provide Clear Context", "provideclearcontext"),
+            ("Break Down Complex Questions", "breakdowncomplexquestions"),
+            ("Provide Specific Instructions", "providespecificinstructions"),
+            ("Define Conciseness", "defineconciseness"),
+            ("Prompting Techniques From Research", "promptingtechniquesfromresearch"),
+            ("State Desired Output", "statedesiredoutput"),
+        ]
+
+        def normalize_key(label: str) -> str:
+            return re.sub(r"[^a-z]", "", (label or '').lower())
+
+        def clamp_clause(text: str, max_words: int = 28, max_chars: int = 220) -> str:
+            cleaned = re.sub(r"\s+", " ", str(text or '')).strip().strip('"')
+            cleaned = cleaned.replace('{', '').replace('}', '')
             if not cleaned:
                 return ''
             words = cleaned.split()
@@ -534,109 +562,248 @@ def main():
                 cleaned = cleaned[:max_chars].rstrip() + '…'
             return cleaned
 
-        def build_from_parts(parts: Dict[str, str]) -> str:
-            keys = ['purpose', 'execution', 'input', 'levers']
-            normalized_parts = {}
-            for key in keys:
-                normalized_parts[key] = clamp_clause(parts.get(key, ''))
-                if not normalized_parts[key]:
+        def finalize(section_map: Dict[str, str]) -> str:
+            ordered_clauses: List[tuple[str, str]] = []
+            normalized_lookup: Dict[str, str] = {}
+            for label, normalized_key in section_order:
+                clause = clamp_clause(section_map.get(normalized_key, ''))
+                if not clause:
                     return ''
+                if clause[-1] not in '.!?':
+                    clause += '.'
+                ordered_clauses.append((label, clause))
+                normalized_lookup[normalized_key] = clause
 
-            sentence_one = (
-                f"Purpose: {normalized_parts['purpose']} "
-                f"Execution: {normalized_parts['execution']}"
-            ).strip()
-            if sentence_one and sentence_one[-1] not in '.!?':
-                sentence_one += '.'
+            # Derive a primary domain from domain_examples or tasks to avoid mixing domains
+            def detect_domain(text: str) -> Optional[str]:
+                if not text:
+                    return None
+                lowered = text.lower()
+                domain_map = {
+                    'healthcare': ['patient', 'medical', 'health', 'clinic', 'vitals', 'diagnosis', 'rx', 'ehr', 'clinical', 'medication', 'medications', 'htn', 'metformin', 'provider'],
+                    'finance': ['finance', 'financial', 'ledger', 'account', 'invoice', 'debit', 'credit', 'acct', 'ar', 'ap'],
+                    'insurance': ['insurance', 'claim', 'policy', 'actuarial', 'underwrite'],
+                    'legal': ['contract', 'legal', 'clause', 'jurisdiction', 'obligation'],
+                    'cybersecurity': ['cyber', 'security', 'firewall', 'threat', 'ip', 'incident'],
+                    'supply': ['supply', 'manufactur', 'logistics', 'inventory', 'warehouse'],
+                    'education': ['education', 'curriculum', 'student', 'teacher'],
+                }
+                for domain, keys in domain_map.items():
+                    for k in keys:
+                        if k in lowered:
+                            return domain
+                return None
 
-            sentence_two = (
-                f"Input: {normalized_parts['input']} "
-                f"Levers: {normalized_parts['levers']}"
-            ).strip()
-            if sentence_two and sentence_two[-1] not in '.!?':
-                sentence_two += '.'
+            primary_domain_counts: Dict[str, int] = {}
+            domain_priority = ['healthcare', 'finance', 'insurance', 'legal', 'cybersecurity', 'supply', 'education']
+            if domain_examples:
+                for item in domain_examples:
+                    if not isinstance(item, dict):
+                        continue
+                    combo = f"{item.get('task','')} {item.get('prompt','')}"
+                    d = detect_domain(combo)
+                    if d:
+                        primary_domain_counts[d] = primary_domain_counts.get(d, 0) + 1
+            if tasks:
+                for t in tasks:
+                    d = detect_domain(t)
+                    if d:
+                        primary_domain_counts[d] = primary_domain_counts.get(d, 0) + 1
+            for _, clause in ordered_clauses:
+                d = detect_domain(clause)
+                if d:
+                    primary_domain_counts[d] = primary_domain_counts.get(d, 0) + 1
 
-            combined = f"{sentence_one} {sentence_two}".strip()
-            words = combined.split()
-            if len(words) > 80:
-                # Prioritize trimming the Levers clause to respect the limit.
-                lever_words = normalized_parts['levers'].split()
-                while len(words) > 80 and lever_words:
-                    lever_words.pop()
-                    normalized_parts['levers'] = ' '.join(lever_words)
-                    if normalized_parts['levers']:
-                        sentence_two = (
-                            f"Input: {normalized_parts['input']} "
-                            f"Levers: {normalized_parts['levers']}"
-                        ).strip()
-                        if sentence_two and sentence_two[-1] not in '.!?':
-                            sentence_two += '.'
-                    combined = f"{sentence_one} {sentence_two}".strip()
-                    words = combined.split()
-                if len(words) > 80:
-                    # As a final safeguard, truncate the combined string.
-                    combined = ' '.join(words[:80])
-                    if combined[-1] not in '.!?':
-                        combined += '.'
+            primary_domain = None
+            if primary_domain_counts:
+                def priority_key(item: Any) -> Any:
+                    domain, count = item
+                    priority = domain_priority.index(domain) if domain in domain_priority else len(domain_priority)
+                    return (count, -priority)
 
-            return combined
+                primary_domain = max(primary_domain_counts.items(), key=priority_key)[0]
+
+            domain_example_phrase = {
+                'healthcare': 'patient record',
+                'finance': 'ledger entries',
+                'insurance': 'insurance claim',
+                'legal': 'contract clause',
+                'cybersecurity': 'firewall log',
+                'supply': 'supply chain entry',
+                'education': 'curriculum module',
+            }
+            primary_phrase = domain_example_phrase.get(primary_domain, 'domain-specific output')
+
+            def build_example_suffix(current_clause: str) -> Optional[str]:
+                """Produce a short clause to reinforce a single domain scenario without bloating the line."""
+
+                keyword_priority = [
+                    'finance', 'financial', 'account', 'ledger', 'invoice', 'audit',
+                    'insurance', 'claim', 'underwrite', 'policy', 'actuarial',
+                    'patient', 'clinical', 'health', 'medical', 'diagnosis',
+                    'contract', 'legal', 'compliance', 'regulatory', 'governance',
+                    'cyber', 'security', 'threat', 'firewall', 'incident',
+                    'supply', 'manufactur', 'logistics', 'retail', 'marketing',
+                    'education', 'curriculum', 'student', 'teacher',
+                ]
+
+                def score_prompt(text: str) -> int:
+                    lowered = text.lower()
+                    for idx, keyword in enumerate(keyword_priority):
+                        if keyword in lowered:
+                            return len(keyword_priority) - idx
+                    return 0
+
+                best_text = None
+                best_task = None
+                if domain_examples:
+                    best_score = -1
+                    for item in domain_examples:
+                        if not isinstance(item, dict):
+                            continue
+                        prompt_text = clamp_clause(item.get('prompt'), max_words=36, max_chars=260)
+                        if not prompt_text:
+                            continue
+                        task_text = str(item.get('task') or '').strip()
+                        current_score = score_prompt(f"{prompt_text} {task_text}")
+                        if current_score > best_score:
+                            best_score = current_score
+                            best_text = prompt_text
+                            best_task = task_text
+                    if primary_domain:
+                        for item in domain_examples:
+                            combo = f"{item.get('task','')} {item.get('prompt','')}"
+                            if detect_domain(combo) == primary_domain:
+                                prompt_text = clamp_clause(item.get('prompt'), max_words=36, max_chars=260)
+                                if prompt_text:
+                                    best_text = prompt_text
+                                    best_task = str(item.get('task') or '').strip()
+                                    break
+
+                if not best_text and tasks:
+                    best_score = -1
+                    for raw_task in tasks:
+                        task_text = str(raw_task or '').strip()
+                        if not task_text:
+                            continue
+                        score = score_prompt(task_text)
+                        if score > best_score:
+                            best_score = score
+                            best_task = task_text
+                    if best_task:
+                        best_text = best_task
+
+                if not best_text:
+                    return None
+
+                cleaned_text = re.sub(r"\s{2,}", " ", best_text).strip()
+                display_task = best_task or cleaned_text
+                display_task = display_task.replace(':', ' ').replace('→', ' to ')
+                display_task = re.sub(r"\s+", " ", display_task).strip()
+                task_words = display_task.split()
+                if len(task_words) > 8:
+                    display_task = ' '.join(task_words[:8])
+                base_phrase = primary_phrase if primary_phrase else 'domain-specific output'
+                suffix_parts: List[str] = []
+                suffix_parts.append(f"Focus on {base_phrase} scenarios such as {display_task}")
+                tokens_found = re.findall(r"'([^']{1,60})'", cleaned_text)
+                base_word_count = len((current_clause or '').split())
+                token_phrase = None
+                if tokens_found:
+                    token_phrase = ', '.join([f"'{t}'" for t in tokens_found[:2]])
+                candidate = '. '.join(suffix_parts)
+                candidate_words = len(candidate.split())
+                if token_phrase:
+                    # Only append token language if it keeps the clause compact
+                    extra = f"Highlight shorthand tokens like {token_phrase}"
+                    if base_word_count + candidate_words + len(extra.split()) <= 28:
+                        candidate = candidate + '. ' + extra
+                candidate = clamp_clause(candidate, max_words=22, max_chars=160)
+                if candidate and candidate[-1] not in '.!?':
+                    candidate += '.'
+                # Guard against cases where the addition would cause heavy truncation
+                if base_word_count + len(candidate.split()) > 28:
+                    return None
+                return candidate
+
+            example_suffix = build_example_suffix(normalized_lookup.get('statedesiredoutput', ''))
+            if example_suffix and 'statedesiredoutput' in normalized_lookup:
+                combined = normalized_lookup['statedesiredoutput'].rstrip('.!?') + '. ' + example_suffix
+                combined = clamp_clause(combined)
+                if combined and combined[-1] not in '.!?':
+                    combined += '.'
+                normalized_lookup['statedesiredoutput'] = combined
+                for idx, (label, _) in enumerate(ordered_clauses):
+                    if normalize_key(label) == 'statedesiredoutput':
+                        ordered_clauses[idx] = (label, combined)
+                        break
+
+            def strip_label(label: str, clause: str) -> str:
+                normalized_label = label.lower()
+                lowered_clause = clause.lower()
+                if lowered_clause.startswith(f"{normalized_label}: "):
+                    return clause[len(label) + 2:].strip()
+                if lowered_clause.startswith(f"{normalized_label} -"):
+                    return clause[len(label) + 2:].strip()
+                return clause.strip()
+
+            intro_label, intro_clause = ordered_clauses[0]
+            intro_text = strip_label(intro_label, intro_clause)
+
+            bullet_lines: List[str] = []
+            for label, clause in ordered_clauses[1:]:
+                text = strip_label(label, clause)
+                if not text:
+                    continue
+                bullet_lines.append(f"- {text}")
+
+            return "\n".join([intro_text, "", *bullet_lines])
 
         if value is None:
             return ''
 
         if isinstance(value, dict):
-            lower_keys = {k.lower(): str(v or '').strip() for k, v in value.items()}
-            return build_from_parts(lower_keys)
+            section_map = {
+                normalize_key(k): str(v or '').strip()
+                for k, v in value.items()
+                if normalize_key(k)
+            }
+            return finalize(section_map)
 
-        text = str(value).strip()
+        text = str(value or '').strip()
         if not text:
             return ''
-        text = re.sub(r"\s+", " ", text)
 
-        def extract_clause(label: str, body: str) -> str:
-            pattern = re.compile(
-                rf"{label}\s*[:\-]\s*(.+?)(?=(Purpose|Execution|Input|Levers)\s*[:\-]|$)",
-                re.IGNORECASE,
-            )
-            match = pattern.search(body)
-            if match:
-                return match.group(1).strip().rstrip('.').strip()
-            return ''
+        working = text.replace('\r\n', '\n')
+        pattern = re.compile(
+            r"(Role|Provide\s+Clear\s+Context|Break\s+Down\s+Complex\s+Questions|Provide\s+Specific\s+Instructions|Define\s+Conciseness|Prompting\s+Techniques\s+From\s+Research|State\s+Desired\s+Output)\s*[:\-]\s*(.+?)(?=(Role|Provide\s+Clear\s+Context|Break\s+Down\s+Complex\s+Questions|Provide\s+Specific\s+Instructions|Define\s+Conciseness|Prompting\s+Techniques\s+From\s+Research|State\s+Desired\s+Output)\s*[:\-]|$)",
+            re.IGNORECASE | re.DOTALL,
+        )
 
-        extracted = {
-            'purpose': extract_clause('Purpose', text),
-            'execution': extract_clause('Execution', text),
-            'input': extract_clause('Input', text),
-            'levers': extract_clause('Levers', text),
-        }
+        captured: Dict[str, str] = {}
+        for match in pattern.finditer(working):
+            label = normalize_key(match.group(1))
+            clause = match.group(2).strip()
+            if label and clause:
+                captured[label] = clause
 
-        # If extraction fails for any clause, fall back to clamped two-sentence form.
-        if all(extracted.values()):
-            return build_from_parts(extracted)
+        if len(captured) < len(section_order):
+            for line in working.split('\n'):
+                stripped = line.strip()
+                if not stripped:
+                    continue
+                for label, normalized_key in section_order:
+                    lowered = label.lower()
+                    if stripped.lower().startswith(lowered):
+                        remainder = stripped[len(label):]
+                        if remainder and remainder[0] in ':—-–':
+                            remainder = remainder[1:]
+                        remainder = remainder.strip()
+                        if remainder:
+                            captured[normalized_key] = remainder
+                        break
 
-        sentences = [
-            seg.strip()
-            for seg in re.split(r"(?<=[.!?])\s+", text)
-            if seg.strip()
-        ]
-        if not sentences:
-            return ''
-        sentences = sentences[:2]
-        trimmed = [
-            clamp_sentence(sentence, max_words=40, max_chars=220)
-            for sentence in sentences
-        ]
-        out = ' '.join(trimmed).strip()
-        if not out:
-            return ''
-        if out[-1] not in '.!?':
-            out += '.'
-        words = out.split()
-        if len(words) > 80:
-            out = ' '.join(words[:80])
-            if out[-1] not in '.!?':
-                out += '.'
-        return out
+        return finalize(captured)
 
     # Phrase diversification state (only in-memory for current run)
     generic_phrase_primary = 'clarify user intent'
@@ -704,15 +871,18 @@ def main():
         pat['template'] = normalized
         pat['templateRawBracketed'] = build_bracketed_from_template(normalized)
 
+    processed_count = 0
     for p in patterns:
-        if limit is not None and enriched_count >= limit:
-            break
         if selected_ids is not None and p.get('id') not in selected_ids:
             continue
         # Decide whether to call the model.
         must_force = force_all or bool(set(force_fields) & set(fields))
         if not must_force and not should_enrich(p, fields):
             continue
+
+        if limit is not None and processed_count >= limit:
+            break
+        processed_count += 1
 
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -765,6 +935,16 @@ def main():
             task_list = split_application_tasks_string(
                 p.get('applicationTasksString')
             )
+            domain_examples_for_peil: List[Dict[str, Any]] = []
+            existing_domain_examples = p.get('domainIndustryExamples')
+            if isinstance(existing_domain_examples, list):
+                domain_examples_for_peil = [
+                    item
+                    for item in existing_domain_examples
+                    if isinstance(item, dict)
+                    and item.get('task')
+                    and item.get('prompt')
+                ]
             for key in [
                 'template',
                 'application',
@@ -836,13 +1016,18 @@ def main():
                             task_list,
                         )
                         if examples_norm:
+                            domain_examples_for_peil = examples_norm
                             if dry_run:
                                 dry_run_changes[key] = examples_norm
                             else:
                                 p[key] = examples_norm
                             updated = True
                     elif key == 'peilPrompt':
-                        prompt_text = normalize_peil_prompt(obj[key])
+                        prompt_text = normalize_peil_prompt(
+                            obj[key],
+                            task_list,
+                            domain_examples_for_peil,
+                        )
                         if prompt_text:
                             if dry_run:
                                 dry_run_changes[key] = prompt_text
