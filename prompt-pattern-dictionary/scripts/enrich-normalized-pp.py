@@ -26,7 +26,8 @@ import sys
 import json
 import re
 import time
-from typing import Any, Dict, List, Optional
+from textwrap import dedent
+from typing import Any, Dict, List, Optional, Tuple
 
 # Ensure repo root is on PYTHONPATH so we can import azure_models.py
 THIS_DIR = os.path.dirname(__file__)
@@ -55,8 +56,97 @@ OUTPUT_FILE = os.path.join(DATA_DIR, 'normalized-patterns.json')
 APPLICATION_FALLBACK_NOTE_DEFAULT = "Unable to process due to Azure's Content Management Policy."
 TEMPLATE_CONTENT_FILTER_NOTE = APPLICATION_FALLBACK_NOTE_DEFAULT
 TEMPLATE_NA = "N/A"
+PEIL_INCOMPLETE_NOTE = "Not all information is available to run PEIL."
 
 PEIL_REFERENCE_PROMPT = build_full_peil_system_prompt()
+
+PEIL_GENERATOR_SYSTEM_PROMPT = dedent(
+        """
+        # INSTRUCTIONS
+        - You are a prompt generator for the Prompt Engineering Instructional Language
+            (PEIL) project.
+        - Your task is to generate a single production-ready PEIL system prompt.
+        - Your output is consumed by autonomous agents and viewed by humans. Return only
+            the system prompt text.
+        - Research summary informing this format:
+                * Bomble et al. (2025) show structured, explicit prompts outperform vague
+                    narratives.
+                * Han, Wu, and Willard (2025) show bullet formatting improves precision,
+                    recall, and F1.
+        - Apply a hybrid style: deliver a short framing paragraph followed by
+            rule-focused bullets as detailed in the return format guidance.
+        - Anchor your output on the provided scenario persona and refer to them
+            explicitly.
+            - Do not mention the pattern name or refer to these instructions as a
+                "pattern" or "scenario"; describe expectations directly.
+        - Never prefix any sentence with label strings (for example "Role:" or
+            "Provide Clear Context:").
+        - Avoid labels such as "Break Down Complex Questions:", "Provide Specific
+            Instructions:", "Define Conciseness:", or "Prompting Techniques From
+            Research:".
+        - Do not include placeholder variables or braces such as {Role}.
+        - Write complete sentences.
+        - Paraphrase any example content instead of quoting it verbatim.
+        - Maintain an authoritative, operational tone suitable for system prompts.
+        # END INSTRUCTIONS
+        """
+).strip()
+
+PEIL_RETURN_FORMAT_GUIDANCE = dedent(
+                """
+                Return format requirements:
+                        1. Write exactly two declarative sentences that frame the persona, mission,
+                             and how the pattern principles support the selected scenario. Treat them
+                             as one paragraph with no prefixed labels.
+                        2. Insert a blank line.
+                        3. Provide exactly six bullets in this order. Each bullet must be a full
+                             sentence and may not start with labels such as "Role:" or "Provide
+                             Clear Context:":
+                                 - Context and inputs to honour. Reaffirm the signals, datasets, or
+                                     stakeholders that shape the work.
+                                 - Sequential breakdown of the work (use sub-bullets only when essential
+                                     for clarity). Highlight the ordered steps you will follow.
+                                 - Specific instructions, controls, or constraints to obey. Call out hard
+                                     requirements or governance rules.
+                                 - Conciseness expectations. State word, token, or formatting limits you
+                                     will enforce.
+                                 - Prompting techniques or reasoning methods to apply. Reference the
+                                     tactics or verification loops you will use.
+                                 - Desired output description referencing the scenario outcome directly.
+                                     Make the deliverable explicit.
+                        4. Keep the total prompt under 220 words.
+                        5. Never prefix any line with the literal strings "Role:", "Provide Clear
+                             Context:", "Break Down Complex Questions:", "Provide Specific
+                             Instructions:", "Define Conciseness:", or "Prompting Techniques From
+                             Research:".
+                                6. Do not mention the pattern name or describe the guidance as a
+                                    "pattern"; focus on the persona and concrete scenario details.
+                """
+).strip()
+
+PEIL_HYBRID_RATIONALE = dedent(
+        """
+        Hybrid formatting rationale:
+        - Structured, explicit prompts (Bomble et al., 2025) outperform vague or purely
+            narrative instructions.
+        - Bullet formatting (Han, Wu, and Willard, 2025) improves precision, recall, and
+            F1 compared to plain descriptive paragraphs.
+        - Combining a concise framing paragraph with explicit bullet rules balances human
+            readability and LLM adherence, matching the PEIL blueprint.
+        """
+).strip()
+
+PEIL_VARIABLE_GUIDE = dedent(
+    """
+    {Role}: This variable specifies the role of the prompt generator in the PEIL project and clarifies the responsibilities for guiding autonomous agents.
+    {ProvideClearContext}: This variable ensures the model understands the surrounding environment, inputs, and stakeholders for the scenario.
+    {BreakDownComplexQuestions}: This variable lists the discrete steps or sub-questions that drive a thorough line of inquiry.
+    {ProvideSpecificInstructions}: This variable names the rules, controls, or constraints that must be enforced during execution.
+    {DefineConciseness}: This variable sets expectations for brevity, length, or structure in the final output.
+    {PromptingTechniquesFromResearch}: This variable emphasises the reasoning patterns or prompting manoeuvres to apply.
+    {StateDesiredOutput}: This variable spells out the deliverable or evidence the agent must return to close the task.
+    """
+).strip()
 
 BASE_SYSTEM_PROMPT = (
     "You are a careful data normalizer. Given a prompt pattern's description, examples, and current fields, "
@@ -79,19 +169,16 @@ BASE_SYSTEM_PROMPT = (
     "1–2 grounded sentences (≤28 words each) that show how to ask the model "
     "to perform that task using the pattern's description, template, and "
     "examples. Use distinct industries whenever possible.\n"
-    "- peilPrompt: OPTIONAL. Return a SINGLE STRING containing a complete system prompt built with the PEIL template. Format EXACTLY as seven newline-separated lines in this order:\n"
-    "  Role: …\n"
-    "  Provide Clear Context: …\n"
-    "  Break Down Complex Questions: …\n"
-    "  Provide Specific Instructions: …\n"
-    "  Define Conciseness: …\n"
-    "  Prompting Techniques From Research: …\n"
-    "  State Desired Output: …\n"
-    "Each clause must be a grounded, declarative sentence (≤28 words) that reflects the "
-    "pattern's template, application chips, and examples. Highlight the single most "
-    "impactful industry/domain scenario when appropriate so downstream automation gets "
-    "a concrete applied use case. Avoid placeholders, braces, bullet lists, or "
-    "references to the PEIL variable names themselves.\n"
+    "- peilPrompt: OPTIONAL. Return a SINGLE STRING containing a complete system prompt "
+    "built with the PEIL template. Use the hybrid format: two declarative sentences "
+    "(one paragraph) that frame the persona and mission, a blank line, then six "
+    "bullet sentences covering context, workflow, controls, conciseness, prompting "
+    "techniques, and desired output. Bullets must not start with labels such as "
+    "'Role:' or 'Provide Clear Context:'.\n"
+    "Each sentence must be grounded (≤28 words) and reflect the pattern's template, "
+    "application chips, and examples. Highlight the most impactful applied scenario "
+    "when appropriate so downstream automation gets a concrete use case. Avoid "
+    "placeholders, braces, or references to PEIL variable names.\n"
     "- turn is 'single' or 'multi' ONLY if clearly implied.\n"
     "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims.\n"
     "- templateRawBracketed: Return a SINGLE LINE exactly in the form [Role: <...>, Context: <...>, Action: <...>, Format: <...>, Response: <...>]. "
@@ -210,6 +297,8 @@ def main():
     application_tasks_only = False
     force_application_tasks = False
     dry_run = False
+    peil_diagnostics_enabled = False
+    anchor_deterministic = False
 
     # Parse args
     args = sys.argv[1:]
@@ -283,6 +372,12 @@ def main():
         if a == '--dry-run':
             dry_run = True
             continue
+        if a == '--peil-diagnostics':
+            peil_diagnostics_enabled = True
+            continue
+        if a == '--anchor-deterministic':
+            anchor_deterministic = True
+            continue
         if a == '--ids' and i + 1 < len(args):
             raw = args[i + 1]
             parts = [x.strip() for x in raw.split(',') if x.strip()]
@@ -321,6 +416,7 @@ def main():
     client = get_model_client(model_name)
 
     enriched_count = 0
+    peil_diagnostics_records: List[Dict[str, Any]] = []
     def clamp_sentence(s: str, max_words: int = 18, max_chars: int = 160) -> str:
         words = s.split()
         if len(words) > max_words:
@@ -530,12 +626,114 @@ def main():
 
         return ordered
 
+    def analyze_peil_structure(text: str) -> Dict[str, int]:
+        content = str(text or '').strip()
+        lines = [line.rstrip() for line in content.splitlines() if line.strip()]
+        bullet_count = sum(1 for line in lines if line.lstrip().startswith('- '))
+        paragraphs = [para.strip() for para in content.split('\n\n') if para.strip()]
+        intro_block = paragraphs[0] if paragraphs else ''
+        sentences = [
+            seg.strip()
+            for seg in re.split(r"(?<=[.!?])\s+", intro_block)
+            if seg.strip()
+        ]
+        word_count = len(content.split()) if content else 0
+        return {
+            'bullet_count': bullet_count,
+            'intro_sentence_count': len(sentences),
+            'word_count': word_count,
+        }
+
+    def collect_candidate_example(
+        pattern_data: Dict[str, Any],
+        domain_examples: Optional[List[Dict[str, Any]]],
+        deterministic: bool,
+    ) -> Optional[Dict[str, str]]:
+        candidates: List[Dict[str, str]] = []
+
+        def normalize_example(task_val: Any, prompt_val: Any) -> Optional[Dict[str, str]]:
+            task_text = str(task_val or '').strip()
+            prompt_text = str(prompt_val or '').strip()
+            if not prompt_text:
+                return None
+            prompt_text = re.sub(r"\s+", " ", prompt_text)
+            if len(prompt_text) > 400:
+                prompt_text = prompt_text[:400].rstrip() + '...'
+            if task_text and len(task_text) > 120:
+                task_text = task_text[:120].rstrip() + '...'
+            return {'task': task_text, 'prompt': prompt_text}
+
+        for item in domain_examples or []:
+            if not isinstance(item, dict):
+                continue
+            normalized = normalize_example(item.get('task'), item.get('prompt'))
+            if normalized:
+                candidates.append(normalized)
+
+        if not candidates:
+            raw_examples = pattern_data.get('promptExamples') or []
+            for entry in raw_examples:
+                if isinstance(entry, dict):
+                    normalized = normalize_example(
+                        entry.get('task') or entry.get('scenario'),
+                        entry.get('prompt')
+                        or entry.get('example')
+                        or entry.get('text')
+                        or entry.get('content'),
+                    )
+                else:
+                    normalized = normalize_example(None, entry)
+                if normalized:
+                    candidates.append(normalized)
+
+        if not candidates:
+            return None
+
+        if deterministic:
+            return candidates[0]
+
+        candidates.sort(
+            key=lambda item: len(item.get('prompt', '')),
+            reverse=True,
+        )
+        return candidates[0]
+
     def normalize_peil_prompt(
         value: Any,
         tasks: Optional[List[str]] = None,
         domain_examples: Optional[List[Dict[str, Any]]] = None,
+        *,
+        pattern: Optional[Dict[str, Any]] = None,
     ) -> str:
-        """Normalize PEIL prompt into a canonical multi-line system prompt."""
+        """Generate a production PEIL prompt via the LLM or return the standard note."""
+
+        nonlocal peil_diagnostics_records
+
+        if client is None:
+            if peil_diagnostics_enabled:
+                analysis = analyze_peil_structure(PEIL_INCOMPLETE_NOTE)
+                peil_diagnostics_records.append(
+                    {
+                        'patternId': (pattern or {}).get('id'),
+                        'anchorTask': None,
+                        'status': 'note',
+                        'noteReason': 'missing-client',
+                        'bulletCount': analysis.get('bullet_count', 0),
+                        'introSentenceCount': analysis.get('intro_sentence_count', 0),
+                        'wordCount': analysis.get('word_count', 0),
+                        'error': 'No model client available',
+                    }
+                )
+            return PEIL_INCOMPLETE_NOTE
+
+        pattern_dict = pattern or {}
+        pattern_id = pattern_dict.get('id')
+
+        def sanitize(text: Any, max_chars: int = 400) -> str:
+            cleaned = re.sub(r"\s+", " ", str(text or "")).strip()
+            if len(cleaned) > max_chars:
+                cleaned = cleaned[:max_chars].rstrip() + '...'
+            return cleaned
 
         section_order = [
             ("Role", "role"),
@@ -550,260 +748,420 @@ def main():
         def normalize_key(label: str) -> str:
             return re.sub(r"[^a-z]", "", (label or '').lower())
 
-        def clamp_clause(text: str, max_words: int = 28, max_chars: int = 220) -> str:
-            cleaned = re.sub(r"\s+", " ", str(text or '')).strip().strip('"')
-            cleaned = cleaned.replace('{', '').replace('}', '')
+        def parse_sections(raw: Any) -> Dict[str, str]:
+            if isinstance(raw, dict):
+                return {
+                    normalize_key(k): sanitize(v)
+                    for k, v in raw.items()
+                    if normalize_key(k)
+                }
+            text = str(raw or '').strip()
+            if not text:
+                return {}
+            working = text.replace('\r\n', '\n')
+            pattern_matcher = re.compile(
+                r"(Role|Provide\s+Clear\s+Context|Break\s+Down\s+Complex\s+Questions|Provide\s+Specific\s+Instructions|Define\s+Conciseness|Prompting\s+Techniques\s+From\s+Research|State\s+Desired\s+Output)\s*[:\-]\s*(.+?)(?=(Role|Provide\s+Clear\s+Context|Break\s+Down\s+Complex\s+Questions|Provide\s+Specific\s+Instructions|Define\s+Conciseness|Prompting\s+Techniques\s+From\s+Research|State\s+Desired\s+Output)\s*[:\-]|$)",
+                re.IGNORECASE | re.DOTALL,
+            )
+            captured: Dict[str, str] = {}
+            for match in pattern_matcher.finditer(working):
+                label = normalize_key(match.group(1))
+                clause = sanitize(match.group(2))
+                if label and clause:
+                    captured[label] = clause
+            if len(captured) < len(section_order):
+                for line in working.split('\n'):
+                    stripped = line.strip()
+                    if not stripped:
+                        continue
+                    for label, normalized_key in section_order:
+                        lowered = label.lower()
+                        if stripped.lower().startswith(lowered):
+                            remainder = stripped[len(label):]
+                            if remainder and remainder[0] in ':—-–':
+                                remainder = remainder[1:]
+                            remainder = sanitize(remainder)
+                            if remainder:
+                                captured[normalized_key] = remainder
+                            break
+            return captured
+
+        def limit_words(text: str, max_words: int = 28) -> str:
+            words = str(text or '').split()
+            if len(words) <= max_words:
+                return ' '.join(words).strip()
+            clipped = ' '.join(words[:max_words]).rstrip(',;:')
+            return f"{clipped}..."
+
+        def ensure_sentence(text: str, fallback: str) -> str:
+            candidate = sanitize(text, 320)
+            if not candidate:
+                candidate = sanitize(fallback, 320)
+            candidate = limit_words(candidate)
+            if not candidate:
+                candidate = fallback
+            if candidate and candidate[-1] not in '.!?':
+                candidate += '.'
+            return candidate
+
+        def first_sentence(text: Optional[str]) -> str:
+            cleaned = sanitize(text, 320)
             if not cleaned:
                 return ''
-            words = cleaned.split()
-            if len(words) > max_words:
-                cleaned = ' '.join(words[:max_words]) + '…'
-            if len(cleaned) > max_chars:
-                cleaned = cleaned[:max_chars].rstrip() + '…'
-            return cleaned
+            segments = re.split(r"(?<=[.!?])\s+", cleaned)
+            return segments[0].strip()
 
-        def finalize(section_map: Dict[str, str]) -> str:
-            ordered_clauses: List[tuple[str, str]] = []
-            normalized_lookup: Dict[str, str] = {}
-            for label, normalized_key in section_order:
-                clause = clamp_clause(section_map.get(normalized_key, ''))
-                if not clause:
-                    return ''
-                if clause[-1] not in '.!?':
-                    clause += '.'
-                ordered_clauses.append((label, clause))
-                normalized_lookup[normalized_key] = clause
-
-            # Derive a primary domain from domain_examples or tasks to avoid mixing domains
-            def detect_domain(text: str) -> Optional[str]:
-                if not text:
-                    return None
-                lowered = text.lower()
-                domain_map = {
-                    'healthcare': ['patient', 'medical', 'health', 'clinic', 'vitals', 'diagnosis', 'rx', 'ehr', 'clinical', 'medication', 'medications', 'htn', 'metformin', 'provider'],
-                    'finance': ['finance', 'financial', 'ledger', 'account', 'invoice', 'debit', 'credit', 'acct', 'ar', 'ap'],
-                    'insurance': ['insurance', 'claim', 'policy', 'actuarial', 'underwrite'],
-                    'legal': ['contract', 'legal', 'clause', 'jurisdiction', 'obligation'],
-                    'cybersecurity': ['cyber', 'security', 'firewall', 'threat', 'ip', 'incident'],
-                    'supply': ['supply', 'manufactur', 'logistics', 'inventory', 'warehouse'],
-                    'education': ['education', 'curriculum', 'student', 'teacher'],
-                }
-                for domain, keys in domain_map.items():
-                    for k in keys:
-                        if k in lowered:
-                            return domain
+        def extract_persona_from_prompt(prompt_text: Optional[str]) -> Optional[str]:
+            if not prompt_text:
                 return None
+            lowered = str(prompt_text)
+            patterns = [
+                r"act as (?:an?|the)\s+([^;.,]+)",
+                r"adopt (?:an?|the)\s+([^;.,]+?) persona",
+                r"serve as (?:an?|the)\s+([^;.,]+)",
+                r"assume (?:an?|the)\s+role of\s+([^;.,]+)",
+                r"play the role of (?:an?|the)\s+([^;.,]+)",
+            ]
+            for pattern in patterns:
+                match = re.search(pattern, lowered, re.IGNORECASE)
+                if match:
+                    persona_raw = match.group(1).strip()
+                    if persona_raw:
+                        return sanitize(persona_raw, 160)
+            return None
 
-            primary_domain_counts: Dict[str, int] = {}
-            domain_priority = ['healthcare', 'finance', 'insurance', 'legal', 'cybersecurity', 'supply', 'education']
-            if domain_examples:
-                for item in domain_examples:
-                    if not isinstance(item, dict):
-                        continue
-                    combo = f"{item.get('task','')} {item.get('prompt','')}"
-                    d = detect_domain(combo)
-                    if d:
-                        primary_domain_counts[d] = primary_domain_counts.get(d, 0) + 1
-            if tasks:
-                for t in tasks:
-                    d = detect_domain(t)
-                    if d:
-                        primary_domain_counts[d] = primary_domain_counts.get(d, 0) + 1
-            for _, clause in ordered_clauses:
-                d = detect_domain(clause)
-                if d:
-                    primary_domain_counts[d] = primary_domain_counts.get(d, 0) + 1
+        def build_peil_sections(
+            current_map: Dict[str, str],
+            template_data: Optional[Dict[str, Any]],
+            example_data: Optional[Dict[str, str]],
+            tasks_list: Optional[List[str]],
+            pattern_meta: Dict[str, Any],
+        ) -> Tuple[Dict[str, str], Dict[str, Optional[str]]]:
+            template_clean = force_template_five_keys(template_data or {})
+            example_task = sanitize((example_data or {}).get('task'), 160)
+            example_prompt = sanitize((example_data or {}).get('prompt'), 320)
+            persona_text = extract_persona_from_prompt(example_prompt)
+            if not persona_text and example_task:
+                persona_text = sanitize(
+                    f"a specialist who can {example_task.lower()}",
+                    160,
+                )
+            scenario_summary = first_sentence(example_prompt)
+            updated = dict(current_map)
 
-            primary_domain = None
-            if primary_domain_counts:
-                def priority_key(item: Any) -> Any:
-                    domain, count = item
-                    priority = domain_priority.index(domain) if domain in domain_priority else len(domain_priority)
-                    return (count, -priority)
+            fallback_role = "You operate as the designated domain expert."
+            fallback_context = (
+                "Ground decisions in the provided scenario and pattern context."
+            )
+            fallback_breakdown = (
+                "Decompose the work into ordered steps and resolve ambiguities early."
+            )
+            fallback_instructions = (
+                "Obey stated controls, governance rules, and stakeholder approvals."
+            )
+            fallback_conciseness = (
+                "Keep confirmations brief and final outputs under 220 words with only"
+                " essential details."
+            )
+            fallback_techniques = (
+                "Use research-backed prompting such as Chain-of-Thought and"
+                " verification checks."
+            )
+            fallback_output = (
+                "Deliver the requested artifact with risks, decisions, and next"
+                " actions highlighted."
+            )
 
-                primary_domain = max(primary_domain_counts.items(), key=priority_key)[0]
+            role_candidate = ""
+            template_role = template_clean.get('role')
+            if persona_text and template_role and template_role.upper() != TEMPLATE_NA:
+                role_candidate = (
+                    f"You embody {persona_text} while fulfilling the"
+                    f" {template_role} responsibilities."
+                )
+            elif persona_text:
+                role_candidate = f"You embody {persona_text} throughout the engagement."
+            elif template_role and template_role.upper() != TEMPLATE_NA:
+                role_candidate = f"You operate as {template_role}."
+            updated['role'] = ensure_sentence(role_candidate, fallback_role)
 
-            domain_example_phrase = {
-                'healthcare': 'patient record',
-                'finance': 'ledger entries',
-                'insurance': 'insurance claim',
-                'legal': 'contract clause',
-                'cybersecurity': 'firewall log',
-                'supply': 'supply chain entry',
-                'education': 'curriculum module',
+            context_parts: List[str] = []
+            template_context = template_clean.get('context')
+            if template_context and template_context.upper() != TEMPLATE_NA:
+                context_parts.append(template_context)
+            if example_task:
+                context_parts.append(
+                    f"Use the '{example_task}' scenario as the working example."
+                )
+            if scenario_summary:
+                context_parts.append(f"Key cues: {scenario_summary}")
+            context_candidate = " ".join(context_parts)
+            updated['provideclearcontext'] = ensure_sentence(
+                context_candidate,
+                fallback_context,
+            )
+
+            breakdown_parts: List[str] = []
+            template_action = template_clean.get('action')
+            if template_action and template_action.upper() != TEMPLATE_NA:
+                breakdown_parts.append(template_action)
+            if tasks_list:
+                sample_tasks = ', '.join(tasks_list[:3])
+                breakdown_parts.append(f"Handle phases such as {sample_tasks}.")
+            breakdown_candidate = " ".join(breakdown_parts)
+            updated['breakdowncomplexquestions'] = ensure_sentence(
+                breakdown_candidate,
+                fallback_breakdown,
+            )
+
+            template_format = template_clean.get('format')
+            instructions_candidate = ""
+            if template_format and template_format.upper() != TEMPLATE_NA:
+                instructions_candidate = f"Follow these controls: {template_format}"
+            updated['providespecificinstructions'] = ensure_sentence(
+                instructions_candidate,
+                fallback_instructions,
+            )
+
+            template_response = template_clean.get('response')
+            conciseness_candidate = ""
+            if template_response and template_response.upper() != TEMPLATE_NA:
+                conciseness_candidate = (
+                    f"Keep confirmations brief and align the output with"
+                    f" {template_response}."
+                )
+            updated['defineconciseness'] = ensure_sentence(
+                conciseness_candidate,
+                fallback_conciseness,
+            )
+
+            techniques_candidate = (
+                "Use Chain-of-Thought reasoning, plan verification questions, and"
+                " apply research-backed prompting to validate each step."
+            )
+            if persona_text:
+                techniques_candidate += f" Maintain alignment with {persona_text}."
+            updated['promptingtechniquesfromresearch'] = ensure_sentence(
+                techniques_candidate,
+                fallback_techniques,
+            )
+
+            desired_parts: List[str] = []
+            if template_response and template_response.upper() != TEMPLATE_NA:
+                desired_parts.append(f"Deliver {template_response}.")
+            if example_task:
+                desired_parts.append(
+                    f"Tailor the result to the '{example_task}' scenario"
+                    " with actionable next steps."
+                )
+            desired_candidate = " ".join(desired_parts)
+            updated['statedesiredoutput'] = ensure_sentence(
+                desired_candidate,
+                fallback_output,
+            )
+
+            scenario_info = {
+                'persona': persona_text,
+                'task': example_task,
+                'summary': scenario_summary,
             }
-            primary_phrase = domain_example_phrase.get(primary_domain, 'domain-specific output')
+            return updated, scenario_info
 
-            def build_example_suffix(current_clause: str) -> Optional[str]:
-                """Produce a short clause to reinforce a single domain scenario without bloating the line."""
+        if isinstance(value, str):
+            _ = value.strip()
 
-                keyword_priority = [
-                    'finance', 'financial', 'account', 'ledger', 'invoice', 'audit',
-                    'insurance', 'claim', 'underwrite', 'policy', 'actuarial',
-                    'patient', 'clinical', 'health', 'medical', 'diagnosis',
-                    'contract', 'legal', 'compliance', 'regulatory', 'governance',
-                    'cyber', 'security', 'threat', 'firewall', 'incident',
-                    'supply', 'manufactur', 'logistics', 'retail', 'marketing',
-                    'education', 'curriculum', 'student', 'teacher',
-                ]
+        section_map = parse_sections(value)
 
-                def score_prompt(text: str) -> int:
-                    lowered = text.lower()
-                    for idx, keyword in enumerate(keyword_priority):
-                        if keyword in lowered:
-                            return len(keyword_priority) - idx
-                    return 0
-
-                best_text = None
-                best_task = None
-                if domain_examples:
-                    best_score = -1
-                    for item in domain_examples:
-                        if not isinstance(item, dict):
-                            continue
-                        prompt_text = clamp_clause(item.get('prompt'), max_words=36, max_chars=260)
-                        if not prompt_text:
-                            continue
-                        task_text = str(item.get('task') or '').strip()
-                        current_score = score_prompt(f"{prompt_text} {task_text}")
-                        if current_score > best_score:
-                            best_score = current_score
-                            best_text = prompt_text
-                            best_task = task_text
-                    if primary_domain:
-                        for item in domain_examples:
-                            combo = f"{item.get('task','')} {item.get('prompt','')}"
-                            if detect_domain(combo) == primary_domain:
-                                prompt_text = clamp_clause(item.get('prompt'), max_words=36, max_chars=260)
-                                if prompt_text:
-                                    best_text = prompt_text
-                                    best_task = str(item.get('task') or '').strip()
-                                    break
-
-                if not best_text and tasks:
-                    best_score = -1
-                    for raw_task in tasks:
-                        task_text = str(raw_task or '').strip()
-                        if not task_text:
-                            continue
-                        score = score_prompt(task_text)
-                        if score > best_score:
-                            best_score = score
-                            best_task = task_text
-                    if best_task:
-                        best_text = best_task
-
-                if not best_text:
-                    return None
-
-                cleaned_text = re.sub(r"\s{2,}", " ", best_text).strip()
-                display_task = best_task or cleaned_text
-                display_task = display_task.replace(':', ' ').replace('→', ' to ')
-                display_task = re.sub(r"\s+", " ", display_task).strip()
-                task_words = display_task.split()
-                if len(task_words) > 8:
-                    display_task = ' '.join(task_words[:8])
-                base_phrase = primary_phrase if primary_phrase else 'domain-specific output'
-                suffix_parts: List[str] = []
-                suffix_parts.append(f"Focus on {base_phrase} scenarios such as {display_task}")
-                tokens_found = re.findall(r"'([^']{1,60})'", cleaned_text)
-                base_word_count = len((current_clause or '').split())
-                token_phrase = None
-                if tokens_found:
-                    token_phrase = ', '.join([f"'{t}'" for t in tokens_found[:2]])
-                candidate = '. '.join(suffix_parts)
-                candidate_words = len(candidate.split())
-                if token_phrase:
-                    # Only append token language if it keeps the clause compact
-                    extra = f"Highlight shorthand tokens like {token_phrase}"
-                    if base_word_count + candidate_words + len(extra.split()) <= 28:
-                        candidate = candidate + '. ' + extra
-                candidate = clamp_clause(candidate, max_words=22, max_chars=160)
-                if candidate and candidate[-1] not in '.!?':
-                    candidate += '.'
-                # Guard against cases where the addition would cause heavy truncation
-                if base_word_count + len(candidate.split()) > 28:
-                    return None
-                return candidate
-
-            example_suffix = build_example_suffix(normalized_lookup.get('statedesiredoutput', ''))
-            if example_suffix and 'statedesiredoutput' in normalized_lookup:
-                combined = normalized_lookup['statedesiredoutput'].rstrip('.!?') + '. ' + example_suffix
-                combined = clamp_clause(combined)
-                if combined and combined[-1] not in '.!?':
-                    combined += '.'
-                normalized_lookup['statedesiredoutput'] = combined
-                for idx, (label, _) in enumerate(ordered_clauses):
-                    if normalize_key(label) == 'statedesiredoutput':
-                        ordered_clauses[idx] = (label, combined)
-                        break
-
-            def strip_label(label: str, clause: str) -> str:
-                normalized_label = label.lower()
-                lowered_clause = clause.lower()
-                if lowered_clause.startswith(f"{normalized_label}: "):
-                    return clause[len(label) + 2:].strip()
-                if lowered_clause.startswith(f"{normalized_label} -"):
-                    return clause[len(label) + 2:].strip()
-                return clause.strip()
-
-            intro_label, intro_clause = ordered_clauses[0]
-            intro_text = strip_label(intro_label, intro_clause)
-
-            bullet_lines: List[str] = []
-            for label, clause in ordered_clauses[1:]:
-                text = strip_label(label, clause)
-                if not text:
-                    continue
-                bullet_lines.append(f"- {text}")
-
-            return "\n".join([intro_text, "", *bullet_lines])
-
-        if value is None:
-            return ''
-
-        if isinstance(value, dict):
-            section_map = {
-                normalize_key(k): str(v or '').strip()
-                for k, v in value.items()
-                if normalize_key(k)
-            }
-            return finalize(section_map)
-
-        text = str(value or '').strip()
-        if not text:
-            return ''
-
-        working = text.replace('\r\n', '\n')
-        pattern = re.compile(
-            r"(Role|Provide\s+Clear\s+Context|Break\s+Down\s+Complex\s+Questions|Provide\s+Specific\s+Instructions|Define\s+Conciseness|Prompting\s+Techniques\s+From\s+Research|State\s+Desired\s+Output)\s*[:\-]\s*(.+?)(?=(Role|Provide\s+Clear\s+Context|Break\s+Down\s+Complex\s+Questions|Provide\s+Specific\s+Instructions|Define\s+Conciseness|Prompting\s+Techniques\s+From\s+Research|State\s+Desired\s+Output)\s*[:\-]|$)",
-            re.IGNORECASE | re.DOTALL,
+        focus_example = collect_candidate_example(
+            pattern_dict,
+            domain_examples,
+            anchor_deterministic,
         )
 
-        captured: Dict[str, str] = {}
-        for match in pattern.finditer(working):
-            label = normalize_key(match.group(1))
-            clause = match.group(2).strip()
-            if label and clause:
-                captured[label] = clause
+        if not focus_example:
+            note_reason = 'no-anchor-example'
+            if peil_diagnostics_enabled:
+                analysis = analyze_peil_structure(PEIL_INCOMPLETE_NOTE)
+                peil_diagnostics_records.append(
+                    {
+                        'patternId': pattern_id,
+                        'anchorTask': None,
+                        'status': 'note',
+                        'noteReason': note_reason,
+                        'bulletCount': analysis.get('bullet_count', 0),
+                        'introSentenceCount': analysis.get('intro_sentence_count', 0),
+                        'wordCount': analysis.get('word_count', 0),
+                        'error': None,
+                    }
+                )
+            return PEIL_INCOMPLETE_NOTE
 
-        if len(captured) < len(section_order):
-            for line in working.split('\n'):
-                stripped = line.strip()
-                if not stripped:
-                    continue
-                for label, normalized_key in section_order:
-                    lowered = label.lower()
-                    if stripped.lower().startswith(lowered):
-                        remainder = stripped[len(label):]
-                        if remainder and remainder[0] in ':—-–':
-                            remainder = remainder[1:]
-                        remainder = remainder.strip()
-                        if remainder:
-                            captured[normalized_key] = remainder
-                        break
+        anchor_task = focus_example.get('task') or None
 
-        return finalize(captured)
+        section_map, scenario_info = build_peil_sections(
+            section_map,
+            pattern_dict.get('template') or {},
+            focus_example,
+            tasks,
+            pattern_dict,
+        )
+
+        missing_sections = [
+            key for _, key in section_order if not section_map.get(key)
+        ]
+        if missing_sections:
+            note_reason = 'missing-derived-variables'
+            if peil_diagnostics_enabled:
+                analysis = analyze_peil_structure(PEIL_INCOMPLETE_NOTE)
+                peil_diagnostics_records.append(
+                    {
+                        'patternId': pattern_id,
+                        'anchorTask': anchor_task,
+                        'status': 'note',
+                        'noteReason': note_reason,
+                        'bulletCount': analysis.get('bullet_count', 0),
+                        'introSentenceCount': analysis.get('intro_sentence_count', 0),
+                        'wordCount': analysis.get('word_count', 0),
+                        'error': None,
+                    }
+                )
+            return PEIL_INCOMPLETE_NOTE
+
+        variable_lines = [
+            f"- {label} => {sanitize(section_map.get(key, 'N/A'))}"
+            for label, key in section_order
+        ]
+
+        task_lines = [
+            f"- {sanitize(task, 120)}"
+            for task in (tasks or [])
+            if str(task or '').strip()
+        ]
+
+        user_sections: List[str] = []
+        user_sections.append(
+            dedent(
+                f"""
+                Pattern overview:
+                - Name: {sanitize(pattern_dict.get('name') or pattern_dict.get('patternName')) or 'N/A'}
+                - Category: {sanitize(pattern_dict.get('category'), 120) or 'N/A'}
+                - Description: {sanitize(pattern_dict.get('description'), 600) or 'N/A'}
+                """
+            ).strip()
+        )
+
+        template_details: List[str] = []
+        template_obj = pattern_dict.get('template') or {}
+        if isinstance(template_obj, dict) and any(template_obj.values()):
+            normalized_template = force_template_five_keys(template_obj)
+            for key_label, value_key in [
+                ('Role', 'role'),
+                ('Context', 'context'),
+                ('Action', 'action'),
+                ('Format', 'format'),
+                ('Response', 'response'),
+            ]:
+                clause = normalized_template.get(value_key, '')
+                if clause and clause.upper() != TEMPLATE_NA:
+                    template_details.append(f"- {key_label} => {sanitize(clause, 220)}")
+        if template_details:
+            user_sections.append("Template guidance:\n" + "\n".join(template_details))
+
+        scenario_lines: List[str] = []
+        persona_display = scenario_info.get('persona') if scenario_info else None
+        if persona_display:
+            scenario_lines.append(f"- Persona => {persona_display}")
+        scenario_task_display = scenario_info.get('task') if scenario_info else None
+        if scenario_task_display:
+            scenario_lines.append(f"- Scenario task => {scenario_task_display}")
+        scenario_summary_display = scenario_info.get('summary') if scenario_info else None
+        if scenario_summary_display:
+            scenario_lines.append(f"- Scenario cues => {scenario_summary_display}")
+        if scenario_lines:
+            user_sections.append("Scenario anchor:\n" + "\n".join(scenario_lines))
+
+        user_sections.append(
+            "PEIL variable guidance:\n" + "\n".join(variable_lines)
+        )
+
+        user_sections.append(PEIL_HYBRID_RATIONALE)
+
+        if task_lines:
+            user_sections.append(
+                "Application tasks to reference:\n" + "\n".join(task_lines)
+            )
+
+        example_section = dedent(
+            f"""
+            Selected domain example (paraphrase in the final prompt):
+            - Task: {focus_example.get('task') or 'N/A'}
+            - Prompt summary: {focus_example.get('prompt') or 'N/A'}
+            """
+        ).strip()
+        user_sections.append(example_section)
+
+        user_sections.append("PEIL variable definitions:\n" + PEIL_VARIABLE_GUIDE)
+        user_sections.append(PEIL_RETURN_FORMAT_GUIDANCE)
+
+        user_prompt = "\n\n".join(section for section in user_sections if section)
+
+        llm_response_text: Optional[str] = None
+        llm_error: Optional[str] = None
+
+        try:
+            messages = [
+                {"role": "system", "content": PEIL_GENERATOR_SYSTEM_PROMPT},
+                {"role": "system", "content": PEIL_REFERENCE_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ]
+            response = client.create_chat_completion(messages, stream=False)
+            content: Optional[str] = None
+            if hasattr(response, 'choices') and response.choices:
+                content = getattr(response.choices[0].message, 'content', None)
+            if not content and isinstance(response, dict):
+                content = (
+                    response.get('choices', [{}])[0]
+                    .get('message', {})
+                    .get('content')
+                )
+            if content:
+                llm_response_text = content.strip()
+        except Exception as exc:
+            llm_error = str(exc)
+            print(f"[{pattern_id}] WARN: PEIL generation failed: {exc}")
+
+        if llm_response_text:
+            structure = analyze_peil_structure(llm_response_text)
+            if peil_diagnostics_enabled:
+                peil_diagnostics_records.append(
+                    {
+                        'patternId': pattern_id,
+                        'anchorTask': anchor_task,
+                        'status': 'generated',
+                        'noteReason': None,
+                        'bulletCount': structure.get('bullet_count', 0),
+                        'introSentenceCount': structure.get('intro_sentence_count', 0),
+                        'wordCount': structure.get('word_count', 0),
+                        'error': None,
+                    }
+                )
+            return llm_response_text
+        note_reason = 'model-error' if llm_error else 'no-llm-output'
+        if peil_diagnostics_enabled:
+            analysis = analyze_peil_structure(PEIL_INCOMPLETE_NOTE)
+            peil_diagnostics_records.append(
+                {
+                    'patternId': pattern_id,
+                    'anchorTask': anchor_task,
+                    'status': 'note',
+                    'noteReason': note_reason,
+                    'bulletCount': analysis.get('bullet_count', 0),
+                    'introSentenceCount': analysis.get('intro_sentence_count', 0),
+                    'wordCount': analysis.get('word_count', 0),
+                    'error': llm_error,
+                }
+            )
+        return PEIL_INCOMPLETE_NOTE
 
     # Phrase diversification state (only in-memory for current run)
     generic_phrase_primary = 'clarify user intent'
@@ -1027,6 +1385,7 @@ def main():
                             obj[key],
                             task_list,
                             domain_examples_for_peil,
+                            pattern=p,
                         )
                         if prompt_text:
                             if dry_run:
@@ -1089,6 +1448,8 @@ def main():
 
     if dry_run:
         print(f"Dry run complete. Would update {enriched_count} pattern(s). No files written.")
+        if peil_diagnostics_enabled and peil_diagnostics_records:
+            print(json.dumps(peil_diagnostics_records, ensure_ascii=False, indent=2))
         return 0
 
     # Final coercion pass: ensure application is ALWAYS a single string
@@ -1101,6 +1462,8 @@ def main():
     # Write back
     json.dump(data, open(OUTPUT_FILE, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
     print(f"Enrichment complete. Updated {enriched_count} pattern(s). Coerced {coerced} application field(s) to string.")
+    if peil_diagnostics_enabled and peil_diagnostics_records:
+        print(json.dumps(peil_diagnostics_records, ensure_ascii=False, indent=2))
     return 0
 
 
