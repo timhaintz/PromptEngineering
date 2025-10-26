@@ -23697,10 +23697,51 @@
       "aiAssistedFields": [
         "application",
         "applicationTasksString",
-        "template"
+        "domainIndustryExamples",
+        "generalExplanation",
+        "peilPrompt",
+        "template",
+        "usageSummary"
       ],
       "aiAssistedModel": "gpt-5",
-      "aiAssistedAt": "2025-09-23T11:26:14Z"
+      "aiAssistedAt": "2025-10-26T08:10:32Z",
+      "usageSummary": "Use this to label the cause in paired sentences across datasets, reports, and logs. It supports annotation and monitoring workflows that need consistent causal identification.",
+      "generalExplanation": "This pattern decides which of two sentences expresses the cause. It outputs only the cause sentence or its index, favoring explicit causal markers when uncertain.",
+      "domainIndustryExamples": [
+        {
+          "task": "choose cause sentence",
+          "prompt": "Given two sentences, decide which one states the cause. Return only the cause sentence or its index with no explanation."
+        },
+        {
+          "task": "detect causal cue words",
+          "prompt": "Given two sentences, use explicit causal cue words to select the cause. Return only the cause sentence or its index."
+        },
+        {
+          "task": "decide causal direction",
+          "prompt": "Given two sentences, determine which expresses the cause and which the effect. Return only the cause sentence or its index."
+        },
+        {
+          "task": "extract cause in earnings report",
+          "prompt": "Given two sentences from an earnings report about revenue changes, select the sentence that states the cause. Return only the cause sentence or its index."
+        },
+        {
+          "task": "identify cause in claim",
+          "prompt": "Given two sentences from an insurance claim summary, select the sentence that states the cause of loss. Return only the cause sentence or its index."
+        },
+        {
+          "task": "select cause in patient record",
+          "prompt": "Given two sentences from a patient record, select the sentence that states the cause of the symptom. Return only the cause sentence or its index."
+        },
+        {
+          "task": "determine cause in case brief",
+          "prompt": "Given two sentences from a case brief, select the sentence that states the cause of the ruling. Return only the cause sentence or its index."
+        },
+        {
+          "task": "flag cause in firewall log",
+          "prompt": "Given two sentences from a firewall log entry, select the sentence that states the cause of the blocked request. Return only the cause sentence or its index."
+        }
+      ],
+      "peilPrompt": "You are a specialist who can flag cause in firewall log, tasked with selecting the sentence that states why a request was blocked. Structured rules and research-backed reasoning ensure consistent, verifiable cause selection.\n\n- Honor the firewall log context: two sentences from one entry, SecOps stakeholders, and the goal of identifying the stated cause of the blocked request.\n- Proceed in order: detect causal cue words, infer causal direction, choose the sentence expressing the cause (not the effect), resolve ties by prioritizing explicit policy/rule references, then select one.\n- Use only provided text, comply with controls and approvals, ask one concise verification question if ambiguous, and if still uncertain, return the index of the sentence most likely to state the cause.\n- Enforce brevity: produce no preamble, keep the final output to the sentence itself or its index, and stay under 220 words.\n- Apply chain-of-thought internally, run a chain-of-verification with one planned check, prefer self-consistency, and suppress intermediate reasoning in the output.\n- Deliver the exact cause sentence or the index 1 or 2 that states the cause of the blocked request; provide next steps only if explicitly requested."
     },
     {
       "id": "19-7-1",
@@ -24635,10 +24676,16 @@
       "aiAssistedFields": [
         "application",
         "applicationTasksString",
-        "template"
+        "generalExplanation",
+        "peilPrompt",
+        "template",
+        "usageSummary"
       ],
       "aiAssistedModel": "gpt-5",
-      "aiAssistedAt": "2025-09-23T11:38:44Z"
+      "aiAssistedAt": "2025-10-26T08:11:30Z",
+      "usageSummary": "Use this to tally items from semicolon-separated lists across documents or systems. It reduces manual counting errors and standardizes outputs.",
+      "generalExplanation": "This pattern counts items in semicolon-separated text inputs. It splits by semicolons, trims whitespace, ignores empty entries, and returns a single integer.",
+      "peilPrompt": "As the designated domain expert, you will determine all opponents and their count across heterogeneous inputs to answer requests that ask for all opponents. Your mission is to apply disciplined, verifiable counting procedures so the results remain precise and audit-ready for stakeholders.\n\n- Honor the request context that focuses on opponents and respect supplied inputs across semicolon-separated strings, lists, table fields, and domain records (invoice items, claim injuries, medications, contract clauses, firewall alerts).\n- Follow an ordered process: parse inputs, normalize tokens, trim whitespace, filter empties/placeholders, deduplicate entities, validate against schema or header names, tally counts, and cross-check consistency.\n- Obey controls, governance rules, and stakeholder approvals; do not invent or infer missing opponents; count only present values; treat null/NA/blank as non-entries; log uncertainties for review.\n- Keep confirmations brief and keep final outputs under 220 words with essential details only, using simple bullet or sentence formatting.\n- Apply research-backed methods: think step by step with internal Chain-of-Thought, ask verification questions via Chain-of-Verification, and use self-consistency checks before finalizing.\n- Deliver a concise artifact that lists the opponents and states the total count, explicitly highlighting any risks, decisions taken, and recommended next actions."
     },
     {
       "id": "20-2-0",
@@ -28293,10 +28340,16 @@
       "aiAssisted": true,
       "aiAssistedFields": [
         "application",
-        "template"
+        "generalExplanation",
+        "peilPrompt",
+        "template",
+        "usageSummary"
       ],
       "aiAssistedModel": "gpt-5",
-      "aiAssistedAt": "2025-08-31T23:42:46Z"
+      "aiAssistedAt": "2025-10-26T08:12:20Z",
+      "usageSummary": "Users paste abstracts to get reviewer-style rewrites that emphasize contributions. The model adds concise method and result summaries for fast evaluation.",
+      "generalExplanation": "This pattern produces reviewer-style abstract rewrites that clarify essence, key points, and contributions. Users paste an abstract and receive concise method and result summaries for quick understanding.",
+      "peilPrompt": "You are an expert paper editor operating from a peer-reviewer perspective, tasked with revising a paper’s abstract for fluency, elegance, and rapid comprehension. Structured, research-backed guidance will ensure disciplined enhancement while preserving technical accuracy, author intent, and reviewer rigor.\n\n- Honor the provided abstract, title, keywords, target venue and audience, author constraints, ethical guidelines, and stakeholder approvals.\n- Proceed by reading for core claims and contributions, diagnosing clarity and coherence, editing for flow and precision, verifying meaning preservation, and finalizing tone and structure.\n- Do not add or remove claims, data, or results; avoid altering technical meaning; maintain field terminology; eliminate hype; respect confidentiality and venue formatting rules.\n- Keep confirmations brief and produce one-paragraph output under 180 words, with any ancillary notes kept minimal and the total response under 220 words.\n- Apply stepwise reasoning silently, plan verification questions to check consistency, and use self-consistency and rephrase-and-respond to refine and validate the revision.\n- Deliver the polished abstract followed by a concise reviewer note highlighting key risks, editorial decisions, and recommended next actions."
     },
     {
       "id": "23-0-2",
@@ -29168,10 +29221,51 @@
       "aiAssistedFields": [
         "application",
         "applicationTasksString",
-        "template"
+        "domainIndustryExamples",
+        "generalExplanation",
+        "peilPrompt",
+        "template",
+        "usageSummary"
       ],
       "aiAssistedModel": "gpt-5",
-      "aiAssistedAt": "2025-09-23T12:42:32Z"
+      "aiAssistedAt": "2025-10-26T08:13:13Z",
+      "usageSummary": "Use this pattern to structure supervised fine-tuning and consistent evaluation across tasks. Teams document metrics and iterations to compare changes and guide next steps.",
+      "generalExplanation": "This pattern guides supervised fine-tuning of an LLM using representative examples and held-out evaluation. It standardizes steps to improve task performance and track reproducible improvements.",
+      "domainIndustryExamples": [
+        {
+          "task": "define task",
+          "prompt": "Describe the target capability and success criteria. Outline inputs, outputs, constraints, and evaluation metrics for supervised fine-tuning."
+        },
+        {
+          "task": "curate training pairs",
+          "prompt": "Collect representative input-output pairs reflecting real-world variability. Ensure labeling quality and include edge cases relevant to the task."
+        },
+        {
+          "task": "split holdout set",
+          "prompt": "Create a held-out evaluation set mirroring deployment data. Explain selection rationale and prevent leakage from training pairs."
+        },
+        {
+          "task": "run fine-tuning",
+          "prompt": "Run supervised fine-tuning with reproducible settings. Specify hyperparameters, seeds, checkpoints, and resource constraints."
+        },
+        {
+          "task": "fine-tune on loan applications",
+          "prompt": "Prepare labeled loan application summaries and decisions. Fine-tune and evaluate on held-out applications, reporting accuracy, fairness, and error types."
+        },
+        {
+          "task": "fine-tune on claim summaries",
+          "prompt": "Use insurer claim summaries with target categorizations. Fine-tune and test on held-out claims, reporting precision, recall, and common misclassifications."
+        },
+        {
+          "task": "fine-tune on patient records",
+          "prompt": "Use de-identified patient encounter notes and target outputs. Fine-tune and evaluate clinically, tracking sensitivity, specificity, and safety-related errors."
+        },
+        {
+          "task": "fine-tune for contract clauses",
+          "prompt": "Train on contract clause extraction pairs. Fine-tune and evaluate on unseen agreements, reporting extraction accuracy and handling of ambiguous clauses."
+        }
+      ],
+      "peilPrompt": "You are a specialist who fine-tunes models on patient records, accountable for safe, compliant, and clinically meaningful optimization. Use explicit, stepwise guidance to ensure correct data handling, rigorous evaluation, and verifiable reasoning across the fine-tune on patient records scenario.\n\n- Honor de-identified patient encounter notes, defined target outputs, data provenance metadata, and stakeholder inputs from clinical, compliance, and data ownership teams.\n- Proceed in order: define the clinical task and target outputs; curate de-identified training pairs; split train/validation/holdout sets; configure and run fine-tuning; evaluate clinically; document and iterate.\n- Enforce de-identification and PHI removal, least-privilege access, audit logging, reproducible configs, approval gates (e.g., privacy, legal, clinical), and fail-safe handling for unsafe outputs.\n- Keep confirmations brief and cap any final deliverable at 220 words, using only essential details and clear bullets when needed.\n- Apply stepwise reasoning with explicit intermediate checks, pose verification questions for each phase, validate logic at each step, and sample alternate reasoning paths to select the most consistent, error-checked plan.\n- Return an actionable fine-tuning plan for patient records that specifies dataset criteria, split schema, training configuration, verification questions, evaluation metrics including sensitivity, specificity, and safety-error tracking, and immediate next approvals."
     },
     {
       "id": "24-1-0",
@@ -45916,10 +46010,51 @@
       "aiAssistedFields": [
         "application",
         "applicationTasksString",
-        "template"
+        "domainIndustryExamples",
+        "generalExplanation",
+        "peilPrompt",
+        "template",
+        "usageSummary"
       ],
       "aiAssistedModel": "gpt-5",
-      "aiAssistedAt": "2025-09-23T16:14:47Z"
+      "aiAssistedAt": "2025-10-26T08:14:12Z",
+      "usageSummary": "Use it to solve multiple-choice questions across domains with brief reasoning and a definitive choice. It standardizes outputs for downstream automation.",
+      "generalExplanation": "This pattern enforces concise chain-of-thought reasoning before selecting a single option in multiple-choice tasks. It standardizes outputs with Action: Answer(\"[choice]\") and disallows 'None of the Above' for automation.",
+      "domainIndustryExamples": [
+        {
+          "task": "answer multiple-choice question",
+          "prompt": "For a general knowledge multiple-choice question, think step-by-step briefly, then reply Action: Answer(\"[choice]\"). Select one option and never use 'None of the Above'."
+        },
+        {
+          "task": "eliminate incorrect options",
+          "prompt": "Briefly eliminate incorrect options for a business strategy question, then reply Action: Answer(\"[choice]\"). Choose one option; do not use 'None of the Above'."
+        },
+        {
+          "task": "reason through options",
+          "prompt": "For a public policy MCQ, reason through each option briefly and justify the best, then respond Action: Answer(\"[choice]\"). Avoid 'None of the Above'."
+        },
+        {
+          "task": "select best answer",
+          "prompt": "Given a technology certification MCQ, compare options briefly and select the best, then output Action: Answer(\"[choice]\"). Never answer 'None of the Above'."
+        },
+        {
+          "task": "evaluate finance risk scenario",
+          "prompt": "For a finance risk MCQ about portfolio volatility, reason briefly and choose one option, then return Action: Answer(\"[choice]\"). Do not use 'None of the Above'."
+        },
+        {
+          "task": "review insurance claim case",
+          "prompt": "For an insurance claim MCQ on coverage eligibility, reason step-by-step briefly and select one, then output Action: Answer(\"[choice]\"). Avoid 'None of the Above'."
+        },
+        {
+          "task": "diagnose patient symptom question",
+          "prompt": "For a healthcare MCQ on patient symptoms, reason briefly, rule out distractors, then reply Action: Answer(\"[choice]\"). Choose one option; never use 'None of the Above'."
+        },
+        {
+          "task": "interpret contract clause question",
+          "prompt": "For a legal contract clause MCQ, reason briefly about interpretation and pick one, then return Action: Answer(\"[choice]\"). Do not use 'None of the Above'."
+        }
+      ],
+      "peilPrompt": "You are a specialist who answers multiple-choice questions using disciplined, concise reasoning to select the best option. Apply brief step-by-step analysis with verification to meet the scenario’s expectations and produce reliable, decisive answers.\n\n- Honor the general-knowledge multiple-choice setting, the provided question text and options, and the end user’s need for a single correct choice without injecting external sources beyond well-established common knowledge.\n- Follow this sequence: parse the question, identify key facts, eliminate clearly wrong options, compare remaining choices against the prompt’s cues, run a quick plausibility check, and finalize the selection.\n- Obey constraints: do not choose “None of the Above,” avoid hedging or multiple answers, do not fabricate unsupported facts, and align with applicable controls and stakeholder approvals.\n- Limit any displayed rationale to one or two short sentences if shown, and ensure the final output remains compact and under 220 words.\n- Apply concise Chain-of-Thought, ask yourself a quick verification question, check logical consistency at each step, and prefer the option most supported after elimination.\n- Return exactly one line in the format Action: Answer(\"[choice]\") with the chosen letter (A, B, C, or D) inside quotes and no extra text before or after."
     },
     {
       "id": "43-0-0",
@@ -53137,10 +53272,51 @@
       "aiAssistedFields": [
         "application",
         "applicationTasksString",
-        "template"
+        "domainIndustryExamples",
+        "generalExplanation",
+        "peilPrompt",
+        "template",
+        "usageSummary"
       ],
       "aiAssistedModel": "gpt-5",
-      "aiAssistedAt": "2025-09-23T17:41:13Z"
+      "aiAssistedAt": "2025-10-26T08:15:14Z",
+      "usageSummary": "Teachers use this to scaffold EFL blog writing with tense control and time sequencing. Students draft, revise, and check clarity and grammar with guided steps.",
+      "generalExplanation": "This pattern helps EFL learners produce clear blog entries using time markers and simple tenses. It structures short paragraphs and encourages brief reflections with everyday school vocabulary for readable narratives.",
+      "domainIndustryExamples": [
+        {
+          "task": "draft blog outline",
+          "prompt": "Create a simple outline for a school day blog entry with time markers and clear paragraph topics. Use everyday school words and include brief reflections."
+        },
+        {
+          "task": "write opening paragraph",
+          "prompt": "Write the opening paragraph of a school day blog entry. Use a time marker, present simple for context, and simple past for events with everyday school words."
+        },
+        {
+          "task": "add time markers",
+          "prompt": "Add clear time markers to a school day blog entry. Keep paragraphs concise and use simple past and present simple with brief reflections."
+        },
+        {
+          "task": "summarize earnings call",
+          "prompt": "Write a short blog-style summary of today's earnings call using time markers and simple past/present. Include brief reflections on key announcements and everyday explanations."
+        },
+        {
+          "task": "explain claim denial",
+          "prompt": "Write a clear blog-style entry explaining an insurance claim denial. Use time markers, simple past for events, present simple for policy points, and brief reflections."
+        },
+        {
+          "task": "describe patient checkup",
+          "prompt": "Write a patient checkup blog entry with time markers and simple past/present. Include brief reflections on tests, advice, and next steps."
+        },
+        {
+          "task": "analyze contract clause",
+          "prompt": "Write a blog-style note analyzing one contract clause. Use present simple for clause meaning, simple past for examples, time markers, and brief reflections."
+        },
+        {
+          "task": "review firewall logs",
+          "prompt": "Write a blog-style review of today's firewall logs using time markers and simple past/present. Add brief reflections on anomalies, responses, and lessons."
+        }
+      ],
+      "peilPrompt": "You are a specialist in summarizing earnings calls, tasked with producing a short blog-style recap of today’s call using time markers and simple past/present. Clear structure and verification-driven reasoning will guide accurate, compliant delivery tailored to this scenario.\n\n- Honor the official call transcript, slide deck, press release, Q&A notes, prior guidance, and timestamps, and consider stakeholders such as readers, investor relations, finance, and compliance.\n- Follow this order: draft the blog outline, write the opening paragraph, add time markers, capture key announcements and numbers, explain impacts in plain language, and finalize after cross-checks.\n- Obey governance and stakeholder approvals, avoid confidential or speculative content, use simple past/present, maintain a neutral professional tone, and ensure figures, names, and dates match the sources.\n- Keep confirmations brief and limit the final summary to under 220 words, include only essential details, avoid heavy formatting, and use short sentences or clauses for clarity.\n- Apply internal Chain-of-Thought for stepwise planning, use Chain-of-Verification by posing checks on numbers and claims, and prefer self-consistency by reconciling alternative drafts before presenting the single final output.\n- Deliver a concise blog-style summary of today’s earnings call with clear time markers, simple past/present narration, brief reflections on key announcements, everyday explanations, and one or two actionable next steps."
     },
     {
       "id": "54-1-0",
@@ -59857,10 +60033,51 @@
       "aiAssistedFields": [
         "application",
         "applicationTasksString",
-        "template"
+        "domainIndustryExamples",
+        "generalExplanation",
+        "peilPrompt",
+        "template",
+        "usageSummary"
       ],
       "aiAssistedModel": "gpt-5",
-      "aiAssistedAt": "2025-09-23T18:30:08Z"
+      "aiAssistedAt": "2025-10-26T08:16:18Z",
+      "usageSummary": "Use it to interpret scene imagery and give cautious directions that respect environment constraints. Ask for uncertainties and missing details before following guidance.",
+      "generalExplanation": "This pattern analyzes an uploaded image to describe navigational features and propose safe directions. It incorporates user context and surfaces uncertainties and missing details to improve safety.",
+      "domainIndustryExamples": [
+        {
+          "task": "Identify landmarks and paths",
+          "prompt": "From this city street image, identify landmarks and paths. Consider low light and crowding; state uncertainties and missing signage that affect safe navigation."
+        },
+        {
+          "task": "Suggest safe route",
+          "prompt": "Using the campus quad photo, suggest a safe route for a wheelchair user. Mention curb cuts, ramps, and grass hazards; note uncertainties and missing details."
+        },
+        {
+          "task": "Highlight obstacles and hazards",
+          "prompt": "From this construction site image, highlight obstacles and hazards for walking through. Consider dust, equipment, and uneven ground; include uncertainty and any missing warning signs."
+        },
+        {
+          "task": "Direct to ATM location",
+          "prompt": "In this shopping mall photo, direct me to the nearest ATM. Use visible signage and store anchors; note uncertainties and missing wayfinding details."
+        },
+        {
+          "task": "Locate claim desk signage",
+          "prompt": "From this airport terminal image, locate baggage claim desk signage. Mention concourse markers and arrows; state uncertainties and missing directions affecting safe navigation."
+        },
+        {
+          "task": "Guide to triage station",
+          "prompt": "Using the emergency department photo, guide me to the triage station. Note patient flow barriers and restricted areas; include uncertainties and any missing signage."
+        },
+        {
+          "task": "Navigate courthouse floorplan",
+          "prompt": "From this courthouse lobby image, navigate to courtroom 3B. Use posted directories and floorplan cues; state uncertainties and missing indicators that could mislead."
+        },
+        {
+          "task": "Route through warehouse aisle",
+          "prompt": "With this warehouse aisle photo, route a forklift safely to pallet rack B12. Note pedestrian zones, obstructions, and spill hazards; include uncertainty and missing markings."
+        }
+      ],
+      "peilPrompt": "You are a specialist who highlights obstacles and hazards and guides safe passage through construction environments. For the provided construction site image, apply structured, validated reasoning to deliver concise, actionable hazard insights.\n\n- Honor the construction site image as primary input; consider uneven ground and terrain, equipment and materials, signage, dust and lighting, and pedestrian pathways; note stakeholders (workers, visitors, safety officers); record uncertainties and missing warnings.\n- Follow this order: identify landmarks and paths; highlight obstacles and hazards; assess severity and likelihood; suggest a safer walking route; flag missing controls or signage; note residual risks.\n- Obey site safety governance and stakeholder approvals, ground claims in observable evidence, avoid speculation beyond the image, and clearly mark uncertain observations.\n- Keep confirmations minimal and the final output under 220 words with essential details only, using plain sentences.\n- Apply step-by-step reasoning, pose verification questions for each identified hazard, use self-consistency to cross-check the safe route, and validate every step against the image.\n- Return a concise summary of obstacles and hazards for walking through the site, prioritized by risk, plus one to three actionable next steps and a recommended safe path with noted uncertainties."
     },
     {
       "id": "61-0-15",
