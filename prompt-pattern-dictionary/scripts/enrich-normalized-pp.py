@@ -25,9 +25,14 @@ import os
 import sys
 import json
 import re
+import logging
 import time
 from textwrap import dedent
-from typing import Any, Dict, List, Optional, Tuple
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from enum import Enum
+from typing import Dict, Optional, Any, List, Union, Iterator, Tuple, cast
+from difflib import SequenceMatcher
 
 # Ensure repo root is on PYTHONPATH so we can import azure_models.py
 THIS_DIR = os.path.dirname(__file__)
@@ -163,7 +168,7 @@ BASE_SYSTEM_PROMPT = (
     "- applicationTasksString: OPTIONAL. If you can confidently produce 1–8 concise tasks (prefer 8) for the pattern's media type, return a single comma+space separated string: 'task1, task2, ...'. "
     "Each task ≤5 words, DISTINCT, ACTIONABLE, and VERB-LED. Provide 3–4 cross-domain tasks AND 4–5 industry-specific tasks covering different sectors. Avoid repeating the same domain more than twice.\n"
     "- generalExplanation: 2 crisp sentences (≤22 words each) summarizing the pattern's intent, mechanics, and the user value. No fluff, no marketing tone.\n"
-    "- domainIndustryExamples: OPTIONAL. Produce one object per task listed in "
+    "- domainIndustryExamples: REQUIRED whenever applicationTasksString exists. Produce one object per task listed in "
     "applicationTasksString. Each object must include {task, prompt}. 'task' "
     "must EXACTLY match the provided chip text (case-sensitive). 'prompt' is "
     "1–2 grounded sentences (≤28 words each) that show how to ask the model "
@@ -299,6 +304,7 @@ def main():
     dry_run = False
     peil_diagnostics_enabled = False
     anchor_deterministic = False
+    show_raw_responses = False
 
     # Parse args
     args = sys.argv[1:]
@@ -377,6 +383,9 @@ def main():
             continue
         if a == '--anchor-deterministic':
             anchor_deterministic = True
+            continue
+        if a == '--show-raw':
+            show_raw_responses = True
             continue
         if a == '--ids' and i + 1 < len(args):
             raw = args[i + 1]
@@ -540,6 +549,7 @@ def main():
     ) -> List[Dict[str, str]]:
         """Normalize domainIndustryExamples into {task, prompt} dicts."""
         if value is None:
+            normalize_domain_examples.last_missing = expected_tasks[:] if expected_tasks else []  # type: ignore[attr-defined]
             return []
 
         entries: List[Dict[str, str]] = []
@@ -605,26 +615,68 @@ def main():
                 push(parts[0], parts[1])
 
         if not expected_tasks:
+            normalize_domain_examples.last_missing = []  # type: ignore[attr-defined]
             return []
 
-        # Build lookup keyed by lower-case task for case-insensitive matching
-        lookup: Dict[str, str] = {}
-        for item in entries:
-            key = item['task'].lower()
-            if key not in lookup:
-                lookup[key] = item['prompt']
+        # Allow fuzzy matching so minor wording differences do not drop the batch.
+        remaining_indices = list(range(len(entries)))
         ordered: List[Dict[str, str]] = []
+        missing_tasks: List[str] = []
+
+        def best_match(target: str) -> Optional[Tuple[int, Dict[str, str]]]:
+            """Return the best matching entry index and payload for the target task."""
+            if not remaining_indices:
+                return None
+
+            target_norm = target.lower()
+
+            # Prefer exact matches when available.
+            for idx in list(remaining_indices):
+                entry = entries[idx]
+                if entry['task'].lower() == target_norm:
+                    return idx, entry
+
+            best_idx: Optional[int] = None
+            best_score = 0.0
+            for idx in remaining_indices:
+                entry = entries[idx]
+                candidate = entry['task'].lower()
+                score = SequenceMatcher(None, target_norm, candidate).ratio()
+                if score > best_score:
+                    best_score = score
+                    best_idx = idx
+
+            if best_idx is None or best_score < 0.75:
+                return None
+
+            return best_idx, entries[best_idx]
+
         for task in expected_tasks:
-            needle = task.lower()
-            prompt_text = lookup.get(needle)
-            if not prompt_text:
-                return []
+            match = best_match(task)
+            if not match:
+                # Fallback: reuse the next available prompt even if the label does not match.
+                if not remaining_indices:
+                    missing_tasks.append(task)
+                    continue
+                idx = remaining_indices[0]
+                payload = entries[idx]
+            else:
+                idx, payload = match
+            prompt_text = payload.get('prompt')
             normalized_prompt = normalize_prompt_example(prompt_text)
+            remaining_indices.remove(idx)
             if not normalized_prompt:
-                return []
+                missing_tasks.append(task)
+                continue
+
             ordered.append({'task': task, 'prompt': normalized_prompt})
 
-        return ordered
+        normalize_domain_examples.last_missing = missing_tasks  # type: ignore[attr-defined]
+        if ordered:
+            return ordered
+        return []
+
+    normalize_domain_examples.last_missing = []  # type: ignore[attr-defined]
 
     def analyze_peil_structure(text: str) -> Dict[str, int]:
         content = str(text or '').strip()
@@ -1260,6 +1312,9 @@ def main():
                 content = getattr(resp.choices[0].message, 'content', None)
             if not content and isinstance(resp, dict):
                 content = resp.get('choices', [{}])[0].get('message', {}).get('content')
+            if (show_raw_responses or dry_run) and content:
+                print(f"[{pid}] RAW RESPONSE:\n{content.strip()}\n")
+
             if not content:
                 print(
                     f"[{pid}] RESPONSE: no content; applying fallback if enabled."
@@ -1375,10 +1430,25 @@ def main():
                         )
                         if examples_norm:
                             domain_examples_for_peil = examples_norm
+                            missing_tasks_norm = getattr(
+                                normalize_domain_examples,
+                                'last_missing',
+                                [],
+                            )
                             if dry_run:
                                 dry_run_changes[key] = examples_norm
+                                if missing_tasks_norm:
+                                    print(
+                                        f"[{pid}] NOTE: missing domain examples for tasks: "
+                                        + ', '.join(missing_tasks_norm)
+                                    )
                             else:
                                 p[key] = examples_norm
+                                if missing_tasks_norm:
+                                    print(
+                                        f"[{pid}] WARNING: domainIndustryExamples missing tasks: "
+                                        + ', '.join(missing_tasks_norm)
+                                    )
                             updated = True
                     elif key == 'peilPrompt':
                         prompt_text = normalize_peil_prompt(
