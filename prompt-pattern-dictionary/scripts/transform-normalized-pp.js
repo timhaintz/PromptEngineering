@@ -125,8 +125,11 @@ function normalize() {
     // Preserve known enrichable fields
     maybePreserve('application');
     maybePreserve('template');
-  // Preserve application domain/task chips string when enriched
-  maybePreserve('applicationTasksString');
+    maybePreserve('generalExplanation');
+    maybePreserve('domainIndustryExamples');
+    maybePreserve('peilPrompt');
+    // Preserve application domain/task chips string when enriched
+    maybePreserve('applicationTasksString');
     // Preserve the raw bracketed template string if it was enriched
     if (typeof oldItem.templateRawBracketed !== 'undefined') {
       newItem.templateRawBracketed = oldItem.templateRawBracketed;
