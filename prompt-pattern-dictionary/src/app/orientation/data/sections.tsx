@@ -54,6 +54,7 @@ const WhatIsPattern = () => (
 const PatternAnatomy = () => (
   <div>
     <p>Each entry follows a consistent schema to support scanning and comparison. The Template exposes five canonical keys (<code>role</code>, <code>context</code>, <code>action</code>, <code>format</code>, <code>response</code>) plus an optional single‑line <em>bracketed synthesis</em>. Additional normalized attributes provide discoverability, provenance, and evaluation hooks.</p>
+    <div id="peil" className="sr-only">Prompt Engineering Instructional Language (PEIL)</div>
     <div className="mt-4 grid gap-4 md:grid-cols-2">
   <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
         <h3 className="text-sm font-semibold mb-2">Field Overview</h3>

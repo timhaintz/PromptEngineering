@@ -13,6 +13,11 @@ export interface PatternBasics {
   examples: Example[];
 }
 
+export interface DomainIndustryExample {
+  task: string;
+  prompt: string;
+}
+
 export interface NormalizedAttrs {
   mediaType?: string | null;
   dependentLLM?: string | null;
@@ -21,6 +26,9 @@ export interface NormalizedAttrs {
   turn?: string | null;
   template?: Record<string, string> | null;
   usageSummary?: string | null;
+  generalExplanation?: string | null;
+  domainIndustryExamples?: DomainIndustryExample[] | null;
+  peilPrompt?: string | null;
   // New: raw single-line bracketed template representation for export/display
   templateRawBracketed?: string | null;
   aiAssisted?: boolean;
@@ -77,6 +85,7 @@ export default function PatternDetail({
   const [similarPatternsOpen, setSimilarPatternsOpen] = useState(false); // default collapsed
   const [bracketOpen, setBracketOpen] = useState(false); // optional bracketed view toggle
   const [applicationOpen, setApplicationOpen] = useState(false); // default collapsed for applications
+  const [peilOpen, setPeilOpen] = useState(false); // default collapsed for PEIL prompt
 
   // Remember examples panel state per pattern id
   useEffect(() => {
@@ -113,6 +122,19 @@ export default function PatternDetail({
       .map(s => s.trim())
       .filter(Boolean);
   }, [attrs?.applicationTasksString]);
+  const domainExampleMap = useMemo(() => {
+    const entries = attrs?.domainIndustryExamples ?? [];
+    const map = new Map<string, string>();
+    for (const entry of entries) {
+      if (!entry?.task) continue;
+      const key = entry.task.trim();
+      if (!key) continue;
+      const prompt = (entry.prompt ?? '').trim();
+      map.set(key, prompt);
+      map.set(key.toLowerCase(), prompt);
+    }
+    return map;
+  }, [attrs?.domainIndustryExamples]);
   const [paperId, categoryIndex, patternIndex] = pattern.id.split('-');
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -160,6 +182,11 @@ export default function PatternDetail({
     });
   }, [appTags]);
 
+  const usageSummary = attrs?.usageSummary?.trim() ? attrs.usageSummary.trim() : null;
+  const generalExplanation = attrs?.generalExplanation?.trim() ? attrs.generalExplanation.trim() : null;
+  const peilPrompt = attrs?.peilPrompt?.trim() ? attrs.peilPrompt.trim() : null;
+  const orientationPeilHref = withBasePath('/orientation/all#peil');
+
   const showReference = context === 'category' && paperTitle && paperUrl;
 
   return (
@@ -186,18 +213,6 @@ export default function PatternDetail({
                   <path d="M13.41 10.59a1 1 0 010 1.41l-3.3 3.3a3 3 0 11-4.24-4.24l1.65-1.65a1 1 0 111.41 1.41L7.29 12.3a1 1 0 101.42 1.42l3.3-3.3a1 1 0 011.41 0z"/>
                 </svg>
               </a>
-              {attrs?.aiAssisted && (attrs.aiAssistedFields || []).includes('usageSummary') && (
-                <span
-                  className="inline-flex items-center rounded bg-amber-100 text-amber-800 px-1.5 py-0.5 text-[10px] font-medium border border-amber-200"
-                  title={
-                    attrs.aiAssistedModel
-                      ? `AI-assisted (usage summary) • ${attrs.aiAssistedModel}${attrs.aiAssistedAt ? ` • ${attrs.aiAssistedAt}` : ''}`
-                      : 'AI-assisted (usage summary)'
-                  }
-                >
-                  AI-assisted
-                </span>
-              )}
             </div>
           </div>
           <div className="flex items-start justify-end shrink-0">
@@ -273,6 +288,12 @@ export default function PatternDetail({
               <dt className="font-semibold text-secondary">Dependent LLM:</dt>
               <dd className="text-secondary">{attrs?.dependentLLM ?? 'N/A'}</dd>
 
+              <dt className="font-semibold text-secondary">General Explanation:</dt>
+              <dd className="text-secondary whitespace-pre-wrap">{generalExplanation ?? 'N/A'}</dd>
+
+              <dt className="font-semibold text-secondary">Usage Summary:</dt>
+              <dd className="text-secondary whitespace-pre-wrap">{usageSummary ?? 'N/A'}</dd>
+
               <dt className="font-semibold text-secondary">Turn:</dt>
               <dd className="text-secondary">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
 
@@ -338,10 +359,21 @@ export default function PatternDetail({
                 {applicationOpen ? (
                   <div id={`app-${pattern.id}`} className="space-y-3">
                     {tasks.length > 0 ? (
-                      <div className="flex flex-col gap-2" aria-label="Application tasks">
-                        {tasks.map((t, i) => (
-                          <span key={i} className="chip-task w-fit">{t}</span>
-                        ))}
+                      <div className="flex flex-col gap-3" aria-label="Application tasks">
+                        {tasks.map(task => {
+                          const key = task.trim();
+                          const prompt = domainExampleMap.get(key) ?? domainExampleMap.get(key.toLowerCase());
+                          return (
+                            <div key={task} className="flex flex-col gap-1">
+                              <span className="chip-task w-fit">{task}</span>
+                              {prompt ? (
+                                <p className="text-xs text-secondary leading-snug whitespace-pre-wrap max-w-prose">{prompt}</p>
+                              ) : (
+                                <p className="text-xs text-muted italic">Prompt example not yet available for this task.</p>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     ) : (
                       <>
@@ -366,17 +398,52 @@ export default function PatternDetail({
                               ))}
                             </div>
                           )
-                        ) : 'N/A'}
+                        ) : (
+                          'N/A'
+                        )}
                       </>
-                    )}
-                    {attrs?.usageSummary && (
-                      <div className="text-muted">
-                        <span className="font-semibold">How to apply:</span> {attrs.usageSummary}
-                      </div>
                     )}
                   </div>
                 ) : (
                   <span className="text-muted select-none">Domain and industry applications hidden. Expand to explore applied use cases.</span>
+                )}
+              </dd>
+
+              <dt className="font-semibold text-secondary flex items-center">
+                <button
+                  type="button"
+                  onClick={() => setPeilOpen(v => !v)}
+                  className="mr-1 text-muted hover:text-secondary focus-ring rounded-sm"
+                  aria-controls={`peil-${pattern.id}`}
+                  title={peilOpen ? 'Hide PEIL prompt' : 'Show PEIL prompt'}
+                  aria-expanded={peilOpen}
+                  aria-label={peilOpen ? 'Hide PEIL prompt' : 'Show PEIL prompt'}
+                >
+                  <span className="text-sm">{peilOpen ? '▾' : '▸'}</span>
+                </button>
+                <span className="flex items-center gap-1">
+                  PEIL:
+                  <Link
+                    href={orientationPeilHref}
+                    className="inline-flex items-center justify-center cursor-help text-secondary hover:text-primary focus-ring rounded-full"
+                    title="PEIL stands for Prompt Engineering Instructional Language. Open the Orientation reference."
+                    aria-label="Learn more about Prompt Engineering Instructional Language (PEIL) in Orientation"
+                  >
+                    <span aria-hidden="true">ℹ️</span>
+                  </Link>
+                </span>
+              </dt>
+              <dd className="text-secondary">
+                {peilOpen ? (
+                  <div id={`peil-${pattern.id}`} className="space-y-2">
+                    {peilPrompt ? (
+                      <pre className="whitespace-pre-wrap bg-surface-2 p-2 rounded border text-xs">{peilPrompt}</pre>
+                    ) : (
+                      <span className="text-muted">No PEIL prompt captured for this pattern.</span>
+                    )}
+                  </div>
+                ) : (
+                  <span id={`peil-${pattern.id}`} className="text-muted select-none">Prompt Engineering Instructional Language instructions hidden. Expand to review the instructional scaffold.</span>
                 )}
               </dd>
             </dl>

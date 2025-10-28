@@ -79,7 +79,7 @@ async function getSimilarExamples(): Promise<SimilarExamples | null> {
   return JSON.parse(fileContents);
 }
 
-type NormalizedPatterns = { patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string | string[]; applicationTasksString?: string | null; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> };
+type NormalizedPatterns = { patterns: Array<{ id: string; mediaType?: string; dependentLLM?: string | null; application?: string | string[]; applicationTasksString?: string | null; turn?: string | null; template?: Record<string, string> | null; usageSummary?: string | null; generalExplanation?: string | null; domainIndustryExamples?: Array<{ task: string; prompt: string }> | null; peilPrompt?: string | null; aiAssisted?: boolean; aiAssistedFields?: string[]; aiAssistedModel?: string | null; aiAssistedAt?: string | null }> };
 async function getNormalized(): Promise<NormalizedPatterns | null> {
   const filePath = path.join(process.cwd(), 'public', 'data', 'normalized-patterns.json');
   if (!fs.existsSync(filePath)) return null;
@@ -198,6 +198,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               turn: n.turn ?? null,
               template: n.template ?? null,
               usageSummary: n.usageSummary ?? null,
+              generalExplanation: n.generalExplanation ?? null,
+              domainIndustryExamples: n.domainIndustryExamples ?? null,
+              peilPrompt: n.peilPrompt ?? null,
               aiAssisted: n.aiAssisted ?? false,
               aiAssistedFields: n.aiAssistedFields ?? null,
               aiAssistedModel: n.aiAssistedModel ?? null,

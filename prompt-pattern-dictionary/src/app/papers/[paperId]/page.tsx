@@ -16,7 +16,10 @@ interface NormalizedPattern {
   turn?: string | null;
   template?: Record<string, string> | null;
   usageSummary?: string | null;
+  generalExplanation?: string | null;
   applicationTasksString?: string | null;
+  domainIndustryExamples?: Array<{ task: string; prompt: string }> | null;
+  peilPrompt?: string | null;
   aiAssisted?: boolean;
   aiAssistedFields?: string[];
   aiAssistedModel?: string | null;
@@ -103,7 +106,10 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
                   turn: n.turn ?? null,
                   template: n.template ?? null,
                   usageSummary: n.usageSummary ?? null,
+                  generalExplanation: n.generalExplanation ?? null,
                   applicationTasksString: n.applicationTasksString ?? null,
+                  domainIndustryExamples: n.domainIndustryExamples ?? null,
+                  peilPrompt: n.peilPrompt ?? null,
                   aiAssisted: n.aiAssisted ?? false,
                   aiAssistedFields: n.aiAssistedFields ?? null,
                   aiAssistedModel: n.aiAssistedModel ?? null,
