@@ -201,7 +201,7 @@ export default function PatternDetail({
           <div className="min-w-0">
             <div className="flex items-center gap-2 group">
               <Link
-                href={withBasePath(`/papers/${paperId}#p-${categoryIndex}-${patternIndex}`)}
+                href={`/papers/${paperId}#p-${categoryIndex}-${patternIndex}`}
                 className="text-lg font-semibold text-primary break-words focus-ring rounded-sm hover:text-secondary"
               >
                 {pattern.patternName}
