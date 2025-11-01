@@ -14,10 +14,9 @@ import { parseBooleanQuery, evaluateBooleanQuery } from '@/lib/search/booleanQue
 import PageShell from '@/components/layout/PageShell';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Card } from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
 import { Spinner } from '@/components/ui/Spinner';
 import { withBasePath } from '@/utils/paths';
-import React from 'react';
+import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
 
 interface Pattern {
   id: string;
@@ -35,6 +34,10 @@ interface Pattern {
 type Logic = { name: string; slug: string; focus: string; categories: { name: string; slug: string; patternCount: number }[] };
 type PatternCategoriesData = { logics: Logic[] };
 type SemanticAssignments = { categories: Record<string, { name: string; slug: string; logic?: string; patternCount: number }> };
+type NormalizedRecord = NormalizedAttrs & { id: string };
+type NormalizedFile = { patterns: NormalizedRecord[] };
+type SimilarExamplesFile = { similar: SimilarMap };
+type SimilarPatternsFile = { similar: SimilarPatternsMap };
 
 type SearchType = 'logic' | 'category' | 'pattern' | 'example';
 
@@ -49,6 +52,9 @@ function SearchResults() {
   const [patterns, setPatterns] = useState<Pattern[]>([]);
   const [catData, setCatData] = useState<PatternCategoriesData | null>(null);
   const [semantic, setSemantic] = useState<SemanticAssignments | null>(null);
+  const [normalizedById, setNormalizedById] = useState<Record<string, NormalizedAttrs>>({});
+  const [similarExamples, setSimilarExamples] = useState<SimilarMap>({});
+  const [similarPatterns, setSimilarPatterns] = useState<SimilarPatternsMap>({});
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState(query);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -73,15 +79,52 @@ function SearchResults() {
   useEffect(() => {
     const loadAll = async () => {
       try {
-        const [pRes, cRes, sRes] = await Promise.all([
+        const [pRes, cRes, sRes, nRes, seRes, spRes] = await Promise.all([
           fetch(withBasePath('/data/patterns.json')),
-          fetch(withBasePath('/data/pattern-categories.json')),
+          fetch(withBasePath('/data/pattern-categories.json')).catch(() => null),
           fetch(withBasePath('/data/semantic-assignments.json')).catch(() => null),
+          fetch(withBasePath('/data/normalized-patterns.json')).catch(() => null),
+          fetch(withBasePath('/data/similar-examples.json')).catch(() => null),
+          fetch(withBasePath('/data/similar-patterns.json')).catch(() => null),
         ]);
         const pData = await pRes.json();
         setPatterns(pData);
-        if (cRes) setCatData(await cRes.json());
-        if (sRes && 'ok' in sRes && sRes.ok) setSemantic(await sRes.json());
+        if (cRes instanceof Response && cRes.ok) {
+          setCatData(await cRes.json());
+        }
+        if (sRes instanceof Response && sRes.ok) setSemantic(await sRes.json());
+        if (nRes instanceof Response && nRes.ok) {
+          const normalizedJson = await nRes.json() as NormalizedFile;
+          const map: Record<string, NormalizedAttrs> = {};
+          normalizedJson.patterns.forEach((record) => {
+            map[record.id] = {
+              mediaType: record.mediaType ?? null,
+              dependentLLM: record.dependentLLM ?? null,
+              application: record.application ?? null,
+              applicationTasksString: record.applicationTasksString ?? null,
+              turn: record.turn ?? null,
+              template: record.template ?? null,
+              usageSummary: record.usageSummary ?? null,
+              generalExplanation: record.generalExplanation ?? null,
+              domainIndustryExamples: record.domainIndustryExamples ?? null,
+              peilPrompt: record.peilPrompt ?? null,
+              templateRawBracketed: record.templateRawBracketed ?? null,
+              aiAssisted: record.aiAssisted ?? false,
+              aiAssistedFields: record.aiAssistedFields ?? null,
+              aiAssistedModel: record.aiAssistedModel ?? null,
+              aiAssistedAt: record.aiAssistedAt ?? null,
+            };
+          });
+          setNormalizedById(map);
+        }
+        if (seRes instanceof Response && seRes.ok) {
+          const similarJson = await seRes.json() as SimilarExamplesFile;
+          setSimilarExamples(similarJson.similar ?? {});
+        }
+        if (spRes instanceof Response && spRes.ok) {
+          const similarPatternsJson = await spRes.json() as SimilarPatternsFile;
+          setSimilarPatterns(similarPatternsJson.similar ?? {});
+        }
       } catch (error) {
         console.error('Error loading search data:', error);
       } finally {
@@ -113,26 +156,13 @@ function SearchResults() {
     return query.toLowerCase().split(/\s+/).filter(w => w && w.length > 1).slice(0, 15);
   }, [query, useBoolean, booleanAst]);
 
-  function applyHighlight(text: string): React.ReactNode {
-    if (!highlightTerms.length) return <>{text}</>;
-    let parts: Array<{ segment: string; match: boolean }> = [{ segment: text, match: false }];
-    highlightTerms.forEach(term => {
-      const newParts: typeof parts = [];
-      const tLower = term.toLowerCase();
-      parts.forEach(p => {
-        if (p.match) { newParts.push(p); return; }
-        let startIdx = 0; let idx;
-        while ((idx = p.segment.toLowerCase().indexOf(tLower, startIdx)) !== -1) {
-          if (idx > startIdx) newParts.push({ segment: p.segment.slice(startIdx, idx), match: false });
-          newParts.push({ segment: p.segment.slice(idx, idx + term.length), match: true });
-          startIdx = idx + term.length;
-        }
-        if (startIdx < p.segment.length) newParts.push({ segment: p.segment.slice(startIdx), match: false });
-      });
-      parts = newParts;
+  const patternFirstExample = useMemo(() => {
+    const map: Record<string, string | undefined> = {};
+    patterns.forEach((pattern) => {
+      map[pattern.id] = pattern.examples[0]?.id;
     });
-    return <>{parts.map((p, i) => p.match ? <mark key={i} className="highlight-term">{p.segment}</mark> : p.segment)}</>;
-  }
+    return map;
+  }, [patterns]);
 
   const filteredPatterns = useMemo(() => {
     if ((type === 'pattern' || type === 'example') && (!query && !selectedCategory)) return [];
@@ -202,22 +232,6 @@ function SearchResults() {
     const text = query.toLowerCase();
     return logicList.filter(l => l.name.toLowerCase().includes(text) || l.focus.toLowerCase().includes(text));
   }, [type, query, logicList]);
-
-  const getPatternRoute = (patternId: string | undefined): string | undefined => {
-    if (!patternId) return undefined;
-    const parts = patternId.split('-');
-    if (parts.length < 3) return undefined;
-    const [paperId, categoryIndex, patternIndex] = parts;
-    if (!paperId || !categoryIndex || !patternIndex) return undefined;
-    return `/papers/${paperId}#p-${categoryIndex}-${patternIndex}`;
-  };
-
-  const getExampleAnchor = (patternId: string, exampleIndex: number | undefined): string | undefined => {
-    if (typeof exampleIndex !== 'number') return undefined;
-    const [paperId, cIdx, pIdx] = patternId.split('-');
-    if (!paperId || !cIdx || !pIdx) return undefined;
-    return `#e-${cIdx}-${pIdx}-${exampleIndex}`;
-  };
 
   if (loading) {
     return (
@@ -406,136 +420,36 @@ function SearchResults() {
                 Start by entering a query or choose filters above.
               </div>
             ) : (
-              filteredPatterns.map((pattern) => (
-                <Card key={pattern.id} header={
-                  <div className="flex items-center gap-2">
-                    {(() => {
-                      const route = getPatternRoute(pattern.id);
-                      return route ? (
-                        <Link href={route} className="text-secondary hover:text-primary font-medium focus-ring rounded-sm px-0.5">
-                          {pattern.patternName}
-                        </Link>
-                      ) : (
-                        <span className="text-secondary font-medium">{pattern.patternName}</span>
-                      );
-                    })()}
-                    {pattern.id && (
-                      <Badge variant="generic" className="badge-id text-[10px]">ID: {pattern.id}</Badge>
-                    )}
-                    <Badge variant="category" className="text-[10px] font-semibold">{pattern.category}</Badge>
-                  </div>
-                }>
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex-1 min-w-0" />
-                  </div>
-
-                  {pattern.description && (
-                    <p className="text-muted mb-4">{applyHighlight(pattern.description)}</p>
-                  )}
-
-                  {pattern.examples.length > 0 && (
-                    <div className="mb-4">
-                      <h4 className="text-md font-medium text-primary mb-2">Examples:</h4>
-                      <div className="space-y-2">
-                        {pattern.examples.slice(0, 2).map((example) => {
-                          const fullIndex = (typeof example.index === 'number' && pattern.id)
-                            ? `${pattern.id}-${example.index}`
-                            : undefined;
-                          const route = getPatternRoute(pattern.id);
-                          const anchor = pattern.id && typeof example.index === 'number' ? getExampleAnchor(pattern.id, example.index) : undefined;
-                          const href = route && anchor ? `${route}${anchor}` : route;
-                          return (
-                            <div key={example.id} className="p-3 rounded border-l-4 border-accent">
-                              <div className="flex items-start gap-2">
-                                {fullIndex && (
-                                  <span className="mt-0.5 inline-flex items-center rounded bg-surface-2 text-secondary px-1.5 py-0.5 text-[10px] font-semibold">
-                                    {fullIndex}
-                                  </span>
-                                )}
-                                {typeof example.content === 'string' ? (
-                                  href ? (
-                                    <Link href={href} className="text-secondary hover:text-primary text-sm focus-ring rounded-sm px-0.5">
-                                      {applyHighlight(example.content)}
-                                    </Link>
-                                  ) : (
-                                    <p className="text-muted text-sm">{applyHighlight(example.content)}</p>
-                                  )
-                                ) : (
-                                  <div className="text-muted text-sm">
-                                    <div className="font-medium mb-2">Complex Example:</div>
-                                    {href ? (
-                                      <Link href={href} className="block">
-                                        <pre className="whitespace-pre-wrap text-xs bg-surface-2 p-2 rounded max-h-32 overflow-y-auto">
-                                          {JSON.stringify(example.content, null, 2)}
-                                        </pre>
-                                      </Link>
-                                    ) : (
-                                      <pre className="whitespace-pre-wrap text-xs bg-surface-2 p-2 rounded max-h-32 overflow-y-auto">
-                                        {JSON.stringify(example.content, null, 2)}
-                                      </pre>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
-                        {pattern.examples.length > 2 && (
-                          <p className="text-sm text-muted">
-                            +{pattern.examples.length - 2} more examples
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="border-t pt-4">
-                    <div className="flex justify-between items-center text-sm text-muted">
-                      <div>
-                        <strong>Source:</strong>
-                        {pattern.paper.url ? (
-                          <a href={pattern.paper.url} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary ml-1 focus-ring rounded-sm px-0.5">
-                            {pattern.paper.title || pattern.paper.apaReference}
-                          </a>
-                        ) : (
-                          <span className="ml-1">{pattern.paper.title || pattern.paper.apaReference}</span>
-                        )}
-                      </div>
-                      {pattern.paper.authors && (
-                        <div>
-                          <strong>Authors:</strong> {pattern.paper.authors.join(', ')}
-                        </div>
-                      )}
-                    </div>
-                    {pattern.semantic_categorization && (
-                      <div className="mt-2 text-sm text-secondary">
-                        <div className="flex items-center gap-2">
-                          <span className="text-muted">Semantic Category:</span>
-                          <Badge variant="ai" className="text-[10px] font-semibold px-2 py-1">{pattern.semantic_categorization.category}</Badge>
-                          <span className="text-muted">
-                            ({(pattern.semantic_categorization.confidence * 100).toFixed(1)}% confidence)
-                          </span>
-                        </div>
-                        {pattern.original_paper_category !== pattern.semantic_categorization.category && (
-                          <div className="text-xs text-secondary mt-1">
-                            ↗ Changed from: {pattern.original_paper_category || pattern.category}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    {(() => {
-                      const route = getPatternRoute(pattern.id);
-                      return route ? (
-                        <div className="mt-3">
-                          <Link href={route} className="inline-flex items-center text-secondary hover:text-primary text-sm focus-ring rounded-sm px-0.5">
-                            View details →
-                          </Link>
-                        </div>
-                      ) : null;
-                    })()}
-                  </div>
-                </Card>
-              ))
+              filteredPatterns.map((pattern) => {
+                const normalized = normalizedById[pattern.id] ?? null;
+                const examples = pattern.examples.map(example => ({
+                  id: example.id,
+                  index: example.index,
+                  content: typeof example.content === 'string' ? example.content : JSON.stringify(example.content, null, 2),
+                }));
+                const paperTitle = pattern.paper.title || pattern.paper.apaReference;
+                return (
+                  <PatternDetail
+                    key={pattern.id}
+                    pattern={{
+                      id: pattern.id,
+                      patternName: pattern.patternName,
+                      description: pattern.description,
+                      category: pattern.category,
+                      examples,
+                    }}
+                    attrs={normalized}
+                    similar={similarExamples}
+                    similarPatterns={similarPatterns}
+                    patternFirstExample={patternFirstExample}
+                    context="category"
+                    paperTitle={paperTitle}
+                    paperUrl={pattern.paper.url}
+                    showSimilarPatterns={true}
+                    highlightTerms={highlightTerms}
+                  />
+                );
+              })
             )}
           </div>
         )}

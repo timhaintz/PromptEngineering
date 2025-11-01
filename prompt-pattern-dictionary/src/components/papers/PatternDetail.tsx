@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
 import { withBasePath } from '@/utils/paths';
 
 export interface Example { id: string; index: number; content: string }
@@ -68,6 +69,7 @@ export default function PatternDetail({
   paperTitle,
   paperUrl,
   showSimilarPatterns = false,
+  highlightTerms,
 }: {
   pattern: PatternBasics;
   attrs: NormalizedAttrs | null;
@@ -78,6 +80,7 @@ export default function PatternDetail({
   paperTitle?: string;
   paperUrl?: string;
   showSimilarPatterns?: boolean;
+  highlightTerms?: string[];
 }) {
   const id = pattern.id;
   const [examplesOpen, setExamplesOpen] = useState(false); // default condensed per user
@@ -189,6 +192,8 @@ export default function PatternDetail({
 
   const showReference = context === 'category' && paperTitle && paperUrl;
 
+  const renderHighlight = (text: string): ReactNode => highlightText(text, highlightTerms);
+
   return (
     <div className="surface-card pattern-surface p-4 scroll-mt-28">
       <section aria-labelledby={`research-chip-${pattern.id}`} className="space-y-3 research-surface border border-muted rounded-lg p-3">
@@ -222,7 +227,9 @@ export default function PatternDetail({
           </div>
         </div>
 
-        {pattern.description && <p className="text-secondary whitespace-pre-wrap">{pattern.description}</p>}
+        {pattern.description && (
+          <p className="text-secondary whitespace-pre-wrap">{renderHighlight(pattern.description)}</p>
+        )}
 
         {showReference && (
           <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 text-sm">
@@ -270,6 +277,7 @@ export default function PatternDetail({
                     ex={ex}
                     similar={exSims.length ? exSims : fallback}
                     context={context}
+                    highlightTerms={highlightTerms}
                   />
                 );
               })}
@@ -515,11 +523,13 @@ function ExampleRow({
   ex,
   similar,
   context,
+  highlightTerms,
 }: {
   patternId: string;
   ex: Example;
   similar: Array<{ id: string; similarity: number }>;
   context: 'paper' | 'category';
+  highlightTerms?: string[];
 }) {
   const [open, setOpen] = useState(false); // default collapsed for similar examples
   const [copied, setCopied] = useState(false);
@@ -609,7 +619,7 @@ function ExampleRow({
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-2 min-w-0">
           <ExampleIdBadge id={`${patternId}-${ex.index}`} />
-          <span className="text-sm text-secondary whitespace-pre-wrap break-words">{ex.content}</span>
+          <span className="text-sm text-secondary whitespace-pre-wrap break-words">{highlightText(ex.content, highlightTerms)}</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <a
@@ -663,5 +673,58 @@ function ExampleRow({
         </div>
       )}
     </li>
+  );
+}
+
+function highlightText(text: string, terms?: string[]): ReactNode {
+  if (!terms || terms.length === 0) {
+    return text;
+  }
+  let segments: Array<{ segment: string; match: boolean }> = [{ segment: text, match: false }];
+  terms.forEach(term => {
+    if (!term) {
+      return;
+    }
+    const lowerTerm = term.toLowerCase();
+    if (!lowerTerm.trim()) {
+      return;
+    }
+    const nextSegments: typeof segments = [];
+    segments.forEach(part => {
+      if (part.match) {
+        nextSegments.push(part);
+        return;
+      }
+      let searchStart = 0;
+      let idx = part.segment.toLowerCase().indexOf(lowerTerm, searchStart);
+      if (idx === -1) {
+        nextSegments.push(part);
+        return;
+      }
+      while (idx !== -1) {
+        if (idx > searchStart) {
+          nextSegments.push({ segment: part.segment.slice(searchStart, idx), match: false });
+        }
+        nextSegments.push({ segment: part.segment.slice(idx, idx + term.length), match: true });
+        searchStart = idx + term.length;
+        idx = part.segment.toLowerCase().indexOf(lowerTerm, searchStart);
+      }
+      if (searchStart < part.segment.length) {
+        nextSegments.push({ segment: part.segment.slice(searchStart), match: false });
+      }
+    });
+    segments = nextSegments;
+  });
+
+  return (
+    <>
+      {segments.map((segment, index) =>
+        segment.match ? (
+          <mark key={index} className="highlight-term">{segment.segment}</mark>
+        ) : (
+          segment.segment
+        )
+      )}
+    </>
   );
 }
