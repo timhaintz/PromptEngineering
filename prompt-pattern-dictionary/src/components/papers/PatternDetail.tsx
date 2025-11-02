@@ -261,38 +261,38 @@ export default function PatternDetail({
               aria-expanded={templateOpen}
               aria-label={templateOpen ? 'Hide template' : 'Show template'}
             >
-              <span className="text-sm">{templateOpen ? '▾' : '▸'}</span>
+              <span className="text-lg leading-none" aria-hidden="true">{templateOpen ? '▾' : '▸'}</span>
             </button>
             Template:
           </dt>
           <dd className="text-secondary">
-            {templateOpen ? (
-              <div id={`tpl-${pattern.id}`} className="space-y-2">
-                <pre className="whitespace-pre-wrap bg-surface-2 p-2 rounded border text-xs">{templateText}</pre>
-                {attrs?.templateRawBracketed ? (
-                  <div className="text-xs text-muted">
-                    <button
-                      type="button"
-                      onClick={() => setBracketOpen(v => !v)}
-                      className="text-secondary hover:text-primary underline focus-ring rounded-sm px-0.5"
-                      aria-controls={`tplb-${pattern.id}`}
-                      title={bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
-                      aria-expanded={bracketOpen}
-                      aria-label={bracketOpen ? 'Hide bracketed template form' : 'Show bracketed template form'}
-                    >
-                      {bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
-                    </button>
-                    {bracketOpen && (
-                      <div id={`tplb-${pattern.id}`} className="mt-1 font-mono break-words bg-white border rounded p-2">
-                        {attrs.templateRawBracketed}
-                      </div>
-                    )}
-                  </div>
-                ) : null}
-              </div>
-            ) : (
-              <span className="text-muted select-none">Prompt template hidden. Expand to review the reusable structure.</span>
-            )}
+            <div
+              id={`tpl-${pattern.id}`}
+              className="space-y-2"
+              hidden={!templateOpen}
+            >
+              <pre className="whitespace-pre-wrap bg-surface-2 p-2 rounded border text-xs">{templateText}</pre>
+              {attrs?.templateRawBracketed ? (
+                <div className="text-xs text-muted">
+                  <button
+                    type="button"
+                    onClick={() => setBracketOpen(v => !v)}
+                    className="text-secondary hover:text-primary underline focus-ring rounded-sm px-0.5"
+                    aria-controls={`tplb-${pattern.id}`}
+                    title={bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
+                    aria-expanded={bracketOpen}
+                    aria-label={bracketOpen ? 'Hide bracketed template form' : 'Show bracketed template form'}
+                  >
+                    {bracketOpen ? 'Hide bracketed form' : 'Show bracketed form'}
+                  </button>
+                  {bracketOpen && (
+                    <div id={`tplb-${pattern.id}`} className="mt-1 font-mono break-words bg-white border rounded p-2">
+                      {attrs.templateRawBracketed}
+                    </div>
+                  )}
+                </div>
+              ) : null}
+            </div>
           </dd>
 
           <dt className="font-semibold text-secondary flex items-center">
@@ -305,62 +305,62 @@ export default function PatternDetail({
               aria-expanded={applicationOpen}
               aria-label={applicationOpen ? 'Hide application tasks' : 'Show application tasks'}
             >
-              <span className="text-sm">{applicationOpen ? '▾' : '▸'}</span>
+              <span className="text-lg leading-none" aria-hidden="true">{applicationOpen ? '▾' : '▸'}</span>
             </button>
             Application:
           </dt>
           <dd className="text-secondary">
-            {applicationOpen ? (
-              <div id={`app-${pattern.id}`} className="space-y-3">
-                {tasks.length > 0 ? (
-                  <div className="flex flex-col gap-3" aria-label="Application tasks">
-                    {tasks.map(task => {
-                      const key = task.trim();
-                      const prompt = domainExampleMap.get(key) ?? domainExampleMap.get(key.toLowerCase());
-                      return (
-                        <div key={task} className="flex flex-col gap-1">
-                          <span className="chip-task w-fit">{task}</span>
-                          {prompt ? (
-                            <p className="text-xs text-secondary leading-snug whitespace-pre-wrap max-w-prose">{prompt}</p>
-                          ) : (
-                            <p className="text-xs text-muted italic">Prompt example not yet available for this task.</p>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <>
-                    {isPolicyFallback ? (
-                      <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
-                        <span className="font-semibold">Notice:</span>
-                        <span>{applicationString ?? (appTags ? appTags[0] : '')}</span>
+            <div
+              id={`app-${pattern.id}`}
+              className="space-y-3"
+              hidden={!applicationOpen}
+            >
+              {tasks.length > 0 ? (
+                <div className="flex flex-col gap-3" aria-label="Application tasks">
+                  {tasks.map(task => {
+                    const key = task.trim();
+                    const prompt = domainExampleMap.get(key) ?? domainExampleMap.get(key.toLowerCase());
+                    return (
+                      <div key={task} className="flex flex-col gap-1">
+                        <span className="chip-task w-fit">{task}</span>
+                        {prompt ? (
+                          <p className="text-xs text-secondary leading-snug whitespace-pre-wrap max-w-prose">{prompt}</p>
+                        ) : (
+                          <p className="text-xs text-muted italic">Prompt example not yet available for this task.</p>
+                        )}
                       </div>
-                    ) : applicationString ? (
-                      <p className="text-sm whitespace-pre-wrap">{applicationString}</p>
-                    ) : appTags ? (
-                      renderAsList ? (
-                        <ul className="list-disc pl-5 space-y-1">
-                          {appTags.map((t, idx) => (
-                            <li key={idx} className="leading-snug">{t}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <div className="flex flex-col gap-2">
-                          {appTags.map((t, idx) => (
-                            <span key={idx} className="chip-task w-fit">{t}</span>
-                          ))}
-                        </div>
-                      )
+                    );
+                  })}
+                </div>
+              ) : (
+                <>
+                  {isPolicyFallback ? (
+                    <div className="inline-flex items-center gap-2 text-amber-800 bg-amber-50 border border-amber-200 rounded px-2 py-1 text-xs">
+                      <span className="font-semibold">Notice:</span>
+                      <span>{applicationString ?? (appTags ? appTags[0] : '')}</span>
+                    </div>
+                  ) : applicationString ? (
+                    <p className="text-sm whitespace-pre-wrap">{applicationString}</p>
+                  ) : appTags ? (
+                    renderAsList ? (
+                      <ul className="list-disc pl-5 space-y-1">
+                        {appTags.map((t, idx) => (
+                          <li key={idx} className="leading-snug">{t}</li>
+                        ))}
+                      </ul>
                     ) : (
-                      'N/A'
-                    )}
-                  </>
-                )}
-              </div>
-            ) : (
-              <span className="text-muted select-none">Domain and industry applications hidden. Expand to explore applied use cases.</span>
-            )}
+                      <div className="flex flex-col gap-2">
+                        {appTags.map((t, idx) => (
+                          <span key={idx} className="chip-task w-fit">{t}</span>
+                        ))}
+                      </div>
+                    )
+                  ) : (
+                    'N/A'
+                  )}
+                </>
+              )}
+            </div>
           </dd>
 
           <dt className="font-semibold text-secondary flex items-center">
@@ -373,7 +373,7 @@ export default function PatternDetail({
               aria-expanded={peilOpen}
               aria-label={peilOpen ? 'Hide PEIL prompt' : 'Show PEIL prompt'}
             >
-              <span className="text-sm">{peilOpen ? '▾' : '▸'}</span>
+              <span className="text-lg leading-none" aria-hidden="true">{peilOpen ? '▾' : '▸'}</span>
             </button>
             <span className="flex items-center gap-1">
               PEIL:
@@ -388,17 +388,17 @@ export default function PatternDetail({
             </span>
           </dt>
           <dd className="text-secondary">
-            {peilOpen ? (
-              <div id={`peil-${pattern.id}`} className="space-y-2">
-                {peilPrompt ? (
-                  <pre className="whitespace-pre-wrap bg-surface-2 p-2 rounded border text-xs">{peilPrompt}</pre>
-                ) : (
-                  <span className="text-muted">No PEIL prompt captured for this pattern.</span>
-                )}
-              </div>
-            ) : (
-              <span id={`peil-${pattern.id}`} className="text-muted select-none">Prompt Engineering Instructional Language instructions hidden. Expand to review the instructional scaffold.</span>
-            )}
+            <div
+              id={`peil-${pattern.id}`}
+              className="space-y-2"
+              hidden={!peilOpen}
+            >
+              {peilPrompt ? (
+                <pre className="whitespace-pre-wrap bg-surface-2 p-2 rounded border text-xs">{peilPrompt}</pre>
+              ) : (
+                <span className="text-muted">No PEIL prompt captured for this pattern.</span>
+              )}
+            </div>
           </dd>
         </dl>
 
@@ -412,7 +412,7 @@ export default function PatternDetail({
                 aria-controls={`ex-${pattern.id}`}
                 title={examplesOpen ? 'Hide examples' : 'Show examples'}
               >
-                <span className="text-base align-middle">{examplesOpen ? '▾' : '▸'}</span>
+                <span className="text-2xl leading-none" aria-hidden="true">{examplesOpen ? '▾' : '▸'}</span>
               </button>
               <div className="text-sm font-semibold text-primary">Prompt Examples ({pattern.examples.length})</div>
             </div>
@@ -455,7 +455,7 @@ export default function PatternDetail({
                 aria-controls={`sp-${pattern.id}`}
                 title={similarPatternsOpen ? 'Hide similar patterns' : 'Show similar patterns'}
               >
-                <span className="text-base align-middle">{similarPatternsOpen ? '▾' : '▸'}</span>
+                <span className="text-2xl leading-none" aria-hidden="true">{similarPatternsOpen ? '▾' : '▸'}</span>
               </button>
               <div className="text-sm font-semibold text-primary flex items-center gap-1">
                 <span>Similar Patterns ({similarPatterns[pattern.id]?.length ?? 0})</span>
@@ -631,7 +631,7 @@ function ExampleRow({
             aria-controls={`sim-${patternId}-${ex.index}`}
             title={open ? 'Hide similar examples' : 'Show similar examples'}
           >
-            <span className="text-sm">{open ? '▾' : '▸'}</span>
+            <span className="text-lg leading-none" aria-hidden="true">{open ? '▾' : '▸'}</span>
           </button>
         </div>
     </div>
