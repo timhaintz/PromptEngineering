@@ -31,7 +31,7 @@ from textwrap import dedent
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, Optional, Any, List, Union, Iterator, Tuple, cast
+from typing import Dict, Optional, Any, List, Union, Iterator, Tuple, Sequence, cast
 from difflib import SequenceMatcher
 
 # Ensure repo root is on PYTHONPATH so we can import azure_models.py
@@ -190,7 +190,111 @@ BASE_SYSTEM_PROMPT = (
     "Always include all five segments in that order and use 'N/A' where a part is not present. Do NOT include newlines.\n"
 )
 
-SYSTEM_PROMPT = BASE_SYSTEM_PROMPT + "\n\n" + PEIL_REFERENCE_PROMPT
+FULL_SYSTEM_PROMPT = BASE_SYSTEM_PROMPT + "\n\n" + PEIL_REFERENCE_PROMPT
+
+JSON_KEY_ORDER = [
+    "template",
+    "application",
+    "dependentLLM",
+    "turn",
+    "usageSummary",
+    "templateRawBracketed",
+    "applicationTasksString",
+    "generalExplanation",
+    "domainIndustryExamples",
+    "peilPrompt",
+]
+
+FIELD_RULE_ORDER = [
+    "dependentLLM",
+    "template",
+    "application",
+    "applicationTasksString",
+    "generalExplanation",
+    "domainIndustryExamples",
+    "peilPrompt",
+    "turn",
+    "usageSummary",
+    "templateRawBracketed",
+]
+
+FIELD_RULES = {
+    "dependentLLM": (
+        "- dependentLLM must be null unless a specific model is explicitly referenced (e.g., GPT-3, GPT-4, Claude)."
+    ),
+    "template": (
+        "- template: ALWAYS return an object with EXACTLY the five keys {role, context, action, format, response}. "
+        "For any part that is not present in the source, set the value to 'N/A' (uppercase). Keep values concise phrases."
+    ),
+    "application": (
+        "- application: RETURN A SINGLE STRING containing ONE short sentence, or TWO short sentences if a second is needed for clarity. "
+        "Use plain English and active voice. Keep each sentence simple (one main clause), concrete, and easy to scan. Avoid jargon, lists, parentheses, semicolons, em dashes, and placeholders. "
+        "Stay grounded in the description and examples. Prefer ≤ 18 words per sentence. Do NOT return tag lists."
+    ),
+    "applicationTasksString": (
+        "- applicationTasksString: OPTIONAL. If you can confidently produce 1–8 concise tasks (prefer 8) for the pattern's media type, return a single comma+space separated string: 'task1, task2, ...'. "
+        "Each task ≤5 words, DISTINCT, ACTIONABLE, and VERB-LED. Provide 3–4 cross-domain tasks AND 4–5 industry-specific tasks covering different sectors. Avoid repeating the same domain more than twice."
+    ),
+    "generalExplanation": (
+        "- generalExplanation: 2 crisp sentences (≤22 words each) summarizing the pattern's intent, mechanics, and the user value. No fluff, no marketing tone."
+    ),
+    "domainIndustryExamples": (
+        "- domainIndustryExamples: REQUIRED whenever applicationTasksString exists. Produce one object per task listed in applicationTasksString. Each object must include {task, prompt}. 'task' "
+        "must EXACTLY match the provided chip text (case-sensitive). 'prompt' is 1–2 grounded sentences (≤28 words each) that show how to ask the model to perform that task using the pattern's description, template, and examples. "
+        "Use distinct industries whenever possible."
+    ),
+    "peilPrompt": (
+        "- peilPrompt: OPTIONAL. Return a SINGLE STRING containing a complete system prompt built with the PEIL template. Use the hybrid format: two declarative sentences (one paragraph) that frame the persona and mission, a blank line, then six bullet sentences covering context, workflow, controls, conciseness, prompting techniques, and desired output. "
+        "Bullets must not start with labels such as 'Role:' or 'Provide Clear Context:'.\n"
+        "Each sentence must be grounded (≤28 words) and reflect the pattern's template, application chips, and examples. Highlight the most impactful applied scenario when appropriate so downstream automation gets a concrete use case. Avoid placeholders, braces, or references to PEIL variable names."
+    ),
+    "turn": (
+        "- turn is 'single' or 'multi' ONLY if clearly implied."
+    ),
+    "usageSummary": (
+        "- usageSummary: write exactly 1–2 sentences describing real-world usage without marketing tone; keep it general yet actionable; no invented claims."
+    ),
+    "templateRawBracketed": (
+        "- templateRawBracketed: Return a SINGLE LINE exactly in the form [Role: <...>, Context: <...>, Action: <...>, Format: <...>, Response: <...>]. "
+        "Always include all five segments in that order and use 'N/A' where a part is not present. Do NOT include newlines."
+    ),
+}
+
+def build_system_prompt_for_fields(active_fields: Sequence[str]) -> str:
+    field_set = {f for f in active_fields if f}
+    ordered_json_keys = [key for key in JSON_KEY_ORDER if key in field_set]
+    if not ordered_json_keys:
+        ordered_json_keys = JSON_KEY_ORDER[:]
+    if (
+        len(field_set) == len(JSON_KEY_ORDER)
+        and all(key in field_set for key in JSON_KEY_ORDER)
+        and ordered_json_keys == JSON_KEY_ORDER
+    ):
+        return FULL_SYSTEM_PROMPT
+
+    allowed_literal = ", ".join(f'"{key}"' for key in ordered_json_keys)
+    if not allowed_literal:
+        allowed_literal = ", ".join(f'"{key}"' for key in JSON_KEY_ORDER)
+
+    segments: List[str] = [
+        (
+            "You are a careful data normalizer. Given a prompt pattern's description, examples, and current fields, "
+            f"infer ONLY missing or clearly improvable values. Return STRICT JSON with keys subset of {{{allowed_literal}}}. Rules:"
+        ),
+        "- Do NOT hallucinate. If unsure, omit the key entirely.",
+    ]
+
+    for field_name in FIELD_RULE_ORDER:
+        if field_name not in field_set:
+            continue
+        rule_text = FIELD_RULES.get(field_name)
+        if rule_text:
+            segments.append(rule_text)
+
+    prompt_body = "\n".join(segments)
+    if "peilPrompt" in field_set:
+        return prompt_body + "\n\n" + PEIL_REFERENCE_PROMPT
+    return prompt_body
 
 def extract_json(text: str) -> Optional[Dict[str, Any]]:
     # Try direct parse
@@ -393,6 +497,8 @@ def main():
             if parts:
                 selected_ids = set(parts)
             continue
+
+    system_prompt = build_system_prompt_for_fields(fields)
 
     if not os.path.exists(OUTPUT_FILE):
         print(f"No normalized-patterns.json found at {OUTPUT_FILE}. Nothing to enrich.")
@@ -1295,7 +1401,7 @@ def main():
         processed_count += 1
 
         messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": build_user_payload(p)},
         ]
 
