@@ -261,7 +261,7 @@ export default function PatternDetail({
               aria-expanded={templateOpen}
               aria-label={templateOpen ? 'Hide template' : 'Show template'}
             >
-              <span className="text-lg leading-none" aria-hidden="true">{templateOpen ? '▾' : '▸'}</span>
+              <span className="text-2xl leading-none" aria-hidden="true">{templateOpen ? '▾' : '▸'}</span>
             </button>
             Template:
           </dt>
@@ -305,7 +305,7 @@ export default function PatternDetail({
               aria-expanded={applicationOpen}
               aria-label={applicationOpen ? 'Hide application tasks' : 'Show application tasks'}
             >
-              <span className="text-lg leading-none" aria-hidden="true">{applicationOpen ? '▾' : '▸'}</span>
+              <span className="text-2xl leading-none" aria-hidden="true">{applicationOpen ? '▾' : '▸'}</span>
             </button>
             Application:
           </dt>
@@ -373,7 +373,7 @@ export default function PatternDetail({
               aria-expanded={peilOpen}
               aria-label={peilOpen ? 'Hide PEIL prompt' : 'Show PEIL prompt'}
             >
-              <span className="text-lg leading-none" aria-hidden="true">{peilOpen ? '▾' : '▸'}</span>
+              <span className="text-2xl leading-none" aria-hidden="true">{peilOpen ? '▾' : '▸'}</span>
             </button>
             <span className="flex items-center gap-1">
               PEIL:
