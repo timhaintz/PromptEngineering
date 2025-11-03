@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# flake8: noqa
 """
 Optional enrichment for normalized prompt patterns using Azure OpenAI (gpt-5).
 - Reads public/data/normalized-patterns.json (object with { metadata, patterns })
@@ -14,7 +15,12 @@ Optional enrichment for normalized prompt patterns using Azure OpenAI (gpt-5).
     "[Role: ..., Context: ..., Action: ..., Format: ..., Response: ...]" for export and UI display.
 
 Usage:
-  python enrich-normalized-pp.py [--model gpt-5] [--limit N]
+    python enrich-normalized-pp.py [--model gpt-5] [--limit N]
+
+Key switches:
+    --dry-run       Preview updates only when fields are missing or improvable.
+    --preview       Force preview of requested fields (bypasses enrichment checks) and
+                    never writes results. Prints proposed updates for inspection.
 
 Notes:
 - Uses azure_models.get_model_client('gpt-5') from repo root. Ensure Python can import azure_models.py.
@@ -65,30 +71,61 @@ PEIL_INCOMPLETE_NOTE = "Not all information is available to run PEIL."
 
 PEIL_REFERENCE_PROMPT = build_full_peil_system_prompt()
 
+HELP_TEXT = dedent(
+    (
+        "Usage:\n"
+        "  python enrich-normalized-pp.py [--model MODEL]\n"
+        "      [--limit N] [options]\n\n"
+        "Common options:\n"
+        "  --fields field1,field2    Limit enrichment to selected fields.\n"
+        "  --force-fields field1,... Bypass skip rules for chosen fields.\n"
+        "  --dry-run                 Preview needed updates only.\n"
+        "                             Writes stay disabled.\n"
+        "  --preview                 Always call the model.\n"
+        "                             Never write the results.\n"
+        "  --show-raw                Print raw responses during preview\n"
+        "                             or dry-run.\n"
+        "  --limit N                 Process at most N patterns.\n"
+        "  --ids id1,id2             Restrict enrichment to specific IDs.\n\n"
+        "Preview vs dry-run:\n"
+        "  --dry-run keeps skip rules and prints changes when enrichment is\n"
+        "  needed.\n"
+        "  --preview bypasses should_enrich and implies --dry-run so the run\n"
+        "  stays read-only.\n\n"
+        "Examples:\n"
+        "  python enrich-normalized-pp.py --dry-run --limit 3\n"
+        "  python enrich-normalized-pp.py --fields application \\\n"
+        "      --preview --show-raw --limit 2\n"
+        "  python enrich-normalized-pp.py --fields template,peilPrompt \\\n"
+        "      --force-fields template --dry-run\n"
+    )
+).strip()
+
 PEIL_GENERATOR_SYSTEM_PROMPT = dedent(
         """
         # INSTRUCTIONS
-        - You are a prompt generator for the Prompt Engineering Instructional Language
-            (PEIL) project.
-        - Your task is to generate a single production-ready PEIL system prompt.
-        - Your output is consumed by autonomous agents and viewed by humans. Return only
-            the system prompt text.
+        - You are a prompt generator for the Prompt Engineering
+            Instructional Language (PEIL) project.
+        - Your task is to generate a single production-ready PEIL system
+            prompt.
+        - Your output is consumed by autonomous agents and viewed by humans.
+            Return only the system prompt text.
         - Research summary informing this format:
-                * Bomble et al. (2025) show structured, explicit prompts outperform vague
-                    narratives.
-                * Han, Wu, and Willard (2025) show bullet formatting improves precision,
-                    recall, and F1.
+                * Bomble et al. (2025) show structured, explicit prompts outperform
+                    vague narratives.
+                * Han, Wu, and Willard (2025) show bullet formatting improves
+                    precision, recall, and F1.
         - Apply a hybrid style: deliver a short framing paragraph followed by
-            rule-focused bullets as detailed in the return format guidance.
+            rule-focused bullets set out in the return format guidance.
         - Anchor your output on the provided scenario persona and refer to them
             explicitly.
-            - Do not mention the pattern name or refer to these instructions as a
-                "pattern" or "scenario"; describe expectations directly.
-        - Never prefix any sentence with label strings (for example "Role:" or
-            "Provide Clear Context:").
-        - Avoid labels such as "Break Down Complex Questions:", "Provide Specific
-            Instructions:", "Define Conciseness:", or "Prompting Techniques From
-            Research:".
+                - Do not mention the pattern name or refer to these instructions as a
+                    'pattern' or 'scenario'; describe expectations directly.
+        - Never prefix any sentence with label strings (for example 'Role:' or
+            'Provide Clear Context:').
+        - Avoid labels such as 'Break Down Complex Questions:', 'Provide Specific
+            Instructions:', 'Define Conciseness:', or 'Prompting Techniques From
+            Research:'.
         - Do not include placeholder variables or braces such as {Role}.
         - Write complete sentences.
         - Paraphrase any example content instead of quoting it verbatim.
@@ -399,6 +436,7 @@ def main():
     ]
     force_all = False
     force_fields: List[str] = []
+    preview_mode = False
     application_fallback_note = APPLICATION_FALLBACK_NOTE_DEFAULT
     disable_fallback = False
     fill_missing_application_only = False
@@ -413,6 +451,9 @@ def main():
     # Parse args
     args = sys.argv[1:]
     for i, a in enumerate(args):
+        if a in ('-h', '--help'):
+            print(HELP_TEXT)
+            return 0
         if a == '--model' and i + 1 < len(args):
             model_name = args[i + 1]
             continue
@@ -497,6 +538,15 @@ def main():
             if parts:
                 selected_ids = set(parts)
             continue
+        if a == '--preview':
+            preview_mode = True
+            dry_run = True
+            continue
+
+    if preview_mode:
+        # Ensure requested fields are always re-generated for inspection.
+        if not dry_run:
+            dry_run = True
 
     system_prompt = build_system_prompt_for_fields(fields)
 
@@ -1392,7 +1442,7 @@ def main():
         if selected_ids is not None and p.get('id') not in selected_ids:
             continue
         # Decide whether to call the model.
-        must_force = force_all or bool(set(force_fields) & set(fields))
+        must_force = force_all or bool(set(force_fields) & set(fields)) or preview_mode
         if not must_force and not should_enrich(p, fields):
             continue
 
@@ -1623,7 +1673,13 @@ def main():
             continue
 
     if dry_run:
-        print(f"Dry run complete. Would update {enriched_count} pattern(s). No files written.")
+        if preview_mode:
+            print(
+                f"Preview complete. Displayed proposed updates for {enriched_count} pattern(s). "
+                "No files written."
+            )
+        else:
+            print(f"Dry run complete. Would update {enriched_count} pattern(s). No files written.")
         if peil_diagnostics_enabled and peil_diagnostics_records:
             print(json.dumps(peil_diagnostics_records, ensure_ascii=False, indent=2))
         return 0

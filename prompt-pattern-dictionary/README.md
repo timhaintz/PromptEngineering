@@ -283,6 +283,14 @@ node scripts/build-data.js --enrich --enrich-limit 25
 node scripts/build-data.js --enrich --enrich-fields template,application,usageSummary
 ```
 
+- Command help:
+
+```powershell
+python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --help
+```
+
+Displays a CLI reference for all enrichment flags, including preview mode.
+
 - Using uv for Python steps (Windows PowerShell):
 
 The build auto-detects uv and prefers `uv run` for Python scripts (embeddings, categorization, enrichment). To force uv explicitly in PowerShell:
@@ -299,6 +307,14 @@ python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --limit 10 --fi
 ```
 
 The `--dry-run` flag calls Azure and prints the exact field updates without writing back to `public/data/normalized-patterns.json`.
+
+- Preview mode (bypass skip logic and stay read-only):
+
+```powershell
+python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --limit 5 --fields application,usageSummary --preview --show-raw
+```
+
+`--preview` forces a model call for the requested fields even when data already exists and implicitly enables `--dry-run` so nothing is written. Pair with `--show-raw` to display the verbatim model response alongside the normalized preview output.
 
 - GPT-5 temperature behavior:
 

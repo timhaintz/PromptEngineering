@@ -665,10 +665,13 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
    - `node scripts/build-data.js --enrich --enrich-limit 20`
   - `node scripts/build-data.js --enrich --enrich-fields template,application`
 
+  - CLI help: `python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --help` prints the full flag reference, including preview mode.
+
 #### Runtime Notes
 - Python environment: The data pipeline auto-detects uv and prefers `uv run` for Python scripts when available (or when `uv.lock` is present). You can force uv with the environment variable `USE_UV=1`.
 - GPT-5 temperature: Azure GPT-5 accepts only the default temperature. The pipeline avoids setting `temperature` for GPT-5 and will retry without it if the service rejects the parameter.
 - Dry run support: Pass `--dry-run` to `scripts/enrich-normalized-pp.py` to preview model output without mutating `public/data/normalized-patterns.json`; the script logs intended field updates and exits without writing files.
+- Preview mode: Pass `--preview` to force model calls for the requested fields even when existing values are present. This implicitly enables `--dry-run`, bypasses the enrichment skip checks, and is safe to pair with `--show-raw` for verbatim model output.
 
 ### Enhanced URL Structure
 - Homepage: `/`
