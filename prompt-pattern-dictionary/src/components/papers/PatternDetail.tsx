@@ -15,6 +15,8 @@ export interface PatternBasics {
 }
 
 export interface DomainIndustryExample {
+  promptType?: string | null;
+  category?: string | null; // legacy field retained for back-compat
   task: string;
   prompt: string;
 }
@@ -127,14 +129,17 @@ export default function PatternDetail({
   }, [attrs?.applicationTasksString]);
   const domainExampleMap = useMemo(() => {
     const entries = attrs?.domainIndustryExamples ?? [];
-    const map = new Map<string, string>();
+    const map = new Map<string, { prompt: string; promptType: string | null }>();
     for (const entry of entries) {
-      if (!entry?.task) continue;
-      const key = entry.task.trim();
-      if (!key) continue;
+      if (!entry) continue;
+      const taskKey = entry.task?.trim();
+      if (!taskKey) continue;
       const prompt = (entry.prompt ?? '').trim();
-      map.set(key, prompt);
-      map.set(key.toLowerCase(), prompt);
+      const promptTypeSource = (entry.promptType ?? entry.category) ?? '';
+      const promptType = typeof promptTypeSource === 'string' ? promptTypeSource.trim() : '';
+      const payload = { prompt, promptType: promptType || null };
+      map.set(taskKey, payload);
+      map.set(taskKey.toLowerCase(), payload);
     }
     return map;
   }, [attrs?.domainIndustryExamples]);
@@ -316,22 +321,28 @@ export default function PatternDetail({
               hidden={!applicationOpen}
             >
               {tasks.length > 0 ? (
-                <div className="flex flex-col gap-3" aria-label="Application tasks">
+                <ol className="list-decimal pl-5 space-y-2" aria-label="Application tasks">
                   {tasks.map(task => {
                     const key = task.trim();
-                    const prompt = domainExampleMap.get(key) ?? domainExampleMap.get(key.toLowerCase());
+                    const example = domainExampleMap.get(key) ?? domainExampleMap.get(key.toLowerCase());
+                    const promptTypeLabel = (example?.promptType && example.promptType.trim()) || 'Prompt Type N/A';
                     return (
-                      <div key={task} className="flex flex-col gap-1">
-                        <span className="chip-task w-fit">{task}</span>
-                        {prompt ? (
-                          <p className="text-xs text-secondary leading-snug whitespace-pre-wrap max-w-prose">{prompt}</p>
-                        ) : (
-                          <p className="text-xs text-muted italic">Prompt example not yet available for this task.</p>
-                        )}
-                      </div>
+                      <li key={task} className="marker:text-muted">
+                        <div className="flex flex-wrap items-baseline gap-2">
+                          <span className="chip-type">{promptTypeLabel}</span>
+                          <span className="chip-task">{task}</span>
+                          {example?.prompt ? (
+                            <span className="text-xs text-secondary leading-snug flex-1 min-w-[12rem]">{example.prompt}</span>
+                          ) : (
+                            <span className="text-xs text-muted italic flex-1 min-w-[12rem]">
+                              Prompt example not yet available for this task.
+                            </span>
+                          )}
+                        </div>
+                      </li>
                     );
                   })}
-                </div>
+                </ol>
               ) : (
                 <>
                   {isPolicyFallback ? (
