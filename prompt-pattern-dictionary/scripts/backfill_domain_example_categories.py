@@ -44,7 +44,7 @@ class ExampleKey:
 
 @dataclass
 class ExampleRef:
-    """Pointer to the example so we can write the category back."""
+    """Pointer to the example so we can write the prompt type back."""
 
     pattern_index: int
     example_index: int
@@ -54,8 +54,8 @@ class ExampleRef:
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Classify domainIndustryExamples and backfill the category field"
-            " (category, task, prompt order)."
+            "Classify domainIndustryExamples and backfill the promptType field"
+            " (promptType, task, prompt order)."
         )
     )
     parser.add_argument(
@@ -93,7 +93,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument(
         "--force",
         action="store_true",
-        help="Reclassify examples even when a category already exists.",
+        help="Reclassify examples even when a promptType already exists.",
     )
     return parser.parse_args(argv)
 
@@ -122,13 +122,15 @@ def load_cache(path: Path) -> Dict[Tuple[str, str], str]:
             entry_dict = cast(Dict[str, Any], entry)
             task = entry_dict.get("task")
             prompt = entry_dict.get("prompt")
-            category = entry_dict.get("category")
+            prompt_type = entry_dict.get("promptType")
+            if not isinstance(prompt_type, str):
+                prompt_type = entry_dict.get("category")  # legacy cache
             if (
                 isinstance(task, str)
                 and isinstance(prompt, str)
-                and isinstance(category, str)
+                and isinstance(prompt_type, str)
             ):
-                result[(task, prompt)] = category
+                result[(task, prompt)] = prompt_type
     return result
 
 
@@ -136,7 +138,7 @@ def save_cache(cache: Dict[Tuple[str, str], str], path: Path) -> None:
     if not path.parent.exists():
         path.parent.mkdir(parents=True, exist_ok=True)
     serialised: List[Dict[str, str]] = [
-        {"task": key[0], "prompt": key[1], "category": value}
+        {"task": key[0], "prompt": key[1], "promptType": value}
         for key, value in sorted(cache.items())
     ]
     path.write_text(
@@ -176,11 +178,8 @@ def collect_examples(
             prompt = item.get("prompt")
             if not isinstance(task, str) or not isinstance(prompt, str):
                 continue
-            if (
-                not force
-                and "category" in item
-                and isinstance(item["category"], str)
-            ):
+            existing_prompt_type = item.get("promptType")
+            if not force and isinstance(existing_prompt_type, str):
                 continue
             key = ExampleKey(task=task.strip(), prompt=prompt.strip())
             key_map[key].append(
@@ -193,18 +192,19 @@ def collect_examples(
     return key_map, patterns
 
 
-def ensure_category_first(
+def ensure_prompt_type_first(
     example: Dict[str, Any],
-    category: str,
+    prompt_type: str,
 ) -> Dict[str, Any]:
-    ordered: Dict[str, Any] = {"category": category}
+    ordered: Dict[str, Any] = {"promptType": prompt_type}
     if "task" in example:
         ordered["task"] = example["task"]
     if "prompt" in example:
         ordered["prompt"] = example["prompt"]
     for key, value in example.items():
-        if key not in ordered:
-            ordered[key] = value
+        if key in {"promptType", "task", "prompt", "category"}:
+            continue
+        ordered[key] = value
     return ordered
 
 
@@ -234,20 +234,20 @@ def update_patterns(
     counters: Counter[str] = Counter()
     for key, refs in key_map.items():
         tuple_key = key.to_tuple()
-        category = cache.get(tuple_key)
-        if category is None:
-            raise ValueError(f"Missing category for task '{key.task}'")
+        prompt_type = cache.get(tuple_key)
+        if prompt_type is None:
+            raise ValueError(f"Missing promptType for task '{key.task}'")
         for ref in refs:
             examples = patterns[ref.pattern_index]["domainIndustryExamples"]
             original = examples[ref.example_index]
-            ordered = ensure_category_first(original, category)
+            ordered = ensure_prompt_type_first(original, prompt_type)
             examples[ref.example_index] = ordered
-            counters[category] += 1
+            counters[prompt_type] += 1
     return counters
 
 
 def reorder_existing_examples(patterns: List[Dict[str, Any]]) -> int:
-    """Ensure category key precedes task and prompt for labelled examples."""
+    """Ensure promptType key precedes task and prompt for labelled examples."""
 
     reordered = 0
     for pattern in patterns:
@@ -259,10 +259,13 @@ def reorder_existing_examples(patterns: List[Dict[str, Any]]) -> int:
             if not isinstance(raw_item, dict):
                 continue
             item = cast(Dict[str, Any], raw_item)
-            category = item.get("category")
-            if not isinstance(category, str):
-                continue
-            ordered = ensure_category_first(item, category)
+            prompt_type = item.get("promptType")
+            if not isinstance(prompt_type, str):
+                legacy_category = item.get("category")
+                if not isinstance(legacy_category, str):
+                    continue
+                prompt_type = legacy_category
+            ordered = ensure_prompt_type_first(item, prompt_type)
             if ordered is not item:
                 examples_list[index] = ordered
                 reordered += 1
@@ -275,7 +278,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     key_map, patterns = collect_examples(data, force=args.force)
     if not key_map:
         print("No examples required classification.")
-        # Still reorder any pre-labelled examples so category appears first.
+    # Still reorder any pre-labelled examples so promptType appears first.
         reordered_only = reorder_existing_examples(patterns)
         if reordered_only and not args.dry_run:
             output_path = args.output or args.input

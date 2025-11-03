@@ -131,7 +131,7 @@ SYSTEM_PROMPT: str = dedent(
     in the prompt.
     Never invent new labels and never return multiple categories.
     Always respond with strict JSON matching this schema:
-    {"items": [{"index": 0, "category": "<Category Name>"}]}
+    {"items": [{"index": 0, "promptType": "<Prompt Type Name>"}]}
     """
 ).strip()
 
@@ -282,14 +282,16 @@ class DomainExampleClassifier:
         for entry in items_list:
             if not isinstance(entry, dict):
                 raise ValueError("Classifier item is not an object")
-            if "index" not in entry or "category" not in entry:
-                raise ValueError("Classifier entry missing index or category")
+            if "index" not in entry or "promptType" not in entry:
+                raise ValueError(
+                    "Classifier entry missing index or promptType",
+                )
             entry_dict = cast(Dict[str, Any], entry)
             try:
                 idx = int(entry_dict["index"])
             except (TypeError, ValueError) as exc:
                 raise ValueError("Classifier index is not an integer") from exc
-            category = str(entry_dict["category"]).strip()
+            category = str(entry_dict["promptType"]).strip()
             if category not in CATEGORY_NAMES:
                 raise ValueError(
                     f"Unsupported category '{category}' in classifier"
