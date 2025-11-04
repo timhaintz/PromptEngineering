@@ -130,6 +130,8 @@ function normalize() {
     maybePreserve('peilPrompt');
     // Preserve application domain/task chips string when enriched
     maybePreserve('applicationTasksString');
+    // Preserve knowledge intent quadrant labels assigned via enrichment tooling
+    maybePreserve('knowledgeIntent');
     // Preserve the raw bracketed template string if it was enriched
     if (typeof oldItem.templateRawBracketed !== 'undefined') {
       newItem.templateRawBracketed = oldItem.templateRawBracketed;
@@ -143,6 +145,9 @@ function normalize() {
     // even if aiAssistedFields didn't explicitly list it (backward compatibility)
     if (typeof oldItem.applicationTasksString !== 'undefined') {
       newItem.applicationTasksString = oldItem.applicationTasksString;
+    }
+    if (typeof oldItem.knowledgeIntent !== 'undefined') {
+      newItem.knowledgeIntent = oldItem.knowledgeIntent;
     }
 
     // Merge AI assistance metadata
@@ -193,7 +198,8 @@ function normalize() {
         authors: p.paper?.authors || [],
         url: p.paper?.url || '',
         apa: p.paper?.apaReference || ''
-      }
+      },
+      knowledgeIntent: null
     };
     return mergePreservingEnriched(base, existingMap[p.id]);
   });
