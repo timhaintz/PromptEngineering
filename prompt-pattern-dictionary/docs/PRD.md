@@ -389,6 +389,7 @@ Foundation and core content processing are largely complete. We have:
 - Data build scripts regenerate normalized/artifact JSON deterministically each build.
  - Introduced `applicationTasksString` enrichment (diversified actionable task list) with preservation in normalization pipeline.
  - Reworked Theme Switcher (radiogroup Light / Dark / System) + zero-FOUC pre-hydration script; dark-mode parity for homepage search panel.
+ - Implemented knowledge intent classifier + backfill tooling; normalized data now carries the four-quadrant `knowledgeIntent` attribute for analytics and UI facets.
  - Removed pattern name truncation to allow full title wrapping.
 
 In progress / upcoming:
@@ -417,6 +418,7 @@ Below phase checklists updated to reflect present state.
 - [x] Implement responsive design and basic mobile-friendly layout
 - [x] **Generate embeddings and similarity scores using Azure OpenAI**
 - [x] **Build semantic categorization system** (semantic assignments + category embeddings)
+- [x] Introduce knowledge intent quadrants classification (classifier + normalized field)
 - [ ] Add boolean operators & auto-complete (planned)
 - [ ] Paper citation export (planned)
 
@@ -461,6 +463,11 @@ interface PromptPattern {
   dateAdded: string;
   tags: string[];
   securityLevel?: 'safe' | 'warning' | 'dangerous';
+  knowledgeIntent?:
+    | 'Refinement & Clarification'
+    | 'Knowledge Retrieval'
+    | 'Co-Discovery & Exploration'
+    | 'AI Tutoring & Tuning';
   // New embedding-related fields
   embedding?: number[];
   similarityScores: {
@@ -585,6 +592,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
   - response?: string
 - Application: string[] (optional)
 - Application Tasks: string (comma+space separated actionable tasks) (optional, `applicationTasksString`)
+- Knowledge Intent: one of ["Refinement & Clarification", "Knowledge Retrieval", "Co-Discovery & Exploration", "AI Tutoring & Tuning"] (optional)
 - Dependent LLM: string | null (optional)
 - Turn: 'single' | 'multi' (optional)
 - Prompt Examples: string[] (required when available)
@@ -599,6 +607,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 - Description → promptpatterns.json description.
 - Template → parsed from examples; see heuristics below.
 - Application → derive from tags and paper context in promptpatterns.json.
+- Knowledge Intent → populated by `scripts/knowledge_intent_classifier.py` outputs (LLM quadrants) and persisted during enrichment/backfill steps.
 - Dependent LLM → null unless the source paper explicitly cites a specific model.
 - Turn → infer from example wording; defaults to 'single' if unclear.
 - Prompt Examples → promptpatterns.json examples[].content.
@@ -616,6 +625,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
   - format: Output constraints ("Return JSON", "Use bullets").
   - response: Expected outcome description.
 - Application: Extract task/domain nouns from tags and paper title; normalize to kebab-case labels.
+- Knowledge Intent: Use classifier result; manual adjustments should stay within the four supported values to preserve analytics integrity.
 - Dependent LLM: Only populate if paper explicitly names a dependency (e.g., "GPT-3", "GPT-4").
 - Turn:
   - 'multi' if prompt implies ongoing dialogue ("from now on", "in this conversation").
@@ -644,6 +654,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 - Prompt Examples: examples[].content
 - Related Patterns: select nearest neighbors from similarity-analysis.json entry for 71-26-6
 - Reference: paper metadata (title, authors, url, apaReference)
+- Knowledge Intent: classifier output (e.g., "Co-Discovery & Exploration")
 
 ### 6. Operational Notes
 - Documentation-first: this schema guides data normalization across code and docs.
@@ -654,6 +665,7 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 - An optional GPT-5 enrichment pass can fill missing fields (template, application, dependentLLM, turn) using `scripts/enrich-normalized-pp.py`.
 - Trigger via build flag: `--enrich` (with optional `--enrich-limit <n>`).
 - Scope enrichment to specific fields with: `--enrich-fields <csv>` where values are any of `template,application,dependentLLM,turn`.
+ - Scope enrichment to specific fields with: `--enrich-fields <csv>` where values can include `template,application,dependentLLM,turn,knowledgeIntent` (plus other supported keys such as `usageSummary`, `domainIndustryExamples`, etc.).
 - Outputs metadata on enriched patterns:
   - `aiAssisted: true`
   - `aiAssistedFields: string[]`
@@ -667,11 +679,41 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
 
   - CLI help: `python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --help` prints the full flag reference, including preview mode.
 
+Knowledge intent enrichment rides through the same Python entry point but is disabled in the default LLM prompt list. Include `knowledgeIntent` in `--fields` (for example, `--fields knowledgeIntent` or `--fields template,knowledgeIntent`) to trigger classification, and use `--force-fields knowledgeIntent` when existing labels should be overwritten. Pair with `--dry-run` or `--preview` to inspect proposed labels before writing.
+
 #### Runtime Notes
 - Python environment: The data pipeline auto-detects uv and prefers `uv run` for Python scripts when available (or when `uv.lock` is present). You can force uv with the environment variable `USE_UV=1`.
 - GPT-5 temperature: Azure GPT-5 accepts only the default temperature. The pipeline avoids setting `temperature` for GPT-5 and will retry without it if the service rejects the parameter.
 - Dry run support: Pass `--dry-run` to `scripts/enrich-normalized-pp.py` to preview model output without mutating `public/data/normalized-patterns.json`; the script logs intended field updates and exits without writing files.
 - Preview mode: Pass `--preview` to force model calls for the requested fields even when existing values are present. This implicitly enables `--dry-run`, bypasses the enrichment skip checks, and is safe to pair with `--show-raw` for verbatim model output.
+
+Knowledge intent can also be backfilled independently of other enrichment fields:
+- `scripts/knowledge_intent_classifier.py` — shared client that batches Azure GPT-5 calls with caching keyed by pattern ID and input hash.
+- `scripts/backfill_knowledge_intent.py` — CLI for loading `public/data/normalized-patterns.json`, identifying target records (all, filtered `--ids`, or missing-only), and setting `knowledgeIntent` with optional cache reuse, `--dry-run`, `--force`, `--limit`, and `--show-raw` switches.
+Example workflow:
+```
+uv run python scripts/backfill_knowledge_intent.py --dry-run --limit 12
+uv run python scripts/backfill_knowledge_intent.py --force
+```
+(Substitute `uv run` with the active environment runner if uv is unavailable.)
+
+Results are written immediately after `generalExplanation` to keep downstream consumers aligned, and the script validates that outputs remain within the supported quadrant set.
+
+### Knowledge Intent Classification (Added)
+
+Knowledge intent captures the dominant knowledge-flow objective driving a prompt pattern. The four supported quadrants power search facets, analytics, and pedagogy planning:
+
+- `Refinement & Clarification` — tightening or clarifying an existing artifact or line of reasoning.
+- `Knowledge Retrieval` — extracting known facts, citations, or authoritative context.
+- `Co-Discovery & Exploration` — probing ambiguous questions or exploring novel solution spaces collaboratively.
+- `AI Tutoring & Tuning` — coaching or calibrating another AI/agent through structured guidance.
+
+Pipeline touchpoints:
+- **Data placement**: `knowledgeIntent` field stored directly after `generalExplanation` within normalized pattern objects.
+- **Generation**: `KnowledgeIntentClassifier` (Azure GPT-5) receives curated pattern context (name, description, application signals, top example) and returns a single quadrant label with schema guards.
+- **Backfill & review**: Run `python scripts/backfill_knowledge_intent.py --dry-run` for spot checks, then re-run without `--dry-run` (or with `--force`) to persist. Cache files prevent re-processing unchanged entries.
+- **Enrichment integration**: Invoke `scripts/enrich-normalized-pp.py --fields knowledgeIntent` during broader enrichment batches to keep new or updated patterns labeled.
+- **Downstream consumption**: UI facets (future), data exports, and research notebooks can slice patterns by knowledge intent to understand how practitioners leverage prompts across refinement vs. discovery workflows.
 
 ### Enhanced URL Structure
 - Homepage: `/`
@@ -697,8 +739,9 @@ This section defines the normalized Prompt Pattern (PP) schema used for the dict
       content: "My software system architecture is X...",
       category: "Requirements Elicitation",
       paper: "ChatGPT Prompt Patterns for Improving Code Quality...",
-      authors: ["Jules White", "Sam Hays"],
-      tags: ["simulation", "requirements", "software-design"],
+    authors: ["Jules White", "Sam Hays"],
+    tags: ["simulation", "requirements", "software-design"],
+    knowledgeIntent: "Co-Discovery & Exploration",
       // New semantic search fields
       embedding: [0.1, 0.2, 0.3, ...], // 307200.
       // -dimensional vector
