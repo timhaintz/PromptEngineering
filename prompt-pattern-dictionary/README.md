@@ -237,7 +237,7 @@ The application processes `../promptpatterns.json` to create:
 Processed artifacts in `public/data/` include:
 
 - `normalized-patterns.json`: Normalized attributes per pattern (mediaType, dependentLLM, application, turn, template)
-	- When enrichment is enabled, may also include: `usageSummary`, `applicationTasksString`, `aiAssisted`, `aiAssistedFields`, `aiAssistedModel`, `aiAssistedAt`
+	- When enrichment is enabled, may also include: `usageSummary`, `applicationTasksString`, `knowledgeIntent`, `aiAssisted`, `aiAssistedFields`, `aiAssistedModel`, `aiAssistedAt`
 - `semantic-assignments.json`: Best semantic category assignments and scores used to compute matrix counts
 - `similar-examples.json`: Example-level similarity edges with top-k matches and scores
 - `similar-patterns.json`: Pattern-level similarity edges with top-k matches and scores
@@ -372,6 +372,24 @@ python prompt-pattern-dictionary/scripts/enrich-normalized-pp.py --applicationta
 - `SYSTEM_PROMPT` encodes distribution & style constraints; logic normalizes + truncates.
 - A diversification pass rotates a small synonym set after the first use of a generic phrase.
 - Future work (optional): domain coverage validator & casing harmonizer.
+
+#### New: Knowledge Intent Quadrants (`knowledgeIntent`)
+
+Each pattern can now be tagged with its primary knowledge flow using the `knowledgeIntent` field. Labels are drawn from a fixed set:
+
+- **Refinement & Clarification** – both human and AI know the subject; prompts polish, validate, or reframe knowledge.
+- **Knowledge Retrieval** – human is unsure, AI supplies concrete answers drawn from its corpus.
+- **Co-Discovery & Exploration** – neither side starts with the answer; prompts promote brainstorming and hypothesis testing.
+- **AI Tutoring & Tuning** – human teaches or aligns the AI with domain expertise, preferences, or guardrails.
+
+Use `scripts/backfill_knowledge_intent.py` to classify existing data. It reuses the GPT-5 powered `KnowledgeIntentClassifier` and writes labels back into `public/data/normalized-patterns.json` (with optional caching):
+
+```powershell
+python prompt-pattern-dictionary/scripts/backfill_knowledge_intent.py --dry-run --limit 10
+python prompt-pattern-dictionary/scripts/backfill_knowledge_intent.py --force --cache-file tmp/knowledge_intent_cache.json
+```
+
+The enrichment pipeline (`enrich-normalized-pp.py`) now understands `--fields knowledgeIntent` and will invoke the same classifier automatically whenever the field is requested or forced, ensuring consistent labels across manual backfills and AI-assisted runs.
 
 ## 📚 Documentation
 

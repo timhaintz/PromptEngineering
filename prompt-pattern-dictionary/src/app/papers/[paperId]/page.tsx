@@ -14,6 +14,7 @@ interface NormalizedPattern {
   dependentLLM?: string | null;
   application?: string | string[];
   turn?: string | null;
+  knowledgeIntent?: string | null;
   template?: Record<string, string> | null;
   usageSummary?: string | null;
   generalExplanation?: string | null;
@@ -104,6 +105,7 @@ export default async function PaperDetail({ params }: { params: Promise<{ paperI
                   // Ensure application is always mapped from normalized top-level field
                   application: n.application ?? null,
                   turn: n.turn ?? null,
+                  knowledgeIntent: n.knowledgeIntent ?? null,
                   template: n.template ?? null,
                   usageSummary: n.usageSummary ?? null,
                   generalExplanation: n.generalExplanation ?? null,

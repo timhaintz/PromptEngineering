@@ -62,12 +62,26 @@ except Exception as e:
     print(f"ERROR: Failed to import azure_models: {e}")
     sys.exit(1)
 
+try:
+    from knowledge_intent_classifier import (
+        KNOWLEDGE_INTENT_LABELS,
+        KnowledgeIntentClassifier,
+        KnowledgeIntentRequest,
+    )
+except Exception as intent_err:
+    print(
+        f"ERROR: Failed to import knowledge_intent_classifier: {intent_err}"
+    )
+    sys.exit(1)
+
 DATA_DIR = os.path.abspath(os.path.join(THIS_DIR, '..', 'public', 'data'))
 OUTPUT_FILE = os.path.join(DATA_DIR, 'normalized-patterns.json')
 APPLICATION_FALLBACK_NOTE_DEFAULT = "Unable to process due to Azure's Content Management Policy."
 TEMPLATE_CONTENT_FILTER_NOTE = APPLICATION_FALLBACK_NOTE_DEFAULT
 TEMPLATE_NA = "N/A"
 PEIL_INCOMPLETE_NOTE = "Not all information is available to run PEIL."
+
+KNOWLEDGE_INTENT_ALLOWED = set(KNOWLEDGE_INTENT_LABELS)
 
 PEIL_REFERENCE_PROMPT = build_full_peil_system_prompt()
 
@@ -238,6 +252,7 @@ JSON_KEY_ORDER = [
     "templateRawBracketed",
     "applicationTasksString",
     "generalExplanation",
+    "knowledgeIntent",
     "domainIndustryExamples",
     "peilPrompt",
 ]
@@ -248,6 +263,7 @@ FIELD_RULE_ORDER = [
     "application",
     "applicationTasksString",
     "generalExplanation",
+    "knowledgeIntent",
     "domainIndustryExamples",
     "peilPrompt",
     "turn",
@@ -279,6 +295,10 @@ FIELD_RULES = {
         "- domainIndustryExamples: REQUIRED whenever applicationTasksString exists. Produce one object per task listed in applicationTasksString. Each object must include {task, prompt}. 'task' "
         "must EXACTLY match the provided chip text (case-sensitive). 'prompt' is 1–2 grounded sentences (≤28 words each) that show how to ask the model to perform that task using the pattern's description, template, and examples. "
         "Use distinct industries whenever possible."
+    ),
+    "knowledgeIntent": (
+        "- knowledgeIntent: Choose exactly one label from {Refinement & Clarification, Knowledge Retrieval, Co-Discovery & Exploration, AI Tutoring & Tuning} "
+        "that best represents the primary knowledge flow between the human and the AI."
     ),
     "peilPrompt": (
         "- peilPrompt: OPTIONAL. Return a SINGLE STRING containing a complete system prompt built with the PEIL template. Use the hybrid format: two declarative sentences (one paragraph) that frame the persona and mission, a blank line, then six bullet sentences covering context, workflow, controls, conciseness, prompting techniques, and desired output. "
@@ -332,6 +352,104 @@ def build_system_prompt_for_fields(active_fields: Sequence[str]) -> str:
     if "peilPrompt" in field_set:
         return prompt_body + "\n\n" + PEIL_REFERENCE_PROMPT
     return prompt_body
+
+
+def normalise_knowledge_intent_value(value: Any) -> Optional[str]:
+    if isinstance(value, str):
+        candidate = value.strip()
+        if candidate in KNOWLEDGE_INTENT_ALLOWED:
+            return candidate
+    return None
+
+
+def _safe_optional_str(value: Any, max_chars: int = 900) -> Optional[str]:
+    if value is None:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    if len(text) <= max_chars:
+        return text
+    return text[: max_chars - 1].rstrip() + "…"
+
+
+def _collect_prompt_examples(raw: Any) -> List[str]:
+    if isinstance(raw, list):
+        entries = cast(List[Any], raw)
+        return [
+            str(item).strip()
+            for item in entries
+            if str(item).strip()
+        ][:6]
+    if isinstance(raw, str):
+        candidate = raw.strip()
+        return [candidate] if candidate else []
+    return []
+
+
+def _collect_domain_examples(raw: Any) -> List[Dict[str, Any]]:
+    if not isinstance(raw, list):
+        return []
+    entries = cast(List[Any], raw)
+    results: List[Dict[str, Any]] = []
+    for item in entries:
+        if isinstance(item, dict):
+            results.append(cast(Dict[str, Any], item))
+    return results
+
+
+def build_knowledge_intent_request(
+    pattern: Dict[str, Any],
+) -> KnowledgeIntentRequest:
+    pattern_id = pattern.get('id')
+    name_value = pattern.get('name') or pattern.get('patternName')
+    category_value = pattern.get('category')
+    description_value = pattern.get('description')
+    application_value = pattern.get('application')
+    general_explanation_value = pattern.get('generalExplanation')
+    usage_summary_value = pattern.get('usageSummary')
+    template_raw = pattern.get('template')
+    prompt_examples_raw = pattern.get('promptExamples')
+    domain_examples_raw = pattern.get('domainIndustryExamples')
+    return KnowledgeIntentRequest(
+        pattern_id=pattern_id if isinstance(pattern_id, str) else None,
+        name=str(name_value).strip() if name_value else "",
+        category=_safe_optional_str(category_value, 160),
+        description=_safe_optional_str(description_value, 900),
+        application=_safe_optional_str(application_value, 320),
+        general_explanation=_safe_optional_str(general_explanation_value, 320),
+        usage_summary=_safe_optional_str(usage_summary_value, 320),
+        template=cast(Dict[str, Any], template_raw)
+        if isinstance(template_raw, dict)
+        else None,
+        prompt_examples=_collect_prompt_examples(prompt_examples_raw),
+        domain_industry_examples=_collect_domain_examples(domain_examples_raw),
+    )
+
+
+def ensure_knowledge_intent_position(
+    pattern: Dict[str, Any],
+    label: str,
+) -> bool:
+    label_clean = label.strip()
+    before_items = list(pattern.items())
+    new_items: List[Tuple[str, Any]] = []
+    inserted = False
+    for key, value in before_items:
+        if key == 'knowledgeIntent':
+            continue
+        new_items.append((key, value))
+        if key == 'generalExplanation':
+            new_items.append(('knowledgeIntent', label_clean))
+            inserted = True
+    if not inserted:
+        new_items.append(('knowledgeIntent', label_clean))
+    if before_items == new_items:
+        return False
+    pattern.clear()
+    pattern.update(new_items)
+    return True
+
 
 def extract_json(text: str) -> Optional[Dict[str, Any]]:
     # Try direct parse
@@ -414,6 +532,13 @@ def should_enrich(p: Dict[str, Any], fields: List[str]) -> bool:
                 return True
             if isinstance(di, list) and not any(isinstance(item, dict) and item.get('task') and item.get('prompt') for item in di):
                 return True
+        if f == 'knowledgeIntent':
+            ki_value = p.get('knowledgeIntent')
+            if (
+                not isinstance(ki_value, str)
+                or ki_value.strip() not in KNOWLEDGE_INTENT_LABELS
+            ):
+                return True
         if f == 'peilPrompt' and not p.get('peilPrompt'):
             return True
     return False
@@ -431,6 +556,7 @@ def main():
         'templateRawBracketed',
         'applicationTasksString',
         'generalExplanation',
+        'knowledgeIntent',
         'domainIndustryExamples',
         'peilPrompt',
     ]
@@ -474,6 +600,7 @@ def main():
                 'usageSummary',
                 'applicationTasksString',
                 'generalExplanation',
+                'knowledgeIntent',
                 'domainIndustryExamples',
                 'peilPrompt',
                 'templateRawBracketed',
@@ -496,6 +623,7 @@ def main():
                 'usageSummary',
                 'applicationTasksString',
                 'generalExplanation',
+                'knowledgeIntent',
                 'domainIndustryExamples',
                 'peilPrompt',
                 'templateRawBracketed',
@@ -548,7 +676,14 @@ def main():
         if not dry_run:
             dry_run = True
 
-    system_prompt = build_system_prompt_for_fields(fields)
+    llm_fields = [field for field in fields if field != 'knowledgeIntent']
+    system_prompt = (
+        build_system_prompt_for_fields(llm_fields) if llm_fields else ""
+    )
+    knowledge_intent_requested = 'knowledgeIntent' in fields
+    force_knowledge_intent = force_all or 'knowledgeIntent' in force_fields
+    knowledge_intent_cache: Dict[Tuple[str, str], str] = {}
+    knowledge_classifier: Optional[KnowledgeIntentClassifier] = None
 
     if not os.path.exists(OUTPUT_FILE):
         print(f"No normalized-patterns.json found at {OUTPUT_FILE}. Nothing to enrich.")
@@ -1450,54 +1585,60 @@ def main():
             break
         processed_count += 1
 
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": build_user_payload(p)},
-        ]
-
         try:
             pid = p.get('id')
-            # Log pattern ID for tracing with API logs.
-            print(f"[{pid}] REQUEST: chat.completions -> {model_name}")
-            sys.stdout.flush()
-            # Do not pass temperature explicitly to support models with fixed defaults.
-            resp = client.create_chat_completion(messages, stream=False)
-            # azure_models clients typically return OpenAI-like response
-            content = None
-            if hasattr(resp, 'choices') and resp.choices:
-                content = getattr(resp.choices[0].message, 'content', None)
-            if not content and isinstance(resp, dict):
-                content = resp.get('choices', [{}])[0].get('message', {}).get('content')
-            if (show_raw_responses or dry_run) and content:
-                print(f"[{pid}] RAW RESPONSE:\n{content.strip()}\n")
+            obj: Dict[str, Any] = {}
+            if llm_fields:
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": build_user_payload(p)},
+                ]
+                # Log pattern ID for tracing with API logs.
+                print(f"[{pid}] REQUEST: chat.completions -> {model_name}")
+                sys.stdout.flush()
+                # Do not pass temperature explicitly to support models with fixed defaults.
+                resp = client.create_chat_completion(messages, stream=False)
+                # azure_models clients typically return OpenAI-like response
+                content: Optional[str] = None
+                if hasattr(resp, 'choices') and resp.choices:
+                    content = getattr(resp.choices[0].message, 'content', None)
+                if not content and isinstance(resp, dict):
+                    content = (
+                        resp.get('choices', [{}])[0]
+                        .get('message', {})
+                        .get('content')
+                    )
+                if (show_raw_responses or dry_run) and content:
+                    print(f"[{pid}] RAW RESPONSE:\n{content.strip()}\n")
 
-            if not content:
-                print(
-                    f"[{pid}] RESPONSE: no content; applying fallback if enabled."
-                )
-                if not dry_run:
-                    if 'application' in fields and not disable_fallback:
-                        # Write fallback as a single string, not an array
-                        p['application'] = application_fallback_note
-                    if not disable_fallback:
-                        # Generic failure -> set template to N/A for all five
-                        set_template_bracket_and_object(p, TEMPLATE_NA)
-                # Continue to next pattern without incrementing enriched_count (not AI-derived)
-                continue
+                if not content:
+                    print(
+                        f"[{pid}] RESPONSE: no content; applying fallback if enabled."
+                    )
+                    if not dry_run:
+                        if 'application' in fields and not disable_fallback:
+                            # Write fallback as a single string, not an array
+                            p['application'] = application_fallback_note
+                        if not disable_fallback:
+                            # Generic failure -> set template to N/A for all five
+                            set_template_bracket_and_object(p, TEMPLATE_NA)
+                    # Continue to next pattern without incrementing enriched_count (not AI-derived)
+                    continue
 
-            obj = extract_json(content)
-            if not obj or not isinstance(obj, dict):
-                print(
-                    f"[{pid}] RESPONSE: unparsable JSON; applying fallback if enabled."
-                )
-                if not dry_run:
-                    if 'application' in fields and not disable_fallback:
-                        # Write fallback as a single string, not an array
-                        p['application'] = application_fallback_note
-                    if not disable_fallback:
-                        # Generic failure -> set template to N/A for all five
-                        set_template_bracket_and_object(p, TEMPLATE_NA)
-                continue
+                parsed = extract_json(content)
+                if not parsed or not isinstance(parsed, dict):
+                    print(
+                        f"[{pid}] RESPONSE: unparsable JSON; applying fallback if enabled."
+                    )
+                    if not dry_run:
+                        if 'application' in fields and not disable_fallback:
+                            # Write fallback as a single string, not an array
+                            p['application'] = application_fallback_note
+                        if not disable_fallback:
+                            # Generic failure -> set template to N/A for all five
+                            set_template_bracket_and_object(p, TEMPLATE_NA)
+                    continue
+                obj = cast(Dict[str, Any], parsed)
 
             updated_fields = []
             dry_run_changes: Dict[str, Any] = {}
@@ -1629,6 +1770,46 @@ def main():
 
                     if updated:
                         updated_fields.append(key)
+
+            if knowledge_intent_requested:
+                existing_label = p.get('knowledgeIntent')
+                need_label = (
+                    force_knowledge_intent
+                    or not isinstance(existing_label, str)
+                    or existing_label.strip() not in KNOWLEDGE_INTENT_ALLOWED
+                )
+                candidate_label: Optional[str] = None
+                if need_label and obj.get('knowledgeIntent') is not None:
+                    candidate_label = normalise_knowledge_intent_value(
+                        obj.get('knowledgeIntent')
+                    )
+                if need_label and not candidate_label:
+                    if knowledge_classifier is None:
+                        knowledge_classifier = KnowledgeIntentClassifier(
+                            model_name=model_name
+                        )
+                    request = build_knowledge_intent_request(p)
+                    candidate_label = knowledge_classifier.classify_requests(
+                        [request],
+                        cache=knowledge_intent_cache,
+                    )[0]
+                if need_label and candidate_label:
+                    if dry_run:
+                        if (
+                            candidate_label != existing_label
+                            or force_knowledge_intent
+                        ):
+                            dry_run_changes['knowledgeIntent'] = candidate_label
+                            if 'knowledgeIntent' not in updated_fields:
+                                updated_fields.append('knowledgeIntent')
+                    else:
+                        changed = ensure_knowledge_intent_position(
+                            p,
+                            candidate_label,
+                        )
+                        if changed or force_knowledge_intent:
+                            if 'knowledgeIntent' not in updated_fields:
+                                updated_fields.append('knowledgeIntent')
 
             # Ensure templateRawBracketed mirrors the normalized template when updated.
             if not dry_run and 'template' in updated_fields and isinstance(p.get('template'), dict):
