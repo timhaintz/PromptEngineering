@@ -27,6 +27,7 @@ export interface NormalizedAttrs {
   application?: string | string[] | null;
   applicationTasksString?: string | null;
   turn?: string | null;
+  knowledgeIntent?: string | null;
   template?: Record<string, string> | null;
   usageSummary?: string | null;
   generalExplanation?: string | null;
@@ -192,6 +193,7 @@ export default function PatternDetail({
 
   const usageSummary = attrs?.usageSummary?.trim() ? attrs.usageSummary.trim() : null;
   const generalExplanation = attrs?.generalExplanation?.trim() ? attrs.generalExplanation.trim() : null;
+  const knowledgeIntent = attrs?.knowledgeIntent?.trim() ? attrs.knowledgeIntent.trim() : null;
   const peilPrompt = attrs?.peilPrompt?.trim() ? attrs.peilPrompt.trim() : null;
   const orientationPeilHref = withBasePath('/orientation/all#peil');
 
@@ -255,6 +257,9 @@ export default function PatternDetail({
 
           <dt className="font-semibold text-secondary">Turn:</dt>
           <dd className="text-secondary">{attrs?.turn ? (attrs.turn.charAt(0).toUpperCase() + attrs.turn.slice(1)) : 'N/A'}</dd>
+
+          <dt className="font-semibold text-secondary">Knowledge Intent:</dt>
+          <dd className="text-secondary">{knowledgeIntent ?? 'N/A'}</dd>
 
           <dt className="font-semibold text-secondary flex items-center">
             <button

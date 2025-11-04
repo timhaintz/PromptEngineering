@@ -5,7 +5,7 @@ import { PatternsBrowser } from '@/components/patterns/PatternsBrowser';
 
 interface Example { id: string; index: number; content: string }
 interface PatternRecord { id: string; patternName: string; description?: string; examples: Example[]; category: string; paper: { title: string; authors: string[]; url: string }; tags?: string[] }
-interface NormalizedPattern { id: string; aiAssisted?: boolean; aiAssistedFields?: string[]; turn?: string | null }
+interface NormalizedPattern { id: string; aiAssisted?: boolean; aiAssistedFields?: string[]; turn?: string | null; knowledgeIntent?: string | null }
 interface Category { name: string; slug: string }
 interface Logic { name: string; slug: string; categories: Category[] }
 interface PatternCategoriesData { logics: Logic[] }

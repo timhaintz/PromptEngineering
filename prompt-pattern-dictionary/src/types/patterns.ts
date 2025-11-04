@@ -82,6 +82,7 @@ export interface NormalizedPromptPattern {
   applicationTasksString?: string;
   dependentLLM?: string | null;
   turn?: 'single' | 'multi';
+  knowledgeIntent?: string | null;
   promptExamples: string[];
   related?: Array<{ category: string; similarity: number }>;
   reference: {

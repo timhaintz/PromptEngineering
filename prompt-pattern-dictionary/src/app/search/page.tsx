@@ -103,6 +103,7 @@ function SearchResults() {
               application: record.application ?? null,
               applicationTasksString: record.applicationTasksString ?? null,
               turn: record.turn ?? null,
+              knowledgeIntent: record.knowledgeIntent ?? null,
               template: record.template ?? null,
               usageSummary: record.usageSummary ?? null,
               generalExplanation: record.generalExplanation ?? null,
