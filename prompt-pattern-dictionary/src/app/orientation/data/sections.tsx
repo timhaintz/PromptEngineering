@@ -13,30 +13,7 @@ export interface OrientationSectionMeta {
 }
 
 // Migrated components from legacy single-page Orientation (headings removed; page/all wrappers provide numbering headings).
-const QuickStart = () => (
-  <div>
-    <ol className="list-decimal pl-6 space-y-1">
-      <li><strong>State your task</strong>: e.g., “Extract product defects”, “Compare legal clauses”, “Score sentiment”.</li>
-      <li><strong>Filter / scan relevant categories</strong>: Use category pages or search. Similarity suggestions can broaden the candidate list.</li>
-      <li><strong>Open 1–2 candidate patterns</strong> and expand the Template (keep its structural keys intact).</li>
-      <li><strong>Insert your domain variables</strong> (use explicit placeholders like <code>{'{{TEXT_BLOCK}}'}</code>).</li>
-      <li><strong>Run on a tiny evaluation set</strong> (3–5 representative examples) before large scale use.</li>
-      <li><strong>Record baseline metrics</strong> (accuracy, coverage, failure modes) – write them down.</li>
-      <li><strong>Iterate structurally first</strong> (reorder, clarify intent) before stylistic tuning.</li>
-      <li><strong>Lock and label version</strong> when stable; avoid silent drift.</li>
-    </ol>
-  <div className="mt-4 p-3 rounded border border-muted bg-surface-1 shadow-sm text-sm text-secondary">
-      <p className="font-semibold mb-1">Principles:</p>
-      <ul className="list-disc pl-5 space-y-1">
-        <li><strong>Clarity over cleverness</strong> – explicit instructions reduce hallucination risk.</li>
-        <li><strong>Single responsibility</strong> – one pattern, one job; chain instead of overloading.</li>
-        <li><strong>Measured change</strong> – modify one aspect at a time; re‑test.</li>
-        <li><strong>Inclusive data</strong> – test with varied names, dialects, and contexts.</li>
-        <li><strong>Document provenance</strong> – note if AI assisted any field.</li>
-      </ul>
-    </div>
-  </div>
-);
+// (Original QuickStart replaced below with concrete mini scenario + evaluation stub.)
 
 const WhatIsPattern = () => (
   <div>
@@ -243,7 +220,50 @@ const AccessibilityResponsible = () => (
     <p>Report potential misuse, accessibility barriers, or biased outcomes via the repository issue tracker. Include reproduction steps, environment (model version), and anonymized sample input/output where possible.</p>
   </div>
 );
-
+// Rewritten Quick Start (P1)
+const QuickStart = () => (
+  <div className="space-y-6">
+    <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
+      <p className="font-semibold mb-2">Mini Scenario: Defensive Log Triage</p>
+      <p className="mb-3">Goal: Classify security log lines as <code>benign</code>, <code>suspicious</code>, or <code>malicious</code> with short rationale. We adapt a <em>Structured Extraction + Justified Answer</em> style pattern.</p>
+      <details className="group">
+        <summary className="cursor-pointer text-accent font-medium">Runnable Prompt Template (fill placeholders)</summary>
+        <pre className="mt-2 overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{`You are a security analysis assistant.\n\nROLE: Classify log entries.\nCONTEXT: Each line is an independent event from an application security log.\nACTION: For each provided LOG_LINE produce a JSON object with fields: classification (benign|suspicious|malicious), rationale (short), indicators (array).\nFORMAT: Return a JSON array, one object per line. No prose outside JSON.\nRESPONSE: Emphasize conservative escalation: if unsure between benign and suspicious choose suspicious.\n\nLOG_LINES:\n1. {{LOG_LINE_1}}\n2. {{LOG_LINE_2}}\n3. {{LOG_LINE_3}}\n`}</code></pre>
+      </details>
+      <details className="group mt-3">
+        <summary className="cursor-pointer text-accent font-medium">Example Filled Prompt</summary>
+        <pre className="mt-2 overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{`LOG_LINES:\n1. Failed login for user 'svc-build' from 10.4.6.7 after 12 attempts\n2. GET /healthz 200 15ms\n3. Outbound connection to 185.23.91.2 on port 4444 established by process powershell.exe`}</code></pre>
+      </details>
+      <details className="group mt-3">
+        <summary className="cursor-pointer text-accent font-medium">Evaluation Harness Stub (Node / Jest)</summary>
+        <pre className="mt-2 overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{`// pseudo-eval.test.ts\n// assuming callModel(prompt) returns model JSON string\nconst GOLDEN = [\n  { classification: 'suspicious', rationale: /12 attempts/i },\n  { classification: 'benign' },\n  { classification: 'malicious', rationale: /outbound/i }\n];\n\n test('classification structure', async () => {\n   const output = JSON.parse(await callModel(filledPrompt));\n   expect(output).toHaveLength(3);\n   output.forEach(o => expect(['benign','suspicious','malicious']).toContain(o.classification));\n });\n\n test('critical rationale hints present', async () => {\n   const output = JSON.parse(await callModel(filledPrompt));\n   expect(output[0].rationale).toMatch(GOLDEN[0].rationale);\n });`}</code></pre>
+      </details>
+    </div>
+    <div>
+      <ol className="list-decimal pl-6 space-y-1">
+        <li><strong>State your task</strong> explicitly with measurable outcome.</li>
+        <li><strong>Find candidate patterns</strong> (search + similarity suggestions).</li>
+        <li><strong>Open pattern & expand Template</strong> (do not delete keys).</li>
+        <li><strong>Inject domain variables</strong> with explicit placeholders.</li>
+        <li><strong>Draft evaluation harness</strong> (JSON parse + key checks).</li>
+        <li><strong>Pilot on 3–5 varied examples</strong> (edge + typical).</li>
+        <li><strong>Refine structurally first</strong> then wording.</li>
+        <li><strong>Version & log metrics</strong> before wider use.</li>
+      </ol>
+    </div>
+    <div className="p-3 rounded border border-muted bg-surface-1 shadow-sm text-sm text-secondary">
+      <p className="font-semibold mb-1">Principles:</p>
+      <ul className="list-disc pl-5 space-y-1">
+        <li><strong>Clarity over cleverness</strong> – explicit instructions reduce hallucination.</li>
+        <li><strong>Single responsibility</strong> – one pattern, one job.</li>
+        <li><strong>Measured change</strong> – alter one dimension per iteration.</li>
+        <li><strong>Inclusive data</strong> – vary names, locales, benign vs edge cases.</li>
+        <li><strong>Document provenance</strong> – track AI-assisted fields.</li>
+      </ul>
+    </div>
+  </div>
+);
+// Glossary (restored after patch collision)
 const Glossary = () => (
   <div>
     <dl className="space-y-2 text-sm">

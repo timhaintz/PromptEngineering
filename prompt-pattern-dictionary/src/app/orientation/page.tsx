@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ORIENTATION_SECTIONS } from './data/sections';
+import { QuickPathsPanel } from './components/QuickPathsPanel';
 import OrientationNav from './components/OrientationNav';
 
 export const metadata = {
@@ -12,8 +13,9 @@ export default function OrientationHubPage() {
     <div>
   <h1 className="text-4xl font-bold tracking-tight text-primary mb-6">Orientation</h1>
   <p className="text-secondary max-w-3xl leading-relaxed mb-6">Use this hub to jump into focused sections or view the full consolidated page. Each section is deliberately concise and accessible; the <em>All Sections</em> view preserves original anchor stability.</p>
-      <div className="mb-10">
+      <div className="mb-10 space-y-8">
         <OrientationNav variant="inline" />
+        <QuickPathsPanel />
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {ORIENTATION_SECTIONS.map(sec => (
