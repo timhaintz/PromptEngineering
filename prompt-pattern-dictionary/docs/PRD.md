@@ -450,7 +450,7 @@ Below phase checklists updated to reflect present state.
 ### Phase 6: Orientation Enhancements & Onboarding Expansion
 Focused consolidation of Orientation hub upgrades across trust, navigation, evaluation guidance, and interactive teasers. Executed as internal sub-sprints (P0–P5) documented below; this phase tracks their delivery milestones at roadmap level.
 
-- [ ] P0 Trust & Accessibility: Provenance badge unification; remove hard-coded backgrounds; skip links; axe baseline (zero serious/critical); consistent focus outlines.
+- [x] P0 Trust & Accessibility: Provenance badge unification; remove hard-coded backgrounds; skip links; axe baseline (zero serious/critical); consistent focus outlines.
 - [ ] P1 Onboarding & Quick Paths: Concrete Quick Start scenario; Quick Paths intent panel (≥5 intents); reading time badges; cross-links between Lifecycle/Evaluation/Adaptation; simplified Pattern Anatomy diagram with alt text.
 - [ ] P2 Depth & Evaluation Tools: Evaluation harness stub (copyable code block); Decision Tree widget (feature-flag); Anti-Pattern remediation table (≥5 mappings); Glossary A–Z jump bar.
 - [ ] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled).
@@ -477,6 +477,9 @@ Acceptance:
 2. No raw color utility classes remain that break dark/high-contrast parity.
 3. axe-core reports zero serious/critical violations on targeted pages.
 4. Skip links are keyboard reachable and visible on focus.
+Status (Completed 2025-11-09): All provenance badges unified; semantic surface tokens replaced remaining hard-coded backgrounds; skip links implemented (Skip to Content, Skip to Section Navigation); axe baseline scan passed with zero serious/critical findings (minor warnings logged for future refinement); focus outlines consistent across disclosures and anchor links. P0 accepted; next focus shifts to P1 Onboarding & Quick Paths. (Acceptance: Met 2025-11-09)
+
+Note: Phase 6 overall Acceptance Gate now tracks remaining sub-sprints P1–P5; P0 deliverables locked to prevent regression (future changes require a regression ticket referencing this completion date).
 
 #### P1 – Onboarding & Quick Paths (Sprint 1)
 Focus: Faster entry, concrete example, navigational scaffolding.
