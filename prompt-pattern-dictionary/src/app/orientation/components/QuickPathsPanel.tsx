@@ -21,8 +21,8 @@ export function QuickPathsPanel() {
       <p className="text-sm text-secondary mb-4">Common intents to accelerate onboarding. Choose one to jump directly to guidance.</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {ITEMS.map(item => (
-          <div key={item.slug} className="group border border-muted rounded-lg bg-surface-1 p-3 shadow-sm focus-within:ring-2 focus-within:ring-accent">
-            <h3 className="text-sm font-semibold mb-1">{item.title}</h3>
+          <div key={item.slug} className="group border border-muted rounded-lg bg-surface-1 p-3 shadow-sm focus-within:outline-none focus-within:ring-2 focus-within:ring-accent" role="group" aria-labelledby={`qp-${item.slug}-title`}>
+            <h3 id={`qp-${item.slug}-title`} className="text-sm font-semibold mb-1">{item.title}</h3>
             <p className="text-xs text-secondary mb-2 leading-relaxed">{item.description}</p>
             <Link
               href={item.href}
