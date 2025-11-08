@@ -447,6 +447,122 @@ Below phase checklists updated to reflect present state.
 - [ ] Public launch and marketing
 - [ ] Community feedback integration
 
+### Phase 6: Orientation Enhancements & Onboarding Expansion
+Focused consolidation of Orientation hub upgrades across trust, navigation, evaluation guidance, and interactive teasers. Executed as internal sub-sprints (P0–P5) documented below; this phase tracks their delivery milestones at roadmap level.
+
+- [ ] P0 Trust & Accessibility: Provenance badge unification; remove hard-coded backgrounds; skip links; axe baseline (zero serious/critical); consistent focus outlines.
+- [ ] P1 Onboarding & Quick Paths: Concrete Quick Start scenario; Quick Paths intent panel (≥5 intents); reading time badges; cross-links between Lifecycle/Evaluation/Adaptation; simplified Pattern Anatomy diagram with alt text.
+- [ ] P2 Depth & Evaluation Tools: Evaluation harness stub (copyable code block); Decision Tree widget (feature-flag); Anti-Pattern remediation table (≥5 mappings); Glossary A–Z jump bar.
+- [ ] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled).
+- [ ] P4 Polish & Consolidation: Cheat Sheet page (≤160 char summaries + links); high-contrast audit (≥7:1 body text); redundancy cleanup; update `ACCESSIBILITY.md` with audit log.
+- [ ] P5 Continuous Learning: Feedback CTA (≥80% pages); telemetry event schema (`orientation_quick_path_click`, `evaluation_copy_action`, `glossary_search`); GitHub labels (`orientation-feedback`, `a11y-regression`, `education`).
+
+Acceptance Gate (Phase 6 complete) when all sub-sprint checkboxes above are checked and Orientation Enhancement Plan section reflects updated statuses.
+
+### Orientation Enhancement Plan (Detailed)
+
+This plan evolves the Orientation hub from a static onboarding collection into a progressive learning and decision-support surface. Work streams are grouped into incremental phases (P0–P5) to minimize disruption and front‑load trust, accessibility, and navigational clarity before introducing deeper interactivity.
+
+#### P0 – Trust & Accessibility Hardening (Sprint 0)
+Focus: Provenance clarity, semantic theming cleanup, baseline a11y.
+Tasks:
+- Unify AI-assisted provenance disclaimer styling across all Orientation pages (consistent badge; link to Data & Provenance section in new global footer).
+- Replace any residual hard‑coded light backgrounds (e.g., FAQ `bg-white`) with semantic tokens (`surface-card`, `surface-alt`).
+- Add page-level skip links on multi-page Orientation routes (`Skip to Section Navigation`, `Skip to Content`).
+- Ensure each section navigation `<nav>` has `aria-label="Orientation sections"` and uses a semantic list.
+- axe-core baseline scan: orientation overview, lifecycle, evaluation, FAQ, glossary (zero serious/critical issues; document any moderate issues with remediation ticket references).
+- Confirm focus outline consistency (2px tokenized) on disclosure buttons and intra-page anchor links.
+Acceptance:
+1. All Orientation pages show a single standardized provenance badge and disclaimer.
+2. No raw color utility classes remain that break dark/high-contrast parity.
+3. axe-core reports zero serious/critical violations on targeted pages.
+4. Skip links are keyboard reachable and visible on focus.
+
+#### P1 – Onboarding & Quick Paths (Sprint 1)
+Focus: Faster entry, concrete example, navigational scaffolding.
+Tasks:
+- Rewrite Quick Start with a concrete end‑to‑end mini scenario: pattern selection → example prompt → evaluation snippet.
+- Introduce "Quick Paths" panel (cards or list) with common intents: Defensive Patterns, Adapt an Existing Prompt, Evaluate Prompt Quality, Explore Similar Patterns, Improve Clarity.
+- Add reading time badges to all Orientation sections (compute via word count heuristic; tokenized muted styling).
+- Cross-link Lifecycle ↔ Evaluation ↔ Adaptation with inline "Related next step" footers.
+- Simplify Pattern Anatomy visual (reduce cognitive load; add textual alt explanation).
+Acceptance:
+1. Quick Start contains one runnable prompt + evaluation harness stub reference.
+2. Quick Paths panel renders ≥5 intents, keyboard navigable, each links to a relevant section.
+3. Reading time badges appear on ≥90% sections and adapt to dark mode.
+4. Pattern Anatomy diagram has accessible alt text and collapsible long description.
+
+#### P2 – Depth & Evaluation Tools (Sprint 2)
+Focus: Introduce practical evaluation & remediation guidance.
+Tasks:
+- Add Evaluation section harness stub (example Jest / Python snippet showing structure for testable prompt assertions; clearly marked experimental).
+- Decision Tree widget: choose goal → suggested pattern categories (static JSON config; feature-flagged if needed).
+- Anti-Patterns section: augment with remediation table (columns: Anti-Pattern, Symptom, Recommended Pattern, Caution).
+- Glossary: add alpha index bar (A–Z) with in-page anchor jump; ensure focus ring & aria-labels.
+Acceptance:
+1. Evaluation harness stub code block appears with copy button + provenance note.
+2. Decision Tree renders and is fully keyboard operable (arrow/tab navigation) and degrades to static list if JS disabled.
+3. Anti-Pattern remediation table includes ≥5 mapped corrective suggestions.
+4. Glossary alpha index jump bar accessible (buttons or links with visible focus).
+
+#### P3 – Interactive & Visualization Teasers (Sprint 3)
+Focus: Light introduction of similarity/comparison capabilities.
+Tasks:
+- Insert "Similarity Preview" callout linking to comparison route (shows 3 sample related pattern IDs with scores).
+- Add miniature lifecycle/flow diagram (Mermaid) for adaptation vs evaluation loop (collapsible; alt text).
+- Optional feature-flag: tiny network sample graph (static SVG) demonstrating pattern connection concept.
+Acceptance:
+1. Similarity Preview callout present; scores use consistent numeric formatting (two decimals) and meet contrast.
+2. Flow diagram accessible: alt text + collapsible long description.
+3. Feature-flagged graph hidden by default; visible when `NEXT_PUBLIC_SHOW_ORIENTATION_GRAPH=1`.
+
+#### P4 – Polish, Consolidation & QA (Sprint 4)
+Focus: Content refinement, cheat sheet consolidation, high-contrast audit.
+Tasks:
+- Create consolidated "Cheat Sheet" page (summary of each Orientation section in ≤160 chars + key link).
+- Run full high-contrast pass (confirm ≥7:1 body text, update tokens where needed).
+- Remove duplicated explanations (e.g., evaluation notes appearing in multiple sections).
+- Update accessibility documentation with Orientation audit results & checklist.
+Acceptance:
+1. Cheat Sheet page deployed & linked from footer and Orientation hub.
+2. High-contrast audit log added to `ACCESSIBILITY.md`.
+3. No duplicated paragraphs across sections (manual diff spot check for removed redundancy).
+4. All Orientation links scoped within landmark regions (<main>, <nav>, <footer>).
+
+#### P5 – Continuous Learning & Community (Post-Launch)
+Focus: Feedback capture & telemetry planning.
+Tasks:
+- Add lightweight feedback CTA (link to GitHub Discussions / Issue template) at end of Orientation pages.
+- Telemetry plan (non-invasive): define events (orientation_quick_path_click, evaluation_copy_action, glossary_search) with privacy note.
+- Create backlog triage labels: `orientation-feedback`, `a11y-regression`, `education`.
+Acceptance:
+1. Feedback CTA present on ≥80% Orientation pages.
+2. Event schema documented (internal `docs/telemetry.md`).
+3. GitHub labels created & referenced in contribution guidelines.
+
+#### Tracking Table
+
+| Phase | Status | Key Deliverables |
+|-------|--------|------------------|
+| P0 | Planned | Provenance badge unification, skip links, axe baseline |
+| P1 | Planned | Quick Paths panel, revised Quick Start, reading time badges |
+| P2 | Planned | Evaluation harness stub, decision tree, remediation table, glossary index |
+| P3 | Planned | Similarity preview callout, flow diagram, optional graph flag |
+| P4 | Planned | Cheat sheet consolidation, high-contrast pass, redundancy cleanup |
+| P5 | Planned | Feedback CTA, telemetry plan, labels setup |
+
+#### Dependencies & Non-Goals
+- Depends on existing semantic tokens; no palette redesign in P0–P1.
+- Decision tree + similarity preview use existing pattern/category artifacts; no new embedding generation.
+- Non-goals: Real-time interactive similarity computation inside Orientation (handled by dedicated comparison pages), full localization, community submission workflow.
+
+#### Risk Mitigation
+- Progressive rollout keeps early phases low risk; interactive widgets are feature-flagged where complexity is higher.
+- Accessibility issues caught early via baseline + regression re-scan (P0 then P4).
+- Clear acceptance criteria reduce scope creep and provide measurable completion signals.
+
+This section will be updated as phases progress; status column is the single source of truth for Orientation enhancement progress.
+
 ## Technical Specifications
 
 ### Data Schema
