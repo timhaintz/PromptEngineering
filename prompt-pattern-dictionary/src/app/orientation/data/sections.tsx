@@ -285,23 +285,23 @@ const Glossary = () => (
 
 const FAQ = () => (
   <div>
-    <details className="group border rounded mb-2 p-3 bg-white">
+    <details className="group border rounded mb-2 p-3 bg-surface-1">
       <summary className="cursor-pointer font-medium">Why five template keys?</summary>
       <p className="mt-2 text-sm">They balance expressive coverage (intent, situational framing, required action, output schema, expected shape/tone) with cognitive load. More keys lowered adoption; fewer reduced precision.</p>
     </details>
-    <details className="group border rounded mb-2 p-3 bg-white">
+  <details className="group border rounded mb-2 p-3 bg-surface-1">
       <summary className="cursor-pointer font-medium">Can I add new keys?</summary>
       <p className="mt-2 text-sm">Yes—locally. If broadly useful, open a proposal so tooling and documentation can stay aligned. Keep custom keys succinct.</p>
     </details>
-    <details className="group border rounded mb-2 p-3 bg-white">
+  <details className="group border rounded mb-2 p-3 bg-surface-1">
       <summary className="cursor-pointer font-medium">How do I detect bias?</summary>
       <p className="mt-2 text-sm">In evaluation, insert controlled variants (names, dialects, region terms) and compare outcome disparities. Investigate structural omissions before applying ad‑hoc wording patches.</p>
     </details>
-    <details className="group border rounded mb-2 p-3 bg-white">
+  <details className="group border rounded mb-2 p-3 bg-surface-1">
       <summary className="cursor-pointer font-medium">When should I fork a pattern?</summary>
       <p className="mt-2 text-sm">If structural keys change semantics (e.g., merging roles, introducing multi-step embedded reasoning) or examples shift domain irreversibly—create a named fork for traceability.</p>
     </details>
-    <details className="group border rounded p-3 bg-white">
+  <details className="group border rounded p-3 bg-surface-1">
       <summary className="cursor-pointer font-medium">How are similar patterns computed?</summary>
       <p className="mt-2 text-sm">Pattern similarity uses cosine similarity over an embedding composed of the pattern’s name, description, and up to the first three example prompts. Results are exploratory semantic neighbors—not a curated taxonomy.</p>
       <p className="mt-2 text-sm">Separate per‑example embeddings are also generated for example‑to‑example cosine similarity; these appear in the UI under <span className="font-semibold">Similar Examples</span>.</p>

@@ -12,7 +12,7 @@ export default function OrientationNav({ variant = 'sidebar' }: Props) {
   const currentSlug = pathname?.split('/').pop();
 
   return (
-    <nav aria-label="Orientation sections" data-variant={variant} className={variant === 'sidebar' ? 'text-sm' : 'flex flex-wrap gap-2'}>
+    <nav aria-label="Orientation sections" id="orientation-nav" data-variant={variant} className={variant === 'sidebar' ? 'text-sm' : 'flex flex-wrap gap-2'}>
       {variant === 'sidebar' ? (
   <ul className="space-y-1">
           {ORIENTATION_SECTIONS.map(s => {
