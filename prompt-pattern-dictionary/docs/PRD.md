@@ -451,8 +451,8 @@ Below phase checklists updated to reflect present state.
 Focused consolidation of Orientation hub upgrades across trust, navigation, evaluation guidance, and interactive teasers. Executed as internal sub-sprints (P0–P5) documented below; this phase tracks their delivery milestones at roadmap level.
 
 - [x] P0 Trust & Accessibility: Provenance badge unification; remove hard-coded backgrounds; skip links; axe baseline (zero serious/critical); consistent focus outlines.
-- [ ] P1 Onboarding & Quick Paths: Concrete Quick Start scenario; Quick Paths intent panel (≥5 intents); reading time badges; cross-links between Lifecycle/Evaluation/Adaptation; simplified Pattern Anatomy diagram with alt text.
-- [ ] P2 Depth & Evaluation Tools: Evaluation harness stub (copyable code block); Decision Tree widget (feature-flag); Anti-Pattern remediation table (≥5 mappings); Glossary A–Z jump bar.
+- [x] P1 Onboarding & Quick Paths: Concrete Quick Start scenario; Quick Paths intent panel (≥5 intents); reading time badges; cross-links between Lifecycle/Evaluation/Adaptation; simplified Pattern Anatomy diagram with alt text.
+- [x] P2 Depth & Evaluation Tools: Evaluation harness stub (copyable code block); Decision Tree widget (feature-flag); Anti-Pattern remediation table (≥5 mappings); Glossary A–Z jump bar.
 - [ ] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled).
 - [ ] P4 Polish & Consolidation: Cheat Sheet page (≤160 char summaries + links); high-contrast audit (≥7:1 body text); redundancy cleanup; update `ACCESSIBILITY.md` with audit log.
 - [ ] P5 Continuous Learning: Feedback CTA (≥80% pages); telemetry event schema (`orientation_quick_path_click`, `evaluation_copy_action`, `glossary_search`); GitHub labels (`orientation-feedback`, `a11y-regression`, `education`).
@@ -494,6 +494,7 @@ Acceptance:
 2. Quick Paths panel renders ≥5 intents, keyboard navigable, each links to a relevant section.
 3. Reading time badges appear on ≥90% sections and adapt to dark mode.
 4. Pattern Anatomy diagram has accessible alt text and collapsible long description.
+Status (Completed 2025-11-09): All acceptance criteria met. Quick Start now includes concrete defensive triage scenario with runnable prompt + evaluation harness reference; Quick Paths panel exposes five intents (Defensive Patterns, Adapt an Existing Prompt, Evaluate Prompt Quality, Explore Similar Patterns, Improve Clarity) with keyboard navigation; reading time badges present across Orientation sections (dark mode parity verified); Pattern Anatomy simplified with collapsible description and alt text. P1 locked—future modifications require a regression ticket referencing this completion date.
 
 #### P2 – Depth & Evaluation Tools (Sprint 2)
 Focus: Introduce practical evaluation & remediation guidance.
@@ -507,6 +508,7 @@ Acceptance:
 2. Decision Tree renders and is fully keyboard operable (arrow/tab navigation) and degrades to static list if JS disabled.
 3. Anti-Pattern remediation table includes ≥5 mapped corrective suggestions.
 4. Glossary alpha index jump bar accessible (buttons or links with visible focus).
+Status (Completed 2025-11-09): Delivered evaluation harness stub (copyable code constant with aria-live feedback), feature-flagged Decision Tree widget (keyboard radiogroup semantics), Anti-Pattern remediation table (≥5 mappings with corrective pattern suggestions), and accessible Glossary A–Z jump bar (focus-visible anchors). All acceptance criteria satisfied. P2 locked—enhancements beyond scope (e.g., persistence/state expansion) will be tracked under future phases; regression changes require ticket referencing this completion date.
 
 #### P3 – Interactive & Visualization Teasers (Sprint 3)
 Focus: Light introduction of similarity/comparison capabilities.
@@ -547,9 +549,9 @@ Acceptance:
 
 | Phase | Status | Key Deliverables |
 |-------|--------|------------------|
-| P0 | Planned | Provenance badge unification, skip links, axe baseline |
-| P1 | Planned | Quick Paths panel, revised Quick Start, reading time badges |
-| P2 | Planned | Evaluation harness stub, decision tree, remediation table, glossary index |
+| P0 | Completed | Provenance badge unification, skip links, axe baseline |
+| P1 | Completed | Quick Paths panel, revised Quick Start, reading time badges |
+| P2 | Completed | Evaluation harness stub, decision tree, remediation table, glossary index |
 | P3 | Planned | Similarity preview callout, flow diagram, optional graph flag |
 | P4 | Planned | Cheat sheet consolidation, high-contrast pass, redundancy cleanup |
 | P5 | Planned | Feedback CTA, telemetry plan, labels setup |
