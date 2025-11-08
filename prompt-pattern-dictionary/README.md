@@ -36,6 +36,14 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
 - **Accessibility**: Improved contrast and chevron-based toggles with appropriate ARIA controls
  - **How to apply**: A concise 1–2 sentence usage summary is shown inline under Application when available; generated via optional enrichment.
  - **Orientation Layout (OED-Inspired)**: Refactored Orientation page to a two-column grid with a sticky numbered side navigation (desktop) and chip navigation (mobile), mirroring reference dictionary usage guides.
+ - **Quick Start Scenario & Quick Paths (Phase 6 P1)**: Concrete defensive triage example with runnable prompt plus evaluation harness reference; Quick Paths panel exposes five intents (Defensive Patterns, Adapt an Existing Prompt, Evaluate Prompt Quality, Explore Similar Patterns, Improve Clarity) with keyboard navigation.
+ - **Reading Time Badges (Phase 6 P1)**: Automated word-count heuristic adds dark‑mode aware badges across Orientation sections.
+ - **Simplified Pattern Anatomy (Phase 6 P1)**: Collapsible descriptive overview + accessible alt text replacing more complex diagram for faster comprehension.
+ - **Cross-Link Footers (Phase 6 P1)**: Lifecycle, Evaluation, and Adaptation pages include contextual "Related next step" navigational hints.
+ - **Evaluation Harness Stub (Phase 6 P2)**: Copyable code block with aria-live feedback demonstrating assertion structure for prompt tests (experimental).
+ - **Decision Tree Widget (Phase 6 P2)**: Feature-flagged interactive radiogroup mapping user goals to suggested pattern categories; keyboard operable.
+ - **Anti-Pattern Remediation Table (Phase 6 P2)**: ≥5 corrective mappings (Anti-Pattern → Symptom → Recommended Pattern → Caution) added to Orientation.
+ - **Glossary A–Z Jump Bar (Phase 6 P2)**: Accessible alpha index anchors accelerate term navigation.
  - **Cheat Sheet Page**: Added `/orientation/cheatsheet` printable condensed reference (5-Key template, lifecycle, evaluation metrics, anti‑patterns, responsible use).
  - **Accessibility & Responsible Use Section**: Dedicated section consolidating inclusive design, bias monitoring, provenance, and escalation guidance.
  - **Sticky Side Navigation**: IntersectionObserver-driven highlight state with scroll offset margin for unobscured anchored headings.
@@ -401,6 +409,21 @@ The enrichment pipeline (`enrich-normalized-pp.py`) now understands `--fields kn
 - [Accessibility & Readability Program](docs/ACCESSIBILITY.md)
 
 > Note: `docs/THEMING.md` and `docs/ACCESSIBILITY.md` are the single sources of truth. Any theming or accessibility changes must update those files. No other copies should exist elsewhere in the repository.
+
+## 🧭 Orientation Phase Progress (Phase 6)
+
+Current multi-sprint Orientation enhancement status (Phase 6):
+
+| Sub-Sprint | Status | Highlights |
+|------------|--------|-----------|
+| P0 Trust & Accessibility | Completed | Provenance badge unification, skip links, axe baseline (zero serious/critical), focus outline consistency |
+| P1 Onboarding & Quick Paths | Completed | Concrete Quick Start scenario, Quick Paths (5 intents), reading time badges, cross-links, simplified Pattern Anatomy overview |
+| P2 Depth & Evaluation Tools | Completed | Evaluation harness stub (copyable, aria-live), Decision Tree widget (feature-flag), Anti-Pattern remediation table, Glossary A–Z index |
+| P3 Interactive Teasers | Planned | Similarity preview callout, adaptation/evaluation loop diagram, optional network sample graph |
+| P4 Polish & Consolidation | Planned | Cheat Sheet refinements, high-contrast audit, redundancy cleanup, ACCESSIBILITY.md audit log update |
+| P5 Continuous Learning | Planned | Feedback CTA rollout, telemetry event schema, GitHub triage labels |
+
+Sub-sprints P0–P2 are locked; future changes require regression tickets referencing completion date (2025-11-09). See `docs/PRD.md` for acceptance criteria details.
 
 ## 🌐 Deployment
 
