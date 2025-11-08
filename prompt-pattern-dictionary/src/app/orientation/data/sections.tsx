@@ -257,6 +257,76 @@ const Evaluation = () => (
   </div>
 );
 
+// P3 – Interactive Teasers
+const SimilarityPreview = () => {
+  const sample = [
+    { id: '0-0-0', score: 0.74 },
+    { id: '0-1-0', score: 0.69 },
+    { id: '71-26-6', score: 0.65 }
+  ];
+  const showGraph = typeof process !== 'undefined' && process.env.NEXT_PUBLIC_SHOW_ORIENTATION_GRAPH === '1';
+  return (
+    <div className="space-y-4 text-sm">
+      <p><strong>Semantic Similarity Preview:</strong> Example related patterns surfaced via cosine similarity over embedding vectors (name + description + up to first 3 examples). Scores are exploratory and aid lateral discovery—not categorical truth.</p>
+      <table className="text-xs w-full border mt-2" aria-describedby="similarity-preview-alt">
+        <thead>
+          <tr className="bg-surface-2 text-secondary">
+            <th className="p-2 text-left font-semibold">Pattern ID</th>
+            <th className="p-2 text-left font-semibold">Similarity Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sample.map(row => (
+            <tr key={row.id} className="border-t">
+              <td className="p-2"><Link href={`/pattern/${row.id}`} className="text-accent hover:underline" aria-label={`View pattern ${row.id}`}>{row.id}</Link></td>
+              <td className="p-2" aria-label={`Similarity ${row.score.toFixed(2)}`}>{row.score.toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div id="similarity-preview-alt" className="sr-only">Three sample patterns with descending cosine similarity scores (0.74, 0.69, 0.65) demonstrating relative semantic proximity. Use the comparison tool for real-time multi-pattern analysis.</div>
+      <p className="text-xs text-secondary">Try the interactive comparison: <Link href={`/compare?patterns=${sample.map(s=>s.id).join(',')}`} className="text-accent underline">Open comparison view</Link>.</p>
+      <details className="group p-3 rounded border border-muted bg-surface-1 shadow-sm">
+        <summary className="cursor-pointer font-medium text-accent text-sm">Adaptation ↔ Evaluation Loop Diagram</summary>
+        <div className="mt-2">
+          <MermaidDiagram chart={`flowchart LR\n  Adaptation[Adaptation] --> Evaluation[Evaluation]\n  Evaluation --> ErrorAnalysis[Error Analysis]\n  ErrorAnalysis --> Refinement[Targeted Refinement]\n  Refinement --> Adaptation\n  classDef cycle fill:#334155,stroke:#64748b,color:#fff;\n  class Adaptation,Evaluation,ErrorAnalysis,Refinement cycle;`} />
+          <details className="mt-3 text-xs">
+            <summary className="cursor-pointer text-accent">Expanded Text Description (Accessibility)</summary>
+            <p className="mt-1 leading-relaxed">The loop begins with Adaptation of a prompt pattern, proceeds to Evaluation against golden or stratified cases. Results feed Error Analysis categorizing failures, which informs Targeted Refinement. Refinement produces a revised pattern returning to Adaptation, forming a continuous reliability cycle.</p>
+          </details>
+        </div>
+      </details>
+      {showGraph && (
+        <div>
+          <details className="group p-3 rounded border border-muted bg-surface-1 shadow-sm">
+            <summary className="cursor-pointer font-medium text-accent text-sm">Sample Pattern Connection Graph (Static)</summary>
+            <div className="mt-2">
+              <p className="text-xs mb-2">Illustrative miniature network—node proximity suggests higher similarity. This static teaser does not reflect dynamic scoring.</p>
+              <div role="img" aria-label="Static network graph with three nodes A, B, C connected by lines showing mutual relationships" className="mx-auto w-full max-w-xs">
+                <svg viewBox="0 0 200 120" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <style>{`.node{fill:var(--color-accent-bg,#0ea5e9);stroke:var(--color-accent,#0369a1);stroke-width:2}`}</style>
+                  </defs>
+                  <line x1="60" y1="60" x2="140" y2="40" stroke="var(--color-border,#64748b)" strokeWidth="1.5" />
+                  <line x1="60" y1="60" x2="120" y2="90" stroke="var(--color-border,#64748b)" strokeWidth="1.5" />
+                  <line x1="140" y1="40" x2="120" y2="90" stroke="var(--color-border,#64748b)" strokeWidth="1.5" strokeDasharray="4 2" />
+                  <circle cx="60" cy="60" r="14" className="node" />
+                  <circle cx="140" cy="40" r="14" className="node" />
+                  <circle cx="120" cy="90" r="14" className="node" />
+                  <text x="60" y="64" textAnchor="middle" fontSize="10" fill="#fff">A</text>
+                  <text x="140" y="44" textAnchor="middle" fontSize="10" fill="#fff">B</text>
+                  <text x="120" y="94" textAnchor="middle" fontSize="10" fill="#fff">C</text>
+                </svg>
+              </div>
+              <p className="text-[10px] text-secondary mt-2">Enable dynamic graph features on the full comparison page; this orientation preview remains static for performance.</p>
+            </div>
+          </details>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const AccessibilityResponsible = () => (
   <div className="space-y-3 text-sm">
     <p>This project aims to support equitable, auditable, and safe prompt engineering practice. Use patterns in ways that respect user dignity, privacy, and legal constraints.</p>
@@ -421,9 +491,10 @@ export const ORIENTATION_SECTIONS: OrientationSectionMeta[] = [
   { slug: 'adaptation', id: 'adaptation', title: 'Adaptation & Remix', number: 7, description: 'Principled iteration, versioning, ethical considerations.', component: <Adaptation /> },
   { slug: 'anti-patterns', id: 'anti-patterns', title: 'Anti-Patterns', number: 8, description: 'Common failure modes and refactoring cues.', component: <AntiPatterns /> },
   { slug: 'quality-evaluation', id: 'quality-evaluation', title: 'Quality & Evaluation', number: 9, description: 'Metrics, failure taxonomy, baselining discipline.', component: <Evaluation /> },
-  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 10, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
-  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 11, description: 'Key terms and definitions.', component: <Glossary /> },
-  { slug: 'faq', id: 'faq', title: 'FAQ', number: 12, description: 'Frequently asked clarifications.', component: <FAQ /> },
-  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 13, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
-  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 14, description: 'Where to go after orienting.', component: <NextSteps /> }
+  { slug: 'similarity-preview', id: 'similarity-preview', title: 'Similarity Preview', number: 10, description: 'Teaser: sample similarity scores, evaluation/adaptation loop, optional static network graph.', component: <SimilarityPreview /> },
+  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 11, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
+  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 12, description: 'Key terms and definitions.', component: <Glossary /> },
+  { slug: 'faq', id: 'faq', title: 'FAQ', number: 13, description: 'Frequently asked clarifications.', component: <FAQ /> },
+  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 14, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
+  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 15, description: 'Where to go after orienting.', component: <NextSteps /> }
 ];
