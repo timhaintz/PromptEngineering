@@ -93,16 +93,24 @@ const PatternAnatomy = () => (
         </ul>
       </div>
     </div>
-    <div className="my-6 p-4 rounded-lg bg-surface-1 border border-muted shadow-sm">
-      <p className="text-sm font-semibold text-accent mb-2">Structure Diagram</p>
-      <div id="diagram-desc" className="sr-only">Diagram showing relationships: Pattern Name connects to Intent/Purpose, Template (with five keys and bracketed summary), Application, Examples & Similar, Adaptation Notes, Evaluation/Quality Hints, and Tags/Category.</div>
-      <MermaidDiagram
-        describedById="diagram-desc"
-        className="mermaid"
-        chart={`flowchart LR\n    A[Pattern Name]:::title --> B[Intent / Purpose]\n    B --> C[Template (5 keys)]\n    C --> C1[role]\n    C --> C2[context]\n    C --> C3[action]\n    C --> C4[format]\n    C --> C5[response]\n    C --> C6[Bracketed Summary]\n    A --> D[Application]\n    A --> E[Examples & Similar]\n    A --> F[Adaptation Notes]\n    A --> G[Evaluation / Quality Hints]\n    A --> H[Tags / Category]\n\n    classDef title fill:#1e3a8a,stroke:#1e3a8a,stroke-width:1,color:#fff;\n    classDef keys fill:#eef2ff,stroke:#4338ca,color:#1e1b4b;\n    class C,C1,C2,C3,C4,C5,C6 keys;`}
-      />
-  <p className="mt-2 text-xs text-muted">Rendered client-side with Mermaid; accessible fallback includes textual description.</p>
-    </div>
+    <details className="my-6 p-4 rounded-lg bg-surface-1 border border-muted shadow-sm group">
+      <summary className="cursor-pointer text-sm font-semibold text-accent mb-2 flex items-center gap-2">
+        Simplified Structure Overview <span className="text-xs text-secondary font-normal">(keys & relationships)</span>
+      </summary>
+      <p className="text-xs text-secondary mb-3">Core relationships between a Pattern and its major components. Focus stays on the 5-Key Template as the structural nucleus; ancillary metadata supports discovery, evaluation, and adaptation.</p>
+      <ul className="grid sm:grid-cols-2 gap-2 text-xs">
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Template</strong>: 5 keys + optional bracketed summary.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Examples</strong>: Canonical prompts feeding similarity links.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Application</strong>: Scenario tags guiding relevance.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Adaptation Notes</strong>: Versioning & rationale traces.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Evaluation Hints</strong>: Metrics & failure taxonomy anchors.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Similar Patterns</strong>: Embedding neighbors for exploration.</li>
+      </ul>
+      <details className="mt-4 group">
+        <summary className="cursor-pointer text-xs text-accent font-medium">Expanded Text Description (Accessibility)</summary>
+        <p className="mt-2 text-xs leading-relaxed">A Pattern centers on its Template. The Template enumerates five required keys ensuring tasks are explicit and auditable. Examples attach to the Pattern to demonstrate usage and seed similarity computations. Application tags contextualize domain fit. Adaptation Notes and Evaluation Hints form an iterative loop around the Template—changes to structure trigger re‑evaluation. Similar Patterns form a peripheral ring enabling lateral exploration without losing structural grounding.</p>
+      </details>
+    </details>
   </div>
 );
 
