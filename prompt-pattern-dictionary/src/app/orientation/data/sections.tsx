@@ -130,19 +130,29 @@ const Lifecycle = () => (
   </div>
 );
 
-const Choosing = () => (
-  <div className="space-y-3 text-sm">
-    <p><strong>Map task → Archetype:</strong> e.g. “Summarize transcripts” → Transformation; “Rank policy risks” → Evaluation; “Suggest refactors” → Reasoning / Refactoring hybrid.</p>
-    <p><strong>Heuristics:</strong></p>
-    <ul className="list-disc pl-5 space-y-1">
-      <li><strong>Prefer simpler baseline</strong> before composite patterns.</li>
-      <li><strong>Favor interpretability</strong> (clear keys, explicit criteria).</li>
-      <li><strong>Bias surface</strong>: choose patterns that force explicit decision rationales when sensitive classifications arise.</li>
-      <li><strong>Evidence richness</strong>: if auditability is critical, select patterns producing structured, inspectable fields.</li>
-    </ul>
-    <p><strong>Tie-break rule:</strong> Pick the pattern with fewer <em>critical</em> (not cosmetic) failures under pilot evaluation.</p>
-  </div>
-);
+const Choosing = () => {
+  const showTree = typeof process !== 'undefined' && process.env.NEXT_PUBLIC_SHOW_DECISION_TREE === '1';
+  return (
+    <div className="space-y-3 text-sm">
+      <p><strong>Map task → Archetype:</strong> e.g. “Summarize transcripts” → Transformation; “Rank policy risks” → Evaluation; “Suggest refactors” → Reasoning / Refactoring hybrid.</p>
+      <p><strong>Heuristics:</strong></p>
+      <ul className="list-disc pl-5 space-y-1">
+        <li><strong>Prefer simpler baseline</strong> before composite patterns.</li>
+        <li><strong>Favor interpretability</strong> (clear keys, explicit criteria).</li>
+        <li><strong>Bias surface</strong>: choose patterns that force explicit decision rationales when sensitive classifications arise.</li>
+        <li><strong>Evidence richness</strong>: if auditability is critical, select patterns producing structured, inspectable fields.</li>
+      </ul>
+      <p><strong>Tie-break rule:</strong> Pick the pattern with fewer <em>critical</em> (not cosmetic) failures under pilot evaluation.</p>
+      {showTree && (
+        // dynamic import not strictly required; small component
+        <div className="mt-4">
+          {/** @ts-ignore - component is client only */}
+          {require('../components/DecisionTreeWidget').DecisionTreeWidget({})}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Combining = () => (
   <div>
@@ -182,7 +192,7 @@ const Adaptation = () => (
 );
 
 const AntiPatterns = () => (
-  <div>
+  <div className="space-y-4">
     <ul className="list-disc pl-5 space-y-1 text-sm">
       <li><strong>Overloaded Mega-Prompt</strong>: Multiple tasks → split & chain.</li>
       <li><strong>Hidden Criteria</strong>: Implicit judgment rules → move into explicit <code>format</code> or <code>response</code> instructions.</li>
@@ -192,16 +202,58 @@ const AntiPatterns = () => (
       <li><strong>Unbounded Outputs</strong>: Missing length or schema constraints → overflow & hallucination risk.</li>
       <li><strong>Bias Amplification</strong>: Narrow example diversity → skewed performance on underrepresented inputs.</li>
     </ul>
+    <div>
+      <h3 className="text-sm font-semibold mb-2">Remediation Mapping</h3>
+      <table className="text-xs w-full border">
+        <thead>
+          <tr className="bg-surface-2 text-secondary">
+            <th className="p-2 text-left font-semibold">Anti-Pattern</th>
+            <th className="p-2 text-left font-semibold">Symptom</th>
+            <th className="p-2 text-left font-semibold">Recommended Pattern</th>
+            <th className="p-2 text-left font-semibold">Caution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-t"><td className="p-2">Overloaded Mega-Prompt</td><td className="p-2">Mixed unrelated instructions</td><td className="p-2">Task Breakdown / Decomposition</td><td className="p-2">Keep steps atomic</td></tr>
+          <tr className="border-t"><td className="p-2">Hidden Criteria</td><td className="p-2">Unstated scoring rules</td><td className="p-2">Structured Extraction + Explicit Format</td><td className="p-2">Define schema keys</td></tr>
+          <tr className="border-t"><td className="p-2">Style Churn</td><td className="p-2">Endless adjective tweaking</td><td className="p-2">Refactor / Clarify</td><td className="p-2">Change one variable</td></tr>
+          <tr className="border-t"><td className="p-2">Example Indigestion</td><td className="p-2">Huge uncurated block</td><td className="p-2">Contrastive Few Examples</td><td className="p-2">Prioritize diversity</td></tr>
+          <tr className="border-t"><td className="p-2">Unbounded Outputs</td><td className="p-2">Rambling / overflow</td><td className="p-2">Structured Extraction / Bounded Response</td><td className="p-2">Set length/schema</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 );
 
+// Evaluation harness code snippet (escaped to avoid TSX template parsing issues)
+const EVAL_HARNESS_CODE = `// eval-harness.test.ts\n// Minimal illustrative harness (pseudo)\nimport { runModel } from '../model';\nimport golden from './golden.json'; // [{input, expectedClassification}]\n\ntest('structure & classification', async () => {\n  const prompt = buildPrompt(golden.map(g => g.input));\n  const raw = await runModel(prompt);\n  const data = JSON.parse(raw);\n  expect(Array.isArray(data)).toBe(true);\n  expect(data).toHaveLength(golden.length);\n  data.forEach((row, i) => {\n    expect(['benign','suspicious','malicious']).toContain(row.classification);\n    expect(row.rationale).toBeTruthy();\n  });\n});\n\ntest('golden alignment (sample)', async () => {\n  const prompt = buildPrompt(golden.slice(0,3).map(g => g.input));\n  const raw = await runModel(prompt);\n  const data = JSON.parse(raw);\n  data.forEach((row, i) => {\n    // relaxed match for rationale keyword\n    expect(row.classification).toBe(golden[i].expectedClassification);\n  });\n});\n\n// Optional helper: ensures JSON parse before further assertions\nfunction buildPrompt(lines){\n  return 'ROLE: classify security logs\\nACTION: output JSON array with classification,rationale\\nLOG_LINES:\\n' + lines.map((l,i)=> (i+1)+'. '+ l).join('\\n');\n}`;
+
 const Evaluation = () => (
-  <div className="space-y-3 text-sm">
-    <p><strong>Suggested Metrics:</strong> accuracy, precision/recall (for extraction), structural compliance, rationale completeness, latency, token efficiency.</p>
-    <p><strong>Failure Mode Taxonomy:</strong> (a) Misclassification (b) Missing field (c) Hallucinated field (d) Formatting drift (e) Biased or exclusionary phrasing.</p>
-    <p><strong>Evaluation Harness:</strong> Start with a CSV/JSON golden set (10–50 rows). Add edge cases representing dialectal variation, varied names, and counterfactuals.</p>
-    <p><strong>Change Discipline:</strong> If more than one structural edit occurs, re-baseline; track a diff log (date, change, metric deltas).</p>
-    <p><strong>Automation Tip:</strong> Consider scripting a validation pass that checks for required keys and JSON parse success before human review.</p>
+  <div className="space-y-4 text-sm">
+    <div className="space-y-3">
+      <p><strong>Suggested Metrics:</strong> accuracy, precision/recall (for extraction), structural compliance, rationale completeness, latency, token efficiency.</p>
+      <p><strong>Failure Mode Taxonomy:</strong> (a) Misclassification (b) Missing field (c) Hallucinated field (d) Formatting drift (e) Biased or exclusionary phrasing.</p>
+      <p><strong>Evaluation Harness:</strong> Start with a CSV/JSON golden set (10–50 rows). Add edge cases representing dialectal variation, varied names, and counterfactuals.</p>
+      <p><strong>Change Discipline:</strong> If more than one structural edit occurs, re-baseline; track a diff log (date, change, metric deltas).</p>
+      <p><strong>Automation Tip:</strong> Consider scripting a validation pass that checks for required keys and JSON parse success before human review.</p>
+    </div>
+    <details className="group">
+      <summary className="cursor-pointer font-medium text-accent">Evaluation Harness Stub (Node/Jest)</summary>
+      <div className="mt-2">
+        <div className="relative">
+          <button type="button" aria-label="Copy harness code" className="absolute top-2 right-2 text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => {
+            const code = document.getElementById('eval-harness-code')?.textContent || '';
+            navigator.clipboard.writeText(code).then(() => {
+              const live = document.getElementById('eval-harness-live');
+              if (live) live.textContent = 'Copied harness to clipboard';
+            });
+          }}>Copy</button>
+          <pre id="eval-harness-code" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{EVAL_HARNESS_CODE}</code></pre>
+          <div id="eval-harness-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+        </div>
+        <p className="mt-2 text-xs text-muted">Experimental: treat harness as starting scaffold; adapt metrics to task. Provenance noted when AI-assisted changes occur.</p>
+      </div>
+    </details>
   </div>
 );
 
@@ -274,6 +326,11 @@ const QuickStart = () => (
 // Glossary (restored after patch collision)
 const Glossary = () => (
   <div>
+    <nav aria-label="Glossary index" className="mb-3 flex flex-wrap gap-1 text-[11px]">
+      {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(ch => (
+        <a key={ch} href={`#term-${ch}`} className="px-1.5 py-0.5 rounded bg-surface-2 border border-muted hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={`Jump to terms starting with ${ch}`}>{ch}</a>
+      ))}
+    </nav>
     <dl className="space-y-2 text-sm">
       <div>
         <dt className="font-medium">Pattern</dt>
