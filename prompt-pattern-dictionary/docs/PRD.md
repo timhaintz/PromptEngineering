@@ -454,7 +454,6 @@ Focused consolidation of Orientation hub upgrades across trust, navigation, eval
 - [x] P1 Onboarding & Quick Paths: Concrete Quick Start scenario; Quick Paths intent panel (≥5 intents); reading time badges; cross-links between Lifecycle/Evaluation/Adaptation; simplified Pattern Anatomy diagram with alt text.
 - [x] P2 Depth & Evaluation Tools: Evaluation harness stub (copyable code block); Decision Tree widget (feature-flag); Anti-Pattern remediation table (≥5 mappings); Glossary A–Z jump bar.
 - [x] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled).
-- [ ] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled).
 - [ ] P4 Polish & Consolidation: Cheat Sheet page (≤160 char summaries + links); high-contrast audit (≥7:1 body text); redundancy cleanup; update `ACCESSIBILITY.md` with audit log.
 - [ ] P5 Continuous Learning: Feedback CTA (≥80% pages); telemetry event schema (`orientation_quick_path_click`, `evaluation_copy_action`, `glossary_search`); GitHub labels (`orientation-feedback`, `a11y-regression`, `education`).
 
