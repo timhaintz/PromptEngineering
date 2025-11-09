@@ -453,6 +453,7 @@ Focused consolidation of Orientation hub upgrades across trust, navigation, eval
 - [x] P0 Trust & Accessibility: Provenance badge unification; remove hard-coded backgrounds; skip links; axe baseline (zero serious/critical); consistent focus outlines.
 - [x] P1 Onboarding & Quick Paths: Concrete Quick Start scenario; Quick Paths intent panel (≥5 intents); reading time badges; cross-links between Lifecycle/Evaluation/Adaptation; simplified Pattern Anatomy diagram with alt text.
 - [x] P2 Depth & Evaluation Tools: Evaluation harness stub (copyable code block); Decision Tree widget (feature-flag); Anti-Pattern remediation table (≥5 mappings); Glossary A–Z jump bar.
+- [x] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled).
 - [ ] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled).
 - [ ] P4 Polish & Consolidation: Cheat Sheet page (≤160 char summaries + links); high-contrast audit (≥7:1 body text); redundancy cleanup; update `ACCESSIBILITY.md` with audit log.
 - [ ] P5 Continuous Learning: Feedback CTA (≥80% pages); telemetry event schema (`orientation_quick_path_click`, `evaluation_copy_action`, `glossary_search`); GitHub labels (`orientation-feedback`, `a11y-regression`, `education`).
@@ -520,6 +521,7 @@ Acceptance:
 1. Similarity Preview callout present; scores use consistent numeric formatting (two decimals) and meet contrast.
 2. Flow diagram accessible: alt text + collapsible long description.
 3. Feature-flagged graph hidden by default; visible when `NEXT_PUBLIC_SHOW_ORIENTATION_GRAPH=1`.
+Status (Completed 2025-11-09): Implemented Similarity Preview section with three sample pattern IDs (0-0-0, 0-1-0, 71-26-6) and two-decimal scores (0.74, 0.69, 0.65); adaptation ↔ evaluation loop Mermaid diagram includes collapsible expanded description for accessibility; static network graph teaser guarded by `NEXT_PUBLIC_SHOW_ORIENTATION_GRAPH` feature flag. All acceptance criteria met; section locked pending future dynamic comparison integration.
 
 #### P4 – Polish, Consolidation & QA (Sprint 4)
 Focus: Content refinement, cheat sheet consolidation, high-contrast audit.
@@ -552,7 +554,8 @@ Acceptance:
 | P0 | Completed | Provenance badge unification, skip links, axe baseline |
 | P1 | Completed | Quick Paths panel, revised Quick Start, reading time badges |
 | P2 | Completed | Evaluation harness stub, decision tree, remediation table, glossary index |
-| P3 | Planned | Similarity preview callout, flow diagram, optional graph flag |
+| P3 | Completed | Similarity preview, loop diagram, optional static graph flag |
+| P4 | Planned | Cheat sheet consolidation, high-contrast pass, redundancy cleanup |
 | P4 | Planned | Cheat sheet consolidation, high-contrast pass, redundancy cleanup |
 | P5 | Planned | Feedback CTA, telemetry plan, labels setup |
 
