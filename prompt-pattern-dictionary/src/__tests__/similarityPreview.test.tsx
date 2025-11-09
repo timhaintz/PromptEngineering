@@ -2,6 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ORIENTATION_SECTIONS } from '../app/orientation/data/sections';
+// Mock MermaidDiagram to silence act() warnings triggered by async rendering in tests
+jest.mock('../components/diagram/MermaidDiagram', () => ({ __esModule: true, default: () => <div data-testid="mermaid-mock" /> }));
 
 describe('SimilarityPreview orientation section', () => {
   it('renders sample similarity table with three rows and link to comparison view', () => {
