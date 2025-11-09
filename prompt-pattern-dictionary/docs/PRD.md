@@ -444,7 +444,7 @@ Below phase checklists updated to reflect present state.
 - [ ] Beta testing with select users
 - [ ] **Research community feedback on comparison features**
 - [ ] Bug fixes and performance optimization
-- [ ] Documentation and help content (Orientation in place; cheat sheet & responsible use section planned)
+- [x] Documentation and help content (Orientation hub, Cheat Sheet, Responsible Use guidelines delivered)
 - [ ] Public launch and marketing
 - [ ] Community feedback integration
 
@@ -567,6 +567,81 @@ Acceptance:
 - Clear acceptance criteria reduce scope creep and provide measurable completion signals.
 
 This section will be updated as phases progress; status column is the single source of truth for Orientation enhancement progress.
+
+## Responsible Use & Ethical Guidelines
+
+This section defines expectations and safeguards for ethical, secure, and privacy‑respectful use of the Prompt Pattern Dictionary and its augmentation tooling. It complements the existing Accessibility commitments and the global footer link labeled "Accessibility & Responsible Use".
+
+### Purpose & Scope
+Provide clear guardrails so pattern exploration, similarity analysis, and enrichment features are applied to legitimate research, defensive security, education, and productivity use cases—never to facilitate harmful misuse of generative systems.
+
+### Core Principles
+1. Transparency & Attribution – Always cite original research sources; AI‑assisted fields carry a provenance badge and disclaimer.
+2. Security-Conscious Usage – Emphasize defensive and resilience patterns; potentially risky offensive examples are contextualized with mitigation guidance.
+3. Privacy & Data Minimization – Do not paste sensitive personal, customer, or regulated data into example prompts or the playground; future telemetry (Phase 4/5) will be opt‑in and event‑minimal.
+4. Non-Malicious Research – Similarity and comparison tooling are for constructive analysis, not operational exploitation.
+5. Accuracy & Validation – AI enrichments are advisory; verify critical outputs against authoritative sources before production use.
+6. Inclusivity & Accessibility – Maintain accessible language, avoid exclusionary phrasing, and ensure content meets WCAG commitments.
+
+### Acceptable Use Examples
+- Academic or industry research analyzing prompt engineering safety and effectiveness.
+- Development of defensive cybersecurity tooling (detection, hardening, red→blue translation with mitigation steps).
+- Educational curriculum, tutorials, and workshops citing patterns responsibly.
+- Internal prompt quality evaluation and refinement with non‑sensitive sample data.
+- Comparative analysis to identify gaps in defensive coverage or bias.
+
+### Unacceptable / Prohibited Use
+- Generating or refining prompts intended to deploy real-world exploits, malware, or intrusive tooling outside sanctioned test environments.
+- Constructing phishing/social engineering content for production campaigns.
+- Attempting prompt strategies to bypass model safety, abuse guardrails, or exfiltrate proprietary system prompts.
+- Using similarity outputs to systematically harvest or fingerprint sensitive proprietary data.
+- Automating large-scale scraping or rate abuse of the site ignoring published robots and caching guidance.
+
+### Safeguards & Controls
+- Provenance Badges: All AI‑enriched fields retain badge + disclaimer; manual review encouraged for high‑impact decisions.
+- Defensive Pattern Tagging: Patterns categorized as security‑relevant are cross‑linked to recommended defensive counterparts.
+- Warning Badges (Planned): Add explicit "Use With Caution" badge for patterns with potential dual‑use characteristics (tracked via issue label `responsible-use-review`).
+- Rate Limiting (Planned): Comparison & playground endpoints (when dynamic) will enforce per‑IP quotas; static build remains read‑only.
+- Telemetry Privacy (Planned): Minimal event schema (orientation_quick_path_click, evaluation_copy_action, glossary_search) omits user content and respects `Do Not Track`.
+- Issue Templates: Security / misuse reporting and responsible use clarification templates added in `.github/ISSUE_TEMPLATE/`.
+
+### Reporting & Escalation
+- Vulnerabilities: Report via `SECURITY.md` (to be added if absent) or GitHub Security Advisories; avoid public exploit details before coordinated disclosure.
+- Misuse / Abuse: Open an issue with label `responsible-use-review`; include pattern IDs, context, and rationale without embedding sensitive data.
+- Data Corrections: For inaccurate AI‑assisted metadata open an issue with label `ai-assist-correction` describing the discrepancy.
+
+### Open Source & Licensing
+- Attribution: Each pattern retains source citation (paper title, authors, URL). Derived educational summaries must not remove provenance.
+- AI Augmentation: Generated summaries / PEIL prompts are under the same repository license; users should not present them as verbatim research quotes.
+- Derivative Works: Downstream forks must preserve this Responsible Use section and clearly mark any additional safety modifications.
+
+### Implementation Tasks (Backlog Mapping)
+| Task | Status | Target Phase |
+|------|--------|--------------|
+| Create `responsible-use` page/route with this content | Planned | Phase 5 |
+| Add footer link (already present: Accessibility & Responsible Use) | Completed | Phase 1 (footer spec) |
+| Add `SECURITY.md` if missing | Planned | Phase 5 |
+| Introduce caution badge component + token | Planned | Phase 4/5 |
+| Add GitHub issue templates (`responsible_use.yml`, `ai_assist_correction.yml`) | Planned | Phase 5 |
+| Annotate ≥5 dual‑use patterns with caution badge + mitigation links | Planned | Phase 5 |
+| Cross-link defensive alternatives on dual‑use entries | Planned | Phase 5 |
+
+### Acceptance Criteria (Documentation & Initial Guardrails)
+1. Responsible Use section published and linked from footer + Orientation hub.
+2. Issue templates for misuse and AI correction merged.
+3. SECURITY.md present with clear coordinated disclosure path.
+4. Caution badge design tokens defined (accessible contrast ≥4.5:1 text / ≥3:1 non-text).
+5. At least five patterns annotated as dual‑use with mitigation cross‑links.
+6. No sensitive real-world exploit payloads included in examples (audited quarterly).
+7. Section passes axe-core (zero serious/critical) and Lighthouse Accessibility ≥95.
+8. Telemetry implementation (when added) omits prompt content and includes opt‑out route in docs.
+
+### Future Enhancements
+- Dynamic runtime classifiers to auto‑flag uploaded or user prompts with potential misuse signals (privacy-preserving, client-side where feasible).
+- Integration with emerging OpenAI / model provider safety APIs for pattern risk scoring.
+- Aggregated transparency dashboard (counts of caution badges, corrections processed, misuse reports triaged).
+
+This Responsible Use section is living documentation; updates require PR with justification and a link to related issue labels for traceability.
 
 ## Technical Specifications
 

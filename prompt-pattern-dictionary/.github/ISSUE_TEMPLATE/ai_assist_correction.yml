@@ -1,0 +1,43 @@
+name: AI-Assisted Field Correction
+description: Request a correction to AI-generated or AI-refined metadata.
+labels: [ai-assist-correction]
+title: "AI Assist Correction: <pattern or example ID>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Provide the current AI-assisted content and your proposed correction. Avoid including sensitive data.
+  - type: input
+    id: target_id
+    attributes:
+      label: Pattern or Example ID
+      description: Single ID (e.g., 71-26-6 or 1-0-2-0-0)
+      placeholder: 71-26-6
+    validations:
+      required: true
+  - type: textarea
+    id: current_text
+    attributes:
+      label: Current AI-Assisted Text
+      description: Copy the existing text needing correction.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_text
+    attributes:
+      label: Proposed Replacement
+      description: Provide corrected wording; cite sources if factual.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale / Source
+      description: Why the correction is needed; include citation if applicable.
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I confirm the proposed text avoids sensitive personal or proprietary data.
+          required: true
