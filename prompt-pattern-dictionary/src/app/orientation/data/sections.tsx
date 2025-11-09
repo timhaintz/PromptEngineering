@@ -30,7 +30,7 @@ const WhatIsPattern = () => (
 
 const PatternAnatomy = () => (
   <div>
-    <p>Each entry follows a consistent schema to support scanning and comparison. The Template exposes five canonical keys (<code>role</code>, <code>context</code>, <code>action</code>, <code>format</code>, <code>response</code>) plus an optional single‑line <em>bracketed synthesis</em>. Additional normalized attributes provide discoverability, provenance, and evaluation hooks.</p>
+    <p>Each entry follows a consistent schema to support scanning, comparison, enrichment and evaluation. The Template exposes five canonical keys (<code>role</code>, <code>context</code>, <code>action</code>, <code>format</code>, <code>response</code>) plus an optional single‑line <em>bracketed synthesis</em>. Recent enrichment adds <strong>General Explanation</strong> (ELI12 summary), <strong>Usage Summary</strong> (pragmatic how‑to), <strong>Knowledge Intent</strong> (quadrant classification), and <strong>PEIL</strong> (Prompt Engineering Instructional Language) prompts. These fields improve pedagogy and adaptation while preserving the original research‑sourced <strong>Description</strong>.</p>
     <div id="peil" className="sr-only">Prompt Engineering Instructional Language (PEIL)</div>
     <div className="mt-4 grid gap-4 md:grid-cols-2">
   <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
@@ -41,8 +41,16 @@ const PatternAnatomy = () => (
             <dd>Human-readable identifier of the design strategy.</dd>
           </div>
           <div>
+            <dt className="font-medium">Pattern ID</dt>
+            <dd>Stable index (<code>paperId-category-pattern</code>) used for linking & similarity matrices.</dd>
+          </div>
+          <div>
             <dt className="font-medium">Description</dt>
-            <dd>Short narrative explaining purpose & scope.</dd>
+            <dd>Research-sourced narrative explaining purpose & scope (authorial voice preserved).</dd>
+          </div>
+          <div>
+            <dt className="font-medium">General Explanation</dt>
+            <dd>ELI12 style pedagogical summary distilling core behavior (AI-assisted; do not overwrite Description).</dd>
           </div>
           <div>
             <dt className="font-medium">Media Type</dt>
@@ -54,15 +62,19 @@ const PatternAnatomy = () => (
           </div>
           <div>
             <dt className="font-medium">Application</dt>
-            <dd>Tags or scenario phrases describing contexts of use.</dd>
+            <dd>Tags / scenario phrases describing contexts of use (research + derived domain examples).</dd>
           </div>
           <div>
             <dt className="font-medium">Usage Summary</dt>
-            <dd>Plain-language “how to apply” guidance (may be AI-assisted).</dd>
+            <dd>Plain-language “how to apply” steps (AI-assisted). Distinct from General Explanation (what) & Description (why).</dd>
           </div>
           <div>
             <dt className="font-medium">Turn</dt>
             <dd>Indicates if pattern expects multi-turn setup.</dd>
+          </div>
+          <div>
+            <dt className="font-medium">Knowledge Intent</dt>
+            <dd>Dominant knowledge-flow quadrant (Retrieval, Refinement, Co‑Discovery, Tutoring).</dd>
           </div>
           <div>
             <dt className="font-medium">Template</dt>
@@ -75,6 +87,10 @@ const PatternAnatomy = () => (
           <div>
             <dt className="font-medium">Similar Patterns</dt>
             <dd>Embeddings-based related entries for exploration.</dd>
+          </div>
+          <div>
+            <dt className="font-medium">PEIL</dt>
+            <dd>Generated structured system prompt combining template + application domain for consistent downstream use.</dd>
           </div>
           <div>
             <dt className="font-medium">AI-Assisted Badge</dt>
@@ -90,6 +106,10 @@ const PatternAnatomy = () => (
           <li><strong>Separate examples from instructions</strong>—don’t bury rules inside an example unless evaluating in-context demonstration.</li>
           <li><strong>Record changes</strong> to monitor regression risk.</li>
           <li><strong>Avoid domain stereotypes</strong> in examples; favor neutral or diverse representations.</li>
+          <li><strong>Preserve Description fidelity</strong>; edit General Explanation / Usage Summary for clarity, not the research text.</li>
+          <li><strong>Knowledge Intent</strong> must remain within the four supported quadrants—open an issue for ambiguous cases.</li>
+          <li><strong>PEIL prompts</strong> are starting scaffolds: adjust variables, not structural logic; never overwrite authoritative Template.</li>
+          <li><strong>AI-assisted fields</strong> (General Explanation, Usage Summary, PEIL) require manual review in regulated contexts.</li>
         </ul>
       </div>
     </div>
@@ -102,13 +122,17 @@ const PatternAnatomy = () => (
         <li className="p-2 rounded border border-muted bg-surface-2"><strong>Template</strong>: 5 keys + optional bracketed summary.</li>
         <li className="p-2 rounded border border-muted bg-surface-2"><strong>Examples</strong>: Canonical prompts feeding similarity links.</li>
         <li className="p-2 rounded border border-muted bg-surface-2"><strong>Application</strong>: Scenario tags guiding relevance.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>General Explanation</strong>: Pedagogical ELI12 summary (AI-assisted).</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Usage Summary</strong>: Operational steps / deployment hints.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>Knowledge Intent</strong>: Quadrant classification powering analytics.</li>
+        <li className="p-2 rounded border border-muted bg-surface-2"><strong>PEIL</strong>: Structured system prompt variant for automation.</li>
         <li className="p-2 rounded border border-muted bg-surface-2"><strong>Adaptation Notes</strong>: Versioning & rationale traces.</li>
         <li className="p-2 rounded border border-muted bg-surface-2"><strong>Evaluation Hints</strong>: Metrics & failure taxonomy anchors.</li>
         <li className="p-2 rounded border border-muted bg-surface-2"><strong>Similar Patterns</strong>: Embedding neighbors for exploration.</li>
       </ul>
       <details className="mt-4 group">
         <summary className="cursor-pointer text-xs text-accent font-medium">Expanded Text Description (Accessibility)</summary>
-        <p className="mt-2 text-xs leading-relaxed">A Pattern centers on its Template. The Template enumerates five required keys ensuring tasks are explicit and auditable. Examples attach to the Pattern to demonstrate usage and seed similarity computations. Application tags contextualize domain fit. Adaptation Notes and Evaluation Hints form an iterative loop around the Template—changes to structure trigger re‑evaluation. Similar Patterns form a peripheral ring enabling lateral exploration without losing structural grounding.</p>
+        <p className="mt-2 text-xs leading-relaxed">A Pattern centers on its Template. The Template enumerates five required keys ensuring tasks are explicit and auditable. General Explanation and Usage Summary sit above the Template for pedagogical orientation (what it does) and operational guidance (how to apply). Knowledge Intent classifies the pattern’s knowledge flow quadrant for analytics and evaluation prioritization. PEIL derives a structured system prompt variant from the authoritative Template + Application tags—never rewriting the underlying research Template. Examples attach to the Pattern to demonstrate usage and seed similarity computations. Application tags contextualize domain fit. Adaptation Notes and Evaluation Hints form an iterative loop around the Template—changes to structure trigger re‑evaluation. Similar Patterns form a peripheral ring enabling lateral exploration without losing structural grounding.</p>
       </details>
     </details>
   </div>
