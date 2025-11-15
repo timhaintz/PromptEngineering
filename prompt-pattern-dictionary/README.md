@@ -4,7 +4,7 @@ A comprehensive, searchable dictionary of prompt engineering patterns for cybers
 
 ## 🎯 Project Overview
 
-This is a Next.js-based web application that transforms academic research on prompt engineering into an accessible, searchable dictionary. It serves as the definitive reference tool for cybersecurity prompt engineering patterns.
+This is a Next.js-based web application that transforms academic research on prompt engineering into an accessible, searchable dictionary. It serves as the definitive reference tool for cybersecurity prompt engineering patterns and is designed to help researchers, practitioners, students, and tool builders design safer, more evaluable prompts.
 
 For the normalized Prompt Pattern schema and mapping details, see the Product Requirements Document (Prompt Pattern Schema section): docs/PRD.md.
 
@@ -192,6 +192,22 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the dictionary.
+
+### First-Time User Guide
+
+If you're new to the project or to prompt patterns, start here after you have the app running locally:
+
+1. Open the **Orientation** section from the main navigation and skim **Quick Start** for a high-level overview.
+2. Visit **Pattern Anatomy** under Orientation to understand how each pattern is structured (Description, General Explanation, Usage Summary, Template, Knowledge Intent, PEIL, etc.).
+3. Use the homepage search to find a pattern related to a domain you care about (e.g., "triage", "classification", "hypothesis").
+4. On a pattern page:
+	- Locate the Pattern ID badge and the research-derived Description.
+	- Expand the Template and (optionally) the PEIL prompt.
+	- Copy a Prompt Example and adapt it for a small, safe test task.
+5. Check any **Similar Patterns/Examples** listed, noting how their Templates and Applications differ.
+6. Before using anything in production, review the **Responsible Use** page (`/responsible-use`) to understand acceptable use, safety constraints, and reporting paths.
+
+Orientation also includes guidance on interpreting similarity scores and using the knowledge intent quadrants when choosing patterns.
 
 ### Start in production
 
