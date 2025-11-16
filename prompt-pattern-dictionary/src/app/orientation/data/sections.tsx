@@ -27,6 +27,13 @@ interface GlossaryEntry {
   definition: React.ReactNode;
 }
 
+interface LearningTrack {
+  stage: string;
+  outcome: string;
+  focus: { label: string; href: string }[];
+  checkpoint: string;
+}
+
 // Migrated components from legacy single-page Orientation (headings removed; page/all wrappers provide numbering headings).
 // (Original QuickStart replaced below with concrete mini scenario + evaluation stub.)
 
@@ -372,6 +379,78 @@ const GLOSSARY_ENTRIES: GlossaryEntry[] = [
     )
   }
 ];
+
+const LEARNING_TRACKS: LearningTrack[] = [
+  {
+    stage: '1. Foundations',
+    outcome: 'Understand what prompt patterns are and why the 5-Key scaffold matters.',
+    focus: [
+      { label: 'Quick Start', href: '/orientation/quick-start' },
+      { label: 'What Is a Pattern', href: '/orientation/what-is-a-pattern' },
+      { label: 'Pattern Anatomy', href: '/orientation/pattern-anatomy' }
+    ],
+    checkpoint: 'You can describe the difference between Description, General Explanation, Usage Summary, Template, Knowledge Intent, and PEIL.'
+  },
+  {
+    stage: '2. Structural Mastery',
+    outcome: 'Practice selecting and chaining patterns while avoiding anti-patterns.',
+    focus: [
+      { label: 'Lifecycle', href: '/orientation/lifecycle' },
+      { label: 'Choosing Patterns', href: '/orientation/choosing-patterns' },
+      { label: 'Combining Patterns', href: '/orientation/combining-patterns' },
+      { label: 'Anti-Patterns', href: '/orientation/anti-patterns' }
+    ],
+    checkpoint: 'You maintain a change log per adaptation and can articulate why each structural adjustment was made.'
+  },
+  {
+    stage: '3. Evaluation & Adaptation',
+    outcome: 'Align evaluation harnesses with failure modes before publishing updates.',
+    focus: [
+      { label: 'Adaptation & Remix', href: '/orientation/adaptation' },
+      { label: 'Quality & Evaluation', href: '/orientation/quality-evaluation' }
+    ],
+    checkpoint: 'You have a repeatable harness, metric targets, and drift monitoring for the pattern you’re iterating.'
+  },
+  {
+    stage: '4. Discovery & Similarity',
+    outcome: 'Use search syntax and similarity pivots to find adjacent research before inventing from scratch.',
+    focus: [
+      { label: 'Search & Similarity UX', href: '/orientation/search-similarity' },
+      { label: 'Similarity Preview', href: '/orientation/similarity-preview' }
+    ],
+    checkpoint: 'You can defend why a candidate pattern was chosen and cite the similarity legend bands that informed the decision.'
+  },
+  {
+    stage: '5. Responsible Scaling',
+    outcome: 'Bake accessibility, provenance, and responsible use signals into rollouts.',
+    focus: [
+      { label: 'Accessibility & Responsible Use', href: '/orientation/accessibility-responsible-use' },
+      { label: 'Glossary', href: '/orientation/glossary' },
+      { label: 'Learning Path & Roadmap', href: '/orientation/learning-path' }
+    ],
+    checkpoint: 'You can point to accessibility test evidence and the most recent contrast audit before shipping.'
+  }
+];
+
+const PATTERN_SUBMISSION_PLACEHOLDER = `## Pattern Submission
+labels: orientation-feedback, education
+
+pattern_id: TBD
+pattern_title:
+source_paper:
+summary: <!-- 2-3 sentences -->
+why_it_matters:
+evidence: <!-- link to research or evaluation logs -->
+requested_actions:
+`;
+
+const CONTRIBUTION_NOTE_PLACEHOLDER = `## Orientation Contribution
+section:
+observed_gap:
+label: orientation-feedback | a11y-regression | education
+details:
+link_or_attachment:
+`;
 
 const WhatIsPattern = () => (
   <div>
@@ -922,6 +1001,21 @@ const AccessibilityResponsible = () => (
       <li><strong>Motion / Load:</strong> Mermaid diagrams render progressively with textual fallback.</li>
       <li><strong>Assistive Navigation:</strong> Anchors include scroll margin (offset) for reduced visual occlusion.</li>
     </ul>
+    <div className="p-4 rounded border border-dashed border-muted bg-surface-1 shadow-sm">
+      <h4 className="text-sm font-semibold mb-1">Contrast audit snapshot (Nov 2025)</h4>
+      <p className="text-xs text-secondary">Automated checks via <code className="text-[11px]">scripts/contrast_audit.js</code> confirmed <strong>text-primary vs surface-1</strong> at 19.95:1 and all sampled pairs ≥14:1 across Light, Dark, and High-Contrast modes. See <Link href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/ACCESSIBILITY.md" className="text-accent hover:underline" target="_blank" rel="noreferrer">ACCESSIBILITY.md</Link> for the full matrix.</p>
+    </div>
+    <details className="group border border-muted rounded-md p-3 bg-surface-1">
+      <summary className="cursor-pointer font-semibold text-accent">Assistive technology walkthrough</summary>
+      <ol className="list-decimal pl-5 space-y-1 mt-3 text-sm">
+        <li>Use the <strong>Skip to Section Navigation</strong> link to bypass the hero, then land on the inline nav.</li>
+        <li>Jump to the desired section via heading navigation; each section title includes the number so screen reader rotor shortcuts remain predictable.</li>
+        <li>Copy snippets (evaluation harness, change log, contribution templates) using the labeled buttons—each announces success via an <code className="text-[11px]">aria-live</code> region.</li>
+        <li>Explore Glossary anchors with the A–Z jump bar; focus order matches alphabetical order so you always know where you are.</li>
+        <li>Use the Feedback CTA buttons (below every section) to open GitHub in a new tab without losing Orientation context.</li>
+      </ol>
+      <p className="text-xs text-secondary mt-2">If you rely on additional assistive tech workflows, tag your issue with <code className="text-[11px]">education</code> so we can document new best practices.</p>
+    </details>
     <h3 className="text-sm font-semibold mt-4">Responsible Use Guidelines</h3>
     <ul className="list-disc pl-5 space-y-1">
       <li><strong>No Harmful Generation:</strong> Do not adapt patterns to produce disallowed or abusive content.</li>
@@ -1084,8 +1178,50 @@ const FAQ = () => (
 );
 
 const Feedback = () => (
-  <div>
-  <p className="text-sm text-secondary">Spotted ambiguity, accessibility gaps, missing inclusive examples, or structural drift? Please open an issue or PR. Reference the pattern ID(s), describe the observed issue, and (if possible) include a minimal reproducible example. Community stewardship maintains reliability.</p>
+  <div className="space-y-5 text-sm">
+    <p className="text-secondary">Spotted ambiguity, accessibility gaps, missing inclusive examples, or structural drift? Please open an issue or PR. Reference the pattern ID(s), describe the observed issue, and include a minimal reproducible example when possible.</p>
+    <div className="grid gap-4 md:grid-cols-3">
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <h3 className="text-sm font-semibold mb-1">Label cheat sheet</h3>
+        <ul className="text-xs space-y-1">
+          <li><code className="text-[11px]">orientation-feedback</code>: general suggestions, roadmap alignment, clarity requests.</li>
+          <li><code className="text-[11px]">a11y-regression</code>: contrast failures, missing labels, keyboard traps.</li>
+          <li><code className="text-[11px]">education</code>: requests for examples, tutorials, or AT walkthroughs.</li>
+        </ul>
+        <p className="text-xs text-secondary mt-2">Add multiple labels if an issue spans categories.</p>
+      </div>
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <h3 className="text-sm font-semibold mb-1">Feedback entry points</h3>
+        <ul className="list-disc pl-4 space-y-1">
+          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=orientation-feedback" target="_blank" rel="noreferrer" className="text-accent hover:underline">Orientation feedback issue</a></li>
+          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=a11y-regression" target="_blank" rel="noreferrer" className="text-accent hover:underline">Accessibility regression report</a></li>
+          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=education" target="_blank" rel="noreferrer" className="text-accent hover:underline">Education/resource request</a></li>
+        </ul>
+        <p className="text-xs text-secondary mt-2">Need to submit privately? Email listed in <Link href="/orientation/accessibility-responsible-use" className="text-accent hover:underline">Responsible Use</Link>.</p>
+      </div>
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <h3 className="text-sm font-semibold mb-1">Pattern / submission placeholders</h3>
+        <p className="text-xs text-secondary">Use the templates below to keep proposals consistent—paste them directly into GitHub issues.</p>
+      </div>
+    </div>
+    <div className="grid gap-4 md:grid-cols-2">
+      <div className="p-3 rounded border border-muted bg-surface-2 relative">
+        <div className="flex items-center justify-between mb-2">
+          <span className="font-semibold text-sm">Pattern submission outline</span>
+          <button type="button" aria-label="Copy pattern submission placeholder" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('pattern-submission-placeholder', 'pattern-submission-live')}>Copy</button>
+        </div>
+        <pre id="pattern-submission-placeholder" className="overflow-auto text-xs"><code>{PATTERN_SUBMISSION_PLACEHOLDER}</code></pre>
+        <div id="pattern-submission-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+      </div>
+      <div className="p-3 rounded border border-muted bg-surface-2 relative">
+        <div className="flex items-center justify-between mb-2">
+          <span className="font-semibold text-sm">Orientation contribution note</span>
+          <button type="button" aria-label="Copy contribution placeholder" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('orientation-contribution-placeholder', 'orientation-contribution-live')}>Copy</button>
+        </div>
+        <pre id="orientation-contribution-placeholder" className="overflow-auto text-xs"><code>{CONTRIBUTION_NOTE_PLACEHOLDER}</code></pre>
+        <div id="orientation-contribution-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+      </div>
+    </div>
   </div>
 );
 
@@ -1097,6 +1233,38 @@ const NextSteps = () => (
       <li>Introduce structured adaptation with version tags.</li>
       <li>Share findings—improvements are welcomed.</li>
     </ul>
+  </div>
+);
+
+const LearningPath = () => (
+  <div className="space-y-6 text-sm">
+    <p>Move through Orientation deliberately instead of skimming every section in one sitting. The roadmap below mirrors the Phase 6 plan in our <a className="text-accent hover:underline" href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/PRD.md#phase-6-orientation-enhancements--onboarding-expansion" target="_blank" rel="noreferrer">living PRD</a>.</p>
+    <div className="grid gap-4 md:grid-cols-2">
+      {LEARNING_TRACKS.map(track => (
+        <div key={track.stage} className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+          <p className="text-xs uppercase tracking-wide text-secondary mb-1">{track.stage}</p>
+          <p className="font-semibold text-primary mb-2">{track.outcome}</p>
+          <div className="space-y-1">
+            <p className="text-xs text-secondary">Focus:</p>
+            <ul className="list-disc pl-4 space-y-1">
+              {track.focus.map(item => (
+                <li key={`${track.stage}-${item.href}`}><Link href={item.href} className="text-accent hover:underline">{item.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-3 text-xs text-secondary"><strong>Checkpoint:</strong> {track.checkpoint}</p>
+        </div>
+      ))}
+    </div>
+    <div className="p-4 rounded border border-dashed border-muted bg-surface-2 shadow-sm">
+      <h3 className="text-sm font-semibold mb-1">AI-assisted correction path & telemetry readiness</h3>
+      <p className="mb-2">If an AI-assisted field (General Explanation, Usage Summary, PEIL, Knowledge Intent) looks incorrect, file an issue with the <code className="text-[11px]">ai-assist-correction</code> label so we can trace the enrichment run and update the source JSON. Planned telemetry events (<code className="text-[11px]">orientation_quick_path_click</code>, <code className="text-[11px]">evaluation_copy_action</code>, <code className="text-[11px]">glossary_search</code>) are documented in <a className="text-accent hover:underline" href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/telemetry.md" target="_blank" rel="noreferrer">docs/telemetry.md</a> and can be wired into a backend once we migrate off static hosting.</p>
+      <div className="flex flex-wrap gap-2">
+        <a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=ai-assist-correction" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center px-3 py-1.5 rounded border border-muted bg-surface-1 text-xs font-semibold text-primary hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Open correction issue</a>
+        <a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=orientation-feedback" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center px-3 py-1.5 rounded border border-muted bg-surface-1 text-xs font-semibold text-primary hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Share roadmap feedback</a>
+      </div>
+      <p className="text-xs text-secondary mt-2">Prefer to just follow along? Watch the Phase 6 roadmap section in the PRD—every accepted sub-phase is timestamped so you can see when guidance last evolved.</p>
+    </div>
   </div>
 );
 
@@ -1116,5 +1284,6 @@ export const ORIENTATION_SECTIONS: OrientationSectionMeta[] = [
   { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 13, description: 'Key terms and definitions.', component: <Glossary /> },
   { slug: 'faq', id: 'faq', title: 'FAQ', number: 14, description: 'Frequently asked clarifications.', component: <FAQ /> },
   { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 15, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
-  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 16, description: 'Where to go after orienting.', component: <NextSteps /> }
+  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 16, description: 'Where to go after orienting.', component: <NextSteps /> },
+  { slug: 'learning-path', id: 'learning-path', title: 'Learning Path & Roadmap', number: 17, description: 'Staged journey plus AI-assisted correction and telemetry notes.', component: <LearningPath /> }
 ];
