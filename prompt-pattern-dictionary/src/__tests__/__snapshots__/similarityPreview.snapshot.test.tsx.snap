@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimilarityPreview snapshot matches snapshot structure (table + optional graph container) 1`] = `
+<div
+  class="space-y-4 text-sm"
+>
+  <p>
+    <strong>
+      Semantic Similarity Preview:
+    </strong>
+     Example related patterns surfaced via cosine similarity over embedding vectors (name + description + up to first 3 examples). Scores are exploratory and aid lateral discovery—not categorical truth.
+  </p>
+  <table
+    aria-describedby="similarity-preview-alt"
+    class="text-xs w-full border mt-2"
+  >
+    <thead>
+      <tr
+        class="bg-surface-2 text-secondary"
+      >
+        <th
+          class="p-2 text-left font-semibold"
+        >
+          Pattern ID
+        </th>
+        <th
+          class="p-2 text-left font-semibold"
+        >
+          Similarity Score
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="border-t"
+      >
+        <td
+          class="p-2"
+        >
+          <a
+            aria-label="View pattern 0-0-0"
+            class="text-accent hover:underline"
+            href="/pattern/0-0-0"
+          >
+            0-0-0
+          </a>
+        </td>
+        <td
+          aria-label="Similarity 0.74"
+          class="p-2"
+        >
+          0.74
+        </td>
+      </tr>
+      <tr
+        class="border-t"
+      >
+        <td
+          class="p-2"
+        >
+          <a
+            aria-label="View pattern 0-1-0"
+            class="text-accent hover:underline"
+            href="/pattern/0-1-0"
+          >
+            0-1-0
+          </a>
+        </td>
+        <td
+          aria-label="Similarity 0.69"
+          class="p-2"
+        >
+          0.69
+        </td>
+      </tr>
+      <tr
+        class="border-t"
+      >
+        <td
+          class="p-2"
+        >
+          <a
+            aria-label="View pattern 71-26-6"
+            class="text-accent hover:underline"
+            href="/pattern/71-26-6"
+          >
+            71-26-6
+          </a>
+        </td>
+        <td
+          aria-label="Similarity 0.65"
+          class="p-2"
+        >
+          0.65
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div
+    class="sr-only"
+    id="similarity-preview-alt"
+  >
+    Three sample patterns with descending cosine similarity scores (0.74, 0.69, 0.65) demonstrating relative semantic proximity. Use the comparison tool for real-time multi-pattern analysis.
+  </div>
+  <p
+    class="text-xs text-secondary"
+  >
+    Try the interactive comparison: 
+    <a
+      class="text-accent underline"
+      href="/compare?patterns=0-0-0,0-1-0,71-26-6"
+    >
+      Open comparison view
+    </a>
+    .
+  </p>
+  <details
+    class="group p-3 rounded border border-muted bg-surface-1 shadow-sm"
+  >
+    <summary
+      class="cursor-pointer font-medium text-accent text-sm"
+    >
+      Adaptation ↔ Evaluation Loop Diagram
+    </summary>
+    <div
+      class="mt-2"
+    >
+      <div
+        data-testid="mermaid-mock"
+      />
+      <details
+        class="mt-3 text-xs"
+      >
+        <summary
+          class="cursor-pointer text-accent"
+        >
+          Expanded Text Description (Accessibility)
+        </summary>
+        <p
+          class="mt-1 leading-relaxed"
+        >
+          The loop begins with Adaptation of a prompt pattern, proceeds to Evaluation against golden or stratified cases. Results feed Error Analysis categorizing failures, which informs Targeted Refinement. Refinement produces a revised pattern returning to Adaptation, forming a continuous reliability cycle.
+        </p>
+      </details>
+    </div>
+  </details>
+</div>
+`;

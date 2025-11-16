@@ -1,6 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import MermaidDiagram from '@/components/diagram/MermaidDiagram';
+
+const DecisionTreeWidget = dynamic(
+  () => import('../components/DecisionTreeWidget').then(mod => ({ default: mod.DecisionTreeWidget })),
+  {
+    ssr: false,
+    loading: () => <p className="text-xs text-muted">Loading decision aid…</p>
+  }
+);
 
 export interface OrientationSectionMeta {
   slug: string;
@@ -14,6 +23,143 @@ export interface OrientationSectionMeta {
 
 // Migrated components from legacy single-page Orientation (headings removed; page/all wrappers provide numbering headings).
 // (Original QuickStart replaced below with concrete mini scenario + evaluation stub.)
+
+const copySnippet = (codeElementId: string, liveRegionId: string) => {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
+  const source = document.getElementById(codeElementId);
+  if (!source) return;
+  const text = source.textContent ?? '';
+  navigator.clipboard.writeText(text).then(() => {
+    const liveRegion = document.getElementById(liveRegionId);
+    if (liveRegion) liveRegion.textContent = 'Copied snippet to clipboard';
+  });
+};
+
+const FAILURE_MODES = [
+  {
+    name: 'Misclassification',
+    indicator: 'Correct label drops below target or rationales contradict verdict',
+    action: 'Revisit ACTION rules, add contrastive examples, tighten evaluation rubric.'
+  },
+  {
+    name: 'Missing Field',
+    indicator: 'Required JSON keys absent or null >5% of runs',
+    action: 'Promote fields into FORMAT instructions, add fail-closed guard (reject incomplete input).'
+  },
+  {
+    name: 'Hallucinated Field',
+    indicator: 'Model invents keys or unsupported references',
+    action: 'Reinforce RESPONSE section with explicit “do not add” rule; include schema validator in harness.'
+  },
+  {
+    name: 'Formatting Drift',
+    indicator: 'Outputs stop parsing cleanly; increased ad-hoc prose',
+    action: 'Add pre/post fences, reiterate deterministic ordering, and validate with parser before scoring.'
+  },
+  {
+    name: 'Biased / Exclusionary Language',
+    indicator: 'Stereotyped rationale wording or uneven error rates across demographic variants',
+    action: 'Inject diverse edge cases, add fairness assertions, and log metrics per cohort.'
+  }
+];
+
+const METRIC_GUIDANCE = [
+  { metric: 'Exact Match %', use: 'Structured extraction or classification with discrete labels', target: '≥90% on a stratified golden set (min 40 items).' },
+  { metric: 'JSON Validity Rate', use: 'Any schema-constrained response', target: '≥98% parse success with required keys present.' },
+  { metric: 'Rationale Completeness', use: 'Explain-then-decide patterns', target: '100% of rows include non-empty rationale tied to evidence.' },
+  { metric: 'Latency & Token Budget', use: 'Operational monitoring', target: 'Stay within agreed ceiling; alert when >20% slower or >15% longer than baseline.' }
+];
+
+const DRIFT_SIGNALS = [
+  'Role fidelity slips (model begins ignoring ROLE persona after adaptations).',
+  'Format error rate trends upward for the last 20 executions.',
+  'Knowledge intent shifts unintentionally (e.g., retrieval prompt starts tutoring).',
+  'Rationales reuse verbatim text from unrelated samples (indicates memorization or context leak).',
+  'Guardrail phrases disappear (e.g., “Reject incomplete input”), hinting the Template was trimmed too aggressively.'
+];
+
+const TEMPLATE_EXCERPT = `ROLE: Rank policy proposals against zero-trust rubric.
+CONTEXT: Each proposal includes scope, controls, and rollout notes.
+ACTION: Produce a JSON table with fields policy_name, coverage_gap, escalation.
+FORMAT: JSON array, deterministic order.
+RESPONSE: Include one-sentence rationale per entry.`;
+
+const BRACKETED_SYNTHESIS_EXAMPLE = `[Rank zero-trust proposals | return JSON array policy_name, coverage_gap, escalation, rationale | reject proposals missing rollout notes]`;
+
+const JS_EVAL_HARNESS_CODE = `// eval-harness.test.ts
+// Minimal illustrative harness (pseudo)
+import { runModel } from '../model';
+import golden from './golden.json'; // [{input, expectedClassification}]
+
+test('structure & classification', async () => {
+  const prompt = buildPrompt(golden.map(g => g.input));
+  const raw = await runModel(prompt);
+  const data = JSON.parse(raw);
+  expect(Array.isArray(data)).toBe(true);
+  expect(data).toHaveLength(golden.length);
+  data.forEach((row, i) => {
+    expect(['benign','suspicious','malicious']).toContain(row.classification);
+    expect(row.rationale).toBeTruthy();
+  });
+});
+
+test('golden alignment (sample)', async () => {
+  const prompt = buildPrompt(golden.slice(0,3).map(g => g.input));
+  const raw = await runModel(prompt);
+  const data = JSON.parse(raw);
+  data.forEach((row, i) => {
+    // relaxed match for rationale keyword
+    expect(row.classification).toBe(golden[i].expectedClassification);
+  });
+});
+
+function buildPrompt(lines){
+  return 'ROLE: classify security logs\\nACTION: output JSON array with classification,rationale\\nLOG_LINES:\\n' + lines.map((l,i)=> (i+1)+'. '+ l).join('\\n');
+}`;
+
+const PY_EVAL_HARNESS_CODE = `# test_evaluate_pattern.py
+import json
+from harness import run_model, load_golden
+
+def test_structure_and_fields():
+    golden = load_golden()
+    prompt = build_prompt([case["input"] for case in golden])
+    parsed = json.loads(run_model(prompt))
+    assert len(parsed) == len(golden)
+    for row in parsed:
+        assert row.get("classification") in {"benign", "suspicious", "malicious"}
+        assert isinstance(row.get("rationale"), str) and row["rationale"].strip()
+
+def test_sample_alignment():
+    sample = load_golden(limit=5)
+    prompt = build_prompt([case["input"] for case in sample])
+    parsed = json.loads(run_model(prompt))
+    mismatches = [row for row, expected in zip(parsed, sample)
+                  if row["classification"] != expected["expected"]]
+    assert len(mismatches) <= 1, "More than one mismatch triggers adaptation"
+
+def build_prompt(lines):
+    joined = "\\n".join(f"{i+1}. {line}" for i, line in enumerate(lines))
+    return f"""ROLE: classify security logs
+CONTEXT: Each line contains timestamp + message
+ACTION: Return JSON array with classification,rationale
+FORMAT: JSON array, deterministic order
+RESPONSE: Include rationale tied to evidence
+LOG_LINES:\n{joined}
+"""`;
+
+const CHANGE_LOG_SNIPPET = `pattern: 71-45-2
+date: 2025-11-16
+change:
+  context: Added domain specificity for academic peer review (removed generic 'document' phrasing)
+rationale: Improve clarity; reduce ambiguous artifact references
+evaluation:
+  sample_size: 8
+  structure_compliance: 100%
+  metric_delta: "Rationale completeness +12%"
+notes: >
+  Logged in evaluation notebook with before/after diff screenshot.
+`;
 
 const WhatIsPattern = () => (
   <div>
@@ -113,6 +259,17 @@ const PatternAnatomy = () => (
         </ul>
       </div>
     </div>
+    <div className="mt-4 p-4 rounded border border-muted bg-surface-1 shadow-sm">
+      <h3 className="text-sm font-semibold mb-2">Template Mutation Guardrails</h3>
+      <ol className="list-decimal pl-5 space-y-1 text-sm">
+        <li><strong>Sequence edits:</strong> adjust context nouns → examples → ACTION wording before touching FORMAT or RESPONSE keys.</li>
+        <li><strong>One structural change per iteration:</strong> re-evaluate after moving or rephrasing any key.</li>
+        <li><strong>Bracket parity:</strong> keep the optional bracketed line synchronized with the full Template.</li>
+        <li><strong>Fail-closed clauses stay visible:</strong> do not delete “reject/abort” instructions unless you log a mitigation.</li>
+        <li><strong>Version every key change:</strong> bump pattern version and capture metrics whenever ROLE, ACTION, FORMAT, or RESPONSE text shifts.</li>
+      </ol>
+      <p className="text-xs text-secondary mt-2">Guardrails maintain comparability between evaluations and provide auditors a clear chain of custody for structural edits.</p>
+    </div>
     <details className="my-6 p-4 rounded-lg bg-surface-1 border border-muted shadow-sm group">
       <summary className="cursor-pointer text-sm font-semibold text-accent mb-2 flex items-center gap-2">
         Simplified Structure Overview <span className="text-xs text-secondary font-normal">(keys & relationships)</span>
@@ -135,6 +292,56 @@ const PatternAnatomy = () => (
         <p className="mt-2 text-xs leading-relaxed">A Pattern centers on its Template. The Template enumerates five required keys ensuring tasks are explicit and auditable. General Explanation and Usage Summary sit above the Template for pedagogical orientation (what it does) and operational guidance (how to apply). Knowledge Intent classifies the pattern’s knowledge flow quadrant for analytics and evaluation prioritization. PEIL derives a structured system prompt variant from the authoritative Template + Application tags—never rewriting the underlying research Template. Examples attach to the Pattern to demonstrate usage and seed similarity computations. Application tags contextualize domain fit. Adaptation Notes and Evaluation Hints form an iterative loop around the Template—changes to structure trigger re‑evaluation. Similar Patterns form a peripheral ring enabling lateral exploration without losing structural grounding.</p>
       </details>
     </details>
+    <div className="mt-6 grid gap-4 md:grid-cols-2">
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
+        <h3 className="text-sm font-semibold mb-2">Field Boundaries</h3>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><strong>Description</strong>: Research-authoritative narrative. Preserve provenance; only fix typos.</li>
+          <li><strong>General Explanation</strong>: Short ELI12 teaching paragraph translating research into plain language.</li>
+          <li><strong>Usage Summary</strong>: Pragmatic “when/how to run this” outline including evaluation hooks.</li>
+          <li><strong>Template vs PEIL</strong>: Template is the canonical 5-key scaffold; PEIL is a derivative automation prompt that must reuse those keys verbatim.</li>
+        </ul>
+      </div>
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
+        <h3 className="text-sm font-semibold mb-2">PEIL Usage Example</h3>
+        <p className="text-sm mb-2">Template excerpt:</p>
+        <pre className="text-xs bg-surface-2 border border-muted rounded p-3 overflow-auto mb-3"><code>{TEMPLATE_EXCERPT}</code></pre>
+        <p className="text-sm mb-1">PEIL derivation (never replaces Template, but wraps it for downstream automation):</p>
+        <pre className="text-xs bg-surface-2 border border-muted rounded p-3 overflow-auto"><code>{`System Goal: Evaluate each zero-trust policy proposal for coverage gaps.
+      Rules:
+      - Reuse the ROLE/CONTEXT/ACTION/FORMAT/RESPONSE keys exactly as authored.
+      - Reject inputs missing rollout notes.
+      - Output JSON with fields policy_name, coverage_gap, escalation, rationale.
+      - Flag policies lacking MFA in rollout plan as escalation="high".`}</code></pre>
+        <p className="text-xs text-secondary mt-2">Notice how PEIL reiterates Template keys, adds operational guardrails, and is safe to paste into orchestration tooling while maintaining provenance.</p>
+      </div>
+    </div>
+    <div className="mt-6 grid gap-4 md:grid-cols-2">
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
+        <h3 className="text-sm font-semibold mb-2">Template ↔ Bracketed Synthesis</h3>
+        <div className="space-y-3">
+          <div>
+            <p className="text-xs text-secondary mb-1">Expanded 5-key structure</p>
+            <pre className="text-xs bg-surface-2 border border-muted rounded p-3 overflow-auto"><code>{TEMPLATE_EXCERPT}</code></pre>
+          </div>
+          <div>
+            <p className="text-xs text-secondary mb-1">Single-line bracketed recall</p>
+            <pre className="text-xs bg-surface-2 border border-muted rounded p-3 overflow-auto"><code>{BRACKETED_SYNTHESIS_EXAMPLE}</code></pre>
+          </div>
+          <p className="text-xs text-secondary">Bracketed lines are optional summaries kept under ~120 characters and must reference the same ROLE → ACTION → FORMAT guardrails. They speed orientation but should never be edited without updating the full Template.</p>
+        </div>
+      </div>
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
+        <h3 className="text-sm font-semibold mb-2">Bracket Usage Checklist</h3>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><strong>No new instructions:</strong> only compress existing Template text.</li>
+          <li><strong>Maintain order:</strong> mention ROLE intent before ACTION outputs.</li>
+          <li><strong>Call out guardrails:</strong> include the most critical constraint (e.g., “reject incomplete input”).</li>
+          <li><strong>Link to Template:</strong> clicking the badge scrolls to the expanded 5-key section to verify fidelity.</li>
+          <li><strong>Version along with Template:</strong> whenever keys change, update the bracket line in the same commit/log entry.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 );
 
@@ -168,10 +375,8 @@ const Choosing = () => {
       </ul>
       <p><strong>Tie-break rule:</strong> Pick the pattern with fewer <em>critical</em> (not cosmetic) failures under pilot evaluation.</p>
       {showTree && (
-        // dynamic import not strictly required; small component
         <div className="mt-4">
-          {/** @ts-ignore - component is client only */}
-          {require('../components/DecisionTreeWidget').DecisionTreeWidget({})}
+          <DecisionTreeWidget />
         </div>
       )}
     </div>
@@ -210,7 +415,18 @@ const Adaptation = () => (
       <li><strong>Minimize example bloat</strong>: prefer 2–3 crisp examples over sprawling narratives.</li>
       <li><strong>Ethical adaptation</strong>: Avoid reinforcing stereotypes; stress neutral or diverse entities.</li>
       <li><strong>Re-run evaluation</strong> after each structural shift (no “silent merges”).</li>
+      <li><strong>Bracket + Template parity</strong>: whenever you add/remove instruction text, update both the expanded keys and the bracketed summary.</li>
+      <li><strong>Change discipline</strong>: one structural adjustment per commit/log entry keeps drift analysis straightforward.</li>
     </ul>
+    <div className="mt-4 p-4 rounded border border-muted bg-surface-1 shadow-sm">
+      <h3 className="text-sm font-semibold mb-2">Minimal Change Log Snippet</h3>
+      <p className="text-xs text-secondary mb-2">Capture every structural edit with pattern ID, rationale, and evaluation deltas. Copy the template below into your tracking doc or repo.</p>
+      <div className="relative">
+        <button type="button" aria-label="Copy change log snippet" className="absolute top-2 right-2 text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('change-log-snippet', 'change-log-live')}>Copy</button>
+        <pre id="change-log-snippet" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{CHANGE_LOG_SNIPPET}</code></pre>
+        <div id="change-log-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+      </div>
+    </div>
   <p className="mt-3 text-xs text-muted">If a pattern diverges heavily, consider naming it explicitly (fork) to preserve lineage.</p>
   </div>
 );
@@ -249,35 +465,83 @@ const AntiPatterns = () => (
   </div>
 );
 
-// Evaluation harness code snippet (escaped to avoid TSX template parsing issues)
-const EVAL_HARNESS_CODE = `// eval-harness.test.ts\n// Minimal illustrative harness (pseudo)\nimport { runModel } from '../model';\nimport golden from './golden.json'; // [{input, expectedClassification}]\n\ntest('structure & classification', async () => {\n  const prompt = buildPrompt(golden.map(g => g.input));\n  const raw = await runModel(prompt);\n  const data = JSON.parse(raw);\n  expect(Array.isArray(data)).toBe(true);\n  expect(data).toHaveLength(golden.length);\n  data.forEach((row, i) => {\n    expect(['benign','suspicious','malicious']).toContain(row.classification);\n    expect(row.rationale).toBeTruthy();\n  });\n});\n\ntest('golden alignment (sample)', async () => {\n  const prompt = buildPrompt(golden.slice(0,3).map(g => g.input));\n  const raw = await runModel(prompt);\n  const data = JSON.parse(raw);\n  data.forEach((row, i) => {\n    // relaxed match for rationale keyword\n    expect(row.classification).toBe(golden[i].expectedClassification);\n  });\n});\n\n// Optional helper: ensures JSON parse before further assertions\nfunction buildPrompt(lines){\n  return 'ROLE: classify security logs\\nACTION: output JSON array with classification,rationale\\nLOG_LINES:\\n' + lines.map((l,i)=> (i+1)+'. '+ l).join('\\n');\n}`;
-
 const Evaluation = () => (
-  <div className="space-y-4 text-sm">
-    <div className="space-y-3">
-      <p><strong>Suggested Metrics:</strong> accuracy, precision/recall (for extraction), structural compliance, rationale completeness, latency, token efficiency.</p>
-      <p><strong>Failure Mode Taxonomy:</strong> (a) Misclassification (b) Missing field (c) Hallucinated field (d) Formatting drift (e) Biased or exclusionary phrasing.</p>
-      <p><strong>Evaluation Harness:</strong> Start with a CSV/JSON golden set (10–50 rows). Add edge cases representing dialectal variation, varied names, and counterfactuals.</p>
-      <p><strong>Change Discipline:</strong> If more than one structural edit occurs, re-baseline; track a diff log (date, change, metric deltas).</p>
-      <p><strong>Automation Tip:</strong> Consider scripting a validation pass that checks for required keys and JSON parse success before human review.</p>
-    </div>
-    <details className="group">
-      <summary className="cursor-pointer font-medium text-accent">Evaluation Harness Stub (Node/Jest)</summary>
-      <div className="mt-2">
-        <div className="relative">
-          <button type="button" aria-label="Copy harness code" className="absolute top-2 right-2 text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => {
-            const code = document.getElementById('eval-harness-code')?.textContent || '';
-            navigator.clipboard.writeText(code).then(() => {
-              const live = document.getElementById('eval-harness-live');
-              if (live) live.textContent = 'Copied harness to clipboard';
-            });
-          }}>Copy</button>
-          <pre id="eval-harness-code" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{EVAL_HARNESS_CODE}</code></pre>
-          <div id="eval-harness-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
-        </div>
-        <p className="mt-2 text-xs text-muted">Experimental: treat harness as starting scaffold; adapt metrics to task. Provenance noted when AI-assisted changes occur.</p>
+  <div className="space-y-5 text-sm">
+    <div>
+      <h3 className="text-sm font-semibold mb-2">Metrics & Drift Watch</h3>
+      <table className="text-xs w-full border" aria-label="Suggested evaluation metrics">
+        <thead>
+          <tr className="bg-surface-2 text-secondary">
+            <th className="p-2 text-left font-semibold">Metric</th>
+            <th className="p-2 text-left font-semibold">Use When</th>
+            <th className="p-2 text-left font-semibold">Target / Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          {METRIC_GUIDANCE.map(row => (
+            <tr key={row.metric} className="border-t">
+              <td className="p-2 font-medium">{row.metric}</td>
+              <td className="p-2">{row.use}</td>
+              <td className="p-2">{row.target}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="mt-3">
+        <h4 className="text-xs font-semibold uppercase tracking-wide text-secondary">Prompt Drift Signals</h4>
+        <ul className="list-disc pl-5 space-y-1 mt-1 text-sm">
+          {DRIFT_SIGNALS.map(signal => (
+            <li key={signal}>{signal}</li>
+          ))}
+        </ul>
+        <p className="text-xs text-muted mt-2">Investigate when any signal persists for &gt;2 evaluation cycles; log mitigation steps in the change log.</p>
       </div>
-    </details>
+    </div>
+    <div>
+      <h3 className="text-sm font-semibold mb-2">Failure Mode Taxonomy</h3>
+      <table className="text-xs w-full border">
+        <thead>
+          <tr className="bg-surface-2 text-secondary">
+            <th className="p-2 text-left font-semibold">Mode</th>
+            <th className="p-2 text-left font-semibold">Indicator</th>
+            <th className="p-2 text-left font-semibold">Corrective Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {FAILURE_MODES.map(mode => (
+            <tr key={mode.name} className="border-t">
+              <td className="p-2 font-medium">{mode.name}</td>
+              <td className="p-2">{mode.indicator}</td>
+              <td className="p-2">{mode.action}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="text-xs text-secondary mt-2">Tag each evaluation finding with one of these modes before proposing adaptations—this keeps remediation focused.</p>
+    </div>
+    <div>
+      <h3 className="text-sm font-semibold mb-2">Evaluation Harness Examples</h3>
+      <p className="text-xs text-secondary mb-3">Start with a CSV/JSON golden set (10–50 rows). Each harness below enforces JSON validity, label coverage, and light alignment checks. Swap in your own <code>run_model</code> implementation.</p>
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="p-3 rounded border border-muted bg-surface-1">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold">Python · pytest</span>
+            <button type="button" aria-label="Copy Python harness" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('eval-harness-py', 'eval-harness-py-live')}>Copy</button>
+          </div>
+          <pre id="eval-harness-py" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{PY_EVAL_HARNESS_CODE}</code></pre>
+          <div id="eval-harness-py-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+        </div>
+        <div className="p-3 rounded border border-muted bg-surface-1">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold">JavaScript · Jest</span>
+            <button type="button" aria-label="Copy JavaScript harness" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('eval-harness-js', 'eval-harness-js-live')}>Copy</button>
+          </div>
+          <pre id="eval-harness-js" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{JS_EVAL_HARNESS_CODE}</code></pre>
+          <div id="eval-harness-js-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+        </div>
+      </div>
+      <p className="text-xs text-muted mt-2">Automation tip: run schema validation before expensive scoring, then log pass/fail + metric deltas alongside the change log snippet.</p>
+    </div>
   </div>
 );
 
@@ -392,6 +656,21 @@ const QuickStart = () => (
         <summary className="cursor-pointer text-accent font-medium">Evaluation Harness Stub (Node / Jest)</summary>
         <pre className="mt-2 overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{`// pseudo-eval.test.ts\n// assuming callModel(prompt) returns model JSON string\nconst GOLDEN = [\n  { classification: 'suspicious', rationale: /12 attempts/i },\n  { classification: 'benign' },\n  { classification: 'malicious', rationale: /outbound/i }\n];\n\n test('classification structure', async () => {\n   const output = JSON.parse(await callModel(filledPrompt));\n   expect(output).toHaveLength(3);\n   output.forEach(o => expect(['benign','suspicious','malicious']).toContain(o.classification));\n });\n\n test('critical rationale hints present', async () => {\n   const output = JSON.parse(await callModel(filledPrompt));\n   expect(output[0].rationale).toMatch(GOLDEN[0].rationale);\n });`}</code></pre>
       </details>
+    </div>
+    <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+      <h3 className="text-sm font-semibold mb-2 flex items-center gap-2">
+        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-accent/10 text-accent text-[11px] font-bold">5</span>
+        Five-Minute Tour
+      </h3>
+      <ol className="list-decimal pl-6 space-y-2 text-sm">
+        <li><strong>Search with intent keywords</strong> (e.g., “triage logs”, “refine policy”). Use the homepage search bar or Quick Paths.</li>
+        <li><strong>Open a pattern</strong> and note the <code className="text-xs">ID</code> badge for future similarity lookups.</li>
+        <li><strong>Expand the Template & bracketed summary</strong> to internalize the five keys before editing.</li>
+        <li><strong>Copy one Prompt Example</strong>, swap placeholders with your context, and respect schema/formatting constraints.</li>
+        <li><strong>Scan Similar Patterns + Knowledge Intent</strong> to compare nearby strategies; jot deltas in a lightweight change log.</li>
+        <li><strong>Run the evaluation harness stub (or yours)</strong> on 3–5 cases, capture pass/fail plus rationale snippets, and decide next adaptation step.</li>
+      </ol>
+      <p className="text-xs text-secondary mt-3">Track Pattern IDs, Template tweaks, and evaluation results in a shared doc—this becomes the minimal audit trail for later comparison.</p>
     </div>
     <div>
       <ol className="list-decimal pl-6 space-y-1">
