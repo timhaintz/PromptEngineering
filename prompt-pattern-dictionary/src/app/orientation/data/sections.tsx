@@ -21,6 +21,12 @@ export interface OrientationSectionMeta {
   component: React.ReactNode; // rendered body (without outer <section>)
 }
 
+interface GlossaryEntry {
+  term: string;
+  letter: string;
+  definition: React.ReactNode;
+}
+
 // Migrated components from legacy single-page Orientation (headings removed; page/all wrappers provide numbering headings).
 // (Original QuickStart replaced below with concrete mini scenario + evaluation stub.)
 
@@ -216,6 +222,155 @@ const MANUAL_COMPARISON_STEPS = [
   'Review Application, Usage Summary, and AI-assisted notes to understand domain assumptions before borrowing text.',
   'Inspect Prompt Examples plus their Similar Example chips to see concrete structural differences or shared rationales.',
   'Summarize findings + next experiment in the Minimal Change Log snippet (pattern IDs, rationale, expected metric deltas).'
+];
+
+const FEATURE_FLAGS = [
+  {
+    env: 'NEXT_PUBLIC_SHOW_DECISION_TREE',
+    surface: 'Choosing Patterns – Decision Tree widget',
+    defaultState: 'Off (static heuristics only)',
+    visibility: 'Set to “1” to render the interactive decision helper; when undefined the written heuristics remain.'
+  },
+  {
+    env: 'NEXT_PUBLIC_SHOW_ORIENTATION_GRAPH',
+    surface: 'Similarity Preview – static network teaser',
+    defaultState: 'Off (graph hidden)',
+    visibility: 'Set to “1” to expose the SVG teaser; default keeps load light on slower devices.'
+  }
+];
+
+const GLOSSARY_ENTRIES: GlossaryEntry[] = [
+  {
+    term: 'Adaptation',
+    letter: 'A',
+    definition: (
+      <>
+        Domain-specific customization of a pattern while preserving the five-key Template labels. Track each change, cite the observed failure mode, and rerun evaluations (see{' '}
+        <Link href="#adaptation" className="text-accent hover:underline">Adaptation & Remix</Link>).
+      </>
+    )
+  },
+  {
+    term: 'Application',
+    letter: 'A',
+    definition: (
+      <>
+        Chips or prose describing where a pattern has been validated. They tether enrichment fields to research reality and appear in the{' '}
+        <Link href="#pattern-anatomy" className="text-accent hover:underline">Pattern Anatomy</Link> layout.
+      </>
+    )
+  },
+  {
+    term: 'Bias Mitigation',
+    letter: 'B',
+    definition: (
+      <>
+        The practice of inserting diverse examples, fairness assertions, and monitoring hooks so outputs perform evenly across cohorts. See the{' '}
+        <Link href="#quality-evaluation" className="text-accent hover:underline">Quality & Evaluation</Link> section for taxonomy + metrics.
+      </>
+    )
+  },
+  {
+    term: 'Bracketed Synthesis',
+    letter: 'B',
+    definition: (
+      <>
+        Optional single-line recap of ROLE → ACTION → FORMAT guardrails (e.g.,{' '}
+        <code className="text-[11px]">[Rank proposals | output JSON | reject missing rollout notes]</code>). Must mirror the full Template—edit both together via{' '}
+        <Link href="#pattern-anatomy" className="text-accent hover:underline">Pattern Anatomy</Link> guardrails.
+      </>
+    )
+  },
+  {
+    term: 'Dual-Use Pattern',
+    letter: 'D',
+    definition: (
+      <>
+        A prompt structure that can help both defensive and potentially harmful tasks. Orientation labels these in{' '}
+        <Link href="#accessibility-responsible-use" className="text-accent hover:underline">Accessibility & Responsible Use</Link> and pairs them with mitigation tips before adaptation.
+      </>
+    )
+  },
+  {
+    term: 'Enrichment',
+    letter: 'E',
+    definition: (
+      <>
+        AI-assisted augmentation pipeline that fills General Explanation, Usage Summary, Knowledge Intent, Domain examples, and PEIL fields in{' '}
+        <code className="text-[11px]">public/data/normalized-patterns.json</code>. Every enrichment run logs the assisting model + timestamp (see <code className="text-[11px]">aiAssisted*</code> fields) and respects the source Template.
+      </>
+    )
+  },
+  {
+    term: 'Knowledge Intent',
+    letter: 'K',
+    definition: (
+      <>
+        Quadrant describing knowledge flow: Refinement & Clarification, Knowledge Retrieval, Co-Discovery & Exploration, or AI Tutoring & Tuning. It informs Quick Paths and{' '}
+        <Link href="#search-similarity" className="text-accent hover:underline">Search & Similarity</Link> guidance when deciding which pattern to trust.
+      </>
+    )
+  },
+  {
+    term: 'Pattern',
+    letter: 'P',
+    definition: (
+      <>
+        Named, reusable design for prompting a model with predictable behavior. It couples intent, structural scaffolding, and evaluation hooks—see{' '}
+        <Link href="#what-is-a-pattern" className="text-accent hover:underline">What Is a Pattern</Link> for the narrative definition.
+      </>
+    )
+  },
+  {
+    term: 'PEIL (Prompt Engineering Instructional Language)',
+    letter: 'P',
+    definition: (
+      <>
+        Structured system prompt derived from the authoritative Template + Application pairing. PEIL wraps, but never rewrites, research text so orchestration tooling can ingest it safely. Examples live in{' '}
+        <Link href="#pattern-anatomy" className="text-accent hover:underline">Pattern Anatomy</Link>.
+      </>
+    )
+  },
+  {
+    term: 'Provenance Badge',
+    letter: 'P',
+    definition: (
+      <>
+        Visual indicator marking AI-assisted fields across Orientation and pattern pages. The badge links to an explanation of enrichment scope plus review expectations in{' '}
+        <Link href="#accessibility-responsible-use" className="text-accent hover:underline">Accessibility & Responsible Use</Link>.
+      </>
+    )
+  },
+  {
+    term: 'Similarity',
+    letter: 'S',
+    definition: (
+      <>
+        Cosine similarity over embeddings built from pattern names, descriptions, and leading examples. Use it for exploratory navigation (see{' '}
+        <Link href="#search-similarity" className="text-accent hover:underline">Search & Similarity UX</Link>)—evaluation still relies on metrics.
+      </>
+    )
+  },
+  {
+    term: 'Template (5-Key)',
+    letter: 'T',
+    definition: (
+      <>
+        Canonical scaffold: ROLE, CONTEXT, ACTION, FORMAT, RESPONSE. It is the audit surface for every change request; details live in{' '}
+        <Link href="#pattern-anatomy" className="text-accent hover:underline">Pattern Anatomy</Link>.
+      </>
+    )
+  },
+  {
+    term: 'Usage Summary',
+    letter: 'U',
+    definition: (
+      <>
+        Pragmatic “how to run it” note derived during enrichment. It complements the Description (research voice) and General Explanation (teaching voice). Cross-reference{' '}
+        <Link href="#pattern-anatomy" className="text-accent hover:underline">Pattern Anatomy</Link> to see how the fields align.
+      </>
+    )
+  }
 ];
 
 const WhatIsPattern = () => (
@@ -838,49 +993,69 @@ const QuickStart = () => (
   </div>
 );
 // Glossary (restored after patch collision)
-const Glossary = () => (
-  <div>
-    <nav aria-label="Glossary index" className="mb-3 flex flex-wrap gap-1 text-[11px]">
-      {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(ch => (
-        <a key={ch} href={`#term-${ch}`} className="px-1.5 py-0.5 rounded bg-surface-2 border border-muted hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={`Jump to terms starting with ${ch}`}>{ch}</a>
-      ))}
-    </nav>
-    <dl className="space-y-2 text-sm">
-      <div>
-        <dt className="font-medium">Pattern</dt>
-        <dd>Named structural design for consistent model interaction.</dd>
+const Glossary = () => {
+  const letters = Array.from(new Set(GLOSSARY_ENTRIES.map(entry => entry.letter)));
+  let lastLetter = '';
+  return (
+    <div>
+      <nav aria-label="Glossary index" className="mb-3 flex flex-wrap gap-1 text-[11px]">
+        {letters.map(letter => (
+          <a key={letter} href={`#term-${letter}`} className="px-1.5 py-0.5 rounded bg-surface-2 border border-muted hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={`Jump to terms starting with ${letter}`}>{letter}</a>
+        ))}
+      </nav>
+      <dl className="space-y-3 text-sm">
+        {GLOSSARY_ENTRIES.map(entry => {
+          const letterChanged = entry.letter !== lastLetter;
+          lastLetter = entry.letter;
+          return (
+            <div key={entry.term}>
+              {letterChanged && <div id={`term-${entry.letter}`} aria-hidden="true"></div>}
+              <dt className="font-medium">{entry.term}</dt>
+              <dd className="text-sm text-secondary">{entry.definition}</dd>
+            </div>
+          );
+        })}
+      </dl>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
+          <h3 className="text-sm font-semibold mb-2">Data cadence & embedding transparency</h3>
+          <p className="text-sm mb-2">Research data lives in <code className="text-[11px]">public/data/normalized-patterns.json</code> with supporting stats inside <code className="text-[11px]">public/data/stats.json</code>. We expose the same metadata in Orientation so users know when artifacts last refreshed.</p>
+          <ul className="list-disc pl-5 space-y-1 text-sm">
+            <li><strong>Weekly ingest (or within 72h of a paper update):</strong> running the normalization pipeline rewrites <code className="text-[11px]">normalized-patterns.json</code> plus the provenance fields that show up in Pattern pages.</li>
+            <li><strong>Embedding refresh policy:</strong> similarity vectors (<code className="text-[11px]">similar-patterns.json</code> + <code className="text-[11px]">similar-examples.json</code>) regenerate at least monthly or whenever ≥10 patterns/examples change so Search & Comparison stay aligned.</li>
+            <li><strong>Transparency surfaces:</strong> the Orientation hub cites <code className="text-[11px]">stats.json.lastProcessed</code> and <code className="text-[11px]">aiAssistedAt</code> timestamps so readers can confirm freshness before trusting enrichment or similarity hints.</li>
+          </ul>
+          <p className="text-xs text-secondary mt-2">If you notice stale data, open an issue referencing the last processed timestamp and affected pattern IDs.</p>
+        </div>
+        <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm overflow-x-auto">
+          <h3 className="text-sm font-semibold mb-2">Feature-flag visibility</h3>
+          <table className="text-xs w-full border">
+            <thead>
+              <tr className="bg-surface-2 text-secondary">
+                <th className="p-2 text-left font-semibold">Env flag</th>
+                <th className="p-2 text-left font-semibold">Surface</th>
+                <th className="p-2 text-left font-semibold">Default / visibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              {FEATURE_FLAGS.map(flag => (
+                <tr key={flag.env} className="border-t align-top">
+                  <td className="p-2 font-mono text-[11px]">{flag.env}</td>
+                  <td className="p-2">{flag.surface}</td>
+                  <td className="p-2 text-xs">
+                    <span className="block font-semibold">Default: {flag.defaultState}</span>
+                    <span className="text-secondary">{flag.visibility}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-xs text-secondary mt-2">Flags are client-visible (prefixed with <code className="text-[11px]">NEXT_PUBLIC_</code>) so you can audit which exploratory widgets are being shown in any given deployment.</p>
+        </div>
       </div>
-      <div>
-        <dt className="font-medium">Template (5-Key)</dt>
-        <dd>Standard scaffold: role, context, action, format, response.</dd>
-      </div>
-      <div>
-        <dt className="font-medium">Bracketed Summary</dt>
-        <dd>Compact single-line representation of the Template intent.</dd>
-      </div>
-      <div>
-        <dt className="font-medium">Application</dt>
-        <dd>Scenario tags or prose describing where the pattern applies.</dd>
-      </div>
-      <div>
-        <dt className="font-medium">Usage Summary</dt>
-        <dd>Concise guidance describing pragmatic deployment steps.</dd>
-      </div>
-      <div>
-        <dt className="font-medium">Adaptation</dt>
-        <dd>Domain-specific customization with structural integrity preserved.</dd>
-      </div>
-      <div>
-        <dt className="font-medium">Similarity</dt>
-        <dd>Embedding-based proximity score guiding exploration.</dd>
-      </div>
-      <div>
-        <dt className="font-medium">Bias Mitigation</dt>
-        <dd>Process of designing prompts and examples to reduce skew across demographic or contextual variation.</dd>
-      </div>
-    </dl>
-  </div>
-);
+    </div>
+  );
+};
 
 const FAQ = () => (
   <div>
