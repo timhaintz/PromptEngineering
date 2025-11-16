@@ -161,6 +161,63 @@ notes: >
   Logged in evaluation notebook with before/after diff screenshot.
 `;
 
+const SIMILARITY_SCORE_LEGEND = [
+  { range: '≥ 0.70', label: 'High structural overlap', guidance: 'Templates share most keys/constraints. Safe to A/B swap with minimal edits; validate metrics before production.' },
+  { range: '0.50 – 0.69', label: 'Related variant', guidance: 'Same intent but different guardrails or personas. Borrow evaluation ideas and adaptation notes; do not paste Template verbatim.' },
+  { range: '< 0.50', label: 'Exploratory only', guidance: 'Distant neighbor for inspiration and research browsing. Expect to re-author Template + metrics.' }
+];
+
+const SEARCH_SYNTAX_HINTS = [
+  {
+    control: 'Search text (default)',
+    syntax: 'triage logs classification',
+    details: 'Matches pattern name, description, category, tags, and first prompt examples. Combine domain + action words for best recall.'
+  },
+  {
+    control: 'Boolean + Fuzzy toggle',
+    syntax: 'reasoning AND ("policy review" OR triage) NOT translation · prompt~1',
+    details: 'Enable the toggle to use AND / OR / NOT, phrase quotes, and fuzzy edit distance (slider 0–3). Use when you must include or exclude specific intents.'
+  },
+  {
+    control: 'Search type dropdown',
+    syntax: 'Type: Prompt Example',
+    details: 'Switch between Prompt Pattern, Prompt Example, Category, or Logic searches. Example mode inspects the actual prompt body text.'
+  },
+  {
+    control: 'Category selectors',
+    syntax: 'Category type: Semantic AI → Filter by category: Evaluation & Scoring',
+    details: 'Pivot between original research categories and semantic AI groupings; narrow results by a single category when browsing patterns/examples.'
+  },
+  {
+    control: 'Logic filter (Category mode)',
+    syntax: 'Search type: Category · Logic filter: Reasoning & Analysis',
+    details: 'When viewing categories, filter to a logic family to explore adjacent pattern families without crafting textual queries.'
+  },
+  {
+    control: 'Clear & reset',
+    syntax: 'Pill: “Clear filters”',
+    details: 'Use the pill in the control bar to drop accumulated filters before switching search types to avoid zero-result traps.'
+  }
+];
+
+const SEARCH_STRATEGIES = [
+  'Pair an intent verb with the artifact or domain (e.g., "rank" + "policy" or "summarize" + "transcript").',
+  'If you remember a phrasing fragment, switch to Prompt Example mode and search the exact quote.',
+  'Start broad, then layer category filters—overly specific compound queries often return nothing in sparse research domains.',
+  'When Boolean filters are enabled, keep expressions short and lean on parentheses-free precedence: NOT > AND > OR.',
+  'Use similarity chips on any matching pattern to pivot sideways once you have a promising baseline.',
+  'Record interesting Pattern IDs immediately so you can compare or log adaptations later.'
+];
+
+const MANUAL_COMPARISON_STEPS = [
+  'Open two candidate patterns (Ctrl/Cmd+Click Similar Patterns or use the comparison preview link) so each Template is visible side-by-side.',
+  'Capture metadata: Pattern IDs, Knowledge Intent, category, and current version tags in your change log.',
+  'Compare ROLE → RESPONSE keys line-by-line. Highlight any guardrail, schema, or persona differences that would impact evaluation.',
+  'Review Application, Usage Summary, and AI-assisted notes to understand domain assumptions before borrowing text.',
+  'Inspect Prompt Examples plus their Similar Example chips to see concrete structural differences or shared rationales.',
+  'Summarize findings + next experiment in the Minimal Change Log snippet (pattern IDs, rationale, expected metric deltas).'
+];
+
 const WhatIsPattern = () => (
   <div>
     <p>A prompt pattern is a <strong>reusable, named design structure</strong> for interacting with a language model so that behavior is <em>predictable, inspectable, and improvable</em>. It captures <em>intent</em>, <em>structural scaffolding</em>, and <em>adaptation guidance</em>. Think of patterns as <strong>primitives</strong> for assembling reliable language workflows—not secret incantations.</p>
@@ -545,6 +602,90 @@ const Evaluation = () => (
   </div>
 );
 
+const SearchSimilarityGuidance = () => (
+  <div className="space-y-6 text-sm">
+    <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="text-sm font-semibold">Search syntax mini-guide</h3>
+        <Link href="/search" className="text-xs text-accent hover:underline">Open search</Link>
+      </div>
+      <table className="text-xs w-full border mt-3">
+        <thead>
+          <tr className="bg-surface-2 text-secondary">
+            <th className="p-2 text-left font-semibold">Control</th>
+            <th className="p-2 text-left font-semibold">Syntax / Example</th>
+            <th className="p-2 text-left font-semibold">What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          {SEARCH_SYNTAX_HINTS.map(hint => (
+            <tr key={hint.control} className="border-t align-top">
+              <td className="p-2 font-medium">{hint.control}</td>
+              <td className="p-2 whitespace-pre-line">{hint.syntax}</td>
+              <td className="p-2">{hint.details}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="text-xs text-secondary mt-2">The Boolean helper drawer on the search page repeats these rules with operator precedence reminders.</p>
+    </div>
+
+    <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+      <h3 className="text-sm font-semibold mb-2">Best-effort query plays</h3>
+      <ul className="list-disc pl-5 space-y-1 text-sm">
+        {SEARCH_STRATEGIES.map(strategy => (
+          <li key={strategy}>{strategy}</li>
+        ))}
+      </ul>
+      <p className="text-xs text-secondary mt-2">If a query returns zero results, clear filters, drop adjectives, and try a different search type before assuming the pattern is missing.</p>
+    </div>
+
+    <div className="grid gap-4 md:grid-cols-2">
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <h3 className="text-sm font-semibold mb-2">Similarity score legend</h3>
+        <table className="text-xs w-full border">
+          <thead>
+            <tr className="bg-surface-2 text-secondary">
+              <th className="p-2 text-left font-semibold">Score Band</th>
+              <th className="p-2 text-left font-semibold">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            {SIMILARITY_SCORE_LEGEND.map(row => (
+              <tr key={row.range} className="border-t">
+                <td className="p-2 font-medium">{row.range}</td>
+                <td className="p-2">{row.label}<span className="block text-xs text-secondary">{row.guidance}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="text-xs text-secondary mt-2">Scores rely on cached embeddings (pattern name + description + first three examples). Treat them as discovery signals, not discrete evaluation metrics.</p>
+        <div className="mt-3 p-3 rounded border border-dashed border-muted bg-surface-2 text-xs text-secondary">
+          <p className="font-semibold text-primary mb-1">Preview-only expectation</p>
+          <p>Orientation previews and the <Link href="/comparison" className="text-accent underline">comparison</Link> route currently use precomputed similarity tables. Live ad-hoc embedding generation, exports, and multi-pattern matrices are on the roadmap—until they ship, leverage the manual workflow below and your evaluation harness.</p>
+        </div>
+      </div>
+
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-sm font-semibold">Manual comparison workflow</h3>
+          <button
+            type="button"
+            className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            onClick={() => copySnippet('change-log-snippet', 'change-log-live')}
+          >Copy change-log template</button>
+        </div>
+        <ol className="list-decimal pl-5 space-y-1 text-sm mt-2">
+          {MANUAL_COMPARISON_STEPS.map(step => (
+            <li key={step}>{step}</li>
+          ))}
+        </ol>
+        <p className="text-xs text-secondary mt-2">Use the change log snippet (see Adaptation section) to capture what you compared, which metrics moved, and any drift hypotheses. Attach screenshot diffs or evaluation outputs when possible.</p>
+      </div>
+    </div>
+  </div>
+);
+
 // P3 – Interactive Teasers
 const SimilarityPreview = () => {
   const sample = [
@@ -794,10 +935,11 @@ export const ORIENTATION_SECTIONS: OrientationSectionMeta[] = [
   { slug: 'adaptation', id: 'adaptation', title: 'Adaptation & Remix', number: 7, description: 'Principled iteration, versioning, ethical considerations.', component: <Adaptation /> },
   { slug: 'anti-patterns', id: 'anti-patterns', title: 'Anti-Patterns', number: 8, description: 'Common failure modes and refactoring cues.', component: <AntiPatterns /> },
   { slug: 'quality-evaluation', id: 'quality-evaluation', title: 'Quality & Evaluation', number: 9, description: 'Metrics, failure taxonomy, baselining discipline.', component: <Evaluation /> },
-  { slug: 'similarity-preview', id: 'similarity-preview', title: 'Similarity Preview', number: 10, description: 'Teaser: sample similarity scores, evaluation/adaptation loop, optional static network graph.', component: <SimilarityPreview /> },
-  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 11, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
-  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 12, description: 'Key terms and definitions.', component: <Glossary /> },
-  { slug: 'faq', id: 'faq', title: 'FAQ', number: 13, description: 'Frequently asked clarifications.', component: <FAQ /> },
-  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 14, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
-  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 15, description: 'Where to go after orienting.', component: <NextSteps /> }
+  { slug: 'search-similarity', id: 'search-similarity', title: 'Search & Similarity UX', number: 10, description: 'Search syntax, similarity legend, and manual comparison workflow.', component: <SearchSimilarityGuidance /> },
+  { slug: 'similarity-preview', id: 'similarity-preview', title: 'Similarity Preview', number: 11, description: 'Teaser: sample similarity scores, evaluation/adaptation loop, optional static network graph.', component: <SimilarityPreview /> },
+  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 12, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
+  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 13, description: 'Key terms and definitions.', component: <Glossary /> },
+  { slug: 'faq', id: 'faq', title: 'FAQ', number: 14, description: 'Frequently asked clarifications.', component: <FAQ /> },
+  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 15, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
+  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 16, description: 'Where to go after orienting.', component: <NextSteps /> }
 ];
