@@ -1,15 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import MermaidDiagram from '@/components/diagram/MermaidDiagram';
-
-const DecisionTreeWidget = dynamic(
-  () => import('../components/DecisionTreeWidget').then(mod => ({ default: mod.DecisionTreeWidget })),
-  {
-    ssr: false,
-    loading: () => <p className="text-xs text-muted">Loading decision aid…</p>
-  }
-);
+import { ClientDecisionTree } from '../components/ClientDecisionTree';
+import CopyButton from '../components/CopyButton';
 
 export interface OrientationSectionMeta {
   slug: string;
@@ -36,17 +29,6 @@ interface LearningTrack {
 
 // Migrated components from legacy single-page Orientation (headings removed; page/all wrappers provide numbering headings).
 // (Original QuickStart replaced below with concrete mini scenario + evaluation stub.)
-
-const copySnippet = (codeElementId: string, liveRegionId: string) => {
-  if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
-  const source = document.getElementById(codeElementId);
-  if (!source) return;
-  const text = source.textContent ?? '';
-  navigator.clipboard.writeText(text).then(() => {
-    const liveRegion = document.getElementById(liveRegionId);
-    if (liveRegion) liveRegion.textContent = 'Copied snippet to clipboard';
-  });
-};
 
 const FAILURE_MODES = [
   {
@@ -667,7 +649,7 @@ const Choosing = () => {
       <p><strong>Tie-break rule:</strong> Pick the pattern with fewer <em>critical</em> (not cosmetic) failures under pilot evaluation.</p>
       {showTree && (
         <div className="mt-4">
-          <DecisionTreeWidget />
+          <ClientDecisionTree />
         </div>
       )}
     </div>
@@ -713,7 +695,12 @@ const Adaptation = () => (
       <h3 className="text-sm font-semibold mb-2">Minimal Change Log Snippet</h3>
       <p className="text-xs text-secondary mb-2">Capture every structural edit with pattern ID, rationale, and evaluation deltas. Copy the template below into your tracking doc or repo.</p>
       <div className="relative">
-        <button type="button" aria-label="Copy change log snippet" className="absolute top-2 right-2 text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('change-log-snippet', 'change-log-live')}>Copy</button>
+        <CopyButton 
+          text={CHANGE_LOG_SNIPPET}
+          liveRegionId="change-log-live"
+          ariaLabel="Copy change log snippet"
+          className="absolute top-2 right-2 text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        />
         <pre id="change-log-snippet" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{CHANGE_LOG_SNIPPET}</code></pre>
         <div id="change-log-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
       </div>
@@ -817,7 +804,12 @@ const Evaluation = () => (
         <div className="p-3 rounded border border-muted bg-surface-1">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold">Python · pytest</span>
-            <button type="button" aria-label="Copy Python harness" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('eval-harness-py', 'eval-harness-py-live')}>Copy</button>
+            <CopyButton 
+              text={PY_EVAL_HARNESS_CODE}
+              liveRegionId="eval-harness-py-live"
+              ariaLabel="Copy Python harness"
+              className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            />
           </div>
           <pre id="eval-harness-py" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{PY_EVAL_HARNESS_CODE}</code></pre>
           <div id="eval-harness-py-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
@@ -825,7 +817,12 @@ const Evaluation = () => (
         <div className="p-3 rounded border border-muted bg-surface-1">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold">JavaScript · Jest</span>
-            <button type="button" aria-label="Copy JavaScript harness" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('eval-harness-js', 'eval-harness-js-live')}>Copy</button>
+            <CopyButton 
+              text={JS_EVAL_HARNESS_CODE}
+              liveRegionId="eval-harness-js-live"
+              ariaLabel="Copy JavaScript harness"
+              className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            />
           </div>
           <pre id="eval-harness-js" className="overflow-auto text-xs bg-surface-2 p-3 rounded border border-muted"><code>{JS_EVAL_HARNESS_CODE}</code></pre>
           <div id="eval-harness-js-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
@@ -903,11 +900,13 @@ const SearchSimilarityGuidance = () => (
       <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-sm font-semibold">Manual comparison workflow</h3>
-          <button
-            type="button"
+          <CopyButton 
+            text={CHANGE_LOG_SNIPPET}
+            liveRegionId="change-log-live"
             className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-2 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            onClick={() => copySnippet('change-log-snippet', 'change-log-live')}
-          >Copy change-log template</button>
+          >
+            Copy change-log template
+          </CopyButton>
         </div>
         <ol className="list-decimal pl-5 space-y-1 text-sm mt-2">
           {MANUAL_COMPARISON_STEPS.map(step => (
@@ -1208,7 +1207,12 @@ const Feedback = () => (
       <div className="p-3 rounded border border-muted bg-surface-2 relative">
         <div className="flex items-center justify-between mb-2">
           <span className="font-semibold text-sm">Pattern submission outline</span>
-          <button type="button" aria-label="Copy pattern submission placeholder" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('pattern-submission-placeholder', 'pattern-submission-live')}>Copy</button>
+          <CopyButton 
+            text={PATTERN_SUBMISSION_PLACEHOLDER}
+            liveRegionId="pattern-submission-live"
+            ariaLabel="Copy pattern submission placeholder"
+            className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          />
         </div>
         <pre id="pattern-submission-placeholder" className="overflow-auto text-xs"><code>{PATTERN_SUBMISSION_PLACEHOLDER}</code></pre>
         <div id="pattern-submission-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
@@ -1216,7 +1220,12 @@ const Feedback = () => (
       <div className="p-3 rounded border border-muted bg-surface-2 relative">
         <div className="flex items-center justify-between mb-2">
           <span className="font-semibold text-sm">Orientation contribution note</span>
-          <button type="button" aria-label="Copy contribution placeholder" className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => copySnippet('orientation-contribution-placeholder', 'orientation-contribution-live')}>Copy</button>
+          <CopyButton 
+            text={CONTRIBUTION_NOTE_PLACEHOLDER}
+            liveRegionId="orientation-contribution-live"
+            ariaLabel="Copy contribution placeholder"
+            className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          />
         </div>
         <pre id="orientation-contribution-placeholder" className="overflow-auto text-xs"><code>{CONTRIBUTION_NOTE_PLACEHOLDER}</code></pre>
         <div id="orientation-contribution-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
