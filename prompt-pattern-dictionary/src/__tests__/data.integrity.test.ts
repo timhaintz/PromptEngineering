@@ -13,8 +13,13 @@ describe('normalized-patterns data integrity', () => {
   let data: NormalizedPatternsFile;
   beforeAll(() => {
     expect(fs.existsSync(file)).toBe(true);
-    const raw = fs.readFileSync(file, 'utf8');
-    const parsed = JSON.parse(raw) as unknown;
+    const raw = fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '').trim();
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(raw) as unknown;
+    } catch (e) {
+      throw new Error(`normalized-patterns.json failed to parse: ${String(e)}`);
+    }
     if (!parsed || typeof parsed !== 'object' || !('patterns' in parsed) || !Array.isArray((parsed as { patterns?: unknown }).patterns)) {
       throw new Error('normalized-patterns.json malformed: missing patterns array');
     }

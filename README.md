@@ -13,6 +13,8 @@ This repository contains a collection of Python scripts and tools designed for v
 - [Directory Structure](#directory-structure)
 - [Contributing](#contributing)
 - [License](#license)
+- [Security Policy](#security-policy)
+- [Responsible Use Guidelines](#responsible-use-guidelines)
 - [Prompt Pattern Dictionary (Web App)](#prompt-pattern-dictionary-web-app)
   - [Orientation Architecture](#orientation-architecture)
   - [Readability & Theming Controls](#readability--theming-controls)
@@ -125,9 +127,28 @@ python exportPromptPatternsJSONfile.py --count
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements, research paper additions or bug fixes.
 
+For ethical / dual‑use concerns use the "Responsible Use Report" issue template. For AI-enriched metadata corrections use the "AI-Assisted Field Correction" template.
+
+Security vulnerabilities should follow the coordinated disclosure process in `SECURITY.md` (private advisory or email) rather than a public issue.
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Security Policy
+
+See `prompt-pattern-dictionary/SECURITY.md` for supported versions and coordinated disclosure steps. Avoid including sensitive exploit payloads or personal data in reports.
+
+## Responsible Use Guidelines
+
+A standalone page at `/responsible-use` in the web app and the Orientation "Accessibility & Responsible Use" section document:
+
+- Core principles: transparency, defensive focus, privacy, inclusivity.
+- Acceptable uses: research, defensive tooling, education, evaluation with non-sensitive data.
+- Prohibited uses: real exploit/malware generation, phishing deployment, guardrail bypass attempts.
+- Safeguards: provenance badges, planned caution indicators, issue templates, minimal telemetry (opt-in, excludes prompt content).
+
+Report ethical concerns with the issue label `responsible-use-review`; corrections to AI-assisted fields with `ai-assist-correction`.
 
 ---
 

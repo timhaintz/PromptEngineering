@@ -49,3 +49,33 @@ global.ResizeObserver = class {
 // Silence jsdom canvas getContext not implemented warnings encountered during axe color contrast scanning
 // jsdom defines getContext but throws; replace with benign stub.
 (HTMLCanvasElement.prototype as any).getContext = () => null;
+
+// Provide a minimal Response polyfill so instanceof checks pass in components
+if (typeof (global as any).Response === 'undefined') {
+  class SimpleResponse {
+    body: string;
+    ok: boolean;
+    status: number;
+    headers: Record<string, string>;
+    constructor(body: any, init: { status?: number; headers?: Record<string,string> } = {}) {
+      this.body = typeof body === 'string' ? body : JSON.stringify(body ?? null);
+      this.status = init.status ?? 200;
+      this.ok = this.status < 400;
+      this.headers = init.headers ?? {};
+    }
+    async json() { return JSON.parse(this.body || 'null'); }
+    async text() { return this.body; }
+  }
+  (global as any).Response = SimpleResponse;
+}
+
+// If our fetch mock exists but doesn't return a Response instance, wrap it
+if ((global as any).fetch && !(global as any).fetch.__wrappedForResponse) {
+  const originalFetch = (global as any).fetch;
+  (global as any).fetch = jest.fn(async (...args: any[]) => {
+    const res = await originalFetch(...args);
+    if (res instanceof (global as any).Response) return res;
+    return new (global as any).Response(await res.json?.());
+  });
+  (global as any).fetch.__wrappedForResponse = true;
+}

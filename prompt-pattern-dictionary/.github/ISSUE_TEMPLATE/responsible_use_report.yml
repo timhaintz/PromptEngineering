@@ -1,0 +1,58 @@
+name: Responsible Use Report
+description: Report potential misuse, dual-use concerns, or ethical issues with patterns/examples.
+labels: [responsible-use-review]
+title: "Responsible Use: <short summary>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping maintain ethical use. Please avoid including sensitive or personal data.
+  - type: input
+    id: pattern_ids
+    attributes:
+      label: Affected Pattern or Example IDs
+      description: Comma-separated list (e.g., 71-26-6, 1-0-2-0-0)
+      placeholder: 71-26-6, 1-0-2-0-0
+    validations:
+      required: true
+  - type: textarea
+    id: concern
+    attributes:
+      label: Concern Description
+      description: Describe why the pattern/example may pose misuse or ethical risk.
+      placeholder: Outline observed or potential misuse scenario.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Intended Use
+      description: Explain legitimate usage context and where risk appears.
+  - type: textarea
+    id: mitigation
+    attributes:
+      label: Suggested Mitigation
+      description: Badges, wording changes, defensive cross-links, etc.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Perceived Severity
+      options:
+        - informational
+        - low
+        - medium
+        - high
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Optional external links or papers supporting your assessment.
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I confirm I have not included sensitive personal or proprietary data.
+          required: true

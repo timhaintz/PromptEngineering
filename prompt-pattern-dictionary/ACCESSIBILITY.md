@@ -74,3 +74,27 @@ The script:
 
 ---
 Maintaining accessibility is an ongoing process—treat these tools as guardrails while continuing manual reviews with assistive tech.
+
+## Phase 6 P4 Additions (High Contrast & Redundancy)
+
+### High Contrast Token Audit
+An automated WCAG contrast audit script (`scripts/contrast_audit.js`) was added in Phase 6 P4. It evaluates representative foreground/background pairs from the High Contrast theme block in `tokens.css` and exits non‑zero if `text-primary` contrast drops below 7:1 (enhanced baseline). Latest run produced:
+
+| Pair | Ratio | AA | Enhanced |
+|------|-------|----|----------|
+| text-primary vs surface-1 | 19.95 | Pass | Pass |
+| text-secondary vs surface-1 | 18.67 | Pass | Pass |
+| text-muted vs surface-1 | 15.79 | Pass | Pass |
+| accent vs surface-1 | 14.03 | Pass | Pass |
+| accent-fg vs accent | 14.77 | Pass | Pass |
+| focus-ring vs surface-2 | 18.82 | Pass | Pass |
+
+All sampled pairs exceed AA (4.5:1) and enhanced (7:1) targets; no remediation items required.
+
+### Content Redundancy Scan
+The Orientation content was scanned with `orientation_redundancy_scan.js` to detect duplicate paragraph blocks. Result: 0 duplicates found. This guards against cognitive overload and improves scan efficiency for users relying on screen readers.
+
+### Ongoing Guards
+- Contrast script can be extended to dark/light theme blocks separately.
+- Future: integrate font scaling & reduced‑motion preference tests into the multi-theme matrix.
+

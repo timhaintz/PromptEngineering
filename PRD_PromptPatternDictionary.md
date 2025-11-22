@@ -273,6 +273,23 @@ Risks & Mitigations:
 - [ ] Public launch and marketing
 - [ ] Community feedback integration
 
+### Phase 6: Orientation Experience (Added)
+Status: P0–P4 Complete (locked); P5 (Telemetry & Continuous Learning) pending.
+
+Sub-Phases & Deliverables:
+- P0 Trust & Accessibility: Baseline accessibility program, theme infra, skip links, focus outlines, provenance disclaimers (Complete ✅)
+- P1 Onboarding & Quick Paths: Quick Start defensive scenario, Quick Paths panel (5 intents), section cross-link footers, reading time badges (Complete ✅)
+- P2 Depth & Evaluation Tools: Evaluation harness stub with copy, Decision Tree (feature-flag), Anti-Pattern remediation table (≥5 mappings), Glossary A–Z index (Complete ✅)
+- P3 Interactive Teasers: Similarity Preview (sample IDs + two-decimal scores), adaptation/evaluation loop diagram (Mermaid + accessible description), optional static network graph (feature-flag) (Complete ✅)
+- P4 Polish & Quality: High Contrast token set audit (scripted ratios all ≥14:1), redundancy scan (0 duplicates), Cheat Sheet actionable summaries (≤160 chars), telemetry schema draft, Mermaid test mock, token presence audit test (Complete ✅)
+- P5 Continuous Learning (Upcoming): Telemetry event emission, feedback CTA coverage, engagement instrumentation dashboards (Pending ⏳)
+
+Acceptance (P4):
+- Contrast audit script passes with all sampled pairs ≥ 7:1 (achieved max ~19.95)
+- No duplicate long-form paragraphs in Orientation content (scan result: 0)
+- Accessibility doc updated with contrast & redundancy results
+- All existing tests pass (Jest + snapshots) and new scripts integrated without regressions
+
 ## Technical Specifications
 
 ### Data Schema

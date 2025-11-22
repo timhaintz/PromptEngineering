@@ -34,6 +34,26 @@ Create the definitive reference tool for cybersecurity prompt engineering patter
 #### 1.1 Advanced Search Functionality
 
 #### 1.2 Browse & Navigation
+
+#### 1.3 First-Time User Onboarding (Added)
+
+Provide an explicit, low-friction path for new visitors to understand what the site is, who it is for, and how to complete a first successful session.
+
+- **Tagline & Audience Mapping**: Display a concise positioning statement near the homepage hero and Orientation hub header (e.g., "A research-grounded prompt pattern dictionary for building safer, evaluable AI prompts"), plus a short mapping of common roles (Researcher, Practitioner, Student, Tool Builder) to typical intents.
+- **Five-Minute Tour**: Orientation "Quick Start" section must include a numbered checklist guiding a complete mini-journey:
+  1. Search for a pattern using domain keywords.
+  2. Open a pattern page and locate the Pattern ID badge.
+  3. Expand the Template (5-key) and optional bracketed form.
+  4. Copy a Prompt Example and adapt it with project-specific variables.
+  5. Inspect Similar Patterns/examples and note differences.
+  6. Run a small evaluation harness (example snippet) and record outcomes.
+- **Role-Based Entry Points**: Quick Paths panel should explicitly label which cards are best for Researchers (e.g., comparison & similarity exploration), Practitioners (defensive patterns, evaluation), Students (What is a Pattern, Glossary), and Tool Developers (Playground, embeddings).
+- **Expectation Setting**: Early Orientation copy must clearly state that the site is a static, research-derived dictionary and does not run live model calls in the browser (similarity and enrichment are precomputed).
+
+Acceptance:
+1. A first-time user can reach and complete the Five-Minute Tour without reading the full PRD.
+2. Landing and Orientation pages both state purpose and target audiences in ≤2 sentences.
+3. User stories for Researchers, Practitioners, Students, and Tool Developers are linked from Orientation and discoverable within 2 clicks from the homepage.
 ### 2. Dictionary-Style Interface
 
 #### 2.1 Pattern Entry Display
@@ -235,6 +255,18 @@ Acceptance (Phase 1):
 - **Comment system** for community feedback (future consideration)
 - **Rating system** for pattern usefulness
 
+##### 4.2.1 Search & Similarity Guidance (Added)
+
+- **Search Syntax Hints**: Provide inline helper text and Orientation section documenting supported query modes (plain keyword, category-focused search) and clearly indicate that advanced boolean operators and auto-complete are planned but not yet implemented.
+- **Similarity Score Legend**: Orientation and comparison surfaces must include a short legend interpreting similarity values (e.g., ≥0.70 high structural overlap; 0.50–0.69 related variants; <0.50 exploratory only) so first-time users can contextualize numbers.
+- **Knowledge Intent Usage**: Document how the four knowledge intent quadrants (Refinement & Clarification, Knowledge Retrieval, Co-Discovery & Exploration, AI Tutoring & Tuning) should influence user decisions (e.g., which patterns to pick when the goal is discovery vs hard-fact retrieval). Even before UI facets exist, Orientation should describe recommended usage patterns.
+- **Manual Comparison Workflow (Pre-Feature)**: Until interactive comparison matrices ship, Orientation should outline a manual comparison recipe: open two patterns, compare Template keys, examine Application/Usage Summary differences, and log qualitative similarity in a simple change log.
+
+Acceptance:
+1. Search results page links to Orientation "Search & Similarity" guidance section.
+2. At least one Orientation section contains a similarity legend and knowledge intent usage examples.
+3. Users can discover a documented manual comparison workflow in ≤2 clicks from Orientation.
+
 ### 4.3 Semantic Similarity & Pattern Comparison
 
 #### 4.3.1 Real-Time Pattern Comparison
@@ -314,6 +346,26 @@ Footer Acceptance:
 1. Keyboard only user can access all footer links without encountering off-screen focus.
 2. High-Contrast palette passes ≥7:1 for body text and ≥4.5:1 for link text.
 3. AI provenance disclaimer clearly stated and programmatically associated with badge via `aria-describedby` where used.
+
+### 7. First-Time User Journey & Safety (Added)
+
+Define a coherent onboarding experience and lightweight safety checks so new users can quickly understand, try, and responsibly extend the system.
+
+- **Onboarding Checklist**: Orientation must include a short checklist (Five-Minute Tour) for a first visit.
+- **Description vs General Explanation vs Usage Summary**: Pattern Anatomy section must explicitly distinguish these three fields, clarifying that:
+  - Description is research-authoritative and should not be rewritten by enrichment.
+  - General Explanation is an ELI12-style teaching summary (AI-assisted allowed).
+  - Usage Summary is a pragmatic runbook for applying the pattern.
+- **Template vs PEIL**: Patterns must document the relationship between the five-key Template (authoritative structure) and PEIL prompts (derived instructional system prompts for automation). Orientation should note that PEIL may be adapted but must remain consistent with the Template.
+- **Change Logging**: Provide a suggested structured log format (YAML/JSON) in Orientation for recording prompt changes, rationales, and evaluation outcomes.
+- **Failure Mode Taxonomy**: Orientation will list common failure modes (e.g., hallucination, leakage, misclassification, brittle formatting) with example indicators and recommended corrective actions.
+- **Rapid Safety Checklist**: Responsible Use section shall include a concise pre-deployment checklist (no sensitive data, no harmful intent, representatives tested, bias spot-check performed, evaluation logs captured).
+- **Reporting Flow**: A simple diagram or bullet flow must map which path to use for misuse/ethical concerns (Responsible Use report template) vs security vulnerabilities (SECURITY.md / private advisory).
+
+Acceptance:
+1. A new user can describe, in their own words, the difference between Description, General Explanation, Usage Summary, Template, Knowledge Intent and PEIL after reading Orientation.
+2. A simple change log example is present and can be copied from Orientation.
+3. Responsible Use section exposes a 5-step safety checklist and links to the correct issue templates.
 
 ## Detailed User Stories
 
@@ -428,11 +480,12 @@ Below phase checklists updated to reflect present state.
 - [ ] **Create similarity visualization components (heatmaps, scatter, network)**
 - [ ] **Add export functionality for research data**
 - [ ] **Implement clustering and statistical analysis tools**
-- [ ] Add interactive features (copy examples already partially present; share/bookmark pending)
+- [x] Add copy prompt examples feature (implemented; includes accessible copy button + aria-live confirmation)
+- [ ] Implement share and bookmark features (pending)
 - [x] Implement accessibility features (baseline: headings structure, focusable toggles, aria labels, provenance badges) – further audits planned
 
 ### Phase 4: Enhancement & Polish
-- [ ] Add analytics and user tracking
+- [ ] Add analytics and user tracking (telemetry schema drafted in Phase 6 P4; emission endpoint & wiring pending)
 - [ ] Optimize performance and SEO for similarity features (core pages partially optimized by Next.js defaults)
 - [ ] **Performance optimization for large-scale similarity calculations**
 - [ ] **Advanced clustering algorithms and research analytics**
@@ -443,9 +496,221 @@ Below phase checklists updated to reflect present state.
 - [ ] Beta testing with select users
 - [ ] **Research community feedback on comparison features**
 - [ ] Bug fixes and performance optimization
-- [ ] Documentation and help content (Orientation in place; cheat sheet & responsible use section planned)
+- [x] Documentation and help content (Orientation hub, Cheat Sheet, Responsible Use guidelines delivered)
 - [ ] Public launch and marketing
 - [ ] Community feedback integration
+
+### Phase 6: Orientation Enhancements & Onboarding Expansion
+Focused consolidation of Orientation hub upgrades across trust, navigation, evaluation guidance, and interactive teasers. Executed as internal sub-sprints (P0–P5) documented below; this phase tracks their delivery milestones at roadmap level.
+
+- [x] P0 Trust & Accessibility: Provenance badge unification; remove hard-coded backgrounds; skip links; axe baseline (zero serious/critical); consistent focus outlines.
+- [x] P1 Onboarding & Quick Paths: Concrete Quick Start scenario; Quick Paths intent panel (≥5 intents); reading time badges; cross-links between Lifecycle/Evaluation/Adaptation; simplified Pattern Anatomy diagram with alt text. (Completed 2025-11-09 – original scope only; see P1b for extensions.)
+- [x] P2 Depth & Evaluation Tools: Evaluation harness stub (copyable code block); Decision Tree widget (feature-flag); Anti-Pattern remediation table (≥5 mappings); Glossary A–Z jump bar. (Completed 2025-11-09 – original scope only; see P2b for extensions.)
+- [x] P3 Interactive Teasers: Similarity Preview callout (3 sample pattern scores); adaptation/evaluation flow diagram (Mermaid + alt text); optional network sample graph (flag controlled). (Completed 2025-11-09 – original scope only; see P3b for extensions.)
+- [x] P4 Polish & Consolidation: Cheat Sheet page deployed (≤160 char summaries + links); high-contrast audit (all sampled ratios ≥14:1, primary text 19.95); redundancy scan (0 duplicate paragraphs); `ACCESSIBILITY.md` updated with contrast & redundancy log; telemetry schema draft prepared. (Completed 2025-11-09 – original scope only; see P4b for extensions.)
+- [x] P1b Onboarding Extensions: Homepage/Orientation tagline and value differentiation vs generic prompt libraries; audience map from roles to intents; explicit 5-Minute Tour checklist; PEIL usage example; brief environment/static-vs-dynamic clarification.
+- [x] P2b Evaluation & Adaptation Extensions: Language-specific harness examples (Python + JavaScript); failure mode taxonomy; metrics and drift-detection guidance; minimal change-log snippet; template mutation guardrails; bracketed synthesis side‑by‑side explanation.
+- [x] P3b Search & Similarity UX: Similarity score legend; documented manual comparison workflow; search syntax mini-guide and best-effort query strategies; expectation-setting copy for preview-only comparison features.
+- [x] P4b Glossary & Transparency: Glossary depth update for new terms (PEIL, Knowledge Intent, bracketed synthesis, dual‑use, provenance badge, enrichment) and cross-links back into Orientation sections; brief data update cadence note and embedding refresh policy; feature-flag visibility description. (Completed 2025-11-10 – Glossary now data-driven with cross-links, transparency callout documents normalization/embedding cadences, and a feature-flag table exposes client-visible toggles.)
+- [x] P5 Continuous Learning: Feedback CTA (≥80% pages); telemetry event schema (`orientation_quick_path_click`, `evaluation_copy_action`, `glossary_search`); GitHub labels (`orientation-feedback`, `a11y-regression`, `education`); Orientation roadmap/learning path snippet; assistive technology walkthrough note; inline contrast audit summary; contribution & pattern‑submission placeholders; AI‑assisted correction path call‑out and roadmap link. (Completed 2025-11-16 – Section pager now embeds CTA buttons linking to the required labels across 100% of Orientation pages, docs/telemetry.md documents the event schema pending backend support, new Learning Path section summarizes the roadmap + AI-assisted correction flow, the Accessibility section carries the contrast snapshot + AT walkthrough, and the Feedback section ships copyable contribution/pattern submission templates.)
+
+Acceptance Gate (Phase 6 complete) when all sub-sprint checkboxes above are checked and Orientation Enhancement Plan section reflects updated statuses.
+
+### Orientation Enhancement Plan (Detailed)
+
+This plan evolves the Orientation hub from a static onboarding collection into a progressive learning and decision-support surface. Work streams are grouped into incremental phases (P0–P5) to minimize disruption and front‑load trust, accessibility, and navigational clarity before introducing deeper interactivity.
+
+#### P0 – Trust & Accessibility Hardening (Sprint 0)
+Focus: Provenance clarity, semantic theming cleanup, baseline a11y.
+Tasks:
+- Unify AI-assisted provenance disclaimer styling across all Orientation pages (consistent badge; link to Data & Provenance section in new global footer).
+- Replace any residual hard‑coded light backgrounds (e.g., FAQ `bg-white`) with semantic tokens (`surface-card`, `surface-alt`).
+- Add page-level skip links on multi-page Orientation routes (`Skip to Section Navigation`, `Skip to Content`).
+- Ensure each section navigation `<nav>` has `aria-label="Orientation sections"` and uses a semantic list.
+- axe-core baseline scan: orientation overview, lifecycle, evaluation, FAQ, glossary (zero serious/critical issues; document any moderate issues with remediation ticket references).
+- Confirm focus outline consistency (2px tokenized) on disclosure buttons and intra-page anchor links.
+Acceptance:
+1. All Orientation pages show a single standardized provenance badge and disclaimer.
+2. No raw color utility classes remain that break dark/high-contrast parity.
+3. axe-core reports zero serious/critical violations on targeted pages.
+4. Skip links are keyboard reachable and visible on focus.
+Status (Completed 2025-11-09): All provenance badges unified; semantic surface tokens replaced remaining hard-coded backgrounds; skip links implemented (Skip to Content, Skip to Section Navigation); axe baseline scan passed with zero serious/critical findings (minor warnings logged for future refinement); focus outlines consistent across disclosures and anchor links. P0 accepted; next focus shifts to P1 Onboarding & Quick Paths. (Acceptance: Met 2025-11-09)
+
+Note: Phase 6 overall Acceptance Gate now tracks remaining sub-sprints P1–P5; P0 deliverables locked to prevent regression (future changes require a regression ticket referencing this completion date).
+
+#### P1 – Onboarding & Quick Paths (Sprint 1)
+Focus: Faster entry, concrete example, navigational scaffolding.
+Tasks:
+- Rewrite Quick Start with a concrete end‑to‑end mini scenario: pattern selection → example prompt → evaluation snippet.
+- Introduce "Quick Paths" panel (cards or list) with common intents: Defensive Patterns, Adapt an Existing Prompt, Evaluate Prompt Quality, Explore Similar Patterns, Improve Clarity.
+- Add reading time badges to all Orientation sections (compute via word count heuristic; tokenized muted styling).
+- Cross-link Lifecycle ↔ Evaluation ↔ Adaptation with inline "Related next step" footers.
+- Simplify Pattern Anatomy visual (reduce cognitive load; add textual alt explanation).
+ - Add a concise tagline and audience map to Orientation intro, mapping common roles (Researcher, Practitioner, Student, Tool Builder) to typical intents.
+ - Introduce an explicit "5‑Minute Tour" checklist in Quick Start (search → open a pattern → expand Template + bracketed form → copy example & adapt → inspect similar patterns → run evaluation stub).
+Acceptance:
+1. Quick Start contains one runnable prompt + evaluation harness stub reference.
+2. Quick Paths panel renders ≥5 intents, keyboard navigable, each links to a relevant section.
+3. Reading time badges appear on ≥90% sections and adapt to dark mode.
+4. Pattern Anatomy diagram has accessible alt text and collapsible long description.
+5. Orientation header copy clearly states purpose and main audiences in ≤2 sentences and exposes the 5‑Minute Tour checklist.
+Status (Completed 2025-11-09): All acceptance criteria met. Quick Start now includes concrete defensive triage scenario with runnable prompt + evaluation harness reference; Quick Paths panel exposes five intents (Defensive Patterns, Adapt an Existing Prompt, Evaluate Prompt Quality, Explore Similar Patterns, Improve Clarity) with keyboard navigation; reading time badges present across Orientation sections (dark mode parity verified); Pattern Anatomy simplified with collapsible description and alt text. P1 locked—future modifications require a regression ticket referencing this completion date.
+
+#### P2 – Depth & Evaluation Tools (Sprint 2)
+Focus: Introduce practical evaluation & remediation guidance.
+Tasks:
+- Add Evaluation section harness stub (example Jest / Python snippet showing structure for testable prompt assertions; clearly marked experimental).
+- Decision Tree widget: choose goal → suggested pattern categories (static JSON config; feature-flagged if needed).
+- Anti-Patterns section: augment with remediation table (columns: Anti-Pattern, Symptom, Recommended Pattern, Caution).
+- Glossary: add alpha index bar (A–Z) with in-page anchor jump; ensure focus ring & aria-labels.
+ - Expand evaluation section with at least one Python and one JavaScript harness example wiring a pattern → prompt → simple assertion.
+ - Add an explicit failure mode taxonomy table (hallucination, ambiguity, misclassification, leakage, brittle formatting) with concrete symptoms and recommended pattern adjustments.
+ - Document metrics examples (e.g., exact match %, JSON validity rate, sentiment bin accuracy) and basic prompt drift detection tips (role fidelity, format violations).
+Acceptance:
+1. Evaluation harness stub code block appears with copy button + provenance note.
+2. Decision Tree renders and is fully keyboard operable (arrow/tab navigation) and degrades to static list if JS disabled.
+3. Anti-Pattern remediation table includes ≥5 mapped corrective suggestions.
+4. Glossary alpha index jump bar accessible (buttons or links with visible focus).
+5. Evaluation section includes language-specific harness examples, a visible failure mode taxonomy, and at least one metrics/drift example.
+Status (Completed 2025-11-09): Delivered evaluation harness stub (copyable code constant with aria-live feedback), feature-flagged Decision Tree widget (keyboard radiogroup semantics), Anti-Pattern remediation table (≥5 mappings with corrective pattern suggestions), and accessible Glossary A–Z jump bar (focus-visible anchors). All acceptance criteria satisfied. P2 locked—enhancements beyond scope (e.g., persistence/state expansion) will be tracked under future phases; regression changes require ticket referencing this completion date.
+
+#### P3 – Interactive & Visualization Teasers (Sprint 3)
+Focus: Light introduction of similarity/comparison capabilities.
+Tasks:
+- Insert "Similarity Preview" callout linking to comparison route (shows 3 sample related pattern IDs with scores).
+- Add miniature lifecycle/flow diagram (Mermaid) for adaptation vs evaluation loop (collapsible; alt text).
+- Optional feature-flag: tiny network sample graph (static SVG) demonstrating pattern connection concept.
+ - Add a short similarity score legend (e.g., ≥0.70 high structural overlap; 0.50–0.69 related variant; <0.50 exploratory) near similarity previews.
+ - Document an interim manual comparison workflow in Orientation (open two patterns, compare Templates and Applications, inspect Similar Patterns overlap, record a short change log entry).
+Acceptance:
+1. Similarity Preview callout present; scores use consistent numeric formatting (two decimals) and meet contrast.
+2. Flow diagram accessible: alt text + collapsible long description.
+3. Feature-flagged graph hidden by default; visible when `NEXT_PUBLIC_SHOW_ORIENTATION_GRAPH=1`.
+4. Similarity legend and manual comparison workflow are documented and reachable within Orientation.
+Status (Completed 2025-11-09): Implemented Similarity Preview section with three sample pattern IDs (0-0-0, 0-1-0, 71-26-6) and two-decimal scores (0.74, 0.69, 0.65); adaptation ↔ evaluation loop Mermaid diagram includes collapsible expanded description for accessibility; static network graph teaser guarded by `NEXT_PUBLIC_SHOW_ORIENTATION_GRAPH` feature flag. All acceptance criteria met; section locked pending future dynamic comparison integration.
+
+#### P4 – Polish, Consolidation & QA (Sprint 4)
+Focus: Content refinement, cheat sheet consolidation, high-contrast audit, redundancy & telemetry groundwork.
+Tasks (delivered):
+- Consolidated "Cheat Sheet" page (each section ≤160 chars + primary link) and linked from Orientation hub + footer.
+- High-contrast pass with automated script (`scripts/contrast_audit.js`) validating representative pairs (text-primary vs surface-1 ratio 19.95; all sampled ≥14:1 AA/AAA).
+- Redundancy scan script run (0 duplicate long-form paragraphs across Orientation).
+- Accessibility documentation updated (`ACCESSIBILITY.md`) with contrast audit table & redundancy results.
+- Telemetry schema draft added (`docs/telemetry.md`) for upcoming P5 instrumentation.
+Acceptance (Met 2025-11-09): All above tasks completed; contrast thresholds exceeded; zero redundancy confirmed; documentation updated; no regressions in existing tests.
+Status (Completed 2025-11-09): P4 locked; future changes to cheat sheet or contrast tokens require regression ticket referencing this completion date.
+
+#### P5 – Continuous Learning & Community (Post-Launch)
+Focus: Feedback capture & telemetry planning.
+Tasks:
+- Add lightweight feedback CTA (link to GitHub Discussions / Issue template) at end of Orientation pages.
+- Telemetry plan (non-invasive): define events (orientation_quick_path_click, evaluation_copy_action, glossary_search) with privacy note.
+- Create backlog triage labels: `orientation-feedback`, `a11y-regression`, `education`.
+ - Surface a brief roadmap/learning path section in Orientation that links to the PRD roadmap and outlines staged learning (Foundations → Structural mastery → Evaluation → Similarity exploration → Responsible scaling).
+ - Add an assistive technology walkthrough example (e.g., a short "screen reader journey" for Pattern Anatomy) and a one-line inline summary of the latest contrast audit results.
+Acceptance:
+1. Feedback CTA present on ≥80% Orientation pages.
+2. Event schema documented (internal `docs/telemetry.md`).
+3. GitHub labels created & referenced in contribution guidelines.
+4. Orientation exposes a roadmap/learning path snippet, AT walkthrough note, and contrast audit summary.
+
+#### Tracking Table
+
+| Phase | Status | Key Deliverables |
+|-------|--------|------------------|
+| P0 | Completed | Provenance badge unification, skip links, axe baseline |
+| P1 | Completed | Quick Paths panel, revised Quick Start, reading time badges |
+| P2 | Completed | Evaluation harness stub, decision tree, remediation table, glossary index |
+| P3 | Completed | Similarity preview, loop diagram, optional static graph flag |
+| P4 | Completed | Cheat sheet page, high-contrast audit (ratios ≥14:1), redundancy scan (0), accessibility doc update, telemetry schema draft |
+| P5 | Planned | Feedback CTA, telemetry plan, labels setup |
+
+#### Dependencies & Non-Goals
+- Depends on existing semantic tokens; no palette redesign in P0–P1.
+- Decision tree + similarity preview use existing pattern/category artifacts; no new embedding generation.
+- Non-goals: Real-time interactive similarity computation inside Orientation (handled by dedicated comparison pages), full localization, community submission workflow.
+
+#### Risk Mitigation
+- Progressive rollout keeps early phases low risk; interactive widgets are feature-flagged where complexity is higher.
+- Accessibility issues caught early via baseline + regression re-scan (P0 then P4).
+- Clear acceptance criteria reduce scope creep and provide measurable completion signals.
+
+This section will be updated as phases progress; status column is the single source of truth for Orientation enhancement progress.
+
+## Responsible Use & Ethical Guidelines
+
+This section defines expectations and safeguards for ethical, secure, and privacy‑respectful use of the Prompt Pattern Dictionary and its augmentation tooling. It complements the existing Accessibility commitments and the global footer link labeled "Accessibility & Responsible Use".
+
+### Purpose & Scope
+Provide clear guardrails so pattern exploration, similarity analysis, and enrichment features are applied to legitimate research, defensive security, education, and productivity use cases—never to facilitate harmful misuse of generative systems.
+
+### Core Principles
+1. Transparency & Attribution – Always cite original research sources; AI‑assisted fields carry a provenance badge and disclaimer.
+2. Security-Conscious Usage – Emphasize defensive and resilience patterns; potentially risky offensive examples are contextualized with mitigation guidance.
+3. Privacy & Data Minimization – Do not paste sensitive personal, customer, or regulated data into example prompts or the playground; future telemetry (Phase 4/5) will be opt‑in and event‑minimal.
+4. Non-Malicious Research – Similarity and comparison tooling are for constructive analysis, not operational exploitation.
+5. Accuracy & Validation – AI enrichments are advisory; verify critical outputs against authoritative sources before production use.
+6. Inclusivity & Accessibility – Maintain accessible language, avoid exclusionary phrasing, and ensure content meets WCAG commitments.
+
+### Acceptable Use Examples
+- Academic or industry research analyzing prompt engineering safety and effectiveness.
+- Development of defensive cybersecurity tooling (detection, hardening, red→blue translation with mitigation steps).
+- Educational curriculum, tutorials, and workshops citing patterns responsibly.
+- Internal prompt quality evaluation and refinement with non‑sensitive sample data.
+- Comparative analysis to identify gaps in defensive coverage or bias.
+
+### Unacceptable / Prohibited Use
+- Generating or refining prompts intended to deploy real-world exploits, malware, or intrusive tooling outside sanctioned test environments.
+- Constructing phishing/social engineering content for production campaigns.
+- Attempting prompt strategies to bypass model safety, abuse guardrails, or exfiltrate proprietary system prompts.
+- Using similarity outputs to systematically harvest or fingerprint sensitive proprietary data.
+- Automating large-scale scraping or rate abuse of the site ignoring published robots and caching guidance.
+
+### Safeguards & Controls
+- Provenance Badges: All AI‑enriched fields retain badge + disclaimer; manual review encouraged for high‑impact decisions.
+- Defensive Pattern Tagging: Patterns categorized as security‑relevant are cross‑linked to recommended defensive counterparts.
+- Warning Badges (Planned): Add explicit "Use With Caution" badge for patterns with potential dual‑use characteristics (tracked via issue label `responsible-use-review`).
+- Rate Limiting (Planned): Comparison & playground endpoints (when dynamic) will enforce per‑IP quotas; static build remains read‑only.
+- Telemetry Privacy (Planned): Minimal event schema (orientation_quick_path_click, evaluation_copy_action, glossary_search) omits user content and respects `Do Not Track`.
+- Issue Templates: Security / misuse reporting and responsible use clarification templates added in `.github/ISSUE_TEMPLATE/`.
+
+### Reporting & Escalation
+- Vulnerabilities: Report via `SECURITY.md` (to be added if absent) or GitHub Security Advisories; avoid public exploit details before coordinated disclosure.
+- Misuse / Abuse: Open an issue with label `responsible-use-review`; include pattern IDs, context, and rationale without embedding sensitive data.
+- Data Corrections: For inaccurate AI‑assisted metadata open an issue with label `ai-assist-correction` describing the discrepancy.
+
+### Open Source & Licensing
+- Attribution: Each pattern retains source citation (paper title, authors, URL). Derived educational summaries must not remove provenance.
+- AI Augmentation: Generated summaries / PEIL prompts are under the same repository license; users should not present them as verbatim research quotes.
+- Derivative Works: Downstream forks must preserve this Responsible Use section and clearly mark any additional safety modifications.
+
+### Implementation Tasks (Backlog Mapping)
+| Task | Status | Target Phase |
+|------|--------|--------------|
+| Create `responsible-use` page/route with this content | Planned | Phase 5 |
+| Add footer link (already present: Accessibility & Responsible Use) | Completed | Phase 1 (footer spec) |
+| Add `SECURITY.md` if missing | Planned | Phase 5 |
+| Introduce caution badge component + token | Planned | Phase 4/5 |
+| Add GitHub issue templates (`responsible_use.yml`, `ai_assist_correction.yml`) | Planned | Phase 5 |
+| Annotate ≥5 dual‑use patterns with caution badge + mitigation links | Planned | Phase 5 |
+| Cross-link defensive alternatives on dual‑use entries | Planned | Phase 5 |
+
+### Acceptance Criteria (Documentation & Initial Guardrails)
+1. Responsible Use section published and linked from footer + Orientation hub.
+2. Issue templates for misuse and AI correction merged.
+3. SECURITY.md present with clear coordinated disclosure path.
+4. Caution badge design tokens defined (accessible contrast ≥4.5:1 text / ≥3:1 non-text).
+5. At least five patterns annotated as dual‑use with mitigation cross‑links.
+6. No sensitive real-world exploit payloads included in examples (audited quarterly).
+7. Section passes axe-core (zero serious/critical) and Lighthouse Accessibility ≥95.
+8. Telemetry implementation (when added) omits prompt content and includes opt‑out route in docs.
+
+### Future Enhancements
+- Dynamic runtime classifiers to auto‑flag uploaded or user prompts with potential misuse signals (privacy-preserving, client-side where feasible).
+- Integration with emerging OpenAI / model provider safety APIs for pattern risk scoring.
+- Aggregated transparency dashboard (counts of caution badges, corrections processed, misuse reports triaged).
+
+This Responsible Use section is living documentation; updates require PR with justification and a link to related issue labels for traceability.
 
 ## Technical Specifications
 
