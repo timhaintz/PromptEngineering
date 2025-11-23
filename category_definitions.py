@@ -13,78 +13,59 @@ HELP:
 # Prepositional Logic #
 #######################
 across = '''
-Across logic is used to transition from one topic to another, navigating between distinct areas of knowledge. This type of logic is particularly valuable in scenarios where prompts need to span **multiple domains** or disciplines, integrating diverse types of knowledge to create a cohesive narrative or solution.
-
-The PP categories under across logic include:
-1. **Argument**: Refers to a structured process where a claim or viewpoint is presented and defended. This type of prompt enables the AI model to generate a response that not only states a position, but also provides reasoning and evidence to support it.
-2. **Comparison**: Examining two or more objects and identifying their similarities and differences. This type of prompt helps in exploring the relationships between different objects, and discovering insights from their characteristics.
-3. **Contradiction**: Refers to presenting opposing statements or viewpoints that cannot be true simultaneously. This type of prompt enables the AI model to recognise and articulate conflicting information, helping in critical reasoning by evaluating inconsistencies and detecting logical errors.
-4. **Cross Boundary**: Involves pushing the AI model beyond its predefined operational or ethical limits, such as attempting to bypass safeguards or restrictions (e.g., jailbreaking). This type of prompt challenges the boundaries of what the model is allowed to do, often with the intent of manipulating it to generate responses that are typically restricted.
-5. **Translation**: Refers to converting data from one interpretation to another while preserving the original meaning. This type of prompt helps humans understand complex concepts by transforming information into a more familiar or accessible format.
+Across logic is used to transition from one topic to another, navigating
+between distinct areas of knowledge. This type of logic is particularly
+valuable in scenarios where prompts need to span multiple domains or
+disciplines, integrating diverse types of knowledge to create a cohesive
+narrative or solution.
 '''
 
 at_logic = '''
-At logic is utilised to denote a more granular aspect or detail of the overarching topic. This concept is particularly pertinent when the prompts are tailored to a specific context or scenario, with the objective of eliciting precise responses.
-
-Prompt engineering is a process that involves the creation of prompts to guide an artificial intelligence model’s responses. The prompts serve as a catalyst, steering the model’s output in a direction that aligns with the desired outcome. In this context, at logic is a crucial component of this process, as it pertains to the creation of prompts that are context-specific or scenario-specific.
-
-For instance, if the scenario involves a user seeking advice on a technical issue, at logic would encompass prompts that are specifically designed to address technical queries. These prompts would be engineered in such a way that they target precise responses, thereby ensuring that the user’s query is addressed in a comprehensive and accurate manner.
-
-In essence, at logic in prompt engineering is about honing in on the specifics of a given context or scenario. It is about crafting prompts that are not just relevant, but also precise, thereby enabling the AI model to generate responses that are both accurate and contextually appropriate. 
-
-At logic is a fundamental element in the process of prompt engineering, playing a pivotal role in the creation of context-specific prompts that target precise responses. Its significance lies in its ability to enhance the relevance and accuracy of the AI model’s responses, thereby improving the overall user experience.
-
-The PP categories under at logic include:
-1. **Assessment**: Provides a comprehensive evaluation of the input, verifying its correctness, providing feedback, and considering factors such as the completeness of the information, ratings, and the input’s relevance to the context. 
-2. **Calculation**: Is the capability to execute mathematical operations, ranging from simple arithmetic to complex multi-step computations with various variables, with the accuracy of these calculations being crucial to the model’s performance evaluation. 
+At logic focuses on examining the specific details or aspects within a
+given topic. This logic is essential when prompts are designed to elicit
+precise, context-dependent responses, enabling the AI to address targeted
+queries with accuracy and depth. At logic is particularly relevant for
+tasks that require granular evaluation, measurement, or analysis within a
+defined scope.
 '''
 
 beyond_logic = '''
-Beyond logic is used to discuss aspects that lie beyond the conventional boundaries of a topic, pushing the limits of what is typically explored. This type of logic is instrumental in crafting prompts that challenge the AI to explore **new capabilities** or **innovative ideas**, thereby extending its functional and conceptual horizons. By employing beyond logic, we can design prompts that encourage the AI to venture into uncharted territories, fostering creativity and innovation. This approach not only enhances the AI's ability to generate novel and forward-thinking responses but also its capacity to adapt to emerging trends and technologies. For instance, beyond logic can be used to explore futuristic scenarios, hypothesise about potential advancements, or integrate cutting-edge research into the AI's responses. This not only enriches the user experience but also positions the AI as a tool for pioneering thought and discovery.
-
-The PP categories under beyond logic include:
-1. **Hypothesise**: Making an educated guess or assumption about the outcome based on the input prompt. This requires the model to analyse the input, consider various possibilities, and predict the most likely outcome.
-2. **Logical Reasoning**: Using logic and reasoning to generate the output based on the input prompt. This could involve deducing conclusions from given facts, making inferences based on patterns or trends, or applying rules or principles to solve problems.
-3. **Prediction**: Forecasting or estimating the outcome based on the input prompt. This requires the model to analyse the input, consider various factors or variables, and generate a response that anticipates future events or trends.
-4. **Simulation**: Imitating or replicating a real-world process or system. This could involve simulating operating systems, applications or any other complex process that can be modelled and analysed.
+Beyond logic encourages large language models to transcend conventional
+topic boundaries, fostering exploration, innovation, and forward-thinking
+responses. This logic is essential for tasks that require the model to
+hypothesise, reason, predict, or simulate scenarios beyond established
+knowledge or current constraints.
 '''
 
 in_logic = '''
-In logic specifically focuses on the intricacies and details within a given topic. The logic is often employed to denote the encapsulation of a particular subject matter or space. This encapsulation can be perceived as a boundary that delineates the scope of a system’s introspective analysis or self-reflection. For example, when we refer to prompts that are internal to a system, we are discussing prompts that direct the system to engage in a form of self-analysis or introspection. These prompts are designed to trigger internal processes, rather than external interactions.
-
-The PP categories under in logic include:
-1. **Categorising**: Sorts or arranges different inputs or outputs into classes or categories based on shared qualities or characteristics, aiding in data organisation and pattern recognition.
-2. **Classification**: Refers to predicting the class or category of an input based on predefined criteria, enabling more precise analysis and interpretation.
-3. **Clustering**: Identifying natural groupings within the data or topic without pre-established categories, often revealing hidden patterns or relationships.
-4. **Error Identification**: Focuses on pinpointing inaccuracies, inconsistencies, or logical fallacies within the topic, aiding in refining and improving the quality of the information or argument.
-5. **Input Semantics**: Understanding and interpreting the meaning and context of the inputs related to the topic, ensuring the AI accurately grasps the nuances of the discussion.
-6. **Requirements Elicitation**: Identifying and defining the specific needs or conditions that must be met within the topic, crucial for tasks that involve planning, development, or specification.
+In logic focuses on the internal structure and detailed analysis within a
+defined topic or space. This logic is essential for prompts that require
+introspection, systematic organisation, or the identification of
+underlying patterns and requirements. Rather than traversing boundaries
+or generating outputs, In logic directs the AI to operate within the
+confines of a specific subject, supporting tasks such as categorisation,
+classification, error detection, and requirements elicitation.
 '''
 
 out_logic = '''
-Out logic is employed to convey the idea of expanding upon or moving beyond the general scope of a topic. This type of logic is particularly useful for prompts that aim to generate **outputs**, such as creative writing, code generation, or other forms of content creation. By utilising out logic, we can design prompts that encourage the AI to think outside the box, producing outputs that are not only relevant but also innovative and imaginative. This approach enhances the AI's ability to contribute to creative processes, whether it be crafting compelling narratives, developing complex algorithms, or generating unique solutions to problems. For instance, out logic can be used to prompt the AI to write a story that explores new genres, generate code that implements novel functionalities, or create art that pushes the boundaries of traditional aesthetics. In essence, out logic in prompt engineering is about expanding the AI's creative and productive capabilities, enabling it to produce high-quality, original outputs that enrich the user experience and drive innovation.
-
-The PP categories under out logic include:
-1. **Context Control**: involves managing the context in which the AI operates to ensure that the responses are accurate and relevant. This could involve providing additional background information, setting specific parameters or constraints, or guiding the AI to focus on particular aspects of the topic.
-2. **Decomposed Prompting**: refers to breaking down complex tasks into simpler, more manageable components. This approach allows the AI to tackle each part of the task individually, leading to more accurate and comprehensive outputs.
-3. **Output Customisation**: Output customisation refers to the ability to modify or personalise the model’s output based on specific requirements or preferences. This could involve controlling the length, style, or format of the output, or incorporating specific information or elements into the response.
-4. **Output Semantics**: refers to the meaning or interpretation of the model’s output. This involves understanding the intent of the output, the context in which it is presented, and the implications or consequences of the information it contains.
-5. **Prompt Improvement**: involves enhancing the quality or effectiveness of the input prompt to achieve a better output. This could involve refining the wording of the prompt, providing additional context or information, or adjusting the complexity or specificity of the prompt.
-6. **Refactoring**: involves restructuring or modifying the input prompt without changing its original meaning or intent. This could involve rephrasing the prompt, rearranging its components, or simplifying its structure to make it easier for the model to understand and respond to.
+Out logic is concerned with extending the boundaries of a topic, enabling
+prompts that move beyond the immediate subject to generate new outputs or
+perspectives. This logic is essential for tasks that require AI to
+produce, transform, or reframe content, such as creative writing, code
+generation, or the synthesis of novel ideas. Out logic facilitates the
+transition from analysis to production, supporting the creation of
+outputs that are contextually relevant yet not strictly confined to the
+original input.
 '''
 
 over_logic = '''
-Over logic refers to a comprehensive approach that encompasses all aspects of a given topic. This holistic perspective ensures that no facet of the subject matter is overlooked, thereby providing a thorough and complete understanding of the topic at hand.
-
-The application of over logic is particularly pertinent in scenarios that necessitate a broad overview or a detailed examination, such as the process of editing or enhancing existing content. In these instances, the use of over logic facilitates a meticulous review of the material, enabling the identification and rectification of any potential issues or areas for improvement.
-
-Furthermore, over logic underscores the importance of a comprehensive perspective in prompt engineering. By ensuring that all elements of a topic are considered, it allows for the creation of prompts that are not only accurate and relevant but also encompassing in their scope. This, in turn, contributes to the production of high-quality, effective prompts that serve to enhance the overall user experience.
-
-Over logic plays a crucial role in prompt engineering, providing a framework for comprehensive coverage and review. Its application contributes significantly to the quality and effectiveness of the prompts, thereby playing a pivotal role in enhancing user engagement and satisfaction.
-
-The PP categories under over logic include:
-1. **Summarising**: Providing a brief overview or summary of the input or output. This could involve condensing a large amount of information into a few key points, highlighting the most important elements, or providing a concise synopsis of the content.
-2. **Synthesis**: Integrating and reconciling information from multiple sources or perspectives to produce a unified, coherent, and insightful output. Synthesis goes beyond simple summarisation by combining disparate elements, identifying relationships and patterns, and generating higher-order insights or recommendations that reflect a comprehensive understanding of the topic.
+Over logic is used when comprehensive coverage, synthesis, or critical
+review of an entire topic or dataset is needed. This logic is essential
+when the objective is to distil complex or voluminous information into
+concise, coherent, and actionable insights. Over logic is particularly
+relevant for tasks such as summarisation, synthesis, and holistic
+evaluation, where the model must demonstrate both breadth and depth of
+understanding.
 '''
 
 #####################################
