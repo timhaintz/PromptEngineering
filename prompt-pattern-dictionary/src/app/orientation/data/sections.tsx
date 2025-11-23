@@ -1337,7 +1337,7 @@ const OrientationHubSection = () => (
       <ul className="list-disc pl-5 space-y-1 text-sm">
         <li><strong>Role → Intent Map:</strong> Find guidance tailored to Researchers, Practitioners, Students, or Tool Builders.</li>
         <li><strong>Quick Paths:</strong> Jump straight to key resources like the Evaluation Harness or Pattern Anatomy.</li>
-        <li><strong>Consolidated View:</strong> Access the "All Sections" page for a single-page reading experience.</li>
+        <li><strong>Consolidated View:</strong> Access the &quot;All Sections&quot; page for a single-page reading experience.</li>
       </ul>
       <div className="mt-4">
         <Link href="/orientation/hub" className="text-accent text-sm font-medium hover:underline">Go to Orientation Hub →</Link>
