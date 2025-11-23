@@ -1085,214 +1085,75 @@ const QuickStart = () => (
     </div>
   </div>
 );
-// Glossary (restored after patch collision)
-const Glossary = () => {
-  const letters = Array.from(new Set(GLOSSARY_ENTRIES.map(entry => entry.letter)));
-  let lastLetter = '';
-  return (
-    <div>
-      <nav aria-label="Glossary index" className="mb-3 flex flex-wrap gap-1 text-[11px]">
-        {letters.map(letter => (
-          <a key={letter} href={`#term-${letter}`} className="px-1.5 py-0.5 rounded bg-surface-2 border border-muted hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={`Jump to terms starting with ${letter}`}>{letter}</a>
-        ))}
-      </nav>
-      <dl className="space-y-3 text-sm">
-        {GLOSSARY_ENTRIES.map(entry => {
-          const letterChanged = entry.letter !== lastLetter;
-          lastLetter = entry.letter;
-          return (
-            <div key={entry.term}>
-              {letterChanged && <div id={`term-${entry.letter}`} aria-hidden="true"></div>}
-              <dt className="font-medium">{entry.term}</dt>
-              <dd className="text-sm text-secondary">{entry.definition}</dd>
-            </div>
-          );
-        })}
-      </dl>
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
-          <h3 className="text-sm font-semibold mb-2">Data cadence & embedding transparency</h3>
-          <p className="text-sm mb-2">Research data lives in <code className="text-[11px]">public/data/normalized-patterns.json</code> with supporting stats inside <code className="text-[11px]">public/data/stats.json</code>. We expose the same metadata in Orientation so users know when artifacts last refreshed.</p>
-          <ul className="list-disc pl-5 space-y-1 text-sm">
-            <li><strong>Weekly ingest (or within 72h of a paper update):</strong> running the normalization pipeline rewrites <code className="text-[11px]">normalized-patterns.json</code> plus the provenance fields that show up in Pattern pages.</li>
-            <li><strong>Embedding refresh policy:</strong> similarity vectors (<code className="text-[11px]">similar-patterns.json</code> + <code className="text-[11px]">similar-examples.json</code>) regenerate at least monthly or whenever ≥10 patterns/examples change so Search & Comparison stay aligned.</li>
-            <li><strong>Transparency surfaces:</strong> the Orientation hub cites <code className="text-[11px]">stats.json.lastProcessed</code> and <code className="text-[11px]">aiAssistedAt</code> timestamps so readers can confirm freshness before trusting enrichment or similarity hints.</li>
-          </ul>
-          <p className="text-xs text-secondary mt-2">If you notice stale data, open an issue referencing the last processed timestamp and affected pattern IDs.</p>
-        </div>
-        <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm overflow-x-auto">
-          <h3 className="text-sm font-semibold mb-2">Feature-flag visibility</h3>
-          <table className="text-xs w-full border">
-            <thead>
-              <tr className="bg-surface-2 text-secondary">
-                <th className="p-2 text-left font-semibold">Env flag</th>
-                <th className="p-2 text-left font-semibold">Surface</th>
-                <th className="p-2 text-left font-semibold">Default / visibility</th>
-              </tr>
-            </thead>
-            <tbody>
-              {FEATURE_FLAGS.map(flag => (
-                <tr key={flag.env} className="border-t align-top">
-                  <td className="p-2 font-mono text-[11px]">{flag.env}</td>
-                  <td className="p-2">{flag.surface}</td>
-                  <td className="p-2 text-xs">
-                    <span className="block font-semibold">Default: {flag.defaultState}</span>
-                    <span className="text-secondary">{flag.visibility}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="text-xs text-secondary mt-2">Flags are client-visible (prefixed with <code className="text-[11px]">NEXT_PUBLIC_</code>) so you can audit which exploratory widgets are being shown in any given deployment.</p>
-        </div>
-      </div>
-    </div>
-  );
-};
 
-const FAQ = () => (
-  <div>
-    <details className="group border rounded mb-2 p-3 bg-surface-1">
-      <summary className="cursor-pointer font-medium">Why five template keys?</summary>
-      <p className="mt-2 text-sm">They balance expressive coverage (intent, situational framing, required action, output schema, expected shape/tone) with cognitive load. More keys lowered adoption; fewer reduced precision.</p>
-    </details>
-  <details className="group border rounded mb-2 p-3 bg-surface-1">
-      <summary className="cursor-pointer font-medium">Can I add new keys?</summary>
-      <p className="mt-2 text-sm">Yes—locally. If broadly useful, open a proposal so tooling and documentation can stay aligned. Keep custom keys succinct.</p>
-    </details>
-  <details className="group border rounded mb-2 p-3 bg-surface-1">
-      <summary className="cursor-pointer font-medium">How do I detect bias?</summary>
-      <p className="mt-2 text-sm">In evaluation, insert controlled variants (names, dialects, region terms) and compare outcome disparities. Investigate structural omissions before applying ad‑hoc wording patches.</p>
-    </details>
-  <details className="group border rounded mb-2 p-3 bg-surface-1">
-      <summary className="cursor-pointer font-medium">When should I fork a pattern?</summary>
-      <p className="mt-2 text-sm">If structural keys change semantics (e.g., merging roles, introducing multi-step embedded reasoning) or examples shift domain irreversibly—create a named fork for traceability.</p>
-    </details>
-  <details className="group border rounded p-3 bg-surface-1">
-      <summary className="cursor-pointer font-medium">How are similar patterns computed?</summary>
-      <p className="mt-2 text-sm">Pattern similarity uses cosine similarity over an embedding composed of the pattern’s name, description, and up to the first three example prompts. Results are exploratory semantic neighbors—not a curated taxonomy.</p>
-      <p className="mt-2 text-sm">Separate per‑example embeddings are also generated for example‑to‑example cosine similarity; these appear in the UI under <span className="font-semibold">Similar Examples</span>.</p>
-    </details>
-  </div>
-);
+const AboutDictionary = () => (
+  <div className="space-y-8 text-sm leading-relaxed">
+    <section>
+      <h2 className="text-lg font-semibold text-primary mb-3">Ballarat AI Prompt Dictionary: What, Why & How</h2>
+      <p className="mb-4">
+        The Ballarat AI Prompt Dictionary is an open-source research platform and search tool that compiles hundreds of proven prompt patterns from academic work. A prompt pattern is a reusable, named template for interacting with large language models (LLMs). Each pattern defines a five-part “5-Key” scaffold—Role, Context, Action, Format and Response—to capture intent, provide structural guidance and adaptation advice, and maximise predictability, reproducibility and auditability. By standardising these key elements, the dictionary makes it possible to compare prompts systematically, reduce ambiguity and drift, and monitor for bias or harmful behaviours.
+      </p>
+      <p>
+        You can start by clearly stating your task—for example, “Rank policy risks” or “Compare legal clauses”—and then browse or search the library by theme. The logic layers and categories help you navigate: for instance, “Beyond” logic covers prompts that push the AI’s capabilities, while the Hypothesise category within “Beyond” focuses on generative speculation. Each individual pattern page expands to show a concise description, a general explanation, a usage summary, a detailed 5-Key template (with variables to fill), example prompts and a list of similar patterns.
+      </p>
+    </section>
 
-const Feedback = () => (
-  <div className="space-y-5 text-sm">
-    <p className="text-secondary">Spotted ambiguity, accessibility gaps, missing inclusive examples, or structural drift? Please open an issue or PR. Reference the pattern ID(s), describe the observed issue, and include a minimal reproducible example when possible.</p>
-    <div className="grid gap-4 md:grid-cols-3">
-      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
-        <h3 className="text-sm font-semibold mb-1">Label cheat sheet</h3>
-        <ul className="text-xs space-y-1">
-          <li><code className="text-[11px]">orientation-feedback</code>: general suggestions, roadmap alignment, clarity requests.</li>
-          <li><code className="text-[11px]">a11y-regression</code>: contrast failures, missing labels, keyboard traps.</li>
-          <li><code className="text-[11px]">education</code>: requests for examples, tutorials, or AT walkthroughs.</li>
-        </ul>
-        <p className="text-xs text-secondary mt-2">Add multiple labels if an issue spans categories.</p>
-      </div>
-      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
-        <h3 className="text-sm font-semibold mb-1">Feedback entry points</h3>
-        <ul className="list-disc pl-4 space-y-1">
-          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=orientation-feedback" target="_blank" rel="noreferrer" className="text-accent hover:underline">Orientation feedback issue</a></li>
-          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=a11y-regression" target="_blank" rel="noreferrer" className="text-accent hover:underline">Accessibility regression report</a></li>
-          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=education" target="_blank" rel="noreferrer" className="text-accent hover:underline">Education/resource request</a></li>
-        </ul>
-        <p className="text-xs text-secondary mt-2">Need to submit privately? Email listed in <Link href="/orientation/accessibility-responsible-use" className="text-accent hover:underline">Responsible Use</Link>.</p>
-      </div>
-      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
-        <h3 className="text-sm font-semibold mb-1">Pattern / submission placeholders</h3>
-        <p className="text-xs text-secondary">Use the templates below to keep proposals consistent—paste them directly into GitHub issues.</p>
-      </div>
-    </div>
-    <div className="grid gap-4 md:grid-cols-2">
-      <div className="p-3 rounded border border-muted bg-surface-2 relative">
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-semibold text-sm">Pattern submission outline</span>
-          <CopyButton 
-            text={PATTERN_SUBMISSION_PLACEHOLDER}
-            liveRegionId="pattern-submission-live"
-            ariaLabel="Copy pattern submission placeholder"
-            className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          />
-        </div>
-        <pre id="pattern-submission-placeholder" className="overflow-auto text-xs"><code>{PATTERN_SUBMISSION_PLACEHOLDER}</code></pre>
-        <div id="pattern-submission-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
-      </div>
-      <div className="p-3 rounded border border-muted bg-surface-2 relative">
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-semibold text-sm">Orientation contribution note</span>
-          <CopyButton 
-            text={CONTRIBUTION_NOTE_PLACEHOLDER}
-            liveRegionId="orientation-contribution-live"
-            ariaLabel="Copy contribution placeholder"
-            className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          />
-        </div>
-        <pre id="orientation-contribution-placeholder" className="overflow-auto text-xs"><code>{CONTRIBUTION_NOTE_PLACEHOLDER}</code></pre>
-        <div id="orientation-contribution-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
-      </div>
-    </div>
-  </div>
-);
+    <section>
+      <h2 className="text-lg font-semibold text-primary mb-3">Logic Layers and Categories</h2>
+      <p className="mb-4">
+        A key insight from the underlying research is that English prepositions provide a natural metaphor for structuring the universe of prompt tasks. The dictionary’s six logic layers are inspired by prepositions—Across, At, Beyond, In, Out and Over—each describing a different behavioural relationship between the prompt and the LLM:
+      </p>
+      <ul className="list-disc pl-5 space-y-2 mb-4">
+        <li><strong>Across Logic</strong> spans multiple domains or disciplines, integrating diverse knowledge.</li>
+        <li><strong>At Logic</strong> targets a specific scenario or context.</li>
+        <li><strong>Beyond Logic</strong> explores new capabilities, innovating beyond standard tasks.</li>
+        <li><strong>In Logic</strong> focuses on introspective or self-reflective tasks.</li>
+        <li><strong>Out Logic</strong> covers prompts for generating outputs such as code or creative text.</li>
+        <li><strong>Over Logic</strong> supports comprehensive coverage, summarisation and synthesis.</li>
+      </ul>
+      <p>
+        Within these layers, the library organises patterns into twenty-five categories (with acronyms like ARG for Argument, CAL for Calculation, HYP for Hypothesise, etc.), each capturing a particular task archetype. For example, the categories “Assessment”, “Calculation” and “Logical Reasoning” reside in the At and Beyond logic layers, while “Summarising” and “Synthesis” live in the Over layer. This dual taxonomy—logic layer plus category—acts as a mental map, aligning with research that uses prepositional logic and task typology to organise human-AI conversation patterns.
+      </p>
+    </section>
 
-const NextSteps = () => (
-  <div>
-    <ul className="list-disc pl-5 text-sm space-y-1">
-  <li><Link href="/patterns" className="text-accent hover:underline">Browse patterns</Link> and shortlist 2–3 for your task.</li>
-      <li>Create a tiny evaluation set (edge + typical cases) and record baseline outputs.</li>
-      <li>Introduce structured adaptation with version tags.</li>
-      <li>Share findings—improvements are welcomed.</li>
-    </ul>
-  </div>
-);
-
-const LearningPath = () => (
-  <div className="space-y-6 text-sm">
-    <p>Move through Orientation deliberately instead of skimming every section in one sitting. The roadmap below mirrors the Phase 6 plan in our <a className="text-accent hover:underline" href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/PRD.md#phase-6-orientation-enhancements--onboarding-expansion" target="_blank" rel="noreferrer">living PRD</a>.</p>
-    <div className="grid gap-4 md:grid-cols-2">
-      {LEARNING_TRACKS.map(track => (
-        <div key={track.stage} className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
-          <p className="text-xs uppercase tracking-wide text-secondary mb-1">{track.stage}</p>
-          <p className="font-semibold text-primary mb-2">{track.outcome}</p>
-          <div className="space-y-1">
-            <p className="text-xs text-secondary">Focus:</p>
-            <ul className="list-disc pl-4 space-y-1">
-              {track.focus.map(item => (
-                <li key={`${track.stage}-${item.href}`}><Link href={item.href} className="text-accent hover:underline">{item.label}</Link></li>
-              ))}
-            </ul>
-          </div>
-          <p className="mt-3 text-xs text-secondary"><strong>Checkpoint:</strong> {track.checkpoint}</p>
-        </div>
-      ))}
-    </div>
-    <div className="p-4 rounded border border-dashed border-muted bg-surface-2 shadow-sm">
-      <h3 className="text-sm font-semibold mb-1">AI-assisted correction path & telemetry readiness</h3>
-      <p className="mb-2">If an AI-assisted field (General Explanation, Usage Summary, PEIL, Knowledge Intent) looks incorrect, file an issue with the <code className="text-[11px]">ai-assist-correction</code> label so we can trace the enrichment run and update the source JSON. Planned telemetry events (<code className="text-[11px]">orientation_quick_path_click</code>, <code className="text-[11px]">evaluation_copy_action</code>, <code className="text-[11px]">glossary_search</code>) are documented in <a className="text-accent hover:underline" href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/telemetry.md" target="_blank" rel="noreferrer">docs/telemetry.md</a> and can be wired into a backend once we migrate off static hosting.</p>
-      <div className="flex flex-wrap gap-2">
-        <a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=ai-assist-correction" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center px-3 py-1.5 rounded border border-muted bg-surface-1 text-xs font-semibold text-primary hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Open correction issue</a>
-        <a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=orientation-feedback" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center px-3 py-1.5 rounded border border-muted bg-surface-1 text-xs font-semibold text-primary hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Share roadmap feedback</a>
-      </div>
-      <p className="text-xs text-secondary mt-2">Prefer to just follow along? Watch the Phase 6 roadmap section in the PRD—every accepted sub-phase is timestamped so you can see when guidance last evolved.</p>
-    </div>
+    <section>
+      <h2 className="text-lg font-semibold text-primary mb-3">Prompt Engineering Instructional Language (PEIL)</h2>
+      <p className="mb-4">
+        Building on the five-key schema and informed by prompt engineering research, the dictionary introduces the Prompt Engineering Instructional Language (PEIL). PEIL is an instructional scaffold that helps automate the creation of robust system prompts. It decomposes a prompt specification into a set of variables—Role, Provide Clear Context, Break Down Complex Questions, Provide Specific Instructions, Define Conciseness, Research-Based Prompting Techniques (e.g. Chain-of-Thought, Few-Shot etc.), and State Desired Output—which are combined to produce a final system prompt. Each of these variables corresponds to an element of the underlying 5-Key structure and codifies best practices found in prompt engineering literature. For instance:
+      </p>
+      <ul className="list-disc pl-5 space-y-2 mb-4">
+        <li><strong>Role</strong> defines the persona or expertise the model should assume (e.g., “You are a cybersecurity expert”).</li>
+        <li><strong>Provide Clear Context</strong> sets the domain and focus, grounding the model’s responses.</li>
+        <li><strong>Break Down Complex Questions</strong> decomposes broad tasks into smaller, explicit sub-questions, fostering step-by-step reasoning (a core technique like Chain-of-Thought).</li>
+        <li><strong>Provide Specific Instructions</strong> delineates essential requirements, constraints or mandatory inclusions.</li>
+        <li><strong>Define Conciseness</strong> sets word or token limits to control verbosity.</li>
+        <li><strong>Research-Based Techniques</strong> invites the inclusion of methods from scholarly work on prompting, such as instruction-prompt hybrids combining a guiding sentence with bullet-point rules—an approach supported by studies advocating hybrid prompt structures.</li>
+        <li><strong>State Desired Output</strong> specifies the target format, scope and expected information in the response.</li>
+      </ul>
+      <p>
+        PEIL thus provides a structured, research-informed framework for designing prompts that are clear, concise and conducive to reliable AI responses. It highlights the synergy between theoretical insights (like the 5-Key scaffold and prepositional logic layers) and practical prompting techniques from recent research, supporting both novice and advanced users in crafting instructive prompts that align with best practices.
+      </p>
+    </section>
   </div>
 );
 
 export const ORIENTATION_SECTIONS: OrientationSectionMeta[] = [
-  { slug: 'quick-start', id: 'quick-start', title: 'Quick Start', number: 1, description: 'Practical 8-step startup path for using patterns safely.', component: <QuickStart /> },
-  { slug: 'what-is-a-pattern', id: 'what-is-a-pattern', title: 'What Is a Pattern', number: 2, description: 'Definition, value, and collaboration benefits.', component: <WhatIsPattern /> },
-  { slug: 'pattern-anatomy', id: 'pattern-anatomy', title: 'Pattern Anatomy', number: 3, description: 'Schema fields, 5-Key template, usage guidance diagram.', component: <PatternAnatomy /> },
-  { slug: 'lifecycle', id: 'lifecycle', title: 'Lifecycle', number: 4, description: 'From need framing through monitoring & drift detection.', component: <Lifecycle /> },
-  { slug: 'choosing-patterns', id: 'choosing-patterns', title: 'Choosing Patterns', number: 5, description: 'Heuristics for selecting candidate patterns.', component: <Choosing /> },
-  { slug: 'combining-patterns', id: 'combining-patterns', title: 'Combining Patterns', number: 6, description: 'Safe compositional chaining strategies.', component: <Combining /> },
-  { slug: 'adaptation', id: 'adaptation', title: 'Adaptation & Remix', number: 7, description: 'Principled iteration, versioning, ethical considerations.', component: <Adaptation /> },
-  { slug: 'anti-patterns', id: 'anti-patterns', title: 'Anti-Patterns', number: 8, description: 'Common failure modes and refactoring cues.', component: <AntiPatterns /> },
-  { slug: 'quality-evaluation', id: 'quality-evaluation', title: 'Quality & Evaluation', number: 9, description: 'Metrics, failure taxonomy, baselining discipline.', component: <Evaluation /> },
-  { slug: 'search-similarity', id: 'search-similarity', title: 'Search & Similarity UX', number: 10, description: 'Search syntax, similarity legend, and manual comparison workflow.', component: <SearchSimilarityGuidance /> },
-  { slug: 'similarity-preview', id: 'similarity-preview', title: 'Similarity Preview', number: 11, description: 'Teaser: sample similarity scores, evaluation/adaptation loop, optional static network graph.', component: <SimilarityPreview /> },
-  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 12, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
-  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 13, description: 'Key terms and definitions.', component: <Glossary /> },
-  { slug: 'faq', id: 'faq', title: 'FAQ', number: 14, description: 'Frequently asked clarifications.', component: <FAQ /> },
-  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 15, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
-  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 16, description: 'Where to go after orienting.', component: <NextSteps /> },
-  { slug: 'learning-path', id: 'learning-path', title: 'Learning Path & Roadmap', number: 17, description: 'Staged journey plus AI-assisted correction and telemetry notes.', component: <LearningPath /> }
+  { slug: 'about', id: 'about', title: 'About the Dictionary', number: 1, description: 'What, Why & How of the Ballarat AI Prompt Dictionary.', component: <AboutDictionary /> },
+  { slug: 'quick-start', id: 'quick-start', title: 'Quick Start', number: 2, description: 'Practical 8-step startup path for using patterns safely.', component: <QuickStart /> },
+  { slug: 'what-is-a-pattern', id: 'what-is-a-pattern', title: 'What Is a Pattern', number: 3, description: 'Definition, value, and collaboration benefits.', component: <WhatIsPattern /> },
+  { slug: 'pattern-anatomy', id: 'pattern-anatomy', title: 'Pattern Anatomy', number: 4, description: 'Schema fields, 5-Key template, usage guidance diagram.', component: <PatternAnatomy /> },
+  { slug: 'lifecycle', id: 'lifecycle', title: 'Lifecycle', number: 5, description: 'From need framing through monitoring & drift detection.', component: <Lifecycle /> },
+  { slug: 'choosing-patterns', id: 'choosing-patterns', title: 'Choosing Patterns', number: 6, description: 'Heuristics for selecting candidate patterns.', component: <Choosing /> },
+  { slug: 'combining-patterns', id: 'combining-patterns', title: 'Combining Patterns', number: 7, description: 'Safe compositional chaining strategies.', component: <Combining /> },
+  { slug: 'adaptation', id: 'adaptation', title: 'Adaptation & Remix', number: 8, description: 'Principled iteration, versioning, ethical considerations.', component: <Adaptation /> },
+  { slug: 'anti-patterns', id: 'anti-patterns', title: 'Anti-Patterns', number: 9, description: 'Common failure modes and refactoring cues.', component: <AntiPatterns /> },
+  { slug: 'quality-evaluation', id: 'quality-evaluation', title: 'Quality & Evaluation', number: 10, description: 'Metrics, failure taxonomy, baselining discipline.', component: <Evaluation /> },
+  { slug: 'search-similarity', id: 'search-similarity', title: 'Search & Similarity UX', number: 11, description: 'Search syntax, similarity legend, and manual comparison workflow.', component: <SearchSimilarityGuidance /> },
+  { slug: 'similarity-preview', id: 'similarity-preview', title: 'Similarity Preview', number: 12, description: 'Teaser: sample similarity scores, evaluation/adaptation loop, optional static network graph.', component: <SimilarityPreview /> },
+  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 13, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
+  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 14, description: 'Key terms and definitions.', component: <Glossary /> },
+  { slug: 'faq', id: 'faq', title: 'FAQ', number: 15, description: 'Frequently asked clarifications.', component: <FAQ /> },
+  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 16, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
+  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 17, description: 'Where to go after orienting.', component: <NextSteps /> },
+  { slug: 'learning-path', id: 'learning-path', title: 'Learning Path & Roadmap', number: 18, description: 'Staged journey plus AI-assisted correction and telemetry notes.', component: <LearningPath /> }
 ];
