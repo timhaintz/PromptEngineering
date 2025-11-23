@@ -9,6 +9,15 @@ import {
   type Logic,
 } from '@/lib/data/categories';
 
+function getLogicSummary(logic: Logic): string {
+  const detailed = logic.detailedDescription?.trim();
+  if (detailed) {
+    const firstParagraph = detailed.split('\n\n')[0] ?? detailed;
+    return firstParagraph.replace(/\*\*(.*?)\*\*/g, '$1');
+  }
+  return logic.focus;
+}
+
 export default async function LogicPage() {
   // Load base taxonomy (dictionary) and semantic overrides for counts
   const data: PatternCategoriesData = loadPatternCategories();
@@ -36,7 +45,7 @@ export default async function LogicPage() {
             <div key={l.slug} className="surface-card p-6">
               <div className="mb-2">
                 <h2 className="text-xl font-semibold text-primary">{l.name} Logic</h2>
-                <p className="text-sm text-muted">{l.focus}</p>
+                <p className="text-sm text-muted whitespace-pre-line">{getLogicSummary(l)}</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {l.categories.map(c => (

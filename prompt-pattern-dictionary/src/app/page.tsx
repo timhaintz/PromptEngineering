@@ -29,12 +29,22 @@ async function getTotalExamplesCount(): Promise<number> {
   return patterns.reduce((sum, p) => sum + (p.examples?.length || 0), 0);
 }
 
+function getLogicSummary(logic: Logic): string {
+  const detailed = logic.detailedDescription?.trim();
+  if (detailed) {
+    const firstParagraph = detailed.split('\n\n')[0] ?? detailed;
+    return firstParagraph.replace(/\*\*(.*?)\*\*/g, '$1');
+  }
+  return logic.focus;
+}
+
 export default async function HomePage() {
   const patternCategories = await getPatternCategories();
   // Load semantic assignments if available to override counts
   const semantic = loadSemanticOverrides();
   const actualPatternCount = await getActualPatternsCount();
   const totalExamples = await getTotalExamplesCount();
+  const showExperimentalTools = process.env.NEXT_PUBLIC_SHOW_EXPERIMENTAL_TOOLS === 'true';
 
   return (
   <div className="min-h-screen bg-base">
@@ -65,7 +75,7 @@ export default async function HomePage() {
               </svg>
             </Link>
             <Link href="/orientation" className="inline-flex items-center gap-2 rounded-md border border-accent text-accent bg-surface-1 px-6 py-3 font-medium shadow hover:bg-surface-hover focus:outline-none focus-ring">
-              Orientation / How to Use
+              Orientation / Getting Started
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
@@ -95,6 +105,7 @@ export default async function HomePage() {
         <SearchInterface />
 
         {/* Similarity Features */}
+        {showExperimentalTools && (
         <div className="max-w-6xl mx-auto mb-16">
           <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
             AI-Powered Analysis Tools
@@ -195,6 +206,7 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
+        )}
 
         {/* Browse by Category */}
         <div className="max-w-6xl mx-auto mb-16">
@@ -220,8 +232,8 @@ export default async function HomePage() {
                   <h3 className="text-xl font-semibold text-primary mb-2">
                     {logic.name} Logic
                   </h3>
-                  <p className="text-secondary text-sm mb-2">
-                    {logic.focus}
+                  <p className="text-secondary text-sm mb-2 whitespace-pre-line">
+                    {getLogicSummary(logic)}
                   </p>
                 </div>
                 
