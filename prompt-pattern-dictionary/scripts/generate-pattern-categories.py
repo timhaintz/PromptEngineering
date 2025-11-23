@@ -138,7 +138,7 @@ def get_category_description(category_name: str) -> str:
     return category_mapping.get(
         category_var_name,
         "No description available.",
-    ).strip()
+    ).strip().replace('\n', ' ')
 
 
 def get_logic_description(logic_name: str) -> str:
@@ -155,7 +155,7 @@ def get_logic_description(logic_name: str) -> str:
     return logic_mapping.get(
         logic_name,
         "No description available.",
-    ).strip()
+    ).strip().replace('\n', ' ')
 
 
 def process_patterns_from_source(
