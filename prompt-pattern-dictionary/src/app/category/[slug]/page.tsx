@@ -179,7 +179,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               </div>
             )}
             {categoryMeta?.description && (
-              <p className="text-sm text-muted max-w-3xl">
+              <p className="text-sm text-muted">
                 {categoryMeta.description.replace(/\s+/g, ' ').trim()}
               </p>
             )}
