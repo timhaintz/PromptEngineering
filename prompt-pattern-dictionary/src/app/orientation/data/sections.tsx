@@ -1329,23 +1329,41 @@ const LearningPath = () => (
   </div>
 );
 
+const OrientationHubSection = () => (
+  <div className="space-y-4">
+    <p className="text-sm">The Orientation Hub serves as the central navigation point for all orientation materials. It provides a role-based guide to help you find the most relevant sections for your needs.</p>
+    <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+      <h3 className="text-sm font-semibold mb-2">Hub Highlights</h3>
+      <ul className="list-disc pl-5 space-y-1 text-sm">
+        <li><strong>Role → Intent Map:</strong> Find guidance tailored to Researchers, Practitioners, Students, or Tool Builders.</li>
+        <li><strong>Quick Paths:</strong> Jump straight to key resources like the Evaluation Harness or Pattern Anatomy.</li>
+        <li><strong>Consolidated View:</strong> Access the "All Sections" page for a single-page reading experience.</li>
+      </ul>
+      <div className="mt-4">
+        <Link href="/orientation/hub" className="text-accent text-sm font-medium hover:underline">Go to Orientation Hub →</Link>
+      </div>
+    </div>
+  </div>
+);
+
 export const ORIENTATION_SECTIONS: OrientationSectionMeta[] = [
   { slug: 'about', id: 'about', title: 'About the Dictionary', number: 1, description: 'What, Why & How of the Ballarat AI Prompt Dictionary.', component: <AboutDictionary /> },
-  { slug: 'quick-start', id: 'quick-start', title: 'Quick Start', number: 2, description: 'Practical 8-step startup path for using patterns safely.', component: <QuickStart /> },
-  { slug: 'what-is-a-pattern', id: 'what-is-a-pattern', title: 'What Is a Pattern', number: 3, description: 'Definition, value, and collaboration benefits.', component: <WhatIsPattern /> },
-  { slug: 'pattern-anatomy', id: 'pattern-anatomy', title: 'Pattern Anatomy', number: 4, description: 'Schema fields, 5-Key template, usage guidance diagram.', component: <PatternAnatomy /> },
-  { slug: 'lifecycle', id: 'lifecycle', title: 'Lifecycle', number: 5, description: 'From need framing through monitoring & drift detection.', component: <Lifecycle /> },
-  { slug: 'choosing-patterns', id: 'choosing-patterns', title: 'Choosing Patterns', number: 6, description: 'Heuristics for selecting candidate patterns.', component: <Choosing /> },
-  { slug: 'combining-patterns', id: 'combining-patterns', title: 'Combining Patterns', number: 7, description: 'Safe compositional chaining strategies.', component: <Combining /> },
-  { slug: 'adaptation', id: 'adaptation', title: 'Adaptation & Remix', number: 8, description: 'Principled iteration, versioning, ethical considerations.', component: <Adaptation /> },
-  { slug: 'anti-patterns', id: 'anti-patterns', title: 'Anti-Patterns', number: 9, description: 'Common failure modes and refactoring cues.', component: <AntiPatterns /> },
-  { slug: 'quality-evaluation', id: 'quality-evaluation', title: 'Quality & Evaluation', number: 10, description: 'Metrics, failure taxonomy, baselining discipline.', component: <Evaluation /> },
-  { slug: 'search-similarity', id: 'search-similarity', title: 'Search & Similarity UX', number: 11, description: 'Search syntax, similarity legend, and manual comparison workflow.', component: <SearchSimilarityGuidance /> },
-  { slug: 'similarity-preview', id: 'similarity-preview', title: 'Similarity Preview', number: 12, description: 'Teaser: sample similarity scores, evaluation/adaptation loop, optional static network graph.', component: <SimilarityPreview /> },
-  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 13, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
-  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 14, description: 'Key terms and definitions.', component: <Glossary /> },
-  { slug: 'faq', id: 'faq', title: 'FAQ', number: 15, description: 'Frequently asked clarifications.', component: <FAQ /> },
-  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 16, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
-  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 17, description: 'Where to go after orienting.', component: <NextSteps /> },
-  { slug: 'learning-path', id: 'learning-path', title: 'Learning Path & Roadmap', number: 18, description: 'Staged journey plus AI-assisted correction and telemetry notes.', component: <LearningPath /> }
+  { slug: 'hub', id: 'hub', title: 'Orientation Hub', number: 2, description: 'Central navigation hub with role-based guides and quick paths.', component: <OrientationHubSection /> },
+  { slug: 'quick-start', id: 'quick-start', title: 'Quick Start', number: 3, description: 'Practical 8-step startup path for using patterns safely.', component: <QuickStart /> },
+  { slug: 'what-is-a-pattern', id: 'what-is-a-pattern', title: 'What Is a Pattern', number: 4, description: 'Definition, value, and collaboration benefits.', component: <WhatIsPattern /> },
+  { slug: 'pattern-anatomy', id: 'pattern-anatomy', title: 'Pattern Anatomy', number: 5, description: 'Schema fields, 5-Key template, usage guidance diagram.', component: <PatternAnatomy /> },
+  { slug: 'lifecycle', id: 'lifecycle', title: 'Lifecycle', number: 6, description: 'From need framing through monitoring & drift detection.', component: <Lifecycle /> },
+  { slug: 'choosing-patterns', id: 'choosing-patterns', title: 'Choosing Patterns', number: 7, description: 'Heuristics for selecting candidate patterns.', component: <Choosing /> },
+  { slug: 'combining-patterns', id: 'combining-patterns', title: 'Combining Patterns', number: 8, description: 'Safe compositional chaining strategies.', component: <Combining /> },
+  { slug: 'adaptation', id: 'adaptation', title: 'Adaptation & Remix', number: 9, description: 'Principled iteration, versioning, ethical considerations.', component: <Adaptation /> },
+  { slug: 'anti-patterns', id: 'anti-patterns', title: 'Anti-Patterns', number: 10, description: 'Common failure modes and refactoring cues.', component: <AntiPatterns /> },
+  { slug: 'quality-evaluation', id: 'quality-evaluation', title: 'Quality & Evaluation', number: 11, description: 'Metrics, failure taxonomy, baselining discipline.', component: <Evaluation /> },
+  { slug: 'search-similarity', id: 'search-similarity', title: 'Search & Similarity UX', number: 12, description: 'Search syntax, similarity legend, and manual comparison workflow.', component: <SearchSimilarityGuidance /> },
+  { slug: 'similarity-preview', id: 'similarity-preview', title: 'Similarity Preview', number: 13, description: 'Teaser: sample similarity scores, evaluation/adaptation loop, optional static network graph.', component: <SimilarityPreview /> },
+  { slug: 'accessibility-responsible-use', id: 'accessibility-responsible-use', title: 'Accessibility & Responsible Use', number: 14, description: 'Inclusive, transparent, and safe utilization guidelines.', component: <AccessibilityResponsible /> },
+  { slug: 'glossary', id: 'glossary', title: 'Glossary', number: 15, description: 'Key terms and definitions.', component: <Glossary /> },
+  { slug: 'faq', id: 'faq', title: 'FAQ', number: 16, description: 'Frequently asked clarifications.', component: <FAQ /> },
+  { slug: 'feedback', id: 'feedback', title: 'Feedback', number: 17, description: 'How to contribute improvements and report issues.', component: <Feedback /> },
+  { slug: 'next-steps', id: 'next-steps', title: 'Next Steps', number: 18, description: 'Where to go after orienting.', component: <NextSteps /> },
+  { slug: 'learning-path', id: 'learning-path', title: 'Learning Path & Roadmap', number: 19, description: 'Staged journey plus AI-assisted correction and telemetry notes.', component: <LearningPath /> }
 ];

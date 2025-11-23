@@ -16,10 +16,11 @@ export default function OrientationNav({ variant = 'sidebar' }: Props) {
       {variant === 'sidebar' ? (
   <ul className="space-y-1">
           {ORIENTATION_SECTIONS.map(s => {
-            const active = currentSlug === s.slug || (isAll && false);
+            const href = s.slug === 'about' ? '/orientation' : `/orientation/${s.slug}`;
+            const active = (s.slug === 'about' && pathname === '/orientation') || currentSlug === s.slug || (isAll && false);
             return (
               <li key={s.slug}>
-                <Link href={`/orientation/${s.slug}`} className={`flex gap-2 rounded px-2 py-1 border-l-4 leading-snug transition-colors focus-ring ${active ? 'bg-[var(--accent-active-bg)] border-accent text-primary font-medium' : 'border-transparent text-secondary hover:bg-surface-hover hover:border-muted'}`} aria-current={active ? 'page' : undefined}>
+                <Link href={href} className={`flex gap-2 rounded px-2 py-1 border-l-4 leading-snug transition-colors focus-ring ${active ? 'bg-[var(--accent-active-bg)] border-accent text-primary font-medium' : 'border-transparent text-secondary hover:bg-surface-hover hover:border-muted'}`} aria-current={active ? 'page' : undefined}>
                   <span className="text-secondary w-6 tabular-nums text-right select-none" aria-hidden="true">{s.number}.</span>
                   <span className="flex-1">{s.title}</span>
                 </Link>
