@@ -1137,6 +1137,198 @@ const AboutDictionary = () => (
   </div>
 );
 
+// Glossary (restored after patch collision)
+const Glossary = () => {
+  const letters = Array.from(new Set(GLOSSARY_ENTRIES.map(entry => entry.letter)));
+  let lastLetter = '';
+  return (
+    <div>
+      <nav aria-label="Glossary index" className="mb-3 flex flex-wrap gap-1 text-[11px]">
+        {letters.map(letter => (
+          <a key={letter} href={`#term-${letter}`} className="px-1.5 py-0.5 rounded bg-surface-2 border border-muted hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={`Jump to terms starting with ${letter}`}>{letter}</a>
+        ))}
+      </nav>
+      <dl className="space-y-3 text-sm">
+        {GLOSSARY_ENTRIES.map(entry => {
+          const letterChanged = entry.letter !== lastLetter;
+          lastLetter = entry.letter;
+          return (
+            <div key={entry.term}>
+              {letterChanged && <div id={`term-${entry.letter}`} aria-hidden="true"></div>}
+              <dt className="font-medium">{entry.term}</dt>
+              <dd className="text-sm text-secondary">{entry.definition}</dd>
+            </div>
+          );
+        })}
+      </dl>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
+          <h3 className="text-sm font-semibold mb-2">Data cadence & embedding transparency</h3>
+          <p className="text-sm mb-2">Research data lives in <code className="text-[11px]">public/data/normalized-patterns.json</code> with supporting stats inside <code className="text-[11px]">public/data/stats.json</code>. We expose the same metadata in Orientation so users know when artifacts last refreshed.</p>
+          <ul className="list-disc pl-5 space-y-1 text-sm">
+            <li><strong>Weekly ingest (or within 72h of a paper update):</strong> running the normalization pipeline rewrites <code className="text-[11px]">normalized-patterns.json</code> plus the provenance fields that show up in Pattern pages.</li>
+            <li><strong>Embedding refresh policy:</strong> similarity vectors (<code className="text-[11px]">similar-patterns.json</code> + <code className="text-[11px]">similar-examples.json</code>) regenerate at least monthly or whenever ≥10 patterns/examples change so Search & Comparison stay aligned.</li>
+            <li><strong>Transparency surfaces:</strong> the Orientation hub cites <code className="text-[11px]">stats.json.lastProcessed</code> and <code className="text-[11px]">aiAssistedAt</code> timestamps so readers can confirm freshness before trusting enrichment or similarity hints.</li>
+          </ul>
+          <p className="text-xs text-secondary mt-2">If you notice stale data, open an issue referencing the last processed timestamp and affected pattern IDs.</p>
+        </div>
+        <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm overflow-x-auto">
+          <h3 className="text-sm font-semibold mb-2">Feature-flag visibility</h3>
+          <table className="text-xs w-full border">
+            <thead>
+              <tr className="bg-surface-2 text-secondary">
+                <th className="p-2 text-left font-semibold">Env flag</th>
+                <th className="p-2 text-left font-semibold">Surface</th>
+                <th className="p-2 text-left font-semibold">Default / visibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              {FEATURE_FLAGS.map(flag => (
+                <tr key={flag.env} className="border-t align-top">
+                  <td className="p-2 font-mono text-[11px]">{flag.env}</td>
+                  <td className="p-2">{flag.surface}</td>
+                  <td className="p-2 text-xs">
+                    <span className="block font-semibold">Default: {flag.defaultState}</span>
+                    <span className="text-secondary">{flag.visibility}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-xs text-secondary mt-2">Flags are client-visible (prefixed with <code className="text-[11px]">NEXT_PUBLIC_</code>) so you can audit which exploratory widgets are being shown in any given deployment.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FAQ = () => (
+  <div>
+    <details className="group border rounded mb-2 p-3 bg-surface-1">
+      <summary className="cursor-pointer font-medium">Why five template keys?</summary>
+      <p className="mt-2 text-sm">They balance expressive coverage (intent, situational framing, required action, output schema, expected shape/tone) with cognitive load. More keys lowered adoption; fewer reduced precision.</p>
+    </details>
+  <details className="group border rounded mb-2 p-3 bg-surface-1">
+      <summary className="cursor-pointer font-medium">Can I add new keys?</summary>
+      <p className="mt-2 text-sm">Yes—locally. If broadly useful, open a proposal so tooling and documentation can stay aligned. Keep custom keys succinct.</p>
+    </details>
+  <details className="group border rounded mb-2 p-3 bg-surface-1">
+      <summary className="cursor-pointer font-medium">How do I detect bias?</summary>
+      <p className="mt-2 text-sm">In evaluation, insert controlled variants (names, dialects, region terms) and compare outcome disparities. Investigate structural omissions before applying ad‑hoc wording patches.</p>
+    </details>
+  <details className="group border rounded mb-2 p-3 bg-surface-1">
+      <summary className="cursor-pointer font-medium">When should I fork a pattern?</summary>
+      <p className="mt-2 text-sm">If structural keys change semantics (e.g., merging roles, introducing multi-step embedded reasoning) or examples shift domain irreversibly—create a named fork for traceability.</p>
+    </details>
+  <details className="group border rounded p-3 bg-surface-1">
+      <summary className="cursor-pointer font-medium">How are similar patterns computed?</summary>
+      <p className="mt-2 text-sm">Pattern similarity uses cosine similarity over an embedding composed of the pattern’s name, description, and up to the first three example prompts. Results are exploratory semantic neighbors—not a curated taxonomy.</p>
+      <p className="mt-2 text-sm">Separate per‑example embeddings are also generated for example‑to‑example cosine similarity; these appear in the UI under <span className="font-semibold">Similar Examples</span>.</p>
+    </details>
+  </div>
+);
+
+const Feedback = () => (
+  <div className="space-y-5 text-sm">
+    <p className="text-secondary">Spotted ambiguity, accessibility gaps, missing inclusive examples, or structural drift? Please open an issue or PR. Reference the pattern ID(s), describe the observed issue, and include a minimal reproducible example when possible.</p>
+    <div className="grid gap-4 md:grid-cols-3">
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <h3 className="text-sm font-semibold mb-1">Label cheat sheet</h3>
+        <ul className="text-xs space-y-1">
+          <li><code className="text-[11px]">orientation-feedback</code>: general suggestions, roadmap alignment, clarity requests.</li>
+          <li><code className="text-[11px]">a11y-regression</code>: contrast failures, missing labels, keyboard traps.</li>
+          <li><code className="text-[11px]">education</code>: requests for examples, tutorials, or AT walkthroughs.</li>
+        </ul>
+        <p className="text-xs text-secondary mt-2">Add multiple labels if an issue spans categories.</p>
+      </div>
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <h3 className="text-sm font-semibold mb-1">Feedback entry points</h3>
+        <ul className="list-disc pl-4 space-y-1">
+          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=orientation-feedback" target="_blank" rel="noreferrer" className="text-accent hover:underline">Orientation feedback issue</a></li>
+          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=a11y-regression" target="_blank" rel="noreferrer" className="text-accent hover:underline">Accessibility regression report</a></li>
+          <li><a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=education" target="_blank" rel="noreferrer" className="text-accent hover:underline">Education/resource request</a></li>
+        </ul>
+        <p className="text-xs text-secondary mt-2">Need to submit privately? Email listed in <Link href="/orientation/accessibility-responsible-use" className="text-accent hover:underline">Responsible Use</Link>.</p>
+      </div>
+      <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+        <h3 className="text-sm font-semibold mb-1">Pattern / submission placeholders</h3>
+        <p className="text-xs text-secondary">Use the templates below to keep proposals consistent—paste them directly into GitHub issues.</p>
+      </div>
+    </div>
+    <div className="grid gap-4 md:grid-cols-2">
+      <div className="p-3 rounded border border-muted bg-surface-2 relative">
+        <div className="flex items-center justify-between mb-2">
+          <span className="font-semibold text-sm">Pattern submission outline</span>
+          <CopyButton
+            text={PATTERN_SUBMISSION_PLACEHOLDER}
+            liveRegionId="pattern-submission-live"
+            ariaLabel="Copy pattern submission placeholder"
+            className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          />
+        </div>
+        <pre id="pattern-submission-placeholder" className="overflow-auto text-xs"><code>{PATTERN_SUBMISSION_PLACEHOLDER}</code></pre>
+        <div id="pattern-submission-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+      </div>
+      <div className="p-3 rounded border border-muted bg-surface-2 relative">
+        <div className="flex items-center justify-between mb-2">
+          <span className="font-semibold text-sm">Orientation contribution note</span>
+          <CopyButton
+            text={CONTRIBUTION_NOTE_PLACEHOLDER}
+            liveRegionId="orientation-contribution-live"
+            ariaLabel="Copy contribution placeholder"
+            className="text-[10px] px-2 py-1 rounded border border-muted bg-surface-1 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          />
+        </div>
+        <pre id="orientation-contribution-placeholder" className="overflow-auto text-xs"><code>{CONTRIBUTION_NOTE_PLACEHOLDER}</code></pre>
+        <div id="orientation-contribution-live" className="mt-1 text-xs text-secondary" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+);
+
+const NextSteps = () => (
+  <div>
+    <ul className="list-disc pl-5 text-sm space-y-1">
+  <li><Link href="/patterns" className="text-accent hover:underline">Browse patterns</Link> and shortlist 2–3 for your task.</li>
+      <li>Create a tiny evaluation set (edge + typical cases) and record baseline outputs.</li>
+      <li>Introduce structured adaptation with version tags.</li>
+      <li>Share findings—improvements are welcomed.</li>
+    </ul>
+  </div>
+);
+
+const LearningPath = () => (
+  <div className="space-y-6 text-sm">
+    <p>Move through Orientation deliberately instead of skimming every section in one sitting. The roadmap below mirrors the Phase 6 plan in our <a className="text-accent hover:underline" href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/PRD.md#phase-6-orientation-enhancements--onboarding-expansion" target="_blank" rel="noreferrer">living PRD</a>.</p>
+    <div className="grid gap-4 md:grid-cols-2">
+      {LEARNING_TRACKS.map(track => (
+        <div key={track.stage} className="p-4 rounded border border-muted bg-surface-1 shadow-sm">
+          <p className="text-xs uppercase tracking-wide text-secondary mb-1">{track.stage}</p>
+          <p className="font-semibold text-primary mb-2">{track.outcome}</p>
+          <div className="space-y-1">
+            <p className="text-xs text-secondary">Focus:</p>
+            <ul className="list-disc pl-4 space-y-1">
+              {track.focus.map(item => (
+                <li key={`${track.stage}-${item.href}`}><Link href={item.href} className="text-accent hover:underline">{item.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-3 text-xs text-secondary"><strong>Checkpoint:</strong> {track.checkpoint}</p>
+        </div>
+      ))}
+    </div>
+    <div className="p-4 rounded border border-dashed border-muted bg-surface-2 shadow-sm">
+      <h3 className="text-sm font-semibold mb-1">AI-assisted correction path & telemetry readiness</h3>
+      <p className="mb-2">If an AI-assisted field (General Explanation, Usage Summary, PEIL, Knowledge Intent) looks incorrect, file an issue with the <code className="text-[11px]">ai-assist-correction</code> label so we can trace the enrichment run and update the source JSON. Planned telemetry events (<code className="text-[11px]">orientation_quick_path_click</code>, <code className="text-[11px]">evaluation_copy_action</code>, <code className="text-[11px]">glossary_search</code>) are documented in <a className="text-accent hover:underline" href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/telemetry.md" target="_blank" rel="noreferrer">docs/telemetry.md</a> and can be wired into a backend once we migrate off static hosting.</p>
+      <div className="flex flex-wrap gap-2">
+        <a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=ai-assist-correction" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center px-3 py-1.5 rounded border border-muted bg-surface-1 text-xs font-semibold text-primary hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Open correction issue</a>
+        <a href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/issues/new?labels=orientation-feedback" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center px-3 py-1.5 rounded border border-muted bg-surface-1 text-xs font-semibold text-primary hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Share roadmap feedback</a>
+      </div>
+      <p className="text-xs text-secondary mt-2">Prefer to just follow along? Watch the Phase 6 roadmap section in the PRD—every accepted sub-phase is timestamped so you can see when guidance last evolved.</p>
+    </div>
+  </div>
+);
+
 export const ORIENTATION_SECTIONS: OrientationSectionMeta[] = [
   { slug: 'about', id: 'about', title: 'About the Dictionary', number: 1, description: 'What, Why & How of the Ballarat AI Prompt Dictionary.', component: <AboutDictionary /> },
   { slug: 'quick-start', id: 'quick-start', title: 'Quick Start', number: 2, description: 'Practical 8-step startup path for using patterns safely.', component: <QuickStart /> },
