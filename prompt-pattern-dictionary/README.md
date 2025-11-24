@@ -4,7 +4,7 @@ A comprehensive, searchable dictionary of prompt engineering patterns for cybers
 
 ## 🎯 Project Overview
 
-This is a Next.js-based web application that transforms academic research on prompt engineering into an accessible, searchable dictionary. It serves as the definitive reference tool for cybersecurity prompt engineering patterns and is designed to help researchers, practitioners, students, and tool builders design safer, more evaluable prompts.
+This is a Next.js-based web application that transforms academic research on prompt engineering into an accessible, searchable dictionary. It serves as the definitive reference tool for prompt engineering patterns and is designed to help researchers, practitioners, students, and tool builders design safer, more evaluable prompts.
 
 For the normalized Prompt Pattern schema and mapping details, see the Product Requirements Document (Prompt Pattern Schema section): docs/PRD.md.
 
@@ -35,7 +35,7 @@ For the normalized Prompt Pattern schema and mapping details, see the Product Re
 - **Search UX**: Results categorized by type with filters, clean blank initial state, “Clear all,” and URL state persistence
 - **Accessibility**: Improved contrast and chevron-based toggles with appropriate ARIA controls
  - **How to apply**: A concise 1–2 sentence usage summary is shown inline under Application when available; generated via optional enrichment.
- - **Orientation Layout (OED-Inspired)**: Refactored Orientation page to a two-column grid with a sticky numbered side navigation (desktop) and chip navigation (mobile), mirroring reference dictionary usage guides.
+ - **Orientation Layout (OED-Inspired)**: Refactored Orientation page to a two-column grid with a sticky numbered side navigation (desktop) and chip navigation (mobile). Introduced a dedicated **About** landing page for context, moving the navigational **Hub** to a sub-view to improve onboarding flow.
  - **Quick Start Scenario & Quick Paths (Phase 6 P1)**: Concrete defensive triage example with runnable prompt plus evaluation harness reference; Quick Paths panel exposes five intents (Defensive Patterns, Adapt an Existing Prompt, Evaluate Prompt Quality, Explore Similar Patterns, Improve Clarity) with keyboard navigation.
  - **Reading Time Badges (Phase 6 P1)**: Automated word-count heuristic adds dark‑mode aware badges across Orientation sections.
  - **Simplified Pattern Anatomy (Phase 6 P1)**: Collapsible descriptive overview + accessible alt text replacing more complex diagram for faster comprehension.
