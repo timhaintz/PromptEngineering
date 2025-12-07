@@ -177,8 +177,42 @@ class ModelRegistry:
                 api_version_env="AZUREVSEASTUS2_OPENAI_GPT5_API_VERSION",
                 default_api_version="2024-12-01-preview",
                 token_param_name="max_completion_tokens",
-                default_temperature=0.2,
+                default_temperature=1.0,
+                min_temperature=1.0,
+                max_temperature=1.0,
                 max_tokens_limit=270000,
+                supported_features=["chat", "completion", "function_calling", "streaming"],
+                supports_streaming=True
+            ),
+            ModelConfig(
+                name="gpt-5.1",
+                model_type=ModelType.AZURE_OPENAI,
+                auth_type=AuthType.MANAGED_IDENTITY,
+                endpoint_env="AZUREVSEASTUS2_OPENAI_ENDPOINT",
+                model_env="AZUREVSEASTUS2_OPENAI_GPT51_MODEL",
+                api_version_env="AZUREVSEASTUS2_OPENAI_GPT51_API_VERSION",
+                default_api_version="2024-05-01-preview",
+                token_param_name="max_completion_tokens",
+                default_temperature=1.0,
+                min_temperature=1.0,
+                max_temperature=1.0,
+                max_tokens_limit=270000,
+                supported_features=["chat", "completion", "function_calling", "streaming"],
+                supports_streaming=True
+            ),
+            ModelConfig(
+                name="gpt-5.1-chat",
+                model_type=ModelType.AZURE_OPENAI,
+                auth_type=AuthType.MANAGED_IDENTITY,
+                endpoint_env="AZUREVSEASTUS2_OPENAI_ENDPOINT",
+                model_env="AZUREVSEASTUS2_OPENAI_GPT51_CHAT_MODEL",
+                api_version_env="AZUREVSEASTUS2_OPENAI_GPT51_CHAT_API_VERSION",
+                default_api_version="2024-05-01-preview",
+                token_param_name="max_completion_tokens",
+                default_temperature=1.0,
+                min_temperature=1.0,
+                max_temperature=1.0,
+                max_tokens_limit=128000,
                 supported_features=["chat", "completion", "function_calling", "streaming"],
                 supports_streaming=True
             ),
@@ -528,7 +562,7 @@ class AzureOpenAIClient(BaseModelClient):
             # Add temperature only if model supports non-default values.
             # Some Azure models (e.g., gpt-5, o*-mini) only accept default temperature and reject explicit values.
             if self.config.default_temperature is not None:
-                strict_default_only = self.config.name in {"gpt-5", "o1-mini", "o3-mini", "o4-mini"}
+                strict_default_only = self.config.name in {"gpt-5", "gpt-5.1", "gpt-5.1-chat", "o1-mini", "o3-mini", "o4-mini"}
                 if not strict_default_only:
                     params.setdefault("temperature", self.config.default_temperature)
             

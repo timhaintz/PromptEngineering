@@ -8,6 +8,9 @@ Author:         Tim Haintz
 Creation Date:  20250113
 Last Updated:   20250421
 LINKS
+https://arxiv.org/abs/2402.07927
+https://arxiv.org/abs/2503.06926
+https://ijirt.org/publishedpaper/IJIRT183166_PAPER.pdf
 EXAMPLE USAGE
 #1. Start a chat session with the PEIL prompt generator
 python peil_prompt_generator.py
@@ -48,7 +51,7 @@ from azure_models import get_model_config, create_azure_openai_client, get_autog
 load_dotenv()
 
 # Default settings
-default_model_version = "gpt-4.1"
+default_model_version = "gpt-5.1"
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 temperature = 0.0
 
@@ -63,17 +66,18 @@ available_models = list(MODEL_CONFIGS.keys())
 
 peil_chat_system_prompt_instructions = r'''
 # INSTRUCTIONS
--You are a prompt generator for the PEIL project.
--Your task is to generate system prompts.
--Your output will be used in autonomous agents system prompts. Only provide the system prompt.
--You generate prompts to optimise the quality of output and performance of large language models. 
--Your goal is to generate prompts that are clear, concise, and effective in guiding the autonomous agents to produce accurate responses. 
--Your performance will be evaluated based on the relevance, coherence, and accuracy of the generated prompts.
--Do not add the {} variables to the prompt. Write full single string sentences to provide clear instructions and context.
--Use the PEIL template to structure your prompts effectively.
--Use the TECHNIQUES AND APPLICATIONS Markdown table to provide the best technique for the request. | Application | Prompting Technique | Add to PE | Summary from Paper |.
--Use the PE column of the table to implement the Prompting Technique.
--Only provide the prompt so it can be used in an automation system.
+- You are a prompt generator for the PEIL project.
+- Your task is to generate system prompts.
+- Your output will be used in autonomous agents system prompts. Only provide the system prompt.
+- You generate prompts to optimise the quality of output and performance of large language models. 
+- Your goal is to generate prompts that are clear, concise, and effective in guiding the autonomous agents to produce accurate responses. 
+- Your performance will be evaluated based on the relevance, coherence, and accuracy of the generated prompts.
+- Do not add the {} variables to the prompt. Write full single string sentences to provide clear instructions and context.
+- Use the PEIL template to structure your prompts effectively.
+- Use the TECHNIQUES AND APPLICATIONS Markdown table to provide the best technique for the request. | Application | Prompting Technique | Add to PE | Summary from Paper |.
+- Use the PE column of the table to implement the Prompting Technique.
+- Only provide the prompt so it can be used in an automation system.
+- Employ a hybrid prompt structure: begin with a short sentence or paragraph that clearly states the role and goal, followed by bullet points outlining specific rules or options.
 # END INSTRUCTIONS #
 '''
 
@@ -106,6 +110,10 @@ peil_chat_system_prompt_peil_definition = r'''
 peil_chat_system_prompt_peil_techniques = r'''
 ## A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications
 ### https://arxiv.org/abs/2402.07927
+
+## Hybrid Prompt Structure Research
+### https://arxiv.org/abs/2503.06926
+### https://ijirt.org/publishedpaper/IJIRT183166_PAPER.pdf
 
 ### TECHNIQUES AND APPLICATIONS ###
 | Application | Prompting Technique | Add to PE | Summary from Paper |
@@ -300,7 +308,7 @@ class ModelClient:
             return None
 
 # Using the GPT-4o model (or other specified model)
-def chat_with_peil(messages, model_version="gpt-4.1", temperature=0.0, debug=False):
+def chat_with_peil(messages, model_version="gpt-5.1", temperature=0.0, debug=False):
     try:
         client = ModelClient(model_version=model_version, temperature=temperature, debug=debug)
         system_prompt = peil_chat_system_prompt_instructions + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_peil_techniques + peil_chat_system_prompt_categories
@@ -346,7 +354,7 @@ def main():
     parser.add_argument("-chat_with_peil", action="store_true", help="Start session with chat_with_peil - Default")
     parser.add_argument("-chat_with_judgement", action="store_true", help="Automatically evaluate output with the judgement model")
     parser.add_argument("-prompt", type=str, default="", help="Provide a one-off custom prompt. Non-interactive mode. Parse text in quotes in the command line.")
-    parser.add_argument("-model_version", type=str, default="gpt-4o", choices=available_models, 
+    parser.add_argument("-model_version", type=str, default="gpt-5.1", choices=available_models, 
                         help=f"Model version to use. Choices: {', '.join(available_models)}")
     parser.add_argument("-judgement_model", type=str, default="deepseek-r1", choices=available_models,
                         help=f"Model version for judgement. Default: deepseek-r1")
