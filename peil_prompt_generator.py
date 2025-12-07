@@ -6,7 +6,7 @@ Leveraging Azure OpenAI API to generate prompts for the PEIL project
 Version:        0.2
 Author:         Tim Haintz                         
 Creation Date:  20250113
-Last Updated:   20250421
+Last Updated:   20251208
 LINKS
 https://arxiv.org/abs/2402.07927
 https://arxiv.org/abs/2503.06926
@@ -45,7 +45,11 @@ from azure.identity import InteractiveBrowserCredential, get_bearer_token_provid
 from typing import Dict, Any, Optional, Union
 
 # Import model configuration functions from azure_models
-from azure_models import get_model_config, create_azure_openai_client, get_autogen_config, MODEL_CONFIGS
+from azure_models import (
+    get_model_info,
+    get_autogen_config,
+    get_available_models,
+)
 
 # Load environment variables
 load_dotenv()
@@ -61,8 +65,8 @@ token_provider = get_bearer_token_provider(
     "https://cognitiveservices.azure.com/.default"
 )
 
-# Available models from MODEL_CONFIGS
-available_models = list(MODEL_CONFIGS.keys())
+# Available models from registry
+available_models = get_available_models()
 
 peil_chat_system_prompt_instructions = r'''
 # INSTRUCTIONS
@@ -204,105 +208,98 @@ By following these instructions, you will provide a comprehensive evaluation tha
 '''
 class ModelClient:
     """Client for interacting with Azure OpenAI and other model providers."""
-    
+
     def __init__(self, model_version: str = "gpt-4.1", temperature: float = 0.0, debug: bool = False):
-        """Initialize the model client.
-        
-        Args:
-            model_version: The model to use (e.g., "gpt-41", "deepseek-r1")
-            temperature: Temperature parameter for model responses
-            debug: Whether to output debug information
-        """
+        """Initialize the model client with current azure_models API."""
         self.model_version = model_version
         self.temperature = temperature
         self.debug = debug
-        
-        # Get model configuration
-        self.model_config = get_model_config(model_version)
-        
-        # Handle temperature overrides for models that require specific temperatures (like o-series)
-        if model_version in ["o1-mini", "o3-mini", "o4-mini"] and temperature != 1.0:
-            if self.debug:
-                print(f"[Debug] Overriding temperature to 1.0 for model {model_version}")
+
+        # Pull config using the supported APIs
+        self.model_info = get_autogen_config(model_version)
+        self.model_meta = get_model_info(model_version)
+
+        # Handle temperature overrides for fixed-temp models
+        if model_version in {"gpt-5", "gpt-5.1", "gpt-5.1-chat", "o1-mini", "o3-mini", "o4-mini"}:
             self.temperature = 1.0
-            
+
         # Create the client
         self.client = self._create_client()
-        
+
     def _create_client(self) -> Union[AzureOpenAI, OpenAI, ChatCompletionsClient]:
         """Create the appropriate client based on model type."""
+        # DeepSeek direct chat endpoint
         if self.model_version == "deepseek-r1":
-            # Use ChatCompletionsClient for DeepSeek models
             return ChatCompletionsClient(
-                endpoint=self.model_config["base_url"],
-                credential=AzureKeyCredential(self.model_config["api_key"])
+                endpoint=self.model_info["base_url"],
+                credential=AzureKeyCredential(self.model_info["api_key"])
             )
-        elif self.model_config.get("is_direct_api", False):
-            # Use OpenAI client for direct API models
+
+        # Direct OpenAI-style API (base_url + api_key)
+        if self.model_info.get("base_url") and self.model_info.get("api_key"):
             return OpenAI(
-                base_url=self.model_config["base_url"],
-                api_key=self.model_config["api_key"]
+                base_url=self.model_info["base_url"],
+                api_key=self.model_info["api_key"]
             )
-        else:
-            # Use AzureOpenAI for Azure-hosted models
-            credential = InteractiveBrowserCredential()
-            token = credential.get_token("https://cognitiveservices.azure.com/.default")
-            return AzureOpenAI(
-                azure_ad_token=token.token,
-                azure_endpoint=self.model_config["azure_endpoint"],
-                api_version=self.model_config["api_version"]
-            )
-    
-    def get_completion(self, messages: list, system_prompt: str = None, max_tokens: int = 4096) -> str:
-        """Get completion from the model.
-        
-        Args:
-            messages: List of message objects (role, content)
-            system_prompt: Optional system prompt
-            max_tokens: Maximum tokens for completion
-            
-        Returns:
-            Model completion text
-        """
+
+        # Azure OpenAI (managed identity)
+        if not self.model_info.get("azure_endpoint"):
+            raise ValueError("azure_endpoint not configured; ensure environment variables are loaded")
+
+        token_provider = self.model_info["azure_ad_token_provider"]
+        return AzureOpenAI(
+            azure_ad_token_provider=token_provider,
+            azure_endpoint=self.model_info["azure_endpoint"],
+            api_version=self.model_info["api_version"]
+        )
+
+    def get_completion(self, messages: list, system_prompt: str = None, max_tokens: int = 4096) -> Optional[str]:
+        """Get completion from the model."""
         try:
-            if system_prompt:
-                system_message = {"role": "system", "content": system_prompt}
-                full_messages = [system_message] + messages
-            else:
-                full_messages = messages
-            
+            full_messages = ([{"role": "system", "content": system_prompt}] + messages) if system_prompt else messages
+
+            # DeepSeek R1 uses ChatCompletionsClient
             if self.model_version == "deepseek-r1":
-                # DeepSeek R1 uses the ChatCompletionsClient
                 payload = {
                     "messages": full_messages,
                     "max_tokens": max_tokens
                 }
                 response = self.client.complete(payload)
                 return response.choices[0].message.content
+
+            # Handle token parameter naming differences
+            token_param: Dict[str, Any] = {}
+            if self.model_version in {
+                "gpt-5",
+                "gpt-5.1",
+                "gpt-5.1-chat",
+                "o1-mini",
+                "o3-mini",
+                "o4-mini",
+            }:
+                token_param = {"max_completion_tokens": max_tokens}
+                if "reasoning_effort" in self.model_info:
+                    token_param["reasoning"] = {"effort": self.model_info["reasoning_effort"]}
             else:
-                # Handle token parameter naming differences between models
-                token_param = {}
-                if self.model_version in ["o1-mini", "o3-mini", "o4-mini"]:
-                    token_param = {"max_completion_tokens": max_tokens}
-                    
-                    # Add reasoning_effort parameter for o-series models
-                    if "reasoning_effort" in self.model_config:
-                        token_param["reasoning"] = {"effort": self.model_config["reasoning_effort"]}
-                else:
-                    token_param = {"max_tokens": max_tokens}
-                
-                # Determine the model deployment name
-                model_name = self.model_config.get("deployment_name", self.model_version)
-                
-                # Create and call completion
-                response = self.client.chat.completions.create(
-                    model=model_name,
-                    messages=full_messages,
-                    temperature=self.temperature,
-                    **token_param
-                )
-                return response.choices[0].message.content
-                
+                token_param = {"max_tokens": max_tokens}
+
+            # Determine deployment name
+            model_name = self.model_info.get("model") or self.model_version
+
+            # Build call params
+            call_params = {
+                "model": model_name,
+                "messages": full_messages,
+                **token_param,
+            }
+
+            # Only pass temperature when the model supports it (avoid server errors)
+            if self.temperature is not None and self.model_version not in {"gpt-5", "gpt-5.1", "gpt-5.1-chat", "o1-mini", "o3-mini", "o4-mini"}:
+                call_params["temperature"] = self.temperature
+
+            response = self.client.chat.completions.create(**call_params)
+            return response.choices[0].message.content
+
         except Exception as e:
             print(f"An error occurred: {e}")
             return None
