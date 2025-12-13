@@ -6,7 +6,7 @@ Leveraging Azure OpenAI API to generate prompts for the PEIL project
 Version:        0.2
 Author:         Tim Haintz                         
 Creation Date:  20250113
-Last Updated:   20251208
+Last Updated:   20251214
 LINKS
 https://arxiv.org/abs/2402.07927
 https://arxiv.org/abs/2503.06926
@@ -55,7 +55,7 @@ from azure_models import (
 load_dotenv()
 
 # Default settings
-default_model_version = "gpt-5.1"
+default_model_version = "gpt-5.2"
 iso_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 temperature = 0.0
 
@@ -220,7 +220,16 @@ class ModelClient:
         self.model_meta = get_model_info(model_version)
 
         # Handle temperature overrides for fixed-temp models
-        if model_version in {"gpt-5", "gpt-5.1", "gpt-5.1-chat", "o1-mini", "o3-mini", "o4-mini"}:
+        if model_version in {
+            "gpt-5",
+            "gpt-5.1",
+            "gpt-5.1-chat",
+            "gpt-5.2",
+            "gpt-5.2-chat",
+            "o1-mini",
+            "o3-mini",
+            "o4-mini",
+        }:
             self.temperature = 1.0
 
         # Create the client
@@ -273,6 +282,8 @@ class ModelClient:
                 "gpt-5",
                 "gpt-5.1",
                 "gpt-5.1-chat",
+                "gpt-5.2",
+                "gpt-5.2-chat",
                 "o1-mini",
                 "o3-mini",
                 "o4-mini",
@@ -294,7 +305,16 @@ class ModelClient:
             }
 
             # Only pass temperature when the model supports it (avoid server errors)
-            if self.temperature is not None and self.model_version not in {"gpt-5", "gpt-5.1", "gpt-5.1-chat", "o1-mini", "o3-mini", "o4-mini"}:
+            if self.temperature is not None and self.model_version not in {
+                "gpt-5",
+                "gpt-5.1",
+                "gpt-5.1-chat",
+                "gpt-5.2",
+                "gpt-5.2-chat",
+                "o1-mini",
+                "o3-mini",
+                "o4-mini",
+            }:
                 call_params["temperature"] = self.temperature
 
             response = self.client.chat.completions.create(**call_params)
@@ -305,7 +325,7 @@ class ModelClient:
             return None
 
 # Using the GPT-4o model (or other specified model)
-def chat_with_peil(messages, model_version="gpt-5.1", temperature=0.0, debug=False):
+def chat_with_peil(messages, model_version="gpt-5.2", temperature=0.0, debug=False):
     try:
         client = ModelClient(model_version=model_version, temperature=temperature, debug=debug)
         system_prompt = peil_chat_system_prompt_instructions + peil_chat_system_prompt_peil_definition + peil_chat_system_prompt_peil_techniques + peil_chat_system_prompt_categories
@@ -351,7 +371,7 @@ def main():
     parser.add_argument("-chat_with_peil", action="store_true", help="Start session with chat_with_peil - Default")
     parser.add_argument("-chat_with_judgement", action="store_true", help="Automatically evaluate output with the judgement model")
     parser.add_argument("-prompt", type=str, default="", help="Provide a one-off custom prompt. Non-interactive mode. Parse text in quotes in the command line.")
-    parser.add_argument("-model_version", type=str, default="gpt-5.1", choices=available_models, 
+    parser.add_argument("-model_version", type=str, default="gpt-5.2", choices=available_models,
                         help=f"Model version to use. Choices: {', '.join(available_models)}")
     parser.add_argument("-judgement_model", type=str, default="deepseek-r1", choices=available_models,
                         help=f"Model version for judgement. Default: deepseek-r1")
@@ -393,8 +413,8 @@ def main():
         print(f"Starting interactive session with the judgement model: {args.judgement_model}")
         if args.debug:
             print(f"Temperature: {args.temperature}")
-            model_config = get_model_config(args.judgement_model)
-            print(f"Model information: {model_config}")
+            model_info = get_model_info(args.judgement_model)
+            print(f"Model information: {model_info}")
             
         while True:
             user_prompt = input("Enter your prompt for chat_with_judgement (or type 'exit' to quit): ")
@@ -423,11 +443,11 @@ def main():
     
     if args.debug:
         print(f"Temperature: {args.temperature}")
-        model_config = get_model_config(args.model_version)
-        print(f"Main model information: {model_config}")
+        model_info = get_model_info(args.model_version)
+        print(f"Main model information: {model_info}")
         if args.chat_with_judgement:
-            judgement_model_config = get_model_config(args.judgement_model)
-            print(f"Judgement model information: {judgement_model_config}")
+            judgement_model_info = get_model_info(args.judgement_model)
+            print(f"Judgement model information: {judgement_model_info}")
     
     while True:        
         # Inner loop: one full interactive session.
