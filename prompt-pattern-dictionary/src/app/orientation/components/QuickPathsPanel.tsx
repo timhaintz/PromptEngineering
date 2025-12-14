@@ -15,7 +15,7 @@ export function QuickPathsPanel() {
   return (
     <section aria-labelledby="quick-paths-heading" className="mt-8">
       <h2 id="quick-paths-heading" className="text-xl font-semibold mb-3 flex items-center gap-2">
-        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent/10 text-accent text-xs font-bold">P1</span>
+        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent/10 text-accent text-xs font-bold">P1</span>{' '}
         Quick Paths
       </h2>
       <p className="text-sm text-secondary mb-4">Common intents to accelerate onboarding. Choose one to jump directly to guidance.</p>
