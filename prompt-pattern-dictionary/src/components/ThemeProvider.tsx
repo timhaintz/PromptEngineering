@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useEffect, useCallback, useMemo, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useCallback, useReducer, useState, ReactNode } from 'react';
 
 export type ThemeChoice = "light" | "dark" | "high-contrast" | "system";
 export type ResolvedTheme = "light" | "dark" | "high-contrast";
@@ -50,18 +50,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return 'system';
   });
 
-  // Used to trigger re-computation when system preferences change.
-  const [systemTick, setSystemTick] = useState(0);
+  // Used to re-render when system preferences change.
+  const [, forceSystemUpdate] = useReducer((x: number) => x + 1, 0);
 
-  const resolvedTheme = useMemo(
-    () => resolveTheme(theme, allowSystemHighContrast),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [theme, systemTick]
-  );
-  const highContrastAuto = useMemo(
-    () => theme === 'system' && resolvedTheme === 'high-contrast' && systemForcedColors(),
-    [theme, resolvedTheme, systemTick]
-  );
+  const resolvedTheme = resolveTheme(theme, allowSystemHighContrast);
+  const highContrastAuto = theme === 'system' && resolvedTheme === 'high-contrast' && systemForcedColors();
 
   const setTheme = useCallback((next: ThemeChoice) => {
     setThemeChoice(next);
@@ -95,7 +88,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (typeof window === 'undefined' || !window.matchMedia) return;
 
     const bump = () => {
-      if (theme === 'system') setSystemTick(t => t + 1);
+      if (theme === 'system') forceSystemUpdate();
     };
 
     const mqlColor = window.matchMedia('(prefers-color-scheme: dark)');
