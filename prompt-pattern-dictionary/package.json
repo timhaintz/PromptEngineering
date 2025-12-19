@@ -12,7 +12,7 @@
     "prestart": "npm run build",
     "start": "npx serve@latest out",
     "preview": "npx serve@latest out",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test:a11y": "playwright test tests/a11y --reporter=line",
     "a11y:install": "playwright install --with-deps",
     "a11y:contrast": "node scripts/contrast-audit.cjs",

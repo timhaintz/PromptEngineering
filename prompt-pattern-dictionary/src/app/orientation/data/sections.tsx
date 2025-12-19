@@ -1140,7 +1140,6 @@ const AboutDictionary = () => (
 // Glossary (restored after patch collision)
 const Glossary = () => {
   const letters = Array.from(new Set(GLOSSARY_ENTRIES.map(entry => entry.letter)));
-  let lastLetter = '';
   return (
     <div>
       <nav aria-label="Glossary index" className="mb-3 flex flex-wrap gap-1 text-[11px]">
@@ -1149,9 +1148,9 @@ const Glossary = () => {
         ))}
       </nav>
       <dl className="space-y-3 text-sm">
-        {GLOSSARY_ENTRIES.map(entry => {
-          const letterChanged = entry.letter !== lastLetter;
-          lastLetter = entry.letter;
+        {GLOSSARY_ENTRIES.map((entry, index) => {
+          const prevLetter = index > 0 ? GLOSSARY_ENTRIES[index - 1].letter : null;
+          const letterChanged = index === 0 || entry.letter !== prevLetter;
           return (
             <div key={entry.term}>
               {letterChanged && <div id={`term-${entry.letter}`} aria-hidden="true"></div>}

@@ -13,23 +13,23 @@ export default function Breadcrumbs({ manual }: { manual?: Crumb[] }) {
   const pathname = usePathname();
   const parts = pathname.split('/').filter(Boolean);
 
-  const crumbs: Crumb[] = manual ?? parts.map((_, i) => {
+  const computedCrumbs: Crumb[] = manual ?? parts.map((_, i) => {
     const href = '/' + parts.slice(0, i + 1).join('/');
     const label = toTitle(parts[i]);
     return { href, label };
   });
 
   // Adjust root segment links to valid listing pages
-  if (!manual && crumbs.length > 0) {
+  const crumbs: Crumb[] = (() => {
+    if (manual || computedCrumbs.length === 0) return computedCrumbs;
     const firstSeg = parts[0];
-    if (firstSeg === 'category') {
-      crumbs[0] = { href: '/categories', label: 'Categories' };
-    } else if (firstSeg === 'pattern') {
-      crumbs[0] = { href: '/patterns', label: 'Patterns' };
-    } else if (firstSeg === 'papers') {
-      crumbs[0] = { href: '/papers', label: 'Papers' };
-    }
-  }
+    let replacement: Crumb | null = null;
+    if (firstSeg === 'category') replacement = { href: '/categories', label: 'Categories' };
+    else if (firstSeg === 'pattern') replacement = { href: '/patterns', label: 'Patterns' };
+    else if (firstSeg === 'papers') replacement = { href: '/papers', label: 'Papers' };
+    if (!replacement) return computedCrumbs;
+    return [replacement, ...computedCrumbs.slice(1)];
+  })();
 
   if (crumbs.length <= 1) return null; // hide on shallow routes
 

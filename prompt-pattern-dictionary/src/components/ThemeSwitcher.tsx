@@ -35,7 +35,6 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
   const { theme, setTheme } = useThemeContext();
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const radioRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -44,10 +43,6 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
 
   const openPanel = () => setOpen(true);
   const closePanel = () => { setOpen(false); triggerRef.current?.focus(); };
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Track viewport size for mobile overlay behaviour
   useEffect(() => {
@@ -181,7 +176,7 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
           {panelContent}
         </div>
       )}
-      {open && isMobile && mounted && typeof document !== 'undefined'
+      {open && isMobile && typeof document !== 'undefined'
         ? createPortal(
             <div className="fixed inset-0 z-[100] pointer-events-auto">
               <div

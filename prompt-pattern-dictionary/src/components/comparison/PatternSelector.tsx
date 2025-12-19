@@ -7,7 +7,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import type { ProcessedPattern } from '@/lib/types/pattern';
 
 interface PatternSelectorProps {
@@ -26,19 +26,15 @@ export default function PatternSelector({
   minSelections = 2
 }: PatternSelectorProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredPatterns, setFilteredPatterns] = useState(patterns);
 
-  useEffect(() => {
-    if (searchTerm.trim() === '') {
-      setFilteredPatterns(patterns);
-    } else {
-      const filtered = patterns.filter(pattern =>
-        pattern.patternName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pattern.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pattern.paper.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredPatterns(filtered);
-    }
+  const filteredPatterns = useMemo(() => {
+    const term = searchTerm.trim().toLowerCase();
+    if (term === '') return patterns;
+    return patterns.filter(pattern =>
+      pattern.patternName.toLowerCase().includes(term) ||
+      pattern.category.toLowerCase().includes(term) ||
+      pattern.paper.title.toLowerCase().includes(term)
+    );
   }, [searchTerm, patterns]);
 
   const handlePatternToggle = (patternId: string) => {
