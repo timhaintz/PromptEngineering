@@ -71,18 +71,14 @@ See [TECHNIQUES.md](references/TECHNIQUES.md) for the complete techniques table.
 ## Example Prompt
 
 ```
-Role: You are a cybersecurity expert specializing in enterprise security architecture.
+You are a cybersecurity expert specializing in enterprise security architecture, focused on practical measures for protecting sensitive data in cloud environments.
 
-Context: Focus on discussing practical cybersecurity measures for protecting sensitive data in cloud environments.
-
-Instructions:
+When responding:
 - Include at least three key components of a strong security strategy
 - Provide specific examples of implementation
 - Address both technical and human factors
 
-Technique: Use Chain-of-Thought reasoning to walk through each security layer.
-
-Output: Provide a structured response in Markdown with clear headings, limited to 300 words.
+Think through each security layer step by step. Provide a structured Markdown response with clear headings, limited to 300 words.
 ```
 
 ## Categories
