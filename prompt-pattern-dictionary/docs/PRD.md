@@ -1284,44 +1284,44 @@ Comprehensive audit identified concrete issues to resolve before public launch. 
 ### P7.3 — Documentation vs Reality Drift
 | # | Issue | Status |
 |---|-------|--------|
-| 5 | `FOLDER_STRUCTURE.md` references `next.config.js` (actual: `.ts`), `tailwind.config.js` (doesn't exist with Tailwind v4), `.env.local`/`.env.example` (don't exist), `src/hooks/` (actual: `src/app/orientation/hooks/`), `src/app/api/` (no API routes with static export), `public/manifest.json`/`robots.txt`/`sitemap.xml`/`images/` (don't exist), `scripts/generate-sitemap.js`/`validate-data.js`/`deploy.sh` (don't exist), `dist/` (actual: `out/`) | [ ] |
-| 6 | `contrast_audit.js` referenced in orientation text but only `contrast-audit.cjs` is in npm scripts | [ ] |
+| 5 | `FOLDER_STRUCTURE.md` references `next.config.js` (actual: `.ts`), `tailwind.config.js` (doesn't exist with Tailwind v4), `.env.local`/`.env.example` (don't exist), `src/hooks/` (actual: `src/app/orientation/hooks/`), `src/app/api/` (no API routes with static export), `public/manifest.json`/`robots.txt`/`sitemap.xml`/`images/` (don't exist), `scripts/generate-sitemap.js`/`validate-data.js`/`deploy.sh` (don't exist), `dist/` (actual: `out/`) | [x] |
+| 6 | `contrast_audit.js` referenced in orientation text but only `contrast-audit.cjs` is in npm scripts | [x] |
 
 ### P7.4 — Code Quality & Duplicate Exports
 | # | Issue | File(s) | Status |
 |---|-------|---------|--------|
-| 7 | Duplicate `cosineSimilarity` exported from both `lib/similarity/index.ts` and `similarity-engine.ts` | `src/lib/similarity/index.ts`, `similarity-engine.ts` | [ ] |
-| 8 | Duplicate `calculateSimilarityMatrix` with incompatible signatures | Same files | [ ] |
-| 9 | Duplicate `NetworkNode`/`NetworkEdge` interfaces with incompatible shapes | `lib/types/pattern.ts`, `lib/similarity/similarity-network.ts` | [ ] |
-| 10 | `SimilarityMatrix` name collision (interface vs class) | `lib/types/pattern.ts`, `lib/similarity/similarity-matrix.ts` | [ ] |
-| 11 | Two separate pattern type systems (`src/types/patterns.ts` vs `src/lib/types/pattern.ts`) need boundary clarification | Both files | [ ] |
-| 12 | Dead scaffold code: `SimilarityEngine`, `SimilarityMatrix`, `SimilarityNetwork` classes never instantiated | `src/lib/similarity/` submodules | [ ] |
+| 7 | Duplicate `cosineSimilarity` exported from both `lib/similarity/index.ts` and `similarity-engine.ts` | `src/lib/similarity/index.ts`, `similarity-engine.ts` | [x] |
+| 8 | Duplicate `calculateSimilarityMatrix` with incompatible signatures | Same files | [x] |
+| 9 | Duplicate `NetworkNode`/`NetworkEdge` interfaces with incompatible shapes | `lib/types/pattern.ts`, `lib/similarity/similarity-network.ts` | [x] |
+| 10 | `SimilarityMatrix` name collision (interface vs class) | `lib/types/pattern.ts`, `lib/similarity/similarity-matrix.ts` | [x] |
+| 11 | Two separate pattern type systems (`src/types/patterns.ts` vs `src/lib/types/pattern.ts`) need boundary clarification | Both files | [x] |
+| 12 | Dead scaffold code: `SimilarityEngine`, `SimilarityMatrix`, `SimilarityNetwork` classes never instantiated | `src/lib/similarity/` submodules | [x] |
 
 ### P7.5 — Test & CI Hardening
 | # | Issue | Status |
 |---|-------|--------|
-| 13 | `legacy.variables.ban.test.ts` scans non-existent root dirs (`app/`, `components/`) — silently skipped | [ ] |
-| 14 | No CI/CD workflows (`.github/workflows/` missing) — need `build.yml`, `test.yml`, `deploy.yml` | [ ] |
-| 15 | Zero test coverage for comparison, playground, semantic, matrix, taxonomy, examples pages | [ ] |
+| 13 | `legacy.variables.ban.test.ts` scans non-existent root dirs (`app/`, `components/`) — silently skipped | [x] |
+| 14 | No CI/CD workflows (`.github/workflows/` missing) — need `build.yml`, `test.yml`, `deploy.yml` | [x] |
+| 15 | Zero test coverage for comparison, playground, semantic, matrix, taxonomy, examples pages | [x] |
 
 ### P7.6 — Orphaned / Unused Artifacts
 | # | Issue | Status |
 |---|-------|--------|
-| 16 | 3 orphaned data files in `public/data/`: `search-index.json`, `pattern-categories-flat.json`, `similarity-analysis.json` (no code references) | [ ] |
-| 17 | `coerce-application-arrays.js` duplicates logic in `build-data.js --coerce-application-arrays` | [ ] |
+| 16 | 3 orphaned data files in `public/data/`: `search-index.json`, `pattern-categories-flat.json`, `similarity-analysis.json` (no code references) | [x] |
+| 17 | `coerce-application-arrays.js` duplicates logic in `build-data.js --coerce-application-arrays` | [x] |
 | 18 | Missing embedding files `paper-32.json`, `paper-45.json` — skipped by Azure OpenAI content policy (verified in embedding-index.json) | N/A |
-| 19 | `PatternDetail.tsx` in `components/papers/` but shared by papers + categories — misleading location | [ ] |
+| 19 | `PatternDetail.tsx` in `components/papers/` but shared by papers + categories — misleading location | [x] |
 
 ### P7.7 — Navigation & Discoverability
 | # | Issue | Status |
 |---|-------|--------|
-| 20 | 5 routes not in primary TopNav: `/comparison`, `/playground`, `/semantic`, `/matrix`, `/responsible-use` | [ ] |
+| 20 | 5 routes not in primary TopNav: `/comparison`, `/playground`, `/semantic`, `/matrix`, `/responsible-use` | [x] |
 
 ### P7.8 — Feature Completeness (Stubs)
 | # | Issue | Status |
 |---|-------|--------|
-| 21 | Playground `findSimilarPatternsFromText` returns hardcoded mock data (TODO comment) | [ ] |
-| 22 | `ComparisonDashboard` uses hardcoded `mockPatterns` — never loads real data | [ ] |
+| 21 | Playground `findSimilarPatternsFromText` returns hardcoded mock data (TODO comment) | [x] |
+| 22 | `ComparisonDashboard` uses hardcoded `mockPatterns` — never loads real data | [x] |
 
 ### Acceptance Gate (Phase 7)
 1. `npm run build` succeeds with zero warnings.

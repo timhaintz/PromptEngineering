@@ -967,11 +967,11 @@ const SimilarityPreview = () => {
               <div role="img" aria-label="Static network graph with three nodes A, B, C connected by lines showing mutual relationships" className="mx-auto w-full max-w-xs">
                 <svg viewBox="0 0 200 120" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <style>{`.node{fill:var(--color-accent-bg,#0ea5e9);stroke:var(--color-accent,#0369a1);stroke-width:2}`}</style>
+                    <style>{`.node{fill:var(--accent,#2563eb);stroke:var(--accent-hover,#1d4ed8);stroke-width:2}`}</style>
                   </defs>
-                  <line x1="60" y1="60" x2="140" y2="40" stroke="var(--color-border,#64748b)" strokeWidth="1.5" />
-                  <line x1="60" y1="60" x2="120" y2="90" stroke="var(--color-border,#64748b)" strokeWidth="1.5" />
-                  <line x1="140" y1="40" x2="120" y2="90" stroke="var(--color-border,#64748b)" strokeWidth="1.5" strokeDasharray="4 2" />
+                  <line x1="60" y1="60" x2="140" y2="40" stroke="var(--border-default,#64748b)" strokeWidth="1.5" />
+                  <line x1="60" y1="60" x2="120" y2="90" stroke="var(--border-default,#64748b)" strokeWidth="1.5" />
+                  <line x1="140" y1="40" x2="120" y2="90" stroke="var(--border-default,#64748b)" strokeWidth="1.5" strokeDasharray="4 2" />
                   <circle cx="60" cy="60" r="14" className="node" />
                   <circle cx="140" cy="40" r="14" className="node" />
                   <circle cx="120" cy="90" r="14" className="node" />

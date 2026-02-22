@@ -108,7 +108,7 @@ exports[`SimilarityPreview snapshot matches snapshot structure (table + optional
     Try the interactive comparison: 
     <a
       class="text-accent underline"
-      href="/compare?patterns=0-0-0,0-1-0,71-26-6"
+      href="/comparison"
     >
       Open comparison view
     </a>

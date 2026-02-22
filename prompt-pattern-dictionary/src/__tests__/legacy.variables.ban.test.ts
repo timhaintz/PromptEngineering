@@ -42,7 +42,7 @@ describe('legacy design token ban', () => {
       const report = offenders
         .map(o => `${o.file}:${o.line} -> ${o.match}`)
         .join('\n');
-      fail(`Found legacy --color-* variable references after semantic refactor:\n${report}`);
+      throw new Error(`Found legacy --color-* variable references after semantic refactor:\n${report}`);
     }
   });
 });
