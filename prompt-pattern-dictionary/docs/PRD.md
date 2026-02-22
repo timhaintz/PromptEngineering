@@ -1265,6 +1265,75 @@ Baseline test file `a11y.basic.test.tsx` covers representative server + client p
 - Added theme regression & a11y smoke suites (current pages pass with contrast rule disabled).
 - Stabilized App Router testing via deferred dynamic imports.
 
+## Phase 7: Production Readiness Cleanup (February 2026)
+
+Comprehensive audit identified concrete issues to resolve before public launch. Work is tracked incrementally with small verified commits. Each fix is built and smoke-tested before committing.
+
+### P7.1 — Broken & Dead Links
+| # | Issue | File(s) | Status |
+|---|-------|---------|--------|
+| 1 | `/compare?patterns=...` link should be `/comparison` | `src/app/orientation/data/sections.tsx` | [ ] |
+
+### P7.2 — Debug & Stub Cleanup
+| # | Issue | File(s) | Status |
+|---|-------|---------|--------|
+| 2 | Remove `console.log` debug statements (3 occurrences) | `ComparisonDashboard.tsx`, `SimilarityNetwork.tsx` | [ ] |
+| 3 | Remove empty `src/components/pattern/` directory | `src/components/pattern/` | [ ] |
+| 4 | Remove unused `Heatmap` import in `SimilarityMatrix.tsx` | `src/components/comparison/SimilarityMatrix.tsx` | [ ] |
+
+### P7.3 — Documentation vs Reality Drift
+| # | Issue | Status |
+|---|-------|--------|
+| 5 | `FOLDER_STRUCTURE.md` references `next.config.js` (actual: `.ts`), `tailwind.config.js` (doesn't exist with Tailwind v4), `.env.local`/`.env.example` (don't exist), `src/hooks/` (actual: `src/app/orientation/hooks/`), `src/app/api/` (no API routes with static export), `public/manifest.json`/`robots.txt`/`sitemap.xml`/`images/` (don't exist), `scripts/generate-sitemap.js`/`validate-data.js`/`deploy.sh` (don't exist), `dist/` (actual: `out/`) | [ ] |
+| 6 | `contrast_audit.js` referenced in orientation text but only `contrast-audit.cjs` is in npm scripts | [ ] |
+
+### P7.4 — Code Quality & Duplicate Exports
+| # | Issue | File(s) | Status |
+|---|-------|---------|--------|
+| 7 | Duplicate `cosineSimilarity` exported from both `lib/similarity/index.ts` and `similarity-engine.ts` | `src/lib/similarity/index.ts`, `similarity-engine.ts` | [ ] |
+| 8 | Duplicate `calculateSimilarityMatrix` with incompatible signatures | Same files | [ ] |
+| 9 | Duplicate `NetworkNode`/`NetworkEdge` interfaces with incompatible shapes | `lib/types/pattern.ts`, `lib/similarity/similarity-network.ts` | [ ] |
+| 10 | `SimilarityMatrix` name collision (interface vs class) | `lib/types/pattern.ts`, `lib/similarity/similarity-matrix.ts` | [ ] |
+| 11 | Two separate pattern type systems (`src/types/patterns.ts` vs `src/lib/types/pattern.ts`) need boundary clarification | Both files | [ ] |
+| 12 | Dead scaffold code: `SimilarityEngine`, `SimilarityMatrix`, `SimilarityNetwork` classes never instantiated | `src/lib/similarity/` submodules | [ ] |
+
+### P7.5 — Test & CI Hardening
+| # | Issue | Status |
+|---|-------|--------|
+| 13 | `legacy.variables.ban.test.ts` scans non-existent root dirs (`app/`, `components/`) — silently skipped | [ ] |
+| 14 | No CI/CD workflows (`.github/workflows/` missing) — need `build.yml`, `test.yml`, `deploy.yml` | [ ] |
+| 15 | Zero test coverage for comparison, playground, semantic, matrix, taxonomy, examples pages | [ ] |
+
+### P7.6 — Orphaned / Unused Artifacts
+| # | Issue | Status |
+|---|-------|--------|
+| 16 | 3 orphaned data files in `public/data/`: `search-index.json`, `pattern-categories-flat.json`, `similarity-analysis.json` (no code references) | [ ] |
+| 17 | `coerce-application-arrays.js` duplicates logic in `build-data.js --coerce-application-arrays` | [ ] |
+| 18 | Missing embedding files `paper-32.json`, `paper-45.json` (gap in sequence) — verify if expected | [ ] |
+| 19 | `PatternDetail.tsx` in `components/papers/` but shared by papers + categories — misleading location | [ ] |
+
+### P7.7 — Navigation & Discoverability
+| # | Issue | Status |
+|---|-------|--------|
+| 20 | 5 routes not in primary TopNav: `/comparison`, `/playground`, `/semantic`, `/matrix`, `/responsible-use` | [ ] |
+
+### P7.8 — Feature Completeness (Stubs)
+| # | Issue | Status |
+|---|-------|--------|
+| 21 | Playground `findSimilarPatternsFromText` returns hardcoded mock data (TODO comment) | [ ] |
+| 22 | `ComparisonDashboard` uses hardcoded `mockPatterns` — never loads real data | [ ] |
+
+### Acceptance Gate (Phase 7)
+1. `npm run build` succeeds with zero warnings.
+2. All links in orientation sections resolve to existing routes.
+3. No `console.log` statements in production components.
+4. `FOLDER_STRUCTURE.md` accurately reflects project state.
+5. No duplicate function/type exports in similarity library.
+6. CI workflow runs lint + test + build on push/PR.
+7. Stub features are either implemented or clearly marked "Coming Soon" with feature flags.
+
+---
+
 ## Conclusion
 
 This prompt pattern dictionary will serve as the definitive reference for cybersecurity prompt engineering, combining academic rigor with practical usability. By creating an OED-style interface with modern search capabilities, we'll provide immense value to the prompt engineering and cybersecurity communities while establishing a foundation for future research and collaboration.

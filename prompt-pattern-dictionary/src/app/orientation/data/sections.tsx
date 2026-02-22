@@ -947,7 +947,7 @@ const SimilarityPreview = () => {
         </tbody>
       </table>
       <div id="similarity-preview-alt" className="sr-only">Three sample patterns with descending cosine similarity scores (0.74, 0.69, 0.65) demonstrating relative semantic proximity. Use the comparison tool for real-time multi-pattern analysis.</div>
-      <p className="text-xs text-secondary">Try the interactive comparison: <Link href={`/compare?patterns=${sample.map(s=>s.id).join(',')}`} className="text-accent underline">Open comparison view</Link>.</p>
+      <p className="text-xs text-secondary">Try the interactive comparison: <Link href="/comparison" className="text-accent underline">Open comparison view</Link>.</p>
       <details className="group p-3 rounded border border-muted bg-surface-1 shadow-sm">
         <summary className="cursor-pointer font-medium text-accent text-sm">Adaptation ↔ Evaluation Loop Diagram</summary>
         <div className="mt-2">
