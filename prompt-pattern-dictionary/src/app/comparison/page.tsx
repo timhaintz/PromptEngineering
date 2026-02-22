@@ -42,6 +42,13 @@ export default function ComparisonPage() {
         </div>
       </div>
 
+      {/* Preview Notice */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <div className="rounded-lg border border-amber-500/30 bg-amber-50 dark:bg-amber-950/20 px-4 py-3 text-sm text-amber-800 dark:text-amber-200" role="status">
+          <strong>Preview:</strong> Pattern selection currently uses representative data. Full embedding-backed comparison is planned for a future release.
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <ComparisonDashboard />
