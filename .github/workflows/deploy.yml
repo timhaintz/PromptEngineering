@@ -41,11 +41,12 @@ jobs:
         working-directory: prompt-pattern-dictionary
         run: npm ci
 
-      - name: Run lint and tests
+      - name: Run lint, typecheck and tests
         working-directory: prompt-pattern-dictionary
         run: |
           npm run lint
-          npm test -- --watch=false || echo "Tests failed – continuing deploy"
+          npm run typecheck
+          npm test -- --watch=false
 
       - name: Build static site
         working-directory: prompt-pattern-dictionary
