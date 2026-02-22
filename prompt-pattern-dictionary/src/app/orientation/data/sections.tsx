@@ -1002,7 +1002,7 @@ const AccessibilityResponsible = () => (
     </ul>
     <div className="p-4 rounded border border-dashed border-muted bg-surface-1 shadow-sm">
       <h4 className="text-sm font-semibold mb-1">Contrast audit snapshot (Nov 2025)</h4>
-      <p className="text-xs text-secondary">Automated checks via <code className="text-[11px]">scripts/contrast_audit.js</code> confirmed <strong>text-primary vs surface-1</strong> at 19.95:1 and all sampled pairs ≥14:1 across Light, Dark, and High-Contrast modes. See <Link href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/ACCESSIBILITY.md" className="text-accent hover:underline" target="_blank" rel="noreferrer">ACCESSIBILITY.md</Link> for the full matrix.</p>
+      <p className="text-xs text-secondary">Automated checks via <code className="text-[11px]">scripts/contrast-audit.cjs</code> confirmed <strong>text-primary vs surface-1</strong> at 19.95:1 and all sampled pairs ≥14:1 across Light, Dark, and High-Contrast modes. See <Link href="https://github.com/timhaintz/PromptEngineering4Cybersecurity/blob/main/prompt-pattern-dictionary/docs/ACCESSIBILITY.md" className="text-accent hover:underline" target="_blank" rel="noreferrer">ACCESSIBILITY.md</Link> for the full matrix.</p>
     </div>
     <details className="group border border-muted rounded-md p-3 bg-surface-1">
       <summary className="cursor-pointer font-semibold text-accent">Assistive technology walkthrough</summary>
