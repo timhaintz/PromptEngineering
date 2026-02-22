@@ -12,10 +12,7 @@ const tabs = [
   { href: '/examples', label: 'Examples' },
   { href: '/papers', label: 'Papers' },
   { href: '/taxonomy', label: 'Taxonomy' },
-  { href: '/semantic', label: 'Semantic' },
-  { href: '/comparison', label: 'Comparison' },
-  { href: '/matrix', label: 'Matrix' },
-  { href: '/playground', label: 'Playground' },
+  // Hidden while under development: Semantic, Comparison, Matrix, Playground
   { href: '/search', label: 'Search' },
   { href: '/responsible-use', label: 'Responsible Use' },
 ];
