@@ -7,7 +7,12 @@ const ROUTES = [
   '/orientation/quick-start',
   '/orientation/cheatsheet',
   '/patterns',
-  '/categories'
+  '/categories',
+  '/logic',
+  '/papers',
+  '/taxonomy',
+  '/examples',
+  '/responsible-use'
 ];
 
 const THEMES: Array<'light' | 'dark' | 'high-contrast'> = ['light', 'dark', 'high-contrast'];
