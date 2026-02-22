@@ -219,9 +219,8 @@ export default function SimilarityNetwork({
               max="0.9"
               step="0.1"
               value={threshold}
-              onChange={(e) => {
-                // In a real implementation, this would update the parent component
-                console.log('Threshold changed:', e.target.value);
+              onChange={(_e) => {
+                // TODO(P7.8): Propagate threshold change to parent component
               }}
               className="w-20"
               aria-label="Similarity threshold"

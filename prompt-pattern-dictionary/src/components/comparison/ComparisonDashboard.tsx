@@ -128,14 +128,12 @@ export default function ComparisonDashboard({ className = '' }: ComparisonDashbo
     URL.revokeObjectURL(url);
   };
 
-  const handleCellClick = (patternIds: [string, string], similarity: number) => {
-    console.log('Cell clicked:', patternIds, similarity);
-    // In a real implementation, this could open a detailed comparison view
+  const handleCellClick = (_patternIds: [string, string], _similarity: number) => {
+    // TODO(P7.8): Wire up detailed comparison view for selected cell
   };
 
-  const handleNodeClick = (patternId: string) => {
-    console.log('Node clicked:', patternId);
-    // In a real implementation, this could highlight the pattern or show details
+  const handleNodeClick = (_patternId: string) => {
+    // TODO(P7.8): Highlight pattern or show detail panel on node click
   };
 
   return (
