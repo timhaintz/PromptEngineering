@@ -1272,14 +1272,14 @@ Comprehensive audit identified concrete issues to resolve before public launch. 
 ### P7.1 — Broken & Dead Links
 | # | Issue | File(s) | Status |
 |---|-------|---------|--------|
-| 1 | `/compare?patterns=...` link should be `/comparison` | `src/app/orientation/data/sections.tsx` | [ ] |
+| 1 | `/compare?patterns=...` link should be `/comparison` | `src/app/orientation/data/sections.tsx` | [x] |
 
 ### P7.2 — Debug & Stub Cleanup
 | # | Issue | File(s) | Status |
 |---|-------|---------|--------|
-| 2 | Remove `console.log` debug statements (3 occurrences) | `ComparisonDashboard.tsx`, `SimilarityNetwork.tsx` | [ ] |
-| 3 | Remove empty `src/components/pattern/` directory | `src/components/pattern/` | [ ] |
-| 4 | Remove unused `Heatmap` import in `SimilarityMatrix.tsx` | `src/components/comparison/SimilarityMatrix.tsx` | [ ] |
+| 2 | Remove `console.log` debug statements (3 occurrences) | `ComparisonDashboard.tsx`, `SimilarityNetwork.tsx` | [x] |
+| 3 | ~~Remove empty `src/components/pattern/` directory~~ | Not tracked by git — non-issue | N/A |
+| 4 | ~~Remove unused `Heatmap` import~~ | Actually used conditionally — false positive | N/A |
 
 ### P7.3 — Documentation vs Reality Drift
 | # | Issue | Status |
@@ -1309,7 +1309,7 @@ Comprehensive audit identified concrete issues to resolve before public launch. 
 |---|-------|--------|
 | 16 | 3 orphaned data files in `public/data/`: `search-index.json`, `pattern-categories-flat.json`, `similarity-analysis.json` (no code references) | [ ] |
 | 17 | `coerce-application-arrays.js` duplicates logic in `build-data.js --coerce-application-arrays` | [ ] |
-| 18 | Missing embedding files `paper-32.json`, `paper-45.json` (gap in sequence) — verify if expected | [ ] |
+| 18 | Missing embedding files `paper-32.json`, `paper-45.json` — skipped by Azure OpenAI content policy (verified in embedding-index.json) | N/A |
 | 19 | `PatternDetail.tsx` in `components/papers/` but shared by papers + categories — misleading location | [ ] |
 
 ### P7.7 — Navigation & Discoverability
