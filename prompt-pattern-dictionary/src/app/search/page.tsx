@@ -252,6 +252,8 @@ function SearchResults() {
     <div className="flex flex-col md:flex-row md:flex-wrap gap-3 md:items-end">
       <div className="basis-full md:max-w-full">
         <form
+          role="search"
+          aria-label="Search prompt patterns"
           onSubmit={(event) => {
             event.preventDefault();
             const params = new URLSearchParams(Array.from(searchParams.entries()));
@@ -387,7 +389,7 @@ function SearchResults() {
               </div>
             )}
             <div className="ml-auto flex items-end gap-3 text-sm text-secondary">
-              <span>
+              <span aria-live="polite" aria-atomic="true">
                 {type === 'pattern' || type === 'example'
                   ? (filteredPatterns.length > 0 ? `${filteredPatterns.length} result(s)` : 'No results yet')
                   : type === 'category'
