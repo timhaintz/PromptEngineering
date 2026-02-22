@@ -5,8 +5,6 @@ import path from 'path';
 const ROOT = path.join(__dirname, '..', '..');
 const SCAN_DIRS = [
   path.join(ROOT, 'src'),
-  path.join(ROOT, 'app'),
-  path.join(ROOT, 'components'),
 ];
 
 const LEGACY_PATTERN = /--color-[a-z0-9-]+/i;
