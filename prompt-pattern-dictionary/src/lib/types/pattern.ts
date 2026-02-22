@@ -162,6 +162,11 @@ export interface CategoryEmbedding {
   averageConfidence: number;
 }
 
+/**
+ * UI-facing similarity matrix record (pattern → category scores).
+ * Not to be confused with the SimilarityMatrix class in lib/similarity/similarity-matrix.ts
+ * which is a sparse-matrix implementation for internal graph calculations.
+ */
 export interface SimilarityMatrix {
   patternId: string;
   similarities: {
@@ -224,6 +229,11 @@ export interface ScatterPoint {
   similarity?: number; // Similarity to user prompt if applicable
 }
 
+/**
+ * UI-facing network node with embedded connections array.
+ * The similarity-network.ts submodule defines its own NetworkNode with
+ * different fields (degree, clusterLabel, etc.) for internal graph algorithms.
+ */
 export interface NetworkNode {
   id: string;
   label: string;
@@ -237,6 +247,10 @@ export interface NetworkNode {
   }[];
 }
 
+/**
+ * UI-facing network edge. The similarity-network.ts submodule defines its own
+ * NetworkEdge with additional fields (id, label) for internal graph algorithms.
+ */
 export interface NetworkEdge {
   source: string;
   target: string;

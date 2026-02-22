@@ -4,17 +4,24 @@
  * Provides client-side similarity calculations for the Ballarat AI Prompt Dictionary.
  * Implements real-time pattern comparison using pre-computed embeddings.
  * 
- * Features:
- * - Cosine similarity calculations
- * - Pattern comparison matrices
- * - Clustering and statistical analysis
- * - Efficient embedding loading and caching
+ * Architecture:
+ * - similarity-engine.ts: Core math (cosineSimilarity, findSimilar, calculateSimilarityMatrix)
+ * - similarity-matrix.ts: Sparse matrix implementation (Phase 3 infrastructure)
+ * - similarity-network.ts: Graph analysis (Phase 3 infrastructure)
+ * - index.ts (this file): High-level API (comparePatterns, findSimilarPatterns, cache)
+ * 
+ * Type boundaries:
+ * - lib/types/pattern.ts: Types consumed by UI components (NetworkNode with connections[], etc.)
+ * - Submodule interfaces: Internal types for class-based implementations (Phase 3)
  */
 
-// Export new modular similarity components
+// Export modular similarity components
 export * from './similarity-engine';
 export * from './similarity-matrix';
 export * from './similarity-network';
+
+// Import cosineSimilarity for internal use (canonical impl lives in similarity-engine)
+import { cosineSimilarity } from './similarity-engine';
 
 import type { 
   EmbeddingStorage, 
@@ -26,56 +33,6 @@ import type {
   NetworkNode,
   SimilaritySearchResult
 } from '../types/pattern';
-
-/**
- * Calculate cosine similarity between two embedding vectors
- */
-export function cosineSimilarity(vectorA: number[], vectorB: number[]): number {
-  if (vectorA.length !== vectorB.length) {
-    throw new Error('Vectors must have the same length');
-  }
-
-  let dotProduct = 0;
-  let normA = 0;
-  let normB = 0;
-
-  for (let i = 0; i < vectorA.length; i++) {
-    dotProduct += vectorA[i] * vectorB[i];
-    normA += vectorA[i] * vectorA[i];
-    normB += vectorB[i] * vectorB[i];
-  }
-
-  const magnitude = Math.sqrt(normA) * Math.sqrt(normB);
-  
-  if (magnitude === 0) {
-    return 0;
-  }
-
-  return dotProduct / magnitude;
-}
-
-/**
- * Calculate similarity matrix between multiple patterns
- */
-export function calculateSimilarityMatrix(embeddings: number[][]): number[][] {
-  const n = embeddings.length;
-  const matrix: number[][] = Array(n).fill(null).map(() => Array(n).fill(0));
-
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      if (i === j) {
-        matrix[i][j] = 1.0; // Perfect similarity with itself
-      } else if (i < j) {
-        // Calculate similarity only for upper triangle
-        const similarity = cosineSimilarity(embeddings[i], embeddings[j]);
-        matrix[i][j] = similarity;
-        matrix[j][i] = similarity; // Mirror to lower triangle
-      }
-    }
-  }
-
-  return matrix;
-}
 
 /**
  * Embedding cache for efficient loading
@@ -173,6 +130,30 @@ class EmbeddingCache {
 export const embeddingCache = new EmbeddingCache();
 
 /**
+ * Build a raw similarity matrix from plain number[][] vectors.
+ * Internal helper — external consumers should use the engine's
+ * calculateSimilarityMatrix (which accepts EmbeddingVector[]).
+ */
+function buildSimilarityMatrix(embeddings: number[][]): number[][] {
+  const n = embeddings.length;
+  const matrix: number[][] = Array(n).fill(null).map(() => Array(n).fill(0));
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      if (i === j) {
+        matrix[i][j] = 1.0;
+      } else if (i < j) {
+        const similarity = cosineSimilarity(embeddings[i], embeddings[j]);
+        matrix[i][j] = similarity;
+        matrix[j][i] = similarity;
+      }
+    }
+  }
+
+  return matrix;
+}
+
+/**
  * Compare multiple patterns and generate comprehensive comparison data
  */
 export async function comparePatterns(
@@ -199,7 +180,7 @@ export async function comparePatterns(
   }
 
   // Calculate similarity matrix
-  const similarityMatrix = calculateSimilarityMatrix(embeddingVectors);
+  const similarityMatrix = buildSimilarityMatrix(embeddingVectors);
   
   // Calculate statistics
   const flatSimilarities = [];
