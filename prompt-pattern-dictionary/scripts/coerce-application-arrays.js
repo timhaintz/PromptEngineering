@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 /*
-  Coerce array-shaped Application fields to a standard content-filter notice.
-  This is a non-AI post-process to normalize remaining legacy array values.
+  DEPRECATED: This standalone script duplicates the --coerce-application-arrays
+  flag in build-data.js. Prefer running:
+    node scripts/build-data.js --coerce-application-arrays
+  This file is kept for reference only.
+
+  Original purpose: Coerce array-shaped Application fields to a standard
+  content-filter notice. Non-AI post-process to normalize legacy array values.
 */
 const fs = require('fs');
 const path = require('path');
