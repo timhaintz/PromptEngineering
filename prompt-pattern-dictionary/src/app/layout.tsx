@@ -36,10 +36,16 @@ export default function RootLayout({
             __html: `(() => {try {const K='pe-theme';const stored=localStorage.getItem(K)||'system';const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;const eff=stored==='system'?(prefersDark?'dark':'light'):stored;document.documentElement.setAttribute('data-theme', eff);document.documentElement.setAttribute('data-theme-mode', stored);}catch(e){}})();`
           }} />
         <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded focus:bg-[var(--accent)] focus:text-[var(--accent-fg)] focus:outline-none"
+          >
+            Skip to main content
+          </a>
           <TopNav />
-          <div className="pt-14">
+          <main id="main-content" className="pt-14">
             {children}
-          </div>
+          </main>
         </ThemeProvider>
       </body>
     </html>
