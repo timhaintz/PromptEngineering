@@ -9,9 +9,9 @@ const path = require('path');
 const args = process.argv.slice(2);
 const shouldFail = args.includes('--fail');
 
-const cssPath = path.join(process.cwd(), 'src', 'app', 'globals.css');
+const cssPath = path.join(process.cwd(), 'src', 'styles', 'tokens.css');
 if (!fs.existsSync(cssPath)) {
-  console.error('globals.css not found at', cssPath);
+  console.error('tokens.css not found at', cssPath);
   process.exit(1);
 }
 const css = fs.readFileSync(cssPath, 'utf8');
@@ -66,8 +66,10 @@ function contrast(c1, c2) {
   return (lighter + 0.05) / (darker + 0.05);
 }
 
-const bgKeys = Object.keys(colorVars).filter(k => /background|surface$/.test(k));
-const fgKeys = Object.keys(colorVars).filter(k => ['--foreground','--color-accent','--color-link','--color-danger','--color-muted'].includes(k));
+const bgKeys = Object.keys(colorVars).filter(k => /surface/.test(k));
+// Only text tokens that appear directly on surface backgrounds.
+// --accent-fg is used ON --accent (not surfaces); --focus-ring is a UI outline.
+const fgKeys = Object.keys(colorVars).filter(k => ['--text-primary','--text-secondary','--text-muted','--accent'].includes(k));
 
 const issues = [];
 const rows = [];
