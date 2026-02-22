@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
 import { PageHeader } from '@/components/ui/PageHeader';
 import Badge from '@/components/ui/Badge';
-import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
+import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/patterns/PatternDetail';
 import fs from 'fs';
 import path from 'path';
 import { getAllCategorySlugs } from '@/lib/data/categories';

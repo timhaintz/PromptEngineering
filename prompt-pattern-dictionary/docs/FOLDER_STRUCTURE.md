@@ -156,9 +156,9 @@ src/components/
 │   ├── OrientationTOC.tsx                   # Table of contents (scrollspy)
 │   └── TopNav.tsx                           # Global top navigation bar
 ├── papers/
-│   ├── PapersGrid.tsx                       # Papers grid/list view
-│   └── PatternDetail.tsx                    # Shared pattern detail component
+│   └── PapersGrid.tsx                       # Papers grid/list view
 ├── patterns/
+│   ├── PatternDetail.tsx                    # Shared pattern detail (papers, categories, search)
 │   └── PatternsBrowser.tsx                  # Patterns list browser
 ├── search/
 │   └── SearchInterface.tsx                  # Homepage/search page search UI
@@ -235,7 +235,8 @@ Uses the App Router with file-based routing. Dynamic segments (`[paperId]`, `[sl
 ### `/src/components/` — Component Architecture
 
 - **comparison/**: Multi-pattern comparison and playground UI (currently mocked data)
-- **papers/**: `PatternDetail.tsx` is the shared pattern rendering component used by both paper and category pages
+- **papers/**: Paper-specific grid/list views
+- **patterns/**: `PatternDetail.tsx` is the shared pattern rendering component used by paper, category, and search pages
 - **navigation/**: Global nav, breadcrumbs, and orientation-specific side navigation
 - **ui/**: Atomic primitives shared across the application
 - **visualization/**: Data visualization components (Heatmap via Recharts)

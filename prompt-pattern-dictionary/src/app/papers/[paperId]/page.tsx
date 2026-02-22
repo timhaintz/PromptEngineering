@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
-import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/papers/PatternDetail';
+import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/patterns/PatternDetail';
 import { notFound } from 'next/navigation';
 import PageShell from '@/components/layout/PageShell';
 import { getAllPaperIds } from '@/lib/data/papers';
