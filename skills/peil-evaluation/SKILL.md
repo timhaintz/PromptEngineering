@@ -1,6 +1,6 @@
 ---
 name: peil-evaluation
-description: Evaluates and judges PEIL-generated prompts for quality and effectiveness. Use when assessing prompt quality, providing feedback on system prompts, rating prompts against criteria, or improving prompt engineering outputs. Keywords: prompt evaluation, prompt quality, prompt feedback, prompt rating, prompt assessment, LLM evaluation, prompt judge.
+description: "Evaluates and judges PEIL-generated prompts for quality and effectiveness. Use when assessing prompt quality, providing feedback on system prompts, rating prompts against criteria, or improving prompt engineering outputs. Keywords: prompt evaluation, prompt quality, prompt feedback, prompt rating, prompt assessment, LLM evaluation, prompt judge."
 license: MIT
 metadata:
   author: Tim Haintz

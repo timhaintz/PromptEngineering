@@ -1,6 +1,6 @@
 ---
 name: peil
-description: Prompt Engineering Instructional Language (PEIL) - generates optimised system prompts for AI agents and LLMs. Use when creating agent system prompts, improving prompt quality, applying research-backed prompting techniques, or structuring prompts with role, context, instructions, and desired output. Keywords: prompt engineering, system prompt, agent prompt, LLM optimization, prompt generation.
+description: "Prompt Engineering Instructional Language (PEIL) - generates optimised system prompts for AI agents and LLMs. Use when creating agent system prompts, improving prompt quality, applying research-backed prompting techniques, or structuring prompts with role, context, instructions, and desired output. Keywords: prompt engineering, system prompt, agent prompt, LLM optimization, prompt generation."
 license: MIT
 metadata:
   author: Tim Haintz
