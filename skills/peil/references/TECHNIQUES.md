@@ -6,15 +6,16 @@ Based on: [A Systematic Survey of Prompt Engineering in Large Language Models: T
 
 The techniques below are general-purpose prompt engineering patterns. They should be adapted to the specific model and model version in use.
 
-Recommended workflow:
+Recommended workflow for agent-based use:
 
-1. Start with the task-appropriate technique from this document.
-2. Identify the exact model and version you are targeting.
-3. Check the vendor's current prompting guidance for that model family.
-4. Layer in the model-specific instructions that improve reliability for that model.
-5. Evaluate the prompt and tune only the parts that fix an observed failure mode.
+1. Identify the agent's current task or sub-task.
+2. Select the prompting technique from this document that best fits that task.
+3. Identify the exact model and version the agent is using.
+4. Check the vendor's current prompting guidance for that model family.
+5. Layer in the model-specific instructions that improve reliability for that model.
+6. Evaluate the prompt and tune only the parts that fix an observed failure mode.
 
-This matters because different models have different defaults for reasoning, tool use, verbosity, formatting, and long-context behavior. A technique such as Chain-of-Thought, RAG, or Few-Shot prompting is still useful, but the surrounding instruction style should match the model you are actually using.
+This matters because different models have different defaults for reasoning, tool use, verbosity, formatting, and long-context behavior. In agent scenarios, the agent usually already understands the user request. The job of PEIL is to help choose the right prompting technique for that task and then adapt it to the model actually in use.
 
 ### Current Model-Specific References
 
@@ -42,13 +43,15 @@ This matters because different models have different defaults for reasoning, too
 
 When writing or updating a prompt, use this order of precedence:
 
-1. Task technique from this document.
+1. Prompting technique for the identified agent task from this document.
 2. Model-specific vendor guidance for the exact model in use.
 3. Local evaluation results for your workload.
 
 If the model is known, reference its official guide directly in the skill or prompt instructions. If the model is not fixed, keep the prompt portable and add a note telling the user or calling system to apply the official model-specific guidance for the selected model family.
 
 For local models, this usually means checking the exact model family first, such as Llama or Mistral, then checking the runtime-specific formatting expectations only if needed.
+
+For agents, this means the task is usually already known from the current user request or execution plan. The decision PEIL supports is which prompting pattern should be used for that task, not what the task itself is.
 
 ## Techniques Reference Table
 
@@ -130,8 +133,11 @@ For local models, this usually means checking the exact model family first, such
 ### Model-Aware Prompting Wrapper
 
 ```text
-Task technique:
-- Apply [selected technique from this document].
+Agent task:
+- The current task or sub-task has already been identified by the agent.
+
+Prompting technique:
+- Apply the technique from this document that best matches the current task.
 
 Model-aware guidance:
 - If using GPT-5.4, apply the current OpenAI GPT-5.4 prompt guidance.
@@ -143,6 +149,7 @@ Model-aware guidance:
 
 Execution rule:
 - Keep the prompt portable across models, but layer in model-specific instructions when the target model is known.
+- In agent workflows, use PEIL to select the prompting pattern for the task the agent is already performing.
 ```
 
 ### Chain-of-Thought Example
