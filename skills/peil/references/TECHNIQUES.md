@@ -2,10 +2,58 @@
 
 Based on: [A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications](https://arxiv.org/abs/2402.07927)
 
+## Model-Specific Guidance
+
+The techniques below are general-purpose prompt engineering patterns. They should be adapted to the specific model and model version in use.
+
+Recommended workflow:
+
+1. Start with the task-appropriate technique from this document.
+2. Identify the exact model and version you are targeting.
+3. Check the vendor's current prompting guidance for that model family.
+4. Layer in the model-specific instructions that improve reliability for that model.
+5. Evaluate the prompt and tune only the parts that fix an observed failure mode.
+
+This matters because different models have different defaults for reasoning, tool use, verbosity, formatting, and long-context behavior. A technique such as Chain-of-Thought, RAG, or Few-Shot prompting is still useful, but the surrounding instruction style should match the model you are actually using.
+
+### Current Model-Specific References
+
+| Model Family | When to Check It | What to Take From It | Reference |
+| ------------ | ---------------- | -------------------- | --------- |
+| OpenAI GPT-5.4 | When using GPT-5.4 for long-running tasks, agents, tool use, coding, research, or structured output | Use explicit output contracts, tool persistence rules, completeness checks, verification loops, and task-shaped reasoning effort rather than raising effort by default. | [OpenAI Prompt Guidance for GPT-5.4](https://developers.openai.com/api/docs/guides/prompt-guidance) |
+| Anthropic Claude | When using Claude models for structured prompting, long context, tool use, agentic coding, or format control | Prefer clear and direct instructions, structured examples, XML tags, explicit role setting, long-context structure, and model-aware thinking and effort settings. | [Claude Prompting Best Practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) |
+| Google Gemini | When using Gemini models for structured prompting, multimodal tasks, long context, or agentic workflows | Prefer precise and direct instructions, consistent prompt structure, few-shot examples, context-first long prompts, and explicit output formatting. For Gemini 3, keep the default temperature unless you have a measured reason to change it. | [Google Gemini Prompt Design Strategies](https://ai.google.dev/gemini-api/docs/prompting-strategies) |
+| Meta Llama | When using Llama models directly or through hosted or local runtimes | Use explicit instructions, style and format controls, role-based prompts, few-shot examples, chain-of-thought where appropriate, RAG for grounding, and constraints to reduce hallucinations and unnecessary output. | [Meta Llama Prompt Engineering Guide](https://www.llama.com/docs/how-to-guides/prompting/) |
+| Mistral | When using Mistral models for structured tasks, JSON outputs, or instruction-following workflows | Use clear system and user separation, concise purpose-setting, hierarchical structure, markdown or XML-style formatting, few-shot examples, and explicit structured-output expectations. Avoid blurry wording and contradictions. | [Mistral Prompting Guide](https://docs.mistral.ai/guides/prompting_capabilities/) |
+| Local models | When using locally hosted or open-weight models through Ollama, Hugging Face, vLLM, LM Studio, or similar runtimes | Local deployment is not a single model family, so prefer the exact model's official guide when it exists. Also check the model card or chat template for formatting requirements, especially for instruct and chat variants. | Use the official guide or model card for the specific model family and version. |
+| Any other model | When using future or less common model families | Find the official prompting guide for the exact model, note its strengths and failure modes, then adapt the prompt structure, reasoning instructions, and output contract accordingly. | Use the official vendor documentation for the exact model/version. |
+
+### How to Adapt Techniques By Model
+
+| Adaptation Area | GPT-5.4 Tendency | Claude Tendency | Gemini Tendency | Llama Tendency | Mistral Tendency | Portable Guidance |
+| --------------- | ---------------- | --------------- | --------------- | -------------- | ---------------- | ----------------- |
+| Output control | Responds well to explicit output contracts and verbosity constraints | Responds well to direct format instructions and style examples | Responds well to precise instructions, explicit format requests, and consistent delimiters | Responds well to explicit stylization, formatting, restrictions, and output constraints | Responds well to hierarchical structure, explicit response formats, and structured outputs | Define the required sections, schema, and allowed formatting explicitly. |
+| Tool use | Benefits from explicit dependency checks, persistence rules, and verification before high-impact actions | Benefits from explicit tool instructions, but can over-trigger if prompted too aggressively | Agentic workflows benefit from explicit planning, risk handling, and persistence instructions | Guidance is more general-purpose; use external grounding and RAG when correctness depends on fresh or domain facts | Clear role separation and structured prompts help keep tool-driven workflows predictable | Specify when tools are required, when parallelism is allowed, and when confirmation is required. |
+| Reasoning | Reasoning effort should be tuned to task shape; stronger prompts often help before increasing effort | Thinking and effort settings can materially change behavior; adaptive or extended thinking should be chosen deliberately | Complex tasks benefit from planning and self-critique prompts; tune parameters carefully and keep Gemini 3 temperature at default unless evals say otherwise | Few-shot prompting, chain-of-thought, self-consistency, and program-aided reasoning are explicitly supported patterns | Clear step structure and example prompting improve reasoning consistency; avoid vague instructions and contradictions | Do not assume maximum reasoning is best. Start with the model's recommended defaults and tune from evals. |
+| Long context | Strong on long-context synthesis when grounded with retrieval, citation, and completion rules | Strong on long context when documents are clearly structured and queries come after the source material | Works better when large context comes first and the specific instruction or question comes at the end | RAG and explicit grounding are important when the answer must stay factual and bounded | Clear structure and formatted sections improve comprehension over longer prompts | Structure large inputs clearly, separate sources from instructions, and require grounded outputs. |
+| Examples | Uses examples well when they lock format and behavior | Few-shot prompting is especially strong when examples are well-tagged and representative | Google recommends few-shot examples often, especially when format, brevity, or response patterns matter | Few-shot prompting is an explicit recommended technique | Few-shot prompting is a core part of the guidance, including role-separated conversations | Use a small number of high-quality examples that match the real task closely. |
+
+### Practical Rule
+
+When writing or updating a prompt, use this order of precedence:
+
+1. Task technique from this document.
+2. Model-specific vendor guidance for the exact model in use.
+3. Local evaluation results for your workload.
+
+If the model is known, reference its official guide directly in the skill or prompt instructions. If the model is not fixed, keep the prompt portable and add a note telling the user or calling system to apply the official model-specific guidance for the selected model family.
+
+For local models, this usually means checking the exact model family first, such as Llama or Mistral, then checking the runtime-specific formatting expectations only if needed.
+
 ## Techniques Reference Table
 
 | Application | Prompting Technique | Add to PE | Summary from Paper |
-|-------------|----------------------|-----------|--------------------|
+| ----------- | ------------------- | --------- | ------------------ |
 | New Tasks Without Extensive Training | Zero-Shot Prompting | | Relies on pre-existing knowledge to generate predictions without labeled data. |
 | | Few-Shot Prompting | Provide a few input-output examples. | Uses a few examples to improve model performance on complex tasks. |
 | Reasoning and Logic | Chain-of-Thought (CoT) Prompting | Tell me the steps you took. | Facilitates coherent, step-by-step reasoning processes. |
@@ -41,7 +89,7 @@ Based on: [A Systematic Survey of Prompt Engineering in Large Language Models: T
 ### By Task Complexity
 
 | Complexity | Recommended Techniques |
-|------------|------------------------|
+| ---------- | ---------------------- |
 | Simple, direct tasks | Zero-Shot Prompting |
 | Tasks needing examples | Few-Shot Prompting |
 | Multi-step reasoning | Chain-of-Thought (CoT) |
@@ -51,7 +99,7 @@ Based on: [A Systematic Survey of Prompt Engineering in Large Language Models: T
 ### By Accuracy Requirements
 
 | Requirement | Recommended Techniques |
-|-------------|------------------------|
+| ----------- | ---------------------- |
 | Reduce hallucinations | RAG, Chain-of-Verification (CoVe) |
 | Verify reasoning | LogiCoT, Self-Consistency |
 | Filter irrelevant info | Chain-of-Note (CoN) |
@@ -59,17 +107,47 @@ Based on: [A Systematic Survey of Prompt Engineering in Large Language Models: T
 ### By Output Type
 
 | Output | Recommended Techniques |
-|--------|------------------------|
+| ------ | ---------------------- |
 | Code | Scratchpad, PoT, SCoT, Chain-of-Code |
 | Tabular data | Chain of Table |
 | Mathematical | Program of Thoughts (PoT) |
 | Explanatory | Chain-of-Thought (CoT) |
 
+### By Model and Runtime
+
+| Scenario | Recommended Addition |
+| -------- | -------------------- |
+| GPT-5.4 in a coding or agent workflow | Add explicit output contracts, dependency-aware tool rules, completeness checks, and a verification loop. |
+| Claude in a coding or agent workflow | Add clear direct instructions, XML-tagged structure where helpful, explicit tool-use guidance, and carefully chosen thinking or effort settings. |
+| Gemini in a coding or agent workflow | Add precise task framing, consistent prompt structure, explicit output formatting, planning or self-critique steps for complex work, and model-appropriate parameter defaults. |
+| Llama in a coding or agent workflow | Add explicit format restrictions, few-shot examples when consistency matters, and grounding or RAG when the task depends on factual or current information. |
+| Mistral in a coding or agent workflow | Add clear system and user role separation, well-structured sections, explicit response format requirements, and examples for consistent outputs. |
+| Local or open-weight model in production | Check the specific model family's prompt guide first, then align to the model card or chat template used by the runtime. |
+| Any model in production | Prefer the vendor's current model-specific prompting guide over generic folklore, then verify behavior with task-specific evals. |
+
 ## Implementation Examples
+
+### Model-Aware Prompting Wrapper
+
+```text
+Task technique:
+- Apply [selected technique from this document].
+
+Model-aware guidance:
+- If using GPT-5.4, apply the current OpenAI GPT-5.4 prompt guidance.
+- If using Claude, apply the current Claude prompting best practices.
+- If using Gemini, apply the current Google Gemini prompt design guidance.
+- If using Llama, apply the current Meta Llama prompt engineering guidance.
+- If using Mistral, apply the current Mistral prompting guidance.
+- If using another model, apply the official prompting guidance for that exact model and version.
+
+Execution rule:
+- Keep the prompt portable across models, but layer in model-specific instructions when the target model is known.
+```
 
 ### Chain-of-Thought Example
 
-```
+```text
 Solve this problem step by step:
 [Problem statement]
 Show your reasoning at each step before providing the final answer.
@@ -77,7 +155,7 @@ Show your reasoning at each step before providing the final answer.
 
 ### Few-Shot Example
 
-```
+```text
 Here are some examples:
 Input: [example 1 input] → Output: [example 1 output]
 Input: [example 2 input] → Output: [example 2 output]
@@ -88,7 +166,7 @@ Input: [new input] → Output:
 
 ### Chain-of-Verification Example
 
-```
+```text
 After providing your answer, create 3 verification questions to check your work.
 Answer each verification question, then revise your original answer if needed.
 ```
