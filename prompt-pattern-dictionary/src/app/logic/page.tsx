@@ -36,8 +36,8 @@ export default async function LogicPage() {
             {semantic && (
               <span title="Counts use semantic category assignments" className="badge-ai">Semantic counts</span>
             )}
-            <Link href="/taxonomy" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">View Taxonomy</Link>
-            <Link href="/matrix" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">Matrix</Link>
+            <Link prefetch={false} href="/taxonomy" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">View Taxonomy</Link>
+            <Link prefetch={false} href="/matrix" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">Matrix</Link>
           </div>
         </div>
         <div className="space-y-6">
@@ -49,7 +49,7 @@ export default async function LogicPage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {l.categories.map(c => (
-                  <Link key={c.slug} href={`/category/${c.slug}`} className="tile focus-ring">
+                  <Link key={c.slug} prefetch={false} href={`/category/${c.slug}`} className="tile focus-ring">
                     <div className="flex items-center justify-between">
                       <span className="tile-title">{c.name}</span>
                       <span className="tile-meta">{c.patternCount} patterns</span>

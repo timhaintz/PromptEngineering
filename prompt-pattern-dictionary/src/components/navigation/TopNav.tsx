@@ -25,6 +25,7 @@ export default function TopNav() {
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 md:gap-3">
         {/* Home button with house icon */}
         <Link
+          prefetch={false}
           href="/"
           className="inline-flex items-center gap-1 rounded-md border border-muted bg-surface-2 px-2.5 py-1.5 text-sm text-secondary shadow-sm hover:bg-surface-hover focus-ring shrink-0 transition-colors"
           aria-label="Go to homepage"
@@ -47,6 +48,7 @@ export default function TopNav() {
                 <Link
                   key={tab.href}
                   aria-current={isActive ? 'page' : undefined}
+                  prefetch={false}
                   href={tab.href}
                   className={`px-3 py-1.5 text-sm rounded-md border transition-colors focus-ring shrink-0 ${isActive ? 'active-pill font-medium' : 'bg-surface-2 text-secondary border-muted hover:bg-surface-hover'}`}
                 >
