@@ -48,8 +48,7 @@ export default function OrientationHubPage() {
         </div>
         <div className="mb-10 space-y-4">
           <section aria-labelledby="audience-map-heading" className="border border-muted rounded-lg bg-surface-1 p-4 shadow-sm">
-            <h2 id="audience-map-heading" className="text-xl font-semibold mb-2 flex items-center gap-2">
-              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent/10 text-accent text-xs font-bold">P1b</span>{' '}
+            <h2 id="audience-map-heading" className="text-xl font-semibold mb-2">
               Role → Intent Map
             </h2>
             <p className="text-sm text-secondary mb-3">Pick the description closest to your goal to jump into the right Orientation section.</p>
