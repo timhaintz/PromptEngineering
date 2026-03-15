@@ -2991,13 +2991,27 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
 \newpage
 \section{Appendix}
 \subsection{References for PP and PE Repository}
-\begin{table}[h!]
+\begingroup
 \fontsize{9pt}{10pt}\selectfont
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|c|c|c|}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{|p{1.5cm}|p{10.3cm}|p{3cm}|}
+\caption{The list of papers in the GitHub Repository}\\
     \hline
-    Repository Paper ID & Title & Reference \\ \hline 
+    Repository Paper ID & Title & Reference \\ \hline
+\endfirsthead
+
+\multicolumn{3}{c}{{\tablename\ \thetable{} -- continued from previous page}} \\
+    \hline
+    Repository Paper ID & Title & Reference \\ \hline
+\endhead
+
+    \hline \multicolumn{3}{r}{{Continued on next page}} \\
+\endfoot
+
+    \hline
+\endlastfoot
+
     0 & A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT & \cite{White2023AChatGPT}\\ \hline
     1 & ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design & \cite{White2023ChatGPTDesign}\\ \hline
     2 & Cataloging Prompt Patterns to Enhance the Discipline of Prompt Engineering & \cite{SchmidtCatalogingEngineering}\\ \hline
@@ -3071,21 +3085,34 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
     70 & From Medprompt to o1: Exploration of Run-Time Strategies for Medical Challenge Problems and Beyond & \cite{Nori2024FromBeyond}\\ \hline
     71 & ChatGPT for higher education and professional development: A guide to conversational AI & \cite{AtlasDigitalCommonsURIAI}\\ \hline
     72 & Skeleton-of-thought: Large language models can do parallel decoding & \cite{Ning2023Skeleton-of-Thought:Decoding}\\ \hline
-\end{tabular}}
-\caption{The list of papers in the GitHub Repository}
-\end{table}
+\end{longtable}
+\endgroup
 
 % force all floats to appear here before the Prompt Engineering Strategies and Techniques
 %\FloatBarrier
 
 \subsection{Prompt Engineering Strategies and Techniques}
-\begin{table}[!htbp]
+\begingroup
 \fontsize{9pt}{10pt}\selectfont
-\centering
-\caption{Unique Prompting Strategies and Techniques}
-\begin{tabular}{|p{3.5cm}|p{9cm}|p{2cm}|} 
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{|p{3.5cm}|p{9cm}|p{2cm}|}
+\caption{Unique Prompting Strategies and Techniques}\\
     \hline
     Prompting Technique & Description & Reference \\ \hline
+\endfirsthead
+
+\multicolumn{3}{c}{{\tablename\ \thetable{} -- continued from previous page}} \\
+    \hline
+    Prompting Technique & Description & Reference \\ \hline
+\endhead
+
+    \hline \multicolumn{3}{r}{{Continued on next page}} \\
+\endfoot
+
+    \hline
+\endlastfoot
+
     Active Prompt & Dynamically selects the most relevant and impactful examples for few-shot learning, fine-tuning the model's responses by focusing on contextually rich prompts tailored to the specific task. & \cite{Sahoo2024AApplications}, \cite{Vatsal2024ATasks}, \cite{Chen2023UnleashingReview} \\ \hline
     AI as a Prompt Generator & Harnesses the model's own capabilities to generate or refine its own prompts, allowing for adaptive and self-improving guidance that enhances performance across diverse tasks. & \cite{Hewing2024TheModels}  \\ \hline
     Analogical Reasoning & Solves new problems by mapping similarities from previous examples and analogies, effectively transferring knowledge through the identification of parallel patterns. & \cite{Yasunaga2023LargeReasoners}, \cite{Vatsal2024ATasks} \\ \hline
@@ -3105,15 +3132,6 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
     Chain-of-Verification (CoVe) & Prompts the model to generate verification queries, checking and refining its intermediate reasoning steps to improve accuracy and reliability. & \cite{Sahoo2024AApplications}, \cite{Vatsal2024ATasks} \\ \hline
     Chain-of-Note (CoN) & Integrates note-taking into the reasoning process, allowing the model to evaluate, summarize, and filter content relevance, aiding in tasks that require synthesis of information. & \cite{Sahoo2024AApplications}, \cite{Vatsal2024ATasks} \\ \hline
     Complex Chain-of-Thought (Complex CoT) & Utilizes intricate in-context examples to break down highly complex problems into multiple reasoning paths, enabling the model to handle layered and nuanced tasks. & \cite{Vatsal2024ATasks} \\ \hline
-    \end{tabular}
-\end{table}
-
-\begin{table}[h!]
-\fontsize{9pt}{10pt}\selectfont
-\centering
-\caption{Unique Prompting Strategies and Techniques - continued}
-\begin{tabular}{|p{3.5cm}|p{9cm}|p{2cm}|} 
-    \hline
     Conditional Context Optimization (CoCoOp) & Dynamically tailors the prompt context based on specific conditions, boosting the model's adaptability and performance across varied inputs. & \cite{Chen2023UnleashingReview} \\ \hline    
     Conversational Prompting & Uses dialogue and iterative feedback to progressively refine the model’s output, fostering an interactive problem-solving environment. & \cite{Shin2023PromptCode} \\ \hline
     Control Codes and Conditioning & Inserts special tokens or control codes into prompts to steer output characteristics and stylistic attributes, enabling fine-grained control over the model's responses. & \cite{Muktadir2023APrompting} \\ \hline
@@ -3139,15 +3157,6 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
     Multimodal Prompting & Combines various input modalities within prompts (e.g., text, images) to provide comprehensive context for the model. & \cite{Muktadir2023APrompting} \\ \hline
     Multimodal Prompt Learning (MaPLe) & Learnable prompts optimize model performance across multiple modalities simultaneously, enhancing cross-modal understanding. & \cite{Chen2023UnleashingReview} \\ \hline
     Negative Prompting & Uses prompts that specify undesired attributes or content to guide the model away from producing certain types of outputs. & \cite{Bruni2025BenchmarkingModels} \\ \hline
-    \end{tabular}
-\end{table}
-
-\begin{table}[h!]
-\fontsize{9pt}{10pt}\selectfont
-\centering
-\caption{Unique Prompting Strategies and Techniques - continued}
-\begin{tabular}{|p{3.5cm}|p{9cm}|p{2cm}|} 
-    \hline
     One-Shot Prompting & Includes a single example in the prompt to demonstrate the task and guide the model's response. & \cite{Chen2023UnleashingReview} \\ \hline
     Output Formatting & Guides the model to produce responses in a predefined, structured format for consistent and easy downstream use. & \cite{ChenAEducation} \\ \hline
     Placeholders \& Delimiters & Employs tokens and delimiters to structure prompts, allowing for flexible templates with clearly defined variable sections. & \cite{Hewing2024TheModels}  \\ \hline
@@ -3174,8 +3183,8 @@ The system output generated from \href{https://github.com/timhaintz/PromptEngine
     Tree-of-Thoughts & Explores various reasoning paths through a branching tree structure, allowing the model to evaluate alternatives and converge on a well-considered answer. & \cite{KepelAutonomousModels}, \cite{Vatsal2024ATasks} \\ \hline
     Try Several Times & Generates multiple responses to the same prompt and selects or aggregates them to improve reliability and overcome variability. & \cite{Chen2023UnleashingReview} \\ \hline
     Unified Combined Annotation and Error Analysis Prompting & Integrates task guidelines with error analysis instructions in the prompt, enhancing model performance by promoting awareness of potential mistakes. & \cite{Vatsal2024ATasks} \\ \hline
-\end{tabular}
-\end{table}
+\end{longtable}
+\endgroup
 
 % force all floats to appear here before the appendix
 \FloatBarrier
