@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "website-e2e: install",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "install"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/website-e2e"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "website-e2e: install browsers",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "install:browsers"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/website-e2e"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "website-e2e: run live",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "test"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/website-e2e"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "website-e2e: run headed",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test:headed"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/website-e2e"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "website-e2e: debug",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test:debug"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/website-e2e"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

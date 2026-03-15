@@ -1,0 +1,55 @@
+name: Website E2E
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Deploy Ballarat AI Prompt Dictionary"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  live-site-tests:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website-e2e
+    env:
+      PLAYWRIGHT_BASE_URL: https://www.timhaintz.com.au/PromptEngineering
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: website-e2e/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Run website E2E suite
+        run: npm test
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-e2e-playwright-report
+          path: website-e2e/playwright-report
+          if-no-files-found: ignore
+
+      - name: Upload Playwright test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-e2e-test-results
+          path: website-e2e/test-results
+          if-no-files-found: ignore

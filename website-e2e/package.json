@@ -1,0 +1,20 @@
+{
+  "name": "ballarat-prompt-dictionary-website-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "External Playwright E2E suite for the deployed Ballarat AI Prompt Dictionary website.",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "codegen": "playwright codegen https://www.timhaintz.com.au/PromptEngineering/",
+    "install:browsers": "playwright install chromium",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.2"
+  }
+}
