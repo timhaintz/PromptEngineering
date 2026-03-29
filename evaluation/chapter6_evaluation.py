@@ -70,7 +70,6 @@ class PatternDefinition:
     technique: str
     output: str
     reference_notes: str = ""
-    max_output_tokens: int = 1200
     source_paper_id: str = ""
     source_pattern_id: str = ""
     source_paper_title: str = ""
@@ -134,7 +133,6 @@ class CyberScenario:
     instructions: tuple[str, ...]
     technique: str
     output: str
-    max_output_tokens: int = 1400
 
     def build_peil_prompt(self) -> str:
         """Return the PEIL prompt for the scenario."""
@@ -282,12 +280,14 @@ def strip_code_fences(text: str) -> str:
 def extract_json_payload(text: str) -> Any:
     """Parse JSON from plain text or fenced output."""
     cleaned = strip_code_fences(text)
+    if not cleaned:
+        raise ValueError("Empty response text — no JSON payload to extract")
     try:
         return json.loads(cleaned)
     except json.JSONDecodeError:
         match = re.search(r"\{.*\}", cleaned, flags=re.DOTALL)
         if not match:
-            raise
+            raise ValueError(f"No JSON object found in response text: {cleaned[:200]}")
         return json.loads(match.group(0))
 
 
@@ -447,7 +447,6 @@ class AzureModelRuntime:
         self,
         model_key: str,
         prompt: str,
-        max_output_tokens: int,
         *,
         json_schema: Optional[dict[str, Any]] = None,
     ) -> dict[str, Any]:
@@ -459,14 +458,12 @@ class AzureModelRuntime:
                 client,
                 resolved,
                 prompt,
-                max_output_tokens,
                 json_schema=json_schema,
             )
         return self._call_chat_completions(
             client,
             resolved,
             prompt,
-            max_output_tokens,
         )
 
     def embed_text(self, text: str) -> list[float]:
@@ -515,7 +512,6 @@ class AzureModelRuntime:
         client: OpenAI,
         resolved: ResolvedModel,
         prompt: str,
-        max_output_tokens: int,
         *,
         json_schema: Optional[dict[str, Any]] = None,
     ) -> dict[str, Any]:
@@ -528,7 +524,6 @@ class AzureModelRuntime:
                     "content": prompt,
                 }
             ],
-            "max_output_tokens": max_output_tokens,
         }
         if resolved.spec.reasoning_effort:
             request["reasoning"] = {"effort": resolved.spec.reasoning_effort, "summary": "auto"}
@@ -579,13 +574,11 @@ class AzureModelRuntime:
         client: OpenAI,
         resolved: ResolvedModel,
         prompt: str,
-        max_output_tokens: int,
     ) -> dict[str, Any]:
         """Call the Chat Completions API and normalize the result."""
         request: dict[str, Any] = {
             "model": resolved.deployment,
             "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": max_output_tokens,
         }
         if resolved.spec.supports_temperature_zero:
             request["temperature"] = 0.0
@@ -678,7 +671,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="62-0-0",
             source_paper_title="On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
             source_pattern_name="Opening",
-            max_output_tokens=400,
         ),
         PatternDefinition(
             key="across_comparison_attendance",
@@ -703,7 +695,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="20-2-0",
             source_paper_title="Successive Prompting for Decomposing Complex Questions",
             source_pattern_name="What round had a higher attendance: SF 2nd Leg or QFR?",
-            max_output_tokens=300,
         ),
         PatternDefinition(
             key="across_translation_summarise_translate",
@@ -728,7 +719,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="30-6-0",
             source_paper_title="Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
             source_pattern_name="Summarization and Translation",
-            max_output_tokens=700,
         ),
         # ── AT LOGIC (3 patterns) ─────────────────────────────────────────
         PatternDefinition(
@@ -754,7 +744,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="3-0-0",
             source_paper_title="A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
             source_pattern_name="Expert",
-            max_output_tokens=1200,
         ),
         PatternDefinition(
             key="at_calculation_math_word_problems",
@@ -779,7 +768,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="31-0-0",
             source_paper_title="Chain-of-thought prompting elicits reasoning in large language models",
             source_pattern_name="Math Word Problems",
-            max_output_tokens=400,
         ),
         PatternDefinition(
             key="at_assessment_opinion_verification",
@@ -804,7 +792,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="37-0-0",
             source_paper_title="Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
             source_pattern_name="Opinion Verification",
-            max_output_tokens=500,
         ),
         # ── BEYOND LOGIC (3 patterns) ─────────────────────────────────────
         PatternDefinition(
@@ -830,7 +817,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="33-1-1",
             source_paper_title="Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
             source_pattern_name="Premise-Question Reasoning",
-            max_output_tokens=800,
         ),
         PatternDefinition(
             key="beyond_hypothesise_theory_of_mind",
@@ -855,7 +841,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="32-26-0",
             source_paper_title="Sparks of artificial general intelligence: Early experiments with GPT-4",
             source_pattern_name="Understanding beliefs",
-            max_output_tokens=500,
         ),
         PatternDefinition(
             key="beyond_simulation_change_request",
@@ -880,7 +865,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="1-0-2",
             source_paper_title="ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
             source_pattern_name="Change Request Simulation",
-            max_output_tokens=1000,
         ),
         # ── IN LOGIC (3 patterns) ─────────────────────────────────────────
         PatternDefinition(
@@ -906,7 +890,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="8-0-0",
             source_paper_title="HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
             source_pattern_name="Hallucination Evaluation",
-            max_output_tokens=600,
         ),
         PatternDefinition(
             key="in_classification_relevancy_check",
@@ -931,7 +914,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="18-0-0",
             source_paper_title="Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
             source_pattern_name="Initial relevancy prompt",
-            max_output_tokens=300,
         ),
         PatternDefinition(
             key="in_refactoring_template_filling",
@@ -956,7 +938,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="0-1-4",
             source_paper_title="A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
             source_pattern_name="Template",
-            max_output_tokens=300,
         ),
         # ── OUT LOGIC (3 patterns) ────────────────────────────────────────
         PatternDefinition(
@@ -982,7 +963,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="50-1-1",
             source_paper_title="Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
             source_pattern_name="Code Generation for Optimization Problem",
-            max_output_tokens=1200,
         ),
         PatternDefinition(
             key="out_decomposed_prompting_letter_concat",
@@ -1007,7 +987,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="6-0-0",
             source_paper_title="Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
             source_pattern_name="Decomposed Prompt",
-            max_output_tokens=500,
         ),
         PatternDefinition(
             key="out_context_control_explicit_constraints",
@@ -1032,7 +1011,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="46-0-1",
             source_paper_title="Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
             source_pattern_name="Using explicit constraints",
-            max_output_tokens=400,
         ),
         # ── OVER LOGIC (3 patterns) ───────────────────────────────────────
         PatternDefinition(
@@ -1058,7 +1036,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="38-0-0",
             source_paper_title="From Sparse to Dense: GPT-4 Summarization with Chain of Density Prompting",
             source_pattern_name="Initial Entity-Sparse Summary",
-            max_output_tokens=1400,
         ),
         PatternDefinition(
             key="over_synthesis_claim_extraction",
@@ -1083,7 +1060,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="63-0-0",
             source_paper_title="FABLES: Evaluating faithfulness and content selection in book-length summarization",
             source_pattern_name="Claim Extraction",
-            max_output_tokens=800,
         ),
         PatternDefinition(
             key="over_summarisation_text_summary",
@@ -1108,7 +1084,6 @@ def build_quantitative_patterns() -> list[PatternDefinition]:
             source_pattern_id="71-25-0",
             source_paper_title="ChatGPT for higher education and professional development: A guide to conversational AI",
             source_pattern_name="Text Summarization",
-            max_output_tokens=700,
         ),
     ]
 
@@ -1346,7 +1321,6 @@ def generate_quantitative_artifact(
     response_data = runtime.generate_text(
         model_key,
         pattern.build_prompt(variant),
-        pattern.max_output_tokens,
     )
     save_generation_artifact(
         path,
@@ -1398,13 +1372,25 @@ def judge_pattern_outputs(
         variant: read_json(generation_path(pattern.key, model_key, 1, variant))["output"]
         for variant in VARIANT_TO_OUTPUT_KEY
     }
-    judge_result = runtime.generate_text(
-        judge_model_key,
-        build_judge_prompt(pattern, outputs),
-        2000,
-        json_schema=JUDGE_SCHEMA,
-    )
-    scores = extract_json_payload(judge_result["text"])
+    max_judge_attempts = 3
+    scores = None
+    last_error = None
+    for attempt in range(1, max_judge_attempts + 1):
+        judge_result = runtime.generate_text(
+            judge_model_key,
+            build_judge_prompt(pattern, outputs),
+            json_schema=JUDGE_SCHEMA,
+        )
+        try:
+            scores = extract_json_payload(judge_result["text"])
+            break
+        except (ValueError, json.JSONDecodeError) as exc:
+            last_error = exc
+            log(f"  Judge JSON parse failed attempt {attempt}/{max_judge_attempts} ({exc})")
+            if attempt < max_judge_attempts:
+                time.sleep(2)
+    if scores is None:
+        raise RuntimeError(f"Judge failed after {max_judge_attempts} attempts: {last_error}")
     payload = {
         "timestamp_utc": now_utc_iso(),
         "pattern": pattern.to_metadata(),
@@ -1472,16 +1458,29 @@ def compute_reproducibility(
             key = f"run_{left_index + 1}_run_{right_index + 1}"
             pairwise[key] = round(score, 6)
             similarities.append(score)
-        llm_result = runtime.generate_text(
-            judge_model_key,
-            build_reproducibility_prompt(pattern, variant, outputs),
-            1200,
-            json_schema=REPRODUCIBILITY_SCHEMA,
-        )
+        max_repro_attempts = 3
+        llm_assessment = None
+        last_error = None
+        for attempt in range(1, max_repro_attempts + 1):
+            llm_result = runtime.generate_text(
+                judge_model_key,
+                build_reproducibility_prompt(pattern, variant, outputs),
+                json_schema=REPRODUCIBILITY_SCHEMA,
+            )
+            try:
+                llm_assessment = extract_json_payload(llm_result["text"])
+                break
+            except (ValueError, json.JSONDecodeError) as exc:
+                last_error = exc
+                log(f"  Reproducibility JSON parse failed attempt {attempt}/{max_repro_attempts} ({exc})")
+                if attempt < max_repro_attempts:
+                    time.sleep(2)
+        if llm_assessment is None:
+            raise RuntimeError(f"Reproducibility assessment failed after {max_repro_attempts} attempts: {last_error}")
         variant_results[variant] = {
             "pairwise_similarity": pairwise,
             "mean_similarity": round(mean(similarities), 6),
-            "llm_assessment": extract_json_payload(llm_result["text"]),
+            "llm_assessment": llm_assessment,
             "judge_usage": llm_result.get("usage", {}),
         }
 
@@ -1575,7 +1574,7 @@ def run_case_studies(
             path = scenario_output_path(scenario.key, model_key, variant)
             if path.exists() and not force:
                 continue
-            response_data = runtime.generate_text(model_key, prompt, scenario.max_output_tokens)
+            response_data = runtime.generate_text(model_key, prompt)
             save_case_study_artifact(
                 path,
                 scenario=scenario,
@@ -1803,14 +1802,14 @@ def doctor(runtime: AzureModelRuntime, model_keys: list[str], probe: bool) -> di
         if probe:
             try:
                 if resolved.spec.use_responses_api:
-                    response = runtime.generate_text(model_key, "Reply with OK.", 64)
+                    response = runtime.generate_text(model_key, "Reply with OK.")
                     model_report["probe"] = {
                         "status": "ok",
                         "output_preview": response["text"][:120],
                         "usage": response.get("usage", {}),
                     }
                 else:
-                    response = runtime.generate_text(model_key, "Reply with OK.", 64)
+                    response = runtime.generate_text(model_key, "Reply with OK.")
                     model_report["probe"] = {
                         "status": "ok",
                         "output_preview": response["text"][:120],
