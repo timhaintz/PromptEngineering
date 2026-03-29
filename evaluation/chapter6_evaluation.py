@@ -71,6 +71,10 @@ class PatternDefinition:
     output: str
     reference_notes: str = ""
     max_output_tokens: int = 1200
+    source_paper_id: str = ""
+    source_pattern_id: str = ""
+    source_paper_title: str = ""
+    source_pattern_name: str = ""
 
     def build_prompt(self, variant: str) -> str:
         """Return the prompt text for the requested variant."""
@@ -648,506 +652,463 @@ class AzureModelRuntime:
 
 
 def build_quantitative_patterns() -> list[PatternDefinition]:
-    """Return the 18 quantitative evaluation patterns."""
+    """Return the 18 quantitative evaluation patterns grounded in promptpatterns.json research papers."""
     return [
+        # ── ACROSS LOGIC (3 patterns) ──────────────────────────────────────
         PatternDefinition(
-            key="across_translation_technical_paragraph",
-            logic="Across",
-            subcategory="Translation",
-            task_title="Translate a zero trust explainer",
-            task_description="Translate the supplied English technical paragraph into Simplified Chinese while preserving security meaning and terminology.",
-            naive_request="Translate this paragraph into Simplified Chinese.",
-            task_material=(
-                "Zero Trust architecture assumes no user or device should be trusted by default, even when it is already inside the corporate network. "
-                "Every access request should be evaluated continuously using identity signals, device health, and contextual risk. "
-                "This reduces lateral movement, limits blast radius, and makes multi-factor authentication and conditional access central controls rather than optional add-ons."
-            ),
-            role="You are a bilingual cloud security translator specializing in English and Simplified Chinese technical writing.",
-            context="The translation will be used in an internal security briefing for engineers in Beijing. Preserve technical accuracy, established security terminology, and product-neutral phrasing.",
-            instructions=(
-                "Translate the full paragraph into Simplified Chinese.",
-                "Preserve terms such as Zero Trust, lateral movement, multi-factor authentication, and conditional access accurately.",
-                "Keep the tone professional and concise.",
-                "Do not add explanations, examples, or extra facts.",
-            ),
-            technique="Use step-by-step semantic preservation so that each sentence keeps the same technical meaning as the source.",
-            output="Return only the final Simplified Chinese translation as two short paragraphs.",
-            reference_notes="The translation should preserve the named security concepts and should not introduce new recommendations or examples.",
-            max_output_tokens=700,
-        ),
-        PatternDefinition(
-            key="across_argument_mfa_policy",
+            key="across_argument_debate_opening",
             logic="Across",
             subcategory="Argument",
-            task_title="Argue for or against universal MFA",
-            task_description="Develop a balanced argument about whether organizations should require multi-factor authentication for all employee access, including low-risk internal tools.",
-            naive_request="Argue for and against requiring MFA for every employee system, even low-risk internal tools, and give a recommendation.",
-            task_material="Audience: security leadership preparing a policy recommendation for the next governance meeting.",
-            role="You are a senior security strategist writing policy advice for a security steering committee.",
-            context="The committee cares about risk reduction, productivity, implementation cost, and user adoption. The response should acknowledge real tradeoffs instead of giving a one-sided answer.",
+            task_title="Write a debate opening statement",
+            task_description="Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+            naive_request='Pretend to be engaging in an online debate on the topic of "Remote work improves employee productivity". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.',
+            task_material="",
+            role="You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+            context="You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
             instructions=(
-                "Present the strongest argument in favor of universal MFA.",
-                "Present the strongest argument against universal MFA for low-risk tools.",
-                "Compare the tradeoffs across security, usability, and operating cost.",
-                "Finish with a clear recommendation and a short rationale.",
+                "State your position clearly in the first sentence.",
+                "Provide two supporting points with brief evidence or reasoning.",
+                "Close with a forward-looking statement that frames the rest of the debate.",
+                "Do not exceed four sentences. Do not use greetings or address the opponent.",
             ),
-            technique="Use dialectical reasoning: build the best case for each side before forming the final recommendation.",
-            output="Return a structured memo with sections titled Position For, Position Against, Tradeoff Assessment, and Recommendation. Keep it under 450 words.",
-            reference_notes="A strong answer should address both security benefit and user friction rather than treating MFA as cost-free.",
+            technique="Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+            output="Return a 2-4 sentence opening argument with no greetings.",
+            reference_notes="A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+            source_paper_id="62",
+            source_pattern_id="62-0-0",
+            source_paper_title="On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+            source_pattern_name="Opening",
+            max_output_tokens=400,
         ),
         PatternDefinition(
-            key="across_comparison_serverless_platforms",
+            key="across_comparison_attendance",
             logic="Across",
             subcategory="Comparison",
-            task_title="Compare Azure Functions and AWS Lambda",
-            task_description="Compare Azure Functions and AWS Lambda for an enterprise event-driven processing workload.",
-            naive_request="Compare Azure Functions and AWS Lambda for an enterprise event-driven workload.",
-            task_material=(
-                "Workload assumptions: bursty API traffic, scheduled jobs, queue-triggered background processing, enterprise identity requirements, and a moderate operations team."
-            ),
-            role="You are a cloud architecture advisor helping an enterprise choose a serverless platform.",
-            context="The decision will be used by an architecture review board that wants a practical comparison rather than marketing language.",
+            task_title="Compare two numeric values and select the larger",
+            task_description="Given two attendance figures from different rounds, determine which round had the higher attendance.",
+            naive_request="Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+            task_material="",
+            role="You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+            context="You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
             instructions=(
-                "Compare both services on scaling behavior, developer experience, observability, identity and access control, and operational overhead.",
-                "Note the most relevant strengths and limitations for each platform.",
-                "Call out one scenario where Azure Functions is a better fit and one where AWS Lambda is a better fit.",
-                "Avoid absolute claims that ignore context.",
+                "Extract the numeric attendance value for each round.",
+                "Handle thousands separators (commas) correctly during comparison.",
+                "State which round has the higher attendance.",
+                "Provide the numeric values to justify the comparison.",
             ),
-            technique="Use dimension-by-dimension comparison before drawing scenario-based conclusions.",
-            output="Return a concise comparison table followed by a short recommendation paragraph.",
-            reference_notes="The answer should compare both services across multiple dimensions and avoid framing one platform as universally superior.",
-            max_output_tokens=900,
+            technique="Use step-by-step numeric extraction and comparison before stating the result.",
+            output="Return the round name with the higher attendance and both numeric values.",
+            reference_notes="Correct answer: SF 2nd Leg (34,669 > 33,861).",
+            source_paper_id="20",
+            source_pattern_id="20-2-0",
+            source_paper_title="Successive Prompting for Decomposing Complex Questions",
+            source_pattern_name="What round had a higher attendance: SF 2nd Leg or QFR?",
+            max_output_tokens=300,
         ),
         PatternDefinition(
-            key="at_assessment_code_review",
+            key="across_translation_summarise_translate",
+            logic="Across",
+            subcategory="Translation",
+            task_title="Summarise a text and translate to French",
+            task_description="Produce a concise English summary of the provided text and then translate that summary into French.",
+            naive_request="Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+            task_material="Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+            role="You are a bilingual technical writer who produces concise summaries and accurate French translations.",
+            context="The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.",
+            instructions=(
+                "Summarise the text in 2-3 concise English sentences.",
+                "Translate the summary into French, preserving tone and terminology.",
+                "Flag any idiomatic expressions that may not translate directly.",
+                "Do not add information beyond what the source text contains.",
+            ),
+            technique="Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.",
+            output="Return two sections: English Summary and French Translation.",
+            reference_notes="A strong answer produces a faithful summary and an accurate French translation without adding new claims.",
+            source_paper_id="30",
+            source_pattern_id="30-6-0",
+            source_paper_title="Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+            source_pattern_name="Summarization and Translation",
+            max_output_tokens=700,
+        ),
+        # ── AT LOGIC (3 patterns) ─────────────────────────────────────────
+        PatternDefinition(
+            key="at_assessment_expert_rating",
             logic="At",
             subcategory="Assessment",
-            task_title="Assess a Python upload handler",
-            task_description="Evaluate the supplied Python code for security and maintainability issues.",
-            naive_request="Evaluate this Python code and tell me what is wrong with it.",
-            task_material=(
-                "```python\n"
-                "import os\n"
-                "from flask import request\n\n"
-                "UPLOAD_DIR = '/tmp/uploads'\n\n"
-                "def save_file():\n"
-                "    file = request.files['file']\n"
-                "    target = os.path.join(UPLOAD_DIR, file.filename)\n"
-                "    file.save(target)\n"
-                "    return {'path': target, 'status': 'saved'}\n"
-                "```"
-            ),
-            role="You are a senior application security reviewer.",
-            context="The code is part of an internal web application that accepts user-supplied files. The team wants a practical review that prioritizes important defects.",
+            task_title="Rate platforms using weighted criteria",
+            task_description="As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+            naive_request="As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+            task_material="Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+            role="You are an expert in online learning and educational technology evaluation.",
+            context="You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
             instructions=(
-                "Assess the code for security, reliability, and maintainability concerns.",
-                "Rank the issues by severity.",
-                "Explain why each issue matters in one sentence.",
-                "Suggest concrete fixes for the top findings.",
+                "First, assign and justify weights for each of the seven criteria.",
+                "Then rate each of the six platforms on every criterion using the provided scale.",
+                "Present the results in a clear table format.",
+                "Note any significant strengths or limitations for each platform.",
             ),
-            technique="Use rubric-based assessment: identify finding, severity, rationale, and remediation for each issue.",
-            output="Return a short assessment report with sections Summary, Findings, and Recommended Fixes.",
-            reference_notes="High-value findings include path traversal risk from filename handling, missing validation, and hard-coded filesystem assumptions.",
+            technique="Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+            output="Return a criteria weighting table followed by a platform rating matrix.",
+            reference_notes="A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+            source_paper_id="3",
+            source_pattern_id="3-0-0",
+            source_paper_title="A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+            source_pattern_name="Expert",
+            max_output_tokens=1200,
         ),
         PatternDefinition(
-            key="at_calculation_incident_hours",
+            key="at_calculation_math_word_problems",
             logic="At",
             subcategory="Calculation",
-            task_title="Calculate analyst effort from phishing clicks",
-            task_description="Solve the multi-step incident response calculation and provide the final number of analyst hours.",
-            naive_request="Solve this calculation and show the answer.",
-            task_material=(
-                "Campaign A targeted 24 mailboxes and one-third of recipients clicked the link.\n"
-                "Campaign B targeted 18 mailboxes and 5 recipients clicked the link.\n"
-                "Campaign C targeted 30 mailboxes and 20% of recipients clicked the link.\n"
-                "If each clicked user requires 45 minutes of analyst response time, how many total analyst hours are required?"
-            ),
-            role="You are a careful quantitative incident response analyst.",
-            context="The result will be used in an after-action report, so arithmetic accuracy matters more than writing style.",
+            task_title="Solve a multi-step math word problem",
+            task_description="Solve the word problem using step-by-step arithmetic and provide the final answer.",
+            naive_request="Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+            task_material="",
+            role="You are a careful arithmetic problem solver who shows all working.",
+            context="The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
             instructions=(
-                "Compute the number of clicked users for each campaign.",
-                "Sum the total number of clicked users.",
-                "Convert the total response time from minutes into hours.",
-                "Provide the final answer clearly.",
+                "Identify the starting quantity.",
+                "Calculate the total additions over the specified period.",
+                "Sum the starting quantity and additions.",
+                "State the final answer clearly on a separate line.",
             ),
-            technique="Use explicit step-by-step arithmetic and verify the final unit conversion.",
-            output="Return the working and end with a line that states the final analyst hours required.",
-            reference_notes="Correct calculation: 8 + 5 + 6 = 19 clicked users, 19 * 45 = 855 minutes, 855 / 60 = 14.25 hours.",
+            technique="Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+            output="Return the working steps and end with: The answer is [number].",
+            reference_notes="Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+            source_paper_id="31",
+            source_pattern_id="31-0-0",
+            source_paper_title="Chain-of-thought prompting elicits reasoning in large language models",
+            source_pattern_name="Math Word Problems",
+            max_output_tokens=400,
+        ),
+        PatternDefinition(
+            key="at_assessment_opinion_verification",
+            logic="At",
+            subcategory="Assessment",
+            task_title="Verify the truth of a factual claim",
+            task_description="Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+            naive_request="As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+            task_material="",
+            role="You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+            context="The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+            instructions=(
+                "State whether the claim is true, false, or uncertain.",
+                "Provide the key evidence or reasoning behind the verdict.",
+                "Note any nuance, context-dependence, or common misconceptions.",
+                "Keep the response concise and decision-ready.",
+            ),
+            technique="Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+            output="Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+            reference_notes="The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+            source_paper_id="37",
+            source_pattern_id="37-0-0",
+            source_paper_title="Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+            source_pattern_name="Opinion Verification",
+            max_output_tokens=500,
+        ),
+        # ── BEYOND LOGIC (3 patterns) ─────────────────────────────────────
+        PatternDefinition(
+            key="beyond_logical_reasoning_premise_question",
+            logic="Beyond",
+            subcategory="Logical Reasoning",
+            task_title="Reason step-by-step from premises to conclusion",
+            task_description="Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+            naive_request="Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+            task_material="",
+            role="You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+            context="The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+            instructions=(
+                "List the premises explicitly.",
+                "Turn each premise into a question to identify alternatives.",
+                "Reason step by step using both lists, tracking branches.",
+                "State whether the conclusion follows and explain why.",
+            ),
+            technique="Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+            output="Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+            reference_notes="The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+            source_paper_id="33",
+            source_pattern_id="33-1-1",
+            source_paper_title="Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+            source_pattern_name="Premise-Question Reasoning",
+            max_output_tokens=800,
+        ),
+        PatternDefinition(
+            key="beyond_hypothesise_theory_of_mind",
+            logic="Beyond",
+            subcategory="Hypothesise",
+            task_title="Infer a person's beliefs from a scenario",
+            task_description="Read the scenario and answer where the unaware person will look for the moved item.",
+            naive_request="We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+            task_material="",
+            role="You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+            context="This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+            instructions=(
+                "Identify what Alice knows and does not know.",
+                "Identify what Bob did and whether Alice is aware of it.",
+                "Reason about Alice's belief state based on her information.",
+                "State where Alice thinks the file is and explain why.",
+            ),
+            technique="Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+            output="State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+            reference_notes="Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+            source_paper_id="32",
+            source_pattern_id="32-26-0",
+            source_paper_title="Sparks of artificial general intelligence: Early experiments with GPT-4",
+            source_pattern_name="Understanding beliefs",
+            max_output_tokens=500,
+        ),
+        PatternDefinition(
+            key="beyond_simulation_change_request",
+            logic="Beyond",
+            subcategory="Simulation",
+            task_title="Simulate a system change and assess impact",
+            task_description="Simulate adding a new mandatory field to an API and list the affected components.",
+            naive_request="My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+            task_material="System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+            role="You are a software architect who simulates proposed system changes and identifies affected components.",
+            context="The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+            instructions=(
+                "List the components affected by adding the mandatory field.",
+                "For each affected component, describe the required modification.",
+                "Identify any risks or side effects of the change.",
+                "Suggest the order of implementation and testing.",
+            ),
+            technique="Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+            output="Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+            reference_notes="A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+            source_paper_id="1",
+            source_pattern_id="1-0-2",
+            source_paper_title="ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+            source_pattern_name="Change Request Simulation",
+            max_output_tokens=1000,
+        ),
+        # ── IN LOGIC (3 patterns) ─────────────────────────────────────────
+        PatternDefinition(
+            key="in_error_identification_hallucination_judge",
+            logic="In",
+            subcategory="Error Identification",
+            task_title="Judge whether an answer contains hallucination",
+            task_description="Given a question, an answer, and related knowledge, determine if the answer contains non-factual or hallucinated information.",
+            naive_request='I want you to act as an answer judge. Given a question and an answer, your objective is to determine if the provided answer contains non-factual or hallucinated information. You SHOULD give your judgement based on the following hallucination types and the world knowledge.\n\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.',
+            task_material="Question: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+            role="You are a hallucination detection judge who identifies factual contradictions, fabrications, and unsupported claims in model outputs.",
+            context="You are evaluating an LLM answer against verified knowledge to detect hallucination. Your judgment must distinguish between factual errors, context misunderstanding, and fabricated details.",
+            instructions=(
+                "Compare the answer against the provided knowledge.",
+                "Identify any factual contradictions between the answer and the knowledge.",
+                "Check whether any claims in the answer are fabricated or unsupported.",
+                "State your verdict: Hallucinated or Not Hallucinated, with specific evidence.",
+            ),
+            technique="Use chain-of-verification: compare each claim in the answer against the knowledge base systematically before judging.",
+            output="Return a verdict (Hallucinated / Not Hallucinated) with specific evidence of any errors found.",
+            reference_notes="The answer is hallucinated: it states Sydney is the capital (incorrect, it is Canberra) and gives a wrong date for the capital decision.",
+            source_paper_id="8",
+            source_pattern_id="8-0-0",
+            source_paper_title="HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+            source_pattern_name="Hallucination Evaluation",
             max_output_tokens=600,
         ),
         PatternDefinition(
-            key="at_assessment_fact_claims",
-            logic="At",
-            subcategory="Assessment",
-            task_title="Assess timeline-based claims",
-            task_description="Assess whether each claim is supported, contradicted, or not supported by the incident timeline.",
-            naive_request="Read the timeline and assess each claim.",
-            task_material=(
-                "Incident timeline:\n"
-                "- 08:00 UTC: Security team applied an emergency VPN configuration change.\n"
-                "- 09:15 UTC: Monitoring detected repeated failed logins from a foreign IP range.\n"
-                "- 09:40 UTC: The privileged admin account was locked.\n"
-                "- 10:10 UTC: Data transfer spikes were observed from the finance file share.\n"
-                "- 10:30 UTC: The finance file share was isolated from the network.\n\n"
-                "Claims:\n"
-                "A. The privileged admin account was locked before suspicious login activity was detected.\n"
-                "B. Potential data exfiltration indicators appeared before the finance file share was isolated.\n"
-                "C. The timeline proves that the VPN configuration change caused the incident."
-            ),
-            role="You are an evidence-driven incident reviewer.",
-            context="The goal is to distinguish what the timeline directly supports from what it merely suggests.",
-            instructions=(
-                "Label each claim as Supported, Contradicted, or Insufficient Evidence.",
-                "Explain the label with direct reference to the timeline.",
-                "Avoid causal conclusions that the timeline does not prove.",
-                "Keep the reasoning concise.",
-            ),
-            technique="Use evidence tracing: map each claim to the exact timeline entries that support or weaken it.",
-            output="Return a short table with columns Claim, Verdict, and Justification.",
-            reference_notes="Expected verdicts: A Contradicted, B Supported, C Insufficient Evidence.",
-            max_output_tokens=700,
-        ),
-        PatternDefinition(
-            key="beyond_logical_reasoning_shift_puzzle",
-            logic="Beyond",
-            subcategory="Logical Reasoning",
-            task_title="Solve an analyst shift puzzle",
-            task_description="Solve the logic puzzle and identify the shift and queue assignment for each analyst.",
-            naive_request="Solve this logic puzzle.",
-            task_material=(
-                "Three analysts - Priya, Mateo, and Lin - each worked one shift (morning, afternoon, overnight) and each owned one queue (phishing, ransomware, insider-risk).\n"
-                "Clues:\n"
-                "1. Priya did not work the overnight shift.\n"
-                "2. Mateo handled the phishing queue.\n"
-                "3. The ransomware analyst worked the afternoon shift.\n"
-                "4. Lin did not work the afternoon shift.\n"
-                "5. The insider-risk analyst worked later than Priya.\n"
-                "Determine the shift and queue for each analyst."
-            ),
-            role="You are a precise logical reasoning specialist.",
-            context="The answer should show disciplined elimination rather than a guess.",
-            instructions=(
-                "Work through the clues systematically.",
-                "Eliminate impossible assignments before making conclusions.",
-                "State the final shift and queue for each analyst.",
-                "Keep the final answer unambiguous.",
-            ),
-            technique="Use step-by-step deductive elimination and verify that the final assignment satisfies all clues.",
-            output="Return a brief reasoning trace followed by a final answer list for Priya, Mateo, and Lin.",
-            reference_notes="Correct solution: Priya worked afternoon and handled ransomware, Mateo worked morning and handled phishing, Lin worked overnight and handled insider-risk.",
-            max_output_tokens=800,
-        ),
-        PatternDefinition(
-            key="beyond_hypothesis_generation_login_spikes",
-            logic="Beyond",
-            subcategory="Hypothesis",
-            task_title="Generate hypotheses from suspicious login data",
-            task_description="Generate plausible hypotheses that explain the observed authentication spike pattern.",
-            naive_request="Look at this data and generate hypotheses about what might be happening.",
-            task_material=(
-                "Observed data over four days:\n"
-                "- Day 1: 120 failed VPN logins, mostly from one country, normal MFA challenge rate.\n"
-                "- Day 2: 430 failed VPN logins, spread across six countries, elevated MFA challenge failures.\n"
-                "- Day 3: 410 failed VPN logins, mostly targeting finance and HR users, several successful password resets.\n"
-                "- Day 4: 95 failed VPN logins, but help desk tickets about lockouts doubled compared with baseline."
-            ),
-            role="You are a threat hunting analyst developing working hypotheses from incomplete evidence.",
-            context="The team needs plausible explanations to guide investigation, not a claim of certainty.",
-            instructions=(
-                "Generate at least three distinct hypotheses that explain the pattern.",
-                "For each hypothesis, cite the observations that support it.",
-                "List one piece of additional evidence that would help confirm or reject each hypothesis.",
-                "Rank the hypotheses from most to least plausible.",
-            ),
-            technique="Use abductive reasoning: infer the most plausible explanations from the observed evidence while explicitly noting uncertainty.",
-            output="Return a ranked list of hypotheses with supporting signals and next-check evidence.",
-            reference_notes="Strong hypotheses could include password spraying, coordinated credential stuffing, or a help-desk abuse component. The answer should not claim certainty.",
-            max_output_tokens=1000,
-        ),
-        PatternDefinition(
-            key="beyond_simulation_rate_limiting",
-            logic="Beyond",
-            subcategory="Simulation",
-            task_title="Simulate a rate-limiting rollout",
-            task_description="Simulate the likely operational effects of introducing IP-based rate limiting on a login endpoint over one week.",
-            naive_request="Simulate what happens if we add IP-based rate limiting to our login endpoint next week.",
-            task_material=(
-                "System context:\n"
-                "- Current state: no IP-based rate limiting.\n"
-                "- Baseline: 12,000 legitimate login attempts per day and 2,500 malicious attempts per day.\n"
-                "- Planned change: block any IP that exceeds 10 failed logins in 5 minutes for 30 minutes.\n"
-                "- Constraint: the service supports global customers who may share NAT gateways."
-            ),
-            role="You are a reliability-minded security engineer modeling operational change.",
-            context="The simulation should be realistic and should include both security benefits and unintended side effects.",
-            instructions=(
-                "Describe the most likely day-by-day effects during the first week after rollout.",
-                "Identify both expected benefits and plausible false-positive impacts.",
-                "Note any assumptions that the simulation relies on.",
-                "End with two mitigation suggestions for the most important downside risks.",
-            ),
-            technique="Use scenario simulation with explicit assumptions and first-order operational consequences.",
-            output="Return a seven-day simulation log followed by a short conclusion.",
-            reference_notes="The response should mention both attacker suppression and possible false positives from shared IP space or support ticket volume.",
-            max_output_tokens=1200,
-        ),
-        PatternDefinition(
-            key="in_error_identification_python_handler",
-            logic="In",
-            subcategory="Error Identification",
-            task_title="Find bugs in a database handler",
-            task_description="Identify the defects and security issues in the provided code snippet.",
-            naive_request="Find the bugs in this code.",
-            task_material=(
-                "```python\n"
-                "import sqlite3\n\n"
-                "def get_user(username):\n"
-                "    connection = sqlite3.connect('users.db')\n"
-                "    cursor = connection.cursor()\n"
-                "    cursor.execute(f\"SELECT * FROM users WHERE username = '{username}'\")\n"
-                "    user = cursor.fetchone()\n"
-                "    return user\n"
-                "```"
-            ),
-            role="You are a senior Python security reviewer.",
-            context="The goal is to surface concrete implementation problems, especially issues that could lead to compromise or unstable behavior.",
-            instructions=(
-                "Identify the most important defects in the code.",
-                "Explain why each defect is dangerous or incorrect.",
-                "State how to fix each defect.",
-                "Prioritize issues that materially affect correctness or security.",
-            ),
-            technique="Use defect isolation: inspect input handling, query construction, resource lifecycle, and error handling separately.",
-            output="Return a numbered list of findings ordered by severity.",
-            reference_notes="High-value findings include SQL injection, unclosed database connection, and lack of exception handling.",
-            max_output_tokens=800,
-        ),
-        PatternDefinition(
-            key="in_categorisation_alert_triage",
+            key="in_classification_relevancy_check",
             logic="In",
             subcategory="Categorising",
-            task_title="Categorize security alerts",
-            task_description="Categorize each alert into the most appropriate response bucket.",
-            naive_request="Categorize these alerts.",
-            task_material=(
-                "Categories: Phishing, Malware, Misconfiguration, Benign.\n\n"
-                "Alerts:\n"
-                "1. Multiple users report a cloned login page hosted on a lookalike domain.\n"
-                "2. Endpoint telemetry shows a scheduled task launching an encoded PowerShell command.\n"
-                "3. A storage account is publicly readable because anonymous blob access was enabled.\n"
-                "4. The nightly vulnerability scan generated an informational message for a test subnet that is intentionally internet-exposed.\n"
-                "5. Mail gateway logs show a wave of messages with malicious attachment hashes already blocked at delivery.\n"
-                "6. Defender reports a signed but known-bad ransomware loader dropped into the temp directory."
-            ),
-            role="You are a SOC triage analyst standardizing alert handling.",
-            context="The triage categories are used for queue routing, so each label should map cleanly to the dominant issue.",
+            task_title="Classify whether a sentence contains a specific property with data",
+            task_description="Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+            naive_request="Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+            task_material="Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+            role="You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+            context="This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
             instructions=(
-                "Assign exactly one category to each alert.",
-                "Explain the label in one short sentence.",
-                "Prefer the category that best reflects the operational response path.",
-                "Do not invent extra categories.",
+                "Check if the sentence mentions the specified property.",
+                "Check if the sentence contains a numeric value with units for that property.",
+                "State whether the sentence is relevant (Yes) or not (No).",
+                "Briefly explain why.",
             ),
-            technique="Use criteria-based categorization: identify the dominant incident type and choose the closest operational bucket.",
-            output="Return a table with Alert Number, Category, and Justification.",
-            reference_notes="Expected dominant labels: 1 Phishing, 2 Malware, 3 Misconfiguration, 4 Benign, 5 Phishing, 6 Malware.",
-            max_output_tokens=900,
+            technique="Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+            output="Return Yes or No followed by a brief justification.",
+            reference_notes="Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+            source_paper_id="18",
+            source_pattern_id="18-0-0",
+            source_paper_title="Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+            source_pattern_name="Initial relevancy prompt",
+            max_output_tokens=300,
         ),
         PatternDefinition(
-            key="in_refactoring_http_service",
+            key="in_refactoring_template_filling",
             logic="In",
             subcategory="Refactoring",
-            task_title="Refactor mixed business and transport logic",
-            task_description="Refactor the code so that business logic is separated from the HTTP client dependency.",
-            naive_request="Refactor this code so it is cleaner.",
-            task_material=(
-                "```python\n"
-                "import requests\n\n"
-                "class BusinessLogic:\n"
-                "    def get(self, url):\n"
-                "        return requests.get(url)\n\n"
-                "    def post(self, url, data):\n"
-                "        return requests.post(url, data=data)\n\n"
-                "    def fetch_data(self, url):\n"
-                "        response = self.get(url)\n"
-                "        return response.json()\n\n"
-                "    def send_data(self, url, data):\n"
-                "        response = self.post(url, data)\n"
-                "        return response.status_code\n"
-                "```"
-            ),
-            role="You are a software architect focused on maintainable Python design.",
-            context="The team wants to make the business logic testable and replaceable without locking itself to a specific HTTP library.",
+            task_title="Fill placeholders in a provided template",
+            task_description="Given a template with marked placeholders, fill each placeholder while preserving the template formatting.",
+            naive_request="I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting and overall template that I provide at https://myapi.com/NAME/profile/JOB",
+            task_material="Template: https://myapi.com/NAME/profile/JOB\nPlaceholder NAME: a realistic full name\nPlaceholder JOB: a realistic job title",
+            role="You are a template-filling assistant who populates marked placeholders while preserving all surrounding formatting.",
+            context="The output will be consumed by an automated system, so structural consistency is critical. Only replace the explicit placeholders.",
             instructions=(
-                "Separate the business logic from the third-party HTTP dependency.",
-                "Introduce a clear abstraction boundary.",
-                "Keep the example concise but runnable in principle.",
-                "Explain the new structure briefly after the code.",
+                "Identify all placeholders (text in ALL CAPS) in the template.",
+                "Replace each placeholder with appropriate content.",
+                "Preserve all non-placeholder text and formatting exactly.",
+                "If a placeholder cannot be filled, flag it rather than guessing.",
             ),
-            technique="Use interface extraction and dependency inversion to decouple the service logic from the transport implementation.",
-            output="Return the refactored Python code followed by a brief explanation of the new design.",
-            reference_notes="A strong answer introduces an adapter or client abstraction rather than leaving requests calls inside the business class.",
+            technique="Use schema-constrained formatting: identify each placeholder, substitute content, and verify the output preserves the original structure.",
+            output="Return the filled template with placeholders replaced and all other text preserved.",
+            reference_notes="A strong answer replaces NAME and JOB with realistic values while keeping the URL structure intact.",
+            source_paper_id="0",
+            source_pattern_id="0-1-4",
+            source_paper_title="A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+            source_pattern_name="Template",
+            max_output_tokens=300,
+        ),
+        # ── OUT LOGIC (3 patterns) ────────────────────────────────────────
+        PatternDefinition(
+            key="out_output_customisation_knapsack_code",
+            logic="Out",
+            subcategory="Output Customisation",
+            task_title="Generate Python code to solve a knapsack problem",
+            task_description="Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+            naive_request="Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+            task_material="Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+            role="You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+            context="The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+            instructions=(
+                "Implement the 0/1 knapsack algorithm in Python.",
+                "Use the provided items and maximum weight capacity.",
+                "Print the selected items with their values and weights.",
+                "Print the total value and total weight of the solution.",
+            ),
+            technique="Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+            output="Return executable Python code with clear output showing selected items and totals.",
+            reference_notes="Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+            source_paper_id="50",
+            source_pattern_id="50-1-1",
+            source_paper_title="Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+            source_pattern_name="Code Generation for Optimization Problem",
             max_output_tokens=1200,
         ),
         PatternDefinition(
-            key="out_output_customisation_incident_json",
-            logic="Out",
-            subcategory="Output Customisation",
-            task_title="Format incident facts as JSON",
-            task_description="Transform the supplied incident facts into a constrained JSON object.",
-            naive_request="Turn these incident facts into JSON.",
-            task_material=(
-                "Incident facts:\n"
-                "- Incident ID: IR-2026-041\n"
-                "- Severity: High\n"
-                "- Initial vector: credential phishing\n"
-                "- Affected assets: finance-share, dc-02\n"
-                "- Confirmed actions: malicious inbox rules, suspicious SMB transfer\n"
-                "- Current status: contained\n"
-                "- Next owner: incident-response\n"
-                "- Evidence gaps: exact exfiltrated files unknown"
-            ),
-            role="You are an operations analyst normalizing incident data for downstream tooling.",
-            context="The JSON will be consumed by another service, so structural consistency matters more than prose quality.",
-            instructions=(
-                "Represent the incident as valid JSON.",
-                "Use the keys incident_id, severity, initial_vector, affected_assets, confirmed_actions, current_status, next_owner, and evidence_gaps.",
-                "Render arrays where multiple values are present.",
-                "Do not add fields that were not requested.",
-            ),
-            technique="Use schema-constrained formatting and preserve source facts without embellishment.",
-            output="Return only valid JSON with the requested keys.",
-            reference_notes="The answer should be valid JSON and should not wrap the object in Markdown or add commentary.",
-            max_output_tokens=500,
-        ),
-        PatternDefinition(
-            key="out_decomposed_prompting_migration_plan",
+            key="out_decomposed_prompting_letter_concat",
             logic="Out",
             subcategory="Decomposed Prompting",
-            task_title="Break down a migration task",
-            task_description="Break down the cloud migration problem into a practical sequence of smaller work items.",
-            naive_request="Break down this migration task into steps.",
-            task_material=(
-                "Task: Migrate a Flask monolith that currently runs on a single VM to Azure App Service with Azure Database for PostgreSQL, "
-                "GitHub Actions deployment automation, and managed identity for secrets access. The team has two engineers and four weeks."
-            ),
-            role="You are a delivery-focused cloud migration planner.",
-            context="The audience is a small engineering team that needs a plan they can execute, review, and track.",
+            task_title="Decompose a string manipulation task into sub-steps",
+            task_description="Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+            naive_request='Concatenate the first letter of every word in "Jack Ryan" using spaces.',
+            task_material="",
+            role="You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+            context="This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
             instructions=(
-                "Decompose the work into a sequence of smaller tasks.",
-                "Group tasks into phases with clear dependencies.",
-                "Call out the riskiest work items and validation checkpoints.",
-                "Keep the plan realistic for a two-engineer team over four weeks.",
+                "Split the input into individual words.",
+                "Extract the first letter of each word.",
+                "Concatenate the extracted letters using spaces.",
+                "Present each step as a numbered sub-question with its result.",
             ),
-            technique="Use decomposition by phase, dependency, and validation checkpoint.",
-            output="Return a phased migration plan with numbered tasks and a short risk section.",
-            reference_notes="A strong answer should not present the migration as a single flat checklist. It should stage foundation, app changes, deployment, and validation.",
-            max_output_tokens=1000,
+            technique="Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+            output="Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+            reference_notes='Correct decomposition: split into ["Jack", "Ryan"], extract first letters ["J", "R"], merge with spaces to get "J R".',
+            source_paper_id="6",
+            source_pattern_id="6-0-0",
+            source_paper_title="Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+            source_pattern_name="Decomposed Prompt",
+            max_output_tokens=500,
         ),
         PatternDefinition(
-            key="out_context_control_privacy_review",
+            key="out_context_control_explicit_constraints",
             logic="Out",
             subcategory="Context Control",
-            task_title="Analyze only privacy risks",
-            task_description="Analyze the supplied application design only from the perspective of privacy risk.",
-            naive_request="Review this application design and tell me the risks.",
-            task_material=(
-                "Application design summary:\n"
-                "A mobile wellness app collects mood journal entries, approximate location, wearable heart-rate data, and optional voice notes. "
-                "The company stores raw data for five years to support product analytics and model training. Data is shared with a third-party transcription service and a marketing analytics vendor."
-            ),
-            role="You are a privacy engineering reviewer.",
-            context="The requester only wants privacy implications. Security, performance, UX, and growth considerations are out of scope unless they directly change privacy exposure.",
+            task_title="Summarise a topic within explicit constraints",
+            task_description="Summarise the main points of photosynthesis in exactly three sentences.",
+            naive_request="Summarize the main points of photosynthesis in three sentences.",
+            task_material="",
+            role="You are a science communicator who produces constrained, accurate summaries.",
+            context="The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
             instructions=(
-                "Assess the design only for privacy risks.",
-                "Focus on data minimization, retention, third-party sharing, and user consent.",
-                "Explicitly avoid unrelated concerns such as performance or feature velocity.",
-                "Suggest the most important privacy mitigations.",
+                "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+                "Use exactly three sentences — no more, no fewer.",
+                "Ensure scientific accuracy in all statements.",
+                "Keep the language accessible to a general audience.",
             ),
-            technique="Use scoped analysis with strict boundary control so the answer stays inside the requested domain.",
-            output="Return a privacy-only review with sections Risks and Recommended Mitigations.",
-            reference_notes="Answers that drift into general app security or product strategy should be scored lower on task completeness and formatting discipline.",
-            max_output_tokens=900,
+            technique="Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+            output="Return exactly three sentences summarising photosynthesis.",
+            reference_notes="A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs — all in exactly three sentences.",
+            source_paper_id="46",
+            source_pattern_id="46-0-1",
+            source_paper_title="Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+            source_pattern_name="Using explicit constraints",
+            max_output_tokens=400,
         ),
+        # ── OVER LOGIC (3 patterns) ───────────────────────────────────────
         PatternDefinition(
-            key="over_summarisation_policy_update",
+            key="over_summarisation_chain_of_density",
             logic="Over",
             subcategory="Summarisation",
-            task_title="Summarize a security policy update",
-            task_description="Summarize the supplied policy text for an executive audience.",
-            naive_request="Summarize this policy update for executives.",
-            task_material=(
-                "Policy update text:\n"
-                "Beginning in Q3, all privileged administrative actions must be performed through managed workstations enrolled in endpoint compliance monitoring. "
-                "Break-glass accounts remain permitted, but their passwords must be stored in the enterprise vault, checked every 30 days, and tested quarterly in a monitored exercise. "
-                "Remote privileged access from unmanaged personal devices is prohibited. Logging requirements are expanding to include session recording for domain administration, cloud control plane changes, and production database access. "
-                "Business units that cannot meet the standard by the deadline must submit a compensating control plan signed by both the business owner and the CISO delegate. "
-                "The intent of the update is to reduce credential theft impact, improve auditability, and make exception handling visible instead of informal."
-            ),
-            role="You are an executive communications analyst.",
-            context="Executives want the essence of the change, the operational implications, and the reason it matters. They do not want the full policy wording.",
+            task_title="Generate entity-dense iterative summaries",
+            task_description="Generate five increasingly entity-dense summaries of the provided article, each the same length, progressively adding missing salient entities.",
+            naive_request='Article: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.\n\nYou will generate increasingly concise, entity-dense summaries of the above Article.\nRepeat the following 2 steps 5 times.\nStep 1. Identify 1-3 informative Entities from the Article which are missing from the previously generated summary.\nStep 2. Write a new, denser summary of identical length which covers every entity and detail from the previous summary plus the Missing Entities.\nA Missing Entity is:\n- Relevant to the main story,\n- Specific yet concise (5 words or fewer),\n- Novel (not in the previous summary),\n- Faithful (present in the Article),\n- Anywhere (can be located anywhere in the Article).\nReturn a JSON list of 5 dictionaries with keys "Missing_Entities" and "Denser_Summary".',
+            task_material="Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.",
+            role="You are a summarisation specialist who produces iteratively denser summaries that preserve entities and key details.",
+            context="The output will be used to evaluate how well models handle progressive entity-dense summarisation. Each summary must be the same length as the previous one but contain more salient entities.",
             instructions=(
-                "Identify the core change in plain language.",
-                "Highlight the most important operational implications.",
-                "Explain why the policy change matters.",
-                "Keep the summary concise and executive-friendly.",
+                "Start with a broad entity-sparse summary of the article.",
+                "Identify 1-3 informative missing entities from the article for each iteration.",
+                "Rewrite the summary at the same length, incorporating the new entities by compressing language.",
+                "Never drop entities from previous summaries. Repeat for 5 iterations total.",
             ),
-            technique="Use hierarchical summarization: capture the central message first, then distill only the most decision-relevant details.",
-            output="Return an executive summary in 3 to 5 bullet points.",
-            reference_notes="Strong answers should mention managed workstations, break-glass controls, logging expansion, and formal exception handling without reproducing the full source text.",
-            max_output_tokens=700,
+            technique="Use chain-of-density summarisation: iteratively compress language to add entities without increasing length.",
+            output='Return a JSON list of 5 dictionaries, each with keys "Missing_Entities" and "Denser_Summary".',
+            reference_notes="Key entities to incorporate: AWS/Azure/GCP, Flexera report, 65 percent, data sovereignty, vendor lock-in, SLAs.",
+            source_paper_id="38",
+            source_pattern_id="38-0-0",
+            source_paper_title="From Sparse to Dense: GPT-4 Summarization with Chain of Density Prompting",
+            source_pattern_name="Initial Entity-Sparse Summary",
+            max_output_tokens=1400,
         ),
         PatternDefinition(
-            key="over_synthesis_multi_source_recommendation",
+            key="over_synthesis_claim_extraction",
             logic="Over",
             subcategory="Synthesis",
-            task_title="Synthesize three source excerpts",
-            task_description="Synthesize the supplied source excerpts into one coherent recommendation.",
-            naive_request="Read these excerpts and synthesize them into a recommendation.",
-            task_material=(
-                "Source A: The phishing simulation program improved reporting rates from 11% to 36% over two quarters, but repeat clickers remained concentrated in three business units.\n\n"
-                "Source B: SOC analysts report that most real email incidents still arrive through third-party file sharing notifications and business collaboration platforms rather than traditional email attachments.\n\n"
-                "Source C: Budget for security awareness is flat next quarter, so any new intervention should target the highest-risk groups and channels rather than broad training refresh for the whole company."
-            ),
-            role="You are a security program analyst preparing a recommendation for leadership.",
-            context="Leadership wants one actionable recommendation that integrates the data, the operational reality, and the budget constraint.",
+            task_title="Extract atomic claims from a book summary",
+            task_description="Break a summary into self-contained atomic claims that can each be independently verified against the source text.",
+            naive_request='You are trying to verify the faithfulness of statements made in a given summary of a book against the actual text of the book. To do so, you first need to break the summary into a set of "atomic claims", each of which will then be passed to a human who will verify its faithfulness. Each claim should be self-contained with all the necessary context. Each claim should contain no more than two sentences. Each individual claim should be on its own line prefixed by a "- ".\n\nSummary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club\'s historic waterfront property to a development company. Her investigation reveals that the club\'s treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.',
+            task_material='Summary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club\'s historic waterfront property to a development company. Her investigation reveals that the club\'s treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.',
+            role="You are a claim extraction specialist who decomposes summaries into independently verifiable atomic statements.",
+            context="Each extracted claim will be passed to a human fact-checker who will verify it against the source text. Claims must be self-contained so the checker does not need additional context.",
             instructions=(
-                "Identify the main signal from each source.",
-                "Combine the sources into one coherent interpretation.",
-                "Recommend a practical next step that fits the budget constraint.",
-                "Explain why the recommendation follows from the combined evidence.",
+                "Break the summary into atomic, self-contained claims.",
+                "Each claim must include sufficient context to be verified independently.",
+                "Limit each claim to no more than two sentences.",
+                "Prefix each claim with a dash and put each on its own line.",
             ),
-            technique="Use cross-source synthesis: extract the key signal from each source and combine them into one decision-oriented conclusion.",
-            output="Return a short recommendation memo with sections Integrated Finding and Recommended Action.",
-            reference_notes="A strong synthesis should recommend targeted interventions for high-risk units and modern collaboration-based phishing channels rather than broad untargeted training.",
-            max_output_tokens=850,
+            technique="Use structured decomposition: parse the summary sentence by sentence and extract each discrete factual assertion as a standalone claim.",
+            output="Return a list of atomic claims, each prefixed with a dash on its own line.",
+            reference_notes="Should extract claims about: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership, vote to sell property, development company, Carlos Mendez as treasurer, his motive.",
+            source_paper_id="63",
+            source_pattern_id="63-0-0",
+            source_paper_title="FABLES: Evaluating faithfulness and content selection in book-length summarization",
+            source_pattern_name="Claim Extraction",
+            max_output_tokens=800,
         ),
         PatternDefinition(
-            key="over_dense_summarisation_incident_digest",
+            key="over_summarisation_text_summary",
             logic="Over",
             subcategory="Summarisation",
-            task_title="Create a dense incident digest",
-            task_description="Condense the incident narrative into a dense summary that preserves named entities, key events, and quantitative details.",
-            naive_request="Write a dense summary of this incident.",
-            task_material=(
-                "Incident narrative:\n"
-                "On 14 March 2026, Fabrikam's incident response team investigated unauthorized activity linked to a compromised vendor account used by Northwind Logistics. "
-                "The first confirmed signal appeared at 02:14 UTC when Microsoft Defender for Endpoint flagged an encoded PowerShell child process on workstation FIN-WS-17. "
-                "By 02:26 UTC, the attacker had authenticated to the finance file share using the vendor account and copied 184 files totaling 1.8 GB. "
-                "At 02:31 UTC, a newly created inbox rule redirected payment confirmation emails for three finance users. The team disabled the vendor account at 02:36 UTC, isolated FIN-WS-17 at 02:41 UTC, and blocked the attacker IP range at 02:48 UTC. "
-                "Later review showed that 27 of the copied files contained sensitive invoice data, while no evidence showed destructive malware or domain-wide privilege escalation."
-            ),
-            role="You are a crisis communications analyst producing a high-density operations digest.",
-            context="The digest is for incident leaders who want maximum information value in minimal space without losing crucial named entities or quantitative facts.",
+            task_title="Summarise a research paper on climate change",
+            task_description="Produce a concise, neutral summary of the provided text highlighting main arguments, key findings, and conclusions.",
+            naive_request="Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.",
+            task_material="Rising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+            role="You are an executive communications analyst who produces neutral, concise research summaries.",
+            context="The summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.",
             instructions=(
-                "Preserve the named organizations, assets, timestamps, and quantitative details.",
-                "Condense the narrative aggressively without losing material facts.",
-                "Do not add interpretation beyond the provided facts.",
-                "Keep the final digest under 120 words.",
+                "Identify the main arguments presented in the text.",
+                "Highlight the key quantitative findings.",
+                "Note the conclusions and any implications or limitations.",
+                "Keep the summary concise and maintain a neutral tone.",
             ),
-            technique="Use dense summarization: compress phrasing while preserving entities, chronology, and numerical details.",
-            output="Return one paragraph under 120 words.",
-            reference_notes="A strong answer should retain Fabrikam, Northwind Logistics, FIN-WS-17, core timestamps, file counts, and the lack of destructive malware or privilege escalation.",
-            max_output_tokens=500,
+            technique="Use hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.",
+            output="Return a concise summary of 3-5 sentences covering arguments, findings, and conclusions.",
+            reference_notes="Key findings to include: 40% increase in bleaching, 70km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, $10B annual fisheries impact.",
+            source_paper_id="71",
+            source_pattern_id="71-25-0",
+            source_paper_title="ChatGPT for higher education and professional development: A guide to conversational AI",
+            source_pattern_name="Text Summarization",
+            max_output_tokens=700,
         ),
     ]
 
