@@ -15,6 +15,7 @@ This repository contains a collection of Python scripts and tools designed for v
 - [License](#license)
 - [Security Policy](#security-policy)
 - [Responsible Use Guidelines](#responsible-use-guidelines)
+- [Chapter 6 Evaluation (CLI)](#chapter-6-evaluation-cli)
 - [Prompt Pattern Dictionary (Web App)](#prompt-pattern-dictionary-web-app)
   - [Orientation Architecture](#orientation-architecture)
   - [Readability & Theming Controls](#readability--theming-controls)
@@ -29,16 +30,26 @@ git clone https://github.com/yourusername/your-repo.git
 cd your-repo
 ```
 
-2. Create and activate a virtual environment:
+2. Create the environment with `uv` and activate the generated `.venv`:
+
 ```sh
-python -m venv .venv
-source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
+uv venv --python 3.12
+.venv\Scripts\Activate.ps1  # On Windows PowerShell
+source .venv/bin/activate    # On macOS/Linux
 ```
 
-3. Install the required dependencies:
+3. Sync the project dependencies from `pyproject.toml` and `uv.lock`:
+
 ```sh
-pip install -r requirements.txt
+uv sync
 ```
+
+Notes:
+
+- The root `pyproject.toml` is now the primary dependency source for the Python workspace.
+- `.venv` is still the environment directory; `uv` just manages it faster and more reproducibly.
+- `requirements.txt` and `requirements_updated.txt` are legacy snapshots from the previous workflow and should not be the primary install target for new setup.
+
 
 4. Set up environment variables by creating a `.env` file in the root directory and adding the necessary keys:
 
@@ -149,6 +160,51 @@ A standalone page at `/responsible-use` in the web app and the Orientation "Acce
 - Safeguards: provenance badges, planned caution indicators, issue templates, minimal telemetry (opt-in, excludes prompt content).
 
 Report ethical concerns with the issue label `responsible-use-review`; corrections to AI-assisted fields with `ai-assist-correction`.
+
+---
+
+## Chapter 6 Evaluation (CLI)
+
+The Chapter 6 thesis evaluation workflow now lives under `evaluation/`.
+
+Primary CLI:
+
+```powershell
+python .\evaluation\chapter6_evaluation.py doctor
+python .\evaluation\chapter6_evaluation.py run-quantitative
+python .\evaluation\chapter6_evaluation.py run-cybersecurity
+python .\evaluation\chapter6_evaluation.py summarize
+python .\evaluation\chapter6_evaluation.py run-all
+```
+
+What it does:
+
+- Runs the quantitative LLM-as-Judge workflow for the 18 Chapter 6 prompt patterns.
+- Runs the 3 qualitative cybersecurity case studies.
+- Writes raw artifacts under `evaluation/results/` and aggregate outputs under `evaluation/summary/`.
+
+Default model setup in the CLI:
+
+- Quantitative evaluation models: `gpt-4o`, `gpt-5`, `o4-mini`, `deepseek-r1-0528`
+- Judge model: `gpt-5.4-pro`
+- Qualitative cybersecurity model: `gpt-5`
+
+Auth behavior:
+
+- Default is `--auth-mode auto`, which prefers an API key when one is present in `.env`, otherwise it falls back to Microsoft Entra ID via `DefaultAzureCredential`.
+- GPT-family requests use the Responses API.
+- The DeepSeek deployment uses chat completions by default.
+
+Useful options:
+
+```powershell
+python .\evaluation\chapter6_evaluation.py doctor --probe
+python .\evaluation\chapter6_evaluation.py run-quantitative --models gpt-4o,gpt-5,o4-mini,deepseek-r1-0528
+python .\evaluation\chapter6_evaluation.py run-cybersecurity --cyber-model gpt-5
+python .\evaluation\chapter6_evaluation.py run-all --auth-mode entra
+```
+
+Generated artifacts inside `evaluation/` are ignored by a local `evaluation/.gitignore` so the raw results do not pollute the main repo status by default.
 
 ---
 

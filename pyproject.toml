@@ -1,0 +1,35 @@
+[project]
+name = "promptengineering"
+version = "0.1.0"
+description = "Prompt engineering research scripts, evaluation tooling, and supporting utilities."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+	"arxiv",
+	"autogen",
+	"autogen-agentchat",
+	"autogen-core",
+	"autogen-ext",
+	"azure-ai-inference",
+	"azure-core",
+	"azure-identity",
+	"chromadb",
+	"langchain-text-splitters",
+	"numpy",
+	"openai",
+	"pandas",
+	"pydot",
+	"pymupdf",
+	"python-dotenv",
+	"requests",
+	"scikit-learn",
+]
+
+[dependency-groups]
+dev = [
+	"pytest",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+package = false

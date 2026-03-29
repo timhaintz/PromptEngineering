@@ -1,6 +1,7 @@
 .env
 .cache/
 .vscode/
+.venv/
 categorisation/
 extractedPromptPatternsFromPDF/
 __pycache__/
