@@ -1,0 +1,54 @@
+{
+  "timestamp_utc": "2026-03-31T06:04:12.538589+00:00",
+  "pattern_key": "agent_across_comparison_model_responses",
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.957551,
+        "run_1_run_3": 0.970494,
+        "run_2_run_3": 0.968617
+      },
+      "mean_similarity": 0.965554,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "Yes. All three outputs serve the same practical function and deliver the same substantive result: they compare Responses A and B using similar evaluation criteria, judge both as acceptable, and consistently conclude that Response A is stronger overall because it is more detailed, comprehensive, and useful, while Response B is more casual and engaging. The differences are mostly in phrasing, organization, and small added details rather than in outcome or user-facing recommendation.",
+        "material_differences": [
+          "Run 2 adds a distinct 'Accuracy and Relevance' section and includes extra example museums/attractions (e.g., Istanbul Modern, Pera Museum, Basilica Cistern, Dolmabahce Palace).",
+          "Run 3 adds explicit numeric ratings ('8/10' vs '6/10'), which the other runs do not.",
+          "Run 2 contains a potentially outdated/factually questionable statement describing Hagia Sophia as 'now a museum,' whereas the other runs avoid that phrasing."
+        ]
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.95503,
+        "run_1_run_3": 0.971795,
+        "run_2_run_3": 0.959809
+      },
+      "mean_similarity": 0.962211,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "Yes. All three runs deliver the same functional result: a structured comparison of Response A vs. Response B across similar evaluation dimensions, with the same overall conclusion that Response A is better because it provides more depth, breadth, and practical value. The differences are mostly phrasing and slight shifts in emphasis, not changes to the user-facing recommendation or decision.",
+        "material_differences": [
+          "Run 3 adds a mild accuracy caveat that Response B blurs museums and galleries, whereas Runs 1 and 2 treat that point as broadly accurate.",
+          "Run 3 gives Response B slightly more credit on actionability because of the Beyoglu location hint; Run 1 rates its actionable value lower, and Run 2 emphasizes vagueness.",
+          "The stated weaknesses of Response A vary slightly across runs (e.g., lack of modern options/logistics vs. lack of warmth), but these do not change the verdict."
+        ]
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.978913,
+        "run_1_run_3": 0.979585,
+        "run_2_run_3": 0.984877
+      },
+      "mean_similarity": 0.981125,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "Yes. All three runs deliver the same substantive assessment: they compare the same dimensions, characterize Response A as more detailed/comprehensive/accurate, characterize Response B as friendlier but vaguer and less useful for planning, and reach the same final verdict that Response A is stronger overall. The differences are limited to wording, emphasis, and a few small framing nuances (especially around Hagia Sophia\u2019s current status and whether Beyoglu makes B slightly more actionable), but none of these change the ranking, recommendation, or practical takeaway.",
+        "material_differences": []
+      }
+    }
+  }
+}

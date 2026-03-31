@@ -1,0 +1,26 @@
+{
+  "timestamp_utc": "2026-03-31T05:41:43.529106+00:00",
+  "pattern_key": "agent_across_comparison_model_responses",
+  "logic": "Across",
+  "subcategory": "Comparison",
+  "source_paper_id": "56",
+  "source_pattern_id": "56-4-0",
+  "source_paper_title": "Prompt Stealing Attacks Against Large Language Models",
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "chat.completions (system+user)",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "system_prompt": "You are a model comparison analyst who evaluates AI responses side-by-side.\n\nYou receive two responses to the same question from different AI models. Your evaluation must be objective, evidence-based, and practical.\n\n1. Evaluate both responses on clarity, accuracy, coverage breadth, and actionable guidance.\n2. Note specific strengths and weaknesses for each response.\n3. Select the stronger response and justify your choice.\n4. Keep the comparison concise and decision-ready.\n\nUse dimension-by-dimension comparison before drawing a final verdict.\n\nReturn a structured comparison with a clear verdict and justification.",
+  "user_message": "Question: Are there any good museums in Istanbul for me to visit?\n\nResponse A: Istanbul has many world-class museums. The Hagia Sophia is a must-see architectural wonder that served as a cathedral and mosque. The Topkapi Palace Museum houses Ottoman artifacts and Islamic relics. The Istanbul Archaeology Museums contain over one million objects spanning multiple civilizations.\n\nResponse B: Yes! Check out the Hagia Sophia, it's amazing. The Topkapi Palace is cool too. There are also some smaller galleries around Beyoglu if you like contemporary art.",
+  "output": "## Clarity\n- **Response A:** Clear, specific, and informative; each museum is named with a brief, relevant description.\n- **Response B:** Clear and friendly, but vague (\u201ccool,\u201d \u201csmaller galleries\u201d) and less informative.\n\n## Accuracy\n- **Response A:** Mostly accurate, but slightly dated/ambiguous: **Hagia Sophia is not a museum** in its current status (it\u2019s a mosque with visitor access). The rest is broadly accurate (Topkap\u0131 as a museum complex; Archaeology Museums\u2019 scope is plausible).\n- **Response B:** Also has the **Hagia Sophia \u201cmuseum\u201d implication** by recommending it as a museum-like stop; otherwise no clear factual claims that can be checked. \u201cSmaller galleries around Beyo\u011flu\u201d is true but nonspecific.\n\n## Coverage breadth\n- **Response A:** Better breadth: includes three major, top-tier institutions (historic, palace, archaeology).\n- **Response B:** Narrower: two headline sights plus a vague pointer to Beyo\u011flu contemporary art without naming any places.\n\n## Actionable guidance\n- **Response A:** More actionable because it identifies specific destinations and what you\u2019ll see there.\n- **Response B:** Least actionable: no concrete museum/gallery names beyond the big two, no guidance on what\u2019s distinctive.\n\n## Strengths & weaknesses\n- **Response A Strengths:** Specific recommendations; helpful context; good variety.  \n  **Response A Weaknesses:** Hagia Sophia classification as a museum is misleading given current status.\n- **Response B Strengths:** Conversational, quick suggestions; nods to contemporary art.  \n  **Response B Weaknesses:** Too vague to plan with; lacks named museums/galleries; minimal detail.\n\n## Verdict\n**Response A is stronger** overall due to its specificity, breadth, and practical descriptions that help a visitor choose where to go. Its main issue is the outdated framing of Hagia Sophia as a museum, but even with that caveat it provides more useful, decision-ready guidance than Response B.",
+  "reasoning_content": null,
+  "usage": {
+    "input_tokens": 231,
+    "output_tokens": 417,
+    "total_tokens": 648
+  }
+}

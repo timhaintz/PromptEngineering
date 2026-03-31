@@ -1,0 +1,57 @@
+{
+  "timestamp_utc": "2026-03-31T05:51:03.766539+00:00",
+  "pattern_key": "agent_across_comparison_model_responses",
+  "evaluated_model_key": "gpt-5",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.882429,
+        "run_1_run_3": 0.875226,
+        "run_2_run_3": 0.941205
+      },
+      "mean_similarity": 0.89962,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs make the same substantive evaluation: Response A is better because it gives specific, well-known museum recommendations with useful context, while Response B is comparatively vague and less actionable. The differences are minor wording/phrasing variations and do not change the preference, reasoning, or practical takeaway.",
+        "material_differences": [
+          "Run 1 includes an extra caveat that Hagia Sophia is primarily a historic monument/current mosque rather than a conventional museum."
+        ]
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.973984,
+        "run_1_run_3": 0.978902,
+        "run_2_run_3": 0.969354
+      },
+      "mean_similarity": 0.97408,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same substantive evaluation: they compare Response A vs. Response B across the same core dimensions (clarity, accuracy, breadth, actionability), identify the same main issue (Hagia Sophia\u2019s museum-status framing), criticize Response B for vagueness/lack of specificity, and reach the same conclusion that Response A is stronger overall. The differences are minor elaborations in wording and examples, not changes in judgment or practical takeaway.",
+        "material_differences": [
+          "Run 2 adds one extra possible accuracy concern: the Archaeology Museums 'over one million objects' claim may be uncertain/overstated.",
+          "Run 3 is slightly stronger/more explicit in saying Hagia Sophia is 'not a museum' currently, whereas Run 1 phrases this more softly ('not a museum in the typical sense today').",
+          "Run 3 gives example omitted contemporary museums (Istanbul Modern, Pera Museum) when criticizing Response B; Runs 1 and 2 do not.",
+          "Section formatting varies slightly (e.g., numbered headings in Run 2), but this does not change the substance."
+        ]
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.966348,
+        "run_1_run_3": 0.973844,
+        "run_2_run_3": 0.970373
+      },
+      "mean_similarity": 0.970188,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same practical evaluation: they use nearly the same comparison structure, judge Response A as clearer/more specific/more actionable, judge Response B as vaguer and less useful, and reach the same final verdict that Response A is stronger overall. The wording varies and the factual caveats differ slightly, but the user-facing outcome and recommendation are unchanged.",
+        "material_differences": [
+          "Run 1 treats Hagia Sophia as a minor classification caveat; Run 3 states more definitively that it is not currently a museum.",
+          "Run 2 adds an extra factual concern about the claimed size of the Istanbul Archaeology Museums collection ('over one million objects'), which the other runs do not emphasize.",
+          "Run 3 says the Archaeology Museums' scope is broadly/plausibly accurate, whereas Run 2 questions a specific quantitative detail."
+        ]
+      }
+    }
+  }
+}

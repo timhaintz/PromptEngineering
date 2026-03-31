@@ -1,0 +1,62 @@
+{
+  "timestamp_utc": "2026-03-31T05:45:27.350061+00:00",
+  "pattern_key": "agent_across_comparison_model_responses",
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly concludes that Response A is stronger, accurately notes A\u2019s greater specificity and planning value, and captures that B is friendlier but vaguer; the Hagia Sophia caveat is also valid."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Clear and readable with bullets and a direct verdict, but less systematically structured than a dimension-by-dimension comparison."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Does not invent museums or unsupported details; the extra note about Hagia Sophia is grounded and relevant."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Compares both responses and gives reasons, but is brief and less explicit on clarity, depth, and actionability than the reference standard."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Strongly aligned with the reference: it compares both responses on clarity, breadth/depth, and actionability, and correctly identifies A as more specific while B is more casual/vague."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Highly consistent structure with labeled sections, parallel bulleting, and a clear final verdict."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Stays grounded in the compared responses and adds only reasonable factual caveats, with no obvious invented claims."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully addresses the task by evaluating both responses across multiple relevant dimensions, summarizing strengths/weaknesses, and giving a clear judgment."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately compares the two responses on the key dimensions and explicitly notes A\u2019s specificity and B\u2019s friendly/conversational tone, matching the reference well."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-organized with consistent section headers, balanced treatment of both responses, and a clear verdict."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Avoids made-up details and remains tied to the content being compared, while using a reasonable Hagia Sophia caveat."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Comprehensively compares both responses, includes strengths and weaknesses, and covers the clarity, depth/breadth, and actionability expected by the reference."
+      }
+    }
+  }
+}

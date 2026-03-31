@@ -1,0 +1,26 @@
+{
+  "timestamp_utc": "2026-03-31T05:31:41.676001+00:00",
+  "pattern_key": "agent_across_comparison_model_responses",
+  "logic": "Across",
+  "subcategory": "Comparison",
+  "source_paper_id": "56",
+  "source_pattern_id": "56-4-0",
+  "source_paper_title": "Prompt Stealing Attacks Against Large Language Models",
+  "variant": "peil_labelled",
+  "run_index": 3,
+  "model_key": "gpt-4.1",
+  "model_deployment": "tjhvs-gpt-4.1-1m",
+  "api": "chat.completions (system+user)",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "system_prompt": "Role: You are a model comparison analyst who evaluates AI responses side-by-side.\n\nContext: You receive two responses to the same question from different AI models. Your evaluation must be objective, evidence-based, and practical.\n\nInstructions:\n1. Evaluate both responses on clarity, accuracy, coverage breadth, and actionable guidance.\n2. Note specific strengths and weaknesses for each response.\n3. Select the stronger response and justify your choice.\n4. Keep the comparison concise and decision-ready.\n\nTechniques: Use dimension-by-dimension comparison before drawing a final verdict.\n\nOutput: Return a structured comparison with a clear verdict and justification.",
+  "user_message": "Question: Are there any good museums in Istanbul for me to visit?\n\nResponse A: Istanbul has many world-class museums. The Hagia Sophia is a must-see architectural wonder that served as a cathedral and mosque. The Topkapi Palace Museum houses Ottoman artifacts and Islamic relics. The Istanbul Archaeology Museums contain over one million objects spanning multiple civilizations.\n\nResponse B: Yes! Check out the Hagia Sophia, it's amazing. The Topkapi Palace is cool too. There are also some smaller galleries around Beyoglu if you like contemporary art.",
+  "output": "**Dimension-by-Dimension Comparison:**\n\n**1. Clarity**\n- *Response A*: Clear, formal language. Each museum is described with its significance.\n- *Response B*: Informal and enthusiastic, but less precise. Uses casual language (\"cool,\" \"amazing\").\n\n**2. Accuracy**\n- *Response A*: Accurate descriptions of Hagia Sophia, Topkapi Palace, and Istanbul Archaeology Museums.\n- *Response B*: Accurate mentions of Hagia Sophia and Topkapi Palace, but lacks detail. Reference to \"smaller galleries around Beyoglu\" is correct but vague.\n\n**3. Coverage Breadth**\n- *Response A*: Covers three major museums, including the less obvious Istanbul Archaeology Museums, and provides context for each.\n- *Response B*: Mentions two main sites and alludes to contemporary art galleries, but without specifics.\n\n**4. Actionable Guidance**\n- *Response A*: Offers concrete suggestions with reasons to visit each museum.\n- *Response B*: Suggests places but lacks detail to help prioritize or understand their importance.\n\n**Strengths and Weaknesses:**\n\n- *Response A Strengths*: Informative, specific, and provides context for each recommendation.\n- *Response A Weaknesses*: Slightly formal; could mention contemporary art for broader appeal.\n- *Response B Strengths*: Friendly tone, mentions contemporary art galleries.\n- *Response B Weaknesses*: Lacks detail, specificity, and actionable information.\n\n**Verdict:**  \n**Response A is stronger.**\n\n**Justification:**  \nResponse A is clearer, more accurate, and provides broader and more actionable guidance. It gives specific reasons to visit each museum, helping the user make informed choices. While Response B is friendly and mentions contemporary art, it lacks the detail and specificity needed for practical decision-making.",
+  "reasoning_content": null,
+  "usage": {
+    "input_tokens": 243,
+    "output_tokens": 369,
+    "total_tokens": 612
+  }
+}

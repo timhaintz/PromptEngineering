@@ -1,0 +1,62 @@
+{
+  "timestamp_utc": "2026-03-31T05:36:19.205515+00:00",
+  "pattern_key": "agent_across_comparison_model_responses",
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It correctly captures the main contrast that Response A is more detailed and Response B is more conversational, but it does not explicitly assess clarity and actionability as the reference calls for."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The headings, bullets, and summary are clear and readable, though the structure is less systematic than a dimension-by-dimension comparison."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It stays close to observable differences in detail, breadth, and tone without adding major unsupported claims."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It compares both responses and gives a useful verdict, but coverage of the requested dimensions is partial, especially on actionability."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It aligns closely with the reference by comparing both responses on clarity, detail/depth, and actionability, while also noting that Response A is more specific and Response B more conversational."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The labeled sections, parallel bullet structure, strengths/weaknesses, and final verdict make the output highly consistent and easy to follow."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The comparison is mostly grounded in the stated differences, though the explicit claims about factual accuracy introduce a small amount of unverifiable judgment beyond the reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It evaluates both responses across multiple relevant dimensions and ends with a clear, justified overall verdict."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It closely matches the reference by addressing clarity, detail/depth, and actionability, and it clearly notes that Response A is more specific while Response B is more conversational."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The numbered sections, parallel phrasing, strengths/weaknesses split, and verdict create a very consistent presentation."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It remains largely grounded in the compared responses, but the added factual-accuracy judgments are slightly beyond what the reference requires."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully compares both responses on relevant dimensions and provides a well-supported conclusion about which is stronger."
+      }
+    }
+  }
+}

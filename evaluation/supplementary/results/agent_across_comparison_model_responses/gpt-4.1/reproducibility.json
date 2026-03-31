@@ -1,0 +1,46 @@
+{
+  "timestamp_utc": "2026-03-31T05:40:44.873151+00:00",
+  "pattern_key": "agent_across_comparison_model_responses",
+  "evaluated_model_key": "gpt-4.1",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.946171,
+        "run_1_run_3": 0.975357,
+        "run_2_run_3": 0.94837
+      },
+      "mean_similarity": 0.956633,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs convey the same substantive comparison and would lead a reader to the same conclusion: Response A is more detailed, formal, and focused on major historical museums, while Response B is more casual, less detailed, and adds a contemporary art/gallery angle in Beyoglu. The differences are limited to phrasing, formatting, and slight emphasis (e.g., Run 2 adds a 'Best for' section; Run 3 explicitly includes a 'Usefulness' bullet), but these do not change the practical meaning or recommendation.",
+        "material_differences": []
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.984782,
+        "run_1_run_3": 0.984609,
+        "run_2_run_3": 0.982386
+      },
+      "mean_similarity": 0.983925,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same substantive evaluation: they compare Response A and Response B across the same core dimensions (clarity, accuracy, coverage breadth, and actionable guidance), identify essentially the same strengths and weaknesses, and reach the same verdict that Response A is stronger because it is clearer, more specific, broader, and more useful for trip planning. The differences are only stylistic or phrasing-level (e.g., numbering, wording like 'formal' vs. 'well-structured,' or mentioning casual words such as 'cool'/'amazing'). These do not change the meaning, recommendation, or practical outcome.",
+        "material_differences": []
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.983716,
+        "run_1_run_3": 0.986013,
+        "run_2_run_3": 0.994846
+      },
+      "mean_similarity": 0.988192,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs make the same substantive evaluation: they compare the same four dimensions, assign the same relative strengths and weaknesses to Response A and Response B, and reach the same verdict that Response A is stronger because it is clearer, more accurate, broader in coverage, and more actionable. The differences are limited to wording, formatting, and slight paraphrases (e.g., 'trip planning' vs. 'museum planning,' or how weaknesses are phrased). These do not change the meaning, ranking, or practical takeaway.",
+        "material_differences": []
+      }
+    }
+  }
+}
