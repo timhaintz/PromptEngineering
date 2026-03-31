@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T19:36:37.709903+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0f3ec87ecc2b58d50069cacfb4d1708197971d15df335b9574",
+  "usage": {
+    "input_tokens": 927.0,
+    "output_tokens": 6214.0,
+    "total_tokens": 7141.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Mostly accurate: it explains light capture, carbon dioxide and water conversion into glucose, and oxygen release. Minor scientific imprecision appears in grouping 'some bacteria' with organisms using chlorophyll in chloroplasts."
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "The summary itself is organized into three numbered sentences, but the added introductory line makes compliance with the 'exactly three sentences' constraint imperfect."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It stays close to standard photosynthesis facts and does not add unsupported outputs or processes. The only slight issue is the overgeneralized chloroplast claim about bacteria."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes light energy, carbon dioxide and water as inputs, chloroplast/chlorophyll involvement, and glucose plus oxygen as outputs."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 3,
+        "justification": "It gets the main inputs and outputs broadly right, but it omits chloroplasts and adds 'water vapor' as a product, which is misleading in a core summary of photosynthesis."
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "It uses three numbered content sentences, yet the introductory line means the overall response does not cleanly satisfy an exact three-sentence requirement."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "Most details are grounded, but the added claim that photosynthesis 'also produces water vapor' is an unsupported extra detail for this task and weakens hallucination control."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It covers sunlight, carbon dioxide, water, sugar/glucose, and oxygen, but the chloroplast location called for in the reference is not explicitly stated."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurate and well-aligned with standard biology: it names sunlight, carbon dioxide, and water as inputs, places the process in chloroplasts with chlorophyll, and identifies glucose and oxygen as outputs."
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "The core answer is three numbered sentences, but the introductory line weakens strict adherence to the 'exactly three sentences' constraint."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not introduce unsupported claims; all stated details are standard parts of photosynthesis."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes every key element from the reference: light energy, carbon dioxide and water inputs, chloroplast-based conversion, and glucose plus oxygen outputs."
+      }
+    }
+  }
+}

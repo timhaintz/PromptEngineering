@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:21:47.970107+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 2,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a science communicator who produces constrained, accurate summaries.\n\nThe summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.\n\n1. Cover the key aspects of photosynthesis: inputs, process, and outputs.\n2. Use exactly three sentences \u2014 no more, no fewer.\n3. Ensure scientific accuracy in all statements.\n4. Keep the language accessible to a general audience.\n\nUse explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.\n\nReturn exactly three sentences summarising photosynthesis.",
+  "output": "Here is a three-sentence summary of photosynthesis:\n\n1.  **Inputs:** Photosynthesis requires sunlight, water absorbed by plant roots, and carbon dioxide from the air.\n2.  **Process:** Inside plant cells containing chlorophyll (primarily in leaves), sunlight energy powers a chemical reaction that splits water molecules and uses the hydrogen to build sugars.\n3.  **Outputs:** This process produces glucose (a sugar used by the plant for energy and growth) and releases oxygen gas as a byproduct into the atmosphere.",
+  "reasoning_content": "\nHmm, the user wants me to act as a science communicator and create a precise summary of photosynthesis. They've given me specific constraints: I need exactly three sentences, no more or less, and each must cover key aspects\u2014inputs, process, and outputs\u2014while being scientifically accurate and accessible to a general audience. I should plan this carefully to ensure completeness within the limit. First, I'll outline the three sentences mentally: one for inputs, one for the process, and one for outputs. That way, I can cover everything without exceeding the sentence count. \n\n The user is likely a student, educator, or curious learner who needs a concise yet thorough explanation. They emphasized accuracy and constraints, so they might be testing my ability to distill complex topics efficiently. Deeper down, they could be seeking clarity on how it fits into broader concepts like energy flow in ecosystems, but I'll stick to the explicit request. \n\n For the summary: Sentence 1 will describe inputs\u2014light, water, and carbon dioxide. Sentence 2 will explain the process\u2014using light to convert inputs into energy. Sentence 3 will cover outputs\u2014glucose and oxygen. I'll use simple language, avoiding jargon, to make it accessible. Finally, I'll double-check for scientific correctness to ensure I'm not oversimplifying or misrepresenting the biology. \n\n Now, crafting the response: I'll write exactly three sentences that flow naturally and meet all criteria.",
+  "response_id": "37b2f7edde6d4746806fa1433432f0ef",
+  "usage": {
+    "input_tokens": 115.0,
+    "output_tokens": 402.0,
+    "total_tokens": 517.0
+  }
+}

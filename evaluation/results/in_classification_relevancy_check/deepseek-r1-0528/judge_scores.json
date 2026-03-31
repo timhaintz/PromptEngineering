@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T07:24:54.919870+00:00",
+  "pattern": {
+    "key": "in_classification_relevancy_check",
+    "logic": "In",
+    "subcategory": "Categorising",
+    "task_title": "Classify whether a sentence contains a specific property with data",
+    "task_description": "Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+    "naive_request": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "task_material": "Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "role": "You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+    "context": "This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
+    "instructions": [
+      "Check if the sentence mentions the specified property.",
+      "Check if the sentence contains a numeric value with units for that property.",
+      "State whether the sentence is relevant (Yes) or not (No).",
+      "Briefly explain why."
+    ],
+    "technique": "Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+    "output": "Return Yes or No followed by a brief justification.",
+    "reference_notes": "Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+    "source_paper_id": "18",
+    "source_pattern_id": "18-0-0",
+    "source_paper_title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+    "source_pattern_name": "Initial relevancy prompt"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0bd44cf081232c6b0069ca246cbcac8190a7158287b437e6c0",
+  "usage": {
+    "input_tokens": 962.0,
+    "output_tokens": 1575.0,
+    "total_tokens": 2537.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly matches the reference by identifying the sentence as relevant and extracting the target property with its value and units: tensile strength, 450, MPa."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Well-structured with bullets and a conclusion, but more verbose and stylized than necessary for a simple classification task."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Does not introduce unsupported factual content; the expansion of MPa and note that it is a standard unit are acceptable clarifications."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Gives the classification and explicitly covers all required elements: property mention, numeric value, units, and a rationale."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Fully consistent with the evaluation reference: it correctly says Yes and identifies tensile strength with value 450 and unit MPa."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear, concise, and consistently organized with a direct answer followed by a short justification list."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Stays tightly grounded in the provided evidence and does not add unsupported details."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Includes the decision plus all key supporting components: property, numeric value, units, and brief explanation."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The core classification is correct and it correctly identifies the required property, value, and unit from the reference."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Readable and organized, but slightly less consistent due to extra spacing and the added side note at the end."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded, but it introduces an additional contextual phrase about \"at room temperature\" that is not present in the provided reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Provides the Yes/No decision and explicitly confirms all required elements are present: property, numeric value, and units."
+      }
+    }
+  }
+}

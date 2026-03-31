@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T13:17:33.786474+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+  "output": "J R",
+  "reasoning_content": null,
+  "response_id": "2903b556-9fda-490d-89ae-5750971dde26",
+  "usage": {
+    "input_tokens": 16.0,
+    "output_tokens": 2.0,
+    "total_tokens": 111.0
+  }
+}

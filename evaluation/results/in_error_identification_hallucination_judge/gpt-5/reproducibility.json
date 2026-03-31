@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T06:46:12.937532+00:00",
+  "pattern": {
+    "key": "in_error_identification_hallucination_judge",
+    "logic": "In",
+    "subcategory": "Error Identification",
+    "task_title": "Judge whether an answer contains hallucination",
+    "task_description": "Given a question, an answer, and related knowledge, determine if the answer contains non-factual or hallucinated information.",
+    "naive_request": "I want you to act as an answer judge. Given a question and an answer, your objective is to determine if the provided answer contains non-factual or hallucinated information. You SHOULD give your judgement based on the following hallucination types and the world knowledge.\n\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "task_material": "Question: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "role": "You are a hallucination detection judge who identifies factual contradictions, fabrications, and unsupported claims in model outputs.",
+    "context": "You are evaluating an LLM answer against verified knowledge to detect hallucination. Your judgment must distinguish between factual errors, context misunderstanding, and fabricated details.",
+    "instructions": [
+      "Compare the answer against the provided knowledge.",
+      "Identify any factual contradictions between the answer and the knowledge.",
+      "Check whether any claims in the answer are fabricated or unsupported.",
+      "State your verdict: Hallucinated or Not Hallucinated, with specific evidence."
+    ],
+    "technique": "Use chain-of-verification: compare each claim in the answer against the knowledge base systematically before judging.",
+    "output": "Return a verdict (Hallucinated / Not Hallucinated) with specific evidence of any errors found.",
+    "reference_notes": "The answer is hallucinated: it states Sydney is the capital (incorrect, it is Canberra) and gives a wrong date for the capital decision.",
+    "source_paper_id": "8",
+    "source_pattern_id": "8-0-0",
+    "source_paper_title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+    "source_pattern_name": "Hallucination Evaluation"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.971917,
+        "run_1_run_3": 0.975206,
+        "run_2_run_3": 0.973536
+      },
+      "mean_similarity": 0.973553,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs make the same substantive judgment: the answer is hallucinated/non-factual because it incorrectly says Sydney is the capital of Australia and incorrectly ties the capital decision to federation in 1901, while noting Canberra is the actual capital and that the federal capital moved there in 1927. The wording varies slightly, but the meaning, structure, and factual basis are the same.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 470.0,
+        "output_tokens": 181.0,
+        "total_tokens": 651.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.951483,
+        "run_1_run_3": 0.988519,
+        "run_2_run_3": 0.94736
+      },
+      "mean_similarity": 0.962454,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs reach the same verdict (the answer is hallucinated) and support it with the same two factual checks: Sydney is incorrectly given as Australia\u2019s capital instead of Canberra, and the statement about being chosen as capital in 1901 is wrong, with Canberra selected as a compromise and the capital moving in 1927. Differences are limited to phrasing and labels such as 'claim-by-claim verification' vs. 'chain-of-verification.'",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 656.0,
+        "output_tokens": 288.0,
+        "total_tokens": 944.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.972599,
+        "run_1_run_3": 0.979775,
+        "run_2_run_3": 0.977259
+      },
+      "mean_similarity": 0.976545,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs reach the same judgment: the answer is hallucinated. Each identifies the same two core factual errors against the reference knowledge\u2014incorrectly naming Sydney instead of Canberra as the capital, and giving a false historical claim about Sydney being chosen in 1901 rather than Canberra being selected as a compromise and officially becoming the capital in 1927. The structure is also materially the same: claim-by-claim verification followed by a hallucination verdict. Differences are only stylistic (formatting, wording such as 'unsupported/fabricated detail').",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 819.0,
+        "output_tokens": 242.0,
+        "total_tokens": 1061.0
+      }
+    }
+  }
+}

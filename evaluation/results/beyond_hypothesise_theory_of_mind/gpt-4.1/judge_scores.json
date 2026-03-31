@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T04:12:09.899420+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0041be326dcdf3d80069c9f7154ec48194b61ba2c9fe150a83",
+  "usage": {
+    "input_tokens": 1125.0,
+    "output_tokens": 2822.0,
+    "total_tokens": 3947.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It correctly states that Alice still thinks the file is in `/shared_folder/photos`, which matches the evaluation reference."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The response is readable and organized, with clear emphasis on the key answer, though it is somewhat more verbose than necessary."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It stays mostly grounded in the scenario, but adds unsupported details about Dropbox syncing, notifications, and what Alice might do afterward."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It directly answers where Alice will look and includes an explanation of why she believes the file is there."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not answer the question at all and instead asks for a scenario that was already available in the task."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The output is clean, concise, and grammatically consistent, but it is not formatted as a substantive answer to the task."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not invent any facts, locations, or events."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It fails to provide the required belief inference or the location where Alice would look."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It answers a different, self-created desk/drawer scenario instead of the given shared-folder scenario, so the answer does not match the reference."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is very well structured, with headings, steps, bullet points, and a clear summary."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "It explicitly invents a new scenario and details that were not provided in the task."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It gives a full explanation and conclusion, but for an invented scenario rather than the actual task, so it only partially fulfills the task structure."
+      }
+    }
+  }
+}

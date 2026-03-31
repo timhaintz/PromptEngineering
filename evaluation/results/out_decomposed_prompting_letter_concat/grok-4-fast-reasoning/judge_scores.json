@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T13:23:29.185662+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0d4cd6cdf4efd0b20069ca7817c3748193a1a24005f766f3c3",
+  "usage": {
+    "input_tokens": 854.0,
+    "output_tokens": 4192.0,
+    "total_tokens": 5046.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The final result \"J R\" matches the reference answer, but it does not show the decomposition the task asked for."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "It is only a bare final answer and lacks explicit numbered sub-questions and intermediate results."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not introduce any unsupported input, intermediate values, or extra claims."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "The required split, first-letter extraction, and merge steps are all missing."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 3,
+        "justification": "The decomposition logic is correct for its own example, but it substitutes a different input (\"Hello World Example\") instead of the reference case, so the produced result is not the target one."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "It uses a clear, consistent QC/Q1/Q2/Q3 structure with numbered steps, intermediate results, and a final answer."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It invents a new input and corresponding results that are not grounded in the task reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes all requested elements: explicit numbered sub-questions, intermediate results, and the final merged output."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 3,
+        "justification": "The step-by-step method is correct for the example it chose, but it answers a different input (\"Hello World\") than the reference decomposition, so the final output does not match the target."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "It is well-structured with explicit numbered steps, operation tags, intermediate results, and a final answer."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It introduces an unsupported replacement input and derived results rather than using the reference example."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully provides the requested decomposition with split, extraction, merge, and intermediate outputs."
+      }
+    }
+  }
+}

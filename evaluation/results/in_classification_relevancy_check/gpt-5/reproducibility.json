@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T07:15:12.971534+00:00",
+  "pattern": {
+    "key": "in_classification_relevancy_check",
+    "logic": "In",
+    "subcategory": "Categorising",
+    "task_title": "Classify whether a sentence contains a specific property with data",
+    "task_description": "Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+    "naive_request": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "task_material": "Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "role": "You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+    "context": "This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
+    "instructions": [
+      "Check if the sentence mentions the specified property.",
+      "Check if the sentence contains a numeric value with units for that property.",
+      "State whether the sentence is relevant (Yes) or not (No).",
+      "Briefly explain why."
+    ],
+    "technique": "Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+    "output": "Return Yes or No followed by a brief justification.",
+    "reference_notes": "Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+    "source_paper_id": "18",
+    "source_pattern_id": "18-0-0",
+    "source_paper_title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+    "source_pattern_name": "Initial relevancy prompt"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.874677,
+        "run_1_run_3": 0.97395,
+        "run_2_run_3": 0.887614
+      },
+      "mean_similarity": 0.91208,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs make the same classification (Yes) and identify the same target property data: tensile strength = 450 MPa. Runs 2 and 3 add room-temperature context, but this does not change the task outcome or the extracted property/value/units for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 302.0,
+        "output_tokens": 289.0,
+        "total_tokens": 591.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.881148,
+        "run_1_run_3": 0.896255,
+        "run_2_run_3": 0.97385
+      },
+      "mean_similarity": 0.917084,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs make the same classification (Yes) and identify the same evidence: the sentence mentions tensile strength and gives the value 450 MPa. The differences are only minor wording/formatting variations and do not change meaning or task satisfaction.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 308.0,
+        "output_tokens": 126.0,
+        "total_tokens": 434.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.906109,
+        "run_1_run_3": 0.983098,
+        "run_2_run_3": 0.904147
+      },
+      "mean_similarity": 0.931118,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs make the same classification (Yes) and justify it in materially the same way: the sentence mentions tensile strength and includes the value 450 with units of MPa. The wording differences are minor and do not affect meaning, structure, or task satisfaction.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 328.0,
+        "output_tokens": 156.0,
+        "total_tokens": 484.0
+      }
+    }
+  }
+}

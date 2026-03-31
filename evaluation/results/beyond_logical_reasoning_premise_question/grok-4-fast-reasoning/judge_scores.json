@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T03:47:55.016631+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0b01020c040e0ab50069c9f1900a108190ada28a1346af6b35",
+  "usage": {
+    "input_tokens": 3298.0,
+    "output_tokens": 2370.0,
+    "total_tokens": 5668.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correct verdict; it matches the reference that Sarah is a manager, all managers completed training, and that training includes conflict resolution."
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "Clear and readable, but it is only a single sentence and does not use the requested step-by-step reasoning format."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not invent any extra premises or conclusions beyond the task."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "Gives the right yes/no answer, but omits the premise chain showing why the conclusion follows."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Incorrect for the task: it claims no premises were provided and analyzes a fabricated hypothetical instead of the Sarah/training argument."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent structure with labeled sections, bullets, and a clear final verdict."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "Introduces unsupported 'implicit premises' and a hypothetical conclusion that are not in the given task."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Despite its length, it does not complete the actual reasoning task about whether Sarah completed a conflict resolution module."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Also fails the task by ignoring the provided Sarah/training premises and evaluating an invented meta-level 'implied conclusion' instead."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-organized and internally consistent, with clear sections and stepwise presentation."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It still invents unstated premises and an implied conclusion, though slightly less expansively than Output B."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It does not answer the actual premise-to-conclusion question from the reference example."
+      }
+    }
+  }
+}

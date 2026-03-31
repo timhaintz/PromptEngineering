@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T06:55:12.849992+00:00",
+  "pattern": {
+    "key": "in_error_identification_hallucination_judge",
+    "logic": "In",
+    "subcategory": "Error Identification",
+    "task_title": "Judge whether an answer contains hallucination",
+    "task_description": "Given a question, an answer, and related knowledge, determine if the answer contains non-factual or hallucinated information.",
+    "naive_request": "I want you to act as an answer judge. Given a question and an answer, your objective is to determine if the provided answer contains non-factual or hallucinated information. You SHOULD give your judgement based on the following hallucination types and the world knowledge.\n\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "task_material": "Question: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "role": "You are a hallucination detection judge who identifies factual contradictions, fabrications, and unsupported claims in model outputs.",
+    "context": "You are evaluating an LLM answer against verified knowledge to detect hallucination. Your judgment must distinguish between factual errors, context misunderstanding, and fabricated details.",
+    "instructions": [
+      "Compare the answer against the provided knowledge.",
+      "Identify any factual contradictions between the answer and the knowledge.",
+      "Check whether any claims in the answer are fabricated or unsupported.",
+      "State your verdict: Hallucinated or Not Hallucinated, with specific evidence."
+    ],
+    "technique": "Use chain-of-verification: compare each claim in the answer against the knowledge base systematically before judging.",
+    "output": "Return a verdict (Hallucinated / Not Hallucinated) with specific evidence of any errors found.",
+    "reference_notes": "The answer is hallucinated: it states Sydney is the capital (incorrect, it is Canberra) and gives a wrong date for the capital decision.",
+    "source_paper_id": "8",
+    "source_pattern_id": "8-0-0",
+    "source_paper_title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+    "source_pattern_name": "Hallucination Evaluation"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a hallucination detection judge who identifies factual contradictions, fabrications, and unsupported claims in model outputs.\n\nYou are evaluating an LLM answer against verified knowledge to detect hallucination. Your judgment must distinguish between factual errors, context misunderstanding, and fabricated details.\n\n1. Compare the answer against the provided knowledge.\n2. Identify any factual contradictions between the answer and the knowledge.\n3. Check whether any claims in the answer are fabricated or unsupported.\n4. State your verdict: Hallucinated or Not Hallucinated, with specific evidence.\n\nUse chain-of-verification: compare each claim in the answer against the knowledge base systematically before judging.\n\nReturn a verdict (Hallucinated / Not Hallucinated) with specific evidence of any errors found.\n\nTask Material:\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+  "output": "### Hallucination Detection Verdict: **Hallucinated**  \n\n**Evidence of Errors:**  \n\n1. **Factual Contradiction (Capital City):**  \n   - **Answer Claim:** \"The capital of Australia is Sydney.\"  \n   - **Verified Knowledge:** \"The capital of Australia is Canberra.\"  \n   - **Contradiction:** The answer incorrectly identifies Sydney as the capital. Canberra is the official capital per the knowledge base.  \n\n2. **Fabricated/Unsupported Claim (Timeline and Reasoning):**  \n   - **Answer Claim:** Sydney \"was chosen as the capital when the country was federated in 1901.\"  \n   - **Verified Knowledge:** Canberra was \"chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.\"  \n   - **Fabrication:**  \n     - The answer falsely states Sydney was ever the capital post-federation. In reality, Melbourne served as the *interim* seat of government from 1901 until 1927, but was never the official capital.  \n     - The 1901 federation date is misattributed to Sydney's selection. The knowledge confirms Canberra was not established as the capital until 1927, 26 years after federation.  \n   - **Unsupported Context:** The answer omits the Sydney-Melbourne rivalry and the compromise that led to Canberra's creation, inventing an incorrect narrative.  \n\n**Conclusion:**  \nThe answer contains **multiple hallucinated elements**: a core factual error (wrong capital), fabricated historical details (Sydney as capital in 1901), and unsupported claims about the selection process. These directly contradict the verified knowledge.",
+  "reasoning_content": "\nAlright, let me approach this hallucination detection task methodically. The user wants me to evaluate an LLM's answer about Australia's capital against verified knowledge, using a structured verification process.\n\nFirst, I'll break down the key elements from the provided materials:\n- The question is straightforward: \"What is the capital of Australia?\"\n- The LLM's answer states: \"The capital was Sydney chosen during federation in 1901\"\n- The verified knowledge clearly states: \"Canberra is the capital, chosen as a Sydney-Melbourne compromise, officially moved in 1927\"\n\nNow applying chain-of-verification:\n1. Core factual claim: The capital city\n   - Answer claims: Sydney\n   - Knowledge states: Canberra\n   \u2192 Direct contradiction\n\n2. Historical claim: When/why chosen\n   - Answer claims: Chosen at federation (1901)\n   - Knowledge states: Compromise between Sydney/Melbourne, moved in 1927\n   \u2192 Contradiction in both timing and reasoning\n\n3. Supporting details:\n   - No additional claims in answer to verify\n\nThe errors are unambiguous:\n- Misidentifying Sydney as capital (factual error)\n- Incorrect federation date attribution (context misunderstanding)\n- Fabricated detail about 1901 decision (unsupported)\n\nVerdict must be \"Hallucinated\" due to multiple clear contradictions with verified facts. The evidence shows fundamental inaccuracies in both the capital's identity and historical context.",
+  "response_id": "6ecfe4a2c35240f592aa6d2c26bd575f",
+  "usage": {
+    "input_tokens": 227.0,
+    "output_tokens": 645.0,
+    "total_tokens": 872.0
+  }
+}

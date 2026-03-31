@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T13:28:44.554046+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "variant": "peil_labelled",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+  "output": "QC: Extract the first letters of each word from the input \"Hello World\" and join them with spaces.  \nQ1: [split] Split \"Hello World\" into individual words \u2192 [\"Hello\", \"World\"]  \nQ2: [str_pos] Extract the first letter of each word \u2192 [\"H\", \"W\"]  \nQ3: [merge] Concatenate the letters with spaces \u2192 \"H W\"  \n\n**Final Answer**: \"H W\"",
+  "reasoning_content": "\nWe are given a string. We need to break the task into steps.\n Steps:\n 1. Split the input string into individual words.\n 2. For each word, extract the first letter.\n 3. Concatenate the extracted letters with spaces.\n\n We'll use:\n   [split] to split the string into words (by space)\n   [str_pos] to get the first character of each word (index 0)\n   [merge] to combine the extracted letters with spaces.\n\n Example: \n   Input: \"Hello World\"\n   Step 1: [split] \"Hello World\" -> [\"Hello\", \"World\"]\n   Step 2: [str_pos] for each word: \n        \"Hello\" -> first letter 'H'\n        \"World\" -> first letter 'W'\n        So we get ['H', 'W']\n   Step 3: [merge] the list ['H','W'] with space -> \"H W\"\n\n Format: \n   QC: The original question: \"Extract the first letters of each word from the input '...' and join them with spaces.\"\n   Q1: [split] ... -> [list of words]\n   Q2: [str_pos] ... -> [list of first letters]\n   Q3: [merge] ... -> the final string\n\n Let's do an example with input: \"Hello World\"",
+  "response_id": "9cedbd0b62264b9588ef0213d57a8d00",
+  "usage": {
+    "input_tokens": 156.0,
+    "output_tokens": 380.0,
+    "total_tokens": 536.0
+  }
+}

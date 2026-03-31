@@ -1,0 +1,89 @@
+{
+  "timestamp_utc": "2026-03-30T13:17:32.413339+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs return the exact same output, \"J R\". They therefore convey the same result and satisfy the task in materially the same way for reproducibility purposes, despite not explicitly showing the decomposition steps.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 240.0,
+        "output_tokens": 186.0,
+        "total_tokens": 426.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.687972,
+        "run_1_run_3": 0.916083,
+        "run_2_run_3": 0.715595
+      },
+      "mean_similarity": 0.773217,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. Runs 1 and 3 behave the same: they incorrectly treat the surrounding instruction text as the input string and produce the same split/initials/merged result. Run 2 instead does not perform the task at all and asks for the input string, leaving all steps unresolved. For research purposes, this is a material behavioral difference.",
+        "material_differences": [
+          "Run 2 requests the input and returns placeholders instead of executing the decomposition.",
+          "Runs 1 and 3 execute the decomposition on the instruction text ('Role: You are...'), while Run 2 does not process any string.",
+          "Runs 1 and 3 produce a concrete final output ('R Y a a t d s w b c o i n s w b o'); Run 2 produces no computed final answer."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 732.0,
+        "output_tokens": 393.0,
+        "total_tokens": 1125.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.777295,
+        "run_1_run_3": 0.916806,
+        "run_2_run_3": 0.802333
+      },
+      "mean_similarity": 0.832144,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same for practical evaluation purposes: instead of performing the decomposition on the reference input, they ask the user to provide the input string and present the same intended 3-step workflow ([split] -> [str_pos] -> [merge]) followed by a final answer placeholder. The differences are only in wording, punctuation, and formatting, not in task handling or outcome.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 442.0,
+        "output_tokens": 494.0,
+        "total_tokens": 936.0
+      }
+    }
+  }
+}

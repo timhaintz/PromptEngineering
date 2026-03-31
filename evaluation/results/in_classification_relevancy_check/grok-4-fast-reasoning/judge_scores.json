@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T07:19:08.832979+00:00",
+  "pattern": {
+    "key": "in_classification_relevancy_check",
+    "logic": "In",
+    "subcategory": "Categorising",
+    "task_title": "Classify whether a sentence contains a specific property with data",
+    "task_description": "Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+    "naive_request": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "task_material": "Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "role": "You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+    "context": "This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
+    "instructions": [
+      "Check if the sentence mentions the specified property.",
+      "Check if the sentence contains a numeric value with units for that property.",
+      "State whether the sentence is relevant (Yes) or not (No).",
+      "Briefly explain why."
+    ],
+    "technique": "Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+    "output": "Return Yes or No followed by a brief justification.",
+    "reference_notes": "Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+    "source_paper_id": "18",
+    "source_pattern_id": "18-0-0",
+    "source_paper_title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+    "source_pattern_name": "Initial relevancy prompt"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_02c49b06b2d81cc50069ca231269a4819394ea0a271d8398d7",
+  "usage": {
+    "input_tokens": 695.0,
+    "output_tokens": 966.0,
+    "total_tokens": 1661.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly classifies the sentence as relevant and identifies the target property, numeric value (450), and units (MPa), matching the reference."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear and readable response with a direct yes/no decision followed by supporting evidence."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Adds no unsupported facts; all stated details are grounded in the reference property, value, and units."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully answers the task by giving the classification and explaining why with the property, number, and units."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly states that the sentence is relevant and explicitly cites tensile strength, 450, and MPa as required."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent, concise format: direct decision first, then brief supporting evidence."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Contains no invented information; every element matches the evaluation reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Provides the required classification and includes the target property, numeric value, and units."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly labels the sentence as relevant and correctly identifies tensile strength with value 450 and units MPa."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clean, concise structure with a direct answer and supporting explanation."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "No unsupported or extraneous claims are introduced beyond the provided evidence."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully addresses the task by confirming relevance and citing the property, value, and units."
+      }
+    }
+  }
+}

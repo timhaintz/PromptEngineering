@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T11:58:47.033347+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0093edfb6ecdcd710069ca6435888c81958cc37ac37f51b81e",
+  "usage": {
+    "input_tokens": 2405.0,
+    "output_tokens": 6247.0,
+    "total_tokens": 8652.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Uses a correct 2D dynamic-programming table with valid backtracking. For the given instance it returns an optimal value of 24 and a valid optimal item set (Items 1, 2, 3), which is equivalent to the reference optimum."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clean single Python code block, consistent commenting, and readable printed output."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Makes no unsupported claims or invented execution results; totals are computed from the actual selected items."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Provides executable code, reconstructs the selected items, and prints chosen items along with total value and total weight."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 2,
+        "justification": "The 1D DP gets the optimal value 24, but the item-reconstruction method is incorrect for 1D DP. On this instance it can select Items 1, 4, and 5 (value 18, weight 8) while still reporting total value 24, so the chosen set is not reliably optimal."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Mostly well-structured and readable, but there is a minor formatting artifact with an extra trailing code fence."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "It overstates correctness (e.g., claiming the approach 'ensures an optimal solution') despite flawed backtracking, but it does not provide a fully fabricated execution transcript."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Includes executable code, prints selected items and totals, and covers the main task components, but it does not correctly recover the optimal chosen items."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 2,
+        "justification": "Like Output B, it uses correct 1D DP for the optimal value but flawed backtracking for recovering items. The code would not reliably produce the optimal chosen set for this instance."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Readable and consistently formatted, with clear code and output blocks."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "The stated 'Output (when executed)' is inconsistent with the code. The code's backtracking would not produce Items 1, 2, and 3 here, so the sample output is misleading/fabricated."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Provides code, selected-item printing, totals, and an example output, but the reconstruction logic does not actually complete the task correctly."
+      }
+    }
+  }
+}

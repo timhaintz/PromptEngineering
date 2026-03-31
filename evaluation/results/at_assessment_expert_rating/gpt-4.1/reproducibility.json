@@ -1,0 +1,99 @@
+{
+  "timestamp_utc": "2026-03-29T23:06:40.399114+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.952149,
+        "run_1_run_3": 0.968011,
+        "run_2_run_3": 0.939982
+      },
+      "mean_similarity": 0.953381,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same seven evaluation criteria with the same weights (20/20/15/15/10/10/10), provide brief rationales, summarize them in a table, and then ask whether to proceed with rating the platforms. The differences are limited to wording, criterion order, and formatting. For research purposes, they are functionally equivalent. Notably, all three are equally incomplete relative to the stated task because they stop at weighting and do not actually rate the platforms.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 1522.0,
+        "output_tokens": 483.0,
+        "total_tokens": 2005.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.977874,
+        "run_1_run_3": 0.992812,
+        "run_2_run_3": 0.981647
+      },
+      "mean_similarity": 0.984111,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs use the same weighted criteria and very similar structure, and they broadly converge on the same overall takeaway (Teams/Zoom/Google Meet strongest; WhatsApp/FaceTime weaker for university-wide use). However, this task is specifically about rating platforms across criteria, and the rating matrices are not stable across runs. Multiple criterion scores change across platforms, including some that would affect weighted comparisons and possible rankings. For research purposes, these are not functionally identical outputs.",
+        "material_differences": [
+          "Zoom ratings vary across runs for Functionality & Features (High vs Very High), Security & Privacy (Medium High vs High), and Cost (Medium vs Medium Low).",
+          "Microsoft Teams cost changes across runs (Medium vs Medium Low).",
+          "Google Meet Functionality & Features changes (Medium High in Run 1 vs High in Runs 2 and 3).",
+          "WhatsApp differs on Compatibility & Integration (Medium Low vs Low) and especially User Experiences (Medium Low in Run 1 vs Medium High in Runs 2 and 3).",
+          "FaceTime varies on Ease of Use (High vs Very High), Compatibility & Integration (Low vs Very Low), Cost (Very High vs High), and User Experiences (Medium Low vs Medium).",
+          "The concluding section is not the same: Run 2 adds a comparative summary naming top candidates, while Runs 1 and 3 end with a note/recommendation to use the rubric or pilot top candidates."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2653.0,
+        "output_tokens": 1404.0,
+        "total_tokens": 4057.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.923624,
+        "run_1_run_3": 0.971909,
+        "run_2_run_3": 0.953268
+      },
+      "mean_similarity": 0.9496,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs use the same overall rubric structure and identical criterion weights, and they broadly recommend Zoom/Teams/Google Meet over Skype/WhatsApp/FaceTime. However, they are not functionally identical for research purposes because Run 2 changes multiple platform ratings across key criteria. Since the task is specifically to rate platforms using weighted criteria, these rating shifts would change any downstream weighted scoring and indicate inconsistent evaluation behavior.",
+        "material_differences": [
+          "Run 2 downgrades Zoom on several criteria versus Runs 1 and 3 (e.g., Functionality & Features: High vs Very High; Compatibility: Medium High vs High; Security: Medium High vs High).",
+          "Run 2 lowers Microsoft Teams technical support/training (Medium High vs Very High in Runs 1 and 3).",
+          "Run 2 changes Google Meet ratings (e.g., Functionality: Medium High vs High; Security: Medium High vs High; Support: Medium vs Medium High; User Experiences: Medium High vs High).",
+          "Run 2 changes WhatsApp ratings (Security: Low vs Medium Low; User Experiences: Medium vs Medium High).",
+          "Run 2 changes FaceTime ratings (Ease of Use: High vs Very High; Cost: High vs Very High; User Experiences: Medium Low vs Medium).",
+          "Run 2 includes an extra summary table, while Runs 1 and 3 instead end with brief summary/note text; this structural difference is minor compared with the rating inconsistencies."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2852.0,
+        "output_tokens": 842.0,
+        "total_tokens": 3694.0
+      }
+    }
+  }
+}

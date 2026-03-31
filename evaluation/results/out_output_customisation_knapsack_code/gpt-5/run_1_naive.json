@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T08:31:24.022517+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.\n\nTask Material:\nItems: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+  "output": "```python\n# 0/1 Knapsack (Google Colab / Python)\n\nitems = [\n    {\"name\": \"Item 1\", \"value\": 8,  \"weight\": 3},\n    {\"name\": \"Item 2\", \"value\": 6,  \"weight\": 2},\n    {\"name\": \"Item 3\", \"value\": 10, \"weight\": 5},\n    {\"name\": \"Item 4\", \"value\": 3,  \"weight\": 1},\n    {\"name\": \"Item 5\", \"value\": 7,  \"weight\": 4},\n]\nW = 10  # max capacity\n\nn = len(items)\n\n# dp[i][w] = max value using first i items with capacity w\ndp = [[0] * (W + 1) for _ in range(n + 1)]\n\nfor i in range(1, n + 1):\n    val = items[i - 1][\"value\"]\n    wt  = items[i - 1][\"weight\"]\n    for w in range(W + 1):\n        dp[i][w] = dp[i - 1][w]  # skip item\n        if wt <= w:\n            dp[i][w] = max(dp[i][w], dp[i - 1][w - wt] + val)  # take item\n\n# Backtrack to find chosen items\nw = W\nchosen = []\nfor i in range(n, 0, -1):\n    if dp[i][w] != dp[i - 1][w]:  # item i-1 was taken\n        chosen.append(items[i - 1])\n        w -= items[i - 1][\"weight\"]\n\nchosen.reverse()\n\nprint(\"Maximum value:\", dp[n][W])\nprint(\"Total weight:\", sum(x[\"weight\"] for x in chosen), \"kg\")\nprint(\"Chosen items:\")\nfor it in chosen:\n    print(f\" - {it['name']}: value={it['value']}, weight={it['weight']} kg\")\n```",
+  "reasoning_content": null,
+  "response_id": "resp_0cdf94d0174ac4280069ca34d4049881939258adb319ea4b21",
+  "usage": {
+    "input_tokens": 171.0,
+    "output_tokens": 462.0,
+    "total_tokens": 633.0
+  }
+}

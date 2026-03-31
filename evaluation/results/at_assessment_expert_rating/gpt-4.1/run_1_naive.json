@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T22:55:15.688185+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-4.1",
+  "model_deployment": "tjhvs-gpt-4.1-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.\n\nTask Material:\nCriteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+  "output": "Certainly! As an expert in online learning, the first step is to **weight the criteria** according to their importance in evaluating online learning platforms. Here\u2019s a recommended weighting, with a brief rationale for each:\n\n---\n\n### **Criteria Weighting (Total = 100%)**\n\n1. **Ease of Use** \u2013 **20%**\n   - Rationale: If a platform is not intuitive, learners and instructors will struggle, reducing engagement and effectiveness.\n\n2. **Functionality and Features** \u2013 **20%**\n   - Rationale: The platform must support essential learning activities (screen sharing, breakout rooms, recording, etc.).\n\n3. **Compatibility and Integration** \u2013 **15%**\n   - Rationale: Seamless integration with other tools (LMS, calendars, file sharing) is crucial for workflow and accessibility.\n\n4. **Security and Privacy** \u2013 **15%**\n   - Rationale: Protecting user data and ensuring safe communication is essential, especially in educational settings.\n\n5. **Technical Support and Training** \u2013 **10%**\n   - Rationale: Reliable support and training resources help users overcome issues and maximize platform use.\n\n6. **Cost of the Program** \u2013 **10%**\n   - Rationale: Affordability impacts accessibility, especially for institutions or individuals with limited budgets.\n\n7. **User Experiences** \u2013 **10%**\n   - Rationale: Real-world feedback reflects platform reliability, satisfaction, and potential issues.\n\n---\n\n### **Summary Table**\n\n| Criteria                     | Weight (%) |\n|------------------------------|------------|\n| Ease of Use                  | 20%        |\n| Functionality and Features   | 20%        |\n| Compatibility and Integration| 15%        |\n| Security and Privacy         | 15%        |\n| Technical Support and Training| 10%       |\n| Cost of the Program          | 10%        |\n| User Experiences             | 10%        |\n| **Total**                    | **100%**   |\n\n---\n\n**Next Steps:**  \nIf you approve these weights, I can proceed to rate each platform (Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime) against each criterion using the provided scale. Let me know if you\u2019d like any adjustments to the weights or if you\u2019re ready for the ratings!",
+  "reasoning_content": null,
+  "response_id": "resp_0ad3753bfe51737c0069c9adcdc3c081958e950bc325ba6f19",
+  "usage": {
+    "input_tokens": 191.0,
+    "output_tokens": 466.0,
+    "total_tokens": 657.0
+  }
+}

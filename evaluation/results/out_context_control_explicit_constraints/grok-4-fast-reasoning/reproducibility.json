@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T19:21:17.239859+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 0.952292,
+        "run_2_run_3": 0.952292
+      },
+      "mean_similarity": 0.968195,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "Yes. All three outputs are exactly three sentences and cover the same required content: light energy plus carbon dioxide and water as inputs, chloroplast-based conversion, and glucose and oxygen as outputs. Runs 1 and 2 are identical, and Run 3 differs only in wording/detail level (for example, naming ATP/NADPH and omitting the explicit chemical equation) without changing the functional answer.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 644.0,
+        "output_tokens": 412.0,
+        "total_tokens": 1056.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are verbatim identical. They use exactly three sentences and cover the same required content: light energy, carbon dioxide and water as inputs, chloroplast-based conversion, and glucose and oxygen as outputs.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 517.0,
+        "output_tokens": 117.0,
+        "total_tokens": 634.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 0.996821,
+        "run_2_run_3": 0.996821
+      },
+      "mean_similarity": 0.997881,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same three-sentence summary of photosynthesis, covering the required inputs (light energy, carbon dioxide, and water), the conversion process in chloroplasts, and the outputs (glucose and oxygen). Runs 1 and 2 are identical, and Run 3 differs only by minor rephrasing in the final sentence without changing meaning, structure, or task fulfillment.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 520.0,
+        "output_tokens": 260.0,
+        "total_tokens": 780.0
+      }
+    }
+  }
+}

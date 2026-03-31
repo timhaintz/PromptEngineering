@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:21:53.723909+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "naive",
+  "run_index": 3,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Summarize the main points of photosynthesis in three sentences.",
+  "output": "Here are the main points of photosynthesis summarized in three sentences:\n\n1.  **Photosynthesis converts light energy into chemical energy**, using sunlight, water, and carbon dioxide as inputs.\n2.  This process occurs primarily in the chloroplasts of plant cells and produces glucose (sugar) as food for the plant and oxygen as a byproduct.\n3.  Photosynthesis is fundamental to life on Earth, forming the base of most food chains and maintaining atmospheric oxygen levels.",
+  "reasoning_content": "\nOkay, the user wants a three-sentence summary of photosynthesis. Hmm, they're probably a student needing a quick study reference or someone refreshing basic biology concepts. The challenge is condensing this complex process without oversimplifying. \n\nFirst, I should cover the core inputs: sunlight, water, and CO2. Then the outputs - glucose and oxygen - because that's the fundamental exchange. The energy conversion aspect is crucial too, since that's the whole point of photosynthesis. \n\nWait, should I mention chlorophyll? Maybe not, since the user didn't ask for details. Three sentences force tough choices... Better emphasize the big picture: energy transformation, gas exchange, and food production. The user likely cares about why photosynthesis matters ecologically. \n\n*checks textbook knowledge* Right, the chemical equation is essential context even if unstated. Must nail the balance between accuracy and brevity. No fluff - they said \"main points\" after all. \n\n*mental draft* Sentence 1: Inputs and energy capture. Sentence 2: The chemical conversion. Sentence 3: Global significance. That flows logically. Double-checking if \"autotrophs\" is too technical... nah, it's standard terminology. \n\n*self-edit* Cut \"chloroplasts\" to save space. Added \"sugars\" as more intuitive than \"carbohydrates\" for general audiences. Done - this covers the non-negotiable elements.\n",
+  "response_id": "eb0aa961b6d0483198955b750fb16a7e",
+  "usage": {
+    "input_tokens": 16.0,
+    "output_tokens": 390.0,
+    "total_tokens": 406.0
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T02:23:31.134558+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are identical in wording, structure, intermediate calculations, and final answer. They solve the task in the same way and match the reference calculation of 29.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 531.0,
+        "output_tokens": 105.0,
+        "total_tokens": 636.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.948192,
+        "run_1_run_3": 0.739847,
+        "run_2_run_3": 0.737843
+      },
+      "mean_similarity": 0.808628,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in the materially relevant sense: instead of solving the provided math problem and giving the correct result (29), they ask the user to supply the problem data. The wording varies slightly, but the intent, structure, and failure mode are effectively the same across runs.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 306.0,
+        "output_tokens": 248.0,
+        "total_tokens": 554.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.831909,
+        "run_1_run_3": 0.871819,
+        "run_2_run_3": 0.723052
+      },
+      "mean_similarity": 0.808927,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in the only material sense: instead of solving the provided math problem, they ask the user to provide the numbers/scenario. The wording varies slightly, but the meaning, structure, and task satisfaction are effectively the same for reproducibility purposes\u2014they share the same failure mode and do not produce the required answer (29).",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 288.0,
+        "output_tokens": 256.0,
+        "total_tokens": 544.0
+      }
+    }
+  }
+}

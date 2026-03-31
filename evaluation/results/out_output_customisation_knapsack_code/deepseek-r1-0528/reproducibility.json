@@ -1,0 +1,98 @@
+{
+  "timestamp_utc": "2026-03-30T12:50:40.764816+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.816625,
+        "run_1_run_3": 0.823638,
+        "run_2_run_3": 0.877731
+      },
+      "mean_similarity": 0.839331,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs use the same general dynamic-programming approach to 0/1 knapsack, but they do not satisfy the task in materially the same way. Run 1 only reports the maximum value and includes an incorrect stated output (19 instead of the optimal 24), while Runs 2 and 3 also backtrack to recover the chosen items. Runs 2 and 3 are close in function, but the set of all three is not functionally identical for research purposes.",
+        "material_differences": [
+          "Run 1's written output is materially incorrect relative to the provided instance/reference: it says the maximum value is 19, while the optimal value is 24.",
+          "Run 1 only computes/prints the objective value; Runs 2 and 3 additionally recover and print the selected items.",
+          "Run 2 uses separate `values` and `weights` arrays and returns `(max_value, selected_items)` with 1-based item numbers.",
+          "Run 3 uses an `items = [(value, weight), ...]` representation and returns `(total_value, total_weight, selected_indices)`, adding total weight to the output."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2508.0,
+        "output_tokens": 860.0,
+        "total_tokens": 3368.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.899287,
+        "run_1_run_3": 0.944078,
+        "run_2_run_3": 0.926137
+      },
+      "mean_similarity": 0.923167,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs use essentially the same dynamic-programming/backtracking strategy, but they are not functionally identical because Run 1 materially misreports the solution. It claims an 'optimal' selection of items 1, 2, and 5 with total value 21, which is not optimal for the stated instance (optimal value is 24). Runs 2 and 3 provide code that would compute the correct optimum (e.g., items 1, 2, 3 or another equivalent optimal set). That incorrect claimed output in Run 1 is a substantive difference for research evaluation.",
+        "material_differences": [
+          "Run 1 includes an explicit sample output/conclusion claiming a suboptimal result (items 1, 2, 5; value 21) instead of the optimal value 24.",
+          "Run 1's displayed output is inconsistent with its own code structure (its print loop would not produce the shown original item numbering).",
+          "Runs 2 and 3 present correct/neutral DP solutions without the incorrect optimality claim made in Run 1."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2918.0,
+        "output_tokens": 2290.0,
+        "total_tokens": 5208.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.902023,
+        "run_1_run_3": 0.967385,
+        "run_2_run_3": 0.909518
+      },
+      "mean_similarity": 0.926309,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "Runs 1 and 3 are materially similar: both provide working dynamic-programming 0/1 knapsack code and recover an optimal item set (possibly different but equivalent due to ties). Run 2 is not functionally equivalent because the code is internally inconsistent and would fail as written, so the three runs are not reproducible as functionally identical outputs.",
+        "material_differences": [
+          "Run 2 defines `knapsack_01(values, weights, max_weight)` but calls `knapsack_01(items, max_weight)`, causing an argument mismatch/runtime error.",
+          "Run 2 mixes two different input formats (separate `values`/`weights` lists vs. a single `items` list of tuples), so it does not correctly solve the stated task as written.",
+          "Runs 1 and 3 differ only in backtracking/tie-breaking and may return different but equivalent optimal item sets; this is not material compared with Run 2's execution failure."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2977.0,
+        "output_tokens": 1249.0,
+        "total_tokens": 4226.0
+      }
+    }
+  }
+}

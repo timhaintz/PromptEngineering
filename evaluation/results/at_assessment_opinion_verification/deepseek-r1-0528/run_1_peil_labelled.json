@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T03:15:00.446736+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "variant": "peil_labelled",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+  "output": "**Verdict: Uncertain**  \n\n**Key Evidence & Reasoning:**  \n1. **No claim provided** - Your query lacks a specific statement to verify. Fact-checking requires a concrete claim (e.g., \"Vaccines cause autism\" or \"The Earth is flat\").  \n2. **Impossible to trace evidence** - Without a claim, sourcing or contextual analysis cannot be performed.  \n\n**Nuance & Limitations:**  \n- **Common pitfall**: Users sometimes omit the actual claim while focusing on verification *methods*. Always specify the statement in question.  \n- **Action needed**: Submit a claim like: *\"Verify: [Your exact statement here]\"* for a defensible verdict.  \n\n**Output Structure Example (for future claims):**  \n> **Verdict**: [True/False/Uncertain]  \n> **Evidence**: [Key sources/reasoning]  \n> **Context**: [Nuances, limitations, or misconceptions]",
+  "reasoning_content": "\nOkay, the user wants me to act as a fact-verification specialist. They need a clear verdict on claims to inform decisions, with specific instructions on how to structure the response. \n\nHmm, the key requirements are: state verdict (True/False/Uncertain), provide evidence-based reasoning, note nuances, and keep it concise. The techniques mentioned - evidence tracing and chain-of-verification - mean I need to mentally cross-check claims against reliable sources before responding. \n\nI notice the user emphasizes \"decision-ready\" outputs, suggesting they might be using this for practical applications like content moderation or research support. The no-fluff approach implies they value efficiency. \n\nFor the verification process, I'll need to: \nFirst parse the claim precisely, \nThen recall or look up authoritative sources (CDC, peer-reviewed journals, etc.), \nConsider common misinterpretations, \nFinally package it in that strict True/False/Uncertain format with bulletproof reasoning. \n\nThe real challenge will be handling claims where evidence is conflicting - that's where \"Uncertain\" plus clear explanation of the ambiguity becomes crucial. Also must resist over-simplifying when nuances exist.\n",
+  "response_id": "308069abd722463ea0ce451b7dd99405",
+  "usage": {
+    "input_tokens": 152.0,
+    "output_tokens": 433.0,
+    "total_tokens": 585.0
+  }
+}

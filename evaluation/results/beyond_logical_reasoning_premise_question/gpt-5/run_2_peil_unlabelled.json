@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T03:31:53.597998+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 2,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+  "output": "To validate a **policy conclusion** with disciplined premise analysis, I need the **argument text** you want assessed.\n\nPlease paste either:\n- the **conclusion** and the **supporting premises/reasons**, or\n- the full policy paragraph/speech excerpt.\n\nAlso tell me (optional):\n- whether you want me to judge **logical validity only** (does the conclusion follow from the premises), or also **soundness** (are the premises true/plausible).\n\n---\n\n## What I will return (once you provide the argument)\n\n### 1) Explicit Premises\n- P1: \u2026\n- P2: \u2026\n- P3: \u2026\n\n### 2) Premise-to-Question Conversion (to surface alternatives)\n- Q1 (from P1): Is it necessarily true that \u2026 ? What if \u2026 ?\n- Q2 (from P2): Are there exceptions/other causes \u2026 ?\n- Q3 (from P3): Are there alternative policies/constraints \u2026 ?\n\n### 3) Step-by-Step Branch Reasoning (tracking alternatives)\n- Step 1: If P1 is true, then \u2026\n  - Branch A (if Q1 answer = yes): \u2026\n  - Branch B (if Q1 answer = no): \u2026\n- Step 2: Combine with P2 \u2026\n  - Branch A1: \u2026\n  - Branch B1: \u2026\n- Step 3: Add P3 \u2026\n  - Branch A2: \u2026\n  - Branch B2: \u2026\n\n### 4) Verdict (does the conclusion follow?)\n- **Valid / Not valid / Underdetermined**\n- Explanation: which branch(es) support the conclusion, and which show it doesn\u2019t follow without extra assumptions.\n\n---\n\nSend the argument and I\u2019ll run this structure on it.",
+  "reasoning_content": null,
+  "response_id": "resp_0a185792dccb5dfe0069c9ee9ddbc08195ad6f0ad4b4f3ce42",
+  "usage": {
+    "input_tokens": 132.0,
+    "output_tokens": 384.0,
+    "total_tokens": 516.0
+  }
+}

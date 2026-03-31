@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T20:47:06.622708+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "variant": "peil_labelled",
+  "run_index": 2,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "Role: You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.\n\nContext: You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.\n\nInstructions:\n1. State your position clearly in the first sentence.\n2. Provide two supporting points with brief evidence or reasoning.\n3. Close with a forward-looking statement that frames the rest of the debate.\n4. Do not exceed four sentences. Do not use greetings or address the opponent.\n\nTechniques: Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.\n\nOutput: Return a 2-4 sentence opening argument with no greetings.",
+  "output": "Remote work improves employee productivity on average when roles and processes are suited to it. First, it increases effective work time by reducing commuting and enabling longer \u201cdeep work\u201d blocks with fewer office interruptions, which multiple employer studies and meta-analyses associate with higher output and task completion. Second, it expands access to better work environments and flexible scheduling, improving focus and retention\u2014both strongly linked to sustained productivity\u2014while performance data from many firms show equal or higher results in hybrid/remote setups than fully on-site. The rest of this debate will show why these mechanisms are robust across industries and how good policy design captures the gains while managing coordination costs.",
+  "reasoning_content": null,
+  "response_id": "resp_01bf6205e51862760069c98fc76c6c8196aacde3e87ee482d3",
+  "usage": {
+    "input_tokens": 154.0,
+    "output_tokens": 133.0,
+    "total_tokens": 287.0
+  }
+}

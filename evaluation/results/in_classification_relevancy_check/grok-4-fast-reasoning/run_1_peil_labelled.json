@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T07:15:17.012349+00:00",
+  "pattern": {
+    "key": "in_classification_relevancy_check",
+    "logic": "In",
+    "subcategory": "Categorising",
+    "task_title": "Classify whether a sentence contains a specific property with data",
+    "task_description": "Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+    "naive_request": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "task_material": "Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "role": "You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+    "context": "This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
+    "instructions": [
+      "Check if the sentence mentions the specified property.",
+      "Check if the sentence contains a numeric value with units for that property.",
+      "State whether the sentence is relevant (Yes) or not (No).",
+      "Briefly explain why."
+    ],
+    "technique": "Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+    "output": "Return Yes or No followed by a brief justification.",
+    "reference_notes": "Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+    "source_paper_id": "18",
+    "source_pattern_id": "18-0-0",
+    "source_paper_title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+    "source_pattern_name": "Initial relevancy prompt"
+  },
+  "variant": "peil_labelled",
+  "run_index": 1,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Role: You are a data extraction specialist who triages sentences for relevance to a specified material property.\n\nContext: This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.\n\nInstructions:\n1. Check if the sentence mentions the specified property.\n2. Check if the sentence contains a numeric value with units for that property.\n3. State whether the sentence is relevant (Yes) or not (No).\n4. Briefly explain why.\n\nTechniques: Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.\n\nOutput: Return Yes or No followed by a brief justification.\n\nTask Material:\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+  "output": "Yes. The sentence mentions \"tensile strength\" and includes a numeric value (450) with units (MPa).",
+  "reasoning_content": null,
+  "response_id": "d0acccef-54e1-4b63-98ea-e06616599f6a",
+  "usage": {
+    "input_tokens": 162.0,
+    "output_tokens": 24.0,
+    "total_tokens": 306.0
+  }
+}

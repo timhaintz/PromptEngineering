@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-31T03:02:56.068676+00:00",
+  "pattern": {
+    "key": "over_summarisation_text_summary",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Summarise a research paper on climate change",
+    "task_description": "Produce a concise, neutral summary of the provided text highlighting main arguments, key findings, and conclusions.",
+    "naive_request": "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.",
+    "task_material": "Rising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+    "role": "You are an executive communications analyst who produces neutral, concise research summaries.",
+    "context": "The summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.",
+    "instructions": [
+      "Identify the main arguments presented in the text.",
+      "Highlight the key quantitative findings.",
+      "Note the conclusions and any implications or limitations.",
+      "Keep the summary concise and maintain a neutral tone."
+    ],
+    "technique": "Use hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.",
+    "output": "Return a concise summary of 3-5 sentences covering arguments, findings, and conclusions.",
+    "reference_notes": "Key findings to include: 40% increase in bleaching, 70km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, $10B annual fisheries impact.",
+    "source_paper_id": "71",
+    "source_pattern_id": "71-25-0",
+    "source_paper_title": "ChatGPT for higher education and professional development: A guide to conversational AI",
+    "source_pattern_name": "Text Summarization"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are an executive communications analyst who produces neutral, concise research summaries.\n\nThe summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.\n\n1. Identify the main arguments presented in the text.\n2. Highlight the key quantitative findings.\n3. Note the conclusions and any implications or limitations.\n4. Keep the summary concise and maintain a neutral tone.\n\nUse hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.\n\nReturn a concise summary of 3-5 sentences covering arguments, findings, and conclusions.\n\nTask Material:\nRising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+  "output": "Based on the provided text, here is a concise, neutral summary:\n\n1.  **Central Thesis:** Rising ocean temperatures and acidification are fundamentally altering marine ecosystems globally, impacting biodiversity and human economies.\n2.  **Key Findings:** Research indicates a 40% increase in coral bleaching frequency (2020-2025 vs. previous decade), species migrating poleward at ~70 km/decade, and projections that 70-90% of tropical coral reefs face severe degradation by 2050 under moderate emissions. Ocean deoxygenation is expanding dead zones, notably in the Eastern Pacific and Bay of Bengal.\n3.  **Conclusions & Implications:** These changes disrupt food webs and are projected to cause significant economic impacts, estimated at $10 billion annually for fisheries-dependent communities by 2030. While adaptation strategies like marine protected areas and blue carbon restoration show promise, scaling them effectively presents major challenges.",
+  "reasoning_content": "\nHmm, the user wants me to act as an executive communications analyst to create a neutral, concise research summary about ocean changes. They've provided specific instructions: identify main arguments, highlight quantitative findings, note conclusions and implications, and keep it concise with a hierarchical structure.\n\nLooking at the task material, I see several key points about marine ecosystem changes. The main arguments appear to be that rising temperatures and acidification are transforming marine environments, with specific impacts on coral reefs, species migration, and oxygen levels. The quantitative findings include a 40% increase in coral bleaching frequency, species moving poleward at 70 km/decade, and projections that 70-90% of tropical reefs could face severe degradation by 2050. There's also mention of $10 billion in annual economic impacts by 2030.\n\nFor the conclusions and implications, the text notes that adaptation strategies like marine protected areas show promise but face scaling challenges. I should maintain complete neutrality while structuring this hierarchically - starting with the central thesis about ecosystem alterations, then supporting evidence, and finally the conclusions about adaptation challenges.\n\nI'll craft a 3-5 sentence summary that flows logically: first stating the core problem, then presenting the key data points, and ending with the projected impacts and adaptation limitations. The economic impact figure should be included as it's a significant quantitative finding. I'll ensure the language remains factual and unbiased throughout.\n",
+  "response_id": "af6cfc86f6954d01b6c606141bcd911b",
+  "usage": {
+    "input_tokens": 292.0,
+    "output_tokens": 468.0,
+    "total_tokens": 760.0
+  }
+}

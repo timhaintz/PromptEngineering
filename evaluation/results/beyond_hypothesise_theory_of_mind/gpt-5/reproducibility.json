@@ -1,0 +1,89 @@
+{
+  "timestamp_utc": "2026-03-30T04:23:50.263357+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.93611,
+        "run_1_run_3": 0.703856,
+        "run_2_run_3": 0.728246
+      },
+      "mean_similarity": 0.789404,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "Runs 1 and 2 are functionally equivalent: both infer Alice's false belief that the file remains in /shared_folder/photos/photo.png because she was not informed of the move. Run 3 is materially different and contradicts the intended belief inference, asserting that Alice would know the file was moved to /shared_folder/photos/family due to Dropbox syncing.",
+        "material_differences": [
+          "Run 3 gives the opposite belief state from Runs 1 and 2, saying Alice believes the file is in /shared_folder/photos/family rather than /shared_folder/photos.",
+          "Run 3 changes the reasoning from lack of knowledge about the move to automatic awareness via shared-folder/Dropbox sync.",
+          "Runs 1 and 2 satisfy the naive false-belief task in the same way; Run 3 does not."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 341.0,
+        "output_tokens": 283.0,
+        "total_tokens": 624.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.890594,
+        "run_1_run_3": 0.90752,
+        "run_2_run_3": 0.918492
+      },
+      "mean_similarity": 0.905535,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in the materially relevant sense: instead of inferring Alice\u2019s belief from the provided scenario/reference, they state that the scenario details are missing and ask for essentially the same four pieces of information (initial location, whether Alice observed events, what Bob did, and whether Alice was informed). The wording, formatting, and slight differences in explanation do not change the functional outcome.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 612.0,
+        "output_tokens": 325.0,
+        "total_tokens": 937.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.9414,
+        "run_1_run_3": 0.923431,
+        "run_2_run_3": 0.92085
+      },
+      "mean_similarity": 0.92856,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in a materially identical way: instead of inferring Alice\u2019s belief from the provided context, they claim the scenario is missing and ask the user to paste the story details. Each run requests essentially the same kinds of information (initial location, who moved the file, who observed what, who was present/absent) and promises the same 4-part answer structure. The differences are only superficial wording and example phrasing.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 656.0,
+        "output_tokens": 296.0,
+        "total_tokens": 952.0
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T12:59:26.348459+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "variant": "peil_labelled",
+  "run_index": 1,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+  "output": "QC1: [split] What are the individual words in the input string?  \nA1: `[\"Role:\", \"You\", \"are\", \"a\", \"task\", \"decomposition\", \"specialist\", \"who\", \"breaks\", \"complex\", \"operations\", \"into\", \"numbered\", \"sub-questions\", \"with\", \"bracketed\", \"operations.\"]`\n\nQ2: [str_pos] What is the first letter of each word?  \nA2: `[\"R\", \"Y\", \"a\", \"a\", \"t\", \"d\", \"s\", \"w\", \"b\", \"c\", \"o\", \"i\", \"n\", \"s\", \"w\", \"b\", \"o\"]`\n\nQ3: [merge] What do you get when you concatenate those first letters using spaces?  \nA3 (final): `R Y a a t d s w b c o i n s w b o`",
+  "reasoning_content": null,
+  "response_id": "resp_01e948b43bf81a510069ca73a98c2881948a0b06f8fe92d217",
+  "usage": {
+    "input_tokens": 158.0,
+    "output_tokens": 203.0,
+    "total_tokens": 361.0
+  }
+}

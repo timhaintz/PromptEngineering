@@ -492,17 +492,24 @@ class AzureModelRuntime:
                 self._credential = InteractiveBrowserCredential()
         return get_bearer_token_provider(self._credential, COGNITIVE_SCOPE)
 
-    def _with_retries(self, operation: Any, attempts: int = 3, delay_seconds: float = 2.0) -> Any:
-        """Run an API operation with simple retry behavior."""
+    def _with_retries(self, operation: Any, attempts: int = 5, delay_seconds: float = 2.0) -> Any:
+        """Run an API operation with retry and rate-limit backoff."""
         last_error: Optional[Exception] = None
         for attempt in range(1, attempts + 1):
             try:
                 return operation()
             except Exception as exc:  # pragma: no cover - defensive network path
                 last_error = exc
+                error_str = str(exc).lower()
+                is_rate_limit = "429" in error_str or "ratelimit" in error_str
                 if attempt == attempts:
                     break
-                time.sleep(delay_seconds * attempt)
+                if is_rate_limit:
+                    wait = min(60, delay_seconds * (2 ** attempt))
+                    log(f"  Rate limited, waiting {wait:.0f}s (attempt {attempt}/{attempts})")
+                else:
+                    wait = delay_seconds * attempt
+                time.sleep(wait)
         if last_error is None:
             raise RuntimeError("Operation failed without raising an exception")
         raise last_error
@@ -1318,6 +1325,7 @@ def generate_quantitative_artifact(
     if path.exists() and not force:
         return read_json(path)
 
+    log(f"  Generating run_{run_index}_{variant} via {model_key}...")
     response_data = runtime.generate_text(
         model_key,
         pattern.build_prompt(variant),
@@ -1368,6 +1376,7 @@ def judge_pattern_outputs(
     if path.exists() and not force:
         return read_json(path)
 
+    log(f"  Judging {model_key} outputs via {judge_model_key}...")
     outputs = {
         variant: read_json(generation_path(pattern.key, model_key, 1, variant))["output"]
         for variant in VARIANT_TO_OUTPUT_KEY
@@ -1443,8 +1452,10 @@ def compute_reproducibility(
     if path.exists() and not force:
         return read_json(path)
 
+    log(f"  Computing reproducibility for {model_key}...")
     variant_results: dict[str, Any] = {}
     for variant in VARIANT_TO_OUTPUT_KEY:
+        log(f"    Reproducibility: {variant} - embedding 3 runs...")
         run_artifacts = [
             read_json(generation_path(pattern.key, model_key, run_index, variant))
             for run_index in range(1, DEFAULT_RUNS + 1)
@@ -1461,6 +1472,7 @@ def compute_reproducibility(
         max_repro_attempts = 3
         llm_assessment = None
         last_error = None
+        log(f"    Reproducibility: {variant} - LLM assessment...")
         for attempt in range(1, max_repro_attempts + 1):
             llm_result = runtime.generate_text(
                 judge_model_key,

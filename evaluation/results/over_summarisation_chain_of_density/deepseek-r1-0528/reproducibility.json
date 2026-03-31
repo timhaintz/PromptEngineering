@@ -1,0 +1,98 @@
+{
+  "timestamp_utc": "2026-03-31T01:25:39.588354+00:00",
+  "pattern": {
+    "key": "over_summarisation_chain_of_density",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Generate entity-dense iterative summaries",
+    "task_description": "Generate five increasingly entity-dense summaries of the provided article, each the same length, progressively adding missing salient entities.",
+    "naive_request": "Article: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.\n\nYou will generate increasingly concise, entity-dense summaries of the above Article.\nRepeat the following 2 steps 5 times.\nStep 1. Identify 1-3 informative Entities from the Article which are missing from the previously generated summary.\nStep 2. Write a new, denser summary of identical length which covers every entity and detail from the previous summary plus the Missing Entities.\nA Missing Entity is:\n- Relevant to the main story,\n- Specific yet concise (5 words or fewer),\n- Novel (not in the previous summary),\n- Faithful (present in the Article),\n- Anywhere (can be located anywhere in the Article).\nReturn a JSON list of 5 dictionaries with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.",
+    "role": "You are a summarisation specialist who produces iteratively denser summaries that preserve entities and key details.",
+    "context": "The output will be used to evaluate how well models handle progressive entity-dense summarisation. Each summary must be the same length as the previous one but contain more salient entities.",
+    "instructions": [
+      "Start with a broad entity-sparse summary of the article.",
+      "Identify 1-3 informative missing entities from the article for each iteration.",
+      "Rewrite the summary at the same length, incorporating the new entities by compressing language.",
+      "Never drop entities from previous summaries. Repeat for 5 iterations total."
+    ],
+    "technique": "Use chain-of-density summarisation: iteratively compress language to add entities without increasing length.",
+    "output": "Return a JSON list of 5 dictionaries, each with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "reference_notes": "Key entities to incorporate: AWS/Azure/GCP, Flexera report, 65 percent, data sovereignty, vendor lock-in, SLAs.",
+    "source_paper_id": "38",
+    "source_pattern_id": "38-0-0",
+    "source_paper_title": "From Sparse to Dense: GPT-4 Summarization with Chain of Density Prompting",
+    "source_pattern_name": "Initial Entity-Sparse Summary"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.971909,
+        "run_1_run_3": 0.976836,
+        "run_2_run_3": 0.982581
+      },
+      "mean_similarity": 0.977108,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are functionally equivalent for research purposes: each returns the same 5-step JSON structure of iterative densification about cloud computing, incorporates the core reference entities across the sequence (AWS/Azure/GCP, Flexera/2023, 65%, data sovereignty, vendor lock-in, SLAs), and ends with the same practical evaluation themes (data residency/sovereignty, lock-in, security, exit strategies). The differences are mostly in phrasing, ordering, and how aggressively details are front-loaded, not in the overall task completion or core meaning.",
+        "material_differences": [
+          "Entity introduction order varies: Run 3 introduces AWS/Azure/GCP in the first summary, while Runs 1 and 2 add them later.",
+          "Final-summary completeness differs: Run 2 keeps AWS/Azure/GCP explicit in the last step, while Runs 1 and 3 omit provider names in the final densest summary.",
+          "Runs 2 and 3 add extra detail not present in Run 1, especially the '50% in 2020' comparison and more explicit provider competition dimensions (pricing, global reach, managed service breadth).",
+          "Run 1's final wording is slightly less specific on security ('security issues') than Runs 2 and 3 ('shared responsibility/shared security')."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1445.0,
+        "output_tokens": 2019.0,
+        "total_tokens": 3464.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.979617,
+        "run_1_run_3": 0.980499,
+        "run_2_run_3": 0.975713
+      },
+      "mean_similarity": 0.97861,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs perform the same task in essentially the same way: a 5-step labelled iterative densification of the same cloud-computing passage, converging on the same core facts and entities (AWS/Azure/GCP, Flexera report, 65% public-cloud adoption, data sovereignty, vendor lock-in, and SLA/data-residency/exit-plan evaluation). Differences are mainly wording, brevity, and when particular details are introduced, not a change in overall meaning or end result.",
+        "material_differences": [
+          "Run 2 is more compressed and leaves out some optional details emphasized in Runs 1 and 3, such as capital expenditure, managed service breadth, and global reach.",
+          "The intermediate densification path differs: Run 2 adds entities in a cleaner stepwise order, while Run 3 introduces some items earlier/later and Run 1 starts with a broader generic first summary.",
+          "The 'Missing_Entities' labels are not perfectly aligned across runs (notably Run 1's empty first list and Run 3's slightly shifted labeling relative to the summary content).",
+          "Entity naming varies slightly across runs (full provider names vs AWS/Azure/GCP; Google Cloud vs Google Cloud Platform; security phrased as shared security/shared responsibility)."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1648.0,
+        "output_tokens": 2885.0,
+        "total_tokens": 4533.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.986551,
+        "run_1_run_3": 0.985911,
+        "run_2_run_3": 0.983391
+      },
+      "mean_similarity": 0.985284,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The runs are semantically very similar and all converge on the same core cloud-computing summary with the requested entities (AWS/Azure/GCP, Flexera, 65 percent, data sovereignty, vendor lock-in, SLAs). However, they are not functionally identical for research purposes because Run 3 is structurally malformed at iteration 4, so it does not preserve the same machine-usable JSON schema as the other runs. In addition, the step-by-step densification differs across runs, so the iterative outputs are not aligned in materially the same way.",
+        "material_differences": [
+          "Run 3 contains malformed JSON in the 4th item: the Missing_Entities field is corrupted and the Denser_Summary field is not cleanly separated, which would break parsing/downstream use.",
+          "The intermediate entity-introduction sequence differs across runs; key concepts like data sovereignty, vendor lock-in, shared responsibility, on-demand scaling, and managed service breadth appear in different iterations rather than being added in the same step order."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1931.0,
+        "output_tokens": 2427.0,
+        "total_tokens": 4358.0
+      }
+    }
+  }
+}

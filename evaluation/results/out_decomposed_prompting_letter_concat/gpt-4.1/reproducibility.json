@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T12:59:19.173156+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 0.977778,
+        "run_2_run_3": 0.977778
+      },
+      "mean_similarity": 0.985186,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs produce the same effective output, \"J R,\" with only trivial wording/formatting differences (\"each\" vs. \"every,\" line break placement). They satisfy the task in materially the same way and exhibit the same lack of explicit decomposition into sub-steps.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 283.0,
+        "output_tokens": 388.0,
+        "total_tokens": 671.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.959047,
+        "run_1_run_3": 0.959047,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 0.972698,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs respond in materially the same way: instead of decomposing the string as requested, they ask the user to provide the input string. Runs 2 and 3 are identical, and Run 1 differs only by trivial phrasing ('Of course' vs 'Certainly', 'decomposed' vs 'me to decompose'), which does not change function or meaning.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 290.0,
+        "output_tokens": 241.0,
+        "total_tokens": 531.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.971364,
+        "run_1_run_3": 0.953927,
+        "run_2_run_3": 0.930926
+      },
+      "mean_similarity": 0.952072,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in substance: instead of decomposing the string manipulation task, they ask the user to provide an input string. The wording differs slightly ('decompose,' 'decomposed,' 'process using the decomposed steps'), but the meaning, structure, and practical effect are the same. For reproducibility purposes, they are functionally identical.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 292.0,
+        "output_tokens": 294.0,
+        "total_tokens": 586.0
+      }
+    }
+  }
+}

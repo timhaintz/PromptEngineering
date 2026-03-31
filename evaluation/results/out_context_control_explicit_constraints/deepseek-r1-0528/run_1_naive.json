@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:21:24.969537+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Summarize the main points of photosynthesis in three sentences.",
+  "output": "Here are the main points of photosynthesis summarized in three sentences:\n\n1.  **Plants, algae, and some bacteria capture light energy (primarily from the sun) using chlorophyll in their chloroplasts.**\n2.  **This energy is used to convert carbon dioxide (CO\u2082) from the air and water (H\u2082O) from the soil into glucose (a sugar used for food and energy storage).**\n3.  **Oxygen (O\u2082) is released as a vital byproduct of this process.**",
+  "reasoning_content": "\nOkay, the user wants a three-sentence summary of photosynthesis. Hmm, they're probably a student needing a quick study reference or someone refreshing basic biology concepts. The challenge is condensing this complex process without losing key elements. \n\nFirst, I should cover the core inputs: sunlight, water, and CO2. Then the outputs - glucose and oxygen - are non-negotiable. The chloroplasts and chlorophyll role must appear too since that's the iconic green machinery. \n\nWait, should I mention ATP/NADPH? Maybe not - the user said \"main points,\" and those are intermediate products. The three pillars are: energy conversion (light to chemical), material transformation (CO2+H2O to sugar), and oxygen byproduct. \n\n*checks textbook accuracy* Yes, the summary must emphasize plants/algae as primary actors. Better avoid technical terms like \"thylakoids\" to keep it accessible. \n\n*mental draft* First sentence: energy capture. Second: chemical conversion. Third: outputs. That flows logically. The user didn't specify grade level, so I'll assume high school biology tier. \n\n*double-checking* Did I miss anything? The oxygen release is crucial - people often forget it's a waste product. And specifying \"food (glucose)\" makes the purpose clearer than just saying \"sugars.\" \n\nFinal structure: 1) Light capture 2) Chemical process 3) Outputs. Concise but complete. Nailed it.",
+  "response_id": "0695819c882d470ba2e64a2f26e5972d",
+  "usage": {
+    "input_tokens": 16.0,
+    "output_tokens": 411.0,
+    "total_tokens": 427.0
+  }
+}

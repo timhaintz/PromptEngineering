@@ -1,0 +1,42 @@
+{
+  "accuracy": {
+    "variant_means": {
+      "naive": 4.4583,
+      "peil_labelled": 3.3472,
+      "peil_unlabelled": 3.3194
+    },
+    "peil_labelled_minus_naive": -1.1111,
+    "peil_unlabelled_minus_naive": -1.1389,
+    "labelled_minus_unlabelled": 0.0278
+  },
+  "formatting": {
+    "variant_means": {
+      "naive": 4.2639,
+      "peil_labelled": 4.2639,
+      "peil_unlabelled": 4.1389
+    },
+    "peil_labelled_minus_naive": 0.0,
+    "peil_unlabelled_minus_naive": -0.125,
+    "labelled_minus_unlabelled": 0.125
+  },
+  "fabrication": {
+    "variant_means": {
+      "naive": 4.3611,
+      "peil_labelled": 3.8889,
+      "peil_unlabelled": 3.6806
+    },
+    "peil_labelled_minus_naive": -0.4722,
+    "peil_unlabelled_minus_naive": -0.6805,
+    "labelled_minus_unlabelled": 0.2083
+  },
+  "completeness": {
+    "variant_means": {
+      "naive": 4.4028,
+      "peil_labelled": 3.8056,
+      "peil_unlabelled": 3.7917
+    },
+    "peil_labelled_minus_naive": -0.5972,
+    "peil_unlabelled_minus_naive": -0.6111,
+    "labelled_minus_unlabelled": 0.0139
+  }
+}

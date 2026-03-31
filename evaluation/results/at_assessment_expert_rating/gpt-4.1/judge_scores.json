@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T23:00:46.627392+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0c5edc474b918ed60069c9ae08ba3081959dab845fa18aa844",
+  "usage": {
+    "input_tokens": 2705.0,
+    "output_tokens": 6538.0,
+    "total_tokens": 9243.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 3,
+        "justification": "The weighting scheme is plausible and sums to 100%, but it does not actually rate any of the six platforms requested by the task."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear headings, bullet rationales, and a clean summary table make the response easy to follow and internally consistent."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It stays at a general, high-level weighting discussion and avoids unsupported platform-specific claims or invented details."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "Only the weighting portion is completed; the required ratings for Zoom, Teams, Skype, Google Meet, WhatsApp, and FaceTime are deferred."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It provides justified weights and rates all six platforms across all criteria with broadly plausible, internally aligned judgments, though the assessments are qualitative rather than evidence-cited."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response uses consistent sectioning, a clearly defined rating scale, and a well-structured comparison matrix."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "There are no invented statistics or fake sources, but several platform claims are uncited qualitative assertions."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It covers both weighted criteria and ratings for all six platforms, and adds strengths and limitations for each."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It includes justified weights and a complete rating matrix for all six platforms; the ratings are generally plausible, though still qualitative and somewhat debatable in places."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent headings, tables, criterion labels, and structure make the output easy to scan and compare."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It avoids made-up numbers or sources, but its platform-specific judgments remain uncited qualitative claims."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully addresses the task by weighting the criteria, rating all six platforms, and providing strengths, limitations, and a summary."
+      }
+    }
+  }
+}

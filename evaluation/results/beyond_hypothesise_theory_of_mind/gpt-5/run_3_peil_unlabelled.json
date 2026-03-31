@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T04:16:48.946855+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge.",
+  "output": "I can do that, but I\u2019m missing the actual scenario (the story about the file, who moved it, who saw what, and who was present/absent).\n\nPlease paste the full setup, e.g.:\n- Where the file starts\n- What Alice sees/does before leaving (if she leaves)\n- What Bob does while Alice can/can\u2019t see it\n- Any returns/communications\n\nOnce you provide it, I\u2019ll answer in the requested structure:\n1) what Alice knows/doesn\u2019t know,  \n2) what Bob did and whether Alice is aware,  \n3) Alice\u2019s resulting belief state, and  \n4) where Alice thinks the file is (and why, based only on her information).",
+  "reasoning_content": null,
+  "response_id": "resp_0e1dfddccb0acd580069c9f92c3c948196bf1157ed7081084a",
+  "usage": {
+    "input_tokens": 136.0,
+    "output_tokens": 169.0,
+    "total_tokens": 305.0
+  }
+}

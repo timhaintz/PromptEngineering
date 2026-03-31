@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-31T02:56:56.530587+00:00",
+  "pattern": {
+    "key": "over_summarisation_text_summary",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Summarise a research paper on climate change",
+    "task_description": "Produce a concise, neutral summary of the provided text highlighting main arguments, key findings, and conclusions.",
+    "naive_request": "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.",
+    "task_material": "Rising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+    "role": "You are an executive communications analyst who produces neutral, concise research summaries.",
+    "context": "The summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.",
+    "instructions": [
+      "Identify the main arguments presented in the text.",
+      "Highlight the key quantitative findings.",
+      "Note the conclusions and any implications or limitations.",
+      "Keep the summary concise and maintain a neutral tone."
+    ],
+    "technique": "Use hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.",
+    "output": "Return a concise summary of 3-5 sentences covering arguments, findings, and conclusions.",
+    "reference_notes": "Key findings to include: 40% increase in bleaching, 70km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, $10B annual fisheries impact.",
+    "source_paper_id": "71",
+    "source_pattern_id": "71-25-0",
+    "source_paper_title": "ChatGPT for higher education and professional development: A guide to conversational AI",
+    "source_pattern_name": "Text Summarization"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0f78a2644703d8aa0069cb36c0c09081949d4351c7fbf11201",
+  "usage": {
+    "input_tokens": 1268.0,
+    "output_tokens": 4668.0,
+    "total_tokens": 5936.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Captures all reference findings accurately: 40% bleaching increase, 70 km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, and $10B annual fisheries losses, while maintaining a neutral overall conclusion."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Uses a clear heading, bullet structure, and closing synthesis, making the summary easy to scan and internally consistent."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The core claims align with the reference, but it adds extra specifics such as the IPCC report name, named regions, and example restoration methods that are not verifiable from the reference alone."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Includes the main argument, all required quantitative findings, socioeconomic impact, adaptation context, and a concluding takeaway."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Includes all reference findings with correct values and accurately reflects the paper's central claim about climate-driven marine ecosystem disruption."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Coherent and concise, but the information is packed into a dense paragraph, which slightly reduces readability compared with a more clearly segmented format."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The key statistics match the reference, though it adds details such as named regions and adaptation measures that cannot be confirmed from the evaluation reference alone."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers the main argument, all five required findings, economic implications, adaptation strategies, and the conclusion about urgent emissions reduction."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately reflects all key findings in the reference and preserves a neutral summary of impacts, adaptation limits, and conclusions."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-organized as a concise multi-sentence paragraph with a clear flow from impacts to evidence to conclusion."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "No obvious invented quantitative claims, but it still introduces some details not directly verifiable from the reference, such as specific adaptation strategies and timing language."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Addresses the main argument, all required reference findings, economic consequences, adaptation context, and the concluding implication that urgent mitigation is needed."
+      }
+    }
+  }
+}

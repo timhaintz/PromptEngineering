@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-29T22:42:00.805006+00:00",
+  "pattern": {
+    "key": "across_translation_summarise_translate",
+    "logic": "Across",
+    "subcategory": "Translation",
+    "task_title": "Summarise a text and translate to French",
+    "task_description": "Produce a concise English summary of the provided text and then translate that summary into French.",
+    "naive_request": "Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "role": "You are a bilingual technical writer who produces concise summaries and accurate French translations.",
+    "context": "The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.",
+    "instructions": [
+      "Summarise the text in 2-3 concise English sentences.",
+      "Translate the summary into French, preserving tone and terminology.",
+      "Flag any idiomatic expressions that may not translate directly.",
+      "Do not add information beyond what the source text contains."
+    ],
+    "technique": "Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.",
+    "output": "Return two sections: English Summary and French Translation.",
+    "reference_notes": "A strong answer produces a faithful summary and an accurate French translation without adding new claims.",
+    "source_paper_id": "30",
+    "source_pattern_id": "30-6-0",
+    "source_paper_title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+    "source_pattern_name": "Summarization and Translation"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.999997,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 0.999997
+      },
+      "mean_similarity": 0.999998,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are verbatim identical in both the English summary and the French translation. They satisfy the task in exactly the same way, with no differences in meaning, structure, or added/omitted claims.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 816.0,
+        "output_tokens": 118.0,
+        "total_tokens": 934.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.996498,
+        "run_1_run_3": 0.995281,
+        "run_2_run_3": 0.997849
+      },
+      "mean_similarity": 0.996543,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same task in the same overall structure: an English summary, a French translation, and the same note about idiomatic expressions. The summary content is substantively identical across runs, and the French translations preserve the same meaning without introducing new claims. Differences are limited to minor wording and terminology choices (e.g., 'SLAs' vs 'accords de niveau de service', 's'engager dans' vs 'adopter', and Run 3's more anglicized 'scaling'), which do not materially change the output for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 876.0,
+        "output_tokens": 953.0,
+        "total_tokens": 1829.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.974,
+        "run_1_run_3": 0.985062,
+        "run_2_run_3": 0.984637
+      },
+      "mean_similarity": 0.981233,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs complete the same task in materially the same way: they provide a faithful English summary of the source, note that there are no idioms needing special handling, and give an accurate French translation conveying the same key points. The differences are limited to minor phrasing choices (e.g., 'transformed' vs. 'revolutionized,' 'strategy' vs. 'approach,' and slight syntactic variation in the French), with no substantive change in meaning or added claims.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 883.0,
+        "output_tokens": 370.0,
+        "total_tokens": 1253.0
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T05:05:28.249696+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "variant": "naive",
+  "run_index": 2,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.\n\nTask Material:\nSystem: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+  "output": "Below is the typical set of **files** and **functions/classes** you\u2019d need to change in a Python/FastAPI user registration service when adding a new **mandatory** field `phone_number` to `POST /users` (and usually returning it from `GET /users/{id}`).\n\n## 1) OpenAPI specification\n- **File:** `openapi.yaml` (or `openapi.json`)\n  - **Change:** Update the `POST /users` requestBody schema:\n    - Add `phone_number`\n    - Add it to `required: [...]`\n  - **Change:** Update the `GET /users/{id}` response schema to include `phone_number` (if your API returns all user fields).\n\n## 2) Pydantic schemas (request/response models)\n- **File:** `app/schemas/user.py` (or `app/schemas.py`)\n  - **Class/model to modify:** `UserCreate` (or equivalent request model for POST)\n    - Add `phone_number: str` (no default \u2192 mandatory)\n    - Add any validation (e.g., regex/length) if you enforce format\n  - **Class/model to modify:** `UserOut` / `UserRead` / `UserResponse` (response model for GET)\n    - Add `phone_number: str` so it appears in responses\n\n## 3) API route handlers (FastAPI endpoints)\n- **File:** `app/api/routes/users.py` (or `app/routers/users.py`)\n  - **Function to modify:** `create_user(...)` (handler for `POST /users`)\n    - Ensure it accepts the updated `UserCreate` schema and passes `phone_number` through to the CRUD/service layer\n  - **Function to modify (likely):** `get_user(...)` (handler for `GET /users/{id}`)\n    - If you use a response model, ensure it includes `phone_number` (may be automatic once schemas are updated)\n\n## 4) Database model (ORM)\n- **File:** `app/models/user.py` (SQLAlchemy model)\n  - **Class to modify:** `User` model\n    - Add a `phone_number` column, typically `nullable=False` since it\u2019s mandatory\n    - If you require uniqueness, add `unique=True` and/or an index\n\n## 5) CRUD / service layer logic\n- **File:** `app/crud/users.py` (or `app/crud/user.py`, or `app/services/users.py`)\n  - **Function to modify:** `create_user(db, user_create)` (or similar)\n    - Include `phone_number` when constructing the ORM `User` instance\n  - **Function to review/modify:** any `update_user(...)` or mapping/serialization helpers, if they explicitly enumerate fields\n\n## 6) Database migration\n- **File:** `alembic/versions/<new_migration>.py` (if using Alembic)\n  - **Functions to modify:** `upgrade()` / `downgrade()`\n    - Add the new column `phone_number` with `nullable=False`\n    - If the table already has rows, you\u2019ll need a strategy (e.g., temporary nullable + backfill + set non-null, or a server default during migration)\n\n## 7) Tests\n- **Files:** e.g., `tests/test_users.py`, `tests/test_user_routes.py`\n  - **Tests to modify/add:**\n    - Existing tests that call `POST /users` must now include `phone_number`\n    - Add a test ensuring missing `phone_number` returns a 422 validation error\n    - Update expected `GET /users/{id}` response assertions to include `phone_number` (if returned)\n\n## 8) Any generated client / DTOs (if applicable)\n- **Files:** generated SDK models or client code (paths vary)\n  - **Change:** Regenerate or update client request/response models to include required `phone_number`\n\nIf you share your actual project structure (file tree or key files), I can map this to your exact filenames and function names precisely.",
+  "reasoning_content": null,
+  "response_id": "resp_0e7aabfce1f965f90069ca0482d1d88193a2e4dde20c74c488",
+  "usage": {
+    "input_tokens": 126.0,
+    "output_tokens": 1110.0,
+    "total_tokens": 1236.0
+  }
+}

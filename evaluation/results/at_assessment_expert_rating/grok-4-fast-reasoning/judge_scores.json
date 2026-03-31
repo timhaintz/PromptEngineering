@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T23:54:52.405455+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_09e2e0d87f5f699d0069c9ba96907c8195987c027f094f60e6",
+  "usage": {
+    "input_tokens": 5132.0,
+    "output_tokens": 5973.0,
+    "total_tokens": 11105.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 3,
+        "justification": "The weights are sensible and all six platforms are rated across all criteria, but the stated weighted totals/ranking do not clearly follow from its own 1-7 scale and listed ratings."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The answer is organized with clear headings and consistent per-platform bullets, but comparison is less standardized than a single rating matrix."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "It is mostly cautious, but it references reviews/case studies without citations and includes specific feature/cost claims that appear dated or unverified."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes justified weights, ratings for all six platforms on every criterion, and an overall synthesis."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 3,
+        "justification": "The matrix is thorough and most ratings are plausible, but the approximate total scores appear inconsistent with the table and some platform details are questionable or dated."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent structure: a weight table, a full rating matrix, and clearly separated strengths/limitations support easy comparison."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It makes several confident unsupported claims, including a specific '90%+' university usage statistic and source references without citations, which raises fabrication risk."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully covers justified weights, all six platforms across all criteria, and adds strengths, limitations, and a recommendation."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The weights and platform ratings are generally plausible and internally consistent, and it avoids questionable weighted-score calculations; only a few platform-specific details seem overstated or dated."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The weight table, rating matrix, and uniform strengths/limitations bullets are clean and highly consistent."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "It includes fewer unsupported quantitative claims than B, but still invokes external benchmarks without citation and contains some specific assertions that may be outdated."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It provides justified weights, ratings for all six platforms across every criterion, and per-platform strengths/limitations."
+      }
+    }
+  }
+}

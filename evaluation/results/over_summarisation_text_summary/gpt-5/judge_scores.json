@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-31T02:48:16.961985+00:00",
+  "pattern": {
+    "key": "over_summarisation_text_summary",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Summarise a research paper on climate change",
+    "task_description": "Produce a concise, neutral summary of the provided text highlighting main arguments, key findings, and conclusions.",
+    "naive_request": "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.",
+    "task_material": "Rising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+    "role": "You are an executive communications analyst who produces neutral, concise research summaries.",
+    "context": "The summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.",
+    "instructions": [
+      "Identify the main arguments presented in the text.",
+      "Highlight the key quantitative findings.",
+      "Note the conclusions and any implications or limitations.",
+      "Keep the summary concise and maintain a neutral tone."
+    ],
+    "technique": "Use hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.",
+    "output": "Return a concise summary of 3-5 sentences covering arguments, findings, and conclusions.",
+    "reference_notes": "Key findings to include: 40% increase in bleaching, 70km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, $10B annual fisheries impact.",
+    "source_paper_id": "71",
+    "source_pattern_id": "71-25-0",
+    "source_paper_title": "ChatGPT for higher education and professional development: A guide to conversational AI",
+    "source_pattern_name": "Text Summarization"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0b506ec14034c6f10069cb34deb4988196ad44fb5a57983d95",
+  "usage": {
+    "input_tokens": 1273.0,
+    "output_tokens": 4891.0,
+    "total_tokens": 6164.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Matches all reference findings: 40% increase in bleaching, about 70 km/decade migration, 70-90% coral degradation by 2050, expanding dead zones, and roughly $10B annual fisheries impact. No clear contradiction to the reference is present."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Readable and consistent bullet format with clear subheads, but it is more segmented and slightly less concise than a typical single-summary presentation."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded in the reference, but it adds specifics not confirmed there (e.g., 2020-2025 framing, IPCC AR6, named regions, adaptation measures), which creates some fabrication risk."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers the main argument, all key quantitative findings in the reference, and includes a concluding point about adaptation limits and economic effects."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately includes every reference point with correct values and timing while preserving a neutral account of ecosystem and livelihood impacts."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear, concise, and internally consistent single-paragraph summary with a neutral academic tone."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "No obvious contradiction, but it introduces details not verifiable from the reference alone, such as the 2020-2025 framing, IPCC AR6, specific regions, and adaptation options."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Addresses the core argument, all five required findings, and the conclusion about adaptation constraints and economic losses."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Includes all required findings with correct figures and preserves a neutral summary of ecological and economic effects."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-formed, concise paragraph with consistent style and good flow."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Like B, it appears mostly grounded but adds several specifics not established by the reference alone, so fabrication risk is low rather than minimal."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers all key findings in the reference and includes the broader conclusion about adaptation difficulty and fisheries impacts."
+      }
+    }
+  }
+}

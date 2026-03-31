@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T02:20:49.817741+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_01dd47b578c27bf00069c9dd3b7d848196ae176fbb85198314",
+  "usage": {
+    "input_tokens": 748.0,
+    "output_tokens": 1347.0,
+    "total_tokens": 2095.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly computes 5 \u00d7 4 = 20 and 9 + 20 = 29, matching the reference answer."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Uses a clear step-by-step structure and explicitly states the final answer, consistent with the task instructions."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Introduces no unsupported facts; all quantities and steps align with the given problem."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully solves the problem with intermediate arithmetic and the final result of 29."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not perform the calculation or provide the answer; it incorrectly asks for information that is already available in the task context."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "Does not follow the requested step-by-step arithmetic format and gives no final answer."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Does not invent any numbers or unsupported details."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Fails to solve the math problem and omits both the arithmetic steps and the final result."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not solve the problem or state the correct answer; it asks for the scenario instead of using the provided one."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "Provides only a clarification request rather than the required step-by-step solution and final answer."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Avoids making up facts or numbers not present in the prompt."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Does not complete the assigned task because it gives neither the calculation steps nor the final answer."
+      }
+    }
+  }
+}

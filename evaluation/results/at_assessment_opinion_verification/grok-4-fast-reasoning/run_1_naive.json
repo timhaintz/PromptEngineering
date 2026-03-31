@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T03:03:15.247448+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+  "output": "No, the statement is false. This is a persistent myth, but it's been debunked by NASA, astronauts, and scientific observations. \n\nFrom low Earth orbit (e.g., the International Space Station at ~400 km altitude), the Great Wall can sometimes be spotted with the naked eye under ideal conditions\u2014clear weather, proper lighting, and knowing exactly where to look\u2014but it's not uniquely visible or easy to see. Other large man-made features, like highways, dams, and cities, are equally or more discernible from that height.\n\nFrom higher altitudes, such as the Moon (~384,000 km away) or deep space, the Wall is far too narrow (typically 4-9 meters wide) and blends into the landscape, making it invisible to the unaided eye. Apollo astronauts confirmed this during lunar missions, and satellite imagery requires zooming in to detect it clearly.\n\nFor reliable sources, check NASA's Earth Observatory or statements from astronauts like Chris Hadfield, who has photographed it from orbit but emphasized it's not a \"space-visible wonder\" as popularly claimed.",
+  "reasoning_content": null,
+  "response_id": "e8c0b85e-f8e5-4b12-a127-37612e59d317",
+  "usage": {
+    "input_tokens": 33.0,
+    "output_tokens": 211.0,
+    "total_tokens": 416.0
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "timestamp_utc": "2026-03-29T21:58:31.492951+00:00",
+  "pattern": {
+    "key": "across_comparison_attendance",
+    "logic": "Across",
+    "subcategory": "Comparison",
+    "task_title": "Compare two numeric values and select the larger",
+    "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+    "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+    "task_material": "",
+    "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+    "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+    "instructions": [
+      "Extract the numeric attendance value for each round.",
+      "Handle thousands separators (commas) correctly during comparison.",
+      "State which round has the higher attendance.",
+      "Provide the numeric values to justify the comparison."
+    ],
+    "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+    "output": "Return the round name with the higher attendance and both numeric values.",
+    "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+    "source_paper_id": "20",
+    "source_pattern_id": "20-2-0",
+    "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+    "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs produce the same selection and the same numeric comparison, matching the reference answer in meaning and structure. They satisfy the task in materially the same way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 263.0,
+        "output_tokens": 97.0,
+        "total_tokens": 360.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.752681,
+        "run_1_run_3": 0.714393,
+        "run_2_run_3": 0.925399
+      },
+      "mean_similarity": 0.797491,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs have the same functional outcome: they do not perform the comparison, state that the attendance figures are missing, and ask the user to provide the two values before proceeding. The differences are only in formatting and verbosity (Run 1 is brief; Runs 2 and 3 add step-by-step normalization/comparison explanations), not in meaning or task behavior.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 645.0,
+        "output_tokens": 546.0,
+        "total_tokens": 1191.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.711647,
+        "run_1_run_3": 0.666191,
+        "run_2_run_3": 0.90444
+      },
+      "mean_similarity": 0.760759,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The runs are not functionally equivalent. Runs 1 and 2 decline to answer because they claim the numeric inputs are missing, while Run 3 invents placeholder values and selects Round 1 as larger. This changes the task outcome materially, and none of the runs produce the correct comparison from the reference.",
+        "material_differences": [
+          "Run 1 asks the user to provide attendance figures and gives no comparison result.",
+          "Run 2 explicitly states no valid comparison is possible due to missing data.",
+          "Run 3 performs a comparison using fabricated example values (12,345 vs 10,000) and concludes Round 1 is higher.",
+          "Run 3 returns a concrete winner, whereas Runs 1 and 2 do not determine any winner.",
+          "The response structures differ meaningfully: brief clarification request (Run 1) vs detailed non-answer (Run 2) vs detailed but incorrect answer based on placeholders (Run 3)."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 756.0,
+        "output_tokens": 448.0,
+        "total_tokens": 1204.0
+      }
+    }
+  }
+}

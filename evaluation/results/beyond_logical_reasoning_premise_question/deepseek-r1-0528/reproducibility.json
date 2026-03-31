@@ -1,0 +1,97 @@
+{
+  "timestamp_utc": "2026-03-30T04:07:31.018351+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.96723,
+        "run_1_run_3": 0.958999,
+        "run_2_run_3": 0.966679
+      },
+      "mean_similarity": 0.964303,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same substantive answer: they reject the target conclusion and argue that 'includes a conflict resolution module' does not entail that Sarah completed that module. They all use the same core reasoning (possible optional module / missing premise connecting training completion to module completion) and therefore fail the task in the same way relative to the reference. Differences are only in presentation, detail, and examples, not in functional outcome.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 2101.0,
+        "output_tokens": 515.0,
+        "total_tokens": 2616.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.872149,
+        "run_1_run_3": 0.563075,
+        "run_2_run_3": 0.589769
+      },
+      "mean_similarity": 0.674998,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. Runs 1 and 2 both fail to analyze the provided target argument and instead claim the premises/conclusion were missing, but even those two differ in behavior: Run 1 includes a full worked renewable-energy example, while Run 2 only gives a procedural template. Run 3 behaves differently again by performing a complete step-by-step analysis of an unrelated tax-refund argument and concluding that it follows logically. For reproducibility purposes, these are materially different outputs in both content and task fulfillment.",
+        "material_differences": [
+          "Runs 1 and 2 request missing input instead of evaluating the target Sarah/manager/training argument.",
+          "Run 1 includes a detailed worked example about renewable energy and climate change; Run 2 does not provide a concrete example, only a method outline.",
+          "Run 3 analyzes a different argument entirely (John/tax refund) rather than the target argument.",
+          "Run 3 reaches a concrete verdict on the unrelated example, whereas Runs 1 and 2 do not evaluate the intended case at all.",
+          "The substantive subject matter and premises differ across runs (renewable energy, generic instructions, tax refund), so the reasoning is not materially the same."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2002.0,
+        "output_tokens": 601.0,
+        "total_tokens": 2603.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.652219,
+        "run_1_run_3": 0.568879,
+        "run_2_run_3": 0.572366
+      },
+      "mean_similarity": 0.597821,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally equivalent. All fail to address the reference Sarah/manager/training argument, and they diverge materially in both content and task fulfillment: Run 1 analyzes an unrelated carbon-tax syllogism and says the conclusion is valid if premises hold; Run 2 does not perform the task at all and instead asks for missing premises; Run 3 analyzes an unrelated free-speech/unconstitutionality argument and concludes the conclusion does not follow. These are different outputs for research purposes, not minor paraphrases.",
+        "material_differences": [
+          "Run 1 uses an unrelated air-pollution/carbon-tax example.",
+          "Run 2 does not analyze any argument and instead requests the user to provide premises/conclusion.",
+          "Run 3 uses an unrelated free-speech/constitutionality example.",
+          "Run 1's verdict is that the argument is logically valid if premises are true; Run 3's verdict is that the conclusion does not follow; Run 2 gives no verdict.",
+          "Only Runs 1 and 3 provide stepwise branch analysis; Run 2 is a clarification request rather than a completed reasoning task."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2079.0,
+        "output_tokens": 521.0,
+        "total_tokens": 2600.0
+      }
+    }
+  }
+}

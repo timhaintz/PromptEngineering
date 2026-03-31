@@ -1,0 +1,103 @@
+{
+  "timestamp_utc": "2026-03-30T00:02:00.015801+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.950585,
+        "run_1_run_3": 0.9518,
+        "run_2_run_3": 0.998639
+      },
+      "mean_similarity": 0.967008,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs use the same weighting scheme and broadly the same evaluation framework, and they reach similar high-level conclusions (Zoom/Teams/Meet strongest; WhatsApp/FaceTime weaker). However, they are not functionally identical because the actual platform ratings vary across runs on multiple criteria, and Run 1 includes an additional weighted overall scoring/ranking section that Runs 2 and 3 omit. Since the task is to rate platforms using weighted criteria, these rating and output-structure differences are material for research use.",
+        "material_differences": [
+          "Run 1 provides explicit overall weighted scores and a final ranked summary; Runs 2 and 3 do not.",
+          "Several core ratings change across runs, especially for Zoom, Microsoft Teams, Skype, WhatsApp, and FaceTime (e.g., Zoom ease of use/cost/user experience; Teams security; Skype ease/functionality/compatibility/security; FaceTime security/functionality).",
+          "Run 2 and Run 3 are closer to each other than to Run 1, but they still differ on some assigned ratings, such as WhatsApp compatibility and FaceTime ease of use/functionality.",
+          "Because the exact criterion ratings are part of the main task output, these are not just wording differences\u2014they would change any downstream comparison or weighted aggregation."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 4835.0,
+        "output_tokens": 1488.0,
+        "total_tokens": 6323.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.932407,
+        "run_1_run_3": 0.932407,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 0.954938,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three outputs have the same overall structure, use the same criteria and weights, and reach a broadly similar high-level conclusion about stronger and weaker platforms. However, they are not functionally identical because Run 1 assigns multiple different ratings from Runs 2 and 3, and it also includes an extra weighted-score/recommendation section. Those differences could change comparative scoring and platform ranking in a research setting.",
+        "material_differences": [
+          "Runs 2 and 3 are effectively identical, but Run 1 differs on several rating cells in the platform matrix.",
+          "Run 1 rates Zoom cost as Medium, while Runs 2/3 rate it Medium High.",
+          "Run 1 rates Microsoft Teams user experience as High, while Runs 2/3 rate it Medium High.",
+          "Run 1 gives Skype different ratings on multiple criteria (e.g., Ease of Use, Functionality, Compatibility, Cost) versus Runs 2/3.",
+          "Run 1 rates Google Meet compatibility as Very High and cost as Medium High, while Runs 2/3 rate both as High.",
+          "Run 1 rates FaceTime differently on Ease of Use, Security, and Technical Support versus Runs 2/3.",
+          "Run 1 includes per-cell explanatory text inside the rating matrix and adds approximate weighted totals/final recommendation; Runs 2/3 do not."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 4037.0,
+        "output_tokens": 1010.0,
+        "total_tokens": 5047.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.982607,
+        "run_1_run_3": 0.994999,
+        "run_2_run_3": 0.982726
+      },
+      "mean_similarity": 0.986777,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs share the same weighting scheme, overall structure, and broad conclusions about which platforms are strongest or weakest, but they are not materially the same evaluation. Several platform-by-criterion ratings change across runs, including differences between Runs 1 and 3, and Run 2 adds a numeric scoring/ranking method that materially changes the form of the answer by naming Microsoft Teams as the top platform. For reproducibility research, these are meaningful inconsistencies rather than minor wording variations.",
+        "material_differences": [
+          "Run 2 changes multiple ratings versus the other runs, including Zoom (Ease of Use and User Experiences reduced from Very High to High), Google Meet (Compatibility and Integration reduced from Very High to High), WhatsApp (Ease of Use raised from High to Very High), and Microsoft Teams (User Experiences lowered from High to Medium High).",
+          "Skype is rated inconsistently across runs: Functionality is Medium in Run 1 but Medium Low in Runs 2 and 3; Compatibility is Medium Low in Run 1 but Medium in Runs 2 and 3; Ease of Use is High in Runs 1 and 3 but Medium High in Run 2.",
+          "FaceTime differs materially across runs: Run 1 rates Ease of Use as Very High and Compatibility as Very Low, while Runs 2 and 3 rate Ease of Use as High and Compatibility as Low; Support and Functionality/User Experience also vary.",
+          "Run 2 includes an explicit numerical scale, weighted overall scores, and a declared top platform (Microsoft Teams at 82.5), while Runs 1 and 3 provide only qualitative matrices without overall scoring."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 4031.0,
+        "output_tokens": 1979.0,
+        "total_tokens": 6010.0
+      }
+    }
+  }
+}

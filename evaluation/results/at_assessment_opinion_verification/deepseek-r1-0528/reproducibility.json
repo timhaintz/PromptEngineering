@@ -1,0 +1,95 @@
+{
+  "timestamp_utc": "2026-03-30T03:24:54.301717+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.958936,
+        "run_1_run_3": 0.97113,
+        "run_2_run_3": 0.957475
+      },
+      "mean_similarity": 0.962514,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same factual verdict: the claim is false, because the Great Wall is generally not visible to the naked eye from low Earth orbit. Each supports that conclusion with the same core reasons\u2014insufficient width/contrast, limits of human visual acuity, and astronaut testimony\u2014and each notes that the wall may be captured with cameras or under special conditions but not by unaided vision. The differences are only in emphasis, examples, and level of detail, not in task completion or substantive conclusion.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 2026.0,
+        "output_tokens": 466.0,
+        "total_tokens": 2492.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.784239,
+        "run_1_run_3": 0.495395,
+        "run_2_run_3": 0.544752
+      },
+      "mean_similarity": 0.608129,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally equivalent. Runs 1 and 2 both say no claim was provided and return an 'Uncertain' verdict asking for a concrete statement, while Run 3 instead evaluates a different claim ('vaccines cause autism') and returns 'False' with supporting evidence. None of the runs verify the target Great Wall claim, and Run 3 materially diverges in both topic and task completion.",
+        "material_differences": [
+          "Runs 1 and 2 state that no specific claim was provided; Run 3 assumes and fact-checks a different claim.",
+          "Runs 1 and 2 give an 'Uncertain' verdict due to missing input; Run 3 gives a definitive 'False' verdict.",
+          "Run 3 discusses vaccine-autism evidence, which is unrelated to the evaluation reference about the Great Wall's visibility from orbit.",
+          "Runs 1 and 2 are structurally similar meta-responses requesting clarification; Run 3 is a full factual rebuttal on a separate subject."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 898.0,
+        "output_tokens": 371.0,
+        "total_tokens": 1269.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.405612,
+        "run_1_run_3": 0.367149,
+        "run_2_run_3": 0.790481
+      },
+      "mean_similarity": 0.521081,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The runs are not functionally identical. Run 1 evaluates a specific, different claim about the comparative lengths of the Great Wall of China and the Great Wall of Gorgan and returns a False verdict with supporting evidence and sources. Runs 2 and 3 do not evaluate any claim; they state that no claim was provided and return Uncertain / request clarification. These differences change both the meaning and the task fulfillment in a material way.",
+        "material_differences": [
+          "Run 1 fact-checks a concrete claim about wall lengths; Runs 2 and 3 say there is no claim to verify.",
+          "Run 1 gives a definitive False verdict; Runs 2 and 3 give an Uncertain/no-claim response.",
+          "Run 1 provides detailed evidence and citations; Runs 2 and 3 provide procedural clarification instead of factual verification.",
+          "Runs 2 and 3 are broadly similar to each other, but neither is functionally equivalent to Run 1."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 715.0,
+        "output_tokens": 557.0,
+        "total_tokens": 1272.0
+      }
+    }
+  }
+}

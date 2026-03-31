@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-31T02:12:13.230808+00:00",
+  "pattern": {
+    "key": "over_synthesis_claim_extraction",
+    "logic": "Over",
+    "subcategory": "Synthesis",
+    "task_title": "Extract atomic claims from a book summary",
+    "task_description": "Break a summary into self-contained atomic claims that can each be independently verified against the source text.",
+    "naive_request": "You are trying to verify the faithfulness of statements made in a given summary of a book against the actual text of the book. To do so, you first need to break the summary into a set of \"atomic claims\", each of which will then be passed to a human who will verify its faithfulness. Each claim should be self-contained with all the necessary context. Each claim should contain no more than two sentences. Each individual claim should be on its own line prefixed by a \"- \".\n\nSummary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "task_material": "Summary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "role": "You are a claim extraction specialist who decomposes summaries into independently verifiable atomic statements.",
+    "context": "Each extracted claim will be passed to a human fact-checker who will verify it against the source text. Claims must be self-contained so the checker does not need additional context.",
+    "instructions": [
+      "Break the summary into atomic, self-contained claims.",
+      "Each claim must include sufficient context to be verified independently.",
+      "Limit each claim to no more than two sentences.",
+      "Prefix each claim with a dash and put each on its own line."
+    ],
+    "technique": "Use structured decomposition: parse the summary sentence by sentence and extract each discrete factual assertion as a standalone claim.",
+    "output": "Return a list of atomic claims, each prefixed with a dash on its own line.",
+    "reference_notes": "Should extract claims about: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership, vote to sell property, development company, Carlos Mendez as treasurer, his motive.",
+    "source_paper_id": "63",
+    "source_pattern_id": "63-0-0",
+    "source_paper_title": "FABLES: Evaluating faithfulness and content selection in book-length summarization",
+    "source_pattern_name": "Claim Extraction"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0ae5434060ddcf190069cb2c430e8881908c0da6305bf60ee2",
+  "usage": {
+    "input_tokens": 1027.0,
+    "output_tokens": 5678.0,
+    "total_tokens": 6705.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The core facts match the reference, but several bullets add framing not in the reference (e.g., 'discovers'/'reveals') and bundle multiple facts together."
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "It uses a consistent bullet list, but most bullets contain multiple claims, so the output is not consistently atomic."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded in the source facts, though it introduces mild unsupported narrative phrasing such as Maria 'discovering' and the investigation 'revealing' facts."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It covers all major reference points, but the summary is compressed into five broader statements rather than fully broken into self-contained atomic claims."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The claims closely track the reference: setting, time, Maria as detective, sailing club membership, sale vote, development company, Carlos as treasurer, and motive."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The bullets are uniform and mostly one fact per line, though a few still combine atomic details (e.g., Porto Azul + summer 2019; vote + development company)."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It stays close to the source content and avoids extra narrative additions beyond the referenced facts."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "All key reference elements are present, including Carlos Mendez's role and motive, with better decomposition than A."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Most claims align with the reference, but 'The story is set in a novel' is inaccurate/irrelevant, and some lines slightly reframe setting details as properties of the disappearances."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The decomposition is fairly granular, but self-containment slips in lines like 'The orchestration was...' and in the malformed first claim."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "It introduces a clearly unsupported or ill-formed claim ('The story is set in a novel') and some awkward abstractions not directly stated in the reference."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It includes all major reference facts and separates several details well, but the extra bad claim and non-self-contained motive lines keep it from fully satisfying the task."
+      }
+    }
+  }
+}

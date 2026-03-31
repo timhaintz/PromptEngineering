@@ -1,0 +1,92 @@
+{
+  "timestamp_utc": "2026-03-30T03:14:39.189553+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 0.972755,
+        "run_2_run_3": 0.972755
+      },
+      "mean_similarity": 0.981837,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs give the same verdict (the claim is false) and support it in materially the same way: they explain that visibility of the Great Wall from low Earth orbit is at best difficult and conditional, not a reliable naked-eye phenomenon, and that from much higher altitudes it is not visible. Runs 1 and 2 are identical; Run 3 differs only in minor wording, source citation style, and slightly different wall-width figures, without changing the substance or task fulfillment.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 880.0,
+        "output_tokens": 269.0,
+        "total_tokens": 1149.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.663617,
+        "run_1_run_3": 0.630255,
+        "run_2_run_3": 0.746568
+      },
+      "mean_similarity": 0.680147,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs respond in materially the same way: they do not evaluate the referenced factual claim and instead state that no specific claim was provided, requesting one before giving a verdict. For reproducibility purposes, they fail the task in the same way and have the same practical meaning and outcome.",
+        "material_differences": [
+          "Run 1 does not explicitly label the result as 'Uncertain,' while Runs 2 and 3 do.",
+          "Runs 2 and 3 provide slightly more explanation; Run 2 includes an example claim, while Run 3 notes that only role/instructions were provided."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 345.0,
+        "output_tokens": 343.0,
+        "total_tokens": 688.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.593065,
+        "run_1_run_3": 0.544492,
+        "run_2_run_3": 0.903766
+      },
+      "mean_similarity": 0.680441,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in substance: instead of evaluating the factual claim, they state that no specific claim was provided and ask the user to supply one. For reproducibility purposes, they make the same decision, give the same practical next step, and fail the task in the same way.",
+        "material_differences": [
+          "Run 1 explicitly gives a verdict of 'Uncertain,' while Runs 2 and 3 do not provide a formal verdict label.",
+          "Run 1 includes extra framing about evidence-based analysis and a brief note about misconceptions; Runs 2 and 3 are shorter.",
+          "Run 2 promises a 'True / False / Uncertain' verdict format, while Run 3 only promises a clear verdict without naming categories."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 354.0,
+        "output_tokens": 339.0,
+        "total_tokens": 693.0
+      }
+    }
+  }
+}

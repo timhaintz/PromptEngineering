@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T13:14:08.022262+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_08aa6eac24a29f5c0069ca76258ab08195bd8d3e971ee8ffb0",
+  "usage": {
+    "input_tokens": 899.0,
+    "output_tokens": 2098.0,
+    "total_tokens": 2997.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The final output matches the reference result exactly: \"J R\"."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "It does not provide explicit, numbered sub-questions or intermediate results; it is only a bare final answer."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It introduces no unsupported intermediate content or invented input; it only states the final result."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It omits the required decomposition steps (split, extract first letters, merge) and their intermediate outputs."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It processes an unrelated string and therefore does not match the reference decomposition or final answer for [\"Jack\", \"Ryan\"] \u2192 [\"J\", \"R\"] \u2192 \"J R\"."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "It is mostly well-structured with stepwise questions, operation labels, and intermediate answers, though the label sequence is slightly inconsistent (\"QC1\" then \"Q2\")."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "It invents and processes a different input string taken from prompt text rather than the target example, which is a clear fabrication relative to the task."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes all requested decomposition components: splitting into words, extracting first letters, and merging them into a final spaced string."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 2,
+        "justification": "It gives a correct generic template for the decomposition, but it does not actually perform the task on the target input or produce the reference result."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The structure is clear and consistent, with explicit staged sub-questions and operation labels for split, extract, and merge."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It avoids inventing any input or intermediate values and explicitly marks missing information as pending."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It outlines the needed steps, but leaves all intermediate results and the final answer unresolved, so the task is not actually completed."
+      }
+    }
+  }
+}

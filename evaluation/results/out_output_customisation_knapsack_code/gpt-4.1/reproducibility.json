@@ -1,0 +1,88 @@
+{
+  "timestamp_utc": "2026-03-30T08:31:15.749354+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.984283,
+        "run_1_run_3": 0.959292,
+        "run_2_run_3": 0.94937
+      },
+      "mean_similarity": 0.964315,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs use essentially the same bottom-up dynamic-programming 0/1 knapsack code and solve the task in the same general way. However, they are not fully functionally identical because Run 1 includes an explicit output example claiming items [1, 2, 3, 4], which is incorrect for the stated 10 kg limit, while Run 3 changes the program's observable output by adding per-item detail prints. Those are material differences for reproducibility/evaluation, even though the core algorithm is the same.",
+        "material_differences": [
+          "Run 1 includes a wrong illustrative output example: 'Items included (1-based index): [1, 2, 3, 4]', which exceeds the weight limit and is inconsistent with the code/reference.",
+          "Run 3 adds extra output behavior by printing detailed value/weight information for each selected item, whereas Runs 1 and 2 only print the maximum value and selected indices."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1705.0,
+        "output_tokens": 2173.0,
+        "total_tokens": 3878.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.807831,
+        "run_1_run_3": 0.815395,
+        "run_2_run_3": 0.984465
+      },
+      "mean_similarity": 0.86923,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs provide the same 0/1 knapsack Python solution: identical item data, capacity, dynamic-programming table construction, backtracking logic, and result-printing behavior. Runs 2 and 3 are essentially identical, and Run 1 differs only by adding a sample output and a brief explanation. For research purposes, they satisfy the task in materially the same way and would produce the same solution behavior.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 2268.0,
+        "output_tokens": 1185.0,
+        "total_tokens": 3453.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.833456,
+        "run_1_run_3": 0.895272,
+        "run_2_run_3": 0.853304
+      },
+      "mean_similarity": 0.860677,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs provide working Python code for the same 0/1 knapsack instance using the same dynamic-programming-plus-backtracking approach, and they solve the task in materially the same way. Differences are limited to presentation (markdown framing, comments, tuple vs. dict item representation, and output formatting). Each run would return an optimal 10 kg solution with total value 24, which is equivalent for the stated evaluation reference.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 2316.0,
+        "output_tokens": 920.0,
+        "total_tokens": 3236.0
+      }
+    }
+  }
+}

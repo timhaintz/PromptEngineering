@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T21:32:05.565484+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0ce6bdfa1d35d7cd0069c9996e6b288190be52702bd65d7839",
+  "usage": {
+    "input_tokens": 881.0,
+    "output_tokens": 2237.0,
+    "total_tokens": 3118.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Takes a clear pro-remote position and gives relevant productivity reasons, but it does not provide concrete evidence and overstates consensus with phrases like \"overwhelming evidence.\""
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "No greeting and the structure is clear, but it uses four sentences rather than staying under four as preferred in the reference."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Avoids risky named studies or statistics, though it makes broad factual claims without support."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Includes a clear stance and multiple supporting points, but it falls short of the reference standard for evidence-backed reasoning."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Directly answers the prompt with a clear stance and relevant evidence-backed reasoning, including a specific Stanford productivity finding."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Three sentences, no greeting, concise, and well suited to a structured debate opening."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The cited evidence is plausible and specific, but the Gallup claim is summarized broadly without enough context to fully verify it."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "States a position, supports it with evidence, and delivers a persuasive opening argument fully within the requested format."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Presents a clear pro-remote argument with supporting reasoning, but some study references and causal claims are more overstated or less clearly tied to productivity than in B."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Three sentences, no greeting, and concise while still sounding like a debate opening statement."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "Introduces multiple specific institutional and journal references without context, increasing the risk of overstatement or misattribution."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Provides a full opening argument with a clear stance, supporting points, and rebuttal framing while staying within the preferred length."
+      }
+    }
+  }
+}

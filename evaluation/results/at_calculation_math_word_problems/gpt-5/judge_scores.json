@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T02:27:31.444064+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_01334390195d01b40069c9dec26d8c8193980da006e3b95484",
+  "usage": {
+    "input_tokens": 842.0,
+    "output_tokens": 3307.0,
+    "total_tokens": 4149.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Matches the reference exactly: 4 days \u00d7 5 = 20, then 9 + 20 = 29."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear step-by-step layout with each arithmetic step separated and the final total stated."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Uses only the given quantities and relationships; no unsupported facts or invented numbers are introduced."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully completes the task by showing the arithmetic and giving the final answer of 29 computers."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not solve the problem and incorrectly claims the needed numbers are missing, even though the reference information is sufficient to get 29."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Well organized with a numbered list and clear placeholders, but it is formatted as a clarification request rather than the requested worked solution."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It does not invent any numbers or a false result, though it incorrectly asserts that required information is absent."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "No arithmetic is performed and no final answer is provided."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Fails to compute the answer and wrongly says the actual numbers are missing despite the task having enough information to reach 29."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Readable bullet formatting and emphasized fields make it clear, but it still does not present the required step-by-step solution and final answer."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Avoids making up numerical details or an unsupported answer, but the claim that the inputs are missing is itself not supported by the task."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It does not solve the problem, show the arithmetic, or provide the final answer."
+      }
+    }
+  }
+}

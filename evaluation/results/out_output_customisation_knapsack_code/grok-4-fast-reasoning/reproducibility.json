@@ -1,0 +1,93 @@
+{
+  "timestamp_utc": "2026-03-30T12:08:42.904206+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.925719,
+        "run_1_run_3": 0.920381,
+        "run_2_run_3": 0.971252
+      },
+      "mean_similarity": 0.939117,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs solve the same 0/1 knapsack instance using the same dynamic-programming approach and backtracking logic, yielding the same optimal maximum value and an equivalent optimal item selection. Differences are limited to code organization and output formatting (e.g., function wrapper vs. top-level script, extra total-weight/details printing, and one run listing recovered items in reverse backtracking order), which do not materially change the solution for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 1718.0,
+        "output_tokens": 1402.0,
+        "total_tokens": 3120.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.861079,
+        "run_1_run_3": 0.898208,
+        "run_2_run_3": 0.903973
+      },
+      "mean_similarity": 0.887753,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs use essentially the same 1D dynamic-programming approach and the same flawed backtracking logic, so they are similar in structure. However, they are not functionally identical because they do not report the solution in the same materially consistent way: Runs 1 and 2 print selected items corresponding to Items 1, 4, and 5 while still reporting total value 24 from the DP table, whereas Run 3 prints the selected items' actual total value (18) and separately reports the maximum possible value (24). Run 2 also includes an expected output claiming the optimal set Items 1, 2, 4, 5, which does not match what its code would reconstruct. These differences are material for reproducibility because the observable outputs and implied correctness differ.",
+        "material_differences": [
+          "Runs 1 and 2 report total value as dp[W] = 24 even though their reconstructed selected items correspond to a lower-value subset.",
+          "Run 3 reports total_value as the sum of reconstructed selected items (18) and separately prints maximum possible value 24, producing materially different runtime output from Runs 1 and 2.",
+          "Run 2 includes an 'Expected Output' showing the optimal set Items 1, 2, 4, 5, which is inconsistent with the actual code behavior and with the other runs' reconstructed selection."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1865.0,
+        "output_tokens": 2479.0,
+        "total_tokens": 4344.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.879187,
+        "run_1_run_3": 0.881461,
+        "run_2_run_3": 0.956545
+      },
+      "mean_similarity": 0.905731,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. Runs 1 and 3 both implement the same 1D dynamic-programming knapsack approach and return an optimal solution with total value 24 at weight 10, which is equivalent to the reference even though they choose a different optimal item set. Run 2 uses similar code structure but reconstructs and reports a suboptimal solution with total value 21 and weight 9, so it does not satisfy the task in materially the same way.",
+        "material_differences": [
+          "Run 2 returns a suboptimal selection (items 0, 1, 4) with total value 21 instead of an optimal value 24.",
+          "Runs 1 and 3 report a different optimal item combination (items 0, 1, 2) than the reference set (items 0, 1, 3, 4), but this is still functionally equivalent because the total value is optimal.",
+          "Output formatting differs across runs (1-indexed vs 0-indexed item labels, different headings/verification text), but those differences are not material compared with Run 2's incorrect result."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2371.0,
+        "output_tokens": 772.0,
+        "total_tokens": 3143.0
+      }
+    }
+  }
+}

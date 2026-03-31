@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T05:24:31.095282+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0c2018e9fd7329730069ca080c49d08197b4d32f210e54d1d7",
+  "usage": {
+    "input_tokens": 5509.0,
+    "output_tokens": 4032.0,
+    "total_tokens": 9541.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly identifies the core FastAPI impact points: API/OpenAPI schema, request/response models, database model and migration, CRUD/route handling, and tests. No clear factual errors."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Clear numbered and bulleted structure, but less standardized and less scannable than the more sectioned B/C responses."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Uses representative file/function names but repeatedly qualifies them as typical/common, avoiding unsupported repo-specific claims."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Covers most expected components, especially schema, model, persistence, and tests, but is lighter on explicit documentation and serialization/validation detail than the reference strong answer."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately covers the required impact areas and adds correct migration and client-breakage considerations. Included conditional items are clearly framed as decisions or possibilities."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Highly consistent structure with clear headings, subsections, bullets, and a summary table that makes the impact analysis easy to follow."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Generally careful and caveated, but it introduces several environment-dependent components (SDKs, logging, compliance, uniqueness rules) that may not apply in every implementation."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Explicitly includes API schema, request validation, database model/migration, serialization/response handling, tests, and documentation, matching the evaluation reference well."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately identifies the major components affected by making a new API field mandatory, including schema, validation, ORM/DB, CRUD, tests, and docs, with sound migration notes."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-organized with a clear summary, layered sections, and a final checklist table; formatting is consistent throughout."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly avoids unsupported claims and labels file paths as representative, but some added impacts (clients, privacy/security, uniqueness choices) are conditional rather than universally required."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Comprehensively addresses all reference components: API schema, validation, database model, serialization/response alignment, tests, and documentation, plus practical rollout impacts."
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T12:08:56.566043+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.\n\nTask Material:\nItems: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+  "output": "To solve the knapsack problem for the given items and maximum weight capacity, we use dynamic programming. The solution involves building a table where each entry `dp[i][w]` represents the maximum value achievable with the first `i` items and a weight capacity of `w`. The algorithm iterates through each item and each possible weight, updating the table based on whether including the current item yields a higher value than excluding it.\n\nHere's the Python code for Google Colab:\n\n```python\n# Define the items and parameters\nvalues = [8, 6, 10, 3, 7]  # Values of the items\nweights = [3, 2, 5, 1, 4]   # Weights of the items\nmax_weight = 10              # Maximum weight capacity\nn = len(values)              # Number of items\n\n# Initialize the DP table with dimensions (n+1) x (max_weight+1)\ndp = [[0] * (max_weight + 1) for _ in range(n + 1)]\n\n# Build the DP table\nfor i in range(1, n + 1):\n    for w in range(1, max_weight + 1):\n        # If the current item's weight exceeds the current capacity, skip it\n        if weights[i-1] > w:\n            dp[i][w] = dp[i-1][w]\n        else:\n            # Choose the maximum between including or excluding the item\n            dp[i][w] = max(dp[i-1][w], values[i-1] + dp[i-1][w - weights[i-1]])\n\n# The maximum value is stored in dp[n][max_weight]\nmax_value = dp[n][max_weight]\nprint(f\"Maximum value achievable: {max_value}\")\n```\n\n**Output:**\n```\nMaximum value achievable: 19\n```\n\n**Explanation:**\n1. **Initialization:** A table `dp` is created with dimensions `(n+1) x (max_weight+1)`, initialized to zero.\n2. **Table Population:** For each item `i` and each possible weight `w`:\n   - If the item's weight exceeds `w`, the value remains the same as without the item (`dp[i-1][w]`).\n   - Otherwise, the value is the maximum of:\n     - Excluding the item (`dp[i-1][w]`).\n     - Including the item (`values[i-1] + dp[i-1][w - weights[i-1]]`).\n3. **Result Extraction:** The value at `dp[n][max_weight]` gives the maximum achievable value, which is `19` for the given inputs.\n\nThis approach efficiently computes the optimal solution by leveraging dynamic programming to avoid redundant calculations.",
+  "reasoning_content": "\nWe are going to solve the classic knapsack problem using dynamic programming.\n We have 5 items with their respective values and weights, and a knapsack with a maximum weight capacity of 10 kg.\n\n Steps:\n 1. We'll represent each item as a tuple (value, weight).\n 2. We'll create a dynamic programming table (dp) where:\n    - Rows: from 0 to n (number of items), so we have n+1 rows.\n    - Columns: from 0 to W (max weight capacity), so we have W+1 columns.\n 3. dp[i][w] will represent the maximum value that can be obtained using the first i items and with a weight limit of w.\n\n 4. We initialize:\n    - dp[0][w] = 0 for all w, because with 0 items we have 0 value.\n    - dp[i][0] = 0 for all i, because with 0 weight capacity we can't carry any item.\n\n 5. For each item i (from 1 to n) and for each possible weight w (from 1 to W):\n    - If the weight of the current item (weight_i) is greater than w, then we cannot include it: \n        dp[i][w] = dp[i-1][w]\n    - Else, we have two choices: either include the item or not.\n        dp[i][w] = max( dp[i-1][w], value_i + dp[i-1][w - weight_i] )\n\n 6. After building the table, the answer is in dp[n][W].\n\n 7. We can also backtrack to find which items are included.\n\n However, note: the problem does not require the list of items, only the maximum value. But for completeness, we can also show the items.\n\n Let's code accordingly.\n\n Items:\n   Item 1: (8, 3) -> (value, weight)\n   Item 2: (6, 2)\n   Item 3: (10, 5)\n   Item 4: (3, 1)\n   Item 5: (7, 4)\n\n We'll index the items from 0 to 4.\n\n We'll create:\n   values = [8, 6, 10, 3, 7]\n   weights = [3, 2, 5, 1, 4]\n   n = 5\n   W = 10\n\n Let's code accordingly.",
+  "response_id": "5a7e26d87a8d4a1c96ade56254c289b5",
+  "usage": {
+    "input_tokens": 170.0,
+    "output_tokens": 1100.0,
+    "total_tokens": 1270.0
+  }
+}

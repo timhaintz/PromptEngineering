@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T02:44:07.912827+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_05c8ff409487f6110069c9e2caab80819789d4b3424192a148",
+  "usage": {
+    "input_tokens": 1154.0,
+    "output_tokens": 1335.0,
+    "total_tokens": 2489.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly computes 4 days \u00d7 5 = 20 and 9 + 20 = 29, matching the reference answer."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear step-by-step structure with arithmetic shown and a distinct final answer; formatting is consistent throughout."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Uses only the quantities implied by the task and does not invent any extra values or unsupported claims."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully solves the problem with intermediate steps and provides the final answer of 29."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not solve the given problem and incorrectly states that the needed values were not provided, despite the task having a determinate answer of 29."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The response is neatly organized with bullets and clear prose, but it does not follow the requested step-by-step solution format for this task."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not invent numbers or calculations; instead, it asks for missing information."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Fails to perform the arithmetic or provide the required final answer, so the task is not completed."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Uses invented example values and produces 255 instead of solving the actual task, whose correct answer is 29."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent and well-structured, with numbered steps, arithmetic breakdown, verification, and a final answer section."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "Explicitly fabricates example values (150, 25, 35, 45) rather than using the task\u2019s values."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "Includes step-by-step arithmetic and a final answer, but it does not complete the actual assigned problem because it substitutes a different example."
+      }
+    }
+  }
+}

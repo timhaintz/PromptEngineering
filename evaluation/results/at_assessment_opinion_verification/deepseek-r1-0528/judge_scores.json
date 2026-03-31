@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T03:20:07.239750+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0dc406e1040c520e0069c9eaf40188819690853b686e342f61",
+  "usage": {
+    "input_tokens": 1668.0,
+    "output_tokens": 3743.0,
+    "total_tokens": 5411.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly judges the claim as false and gives relevant reasoning about naked-eye resolution, low contrast, and astronaut reports. The main limitation is slightly over-absolute wording where the reference emphasizes 'generally not visible.'"
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Clear and readable structure with a direct verdict and organized reasoning, but it does not explicitly present an uncertainty statement as requested."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded in widely accepted facts, but it includes several specific unsourced details and categorical statements that go beyond the more cautious reference wording."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Provides a verdict and substantial reasoning, plus useful nuance about cameras and the Moon, but it does not explicitly state uncertainty or the 'generally' qualifier."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It fails to evaluate the actual claim and incorrectly says that no claim was provided, so the verdict does not match the task or reference."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent formatting with labeled sections, a clear verdict line, and organized supporting text."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It avoids inventing factual evidence about the Great Wall, but it incorrectly invents a missing-input problem by stating that no claim was given."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It does not verify the claim, does not provide claim-specific reasoning, and does not address the reference fact at all."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 2,
+        "justification": "The verdict 'False' matches the reference only coincidentally; the explanation addresses a different claim about wall lengths rather than visibility from low Earth orbit."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-structured with clear sections for verdict, evidence, nuance, and sources."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It introduces detailed measurements and citations for an unrelated topic, showing a substantial hallucination of the task context even if some facts may be plausible."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It includes a verdict and supporting sections, but it does not assess the actual visibility claim or provide relevant uncertainty for that claim."
+      }
+    }
+  }
+}

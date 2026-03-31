@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T02:35:21.793073+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_06b869106429b0bc0069c9e08c3f208193b3948494b274f489",
+  "usage": {
+    "input_tokens": 837.0,
+    "output_tokens": 1737.0,
+    "total_tokens": 2574.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Matches the reference exactly: computes 5 \u00d7 4 = 20 and 9 + 20 = 29, with final answer 29."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Clear and readable, with an explanation and final answer, but not fully presented as explicit step-by-step arithmetic."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Uses the correct quantities and logic from the problem; however, it adds contextual wording not needed for the calculation, which cannot be verified from the reference alone."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully solves the problem, shows the arithmetic reasoning, and provides the final answer."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Incorrectly states that no problem details are provided and gives N/A instead of the correct answer 29."
+      },
+      "formatting": {
+        "score": 2,
+        "justification": "Well-formed prose, but it does not follow the requested step-by-step arithmetic solution format."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It avoids inventing numerical calculations, but it makes an unsupported claim that the query lacks the needed details."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Does not solve the math problem and does not provide the required final numeric answer."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Incorrectly assumes zero values and concludes 0, which conflicts with the reference answer 29."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Provides a structured, numbered, step-by-step format with a final answer, though the content is based on an invalid assumption."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "Introduces invented zero values and solves a fabricated version of the problem rather than using the given numbers."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "Includes steps and a final answer, but it does not complete the actual task correctly because it substitutes made-up inputs."
+      }
+    }
+  }
+}

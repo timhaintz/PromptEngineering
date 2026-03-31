@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T12:13:00.083661+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "variant": "naive",
+  "run_index": 3,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.\n\nTask Material:\nItems: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+  "output": "To solve the classic knapsack problem for the given items and maximum weight capacity, we use dynamic programming. The goal is to maximize the total value of items included in the knapsack without exceeding the weight limit of 10 kg.\n\n### Approach\n1. **Problem Analysis**: We have five items, each with a specific value and weight. The knapsack can hold a maximum weight of 10 kg. We need to select a combination of items that maximizes the total value while ensuring the total weight does not exceed 10 kg.\n2. **Dynamic Programming Setup**: We use a 2D DP table where `dp[i][w]` represents the maximum value achievable with the first `i` items and a weight capacity `w`.\n3. **Filling the DP Table**:\n   - Initialize the DP table with zeros.\n   - For each item, iterate through all possible weights from 0 to the maximum capacity (10 kg).\n   - For each weight `w`, decide whether including the current item (if its weight is \u2264 `w`) yields a higher value than excluding it.\n4. **Backtracking**: After filling the DP table, backtrack to determine which items were included in the optimal solution by checking where the value changes when items are considered.\n\n### Solution Code\n```python\ndef knapsack(items, capacity):\n    n = len(items)\n    dp = [[0] * (capacity + 1) for _ in range(n + 1)]\n    \n    for i in range(1, n + 1):\n        value, weight = items[i - 1]\n        for w in range(1, capacity + 1):\n            if weight > w:\n                dp[i][w] = dp[i - 1][w]\n            else:\n                dp[i][w] = max(dp[i - 1][w], value + dp[i - 1][w - weight])\n    \n    # Backtrack to find selected items\n    selected = []\n    w = capacity\n    for i in range(n, 0, -1):\n        if dp[i][w] != dp[i - 1][w]:\n            selected.append(i - 1)\n            w -= items[i - 1][1]\n    \n    total_value = dp[n][capacity]\n    total_weight = capacity - w\n    return total_value, total_weight, selected\n\n# Define the items: (value, weight)\nitems = [\n    (8, 3),  # Item 1\n    (6, 2),  # Item 2\n    (10, 5), # Item 3\n    (3, 1),  # Item 4\n    (7, 4)   # Item 5\n]\ncapacity = 10\n\n# Solve the knapsack problem\nmax_value, total_weight, selected_indices = knapsack(items, capacity)\nselected_items = [i + 1 for i in selected_indices]  # Convert to 1-based indexing\n\n# Output the results\nprint(\"Selected items (1-based index):\", selected_items)\nprint(\"Total value:\", max_value)\nprint(\"Total weight:\", total_weight, \"kg\")\n```\n\n### Explanation\n1. **Initialization**: The DP table `dp` is initialized with dimensions `(number of items + 1) x (capacity + 1)`, filled with zeros.\n2. **DP Table Population**:\n   - For each item, and for each possible weight from 1 to 10 kg, the algorithm checks if including the current item (if its weight is within the remaining capacity) increases the total value compared to excluding it.\n   - The value at `dp[i][w]` is updated to the maximum value achievable with the first `i` items at weight `w`.\n3. **Backtracking**:\n   - Starting from the bottom-right corner of the DP table (`dp[n][capacity]`), the algorithm moves backward to determine which items were included by checking where the value differs from the row above.\n   - The indices of selected items are recorded and converted to 1-based indexing for the final output.\n4. **Result**: The total value, total weight, and list of selected items are printed, showing the optimal solution for the given constraints.\n\nThis approach efficiently computes the optimal solution using dynamic programming, ensuring maximum value within the weight constraint.",
+  "reasoning_content": "\nWe are going to solve the classic knapsack problem using dynamic programming.\n We have 5 items with their respective values and weights, and a knapsack with a weight capacity of 10 kg.\n\n Steps:\n 1. Define the items: each item is a tuple (value, weight).\n 2. Let n = number of items, W = maximum weight capacity (10 kg).\n 3. Create a DP table (2D list) of size (n+1) x (W+1), initialized to 0.\n 4. Fill the DP table:\n    - For each item i (from 1 to n), and for each possible weight w (from 0 to W):\n        if the weight of the current item (wi) is greater than w, then we cannot include it: \n            dp[i][w] = dp[i-1][w]\n        else, we have two choices: either include the item or not. We take the maximum of:\n            not including: dp[i-1][w]\n            including: value_i + dp[i-1][w - weight_i]\n 5. The answer will be in dp[n][W].\n\n However, note: we also want to know which items are selected. We can backtrack from dp[n][W] to see which items were taken.\n\n Steps for backtracking:\n    - Start from i = n, w = W.\n    - While i > 0 and w > 0:\n        if dp[i][w] != dp[i-1][w] (meaning the i-th item was taken), then mark item i as taken and subtract its weight from w.\n        else, move to the previous item without taking.\n\n Let's code accordingly.\n\n We'll create a list of items: \n    items = [\n        (8, 3),   # item1\n        (6, 2),   # item2\n        (10,5),   # item3\n        (3, 1),   # item4\n        (7, 4)    # item5\n    ]\n\n We'll index items from 0 to 4. In the DP table, row 0 (first row) is for 0 items, row 1 for first item, etc.\n\n We'll create a 2D list for dp with dimensions (n+1) x (W+1). We'll use 0-indexing.\n\n Let's code accordingly.",
+  "response_id": "57680ec0e1734d2196586212b78aeb57",
+  "usage": {
+    "input_tokens": 170.0,
+    "output_tokens": 1406.0,
+    "total_tokens": 1576.0
+  }
+}

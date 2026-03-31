@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-31T03:02:34.104841+00:00",
+  "pattern": {
+    "key": "over_summarisation_text_summary",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Summarise a research paper on climate change",
+    "task_description": "Produce a concise, neutral summary of the provided text highlighting main arguments, key findings, and conclusions.",
+    "naive_request": "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.",
+    "task_material": "Rising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+    "role": "You are an executive communications analyst who produces neutral, concise research summaries.",
+    "context": "The summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.",
+    "instructions": [
+      "Identify the main arguments presented in the text.",
+      "Highlight the key quantitative findings.",
+      "Note the conclusions and any implications or limitations.",
+      "Keep the summary concise and maintain a neutral tone."
+    ],
+    "technique": "Use hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.",
+    "output": "Return a concise summary of 3-5 sentences covering arguments, findings, and conclusions.",
+    "reference_notes": "Key findings to include: 40% increase in bleaching, 70km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, $10B annual fisheries impact.",
+    "source_paper_id": "71",
+    "source_pattern_id": "71-25-0",
+    "source_paper_title": "ChatGPT for higher education and professional development: A guide to conversational AI",
+    "source_pattern_name": "Text Summarization"
+  },
+  "variant": "naive",
+  "run_index": 3,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.\n\nTask Material:\nRising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+  "output": "Based on the provided text, here's a summary of the main arguments and findings regarding climate change impacts on ocean ecosystems:\n\n1.  **Primary Drivers:**\n    *   Rising ocean temperatures and acidification are identified as the fundamental forces altering marine ecosystems globally.\n\n2.  **Key Observed Impacts:**\n    *   **Coral Reefs:** Coral bleaching events have increased in frequency by **40%** compared to the previous decade.\n    *   **Species Migration:** Marine species are shifting their ranges poleward at an average rate of **70 kilometres per decade**, disrupting established food webs.\n    *   **Deoxygenation:** Ocean deoxygenation is expanding \"dead zones,\" particularly noted in the **Eastern Pacific** and the **Bay of Bengal**.\n\n3.  **Future Projections (IPCC):**\n    *   Even under **moderate emissions scenarios**, **70 to 90% of tropical coral reefs** are projected to face **severe degradation by 2050**.\n\n4.  **Adaptation Strategies (Challenges Noted):**\n    *   Strategies like **marine protected areas, assisted migration, and blue carbon restoration** show promise for helping ecosystems adapt.\n    *   However, these strategies face **significant scaling challenges** to be effective at the necessary level.\n\n5.  **Economic Impact:**\n    *   The economic impact on communities dependent on fisheries is estimated to reach **$10 billion annually by 2030**.\n\n**In essence:** The article argues that climate change (via warming and acidification) is causing rapid, severe, and widespread damage to ocean ecosystems, evidenced by increased coral bleaching, species migration disrupting food webs, and expanding dead zones. Projections indicate catastrophic loss of coral reefs is imminent even with moderate action. While adaptation strategies exist, scaling them up is difficult, and the economic costs to human communities are already significant and rising.",
+  "reasoning_content": "\nHmm, the user wants me to summarize the main arguments and findings from an article about climate change's effects on ocean ecosystems. The task material provides several important points that I need to organize clearly.\n\nLooking at the information, I see several key impacts: rising temperatures and acidification are identified as the primary drivers of change. There's specific data about coral bleaching increasing by 40% in frequency to the previous decade. Species are migrating poleward quite rapidly at 70 km per decade, which disrupts food webs. The IPCC projections are particularly alarming - even with moderate emissions, 70-90% of tropical coral reefs could be severely degraded by 2050. \n\nI also notice concerning information about ocean deoxygenation creating dead zones, especially in the Eastern Pacific and Bay of Bengal. While there are some adaptation strategies mentioned like marine protected areas and blue carbon restoration, the text notes they face scaling challenges. The economic impact is significant too - estimated at $10 billion annually for fisheries-dependent communities by 2030.\n\nFor my summary, I'll structure it around the main points: the drivers of change, the specific impacts on ecosystems, the projections for the future, and the adaptation challenges. I should make sure to include all the key statistics and locations mentioned since they provide concrete evidence of the scale of these changes. I'll present this information in a clear, organized way that highlights both the severity of the situation and the potential solutions, while noting their limitations. The summary should come away with a comprehensive understanding of how climate change is transforming ocean ecosystems based on this research.\n",
+  "response_id": "b3013824580c46e7a3d370708f2de045",
+  "usage": {
+    "input_tokens": 193.0,
+    "output_tokens": 700.0,
+    "total_tokens": 893.0
+  }
+}

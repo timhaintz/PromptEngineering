@@ -1,0 +1,95 @@
+{
+  "timestamp_utc": "2026-03-30T13:28:31.935854+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs produce the exact same output, \"J R\", matching the intended result and satisfying the task in the same way with no meaningful variation in wording or structure.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 240.0,
+        "output_tokens": 103.0,
+        "total_tokens": 343.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.969226,
+        "run_1_run_3": 0.931802,
+        "run_2_run_3": 0.909945
+      },
+      "mean_similarity": 0.936991,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "Runs 1 and 3 are effectively the same: they use the same input (\"Hello World Example\"), perform the same three-step decomposition (split, first-letter extraction, merge), and produce the same result (\"H W E\"). Run 2 is not functionally equivalent because it changes the input to \"Hello World\", omits the third word, and therefore produces a different decomposition and final output (\"H W\"). For reproducibility purposes, this is a material mismatch, not a minor wording variation.",
+        "material_differences": [
+          "Run 2 uses a different input string (\"Hello World\") instead of \"Hello World Example\".",
+          "Run 2 splits into two words rather than three.",
+          "Run 2 extracts two initials ([\"H\", \"W\"]) instead of three ([\"H\", \"W\", \"E\"]).",
+          "Run 2's final answer is \"H W\" rather than \"H W E\"."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 591.0,
+        "output_tokens": 439.0,
+        "total_tokens": 1030.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.815597,
+        "run_1_run_3": 0.876999,
+        "run_2_run_3": 0.910198
+      },
+      "mean_similarity": 0.867598,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "Runs 2 and 3 are effectively identical, but Run 1 solves a different instance of the task: it uses a different input string, produces two words instead of three, and yields a different final output. Because the decomposition and result are not materially the same across all three runs, they are not functionally identical for research purposes.",
+        "material_differences": [
+          "Run 1 uses the input \"Hello World\", while Runs 2 and 3 use \"Hello World Example\".",
+          "Run 1 splits into 2 words and extracts 2 initials; Runs 2 and 3 split into 3 words and extract 3 initials.",
+          "Run 1's final output is \"H W\", while Runs 2 and 3 output \"H W E\".",
+          "The QC/task framing in Run 1 differs from Runs 2 and 3, reflecting a different task instance rather than minor wording variation."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 585.0,
+        "output_tokens": 304.0,
+        "total_tokens": 889.0
+      }
+    }
+  }
+}

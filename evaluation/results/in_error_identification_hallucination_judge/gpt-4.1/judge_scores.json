@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T06:33:51.378635+00:00",
+  "pattern": {
+    "key": "in_error_identification_hallucination_judge",
+    "logic": "In",
+    "subcategory": "Error Identification",
+    "task_title": "Judge whether an answer contains hallucination",
+    "task_description": "Given a question, an answer, and related knowledge, determine if the answer contains non-factual or hallucinated information.",
+    "naive_request": "I want you to act as an answer judge. Given a question and an answer, your objective is to determine if the provided answer contains non-factual or hallucinated information. You SHOULD give your judgement based on the following hallucination types and the world knowledge.\n\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "task_material": "Question: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "role": "You are a hallucination detection judge who identifies factual contradictions, fabrications, and unsupported claims in model outputs.",
+    "context": "You are evaluating an LLM answer against verified knowledge to detect hallucination. Your judgment must distinguish between factual errors, context misunderstanding, and fabricated details.",
+    "instructions": [
+      "Compare the answer against the provided knowledge.",
+      "Identify any factual contradictions between the answer and the knowledge.",
+      "Check whether any claims in the answer are fabricated or unsupported.",
+      "State your verdict: Hallucinated or Not Hallucinated, with specific evidence."
+    ],
+    "technique": "Use chain-of-verification: compare each claim in the answer against the knowledge base systematically before judging.",
+    "output": "Return a verdict (Hallucinated / Not Hallucinated) with specific evidence of any errors found.",
+    "reference_notes": "The answer is hallucinated: it states Sydney is the capital (incorrect, it is Canberra) and gives a wrong date for the capital decision.",
+    "source_paper_id": "8",
+    "source_pattern_id": "8-0-0",
+    "source_paper_title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+    "source_pattern_name": "Hallucination Evaluation"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0ed8103a7077a4e20069ca1811b5c8819482285383a35cb085",
+  "usage": {
+    "input_tokens": 1110.0,
+    "output_tokens": 2957.0,
+    "total_tokens": 4067.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Matches the reference: it correctly identifies that Sydney is not the capital and that the 1901 capital claim is wrong, with Canberra given as the correct capital."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Clear and readable with a judgment line and bullet points, but less systematically structured than the more explicitly organized alternatives."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Stays grounded in the provided facts and does not introduce obvious unsupported claims beyond the correction."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Provides a clear hallucination judgment and addresses both core factual errors called out in the reference."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Fully consistent with the reference: it correctly flags both the Sydney-capital claim and the 1901 federation claim as false."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent structure with labeled sections, numbered evidence, and a concise concluding verdict."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Reasoning is tightly anchored to the stated knowledge and avoids speculative or unsupported additions."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Includes the verdict, identifies both hallucinated claims, and explains why each contradicts the knowledge."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly identifies the answer as hallucinated and accurately contrasts both quoted claims with the verified knowledge."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-organized claim-by-claim verification followed by a clear final verdict and supporting evidence."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded in the knowledge, but the extra omission analysis goes beyond what is necessary to establish hallucination."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers the main contradictions, provides a final verdict, and includes detailed supporting evidence."
+      }
+    }
+  }
+}

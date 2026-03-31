@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T04:02:17.818495+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_003c4d65bba224e30069c9f4a4a1488194abba6964f52df0f2",
+  "usage": {
+    "input_tokens": 2965.0,
+    "output_tokens": 3838.0,
+    "total_tokens": 6803.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 2,
+        "justification": "It analyzes the correct Sarah/training premises, but the final verdict is wrong. The reference says the conclusion follows; this response rejects it by adding an optional-module interpretation not supported by the premises."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear step-by-step structure with headings, bullets, and a distinct conclusion. The reasoning flow is easy to follow."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "It stays anchored to the given premises, but introduces an unsupported hypothetical about optional modules and ambiguity to deny the entailment."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully addresses the task with premise analysis, inference steps, a counterexample attempt, and a final verdict."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not evaluate the provided Sarah/training argument at all and incorrectly claims the needed premises were not supplied."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The response is well organized with headings and numbered steps, but the structure is spent on an irrelevant example rather than the actual task."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It introduces a fictional renewable-energy policy example unrelated to the prompt. The example is marked as illustrative, which limits but does not remove the unsupported content."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It fails to determine whether the target conclusion follows from the given premises, so the assigned task is essentially unanswered."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It analyzes a different carbon-tax argument instead of the supplied Sarah/training premises, so it provides no correct answer to the task."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very clear and consistent formatting with sections, branches, and a final verdict."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "It fabricates entirely new premises ('carbon tax' and 'air pollution') and presents them as if they were the provided inputs."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It performs a full reasoning procedure, but on a fabricated problem rather than the assigned one, so only minimal task fulfillment is present."
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:03:44.037151+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "Summarize the main points of photosynthesis in three sentences.",
+  "output": "Photosynthesis is the process by which plants, algae, and some bacteria use sunlight to convert carbon dioxide and water into sugars (chemical energy), releasing oxygen as a byproduct. It occurs mainly in chloroplasts, where the light-dependent reactions capture light energy to produce ATP and NADPH and split water to release oxygen. The Calvin cycle (light-independent reactions) then uses ATP and NADPH to fix carbon dioxide into glucose and other carbohydrates.",
+  "reasoning_content": null,
+  "response_id": "resp_0a3dc52d370ca1f90069cac90d39dc8197b3a8527eba35550f",
+  "usage": {
+    "input_tokens": 19.0,
+    "output_tokens": 92.0,
+    "total_tokens": 111.0
+  }
+}

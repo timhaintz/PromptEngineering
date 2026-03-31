@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-29T21:44:31.884608+00:00",
+  "pattern": {
+    "key": "across_comparison_attendance",
+    "logic": "Across",
+    "subcategory": "Comparison",
+    "task_title": "Compare two numeric values and select the larger",
+    "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+    "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+    "task_material": "",
+    "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+    "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+    "instructions": [
+      "Extract the numeric attendance value for each round.",
+      "Handle thousands separators (commas) correctly during comparison.",
+      "State which round has the higher attendance.",
+      "Provide the numeric values to justify the comparison."
+    ],
+    "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+    "output": "Return the round name with the higher attendance and both numeric values.",
+    "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+    "source_paper_id": "20",
+    "source_pattern_id": "20-2-0",
+    "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+    "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.975973,
+        "run_1_run_3": 0.977458,
+        "run_2_run_3": 0.994785
+      },
+      "mean_similarity": 0.982739,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same correct comparison and identify SF 2nd Leg as having the higher attendance (34,669 vs 33,861). The wording differences are purely stylistic and do not change meaning, structure, or task fulfillment in any material way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 311.0,
+        "output_tokens": 172.0,
+        "total_tokens": 483.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.96515,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 0.96515
+      },
+      "mean_similarity": 0.976767,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are functionally the same: instead of selecting the larger numeric value, they ask the user to provide the attendance figures. Runs 1 and 3 are identical, and Run 2 differs only by trivial phrasing ('would like me to compare' vs. 'want to compare'). For research purposes, they have the same meaning, structure, and failure mode.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 271.0,
+        "output_tokens": 292.0,
+        "total_tokens": 563.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are exactly identical in wording, structure, and behavior. They respond by requesting the attendance figures instead of performing the comparison, so they fail the task in the same way. For reproducibility purposes, they are functionally identical.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 271.0,
+        "output_tokens": 163.0,
+        "total_tokens": 434.0
+      }
+    }
+  }
+}

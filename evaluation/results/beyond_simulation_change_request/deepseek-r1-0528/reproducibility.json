@@ -1,0 +1,97 @@
+{
+  "timestamp_utc": "2026-03-30T06:28:10.183309+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.957401,
+        "run_1_run_3": 0.946478,
+        "run_2_run_3": 0.951888
+      },
+      "mean_similarity": 0.951922,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs propose the same core change set: add a required `phone_number` to request/response schemas, enforce validation, add a non-null database column plus migration, propagate the field through user-creation logic and API handling, update tests, and note rollout/migration concerns. For research purposes, they satisfy the task in materially the same way despite small differences in code organization and emphasis.",
+        "material_differences": [
+          "Run 1 handles user creation directly in the route example, while Runs 2 and 3 explicitly separate that logic into a CRUD layer.",
+          "Runs 1 and 3 explicitly mention OpenAPI/documentation updates; Run 2 does not call documentation out separately.",
+          "The examples differ in validation and rollout details: Run 2 emphasizes E.164 regex and client backward compatibility/versioning, while Runs 1 and 3 focus more on data backfilling/defaults for existing rows."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 3381.0,
+        "output_tokens": 1481.0,
+        "total_tokens": 4862.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.946951,
+        "run_1_run_3": 0.948874,
+        "run_2_run_3": 0.956104
+      },
+      "mean_similarity": 0.950643,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs answer the same task in materially the same way: they identify the same core impact areas of making `phone_number` mandatory, including API/OpenAPI contract changes, validation/schema updates, database model and migration changes, service/endpoint propagation, response/serialization implications, test updates, documentation, rollout risks, and phased implementation/testing. The structure varies slightly (table vs. numbered list, different file paths/examples), but the meaning and recommended actions are effectively the same for research purposes.",
+        "material_differences": [
+          "Runs 2 and 3 are more explicit about response serialization (`UserResponse` / `GET /users/{id}` response schema), while Run 1 mentions response validation more indirectly.",
+          "Run 3 adds extra considerations such as PII/security and specific edge-case tests; Runs 1 and 2 instead emphasize uniqueness/indexing and fixture updates.",
+          "The rollout details differ slightly: Runs 1 and 2 explicitly recommend a nullable-first migration phase before enforcing `NOT NULL`, while Run 3 also discusses backfill but presents a more direct `nullable=False` migration description before deployment phasing."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 3632.0,
+        "output_tokens": 746.0,
+        "total_tokens": 4378.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.939833,
+        "run_1_run_3": 0.974593,
+        "run_2_run_3": 0.943539
+      },
+      "mean_similarity": 0.952655,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs satisfy the task in materially the same way: they identify the same core impact areas for adding a required `phone_number` field, including API/OpenAPI changes, request/response schema updates, validation, database model and migration work, serialization via response models, tests, documentation, risks, and an implementation/deployment order. The differences are mainly in naming, assumed project layering, and rollout detail rather than in overall meaning or recommended change surface.",
+        "material_differences": [
+          "Run 3 proposes a more explicit two-step rollout (nullable/backfill first, then enforce NOT NULL), whereas Runs 1 and 2 mostly describe adding the field as required with a temporary/default backfill strategy.",
+          "The runs assume slightly different codebase architectures: Run 1 uses routes + CRUD, Run 2 uses endpoints + service + repository layers, and Run 3 emphasizes request-validation and service-layer changes.",
+          "Run 2 adds extra emphasis on frontend/client coordination and privacy/PII concerns; Run 1 mentions API versioning; Run 3 highlights manual Swagger verification and indexing if queried frequently."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 3369.0,
+        "output_tokens": 1646.0,
+        "total_tokens": 5015.0
+      }
+    }
+  }
+}

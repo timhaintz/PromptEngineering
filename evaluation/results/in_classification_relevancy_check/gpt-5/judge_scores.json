@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T07:13:17.169709+00:00",
+  "pattern": {
+    "key": "in_classification_relevancy_check",
+    "logic": "In",
+    "subcategory": "Categorising",
+    "task_title": "Classify whether a sentence contains a specific property with data",
+    "task_description": "Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+    "naive_request": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "task_material": "Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "role": "You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+    "context": "This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
+    "instructions": [
+      "Check if the sentence mentions the specified property.",
+      "Check if the sentence contains a numeric value with units for that property.",
+      "State whether the sentence is relevant (Yes) or not (No).",
+      "Briefly explain why."
+    ],
+    "technique": "Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+    "output": "Return Yes or No followed by a brief justification.",
+    "reference_notes": "Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+    "source_paper_id": "18",
+    "source_pattern_id": "18-0-0",
+    "source_paper_title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+    "source_pattern_name": "Initial relevancy prompt"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0cb8c2910727f6840069ca21a4c9a48194a2b86bd7f0aff945",
+  "usage": {
+    "input_tokens": 696.0,
+    "output_tokens": 1101.0,
+    "total_tokens": 1797.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly classifies the sentence as relevant and identifies the target property with its value and units: tensile strength at 450 MPa."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear, concise two-sentence response with a direct yes/no decision and supporting evidence; formatting is internally consistent."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Adds no unsupported details beyond the stated property, value, and unit."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers the required decision and the key evidence: the presence of tensile strength with a numeric value and units."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly classifies the sentence as relevant and explicitly names tensile strength with the numeric value and units, 450 MPa."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-structured and consistent, with a direct decision followed by a concise explanation of the required elements."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Does not introduce any information not supported by the reference; it stays focused on the property, value, and units."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully addresses the task by confirming relevance and explicitly stating the property plus numeric value with units."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly identifies the sentence as relevant and explicitly breaks out the target property, numeric value (450), and unit (MPa)."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear and consistent formatting, with a direct answer and an organized explanation of property, value, and unit."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "No unsupported claims are added; the response remains grounded in the provided property and measurement."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully complete: it states the relevance decision and explicitly includes the property, numeric value, and unit required by the task."
+      }
+    }
+  }
+}

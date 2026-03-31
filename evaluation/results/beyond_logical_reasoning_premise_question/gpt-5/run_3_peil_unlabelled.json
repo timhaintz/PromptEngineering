@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T03:32:15.205275+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+  "output": "To do this properly, I need the *specific policy conclusion* and the *supporting argument* you want tested.\n\nPlease paste either:\n1) The conclusion plus the full set of stated premises/reasons (bullet points are fine), **or**\n2) A paragraph making the case (I\u2019ll extract premises from it).\n\nOnce you provide that, I will return, in this exact structure:\n\n## 1) Explicit Premises (as stated or extracted)\n- P1: \u2026\n- P2: \u2026\n- \u2026\n\n## 2) Each Premise Converted into a Question (to surface alternatives)\n- Q1 (from P1): \u201cIs it true that \u2026 ? What if not?\u201d\n- Q2 (from P2): \u2026\n- \u2026\n\n## 3) Step-by-Step Reasoning With Branch Tracking\n- Step 1: If Q1 = Yes, then \u2026\n  - Branch 1A: If Q2 = Yes, then \u2026\n  - Branch 1B: If Q2 = No, then \u2026\n- Step 2: \u2026\n- (Continue until the conclusion is either supported or blocked)\n\n## 4) Final Verdict: Does the Conclusion Follow?\n- Verdict: **Follows / Does not follow / Underdetermined**\n- Why: identify exactly which premise(s) are missing, ambiguous, or require extra assumptions; or show the valid inference chain if it follows.\n\nSend the conclusion and argument text and I\u2019ll run the premise-question analysis.",
+  "reasoning_content": null,
+  "response_id": "resp_070d1beb3e49aefb0069c9eeb587f081969500b53cceb90ec0",
+  "usage": {
+    "input_tokens": 132.0,
+    "output_tokens": 331.0,
+    "total_tokens": 463.0
+  }
+}

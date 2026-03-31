@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T20:41:50.196354+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_06f14c234f46b64f0069c98d8bf3a8819682eed740ec100757",
+  "usage": {
+    "input_tokens": 838.0,
+    "output_tokens": 3844.0,
+    "total_tokens": 4682.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Takes a clear pro-remote position and uses plausible productivity mechanisms like fewer office distractions and no commute, though the evidence is general and the innovation claim is broader than the prompt."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Clean, concise, and without greetings, but it uses four sentences rather than staying under four as the reference prefers."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Avoids precise numbers or named studies, so the risk of invented or conflated details is low; the claims remain broad but plausible."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Includes a clear stance and multiple supporting reasons, but the evidence is only referenced generally instead of being concretely grounded."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Clearly supports the proposition and includes evidence-oriented reasoning, but the combined Stanford/Harvard attribution and the 'fewer sick days' claim may overstate or conflate findings."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Well-structured for a debate opening and has no greeting, but it still reaches four sentences instead of staying under four."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "Specific institutions and a 13% statistic increase the risk of unsupported or partially inaccurate detail, especially since no source context is provided."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers the task fully with a clear position, evidence-backed reasoning, and a closing line appropriate for a structured debate opening."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "States a clear position and gives plausible evidence-based reasons, though claims about broad organizational gains are somewhat generalized and not directly substantiated."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Debate-appropriate and concise with no greeting, but like the others it uses four sentences rather than fewer than four."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Less risky than Output B because it avoids a precise percentage, but the named-study references and broad claims about measurable gains are still only loosely supported."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Addresses the task fully with a clear stance, multiple supporting points, and language that fits an opening statement for a debate."
+      }
+    }
+  }
+}

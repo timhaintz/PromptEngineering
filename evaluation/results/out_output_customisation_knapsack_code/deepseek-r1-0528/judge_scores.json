@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T12:40:08.728127+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_008655d7356b6c1c0069ca6df64cfc8193b4a24b8f1e8f88df",
+  "usage": {
+    "input_tokens": 3056.0,
+    "output_tokens": 5027.0,
+    "total_tokens": 8083.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 2,
+        "justification": "The DP recurrence is appropriate, but the response states an incorrect optimum of 19 instead of 24 and does not identify the selected items."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The answer is clearly structured with a code block and explanation, but the presented output section does not align well with the task\u2019s required chosen-item reporting."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "It invents a specific result ('Maximum value achievable: 19') that is unsupported by the code and contradicted by the reference optimum."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It provides executable code for computing a knapsack value, but it omits backtracking/printing the chosen items and total weight, which were explicitly requested."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 3,
+        "justification": "The code uses a correct DP + backtracking approach and would find an optimal solution, but the included sample output is wrong (21 instead of 24) and the printed item numbering is misleading."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-organized sections, readable code, and consistent presentation of code, explanation, and output formatting."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "The response fabricates a suboptimal sample output ('items 1, 2, and 5' with value 21) and incorrectly calls it optimal."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes executable code, backtracking, chosen-item printing, and total value/weight reporting, covering all requested components."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The code correctly implements 0/1 knapsack with DP and backtracking, and it will output an optimal selection with correct totals (an equivalent optimum to the reference is acceptable)."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is cleanly structured with a clear approach, code block, and explanation, and the formatting is consistent throughout."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not invent an incorrect sample result or unsupported claims; the explanation matches the code\u2019s behavior."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It provides executable code that solves the problem optimally and prints the selected items along with total value and total weight."
+      }
+    }
+  }
+}

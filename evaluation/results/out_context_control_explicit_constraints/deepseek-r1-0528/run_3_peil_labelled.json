@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:21:57.792839+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "peil_labelled",
+  "run_index": 3,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Role: You are a science communicator who produces constrained, accurate summaries.\n\nContext: The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.\n\nInstructions:\n1. Cover the key aspects of photosynthesis: inputs, process, and outputs.\n2. Use exactly three sentences \u2014 no more, no fewer.\n3. Ensure scientific accuracy in all statements.\n4. Keep the language accessible to a general audience.\n\nTechniques: Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.\n\nOutput: Return exactly three sentences summarising photosynthesis.",
+  "output": "Photosynthesis requires sunlight, water, and carbon dioxide as essential inputs. Within plant chloroplasts, light energy powers a process that splits water and combines hydrogen with carbon dioxide. This reaction produces glucose sugar for the plant's energy and releases oxygen gas as a byproduct.",
+  "reasoning_content": "\nHmm, the user wants me to act as a science communicator and provide a precise summary of photosynthesis with exactly three sentences. They've specified that I need to cover the key aspects: inputs, process, and outputs, while maintaining scientific accuracy and accessibility for a general audience.\n\nI need to carefully plan my three sentences to cover all required elements without exceeding the limit. The first sentence should introduce the inputs - sunlight, water, and carbon dioxide. The second sentence should explain the core process - how plants use light energy to convert these inputs. The third sentence should cover the outputs - glucose and oxygen. This structure ensures completeness while meeting the constraint.\n\nThe user seems to value both precision and educational value, possibly for teaching or learning purposes. By making the language simple and clear, I'm addressing the need for accessibility while ensuring the summary remains scientifically sound. The strict sentence count suggests they want something concise yet comprehensive, so I'll focus on the most essential elements without unnecessary details.\n",
+  "response_id": "627a80cd2f984e1da031784118356d29",
+  "usage": {
+    "input_tokens": 126.0,
+    "output_tokens": 254.0,
+    "total_tokens": 380.0
+  }
+}

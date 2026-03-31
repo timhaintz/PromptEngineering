@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T22:08:01.758211+00:00",
+  "pattern": {
+    "key": "across_comparison_attendance",
+    "logic": "Across",
+    "subcategory": "Comparison",
+    "task_title": "Compare two numeric values and select the larger",
+    "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+    "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+    "task_material": "",
+    "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+    "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+    "instructions": [
+      "Extract the numeric attendance value for each round.",
+      "Handle thousands separators (commas) correctly during comparison.",
+      "State which round has the higher attendance.",
+      "Provide the numeric values to justify the comparison."
+    ],
+    "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+    "output": "Return the round name with the higher attendance and both numeric values.",
+    "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+    "source_paper_id": "20",
+    "source_pattern_id": "20-2-0",
+    "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+    "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_06cb809d9ee52c100069c9a2132458819581bbfd4ff9eda95e",
+  "usage": {
+    "input_tokens": 1147.0,
+    "output_tokens": 1961.0,
+    "total_tokens": 3108.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly identifies SF 2nd Leg as higher attendance and correctly compares 34,669 > 33,861, matching the reference."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear, consistent bullet structure with a direct comparison and an unambiguous final answer."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Uses only the provided figures and labels; no invented numbers, rounds, or unsupported claims."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully completes the task by stating both values, comparing them, and naming the higher-attendance round."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Incorrect for the task: it replaces the actual figures with 45,000 and 46,500 and concludes 'Round 2,' not the referenced SF 2nd Leg."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-structured and internally consistent, with numbered steps and a clear final output."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "Introduces unsupported attendance values and generic round labels as if they were the task inputs."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It includes a full comparison workflow and final answer, but it does so for fabricated inputs rather than the actual task data."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not answer the actual task; it uses hypothetical example values and therefore fails to identify the correct higher-attendance round."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Organized and readable with headings and steps, though it is more verbose than necessary and ends by deferring the task."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It invents example attendance figures, but at least labels them as assumptions rather than presenting them as actual task data."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Incomplete for the stated task because it provides a generic demonstration and requests values instead of performing the required comparison."
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T03:07:53.936504+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0de5ccabe1fe193a0069c9e81b00fc8190a103756a7a39a996",
+  "usage": {
+    "input_tokens": 908.0,
+    "output_tokens": 3508.0,
+    "total_tokens": 4416.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly identifies the claim as false and explains the common myth; its caveat about ideal low-Earth-orbit conditions still fits the reference's wording that the Wall is generally not visible."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Opens with a clear verdict and follows with organized reasoning, but uncertainty is not explicitly labeled or separated."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Uses plausible, well-known supporting facts and references without obvious invented details, though the sourcing remains general rather than specific."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Provides the required verdict and substantial reasoning with useful context, but lacks an explicit uncertainty statement."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not assess the claim and therefore fails to provide the expected false verdict."
+      },
+      "formatting": {
+        "score": 2,
+        "justification": "The response is readable, but it is a clarification request instead of the requested verdict-plus-reasoning format."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It avoids making unsupported factual claims by not attempting an answer."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Missing the core task elements: verdict, reasoning, and uncertainty about the actual claim."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Incorrectly states that no claim was provided and gives an 'Uncertain' verdict instead of evaluating the false claim."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "It includes a clearly labeled verdict and a brief explanation, which matches the requested structure better than B."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It largely avoids domain-specific hallucinations, but the statement that no claim was provided is unsupported in this context."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It supplies a verdict and rationale, but it does not actually verify the intended factual claim."
+      }
+    }
+  }
+}

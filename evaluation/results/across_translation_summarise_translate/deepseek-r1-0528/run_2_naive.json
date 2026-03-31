@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T22:42:33.930049+00:00",
+  "pattern": {
+    "key": "across_translation_summarise_translate",
+    "logic": "Across",
+    "subcategory": "Translation",
+    "task_title": "Summarise a text and translate to French",
+    "task_description": "Produce a concise English summary of the provided text and then translate that summary into French.",
+    "naive_request": "Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "role": "You are a bilingual technical writer who produces concise summaries and accurate French translations.",
+    "context": "The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.",
+    "instructions": [
+      "Summarise the text in 2-3 concise English sentences.",
+      "Translate the summary into French, preserving tone and terminology.",
+      "Flag any idiomatic expressions that may not translate directly.",
+      "Do not add information beyond what the source text contains."
+    ],
+    "technique": "Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.",
+    "output": "Return two sections: English Summary and French Translation.",
+    "reference_notes": "A strong answer produces a faithful summary and an accurate French translation without adding new claims.",
+    "source_paper_id": "30",
+    "source_pattern_id": "30-6-0",
+    "source_paper_title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+    "source_pattern_name": "Summarization and Translation"
+  },
+  "variant": "naive",
+  "run_index": 2,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.\n\nTask Material:\nCloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+  "output": "### English Summary:\nCloud computing revolutionizes infrastructure management by replacing on-premises servers with scalable cloud services, reducing upfront costs and enabling on-demand resource scaling. However, this transition creates challenges including data sovereignty, vendor lock-in, and shared security responsibilities. Organizations must thoroughly assess provider service level agreements (SLAs), data residency rules, and exit plans before adopting a cloud-first strategy.\n\n### Traduction Fran\u00e7aise (French Translation):\nL'informatique en nuage r\u00e9volutionne la gestion de l'infrastructure en rempla\u00e7ant les serveurs locaux par des services cloud \u00e9lastiques, r\u00e9duisant les d\u00e9penses en capital et permettant une mise \u00e0 l'\u00e9chelle des ressources \u00e0 la demande. Cependant, cette transition cr\u00e9e des d\u00e9fis, notamment en mati\u00e8re de souverainet\u00e9 des donn\u00e9es, de d\u00e9pendance vis-\u00e0-vis des fournisseurs et de responsabilit\u00e9 partag\u00e9e en mati\u00e8re de s\u00e9curit\u00e9. Les organisations doivent soigneusement \u00e9valuer les accords de niveau de service (SLA) des fournisseurs, les exigences de r\u00e9sidence des donn\u00e9es et les strat\u00e9gies de sortie avant d'adopter une approche cloud-first.",
+  "reasoning_content": "\nHmm, the user wants me to summarize a text about cloud computing and then translate that summary into French. The text discusses how cloud computing has changed infrastructure management by moving from on-premises servers to cloud services, which reduces costs and improves scalability. But it also mentions new issues like data sovereignty, vendor lock-in, and security responsibilities. The text emphasizes that organizations need to evaluate service level agreements (SLAs), data residency rules, and exit plans before fully adopting cloud solutions.\n\nI need to create a concise summary that captures all the key points: the benefits (cost reduction, scalability), the risks (sovereignty, lock-in, security), and the necessary evaluations (SLAs, residency, exit strategies). I'll keep it brief but comprehensive, using clear language to make it easy to understand.\n\nFor the French translation, I have to ensure it's accurate and natural-sounding. I'll use terms like \"informatique en nuage\" for cloud computing, \"d\u00e9penses en capital\" for capital expenditure, and \"souverainet\u00e9 des donn\u00e9es\" for data sovereignty. I'll need to maintain the same structure and tone as the English summary to preserve the meaning.\n\nThe user might be a student, professional, or someone researching cloud technology. They could be looking for a quick overview to save time or to use in a multilingual context. By providing both summary and translation, I'm addressing potential needs for clarity and accessibility, which could help in presentations, reports, or learning. I'll make sure my response is helpful and error-free to build trust.",
+  "response_id": "3c0c11c9ef3d42e99e861eca159a19f0",
+  "usage": {
+    "input_tokens": 187.0,
+    "output_tokens": 556.0,
+    "total_tokens": 743.0
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T08:33:20.548932+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.\n\nThe code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.\n\n1. Implement the 0/1 knapsack algorithm in Python.\n2. Use the provided items and maximum weight capacity.\n3. Print the selected items with their values and weights.\n4. Print the total value and total weight of the solution.\n\nUse structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.\n\nReturn executable Python code with clear output showing selected items and totals.\n\nTask Material:\nItems: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+  "output": "```python\n# 0/1 Knapsack (optimal) via dynamic programming + traceback\n# Problem: choose a subset of items (each at most once) maximizing total value\n# subject to total weight <= capacity.\n\nfrom dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Item:\n    idx: int\n    value: int\n    weight: int\n\n# ---- Input data ----\nitems = [\n    Item(1, 8, 3),\n    Item(2, 6, 2),\n    Item(3, 10, 5),\n    Item(4, 3, 1),\n    Item(5, 7, 4),\n]\ncapacity = 10\n\n# ---- DP solution ----\n# dp[i][w] = best value using first i items with capacity w\nn = len(items)\ndp = [[0] * (capacity + 1) for _ in range(n + 1)]\n\nfor i in range(1, n + 1):\n    it = items[i - 1]\n    for w in range(capacity + 1):\n        # don't take item i\n        best = dp[i - 1][w]\n        # take item i (if it fits)\n        if it.weight <= w:\n            best = max(best, dp[i - 1][w - it.weight] + it.value)\n        dp[i][w] = best\n\n# ---- Traceback to recover chosen items ----\nchosen = []\nw = capacity\nfor i in range(n, 0, -1):\n    if dp[i][w] != dp[i - 1][w]:  # item i was taken\n        it = items[i - 1]\n        chosen.append(it)\n        w -= it.weight\n\nchosen.reverse()\n\n# ---- Verification / printout ----\ntotal_value = sum(it.value for it in chosen)\ntotal_weight = sum(it.weight for it in chosen)\n\nprint(\"0/1 Knapsack Solution (Optimal)\")\nprint(f\"Capacity: {capacity} kg\\n\")\n\nprint(\"Selected items:\")\nif not chosen:\n    print(\"  (none)\")\nelse:\n    for it in chosen:\n        print(f\"  Item {it.idx}: Value={it.value}, Weight={it.weight} kg\")\n\nprint(\"\\nTotals:\")\nprint(f\"  Total Value : {total_value}\")\nprint(f\"  Total Weight: {total_weight} kg\")\nprint(f\"\\nDP optimal value check: {dp[n][capacity]}\")\n```",
+  "reasoning_content": null,
+  "response_id": "resp_0c8e4eb1be03422b0069ca35401608819088930aa5c7739a32",
+  "usage": {
+    "input_tokens": 211.0,
+    "output_tokens": 886.0,
+    "total_tokens": 1097.0
+  }
+}

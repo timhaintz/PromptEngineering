@@ -1,0 +1,98 @@
+{
+  "timestamp_utc": "2026-03-29T21:40:21.366026+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.942791,
+        "run_1_run_3": 0.948592,
+        "run_2_run_3": 0.940603
+      },
+      "mean_similarity": 0.943995,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same debate opening: a clear pro-remote-work position arguing that remote work increases productivity through eliminated commutes, fewer office distractions, and greater scheduling/environmental control. They use very similar structure and reasoning, and each satisfies the task in materially the same way despite small wording and emphasis differences.",
+        "material_differences": [
+          "Run 2 uniquely acknowledges a collaboration objection and counters it with digital tools.",
+          "Run 2 adds autonomy/job satisfaction as an extra mechanism for productivity.",
+          "All three responses use four sentences rather than staying under four sentences, but they do so consistently."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 529.0,
+        "output_tokens": 518.0,
+        "total_tokens": 1047.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.890956,
+        "run_1_run_3": 0.886005,
+        "run_2_run_3": 0.87433
+      },
+      "mean_similarity": 0.883764,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs perform the same core task in materially the same way: they open a debate by taking the same position (pro-remote work), support it with empirical evidence, stay within four sentences, and end with a broader implication. The wording, evidence selection, and closing emphasis vary, but for research purposes they are functionally equivalent as evidence-backed opening statements.",
+        "material_differences": [
+          "Run 1 cites a Stanford 13% productivity increase and Gallup-related retention/job-satisfaction evidence; Runs 2 and 3 cite Stanford at 9% instead.",
+          "Run 2 uniquely adds commute reduction, Buffer 2023 focus data, and a forward-looking note about managing collaboration challenges.",
+          "Run 3 uniquely emphasizes lower burnout and work-life balance as the secondary support point.",
+          "None of the runs explicitly use PEIL labels, but this omission is consistent across all three."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 511.0,
+        "output_tokens": 751.0,
+        "total_tokens": 1262.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.907582,
+        "run_1_run_3": 0.917934,
+        "run_2_run_3": 0.895623
+      },
+      "mean_similarity": 0.907047,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three responses are functionally equivalent: each delivers a debate opening statement arguing that remote work increases productivity, supports that claim with research-based evidence, and ends with a forward-looking debate frame. The differences are mainly in which studies and productivity mechanisms are highlighted, not in the overall position, structure, or task fulfillment.",
+        "material_differences": [
+          "Run 1 emphasizes commute elimination and reduced office distractions, and it closes by shifting the burden to opponents to defend office-based work.",
+          "Run 2 emphasizes fewer interruptions and reclaimed commuting time, and it frames the issue around optimizing remote work policy.",
+          "Run 3 emphasizes commute elimination plus flexible scheduling/autonomy, and it uses four sentences rather than three."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 505.0,
+        "output_tokens": 1444.0,
+        "total_tokens": 1949.0
+      }
+    }
+  }
+}

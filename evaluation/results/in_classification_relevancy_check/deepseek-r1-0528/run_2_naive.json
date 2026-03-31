@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T07:20:52.742235+00:00",
+  "pattern": {
+    "key": "in_classification_relevancy_check",
+    "logic": "In",
+    "subcategory": "Categorising",
+    "task_title": "Classify whether a sentence contains a specific property with data",
+    "task_description": "Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+    "naive_request": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "task_material": "Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "role": "You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+    "context": "This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
+    "instructions": [
+      "Check if the sentence mentions the specified property.",
+      "Check if the sentence contains a numeric value with units for that property.",
+      "State whether the sentence is relevant (Yes) or not (No).",
+      "Briefly explain why."
+    ],
+    "technique": "Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+    "output": "Return Yes or No followed by a brief justification.",
+    "reference_notes": "Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+    "source_paper_id": "18",
+    "source_pattern_id": "18-0-0",
+    "source_paper_title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+    "source_pattern_name": "Initial relevancy prompt"
+  },
+  "variant": "naive",
+  "run_index": 2,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.\n\nTask Material:\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+  "output": "Yes, the sentence **is relevant** for further analysis of tensile strength and **does contain** the required data (value and units).\n\nHere's the breakdown:\n\n1.  **Relevant:** The sentence explicitly states the property being discussed: \"tensile strength\".\n2.  **Contains Value:** The sentence provides a specific numerical value: **450**.\n3.  **Contains Units:** The sentence provides the standard unit for tensile strength: **MPa** (Megapascals).\n\n**Therefore, the sentence provides the complete core data point for tensile strength: 450 MPa.**\n\n*   The additional context \"at room temperature\" is useful information about the test condition but is not part of the core property value/unit pair required for the data point itself.",
+  "reasoning_content": "\nAlright, let me tackle this user query. The user wants to know if the given sentence is relevant for analyzing tensile strength and if it contains the necessary data with units. \n\nFirst, I'll look at the sentence: \"The measured tensile strength of the sample was 450 MPa at room temperature.\" The property in question is tensile strength, which is explicitly mentioned here. That's a good sign for relevance.\n\nNext, checking for the value and units. The number 450 is present, and the units are MPa (Megapascals), which is standard for tensile strength. The mention of room temperature adds context but isn't necessary for the core data. \n\nThe user might be compiling material data, possibly for research or quality control. They need precise extraction of property values. Including the temperature might be important for their records, but the key data is there. \n\nI should confirm that both value and units are present, which they are. No ambiguity here. The user's deeper need is likely ensuring data accuracy for their task, so affirming the sentence's relevance and completeness is crucial.",
+  "response_id": "a312cd1574f94ddb962c2d083841c5d1",
+  "usage": {
+    "input_tokens": 76.0,
+    "output_tokens": 375.0,
+    "total_tokens": 451.0
+  }
+}

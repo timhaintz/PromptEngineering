@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-31T01:31:12.679315+00:00",
+  "pattern": {
+    "key": "over_synthesis_claim_extraction",
+    "logic": "Over",
+    "subcategory": "Synthesis",
+    "task_title": "Extract atomic claims from a book summary",
+    "task_description": "Break a summary into self-contained atomic claims that can each be independently verified against the source text.",
+    "naive_request": "You are trying to verify the faithfulness of statements made in a given summary of a book against the actual text of the book. To do so, you first need to break the summary into a set of \"atomic claims\", each of which will then be passed to a human who will verify its faithfulness. Each claim should be self-contained with all the necessary context. Each claim should contain no more than two sentences. Each individual claim should be on its own line prefixed by a \"- \".\n\nSummary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "task_material": "Summary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "role": "You are a claim extraction specialist who decomposes summaries into independently verifiable atomic statements.",
+    "context": "Each extracted claim will be passed to a human fact-checker who will verify it against the source text. Claims must be self-contained so the checker does not need additional context.",
+    "instructions": [
+      "Break the summary into atomic, self-contained claims.",
+      "Each claim must include sufficient context to be verified independently.",
+      "Limit each claim to no more than two sentences.",
+      "Prefix each claim with a dash and put each on its own line."
+    ],
+    "technique": "Use structured decomposition: parse the summary sentence by sentence and extract each discrete factual assertion as a standalone claim.",
+    "output": "Return a list of atomic claims, each prefixed with a dash on its own line.",
+    "reference_notes": "Should extract claims about: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership, vote to sell property, development company, Carlos Mendez as treasurer, his motive.",
+    "source_paper_id": "63",
+    "source_pattern_id": "63-0-0",
+    "source_paper_title": "FABLES: Evaluating faithfulness and content selection in book-length summarization",
+    "source_pattern_name": "Claim Extraction"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0691b3cd77e6780e0069cb22a65c0881968d4a1382fa5f7f30",
+  "usage": {
+    "input_tokens": 956.0,
+    "output_tokens": 6514.0,
+    "total_tokens": 7470.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Includes all reference facts (Maria Santos as detective, Porto Azul, summer 2019, sailing club membership, sale vote, development company, Carlos Mendez as treasurer, motive), but several bullets bundle multiple facts rather than fully atomic claims."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Uses a consistent bullet-list format with parallel sentence structure throughout."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded in the reference; only minor extra detail such as 'historic waterfront property' is not explicitly listed in the evaluation reference."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Covers the full set of target facts, but does not fully decompose them into independently verifiable atomic claims."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Contains the key reference facts, but wraps several target facts in narrative framing ('discovers', 'reveals') and still combines multiple facts per bullet, so atomicity is incomplete."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-formed, uniform bullet list with consistent sentence formatting."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "No clear hallucinations relative to the reference, though extra framing ('In the novel', 'investigation reveals') and unlisted detail add slight risk beyond strict extraction."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "All required content areas are present, but they are not separated into fully atomic, independently checkable claims."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Matches the reference content overall, but like B it uses narrative framing and merges several facts into single bullets instead of isolating atomic claims."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Consistent bulleted structure and sentence style across the response."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Largely grounded, with only minor extra framing/detail ('In the novel', 'personal financial gain') beyond the explicit reference items."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Touches every expected fact from the reference, but does not fully break them into separate atomic units."
+      }
+    }
+  }
+}

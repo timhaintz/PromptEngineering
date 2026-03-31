@@ -1,0 +1,95 @@
+{
+  "timestamp_utc": "2026-03-29T21:02:18.062245+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.92512,
+        "run_1_run_3": 0.937115,
+        "run_2_run_3": 0.943778
+      },
+      "mean_similarity": 0.935338,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs are functionally equivalent: each is a debate opening statement taking the same clear pro-remote-work position and supporting it with the same core evidence pattern\u2014eliminated commute/office overhead, fewer interruptions, greater control over environment/schedule, and output-based accountability enabled by modern tools. The structure is also effectively the same across runs: concise four-sentence arguments with no greeting and a similar progression from productivity mechanisms to management/accountability. Although all three miss the reference constraint of staying under four sentences, they miss it in the same way, so this does not create a reproducibility difference between runs.",
+        "material_differences": [
+          "Minor emphasis differences only: Run 1 mentions recovery and reduced context switching, Run 2 highlights complex individual tasks, and Run 3 adds asynchronous workflows, documentation, and reduced rework."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 541.0,
+        "output_tokens": 461.0,
+        "total_tokens": 1002.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.958332,
+        "run_1_run_3": 0.93547,
+        "run_2_run_3": 0.94425
+      },
+      "mean_similarity": 0.946017,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs take the same affirmative position that remote work improves productivity on average, use the same basic structure (claim + two evidence-backed reasons + brief roadmap), and satisfy the task constraints in materially the same way. The differences are mainly in supporting examples and phrasing rather than stance, argumentative strategy, or task fulfillment.",
+        "material_differences": [
+          "Run 3 includes a specific Trip.com randomized trial and a ~13% figure, whereas Runs 1 and 2 cite studies more generally.",
+          "Run 1 emphasizes autonomy, peak concentration hours, and reduced burnout-related downtime; Run 2 emphasizes better work environments, flexible scheduling, and retention; Run 3 emphasizes absenteeism/turnover and caregiving constraints.",
+          "Run 2 and Run 3 explicitly mention hybrid arrangements and coordination costs, while Run 1 refers more generally to policy design and addressable risks."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 609.0,
+        "output_tokens": 457.0,
+        "total_tokens": 1066.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.911312,
+        "run_1_run_3": 0.888407,
+        "run_2_run_3": 0.894811
+      },
+      "mean_similarity": 0.898177,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same debate opening in materially the same way: they take the same pro-remote-work position, use a thesis-plus-two-reasons structure, cite empirical evidence, and close by previewing the rest of the debate. The main variation is in which studies/examples are named and how the productivity mechanisms are phrased; these do not change the functional role or argumentative substance for research purposes. Notably, all three also share the same constraint miss by using four sentences rather than staying under four.",
+        "material_differences": [
+          "Different evidence examples are cited across runs (COVID-era/Stanford in Run 1, Chinese travel agency/Gallup in Run 2, Nature Human Behaviour/Microsoft and broader trial evidence in Run 3).",
+          "Run 1 and Run 3 add more qualification about conditions/guardrails for success, while Run 2 is slightly more direct and less hedged.",
+          "Run 3 explicitly mentions coordination costs and mitigation, a nuance less emphasized in Runs 1 and 2."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 638.0,
+        "output_tokens": 677.0,
+        "total_tokens": 1315.0
+      }
+    }
+  }
+}

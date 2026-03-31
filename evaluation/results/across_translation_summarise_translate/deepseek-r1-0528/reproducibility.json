@@ -1,0 +1,89 @@
+{
+  "timestamp_utc": "2026-03-29T22:55:09.565570+00:00",
+  "pattern": {
+    "key": "across_translation_summarise_translate",
+    "logic": "Across",
+    "subcategory": "Translation",
+    "task_title": "Summarise a text and translate to French",
+    "task_description": "Produce a concise English summary of the provided text and then translate that summary into French.",
+    "naive_request": "Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "role": "You are a bilingual technical writer who produces concise summaries and accurate French translations.",
+    "context": "The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.",
+    "instructions": [
+      "Summarise the text in 2-3 concise English sentences.",
+      "Translate the summary into French, preserving tone and terminology.",
+      "Flag any idiomatic expressions that may not translate directly.",
+      "Do not add information beyond what the source text contains."
+    ],
+    "technique": "Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.",
+    "output": "Return two sections: English Summary and French Translation.",
+    "reference_notes": "A strong answer produces a faithful summary and an accurate French translation without adding new claims.",
+    "source_paper_id": "30",
+    "source_pattern_id": "30-6-0",
+    "source_paper_title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+    "source_pattern_name": "Summarization and Translation"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.989947,
+        "run_1_run_3": 0.97671,
+        "run_2_run_3": 0.979431
+      },
+      "mean_similarity": 0.982029,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same substantive English summary and corresponding French translation: cloud computing replaces on-premises infrastructure with scalable/flexible cloud services, reduces upfront/capital costs, enables on-demand scaling, introduces data sovereignty/vendor lock-in/shared security challenges, and requires evaluation of SLAs, data residency, and exit strategies before a cloud-first adoption. Differences are limited to wording, sentence structure, and near-synonymous phrasing, with no meaningful change in claims or task fulfillment.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 838.0,
+        "output_tokens": 686.0,
+        "total_tokens": 1524.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.923209,
+        "run_1_run_3": 0.975162,
+        "run_2_run_3": 0.921967
+      },
+      "mean_similarity": 0.940113,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs perform the same task in the same overall format: an English summary, a French translation, and brief notes on potentially tricky terminology. The core meaning is consistent across runs: cloud adoption replaces/scales beyond on-premises infrastructure, reduces capital costs, introduces risks around data sovereignty/vendor lock-in/shared security, and requires evaluating SLAs, data residency, and exit strategies before a cloud-first move. Differences are mainly phrasing, terminology choices, and how many idioms are explicitly flagged, not substantive changes to the task outcome.",
+        "material_differences": [
+          "Run 2 is slightly more expansive, adding wording like 'revolutionizes infrastructure management' and 'allowing on-demand resource scaling,' which is a mild elaboration compared with Runs 1 and 3.",
+          "The French terminology varies: e.g., 'informatique en cloud' vs 'cloud computing' vs 'informatique en nuage'; 'enfermement propri\u00e9taire' vs 'enfermement fournisseur'; 'approche cloud-first' vs 'approche cloud d'abord'.",
+          "The idiom/terminology notes differ in scope: Runs 1 and 3 mainly flag 'cloud-first approach,' while Run 2 additionally flags 'vendor lock-in' and 'on-demand'."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1057.0,
+        "output_tokens": 640.0,
+        "total_tokens": 1697.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.975298,
+        "run_1_run_3": 0.932487,
+        "run_2_run_3": 0.904439
+      },
+      "mean_similarity": 0.937408,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same task in materially the same way: a faithful English summary of the source content and a correct French translation covering the same key points (cloud replacing on-premises infrastructure, lower capital cost, scalability, challenges such as data sovereignty/vendor lock-in/shared security, and the need to assess SLAs/data residency/exit strategies before a cloud-first approach). Differences are limited to phrasing, compression, and terminology choices in French/idiom notes, with no substantive change in meaning or added claims.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 986.0,
+        "output_tokens": 596.0,
+        "total_tokens": 1582.0
+      }
+    }
+  }
+}

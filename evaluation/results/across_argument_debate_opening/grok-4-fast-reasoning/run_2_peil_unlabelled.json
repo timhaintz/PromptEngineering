@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T21:16:41.135713+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 2,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.\n\nYou are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.\n\n1. State your position clearly in the first sentence.\n2. Provide two supporting points with brief evidence or reasoning.\n3. Close with a forward-looking statement that frames the rest of the debate.\n4. Do not exceed four sentences. Do not use greetings or address the opponent.\n\nUse dialectical reasoning to present a clear thesis with supporting evidence before concluding.\n\nReturn a 2-4 sentence opening argument with no greetings.",
+  "output": "Remote work demonstrably improves employee productivity by offering greater flexibility and reducing common office distractions. First, it enables personalized schedules that align with peak performance hours, as evidenced by a 2020 Stanford study finding remote workers 13% more productive due to shorter commutes and better work-life balance. Second, customized home environments minimize interruptions, with Owl Labs reporting that 82% of remote employees feel more focused without office noise or unplanned meetings. As we proceed, I anticipate examining these advantages against potential drawbacks to affirm remote work's net positive impact.",
+  "reasoning_content": null,
+  "response_id": "b72c0cab-a77d-4c62-b4ef-77d8025e5a5c",
+  "usage": {
+    "input_tokens": 136.0,
+    "output_tokens": 108.0,
+    "total_tokens": 509.0
+  }
+}

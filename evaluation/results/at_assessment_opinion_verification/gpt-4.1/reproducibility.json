@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T02:55:24.152857+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.983699,
+        "run_1_run_3": 0.982292,
+        "run_2_run_3": 0.983023
+      },
+      "mean_similarity": 0.983005,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same factual verdict: the claim is false, explaining that the Great Wall is generally not visible to the naked eye from low Earth orbit and that visibility-from-the-Moon is a myth. They use essentially the same structure (verdict, scientific explanation, astronaut evidence, conclusion) and satisfy the task in materially the same way. Differences are limited to wording, level of detail, and examples.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 993.0,
+        "output_tokens": 313.0,
+        "total_tokens": 1306.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are textually identical and respond in the same way: they ask the user to provide the claim instead of verifying it. They therefore have the same meaning, structure, and task performance for reproducibility purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 270.0,
+        "output_tokens": 202.0,
+        "total_tokens": 472.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.719243,
+        "run_1_run_3": 0.719243,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 0.812829,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in the relevant sense: instead of verifying the provided factual claim, they ask the user to supply a claim. Runs 2 and 3 are identical, and Run 1 is only a slightly longer paraphrase with the same practical effect. For reproducibility purposes, they are functionally the same response and fail the task in materially the same way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 284.0,
+        "output_tokens": 320.0,
+        "total_tokens": 604.0
+      }
+    }
+  }
+}

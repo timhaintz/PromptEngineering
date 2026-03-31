@@ -1,0 +1,96 @@
+{
+  "timestamp_utc": "2026-03-30T04:35:07.665709+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.929478,
+        "run_1_run_3": 0.942461,
+        "run_2_run_3": 0.908551
+      },
+      "mean_similarity": 0.92683,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same inferred belief: Alice thinks the file is in /shared_folder/photos, with the same core reasoning that she put it there and was not told about the move. The added comments in Runs 1 and 3 about checking/sync do not change the answer or the task fulfillment in any meaningful way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 326.0,
+        "output_tokens": 261.0,
+        "total_tokens": 587.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.875859,
+        "run_1_run_3": 0.886192,
+        "run_2_run_3": 0.836247
+      },
+      "mean_similarity": 0.866099,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The runs share the same high-level false-belief pattern\u2014Alice believes the file is where she last left it because she was unaware of the move\u2014but they do not give materially the same inferred belief. Runs 1 and 2 answer generically with an unspecified 'original location,' while Run 3 gives a different concrete location ('desktop'). For this task, the believed location is the core output, so these differences are material rather than mere wording variation.",
+        "material_differences": [
+          "Runs 1 and 2 describe Alice's belief as the file being in its original/last-seen location without naming the specific location.",
+          "Run 3 specifies a different concrete believed location: 'on the desktop.'",
+          "Run 3 also introduces a different relocation narrative ('documents folder') than Runs 1 and 2's generic move scenario.",
+          "None of the runs match the reference location '/shared_folder/photos'; Runs 1 and 2 are underspecified, and Run 3 is inconsistent with it."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 659.0,
+        "output_tokens": 706.0,
+        "total_tokens": 1365.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.864299,
+        "run_1_run_3": 0.950164,
+        "run_2_run_3": 0.850993
+      },
+      "mean_similarity": 0.888485,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs apply the same false-belief reasoning pattern: Alice believes the file remains where she originally placed it because she was not informed of any move. However, they instantiate materially different assumed scenarios and therefore give different concrete answers about where Alice thinks the file is (Run 1: left drawer/Location A, Run 2: desk drawer, Run 3: desk). For research purposes, these are not functionally identical because the inferred belief content differs at the key output level.",
+        "material_differences": [
+          "Run 1 says Alice thinks the file is in 'Location A/the left drawer.'",
+          "Run 2 says Alice thinks the file is in 'the desk drawer.'",
+          "Run 3 says Alice thinks the file is 'on her desk.'",
+          "Runs 1 and 3 explicitly note that the scenario details were missing and substitute an assumed classic theory-of-mind setup; Run 2 does this less explicitly.",
+          "The objective relocation also differs across runs (e.g., drawer to cabinet, desk to drawer), showing different instantiated stories rather than mere wording variation."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1935.0,
+        "output_tokens": 555.0,
+        "total_tokens": 2490.0
+      }
+    }
+  }
+}

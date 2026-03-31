@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T08:48:54.766344+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0d1a872ba94a454c0069ca37aa5d108195847b1321dbcbad17",
+  "usage": {
+    "input_tokens": 2121.0,
+    "output_tokens": 3958.0,
+    "total_tokens": 6079.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The DP algorithm and backtracking are correct and executable. For the given items and 10 kg limit, it reconstructs an optimal solution (items 1, 2, 3 with value 24 and weight 10), which is equivalent in value to the reference optimum."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The code is readable and the printed output is clear, but the presentation is relatively plain compared with the more structured/tabular formatting in B and C."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It stays grounded in the provided item list and capacity, and it does not invent extra data or unsupported claims."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It provides full executable Python code, solves the 0/1 knapsack optimally, reconstructs the chosen items, and prints totals."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The dynamic programming solution is correct and reconstructs an optimal subset. With this tie-handling, it returns an equivalent optimal solution (items 1, 2, 3; total value 24, total weight 10)."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent formatting: step labels, clear sectioning, aligned item table, and a clean totals block make the output easy to follow."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "All statements are supported by the code and given data; no hallucinated items, values, or unsupported reasoning are introduced."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully satisfies the task with executable code, optimal solving logic, item reconstruction, and printed selected items plus totals."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The DP implementation and reconstruction are correct. It yields an optimal valid subset for the 10 kg limit (items 1, 2, 3; value 24), which is equivalent to the reference optimal value."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The output is consistently organized with section comments, separators, and clear per-item/totals printing, making it easy to read and verify."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It remains faithful to the provided problem data and makes no unsupported claims beyond what the code computes."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes executable code, solves the problem optimally, reconstructs the chosen items, and prints both the selected items and aggregate totals."
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T03:31:10.065583+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.972322,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 0.972322
+      },
+      "mean_similarity": 0.981548,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs reach the same verdict ('yes, the conclusion follows') and use the same logical chain: Sarah is a manager, all managers completed leadership training, the training includes conflict resolution, therefore Sarah completed a conflict resolution module. The wording and formatting differ slightly, but they satisfy the task in materially the same way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 629.0,
+        "output_tokens": 155.0,
+        "total_tokens": 784.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 0.934229,
+        "run_2_run_3": 0.934229
+      },
+      "mean_similarity": 0.956153,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same way for research purposes: instead of analyzing the provided argument, they ask the user to supply the premises/conclusion before proceeding. Runs 1 and 2 are identical, and Run 3 differs only in minor wording ('or the argument you want analyzed' and 'premise-question reasoning') without changing meaning, structure, or outcome. They therefore satisfy the task in materially the same way\u2014by failing to perform it and requesting more input.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 327.0,
+        "output_tokens": 298.0,
+        "total_tokens": 625.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.873002,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 0.873002
+      },
+      "mean_similarity": 0.915334,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs respond in materially the same way: they acknowledge the instructions/method and ask the user to provide the policy conclusion and supporting premises, rather than performing the requested reasoning on the provided reference content. Run 1 and Run 3 are identical; Run 2 differs only in minor wording ('understand the method' vs. 'understand your instructions' and a slightly shorter request), with no functional difference.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 308.0,
+        "output_tokens": 226.0,
+        "total_tokens": 534.0
+      }
+    }
+  }
+}

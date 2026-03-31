@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T21:27:29.076631+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+  "output": "Remote work demonstrably boosts productivity by eliminating exhausting commutes, instantly reclaiming hours each week for focused work or essential rest. Employees gain control over their environment, significantly reducing disruptive office noise and interruptions, allowing for deeper concentration on complex tasks. Furthermore, the flexibility to structure their day around peak energy levels and personal needs leads to more efficient and higher-quality output. The overwhelming evidence shows that empowered, location-independent workers consistently achieve more in less time.",
+  "reasoning_content": "\nOkay, the user wants me to pretend I'm in an online debate arguing that remote work improves employee productivity. They've specified I should write an opening argument without greetings or addressing the opponent, and keep it under four sentences. \n\nHmm, this seems like a structured debate format where conciseness is key. The user is probably looking for a punchy, evidence-based opener that sets up my position strongly. Since they emphasized not to address the opponent, I should focus purely on stating my case.\n\nI recall research showing remote work boosts productivity killers like commute time elimination and flexible scheduling. The challenge is packing the strongest points into just four sentences - maybe focus on time savings, focus benefits, and autonomy? \n\nThe tone should be assertive but professional, using phrases like \"overwhelming evidence\" to establish authority. No fluff - every word must count. I'll lead with the commute time argument since it's universally relatable, then layer in focus and autonomy as complementary drivers.\n",
+  "response_id": "b79d53aab91c4385a411c5e57094c2e9",
+  "usage": {
+    "input_tokens": 65.0,
+    "output_tokens": 293.0,
+    "total_tokens": 358.0
+  }
+}

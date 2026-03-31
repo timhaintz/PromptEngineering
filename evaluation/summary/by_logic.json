@@ -1,0 +1,332 @@
+{
+  "Across": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.5833,
+          "completeness": 4.75,
+          "fabrication": 4.8333,
+          "formatting": 4.6667
+        },
+        "overall_mean": 4.7083,
+        "sample_count": 12
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 3.25,
+          "completeness": 3.75,
+          "fabrication": 3.8333,
+          "formatting": 4.1667
+        },
+        "overall_mean": 3.75,
+        "sample_count": 12
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 2.9167,
+          "completeness": 3.6667,
+          "fabrication": 3.5833,
+          "formatting": 3.9167
+        },
+        "overall_mean": 3.5209,
+        "sample_count": 12
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -1.3333,
+      "completeness": -1.0,
+      "fabrication": -1.0,
+      "formatting": -0.5,
+      "overall_mean": -0.9583
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -1.6666,
+      "completeness": -1.0833,
+      "fabrication": -1.25,
+      "formatting": -0.75,
+      "overall_mean": -1.1874
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": 0.3333,
+      "completeness": 0.0833,
+      "fabrication": 0.25,
+      "formatting": 0.25,
+      "overall_mean": 0.2291
+    }
+  },
+  "At": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.4167,
+          "completeness": 4.4167,
+          "fabrication": 4.3333,
+          "formatting": 4.5
+        },
+        "overall_mean": 4.4167,
+        "sample_count": 12
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 1.9167,
+          "completeness": 2.3333,
+          "fabrication": 4.25,
+          "formatting": 3.4167
+        },
+        "overall_mean": 2.9792,
+        "sample_count": 12
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 2.0833,
+          "completeness": 2.6667,
+          "fabrication": 3.3333,
+          "formatting": 3.75
+        },
+        "overall_mean": 2.9583,
+        "sample_count": 12
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -2.5,
+      "completeness": -2.0834,
+      "fabrication": -0.0833,
+      "formatting": -1.0833,
+      "overall_mean": -1.4375
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -2.3334,
+      "completeness": -1.75,
+      "fabrication": -1.0,
+      "formatting": -0.75,
+      "overall_mean": -1.4584
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": -0.1666,
+      "completeness": -0.3334,
+      "fabrication": 0.9167,
+      "formatting": -0.3333,
+      "overall_mean": 0.0209
+    }
+  },
+  "Beyond": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.5,
+          "completeness": 4.5,
+          "fabrication": 4,
+          "formatting": 4.5833
+        },
+        "overall_mean": 4.3958,
+        "sample_count": 12
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 2.4167,
+          "completeness": 2.8333,
+          "fabrication": 3.1667,
+          "formatting": 4.4167
+        },
+        "overall_mean": 3.2083,
+        "sample_count": 12
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 2.25,
+          "completeness": 3,
+          "fabrication": 2.75,
+          "formatting": 4.3333
+        },
+        "overall_mean": 3.0833,
+        "sample_count": 12
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -2.0833,
+      "completeness": -1.6667,
+      "fabrication": -0.8333,
+      "formatting": -0.1666,
+      "overall_mean": -1.1875
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -2.25,
+      "completeness": -1.5,
+      "fabrication": -1.25,
+      "formatting": -0.25,
+      "overall_mean": -1.3125
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": 0.1667,
+      "completeness": -0.1667,
+      "fabrication": 0.4167,
+      "formatting": 0.0834,
+      "overall_mean": 0.125
+    }
+  },
+  "In": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.75,
+          "completeness": 4.75,
+          "fabrication": 4.8333,
+          "formatting": 4.0833
+        },
+        "overall_mean": 4.6042,
+        "sample_count": 12
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 4.9167,
+          "completeness": 5,
+          "fabrication": 4.9167,
+          "formatting": 4.9167
+        },
+        "overall_mean": 4.9375,
+        "sample_count": 12
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 4.75,
+          "completeness": 5,
+          "fabrication": 4.5,
+          "formatting": 4.5
+        },
+        "overall_mean": 4.6875,
+        "sample_count": 12
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": 0.1667,
+      "completeness": 0.25,
+      "fabrication": 0.0834,
+      "formatting": 0.8334,
+      "overall_mean": 0.3333
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": 0.0,
+      "completeness": 0.25,
+      "fabrication": -0.3333,
+      "formatting": 0.4167,
+      "overall_mean": 0.0833
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": 0.1667,
+      "completeness": 0,
+      "fabrication": 0.4167,
+      "formatting": 0.4167,
+      "overall_mean": 0.25
+    }
+  },
+  "Out": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.4167,
+          "completeness": 3.6667,
+          "fabrication": 4.3333,
+          "formatting": 3.5833
+        },
+        "overall_mean": 4.0,
+        "sample_count": 12
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 3.25,
+          "completeness": 4.4167,
+          "fabrication": 3.5,
+          "formatting": 4.3333
+        },
+        "overall_mean": 3.875,
+        "sample_count": 12
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 3.6667,
+          "completeness": 4.1667,
+          "fabrication": 4.1667,
+          "formatting": 4.0833
+        },
+        "overall_mean": 4.0209,
+        "sample_count": 12
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -1.1667,
+      "completeness": 0.75,
+      "fabrication": -0.8333,
+      "formatting": 0.75,
+      "overall_mean": -0.125
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -0.75,
+      "completeness": 0.5,
+      "fabrication": -0.1666,
+      "formatting": 0.5,
+      "overall_mean": 0.0209
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": -0.4167,
+      "completeness": 0.25,
+      "fabrication": -0.6667,
+      "formatting": 0.25,
+      "overall_mean": -0.1459
+    }
+  },
+  "Over": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.0833,
+          "completeness": 4.3333,
+          "fabrication": 3.8333,
+          "formatting": 4.1667
+        },
+        "overall_mean": 4.1041,
+        "sample_count": 12
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 4.3333,
+          "completeness": 4.5,
+          "fabrication": 3.6667,
+          "formatting": 4.3333
+        },
+        "overall_mean": 4.2083,
+        "sample_count": 12
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 4.25,
+          "completeness": 4.25,
+          "fabrication": 3.75,
+          "formatting": 4.25
+        },
+        "overall_mean": 4.125,
+        "sample_count": 12
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": 0.25,
+      "completeness": 0.1667,
+      "fabrication": -0.1666,
+      "formatting": 0.1666,
+      "overall_mean": 0.1042
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": 0.1667,
+      "completeness": -0.0833,
+      "fabrication": -0.0833,
+      "formatting": 0.0833,
+      "overall_mean": 0.0209
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": 0.0833,
+      "completeness": 0.25,
+      "fabrication": -0.0833,
+      "formatting": 0.0833,
+      "overall_mean": 0.0833
+    }
+  }
+}

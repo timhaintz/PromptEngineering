@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T22:37:10.305321+00:00",
+  "pattern": {
+    "key": "across_translation_summarise_translate",
+    "logic": "Across",
+    "subcategory": "Translation",
+    "task_title": "Summarise a text and translate to French",
+    "task_description": "Produce a concise English summary of the provided text and then translate that summary into French.",
+    "naive_request": "Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "role": "You are a bilingual technical writer who produces concise summaries and accurate French translations.",
+    "context": "The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.",
+    "instructions": [
+      "Summarise the text in 2-3 concise English sentences.",
+      "Translate the summary into French, preserving tone and terminology.",
+      "Flag any idiomatic expressions that may not translate directly.",
+      "Do not add information beyond what the source text contains."
+    ],
+    "technique": "Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.",
+    "output": "Return two sections: English Summary and French Translation.",
+    "reference_notes": "A strong answer produces a faithful summary and an accurate French translation without adding new claims.",
+    "source_paper_id": "30",
+    "source_pattern_id": "30-6-0",
+    "source_paper_title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+    "source_pattern_name": "Summarization and Translation"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0ced9573e786dfed0069c9a86fd4a48194b29f645795afce73",
+  "usage": {
+    "input_tokens": 1237.0,
+    "output_tokens": 3499.0,
+    "total_tokens": 4736.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The summary is coherent and likely faithful, and the French version preserves the main points. Minor issues include anglicized French phrasing such as \"cloud computing\" and \"scaling des ressources.\""
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear two-part structure with headings for the English summary and French translation, in the exact order requested."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It stays within the apparent source content and does not add extra meta-comments or new claims beyond the summary itself."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Provides both required elements: a concise English summary and a French translation of that summary."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The English summary is concise, and the French translation closely matches it with strong terminology and no material loss of meaning."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The summary and translation are clearly labeled and correctly ordered, but the added final note breaks the otherwise clean two-part format."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The main summary/translation stays faithful, but the extra statement about idiomatic expressions is an unrequested claim not supported by the task."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Includes both requested components in full; the extra note is unnecessary but nothing essential is missing."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The summary and translation are largely faithful, but the French is slightly less polished and includes anglicized phrasing such as \"scaling des ressources.\""
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "Both required sections are present, but the inserted idiom note between the summary and translation disrupts the expected summary-then-translation flow."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The core content does not add major unsupported facts, but the extra note about idiomatic expressions introduces unrequested information."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It still provides both the English summary and the French translation, so all required task elements are present."
+      }
+    }
+  }
+}

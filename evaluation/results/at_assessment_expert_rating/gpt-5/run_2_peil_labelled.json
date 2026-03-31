@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T23:08:34.602343+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "variant": "peil_labelled",
+  "run_index": 2,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "Role: You are an expert in online learning and educational technology evaluation.\n\nContext: You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.\n\nInstructions:\n1. First, assign and justify weights for each of the seven criteria.\n2. Then rate each of the six platforms on every criterion using the provided scale.\n3. Present the results in a clear table format.\n4. Note any significant strengths or limitations for each platform.\n\nTechniques: Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.\n\nOutput: Return a criteria weighting table followed by a platform rating matrix.\n\nTask Material:\nCriteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+  "output": "## 1) Criteria weights (set *before* rating)\n\n| Criterion | Weight | Justification (university online learning context) |\n|---|---:|---|\n| Security and privacy | 20% | Must meet institutional risk posture (FERPA/GDPR-type expectations), admin controls, data handling, and safe classroom practices. |\n| Functionality and features | 18% | Teaching requires breakout rooms, recording, captions, chat moderation, webinars/large meetings, attendance, polls, etc. |\n| Compatibility and integration | 15% | Needs to work across devices/OS and integrate with LMS/SSO/calendars and institutional workflows. |\n| User experiences | 15% | Consistent student/faculty experience affects adoption, engagement, accessibility, and course continuity. |\n| Ease of use | 12% | Low friction for faculty/students reduces support load and improves participation. |\n| Technical support and training | 10% | Vendor documentation, enterprise support options, and training resources are critical at scale. |\n| Cost of the program | 10% | Total cost matters, but universities often prioritize risk, integration, and teaching capability over lowest price. |\n\n**Rating scale used:** Very Low, Low, Medium Low, Medium, Medium High, High, Very High.\n\n---\n\n## 2) Platform rating matrix (rubric-based)\n\n| Platform | Ease of use (12%) | Functionality & features (18%) | Compatibility & integration (15%) | Security & privacy (20%) | Technical support & training (10%) | Cost (10%) | User experiences (15%) |\n|---|---|---|---|---|---|---|---|\n| **Zoom** | High | Very High | High | Medium High | High | Medium | High |\n| **Microsoft Teams** | Medium High | Very High | Very High | Very High | High | Medium | Medium High |\n| **Skype** | Medium | Medium | Medium Low | Medium | Low | Very High | Medium Low |\n| **Google Meet** | High | Medium High | High | High | Medium High | Medium | High |\n| **WhatsApp** | Very High | Medium | Low | Medium High | Low | Very High | Medium High |\n| **FaceTime** | High | Medium Low | Low | High | Medium | Very High | Medium |\n\n---\n\n## 3) Notable strengths and limitations (by platform)\n\n**Zoom**\n- **Strengths:** Best-in-class teaching features (breakouts, recording, webinars); strong cross-platform performance; broad LMS/integration ecosystem.\n- **Limitations:** Security/privacy is strong but typically requires careful admin configuration and policy enforcement; costs can rise for webinars/large meetings/add-ons.\n\n**Microsoft Teams**\n- **Strengths:** Tight integration with Microsoft 365 (SSO, calendar, file collaboration); robust enterprise security/compliance and admin controls; strong meeting + collaboration in one hub.\n- **Limitations:** More complex UI and governance (teams/channels/permissions) can increase onboarding/training needs; licensing value depends on existing campus agreements.\n\n**Skype**\n- **Strengths:** Low cost and familiar to some users.\n- **Limitations:** Limited modern LMS/admin integration and weaker enterprise roadmap positioning; fewer teaching-focused features; comparatively weaker institutional support posture.\n\n**Google Meet**\n- **Strengths:** Simple experience; strong integration with Google Workspace/Classroom and calendar; generally solid security controls in managed Workspace tenants.\n- **Limitations:** Advanced teaching/webinar features are less comprehensive than Zoom/Teams depending on edition; some features gated by Workspace tier.\n\n**WhatsApp**\n- **Strengths:** Extremely easy adoption; ubiquitous on mobile; fast for informal communications and small-group coordination.\n- **Limitations:** Poor institutional integration (SSO/LMS/rosters), limited classroom controls/archiving/records management; consumer-oriented privacy/metadata considerations and policy misfit for official instruction.\n\n**FaceTime**\n- **Strengths:** Strong privacy posture for calls; very easy for Apple users; good audio/video quality in the Apple ecosystem.\n- **Limitations:** Limited cross-platform compatibility and institutional integration; lacks many higher-education teaching controls (class management, webinar tooling, admin governance).",
+  "reasoning_content": null,
+  "response_id": "resp_00df42fffde63bb40069c9b0d076b48197bddd2b66296e6336",
+  "usage": {
+    "input_tokens": 209.0,
+    "output_tokens": 2292.0,
+    "total_tokens": 2501.0
+  }
+}

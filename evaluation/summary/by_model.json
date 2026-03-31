@@ -1,0 +1,290 @@
+{
+  "deepseek-r1-0528": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.1667,
+          "completeness": 4.6111,
+          "fabrication": 4.1667,
+          "formatting": 4.2778
+        },
+        "overall_mean": 4.3056,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 3.1667,
+          "completeness": 3.9444,
+          "fabrication": 3.2222,
+          "formatting": 4.5556
+        },
+        "overall_mean": 3.7222,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 3.4444,
+          "completeness": 4.1667,
+          "fabrication": 2.8889,
+          "formatting": 4.3333
+        },
+        "overall_mean": 3.7083,
+        "sample_count": 18
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -1.0,
+      "completeness": -0.6667,
+      "fabrication": -0.9445,
+      "formatting": 0.2778,
+      "overall_mean": -0.5834
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -0.7223,
+      "completeness": -0.4444,
+      "fabrication": -1.2778,
+      "formatting": 0.0555,
+      "overall_mean": -0.5973
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": -0.2777,
+      "completeness": -0.2223,
+      "fabrication": 0.3333,
+      "formatting": 0.2223,
+      "overall_mean": 0.0139
+    },
+    "reproducibility": {
+      "naive": {
+        "mean_similarity": 0.942756,
+        "functionally_identical_rate": 0.8333,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "mean_similarity": 0.876591,
+        "functionally_identical_rate": 0.5556,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "mean_similarity": 0.872064,
+        "functionally_identical_rate": 0.4444,
+        "sample_count": 18
+      }
+    }
+  },
+  "gpt-4.1": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.4444,
+          "completeness": 4.1667,
+          "fabrication": 4.2778,
+          "formatting": 4.4444
+        },
+        "overall_mean": 4.3333,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 3.3889,
+          "completeness": 3.5556,
+          "fabrication": 4.3889,
+          "formatting": 3.7778
+        },
+        "overall_mean": 3.7778,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 3.2778,
+          "completeness": 3.5,
+          "fabrication": 4.2222,
+          "formatting": 3.3889
+        },
+        "overall_mean": 3.5972,
+        "sample_count": 18
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -1.0555,
+      "completeness": -0.6111,
+      "fabrication": 0.1111,
+      "formatting": -0.6666,
+      "overall_mean": -0.5555
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -1.1666,
+      "completeness": -0.6667,
+      "fabrication": -0.0556,
+      "formatting": -1.0555,
+      "overall_mean": -0.7361
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": 0.1111,
+      "completeness": 0.0556,
+      "fabrication": 0.1667,
+      "formatting": 0.3889,
+      "overall_mean": 0.1806
+    },
+    "reproducibility": {
+      "naive": {
+        "mean_similarity": 0.963388,
+        "functionally_identical_rate": 0.8333,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "mean_similarity": 0.942433,
+        "functionally_identical_rate": 0.8889,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "mean_similarity": 0.930434,
+        "functionally_identical_rate": 0.8889,
+        "sample_count": 18
+      }
+    }
+  },
+  "gpt-5": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.6111,
+          "completeness": 4.4444,
+          "fabrication": 4.6111,
+          "formatting": 4.1667
+        },
+        "overall_mean": 4.4583,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 3.5556,
+          "completeness": 3.8333,
+          "fabrication": 4.3333,
+          "formatting": 4.4444
+        },
+        "overall_mean": 4.0416,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 3.3889,
+          "completeness": 3.6667,
+          "fabrication": 4.4444,
+          "formatting": 4.3333
+        },
+        "overall_mean": 3.9583,
+        "sample_count": 18
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -1.0555,
+      "completeness": -0.6111,
+      "fabrication": -0.2778,
+      "formatting": 0.2777,
+      "overall_mean": -0.4167
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -1.2222,
+      "completeness": -0.7777,
+      "fabrication": -0.1667,
+      "formatting": 0.1666,
+      "overall_mean": -0.5
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": 0.1667,
+      "completeness": 0.1666,
+      "fabrication": -0.1111,
+      "formatting": 0.1111,
+      "overall_mean": 0.0833
+    },
+    "reproducibility": {
+      "naive": {
+        "mean_similarity": 0.925223,
+        "functionally_identical_rate": 0.8333,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "mean_similarity": 0.890962,
+        "functionally_identical_rate": 0.8889,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "mean_similarity": 0.885802,
+        "functionally_identical_rate": 0.8889,
+        "sample_count": 18
+      }
+    }
+  },
+  "grok-4-fast-reasoning": {
+    "scores": {
+      "naive": {
+        "metrics": {
+          "accuracy": 4.6111,
+          "completeness": 4.3889,
+          "fabrication": 4.3889,
+          "formatting": 4.1667
+        },
+        "overall_mean": 4.3889,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "metrics": {
+          "accuracy": 3.2778,
+          "completeness": 3.8889,
+          "fabrication": 3.6111,
+          "formatting": 4.2778
+        },
+        "overall_mean": 3.7639,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "metrics": {
+          "accuracy": 3.1667,
+          "completeness": 3.8333,
+          "fabrication": 3.1667,
+          "formatting": 4.5
+        },
+        "overall_mean": 3.6667,
+        "sample_count": 18
+      }
+    },
+    "peil_labelled_minus_naive": {
+      "accuracy": -1.3333,
+      "completeness": -0.5,
+      "fabrication": -0.7778,
+      "formatting": 0.1111,
+      "overall_mean": -0.625
+    },
+    "peil_unlabelled_minus_naive": {
+      "accuracy": -1.4444,
+      "completeness": -0.5556,
+      "fabrication": -1.2222,
+      "formatting": 0.3333,
+      "overall_mean": -0.7222
+    },
+    "labelled_minus_unlabelled": {
+      "accuracy": 0.1111,
+      "completeness": 0.0556,
+      "fabrication": 0.4444,
+      "formatting": -0.2222,
+      "overall_mean": 0.0972
+    },
+    "reproducibility": {
+      "naive": {
+        "mean_similarity": 0.961601,
+        "functionally_identical_rate": 0.8889,
+        "sample_count": 18
+      },
+      "peil_labelled": {
+        "mean_similarity": 0.913005,
+        "functionally_identical_rate": 0.6667,
+        "sample_count": 18
+      },
+      "peil_unlabelled": {
+        "mean_similarity": 0.90497,
+        "functionally_identical_rate": 0.6111,
+        "sample_count": 18
+      }
+    }
+  }
+}

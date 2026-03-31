@@ -1,0 +1,89 @@
+{
+  "timestamp_utc": "2026-03-30T19:13:20.511698+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.930543,
+        "run_1_run_3": 0.958623,
+        "run_2_run_3": 0.927451
+      },
+      "mean_similarity": 0.938872,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs satisfy the task in materially the same way: each is exactly three sentences, summarizes photosynthesis, includes light energy plus carbon dioxide and water as inputs, identifies chloroplasts as the site of the process, and gives glucose/sugars and oxygen as outputs. The differences are limited to phrasing, ordering of details, and small emphasis shifts (for example, Run 3 adds a final sentence about ecological significance), which do not change the functional content for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 496.0,
+        "output_tokens": 919.0,
+        "total_tokens": 1415.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.943429,
+        "run_1_run_3": 0.956799,
+        "run_2_run_3": 0.947324
+      },
+      "mean_similarity": 0.949184,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "Yes. All three outputs satisfy the task in the same way: each is exactly three sentences, identifies sunlight/light energy, carbon dioxide, and water as inputs, places the process in chloroplasts with chlorophyll capturing light energy, and names glucose and oxygen as outputs. The wording varies slightly, but the meaning, structure, and level of task completion are materially the same for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 466.0,
+        "output_tokens": 312.0,
+        "total_tokens": 778.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.92948,
+        "run_1_run_3": 0.842978,
+        "run_2_run_3": 0.863749
+      },
+      "mean_similarity": 0.878736,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs convey the same core explanation of photosynthesis in exactly three sentences, but they do not satisfy the prompt variant in materially the same way. Runs 1 and 2 use explicit 'Inputs/Process/Outputs' labels, while Run 3 is unlabelled prose, which is a meaningful structural difference given the 'unlabelled' variant; Run 3 also adds notably more biochemical detail.",
+        "material_differences": [
+          "Runs 1 and 2 label each sentence as 'Inputs:', 'Process:', and 'Outputs:', whereas Run 3 does not.",
+          "Run 3 adds extra mechanistic content such as electron movement and the Calvin cycle, making it more detailed than Runs 1 and 2.",
+          "Run 2 uniquely mentions glucose being stored as starch."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 511.0,
+        "output_tokens": 1635.0,
+        "total_tokens": 2146.0
+      }
+    }
+  }
+}

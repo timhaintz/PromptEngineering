@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T02:52:27.857671+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0b998880d64adeeb0069c9e48a42448196979b1cccf4a4a4c6",
+  "usage": {
+    "input_tokens": 899.0,
+    "output_tokens": 1686.0,
+    "total_tokens": 2585.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly judges the claim as false, matching the reference that the Great Wall is generally not visible from low Earth orbit with the naked eye."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear, well-structured response with an explicit verdict, supporting reasoning, and organized sections."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded and aligned with known evidence, though it includes specific astronaut quotations/testimony without sourcing, which slightly raises risk of paraphrase or unsupported detail."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Provides the required verdict and reasoning, but does not explicitly state uncertainty despite the task asking for it."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not evaluate the claim or provide a true/false judgment, so it fails the core factual verification task."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "The response is not in the requested verdict-plus-reasoning format; it only asks the user to provide a claim."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not introduce any factual assertions, so there is effectively no hallucinated content."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "No verdict, no reasoning, and no uncertainty assessment are provided."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not assess the supplied claim and therefore does not deliver an accuracy-bearing answer to the task."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "The response does not follow the requested factual-verification format and instead asks for a claim to be submitted."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It makes no substantive factual claims, so it avoids fabrication."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It omits the verdict, reasoning, and uncertainty required by the task."
+      }
+    }
+  }
+}

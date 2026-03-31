@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T04:55:24.185696+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0b2b1265a25ad4470069ca0117631c819390ad171a287437a3",
+  "usage": {
+    "input_tokens": 3659.0,
+    "output_tokens": 2882.0,
+    "total_tokens": 6541.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Correctly identifies schema/model, database, endpoint, OpenAPI, tests, and migration changes. However, request validation is only implicit via Pydantic, serialization is only partially implied through response models, and documentation is not clearly covered."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-structured with numbered sections and a clear summary table. The formatting is consistent and easy to scan."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "Introduces a specific FastAPI user-registration context, file names, and endpoints that were not provided in the task. Some assumptions are hedged, but the response still grounds itself in an invented stack."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Covers most core impact areas, including schema, DB, endpoint logic, tests, and migration. It falls short of the reference by not explicitly covering documentation and only indirectly addressing validation/serialization."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately covers the major impact areas expected by the reference: API schema, request validation, database model/migrations, response handling, tests, and documentation. It also correctly notes backward-compatibility and rollout concerns."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Highly consistent structure with clear headings, tables, bullet points, and an implementation order. The organization supports quick evaluation."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Assumes a FastAPI/Pydantic-style stack, specific routes, and possible SDKs/examples not stated in the prompt. Still, most specifics are presented as examples or conditional components rather than hard facts."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully covers the reference components and goes beyond them with risks, migration strategy, negative tests, documentation updates, and downstream client impacts."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately identifies the expected impact areas: API spec, validation, ORM/storage, input/output models, tests, documentation, and response handling. It also sensibly includes migration and client compatibility considerations."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Consistent and readable throughout, with clear sectioning, tables, and scoped bullet lists. The structure remains uniform across components."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Makes stack-specific assumptions such as FastAPI, Pydantic, SQLAlchemy, and named handlers/files that are not in the task. However, these are framed as illustrative and remain plausible for the simulated scenario."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers all reference items, including schema, validation, DB model, serialization via input/output models, tests, and documentation. It also adds deployment, SDK, and monitoring considerations."
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T03:03:12.567402+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.923406,
+        "run_1_run_3": 0.913529,
+        "run_2_run_3": 0.909268
+      },
+      "mean_similarity": 0.915401,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs reach the same factual verdict and explain it in materially the same way: the claim is false as a general statement, the Great Wall is generally not visible to the naked eye from low Earth orbit, definitely not visible from the Moon, and any naked-eye sighting from orbit would be rare and dependent on exceptional conditions. Structural differences are minor elaborations rather than changes in task fulfillment or conclusion.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 718.0,
+        "output_tokens": 292.0,
+        "total_tokens": 1010.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.766306,
+        "run_1_run_3": 0.759604,
+        "run_2_run_3": 0.927072
+      },
+      "mean_similarity": 0.817661,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in the material sense: instead of evaluating the provided claim, they state that the specific claim is missing and ask the user to supply the exact statement plus context/source before giving a True/False/Uncertain verdict. The wording and formatting differ slightly, but the meaning, structure, and task handling are effectively the same.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 441.0,
+        "output_tokens": 338.0,
+        "total_tokens": 779.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.849145,
+        "run_1_run_3": 0.780527,
+        "run_2_run_3": 0.822505
+      },
+      "mean_similarity": 0.817393,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs respond in materially the same way: instead of evaluating the factual claim, they state that the specific claim is missing and ask the user to provide or quote it before giving a True/False/Uncertain verdict. The wording and requested supplemental context vary slightly, but the outputs have the same functional behavior, structure, and practical outcome for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 419.0,
+        "output_tokens": 453.0,
+        "total_tokens": 872.0
+      }
+    }
+  }
+}

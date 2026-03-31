@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T05:03:30.880099+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.\n\nTask Material:\nSystem: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+  "output": "Below is what typically must change in a Python/FastAPI REST service when you add a new **mandatory** `phone_number` field to user registration (POST `/users`) and expose it on retrieval (GET `/users/{id}`).\n\n## Files to modify (typical FastAPI layout)\n\n1. **OpenAPI spec**\n   - `openapi.yaml` / `openapi.json` (or whatever file you author the spec in)\n     - Add `phone_number` to the POST `/users` request body schema and mark it **required**\n     - Add `phone_number` to the user schema returned by GET `/users/{id}` (and POST response, if it returns the created user)\n\n2. **Pydantic schemas (request/response models)**\n   - `app/schemas/user.py` (or `app/schemas.py`)\n     - Update the \u201ccreate user\u201d schema (commonly `UserCreate`) to include `phone_number: str` (no default => required)\n     - Update the response schema (commonly `UserRead` / `UserOut`) to include `phone_number`\n\n3. **Database model**\n   - `app/models/user.py` (or `app/models.py`)\n     - Add a column/field for `phone_number` on the `User` model (e.g., SQLAlchemy `Column(String, nullable=False)`)\n\n4. **Database migration**\n   - `alembic/versions/<new_migration>.py` (or your migration tool equivalent)\n     - Add the column to the users table\n     - Make it non-nullable (or perform a backfill + then enforce non-null)\n\n5. **CRUD / persistence logic**\n   - `app/crud/users.py` (or `app/crud.py`)\n     - Ensure the create-user logic persists `phone_number`\n     - Ensure read-user logic returns it (often automatic if ORM model includes it)\n\n6. **API route handlers**\n   - `app/api/routes/users.py` (or `app/routers/users.py`)\n     - POST handler should accept the updated `UserCreate` schema (it will now require `phone_number`)\n     - GET handler should return the updated response model including `phone_number`\n\n7. **Tests**\n   - `tests/test_users.py` (or similar)\n     - Update POST `/users` tests to include `phone_number` in request payloads\n     - Add/adjust negative tests asserting requests **without** `phone_number` fail (422)\n     - Update GET `/users/{id}` assertions to include `phone_number`\n\n## Functions that will need modification (common names)\n\n- **Route handlers**\n  - `create_user(...)` (POST `/users`) \u2014 must accept and pass through `phone_number`\n  - `get_user(...)` (GET `/users/{id}`) \u2014 must return a model that includes `phone_number`\n\n- **CRUD functions**\n  - `create_user(db, user_in)` \u2014 must write `phone_number` to the DB model\n  - `get_user(db, user_id)` \u2014 usually unchanged logically, but the returned schema/model now includes `phone_number`\n\n- **Schema classes (not functions, but key change points)**\n  - `class UserCreate(...)` \u2014 add required `phone_number`\n  - `class UserOut/UserRead(...)` \u2014 include `phone_number`\n\nIf you share your repo\u2019s actual folder/file names, I can map this list to your exact paths and function identifiers.",
+  "reasoning_content": null,
+  "response_id": "resp_0d27136fc81f0e500069ca04116d0881979cb56acbdeb83500",
+  "usage": {
+    "input_tokens": 126.0,
+    "output_tokens": 877.0,
+    "total_tokens": 1003.0
+  }
+}

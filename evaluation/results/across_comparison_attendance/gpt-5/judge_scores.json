@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T21:48:22.513473+00:00",
+  "pattern": {
+    "key": "across_comparison_attendance",
+    "logic": "Across",
+    "subcategory": "Comparison",
+    "task_title": "Compare two numeric values and select the larger",
+    "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+    "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+    "task_material": "",
+    "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+    "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+    "instructions": [
+      "Extract the numeric attendance value for each round.",
+      "Handle thousands separators (commas) correctly during comparison.",
+      "State which round has the higher attendance.",
+      "Provide the numeric values to justify the comparison."
+    ],
+    "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+    "output": "Return the round name with the higher attendance and both numeric values.",
+    "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+    "source_paper_id": "20",
+    "source_pattern_id": "20-2-0",
+    "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+    "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0f5cd16827ba67080069c99d565f548196a5f19bbf837de30c",
+  "usage": {
+    "input_tokens": 783.0,
+    "output_tokens": 1540.0,
+    "total_tokens": 2323.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly identifies SF 2nd Leg as having the higher attendance and uses the correct figures (34,669 > 33,861)."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear, concise, and directly formatted as an answer, including the winner and both values."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "No unsupported claims are introduced; the stated comparison matches the reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully completes the task by selecting the larger attendance and showing the numeric comparison."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not provide the required comparison or the correct winner; it incorrectly claims the needed figures are missing."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Readable and well-structured with a numbered list, but formatted as a clarification request rather than a direct task response."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Avoids making up a winner or values and explicitly refrains from guessing."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Fails to complete the task because it asks for additional input instead of identifying which round had higher attendance."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "Does not answer which round had the higher attendance and therefore misses the correct result."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Organized and easy to read with bullets and steps, but it is still a request for more information rather than an answer."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Does not invent values or an unsupported conclusion; it asks for the data instead."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "Does not perform the comparison or provide the winner, so the task remains incomplete."
+      }
+    }
+  }
+}

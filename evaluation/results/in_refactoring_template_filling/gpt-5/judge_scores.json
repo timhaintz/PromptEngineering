@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T07:44:16.707714+00:00",
+  "pattern": {
+    "key": "in_refactoring_template_filling",
+    "logic": "In",
+    "subcategory": "Refactoring",
+    "task_title": "Fill placeholders in a provided template",
+    "task_description": "Given a template with marked placeholders, fill each placeholder while preserving the template formatting.",
+    "naive_request": "I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting and overall template that I provide at https://myapi.com/NAME/profile/JOB",
+    "task_material": "Template: https://myapi.com/NAME/profile/JOB\nPlaceholder NAME: a realistic full name\nPlaceholder JOB: a realistic job title",
+    "role": "You are a template-filling assistant who populates marked placeholders while preserving all surrounding formatting.",
+    "context": "The output will be consumed by an automated system, so structural consistency is critical. Only replace the explicit placeholders.",
+    "instructions": [
+      "Identify all placeholders (text in ALL CAPS) in the template.",
+      "Replace each placeholder with appropriate content.",
+      "Preserve all non-placeholder text and formatting exactly.",
+      "If a placeholder cannot be filled, flag it rather than guessing."
+    ],
+    "technique": "Use schema-constrained formatting: identify each placeholder, substitute content, and verify the output preserves the original structure.",
+    "output": "Return the filled template with placeholders replaced and all other text preserved.",
+    "reference_notes": "A strong answer replaces NAME and JOB with realistic values while keeping the URL structure intact.",
+    "source_paper_id": "0",
+    "source_pattern_id": "0-1-4",
+    "source_paper_title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+    "source_pattern_name": "Template"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_068453f5d8d2375c0069ca28c0481481969e7dca96b757496f",
+  "usage": {
+    "input_tokens": 724.0,
+    "output_tokens": 1651.0,
+    "total_tokens": 2375.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 2,
+        "justification": "It provides realistic NAME and JOB values, but it does not actually apply them to the template or produce the filled URL required by the task."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "It does not preserve the template format; instead of returning a single filled template, it adds explanatory prose and a bulleted list."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It avoids pretending to know the unseen template contents and clearly frames the values as examples, with no major invented facts beyond an unnecessary limitation note."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It only partially helps by suggesting values; it does not complete the placeholder replacement task itself."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It correctly fills both placeholders with realistic values and preserves the expected URL structure."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is a single filled URL, matching the template style and maintaining URL encoding for spaces."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It includes only the required realistic substitutions and adds no unsupported claims or extraneous content."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully completes the task by replacing both NAME and JOB in the template."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It correctly fills both placeholders with realistic values and preserves the expected URL structure."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is a single filled URL, matching the template style and maintaining URL encoding for spaces."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It includes only the required realistic substitutions and adds no unsupported claims or extraneous content."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully completes the task by replacing both NAME and JOB in the template."
+      }
+    }
+  }
+}

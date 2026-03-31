@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-29T21:51:07.874756+00:00",
+  "pattern": {
+    "key": "across_comparison_attendance",
+    "logic": "Across",
+    "subcategory": "Comparison",
+    "task_title": "Compare two numeric values and select the larger",
+    "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+    "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+    "task_material": "",
+    "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+    "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+    "instructions": [
+      "Extract the numeric attendance value for each round.",
+      "Handle thousands separators (commas) correctly during comparison.",
+      "State which round has the higher attendance.",
+      "Provide the numeric values to justify the comparison."
+    ],
+    "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+    "output": "Return the round name with the higher attendance and both numeric values.",
+    "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+    "source_paper_id": "20",
+    "source_pattern_id": "20-2-0",
+    "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+    "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.999977,
+        "run_1_run_3": 0.999976,
+        "run_2_run_3": 0.999999
+      },
+      "mean_similarity": 0.999984,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the exact same answer, selecting SF 2nd Leg as larger and citing the same numeric comparison (34,669 vs 33,861). They satisfy the task in the same way with no meaningful variation in wording, structure, or content.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 291.0,
+        "output_tokens": 144.0,
+        "total_tokens": 435.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.843571,
+        "run_1_run_3": 0.873964,
+        "run_2_run_3": 0.875267
+      },
+      "mean_similarity": 0.864267,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in substance: instead of comparing the provided values and selecting the larger one, they claim the needed attendance figures are missing and ask the user to supply them. They therefore fail the task in materially the same way and are functionally equivalent for reproducibility purposes. Differences are limited to phrasing, formatting, and how explicitly they describe the intended comparison steps.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 437.0,
+        "output_tokens": 362.0,
+        "total_tokens": 799.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.849414,
+        "run_1_run_3": 0.852683,
+        "run_2_run_3": 0.937247
+      },
+      "mean_similarity": 0.879781,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in substance: instead of answering the comparison task, they state that the attendance figures are missing and ask the user to provide the two round names and values, then describe the same 4-step process (extract numbers, normalize/remove commas, compare numerically, report the higher round). The wording, examples, and phrasing differ slightly, but they fail in the same way and would lead to the same next-step interaction.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 465.0,
+        "output_tokens": 411.0,
+        "total_tokens": 876.0
+      }
+    }
+  }
+}

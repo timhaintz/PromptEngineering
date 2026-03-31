@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T02:55:35.337462+00:00",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "variant": "peil_labelled",
+  "run_index": 1,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+  "output": "Please provide the exact claim you want fact-checked (quote it verbatim if possible) and any relevant context (who said it, where/when, and what decision it affects). Without the specific claim, I can\u2019t issue a defensible True/False/Uncertain verdict.",
+  "reasoning_content": null,
+  "response_id": "resp_0bd72b937f3756af0069c9e6239e888195ae4ce19584d763b7",
+  "usage": {
+    "input_tokens": 154.0,
+    "output_tokens": 80.0,
+    "total_tokens": 234.0
+  }
+}

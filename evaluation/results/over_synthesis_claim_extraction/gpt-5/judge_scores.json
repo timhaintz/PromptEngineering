@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-31T02:01:23.838481+00:00",
+  "pattern": {
+    "key": "over_synthesis_claim_extraction",
+    "logic": "Over",
+    "subcategory": "Synthesis",
+    "task_title": "Extract atomic claims from a book summary",
+    "task_description": "Break a summary into self-contained atomic claims that can each be independently verified against the source text.",
+    "naive_request": "You are trying to verify the faithfulness of statements made in a given summary of a book against the actual text of the book. To do so, you first need to break the summary into a set of \"atomic claims\", each of which will then be passed to a human who will verify its faithfulness. Each claim should be self-contained with all the necessary context. Each claim should contain no more than two sentences. Each individual claim should be on its own line prefixed by a \"- \".\n\nSummary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "task_material": "Summary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "role": "You are a claim extraction specialist who decomposes summaries into independently verifiable atomic statements.",
+    "context": "Each extracted claim will be passed to a human fact-checker who will verify it against the source text. Claims must be self-contained so the checker does not need additional context.",
+    "instructions": [
+      "Break the summary into atomic, self-contained claims.",
+      "Each claim must include sufficient context to be verified independently.",
+      "Limit each claim to no more than two sentences.",
+      "Prefix each claim with a dash and put each on its own line."
+    ],
+    "technique": "Use structured decomposition: parse the summary sentence by sentence and extract each discrete factual assertion as a standalone claim.",
+    "output": "Return a list of atomic claims, each prefixed with a dash on its own line.",
+    "reference_notes": "Should extract claims about: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership, vote to sell property, development company, Carlos Mendez as treasurer, his motive.",
+    "source_paper_id": "63",
+    "source_pattern_id": "63-0-0",
+    "source_paper_title": "FABLES: Evaluating faithfulness and content selection in book-length summarization",
+    "source_pattern_name": "Claim Extraction"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_045ad87986ca6fc10069cb29a1b2708197982516452b05567c",
+  "usage": {
+    "input_tokens": 1191.0,
+    "output_tokens": 8275.0,
+    "total_tokens": 9466.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It covers all key reference facts, but several bullets are not fully atomic (for example, combining Maria Santos being a detective with her investigation) and the final motive statement is more specific than the reference."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Uses a clean, uniform bullet list with full-sentence items and consistent punctuation."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It stays close to the reference content, but it adds specificity around Carlos Mendez\u2019s motive ('personal financial gain') that is not explicit in the reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Includes all expected elements: Maria Santos as detective, Porto Azul, summer 2019, sailing club membership, the vote to sell property, the development company, Carlos Mendez as treasurer, and his motive."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It includes the core reference facts, but several items are meta-statements about what 'the summary' says rather than direct atomic story claims."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Maintains a consistent bullet-list structure with complete sentences throughout."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The attribution to 'the summary' makes it somewhat cautious, but it still includes motive detail not explicitly stated in the reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers all required reference points, including setting, timing, club membership, sale vote, buyer, treasurer, and motive."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It directly states the main story facts and covers the reference content, but some bullets still bundle multiple facts and the final motive phrasing is more specific than the reference."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The list structure is consistent, but each bullet is missing a space after the hyphen, which makes the formatting less polished."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded in the reference, though it asserts added motive specificity ('personal financial gain') as fact."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Includes all expected reference claims: Maria Santos, Porto Azul, summer 2019, sailing club membership, property sale vote, development company, Carlos Mendez as treasurer, and motive."
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:22:02.618279+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a science communicator who produces constrained, accurate summaries.\n\nThe summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.\n\n1. Cover the key aspects of photosynthesis: inputs, process, and outputs.\n2. Use exactly three sentences \u2014 no more, no fewer.\n3. Ensure scientific accuracy in all statements.\n4. Keep the language accessible to a general audience.\n\nUse explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.\n\nReturn exactly three sentences summarising photosynthesis.",
+  "output": "Here is the three-sentence summary of photosynthesis:\n\n1.  **Inputs:** Photosynthesis requires sunlight energy, carbon dioxide gas absorbed from the air, and water taken up by plant roots.\n2.  **Process:** Inside plant and algal cells, specialized structures use the sunlight to split water molecules and convert carbon dioxide into energy-rich molecules.\n3.  **Outputs:** This process produces oxygen gas released into the atmosphere and glucose sugar, which serves as the primary food source for the plant.",
+  "reasoning_content": "\nAlright, the user wants a three-sentence summary of photosynthesis that's accurate and accessible. They specifically mentioned covering inputs, process, and outputs\u2014one per sentence. \n\nHmm, the user seems detail-oriented (exact sentence count, scientific accuracy) but also values clarity for general audiences. Probably creating educational material? \n\nFirst sentence must cover inputs: sunlight, CO2, water. Second sentence needs the core process\u2014light-dependent and Calvin cycle. Third sentence should list outputs: glucose and oxygen. \n\nGotta avoid jargon like \"thylakoid membranes\" or \"NADPH\" to keep it accessible. Also double-checking that glucose is the main product, not just \"sugars.\" \n\n...Wait, should I specify \"plants and algae\" or is \"organisms\" sufficient? \"Organisms\" feels more inclusive since cyanobacteria do it too. \n\nFinal check: Three sentences? Yep. Accurate? Photosynthesis equation covered. Accessible? No technical terms. Done.",
+  "response_id": "8c941124b8ba41f382004e6c87260be5",
+  "usage": {
+    "input_tokens": 115.0,
+    "output_tokens": 307.0,
+    "total_tokens": 422.0
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T07:27:20.290175+00:00",
+  "pattern": {
+    "key": "in_classification_relevancy_check",
+    "logic": "In",
+    "subcategory": "Categorising",
+    "task_title": "Classify whether a sentence contains a specific property with data",
+    "task_description": "Determine whether the provided sentence is relevant for further analysis by checking if it contains the specified property with a numeric value and units.",
+    "naive_request": "Is the following sentence relevant for further analysis? Does it contain the data for the property in question (value and units)?\n\nProperty: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "task_material": "Property: tensile strength\nSentence: The measured tensile strength of the sample was 450 MPa at room temperature.",
+    "role": "You are a data extraction specialist who triages sentences for relevance to a specified material property.",
+    "context": "This classification step filters sentences from research papers before detailed data extraction. Only sentences containing the target property with numeric values and units should pass.",
+    "instructions": [
+      "Check if the sentence mentions the specified property.",
+      "Check if the sentence contains a numeric value with units for that property.",
+      "State whether the sentence is relevant (Yes) or not (No).",
+      "Briefly explain why."
+    ],
+    "technique": "Use criteria-based classification: check each required element (property mention, numeric value, units) before deciding relevance.",
+    "output": "Return Yes or No followed by a brief justification.",
+    "reference_notes": "Yes: the sentence mentions tensile strength (the target property) with a value of 450 and units of MPa.",
+    "source_paper_id": "18",
+    "source_pattern_id": "18-0-0",
+    "source_paper_title": "Extracting Accurate Materials Data from Research Papers with Conversational Language Models and Prompt Engineering",
+    "source_pattern_name": "Initial relevancy prompt"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.918729,
+        "run_1_run_3": 0.902249,
+        "run_2_run_3": 0.932776
+      },
+      "mean_similarity": 0.917918,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs make the same classification: Yes, the sentence mentions the target property (tensile strength) and includes the required quantitative data (450 MPa). The differences are only in phrasing and level of explanation; runs 2 and 3 additionally note that 'at room temperature' is contextual rather than part of the core value/unit pair, which does not change the task outcome.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 669.0,
+        "output_tokens": 236.0,
+        "total_tokens": 905.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.933572,
+        "run_1_run_3": 0.957957,
+        "run_2_run_3": 0.902037
+      },
+      "mean_similarity": 0.931189,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same classification (Yes) and support it with the same core rationale: the sentence explicitly mentions the target property 'tensile strength' and includes the value 450 with units MPa. Differences are only in formatting and level of detail, not in meaning or task fulfillment.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 443.0,
+        "output_tokens": 254.0,
+        "total_tokens": 697.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.888402,
+        "run_1_run_3": 0.899271,
+        "run_2_run_3": 0.934637
+      },
+      "mean_similarity": 0.907437,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same classification ('Yes') and justify it with the same substantive criteria: the sentence contains the target property ('tensile strength'), the numeric value ('450'), and the unit ('MPa'). Differences are only stylistic (formatting, punctuation, and amount of explanation) and do not change task satisfaction or meaning.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 489.0,
+        "output_tokens": 166.0,
+        "total_tokens": 655.0
+      }
+    }
+  }
+}

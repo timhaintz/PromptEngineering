@@ -1,0 +1,96 @@
+{
+  "timestamp_utc": "2026-03-30T05:50:43.595203+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.938791,
+        "run_1_run_3": 0.962278,
+        "run_2_run_3": 0.947432
+      },
+      "mean_similarity": 0.9495,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs recommend the same substantive changes: update FastAPI/Pydantic request and response schemas, add a non-nullable database field plus migration, ensure create/read logic propagates the new field, and account for tests and OpenAPI/documentation updates. For research purposes, they solve the task in materially the same way.",
+        "material_differences": [
+          "Run 1 and Run 3 explicitly separate changes across schemas, DB models, CRUD/services, and routers; Run 2 mostly collapses CRUD/business-logic changes into the endpoint layer.",
+          "Run 2 and Run 3 are slightly inconsistent about tests, saying 'no changes needed' while also recommending adding/updating tests; Run 1 more directly states tests should be updated.",
+          "Run 1 uniquely calls out API versioning/backward incompatibility, whereas Run 2 and Run 3 focus more on migration/default handling for existing users."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 3144.0,
+        "output_tokens": 1162.0,
+        "total_tokens": 4306.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.96917,
+        "run_1_run_3": 0.965268,
+        "run_2_run_3": 0.979966
+      },
+      "mean_similarity": 0.971468,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same core impact analysis in materially the same structure and level of detail: they identify API schema changes, request validation, database/ORM and migration updates, endpoint/serialization effects for POST and GET, test updates, documentation changes, risks, and an implementation/testing order. For the evaluation reference, each answer covers the expected areas and would support the same research conclusion about system-change impact.",
+        "material_differences": [
+          "They differ in the recommended database migration/nullability strategy for legacy users: Run 1 leans toward non-null with backfill/default handling, Run 2 recommends adding the column nullable first, and Run 3 suggests NOT NULL with a default/empty-string style migration.",
+          "They vary slightly in schema/serialization details, such as model names (e.g., User vs UserResponse), regex examples, and whether serialization is described generically or via from_orm/model methods.",
+          "They give different effort estimates and rollout guidance (hours vs days, degree of emphasis on versioning, feature flags, migration testing, and monitoring), but not in a way that changes the functional outcome."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 6706.0,
+        "output_tokens": 762.0,
+        "total_tokens": 7468.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.917388,
+        "run_1_run_3": 0.966693,
+        "run_2_run_3": 0.921643
+      },
+      "mean_similarity": 0.935241,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs provide materially the same impact analysis for the same simulated change: adding a mandatory `phone_number` field to user registration. They all cover the same core layers and actions expected by the reference answer\u2014API/Pydantic schema updates, request validation, database/ORM plus migration changes, CRUD or serialization propagation, test updates, and documentation/OpenAPI impact\u2014along with similar risks and rollout/testing order. The differences are mostly implementation-detail variations in how backward compatibility is handled, not a different solution to the task.",
+        "material_differences": [
+          "Run 1 and Run 3 lean more toward backward-compatible nullability/optional response handling for existing users, while Run 2 describes a stricter eventual end state with non-optional response schema and `nullable=False` at the model/DB level after migration.",
+          "Run 1 contains a minor inconsistency by mentioning a 400 error for a missing required field in one test note, whereas Runs 2 and 3 consistently frame FastAPI validation failures as 422."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 6778.0,
+        "output_tokens": 1871.0,
+        "total_tokens": 8649.0
+      }
+    }
+  }
+}

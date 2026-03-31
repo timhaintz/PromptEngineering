@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T19:17:55.740895+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0a657376432878ab0069cacb65d1ec8190b53707bf61bedf28",
+  "usage": {
+    "input_tokens": 932.0,
+    "output_tokens": 1888.0,
+    "total_tokens": 2820.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately describes light energy use, carbon dioxide and water as inputs, chloroplast/chlorophyll-based conversion, and glucose and oxygen as outputs; the added equation and Calvin cycle details are biologically sound."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Follows the constraint exactly with three complete sentences in a consistent prose format."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Contains no invented or unsupported claims; extra details such as ATP production and the chemical equation are standard facts."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers all key reference points and stays within the exact three-sentence requirement."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Mostly accurate, but saying photosynthesis uses inputs to 'produce energy' is imprecise since it stores light energy in glucose rather than producing energy itself."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Uses exactly three clear sentences and maintains a consistent format throughout."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "No clear hallucinations or unsupported details; the content stays within standard biology."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Includes sunlight, carbon dioxide, water, chloroplasts/chlorophyll, and glucose plus oxygen outputs, all in exactly three sentences."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately summarizes the inputs, chloroplast-based process, carbon fixation, and production of glucose and oxygen without major scientific error."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Meets the formatting constraint exactly with three complete, consistently written sentences."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "No fabricated content is present; the added note about supporting life on Earth is valid."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully covers the required main points and satisfies the exact three-sentence constraint."
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T21:44:47.377083+00:00",
+  "pattern": {
+    "key": "across_comparison_attendance",
+    "logic": "Across",
+    "subcategory": "Comparison",
+    "task_title": "Compare two numeric values and select the larger",
+    "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+    "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+    "task_material": "",
+    "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+    "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+    "instructions": [
+      "Extract the numeric attendance value for each round.",
+      "Handle thousands separators (commas) correctly during comparison.",
+      "State which round has the higher attendance.",
+      "Provide the numeric values to justify the comparison."
+    ],
+    "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+    "output": "Return the round name with the higher attendance and both numeric values.",
+    "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+    "source_paper_id": "20",
+    "source_pattern_id": "20-2-0",
+    "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+    "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 2,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values.",
+  "output": "I\u2019m missing the two attendance figures to compare.\n\nPlease provide the two round names and their attendance values (as written, e.g., `Round 1: 12,345` and `Round 2: 9,876`), and I\u2019ll:\n1) extract the numbers, 2) remove commas correctly, 3) compare, and 4) return the higher round plus both numeric values.",
+  "reasoning_content": null,
+  "response_id": "resp_097c6b9acc1c93280069c99d4cb21c819688a20b8ec525fbb0",
+  "usage": {
+    "input_tokens": 121.0,
+    "output_tokens": 114.0,
+    "total_tokens": 235.0
+  }
+}

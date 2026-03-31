@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T06:19:07.721868+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0ae5f3a1f6f0abad0069ca14a78a68819099b6680c82655f7d",
+  "usage": {
+    "input_tokens": 3591.0,
+    "output_tokens": 4870.0,
+    "total_tokens": 8461.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Correctly identifies schema, ORM/model, migration, endpoint, tests, and docs impacts in a plausible FastAPI setup. Minor imprecision remains (e.g., mentioning a Pydantic 'required list') and it assumes a specific stack not stated in the task."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Consistently structured with clear headings, bullets, code examples, and a summary table, making the impact analysis easy to follow."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Adds concrete stack assumptions (FastAPI, SQLAlchemy, Alembic, specific files/routes), but the speculation stays limited and directly relevant to the requested change."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers API/request-response schema, validation, database model and migration, serialization via response schema, tests, and documentation, matching the reference well."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Mostly accurate on API spec, validation, route, database, migration, tests, and documentation impacts. However, it omits an explicit response/serialization component and adds unsupported requirements like uniqueness/index concerns."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Well organized with tables and phased sections, but the mix of markdown tables and HTML list markup is slightly less clean and consistent."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "Contains several architecture-specific assumptions not grounded in the prompt (openapi.yaml, service layer, uniqueness checks, index/performance implications), increasing speculative content."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Addresses most expected areas, including API schema, validation, database, tests, and docs, but does not clearly call out serialization/response-model changes."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Accurately covers API spec, request/response schemas, database model, migration, routes/CRUD, tests, and deployment concerns. Some details are more assumed than required, such as explicit GET/CRUD changes and effort estimation."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Clear sectioning and readable tables/bullets, though the table formatting is slightly uneven due to embedded HTML list markup."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "Introduces stack-specific files and processes (openapi.json, crud.py, conftest.py, sprint-point estimate) not given in the task, but the assumptions are still plausible and mostly relevant."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Thoroughly covers API schema, validation, database model/migration, serialization via response models, tests, and documentation/OpenAPI updates, aligning strongly with the reference."
+      }
+    }
+  }
+}

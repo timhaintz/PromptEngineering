@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T21:20:57.291871+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_005996ec8d46ae1d0069c996c1739c819594ad4a98f3b60bc0",
+  "usage": {
+    "input_tokens": 955.0,
+    "output_tokens": 5286.0,
+    "total_tokens": 6241.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Takes a clear pro-remote position and uses a broadly accurate Stanford-linked 13% productivity claim; the rest of the reasoning is relevant but somewhat generalized."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "It is a clean single-paragraph opening with no greeting, but it uses four sentences rather than staying under four and is slightly wordy for a concise opener."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "There are no obvious invented statistics beyond a commonly cited productivity figure, though several benefits are asserted without precise sourcing."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes a clear stance, supporting reasons, and a concluding line suitable for a debate opening statement."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 3,
+        "justification": "It presents a strong stance and relevant evidence, but the Stanford/Ctrip study is inaccurately framed as involving over 16,000 employees, which weakens factual correctness."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The response is well structured and has no greeting, but it is still four sentences instead of under four."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "It uses concrete evidence, yet the likely inflated study scope and a precise survey claim reduce confidence that all factual details are reliable."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It gives a full opening argument with a clear position, multiple supporting points, and a debate-oriented closing sentence."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 3,
+        "justification": "It directly answers the prompt and cites the Stanford 13% result reasonably well, but the Owl Labs claim about 22% more focused hours annually appears questionable."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The style fits a debate opener and includes no greeting, though it again uses four sentences rather than staying under four."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "One precise statistic appears likely unsupported or misattributed, creating a stronger fabrication concern than in the other responses."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It states a clear position, provides two supporting reasons, and frames them as an opening case for the debate."
+      }
+    }
+  }
+}

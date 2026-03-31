@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T08:06:49.180647+00:00",
+  "pattern": {
+    "key": "in_refactoring_template_filling",
+    "logic": "In",
+    "subcategory": "Refactoring",
+    "task_title": "Fill placeholders in a provided template",
+    "task_description": "Given a template with marked placeholders, fill each placeholder while preserving the template formatting.",
+    "naive_request": "I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting and overall template that I provide at https://myapi.com/NAME/profile/JOB",
+    "task_material": "Template: https://myapi.com/NAME/profile/JOB\nPlaceholder NAME: a realistic full name\nPlaceholder JOB: a realistic job title",
+    "role": "You are a template-filling assistant who populates marked placeholders while preserving all surrounding formatting.",
+    "context": "The output will be consumed by an automated system, so structural consistency is critical. Only replace the explicit placeholders.",
+    "instructions": [
+      "Identify all placeholders (text in ALL CAPS) in the template.",
+      "Replace each placeholder with appropriate content.",
+      "Preserve all non-placeholder text and formatting exactly.",
+      "If a placeholder cannot be filled, flag it rather than guessing."
+    ],
+    "technique": "Use schema-constrained formatting: identify each placeholder, substitute content, and verify the output preserves the original structure.",
+    "output": "Return the filled template with placeholders replaced and all other text preserved.",
+    "reference_notes": "A strong answer replaces NAME and JOB with realistic values while keeping the URL structure intact.",
+    "source_paper_id": "0",
+    "source_pattern_id": "0-1-4",
+    "source_paper_title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+    "source_pattern_name": "Template"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0edd8df443b1a43a0069ca2df208308195840acfdea30a2b50",
+  "usage": {
+    "input_tokens": 1040.0,
+    "output_tokens": 2558.0,
+    "total_tokens": 3598.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It correctly replaces both `NAME` and `JOB` with realistic values and preserves the original URL pattern `https://myapi.com/.../profile/...`. Encoding spaces as `%20` is valid for a URL."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The completed URL keeps the template structure intact, but the response adds headings and explanatory text instead of providing only the filled template."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "The response stays grounded in the given template and does not introduce unsupported requirements or false claims; the extra explanation is descriptive rather than fabricated."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "All placeholders are filled, and the final URL is explicitly provided."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It correctly fills both placeholders and preserves the URL structure. However, `John_Doe` is somewhat generic/example-like, and underscores are a formatting choice not required by the prompt."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The slash-based URL structure is preserved exactly, but the answer includes additional explanatory text rather than only the filled template."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It is mostly grounded in the task, though phrases like 'No placeholders require flagging' and 'for automated processing' add unsupported process assumptions not requested in the prompt."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Both placeholders are replaced and the response clearly presents the completed template."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It successfully replaces `NAME` and `JOB` and keeps the original URL path structure. As with Output B, the chosen values are acceptable but somewhat generic, and underscore substitution was not required."
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "The URL itself preserves the template structure, but the response adds more surrounding formatting, explanation, and a warning note, making it less consistent with a simple template-fill output."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "The claim that underscores are used 'as required by automated systems' is unsupported by the prompt, so it introduces unnecessary invented rationale."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "All placeholders are filled and the completed template is provided clearly."
+      }
+    }
+  }
+}

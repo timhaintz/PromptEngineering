@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T03:56:17.088563+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 2,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+  "output": "As a logical reasoning specialist, I follow a structured method to validate conclusions by analyzing premises. This involves explicitly listing the premises, converting each into a question to explore alternatives, reasoning step by step through all branches, and providing a verdict on whether the conclusion logically follows. Since you haven't provided a specific policy conclusion and its premises, I cannot perform the analysis yet.\n\nPlease provide the policy conclusion and the supporting premises in the following format:\n- **Premises**: A clear list of statements presented as facts or assumptions.\n- **Conclusion**: The policy claim derived from these premises.\n\nFor example:\n- Premises: \n  1. If a policy reduces carbon emissions, it improves public health.\n  2. Policy X reduces carbon emissions.\n- Conclusion: Therefore, policy X improves public health.\n\nOnce you provide the details, I will:\n1. List all premises explicitly.\n2. Convert each premise into a question to identify and explore alternative scenarios.\n3. Reason step by step, considering all branches (e.g., what if a premise is true, false, or has exceptions).\n4. State a verdict on whether the conclusion is logically sound, with an explanation.\n\nI look forward to your input!",
+  "reasoning_content": "\nFirst, the user wants me to act as a logical reasoning specialist. My role is to validate conclusions by analyzing premises. The output should be structured: list premises, turn them into questions, reason step by step, and give a verdict with explanation.\n\nThe specific input isn't provided here; I need to wait for the user to give the policy conclusion and premises. But the user said: \"The analysis will be used to assess whether a policy conclusion is logically sound.\" So, I should expect a statement that includes premises and a conclusion.\n\nLooking back: \"You are a logical reasoning specialist... validate conclusions through disciplined premise analysis.\" Then it describes the process. But in this message, there's no actual policy conclusion given. That might be a mistake.\n\nPerhaps the user will provide the premises and conclusion in a follow-up, or maybe I need to assume a generic case. But the message says: \"Return the listed premises, the derived questions, etc., so I need specific input.\n\nRe-reading the user's message: It starts with \"You are a logical reasoning specialist...\" and then describes the method, but it doesn't include the actual content to analyze. I think the user might have intended to provide that separately or perhaps it's implied.\n\nNo, in this text, it's just the instruction. I should respond by asking for the premises and conclusion to analyze.\n\nBut the user says: \"Use premise-question reasoning...\" and then \"Return the listed premises...\", so I need to have that information.\n\nPerhaps this is a template, and I need to apply it when given the case.\n\nI think the best approach is to acknowledge the method and ask for the specific policy conclusion and premises to analyze.\n\nSince this is a simulation, maybe I should create an example. But the user didn't provide one.\n\nLet me see the message again: \"You are a logical reasoning specialist who validates conclusions through disciplined premise analysis. The analysis will be used to assess whether a policy conclusion is logically sound. ...\"\n\nThen it lists steps 1-4.\n\nFinally, \"Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.\"\n\nBut no premises or conclusion are given. I think I need to prompt the user to provide the specific case.\n\nAs an AI, I can generate a sample to demonstrate, but the user might want to provide their own.\n\nPerhaps in the context, this is a standalone message, and I should respond with an example.\n\nTo be safe, I'll assume that the user will provide the premises and conclusion in a subsequent input, but since this is a single response, I should ask for it.\n\nBut the instruction says \"return\" the analysis, so I need to have something.\n\nI think there's a misunderstanding. Let me treat this as the user describing the task, and I need to be ready to apply it. But for now, since no specific case is given, I'll provide a generic response or ask for details.\n\nPerhaps the user expects me to use this method on a case I have, but I don't have one.\n\nAnother idea: maybe this is part of a conversation, and the previous message had the case. But in this chat, it's the first message.\n\nI should respond by saying that I need the premises and conclusion to proceed.\n\nLet's do that.\n",
+  "response_id": "5a062cf0c61a4bfea827d7322ec74d21",
+  "usage": {
+    "input_tokens": 132.0,
+    "output_tokens": 917.0,
+    "total_tokens": 1049.0
+  }
+}

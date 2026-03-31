@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T04:29:26.460037+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0d99d713c7281b580069c9fb121f988197834e071ede0ae84e",
+  "usage": {
+    "input_tokens": 1394.0,
+    "output_tokens": 3176.0,
+    "total_tokens": 4570.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It gives the exact referenced belief location, /shared_folder/photos, and correctly states that Alice was not informed of the move."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Direct answer first, followed by a brief explanation; the response is clear and internally consistent."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It stays grounded in the given scenario and does not introduce unsupported actors, locations, or events."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It answers where Alice will look and briefly explains why, fully covering the task."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 3,
+        "justification": "It captures the false-belief logic that Alice will look in the original location, but it does not identify the specific location /shared_folder/photos and substitutes generic examples."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is well-structured with a clear main answer, heading, and bullets that are easy to follow."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It introduces unsupported scenario details such as drawer/desk examples, Bob, and assumptions about what Alice observed or was told."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It explains where Alice thinks the file is and why, but it does not provide the scenario-specific path from the reference."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 2,
+        "justification": "It understands the general false-belief pattern, but it answers with invented locations like 'Location A' and 'the left drawer' instead of /shared_folder/photos."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "It is organized with headings and numbered sections, but it is unnecessarily verbose and includes an extra conditional caveat not requested."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "It adds many unsupported details, including Bob, a room-based setup, left/right drawers, a cabinet, and a theory-of-mind framing not grounded in the given task."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It does provide a final belief location and rationale, but the answer is not tailored to the actual scenario's specific location."
+      }
+    }
+  }
+}

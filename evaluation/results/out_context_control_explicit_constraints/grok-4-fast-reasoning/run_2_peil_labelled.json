@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:13:32.414438+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "peil_labelled",
+  "run_index": 2,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Role: You are a science communicator who produces constrained, accurate summaries.\n\nContext: The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.\n\nInstructions:\n1. Cover the key aspects of photosynthesis: inputs, process, and outputs.\n2. Use exactly three sentences \u2014 no more, no fewer.\n3. Ensure scientific accuracy in all statements.\n4. Keep the language accessible to a general audience.\n\nTechniques: Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.\n\nOutput: Return exactly three sentences summarising photosynthesis.",
+  "output": "Photosynthesis is the process by which plants and some other organisms use sunlight, carbon dioxide from the air, and water from the soil as key inputs to produce energy. Within the plant's chloroplasts, chlorophyll absorbs the sunlight's energy to drive chemical reactions that split water molecules and combine carbon dioxide into simple sugars. The main outputs are glucose, which provides food and energy for the plant, and oxygen, which is released into the atmosphere as a byproduct.",
+  "reasoning_content": null,
+  "response_id": "6af7174c-20df-44b0-adc7-88eb1dbc6ce0",
+  "usage": {
+    "input_tokens": 120.0,
+    "output_tokens": 89.0,
+    "total_tokens": 456.0
+  }
+}

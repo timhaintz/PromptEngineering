@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-29T23:15:36.986700+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0f8253eff1c954dc0069c9b1648bb88193a285bb170e2baeb5",
+  "usage": {
+    "input_tokens": 2826.0,
+    "output_tokens": 5552.0,
+    "total_tokens": 8378.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 3,
+        "justification": "Weights sum to 100% and many ratings are plausible, but several judgments are weakly supported for an online-learning context (notably WhatsApp rated high on compatibility/integration and Skype rated relatively favorably despite limited education fit)."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The answer is readable and table-based, but criterion order/naming shifts between sections and the rating basis is not explained beyond the scale labels."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It avoids detailed unverifiable claims, but the ratings are presented as expert judgments without evidence, caveats, or context-specific support."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It provides weights and ratings for all six platforms across all criteria, but does not justify the weights or explain major platform trade-offs."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The weighting is well aligned to a university online-learning context, and the platform ratings are generally well calibrated to known strengths and weaknesses (e.g., Teams/Zoom strong for formal teaching, WhatsApp/FaceTime weaker for institutional use)."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear sectioning, consistent tables, explicit scale, and criterion-by-criterion application make the response easy to follow and internally consistent."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "Claims are specific but cautious, with appropriate qualifiers such as licensing/configuration dependence; there are no obvious invented facts or overstatements."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Fully covers justified weights, ratings for all six platforms on all criteria, and concise strengths/limitations for each platform."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Overall strong and systematic, but some ratings are harder to defend against its own university rubric\u2014especially WhatsApp scoring relatively high on compatibility/integration despite limited LMS, governance, and institutional admin support."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very clear structure with consistent tables, explicit weights, a transparent scoring method, and an overall weighted result."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "The response is generally careful and transparent, but the precise overall scores/percentages imply more certainty than the underlying subjective ordinal ratings fully warrant."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes justified weights, complete ratings for all six platforms and criteria, weighted overall results, and strengths/limitations for each platform."
+      }
+    }
+  }
+}

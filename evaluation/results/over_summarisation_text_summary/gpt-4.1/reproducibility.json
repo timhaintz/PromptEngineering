@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-31T02:42:58.756597+00:00",
+  "pattern": {
+    "key": "over_summarisation_text_summary",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Summarise a research paper on climate change",
+    "task_description": "Produce a concise, neutral summary of the provided text highlighting main arguments, key findings, and conclusions.",
+    "naive_request": "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.",
+    "task_material": "Rising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+    "role": "You are an executive communications analyst who produces neutral, concise research summaries.",
+    "context": "The summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.",
+    "instructions": [
+      "Identify the main arguments presented in the text.",
+      "Highlight the key quantitative findings.",
+      "Note the conclusions and any implications or limitations.",
+      "Keep the summary concise and maintain a neutral tone."
+    ],
+    "technique": "Use hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.",
+    "output": "Return a concise summary of 3-5 sentences covering arguments, findings, and conclusions.",
+    "reference_notes": "Key findings to include: 40% increase in bleaching, 70km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, $10B annual fisheries impact.",
+    "source_paper_id": "71",
+    "source_pattern_id": "71-25-0",
+    "source_paper_title": "ChatGPT for higher education and professional development: A guide to conversational AI",
+    "source_pattern_name": "Text Summarization"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.986567,
+        "run_1_run_3": 0.987641,
+        "run_2_run_3": 0.997507
+      },
+      "mean_similarity": 0.990572,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same summary structure and convey the same core findings: 40% increase in bleaching, ~70 km/decade species migration, 70\u201390% coral degradation by 2050, expanding dead zones, adaptation challenges, and roughly $10B annual fisheries-related losses. The differences are limited to wording, phrasing, and slight emphasis in the introduction and conclusion, with no meaningful change in content or task fulfillment.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 1038.0,
+        "output_tokens": 292.0,
+        "total_tokens": 1330.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.978496,
+        "run_1_run_3": 0.971406,
+        "run_2_run_3": 0.956984
+      },
+      "mean_similarity": 0.968962,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs summarize the same paper in materially the same way, with the same core quantitative findings and overall narrative: increased bleaching (40%), poleward species migration (70 km/decade), projected coral degradation by 2050 (70\u201390%), expanding dead zones, and roughly $10B annual fisheries impacts. The structure is also highly similar, moving from climate drivers to ecological impacts, then adaptation limits and economic consequences. Differences are limited to wording, sentence ordering, and minor emphasis/caveat variations.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 794.0,
+        "output_tokens": 599.0,
+        "total_tokens": 1393.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.975324,
+        "run_1_run_3": 0.979978,
+        "run_2_run_3": 0.992449
+      },
+      "mean_similarity": 0.982584,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same summary of the paper in materially the same way: they cover the same topic, include the same core quantitative findings (40% bleaching increase, 70 km/decade migration, 70\u201390% coral degradation by 2050, expanding dead zones, and ~$10B annual fisheries impact), and reach the same overall conclusion about urgent mitigation/adaptation needs. Differences are limited to wording and slight phrasing/attribution changes, which do not affect research-use equivalence.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 804.0,
+        "output_tokens": 232.0,
+        "total_tokens": 1036.0
+      }
+    }
+  }
+}

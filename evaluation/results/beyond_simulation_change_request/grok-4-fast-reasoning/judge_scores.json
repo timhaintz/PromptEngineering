@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T05:42:48.922742+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0fa4b2d6c083198f0069ca0c03a9e08195a475a85f712ffb53",
+  "usage": {
+    "input_tokens": 5742.0,
+    "output_tokens": 3918.0,
+    "total_tokens": 9660.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Correctly identifies the main impacted areas: API schemas, required-field validation, DB model/migration, CRUD/response mapping, tests, and OpenAPI/docs. The FastAPI-specific assumptions are explicit and the change path is internally coherent."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Well-structured with clear headings, numbered components, and concise per-component impact notes, making the answer easy to scan."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Uses some assumed file/function names and a specific FastAPI stack, but these assumptions are stated and the answer avoids excessive unsupported claims."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Covers nearly all reference items, including schema, validation, DB, serialization via response mapping, tests, and documentation, though tests/docs are less fully developed than the strongest answer."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "Covers all key layers correctly, but it has a notable inconsistency: it recommends a non-nullable DB field while also saying legacy users may return null phone_number values."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent structure with clear sections for overview, affected components, risks, and implementation/testing order."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "Includes many plausible but unsupported specifics beyond the task, such as exact file paths, effort estimates, payload-size impact, and future SMS-cost speculation."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Explicitly addresses API schema, request validation, DB model and migration, serialization/response handling, tests, and documentation, matching and exceeding the reference."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 3,
+        "justification": "Identifies the right components, but includes weaker or incorrect details, such as treating missing-field validation as a 400 instead of FastAPI\u2019s typical 422 and making the DB column nullable despite the field being mandatory."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Clear, consistent organization with overview, affected components, risk analysis, and ordered implementation/testing steps."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "Adds several unsupported planning details (record-count assumptions, sprint allocation, blue-green/A/B rollout suggestions, effort estimates) that are not grounded in the task."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "Covers schema, validation, DB/migration, CRUD/serialization, tests, and mentions docs/OpenAPI, but documentation changes are less explicit and the mandatory-field impact is handled less cleanly than in B."
+      }
+    }
+  }
+}

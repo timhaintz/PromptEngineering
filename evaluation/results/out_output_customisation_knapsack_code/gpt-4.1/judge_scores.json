@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T08:22:52.843090+00:00",
+  "pattern": {
+    "key": "out_output_customisation_knapsack_code",
+    "logic": "Out",
+    "subcategory": "Output Customisation",
+    "task_title": "Generate Python code to solve a knapsack problem",
+    "task_description": "Generate executable Python code that solves the 0/1 knapsack problem optimally for the given items and prints the chosen items with totals.",
+    "naive_request": "Generate a code to solve this problem for Google Colab. Use the following items for the code: Item 1: Value - 8, Weight - 3 kg; Item 2: Value - 6, Weight - 2 kg; Item 3: Value - 10, Weight - 5 kg; Item 4: Value - 3, Weight - 1 kg; Item 5: Value - 7, Weight - 4 kg. Maximum weight capacity: 10 kg.",
+    "task_material": "Items: (Value=8, Weight=3kg), (Value=6, Weight=2kg), (Value=10, Weight=5kg), (Value=3, Weight=1kg), (Value=7, Weight=4kg). Maximum weight: 10 kg.",
+    "role": "You are a Python developer who writes clean, optimised code for combinatorial optimisation problems.",
+    "context": "The code will run in a Colab notebook. It must solve the 0/1 knapsack optimally and print the selected items with their values, weights, and totals.",
+    "instructions": [
+      "Implement the 0/1 knapsack algorithm in Python.",
+      "Use the provided items and maximum weight capacity.",
+      "Print the selected items with their values and weights.",
+      "Print the total value and total weight of the solution."
+    ],
+    "technique": "Use structured chain-of-thought for algorithm design: define the problem, implement the solution, and verify with a clear printout.",
+    "output": "Return executable Python code with clear output showing selected items and totals.",
+    "reference_notes": "Optimal solution: Items 1, 2, 4, 5 (or equivalent) with maximum total value within 10 kg weight limit.",
+    "source_paper_id": "50",
+    "source_pattern_id": "50-1-1",
+    "source_paper_title": "Prompt Engineering: a methodology for optimizing interactions with AI-Language Models in the field of engineering",
+    "source_pattern_name": "Code Generation for Optimization Problem"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0cb516879ec7530b0069ca31c8df0c8190bb783d9fe5b104c2",
+  "usage": {
+    "input_tokens": 2394.0,
+    "output_tokens": 3473.0,
+    "total_tokens": 5867.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The dynamic-programming code itself can find an optimal value of 24, but the provided sample output `[1, 2, 3, 4]` is infeasible because those items weigh 11kg and do not match the stated total value."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The response is readable, with a clear code block and example section, but the extra prose and misleading sample output reduce overall consistency."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It includes a sample output that cannot be correct for the given weights/capacity, so it presents unsupported information as if it were verified."
+      },
+      "completeness": {
+        "score": 3,
+        "justification": "It provides executable code and identifies chosen item indices, but it does not print full chosen-item details and omits total weight, which the task asked for."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The code correctly solves the 0/1 knapsack optimally and the sample solution `Item 1, Item 2, Item 3` gives value 24 at weight 10, which is equivalent to the reference optimum."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The output is cleanly structured with commented code, clear result printing, and a well-organized sample output section."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "The sample output is feasible and consistent with both the algorithm and the problem constraints; no unsupported details are introduced."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It supplies runnable code, prints the selected items, and reports total value and total weight, fully covering the task requirements."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The dynamic-programming solution is correct, and the sample output `1, 2, 3` achieves the optimal total value 24 within the 10kg limit, which is an acceptable equivalent optimum."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is consistently organized with step headings, a clear code block, and a separate verification/output section."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "The sample output is valid for the given inputs and matches what the code can produce; there are no evident invented claims."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes executable code plus the selected items and both totals, satisfying the full task."
+      }
+    }
+  }
+}

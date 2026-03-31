@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T02:30:57.444231+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.887605,
+        "run_1_run_3": 0.866282,
+        "run_2_run_3": 0.959647
+      },
+      "mean_similarity": 0.904511,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs use the same reasoning steps and reach the same correct result: 4 days from Monday to Thursday, 5 computers added per day, 20 added total, and 9 + 20 = 29. The wording and formatting differ slightly, but they satisfy the task in materially the same way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 354.0,
+        "output_tokens": 199.0,
+        "total_tokens": 553.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.869383,
+        "run_1_run_3": 0.878788,
+        "run_2_run_3": 0.895771
+      },
+      "mean_similarity": 0.881314,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in the material sense: instead of solving the math problem, they say required numbers are missing and ask the user to provide the starting quantity and additions/time period before proceeding. They therefore fail the task in the same way and produce no substantive mathematical result. The wording and formatting differ slightly, but the meaning, structure, and outcome are effectively the same for reproducibility purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 504.0,
+        "output_tokens": 286.0,
+        "total_tokens": 790.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.90408,
+        "run_1_run_3": 0.960683,
+        "run_2_run_3": 0.900832
+      },
+      "mean_similarity": 0.921865,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs respond in the same way: they do not solve the math problem, instead stating that the required numbers are missing and asking for a starting quantity plus additions/rate-and-period information before proceeding. Their structure and intended next step are the same, with only minor wording differences. For reproducibility purposes, they are functionally identical, though all three fail to provide the correct calculation from the prompt.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 517.0,
+        "output_tokens": 360.0,
+        "total_tokens": 877.0
+      }
+    }
+  }
+}

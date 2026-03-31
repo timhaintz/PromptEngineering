@@ -1,0 +1,87 @@
+{
+  "timestamp_utc": "2026-03-30T05:29:45.625512+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.939374,
+        "run_1_run_3": 0.918063,
+        "run_2_run_3": 0.924979
+      },
+      "mean_similarity": 0.927472,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same substantive impact assessment: update the OpenAPI/API schema, request/response Pydantic models so `phone_number` is required on create and returned on read, route handlers, persistence/CRUD logic, the ORM/database model plus migration, and tests for both success and missing-field validation. Differences are limited to presentation and small ancillary additions (for example generated clients, seed data, fixtures, or explicit serializer helpers), so they are functionally equivalent for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 2601.0,
+        "output_tokens": 483.0,
+        "total_tokens": 3084.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.917368,
+        "run_1_run_3": 0.914088,
+        "run_2_run_3": 0.96188
+      },
+      "mean_similarity": 0.931112,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs answer the same task in materially the same way: they identify the API contract/schema change, request validation behavior, service/business logic updates, ORM/database model plus migration/backfill concerns, response serialization/GET behavior, tests/fixtures, and documentation/client-impact updates. Each also flags the same core rollout risks (breaking clients, NOT NULL migration issues, validation/format policy, PII/logging/privacy) and proposes a similar phased implementation order. Differences are limited to wording, formatting, file-path examples, and emphasis, not substance.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 6047.0,
+        "output_tokens": 444.0,
+        "total_tokens": 6491.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.958821,
+        "run_1_run_3": 0.964557,
+        "run_2_run_3": 0.963915
+      },
+      "mean_similarity": 0.962431,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs satisfy the task in materially the same way: they identify the same core impact areas for adding a mandatory `phone_number` to FastAPI user registration, including API/OpenAPI schema changes, request validation, route handling, ORM/database migration, serialization/response model updates, tests/fixtures, and documentation/client updates. They also all call out the breaking-change nature of the modification and the need to handle existing rows during migration. Differences are primarily wording, organization, and emphasis rather than meaning.",
+        "material_differences": [
+          "Run 3 places more emphasis on a staged rollout where `phone_number` may be temporarily optional before final enforcement; Runs 1 and 2 focus more directly on the mandatory end state with migration safeguards."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 6969.0,
+        "output_tokens": 632.0,
+        "total_tokens": 7601.0
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T03:37:06.889187+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0925b019637d61040069c9eebf72a481949f1e0c4b3aa4c308",
+  "usage": {
+    "input_tokens": 1006.0,
+    "output_tokens": 4975.0,
+    "total_tokens": 5981.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It reaches the correct verdict ('Yes') and uses the right chain of reasoning: Sarah is a manager, managers completed the training, and the training includes conflict resolution, so Sarah completed that module. The added caveat is unnecessary but does not change the correct conclusion."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is clear, concise, and structured as step-by-step bullet reasoning from premises to conclusion."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It largely stays within the given premises, with only a minor extra interpretive assumption about completing all required parts of the training."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It fully answers the task by giving a verdict and explaining how the premises support the conclusion."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not evaluate the given premises or state whether the conclusion follows. Instead, it asks the user to provide inputs that were already available in the task."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The output is neatly organized with headings, options, and a numbered list, even though it is not the requested direct analysis."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It avoids inventing substantive facts about Sarah or the premises, but it incorrectly reframes the task as needing a separate 'policy conclusion' and supporting argument."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It does not perform the reasoning task at all; there is no premise analysis, no verdict, and no conclusion assessment."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not answer the logical reasoning question or determine whether the conclusion follows; it only asks for the argument to be provided."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The response is well structured and readable, with clear input options and formatting, despite not matching the task's required direct reasoning output."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It does not hallucinate facts about the scenario, but it wrongly implies that the needed premises/conclusion were not already given and reframes the task as a 'policy argument' validation."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It fails to complete the assigned task because it provides no actual analysis, no step-by-step reasoning, and no final verdict."
+      }
+    }
+  }
+}

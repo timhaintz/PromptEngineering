@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:13:29.960482+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "naive",
+  "run_index": 2,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Summarize the main points of photosynthesis in three sentences.",
+  "output": "Photosynthesis is the process by which green plants, algae, and some bacteria convert light energy from the sun into chemical energy stored in glucose, using carbon dioxide and water as raw materials. This occurs primarily in the chloroplasts of plant cells, where chlorophyll absorbs sunlight to drive the light-dependent reactions that produce oxygen and ATP, followed by the light-independent reactions (Calvin cycle) that synthesize sugars. Overall, the equation is 6CO\u2082 + 6H\u2082O + light energy \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082, making photosynthesis essential for life as it provides oxygen and forms the base of most food chains.",
+  "reasoning_content": null,
+  "response_id": "96bb7581-b649-4ee0-af16-2330ac22e264",
+  "usage": {
+    "input_tokens": 11.0,
+    "output_tokens": 130.0,
+    "total_tokens": 338.0
+  }
+}

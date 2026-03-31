@@ -1,0 +1,96 @@
+{
+  "timestamp_utc": "2026-03-29T20:46:50.040778+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.983615,
+        "run_1_run_3": 0.931745,
+        "run_2_run_3": 0.933272
+      },
+      "mean_similarity": 0.949544,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs take the same position in favor of remote work, use the same basic argumentative structure, and support the claim with similar evidence themes: fewer distractions, no commute, higher productivity/job satisfaction, and flexibility. Each stays within four sentences, contains no greeting, and fulfills the debate-opening task in materially the same way. The wording and a few supporting details vary slightly, but not enough to affect research-relevant function.",
+        "material_differences": [
+          "Run 2 emphasizes increased output compared to in-office workers and frames office structures as suppressing productivity.",
+          "Run 3 adds lower stress and working during most productive hours, while omitting the explicit work-life balance/innovation framing used in Runs 1 and 2.",
+          "Run 1 mentions efficiency and innovation across industries, which is not stated in the other runs."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 475.0,
+        "output_tokens": 389.0,
+        "total_tokens": 864.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.999749,
+        "run_1_run_3": 0.926758,
+        "run_2_run_3": 0.926755
+      },
+      "mean_similarity": 0.951087,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs deliver the same debate opening in materially the same way: they clearly support the position that remote work increases productivity, provide evidence-based reasons, and remain within four sentences without greetings. Runs 1 and 2 are nearly identical, and Run 3 differs mainly in the supporting examples and phrasing while preserving the same argumentative function, structure, and task fulfillment.",
+        "material_differences": [
+          "Run 3 uses different supporting evidence, citing Harvard Business Review and task completion/job satisfaction rather than the Stanford/Harvard 13% performance figure and fewer sick days in Runs 1 and 2.",
+          "Runs 1 and 2 emphasize work-life balance, while Run 3 emphasizes eliminating commutes and fewer interruptions.",
+          "The closing sentence in Run 3 frames the debate more prospectively ('This debate will further examine...') rather than asserting the evidence already suggests sustained productivity gains."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 463.0,
+        "output_tokens": 519.0,
+        "total_tokens": 982.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.953252,
+        "run_1_run_3": 0.924816,
+        "run_2_run_3": 0.917353
+      },
+      "mean_similarity": 0.931807,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs take the same position (remote work boosts productivity), use the same debate-opening structure (claim + evidence + implications + forward-looking close), and satisfy the task in materially the same way. The differences are limited to which studies/metrics are cited and slight wording changes; notably, all three also share the same minor issue of using four sentences despite the preference for fewer than four.",
+        "material_differences": [
+          "They cite different supporting evidence and metrics (e.g., Stanford/Harvard with sick days or interruptions in Runs 1\u20132 versus a 2022 Stanford survey, 13% output gain, and Gallup analytics in Run 3).",
+          "Run 1 emphasizes reduced sick days and task completion, Run 2 emphasizes fewer interruptions and sustained performance, and Run 3 uses a more explicitly enumerated 'First/Second' structure with quantified evidence."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 475.0,
+        "output_tokens": 766.0,
+        "total_tokens": 1241.0
+      }
+    }
+  }
+}

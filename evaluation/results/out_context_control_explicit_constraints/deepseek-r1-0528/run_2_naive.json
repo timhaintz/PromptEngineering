@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:21:39.186530+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "naive",
+  "run_index": 2,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Summarize the main points of photosynthesis in three sentences.",
+  "output": "Here are the main points of photosynthesis summarized in three sentences:\n\n1.  **Plants, algae, and some bacteria use sunlight (captured by chlorophyll) to convert carbon dioxide and water into glucose (sugar), storing chemical energy.**  \n2.  **This process occurs primarily in chloroplasts and involves two main stages: light-dependent reactions (which capture solar energy and produce ATP/NADPH) and light-independent reactions (the Calvin cycle, which uses that energy to build glucose from CO\u2082).**  \n3.  **Oxygen is released as a vital byproduct of splitting water molecules during the light-dependent reactions.**",
+  "reasoning_content": "\nOkay, the user wants a three-sentence summary of photosynthesis. Hmm, they probably need a concise yet comprehensive overview - maybe for studying or quick reference. \n\nI should cover the core mechanism without oversimplifying: light capture, the chemical process, and the outputs. The user didn't specify academic level, so I'll assume general knowledge but include key terms like chlorophyll and glucose. \n\nWait, should I mention oxygen as a byproduct? Yes, that's crucial. And better emphasize it's plants/algae/bacteria since people often forget it's not just plants. \n\n*checks textbook accuracy* Right: light \u2192 chemical energy conversion, CO2+H2O \u2192 glucose, O2 release. Three clean sentences it is - no fluff, just the pillars. \n\nUser seems efficient - hope this matches their expectation. If they needed more detail, they'd have asked.\n",
+  "response_id": "142dbc26506a462aad256f583106cfbc",
+  "usage": {
+    "input_tokens": 16.0,
+    "output_tokens": 309.0,
+    "total_tokens": 325.0
+  }
+}

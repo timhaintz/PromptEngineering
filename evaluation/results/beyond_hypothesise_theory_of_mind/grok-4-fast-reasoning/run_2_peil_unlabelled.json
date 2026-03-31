@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T04:24:28.734427+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 2,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge.",
+  "output": "### 1. What Alice Knows and Does Not Know\n- **Objective Facts (for reference, not Alice's knowledge):** Alice initially places a file in a desk drawer. She then leaves the room. While she is away, Bob enters and moves the file to a cabinet shelf. Alice has no information about Bob's actions and returns unaware of any change.\n- **Alice's Knowledge:** Alice knows she placed the file in the desk drawer. She knows nothing about Bob entering the room or moving the file. She has no reason to suspect the file has been relocated.\n- **Alice's Lack of Knowledge:** Alice is unaware of Bob's presence or actions in her absence. She does not know the file's actual current location (cabinet shelf).\n\n### 2. What Bob Did and Whether Alice Is Aware of It\n- **Bob's Actions:** Bob moved the file from the desk drawer to the cabinet shelf while Alice was out of the room.\n- **Alice's Awareness:** Alice is not aware of Bob's actions. She did not witness the move, hear about it, or receive any indication that it occurred. Bob's actions happened entirely outside of her perceptual or informational access.\n\n### 3. Reasoning About Alice's Belief State Based on Her Information\nFrom Alice's perspective, the last thing she knew about the file was that she personally placed it in the desk drawer. Since she has no new information suggesting otherwise\u2014no updates from Bob, no visual cues upon return (assuming she hasn't checked yet), and no other events\u2014she has no basis to update her belief. Her belief state remains anchored to her own actions and knowledge prior to leaving the room. This is a classic false belief scenario: Alice's mental model of the world does not include Bob's intervention, so she maintains the belief consistent with her limited information.\n\n### 4. Where Alice Thinks the File Is and Why\nAlice thinks the file is in the desk drawer. This is because her belief is based solely on her own actions (placing it there) and the absence of any contradicting information. She has no knowledge of Bob's move, so she cannot incorporate that event into her understanding\u2014her perspective is limited to what she directly knows, leading her to expect the file remains where she left it.",
+  "reasoning_content": null,
+  "response_id": "140bf14b-06c0-4bc7-9940-d08a7c95597e",
+  "usage": {
+    "input_tokens": 129.0,
+    "output_tokens": 455.0,
+    "total_tokens": 1088.0
+  }
+}

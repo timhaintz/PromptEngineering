@@ -1,0 +1,95 @@
+{
+  "timestamp_utc": "2026-03-30T03:54:02.552034+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs produce the same conclusion in the same form: they state that the conclusion follows from the premises. There are no differences in meaning, structure, or task satisfaction.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 264.0,
+        "output_tokens": 101.0,
+        "total_tokens": 365.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.794191,
+        "run_1_run_3": 0.80033,
+        "run_2_run_3": 0.898066
+      },
+      "mean_similarity": 0.830862,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The runs use a similar presentation format (premises/questions/reasoning/verdict) and all end with an affirmative verdict, but they are not functionally equivalent. They analyze materially different arguments: Run 1 invents a meta-argument about the instructions themselves, Run 2 analyzes a specific AI policy hierarchy, and Run 3 invents a sample AI-safety argument. They therefore do not perform the same task in the same way, and none of them address the evaluation reference about Sarah, managers, and conflict-resolution training.",
+        "material_differences": [
+          "Run 1 says no premises were provided and substitutes a hypothetical conclusion about whether the instructions enable sound logical analysis.",
+          "Run 2 treats a supposed <policy> block as the source material and evaluates an implicit conclusion about ethical/safe AI behavior.",
+          "Run 3 also says no premises were provided, but substitutes a different sample argument about AI safety rules overriding other instructions.",
+          "Runs 1 and 3 explicitly frame their analysis as a demonstration due to missing input; Run 2 does not and instead assumes concrete policy content exists.",
+          "The underlying premises, inferred conclusions, and branch reasoning differ substantially across runs, so they would not be interchangeable for research use."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 4549.0,
+        "output_tokens": 958.0,
+        "total_tokens": 5507.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.887287,
+        "run_1_run_3": 0.741198,
+        "run_2_run_3": 0.799435
+      },
+      "mean_similarity": 0.809307,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs make the same basic mistake: they treat the prompt as missing premises and fail to analyze the Sarah/manager/training argument. However, they do not respond in materially the same way. Runs 1 and 2 perform a full meta-analysis of the supposed absence of premises and explicitly conclude that the conclusion does not follow, whereas Run 3 simply asks for the missing argument and does not provide a verdict.",
+        "material_differences": [
+          "Runs 1 and 2 include structured premise/question/reasoning/verdict sections; Run 3 does not execute that full structure.",
+          "Runs 1 and 2 explicitly give a negative logical verdict ('does not follow'); Run 3 withholds judgment and requests clarification.",
+          "Run 1 invents implicit premises about the instructions, Run 2 frames the case as zero premises, and Run 3 avoids both approaches."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2560.0,
+        "output_tokens": 1372.0,
+        "total_tokens": 3932.0
+      }
+    }
+  }
+}

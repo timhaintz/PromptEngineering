@@ -1,0 +1,73 @@
+{
+  "generated_at_utc": "2026-03-31T03:14:17.752168+00:00",
+  "score_summary": {
+    "naive": {
+      "metrics": {
+        "accuracy": 4.4583,
+        "completeness": 4.4028,
+        "fabrication": 4.3611,
+        "formatting": 4.2639
+      },
+      "overall_mean": 4.3715,
+      "sample_count": 72
+    },
+    "peil_labelled": {
+      "metrics": {
+        "accuracy": 3.3472,
+        "completeness": 3.8056,
+        "fabrication": 3.8889,
+        "formatting": 4.2639
+      },
+      "overall_mean": 3.8264,
+      "sample_count": 72
+    },
+    "peil_unlabelled": {
+      "metrics": {
+        "accuracy": 3.3194,
+        "completeness": 3.7917,
+        "fabrication": 3.6806,
+        "formatting": 4.1389
+      },
+      "overall_mean": 3.7327,
+      "sample_count": 72
+    }
+  },
+  "peil_labelled_minus_naive": {
+    "accuracy": -1.1111,
+    "completeness": -0.5972,
+    "fabrication": -0.4722,
+    "formatting": 0.0,
+    "overall_mean": -0.5451
+  },
+  "peil_unlabelled_minus_naive": {
+    "accuracy": -1.1389,
+    "completeness": -0.6111,
+    "fabrication": -0.6805,
+    "formatting": -0.125,
+    "overall_mean": -0.6388
+  },
+  "labelled_minus_unlabelled": {
+    "accuracy": 0.0278,
+    "completeness": 0.0139,
+    "fabrication": 0.2083,
+    "formatting": 0.125,
+    "overall_mean": 0.0937
+  },
+  "reproducibility": {
+    "naive": {
+      "mean_similarity": 0.948242,
+      "functionally_identical_rate": 0.8472,
+      "sample_count": 72
+    },
+    "peil_labelled": {
+      "mean_similarity": 0.905748,
+      "functionally_identical_rate": 0.75,
+      "sample_count": 72
+    },
+    "peil_unlabelled": {
+      "mean_similarity": 0.898318,
+      "functionally_identical_rate": 0.7083,
+      "sample_count": 72
+    }
+  }
+}

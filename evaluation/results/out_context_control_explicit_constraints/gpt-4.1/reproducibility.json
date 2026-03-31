@@ -1,0 +1,88 @@
+{
+  "timestamp_utc": "2026-03-30T19:03:40.967987+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.993062,
+        "run_1_run_3": 0.984619,
+        "run_2_run_3": 0.984083
+      },
+      "mean_similarity": 0.987255,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs satisfy the task in materially the same way: each is exactly three sentences and covers the key required points about photosynthesis\u2014light/sunlight energy, carbon dioxide and water as inputs, chloroplasts/chlorophyll as the site and mechanism of conversion, and glucose plus oxygen as outputs. The only variations are minor rephrasings in the final sentence and do not change the meaning or usefulness for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 450.0,
+        "output_tokens": 350.0,
+        "total_tokens": 800.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 0.980456,
+        "run_2_run_3": 0.980456
+      },
+      "mean_similarity": 0.986971,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "Runs 1 and 2 are identical and fully match the target structure/content. Run 3 is very similar overall, but it changes the middle sentence to focus on chlorophyll and no longer explicitly states that the conversion process occurs in chloroplasts, which is a key expected element of the constrained summary. Because that omission affects compliance with the stated reference criteria, the outputs are not functionally identical for research purposes.",
+        "material_differences": [
+          "Run 3 omits explicit mention of chloroplasts, while Runs 1 and 2 include them.",
+          "Run 3 reframes the process as light being captured by chlorophyll rather than describing chemical reactions in chloroplasts."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 460.0,
+        "output_tokens": 432.0,
+        "total_tokens": 892.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.941992,
+        "run_1_run_3": 0.939441,
+        "run_2_run_3": 0.997702
+      },
+      "mean_similarity": 0.959712,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "Yes. All three runs use the same overall structure (planning plus a three-sentence summary), convey the same core content about photosynthesis, and satisfy the task in materially the same way: inputs are sunlight/carbon dioxide/water, the process involves chlorophyll capturing light energy, and the outputs are glucose and oxygen. Runs 2 and 3 are identical, and Run 1 differs only in minor wording/detail level, not in functional substance. All three also share the same limitations relative to the reference (they include extra planning text and do not explicitly mention chloroplasts).",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 596.0,
+        "output_tokens": 760.0,
+        "total_tokens": 1356.0
+      }
+    }
+  }
+}

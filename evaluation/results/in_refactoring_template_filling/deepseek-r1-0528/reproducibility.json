@@ -1,0 +1,93 @@
+{
+  "timestamp_utc": "2026-03-30T08:17:07.835268+00:00",
+  "pattern": {
+    "key": "in_refactoring_template_filling",
+    "logic": "In",
+    "subcategory": "Refactoring",
+    "task_title": "Fill placeholders in a provided template",
+    "task_description": "Given a template with marked placeholders, fill each placeholder while preserving the template formatting.",
+    "naive_request": "I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting and overall template that I provide at https://myapi.com/NAME/profile/JOB",
+    "task_material": "Template: https://myapi.com/NAME/profile/JOB\nPlaceholder NAME: a realistic full name\nPlaceholder JOB: a realistic job title",
+    "role": "You are a template-filling assistant who populates marked placeholders while preserving all surrounding formatting.",
+    "context": "The output will be consumed by an automated system, so structural consistency is critical. Only replace the explicit placeholders.",
+    "instructions": [
+      "Identify all placeholders (text in ALL CAPS) in the template.",
+      "Replace each placeholder with appropriate content.",
+      "Preserve all non-placeholder text and formatting exactly.",
+      "If a placeholder cannot be filled, flag it rather than guessing."
+    ],
+    "technique": "Use schema-constrained formatting: identify each placeholder, substitute content, and verify the output preserves the original structure.",
+    "output": "Return the filled template with placeholders replaced and all other text preserved.",
+    "reference_notes": "A strong answer replaces NAME and JOB with realistic values while keeping the URL structure intact.",
+    "source_paper_id": "0",
+    "source_pattern_id": "0-1-4",
+    "source_paper_title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+    "source_pattern_name": "Template"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.850434,
+        "run_1_run_3": 0.889131,
+        "run_2_run_3": 0.833614
+      },
+      "mean_similarity": 0.857726,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs complete the same task successfully: they replace NAME and JOB with plausible values in the same URL template and preserve the core `https://myapi.com/<name>/profile/<job>` structure. The differences are limited to which realistic placeholders were chosen and how spaces were represented in the URL, which does not materially change task fulfillment for reproducibility purposes.",
+        "material_differences": [
+          "Run 1 and Run 2 use `%20` URL encoding for spaces, while Run 3 uses hyphens in the name and job segments.",
+          "The specific placeholder values differ across runs (different names; Run 3 also uses a different job title).",
+          "Run 2\u2019s explanation includes a minor template typo with braces (`NAME}` / `{JOB}`), though its generated URL is still correct."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 615.0,
+        "output_tokens": 1016.0,
+        "total_tokens": 1631.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.887845,
+        "run_1_run_3": 0.899148,
+        "run_2_run_3": 0.946862
+      },
+      "mean_similarity": 0.911285,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs complete the same task successfully: they replace NAME and JOB with realistic values and preserve the base URL structure. Runs 2 and 3 are essentially the same, and Run 1 differs only in using underscores instead of %20 URL encoding for multi-word values. That formatting choice does not materially change task fulfillment for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 709.0,
+        "output_tokens": 489.0,
+        "total_tokens": 1198.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.832132,
+        "run_1_run_3": 0.854085,
+        "run_2_run_3": 0.821342
+      },
+      "mean_similarity": 0.835853,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs replace NAME and JOB with realistic values and preserve the overall template pattern, so they are similar in intent. However, they are not functionally identical because they handle the inserted URL segments in materially different ways: Run 1 converts spaces to underscores, Run 3 percent-encodes spaces, and Run 2 leaves literal spaces in the URL. That affects URL validity/compatibility and means the task is not satisfied in the same way across runs.",
+        "material_differences": [
+          "Run 1 uses underscore-separated URL-safe replacements (e.g., `John_Doe`, `Software_Engineer`).",
+          "Run 3 uses percent-encoded replacements (e.g., `John%20Doe`, `Software%20Engineer`).",
+          "Run 2 leaves literal spaces in the URL (`Jane Doe`, `Data Scientist`), which is materially different from the URL-safe approaches in Runs 1 and 3."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 577.0,
+        "output_tokens": 720.0,
+        "total_tokens": 1297.0
+      }
+    }
+  }
+}

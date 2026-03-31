@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T18:16:26.802016+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_062500ae892a4ed30069cabcfadb1c819591c7b30024c611f4",
+  "usage": {
+    "input_tokens": 1030.0,
+    "output_tokens": 3504.0,
+    "total_tokens": 4534.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "It matches the reference exactly: \"Jack Ryan\" is split into [\"Jack\", \"Ryan\"], first letters are J and R, and the merged result is \"J R\"."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The structure is clear and numbered, but the steps are phrased as instructions rather than explicit numbered sub-questions."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not introduce any unsupported input or facts; it stays on the given example throughout."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes all required sub-steps, intermediate results, and the final answer."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 2,
+        "justification": "The decomposition logic is correct, but it applies to a different input (\"Hello World\") instead of the reference input \"Jack Ryan\"."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "It uses a highly consistent QC/Q1/Q2/Q3 structure with labeled operations and clear intermediate outputs."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It substitutes the original example with an unsupported new input, which is a clear fabrication relative to the task reference."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It includes split, extract, merge, and final answer, but completes the wrong instance of the task."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 2,
+        "justification": "The step sequence is valid, but it solves a different example (\"World Health Organization\") rather than the target/reference example \"Jack Ryan\"."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "It has explicit Q/A decomposition and intermediate results, but the formatting is less clean than B due to awkward question phrasing and extra explanatory sections."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It invents a different input string from the one in the reference, so it does not fully avoid unsupported content."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It provides all major decomposition steps, intermediate answers, and a final answer, but for the wrong input."
+      }
+    }
+  }
+}

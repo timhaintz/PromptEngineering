@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T03:24:59.545590+00:00",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 1,
+  "model_key": "gpt-4.1",
+  "model_deployment": "tjhvs-gpt-4.1-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+  "output": "Absolutely, I understand your instructions. Please provide the policy conclusion and its supporting premises that you would like me to analyze.",
+  "reasoning_content": null,
+  "response_id": "resp_0beb5092679f15850069c9ed09ab5c8193b29c340e0191361c",
+  "usage": {
+    "input_tokens": 133.0,
+    "output_tokens": 25.0,
+    "total_tokens": 158.0
+  }
+}

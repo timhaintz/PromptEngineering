@@ -1,0 +1,93 @@
+{
+  "timestamp_utc": "2026-03-30T05:03:13.218109+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.988757,
+        "run_1_run_3": 0.962723,
+        "run_2_run_3": 0.967304
+      },
+      "mean_similarity": 0.972928,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same substantive impact assessment: add a required `phone_number` to the request/response schema, update API handling and validation, update the database model and migration, refresh OpenAPI/docs, and update tests. The differences are mainly organizational and wording-level. Run 3 separates CRUD logic from route handling, while Runs 1 and 2 fold that into endpoint logic; Run 2 additionally mentions optional frontend/client updates. These do not materially change the task completion or recommended system changes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 2472.0,
+        "output_tokens": 810.0,
+        "total_tokens": 3282.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.962166,
+        "run_1_run_3": 0.966351,
+        "run_2_run_3": 0.967017
+      },
+      "mean_similarity": 0.965178,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs answer the task in materially the same way: they identify the need to update the API/schema to require `phone_number`, add request validation, modify endpoint handling/response models, update the database model and migrations, revise tests, and update documentation, while also flagging backward-compatibility and migration risks and recommending a staged rollout. The differences are mostly scope emphasis and phrasing, not substantive task fulfillment.",
+        "material_differences": [
+          "Run 2 adds extra emphasis on business logic, frontend/client forms, and post-deployment monitoring.",
+          "Runs 1 and 3 explicitly mention response serialization/GET handlers (e.g. `UserRead`, `GET /users/{id}` returning `phone_number`), while Run 2 is less explicit about response serialization.",
+          "Run 1 explicitly includes client SDKs/examples; Run 3 is narrower and does not mention client SDKs or frontend updates."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 3481.0,
+        "output_tokens": 749.0,
+        "total_tokens": 4230.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.890777,
+        "run_1_run_3": 0.949776,
+        "run_2_run_3": 0.892539
+      },
+      "mean_similarity": 0.911031,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs deliver the same core impact analysis: adding a mandatory `phone_number` field requires updates to the API schema/request models, validation, database/ORM plus migration, endpoint/business logic and response handling, tests, and documentation, along with noting breaking-change and migration risks. The structure is also highly similar, with affected components, required modifications, risks, and implementation order. Differences are mainly in emphasis and optional extras, not in task completion or practical conclusions.",
+        "material_differences": [
+          "Run 1 explicitly mentions client SDK regeneration; Run 3 mentions frontend/client consumers and error-handling updates; Run 2 is more minimal on downstream consumers.",
+          "Run 3 proposes a phased database rollout (nullable first, then non-null), while Runs 1 and 2 more directly describe adding a non-nullable column with migration handling.",
+          "Run 1 most explicitly references output serialization via `UserOut`/GET response updates; Runs 2 and 3 imply the same through response models/retrieval logic rather than naming serialization separately."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 3842.0,
+        "output_tokens": 513.0,
+        "total_tokens": 4355.0
+      }
+    }
+  }
+}

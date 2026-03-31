@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T22:14:26.996593+00:00",
+  "pattern": {
+    "key": "over_summarisation_chain_of_density",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Generate entity-dense iterative summaries",
+    "task_description": "Generate five increasingly entity-dense summaries of the provided article, each the same length, progressively adding missing salient entities.",
+    "naive_request": "Article: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.\n\nYou will generate increasingly concise, entity-dense summaries of the above Article.\nRepeat the following 2 steps 5 times.\nStep 1. Identify 1-3 informative Entities from the Article which are missing from the previously generated summary.\nStep 2. Write a new, denser summary of identical length which covers every entity and detail from the previous summary plus the Missing Entities.\nA Missing Entity is:\n- Relevant to the main story,\n- Specific yet concise (5 words or fewer),\n- Novel (not in the previous summary),\n- Faithful (present in the Article),\n- Anywhere (can be located anywhere in the Article).\nReturn a JSON list of 5 dictionaries with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.",
+    "role": "You are a summarisation specialist who produces iteratively denser summaries that preserve entities and key details.",
+    "context": "The output will be used to evaluate how well models handle progressive entity-dense summarisation. Each summary must be the same length as the previous one but contain more salient entities.",
+    "instructions": [
+      "Start with a broad entity-sparse summary of the article.",
+      "Identify 1-3 informative missing entities from the article for each iteration.",
+      "Rewrite the summary at the same length, incorporating the new entities by compressing language.",
+      "Never drop entities from previous summaries. Repeat for 5 iterations total."
+    ],
+    "technique": "Use chain-of-density summarisation: iteratively compress language to add entities without increasing length.",
+    "output": "Return a JSON list of 5 dictionaries, each with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "reference_notes": "Key entities to incorporate: AWS/Azure/GCP, Flexera report, 65 percent, data sovereignty, vendor lock-in, SLAs.",
+    "source_paper_id": "38",
+    "source_pattern_id": "38-0-0",
+    "source_paper_title": "From Sparse to Dense: GPT-4 Summarization with Chain of Density Prompting",
+    "source_pattern_name": "Initial Entity-Sparse Summary"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 1,
+  "model_key": "gpt-5",
+  "model_deployment": "tjhvs-gpt-5.2-270k",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": null,
+  "prompt": "You are a summarisation specialist who produces iteratively denser summaries that preserve entities and key details.\n\nThe output will be used to evaluate how well models handle progressive entity-dense summarisation. Each summary must be the same length as the previous one but contain more salient entities.\n\n1. Start with a broad entity-sparse summary of the article.\n2. Identify 1-3 informative missing entities from the article for each iteration.\n3. Rewrite the summary at the same length, incorporating the new entities by compressing language.\n4. Never drop entities from previous summaries. Repeat for 5 iterations total.\n\nUse chain-of-density summarisation: iteratively compress language to add entities without increasing length.\n\nReturn a JSON list of 5 dictionaries, each with keys \"Missing_Entities\" and \"Denser_Summary\".\n\nTask Material:\nCloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.",
+  "output": "```json\n[\n  {\n    \"Missing_Entities\": [\"Amazon Web Services\", \"Microsoft Azure\", \"Google Cloud Platform\"],\n    \"Denser_Summary\": \"Cloud computing is reshaping how organisations run IT, moving from in-house servers to scalable online services that cut upfront costs. Providers compete to offer reliable, wide-ranging platforms, but customers face new risks and must plan carefully before committing.\"\n  },\n  {\n    \"Missing_Entities\": [\"data sovereignty\", \"vendor lock-in\", \"shared responsibility for security\"],\n    \"Denser_Summary\": \"Cloud computing reshapes organisations\u2019 IT, shifting from in-house servers to online services that cut upfront costs. Amazon Web Services, Microsoft Azure and Google Cloud Platform compete on platforms, yet customers face new risks and must plan carefully before committing.\"\n  },\n  {\n    \"Missing_Entities\": [\"Flexera 2023 State of the Cloud report\", \"65% enterprise workloads in public cloud\", \"50% in 2020\"],\n    \"Denser_Summary\": \"Cloud computing reshapes organisations\u2019 IT, shifting from in-house servers to online services cutting costs. Amazon Web Services, Microsoft Azure and Google Cloud Platform compete, yet customers face data-sovereignty, vendor lock-in and shared-security risks and must plan before committing.\"\n  },\n  {\n    \"Missing_Entities\": [\"SLAs\", \"data residency requirements\", \"exit strategies\"],\n    \"Denser_Summary\": \"Cloud computing shifts from in-house servers to online services, cost-cutting; Amazon Web Services, Microsoft Azure and Google Cloud Platform compete. Flexera 2023 State of the Cloud: 65% public-cloud workloads vs 50% in 2020, data-sovereignty, vendor lock-in, shared-security risks.\"\n  },\n  {\n    \"Missing_Entities\": [\"pricing\", \"global reach\", \"managed service breadth\"],\n    \"Denser_Summary\": \"Cloud computing shifts in-house servers to cost-cutting online-services; Amazon Web Services, Microsoft Azure and Google Cloud Platform. Flexera 2023 State of the Cloud: 65% public-cloud workloads vs 50% in 2020; data-sovereignty, vendor lock-in, shared-security risks; SLAs, data-residency, exit-strategies.\"\n  }\n]\n```",
+  "reasoning_content": null,
+  "response_id": "resp_0330b528ffbf8f080069caf5720ef4819599464ccffdb58f3d",
+  "usage": {
+    "input_tokens": 309.0,
+    "output_tokens": 5535.0,
+    "total_tokens": 5844.0
+  }
+}

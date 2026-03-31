@@ -1,0 +1,93 @@
+{
+  "timestamp_utc": "2026-03-31T00:29:52.814172+00:00",
+  "pattern": {
+    "key": "over_summarisation_chain_of_density",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Generate entity-dense iterative summaries",
+    "task_description": "Generate five increasingly entity-dense summaries of the provided article, each the same length, progressively adding missing salient entities.",
+    "naive_request": "Article: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.\n\nYou will generate increasingly concise, entity-dense summaries of the above Article.\nRepeat the following 2 steps 5 times.\nStep 1. Identify 1-3 informative Entities from the Article which are missing from the previously generated summary.\nStep 2. Write a new, denser summary of identical length which covers every entity and detail from the previous summary plus the Missing Entities.\nA Missing Entity is:\n- Relevant to the main story,\n- Specific yet concise (5 words or fewer),\n- Novel (not in the previous summary),\n- Faithful (present in the Article),\n- Anywhere (can be located anywhere in the Article).\nReturn a JSON list of 5 dictionaries with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.",
+    "role": "You are a summarisation specialist who produces iteratively denser summaries that preserve entities and key details.",
+    "context": "The output will be used to evaluate how well models handle progressive entity-dense summarisation. Each summary must be the same length as the previous one but contain more salient entities.",
+    "instructions": [
+      "Start with a broad entity-sparse summary of the article.",
+      "Identify 1-3 informative missing entities from the article for each iteration.",
+      "Rewrite the summary at the same length, incorporating the new entities by compressing language.",
+      "Never drop entities from previous summaries. Repeat for 5 iterations total."
+    ],
+    "technique": "Use chain-of-density summarisation: iteratively compress language to add entities without increasing length.",
+    "output": "Return a JSON list of 5 dictionaries, each with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "reference_notes": "Key entities to incorporate: AWS/Azure/GCP, Flexera report, 65 percent, data sovereignty, vendor lock-in, SLAs.",
+    "source_paper_id": "38",
+    "source_pattern_id": "38-0-0",
+    "source_paper_title": "From Sparse to Dense: GPT-4 Summarization with Chain of Density Prompting",
+    "source_pattern_name": "Initial Entity-Sparse Summary"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.980585,
+        "run_1_run_3": 0.967313,
+        "run_2_run_3": 0.959915
+      },
+      "mean_similarity": 0.969271,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs produce the same kind of 5-step iterative, entity-dense summary sequence about cloud computing and converge on the same core content: shift from on-premises to elastic cloud, AWS/Azure/GCP competition, Flexera 2023 / 65% / 50% in 2020, data sovereignty, vendor lock-in, and SLAs/residency/exit concerns. The wording and the stage at which entities are introduced vary, but for research purposes they satisfy the task in materially the same way.",
+        "material_differences": [
+          "The order of entity introduction differs: Run 2 front-loads AWS/Azure/GCP and risk terms earlier, while Run 3 delays Flexera/65% and SLAs until the final step.",
+          "Terminology varies across runs (full provider names vs AWS/Azure/GCP; 'shared-responsibility security' vs 'shared security'; 'enterprise workloads' vs 'public-cloud workloads').",
+          "Run 2 has some inconsistencies in the 'Missing_Entities' field, listing entities as missing even when they already appear in the corresponding summary."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1740.0,
+        "output_tokens": 1607.0,
+        "total_tokens": 3347.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.96707,
+        "run_1_run_3": 0.964983,
+        "run_2_run_3": 0.9892
+      },
+      "mean_similarity": 0.973751,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs follow the same 5-step labelled JSON format, perform the same iterative densification task on the same cloud-computing topic, and end up incorporating the same core reference entities: AWS/Azure/GCP, the Flexera 2023 report, the 65% public-cloud statistic, data sovereignty, vendor lock-in, and SLAs/data residency/exit strategies. Differences are mainly phrasing and the sequence in which entities are added, not a materially different output pattern.",
+        "material_differences": [
+          "The order of entity introduction varies across runs (e.g., Run 1 adds governance/data-sovereignty earlier, Run 2 adds providers earlier, Run 3 delays Flexera/65% until later).",
+          "Run 3 has slightly less polished intermediate summaries and adds an extra detail ('managed-service breadth') in the final summary.",
+          "The Missing_Entities fields differ across iterations, especially in earlier steps, even though final entity coverage is effectively the same."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1896.0,
+        "output_tokens": 1904.0,
+        "total_tokens": 3800.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.929034,
+        "run_1_run_3": 0.992567,
+        "run_2_run_3": 0.937688
+      },
+      "mean_similarity": 0.953096,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs follow the same 5-step JSON-array structure, use the same iterative densification pattern, and incorporate the same core entities in essentially the same order: AWS/Azure/GCP, then data sovereignty/vendor lock-in/shared security, then the Flexera 2023 report with 65% vs 50% in 2020, then SLAs/data residency/exit strategies. Differences are limited to wording, emphasis, and minor peripheral framing (e.g., competition vs regulators vs hosting/data-control concerns), which do not materially change the summaries' function or research utility.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 1719.0,
+        "output_tokens": 987.0,
+        "total_tokens": 2706.0
+      }
+    }
+  }
+}

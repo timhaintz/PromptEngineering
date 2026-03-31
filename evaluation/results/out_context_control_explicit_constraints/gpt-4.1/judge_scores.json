@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T18:58:29.844111+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_01dceee68529d55c0069cac68c4aa48196ad39d90ccbf832f9",
+  "usage": {
+    "input_tokens": 868.0,
+    "output_tokens": 2045.0,
+    "total_tokens": 2913.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Scientifically accurate: it correctly names sunlight, carbon dioxide, and water as inputs, places the process in chloroplasts, and gives glucose and oxygen as outputs."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "It is exactly three sentences and presented as a direct summary with no extra scaffolding."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "There are no invented facts; the added note about supporting life on Earth is broadly true and not misleading."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It covers all reference points: light energy, carbon dioxide and water inputs, chloroplast-based conversion, and glucose and oxygen outputs."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Scientifically correct throughout: it accurately describes the inputs, chloroplast reactions, conversion of light to chemical energy, and outputs."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "It follows the instruction exactly by giving a clean three-sentence summary with no extra text."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "No hallucinated or unsupported claims are introduced; the content stays within standard photosynthesis facts."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It includes all key elements from the reference: light energy, carbon dioxide and water, chloroplasts, glucose, and oxygen."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The summary content is factually correct about inputs, light-energy conversion, glucose production, and oxygen release."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "It violates the explicit constraint by adding planning bullets and headings, so the overall response is not exactly three sentences."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not introduce fabricated scientific claims; the extra material is meta-structure rather than false content."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "The three summary sentences cover most main points, but they omit chloroplasts, which are part of the evaluation reference."
+      }
+    }
+  }
+}

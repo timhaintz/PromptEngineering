@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T04:48:51.372512+00:00",
+  "pattern": {
+    "key": "beyond_simulation_change_request",
+    "logic": "Beyond",
+    "subcategory": "Simulation",
+    "task_title": "Simulate a system change and assess impact",
+    "task_description": "Simulate adding a new mandatory field to an API and list the affected components.",
+    "naive_request": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.",
+    "task_material": "System: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+    "role": "You are a software architect who simulates proposed system changes and identifies affected components.",
+    "context": "The team needs to understand the blast radius of this change before implementation. The assessment will inform sprint planning and test coverage.",
+    "instructions": [
+      "List the components affected by adding the mandatory field.",
+      "For each affected component, describe the required modification.",
+      "Identify any risks or side effects of the change.",
+      "Suggest the order of implementation and testing."
+    ],
+    "technique": "Use impact analysis simulation: trace the new field through all layers (API spec, validation, storage, tests) to identify every affected component.",
+    "output": "Return a structured impact analysis with affected files, required changes, risks, and implementation order.",
+    "reference_notes": "A strong answer should identify changes in the API schema, request validation, database model, serialisation, tests, and documentation.",
+    "source_paper_id": "1",
+    "source_pattern_id": "1-0-2",
+    "source_paper_title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+    "source_pattern_name": "Change Request Simulation"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-4.1",
+  "model_deployment": "tjhvs-gpt-4.1-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "My software system uses an OpenAPI specification for a user registration service with endpoints POST /users and GET /users/{id}. I want you to simulate a change where a new mandatory field 'phone_number' needs to be added to the user registration. List which functions and which files will need to be modified.\n\nTask Material:\nSystem: A REST API for user registration built with Python/FastAPI.\nEndpoints: POST /users (create user), GET /users/{id} (retrieve user).\nCurrent fields: name, email, password.\nProposed change: Add mandatory 'phone_number' field.",
+  "output": "Certainly! Here\u2019s a breakdown of what needs to be changed in your FastAPI-based user registration system to add a mandatory `phone_number` field.\n\n---\n\n## 1. **Pydantic Models**\n\n**File(s):**  \n- `models.py` (or wherever your Pydantic schemas are defined)\n\n**Function(s)/Classes:**  \n- `UserCreate` (or equivalent schema for user creation)\n- `User` (if you return the user object in responses)\n\n**Change:**  \n- Add a `phone_number: str` field, marked as required.\n\n---\n\n## 2. **Database Models**\n\n**File(s):**  \n- `models.py` (if using SQLAlchemy or similar ORM)\n\n**Class:**  \n- `User` (the ORM model)\n\n**Change:**  \n- Add a `phone_number` column to the database model.\n- Generate and apply a migration if using Alembic or similar.\n\n---\n\n## 3. **API Endpoint Logic**\n\n**File(s):**  \n- `main.py` or `routes/users.py` (where your endpoints are defined)\n\n**Function(s):**  \n- The function handling `POST /users` (e.g., `create_user`)\n- (Possibly) The function handling `GET /users/{id}` if it returns the user object\n\n**Change:**  \n- Ensure the endpoint expects and processes the `phone_number` field.\n- Pass the field to the database layer.\n\n---\n\n## 4. **OpenAPI Specification**\n\n**File(s):**  \n- `openapi.yaml` or `openapi.json` (if you maintain a separate OpenAPI spec)\n\n**Change:**  \n- Add `phone_number` as a required property in the schema for user creation.\n\n---\n\n## 5. **Tests**\n\n**File(s):**  \n- `test_users.py` or similar\n\n**Function(s):**  \n- Tests for user creation (should now require `phone_number`)\n- Tests for user retrieval (should check for `phone_number` in response)\n\n---\n\n## 6. **Database Migration (if using ORM)**\n\n**File(s):**  \n- Migration scripts (e.g., in `alembic/versions/`)\n\n**Change:**  \n- Add a migration to include the new `phone_number` column.\n\n---\n\n## **Summary Table**\n\n| Layer                | File(s)                | Function/Class/Section         | Change Description                        |\n|----------------------|------------------------|-------------------------------|-------------------------------------------|\n| Pydantic Models      | `models.py`            | `UserCreate`, `User`          | Add required `phone_number` field         |\n| Database Models      | `models.py`            | `User` ORM class              | Add `phone_number` column                 |\n| API Endpoints        | `main.py`, `routes/`   | `create_user`, `get_user`     | Accept and return `phone_number`          |\n| OpenAPI Spec         | `openapi.yaml/json`    | User schema                   | Add required `phone_number` property      |\n| Tests                | `test_users.py`        | User creation/retrieval tests | Update to include `phone_number`          |\n| DB Migration         | `alembic/versions/`    | Migration script              | Add `phone_number` column                 |\n\n---\n\n**In summary:**  \nYou will need to update your Pydantic schemas, database models, endpoint logic, OpenAPI spec, tests, and (if using an ORM) create a migration for the new field. All functions and files that handle user creation and retrieval will need to be updated to include and require `phone_number`.",
+  "reasoning_content": null,
+  "response_id": "resp_0843cb329b27a9fb0069ca00ac20d08195a733922a2d4cb3bb",
+  "usage": {
+    "input_tokens": 127.0,
+    "output_tokens": 746.0,
+    "total_tokens": 873.0
+  }
+}

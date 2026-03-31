@@ -1,0 +1,89 @@
+{
+  "timestamp_utc": "2026-03-31T02:06:26.061248+00:00",
+  "pattern": {
+    "key": "over_synthesis_claim_extraction",
+    "logic": "Over",
+    "subcategory": "Synthesis",
+    "task_title": "Extract atomic claims from a book summary",
+    "task_description": "Break a summary into self-contained atomic claims that can each be independently verified against the source text.",
+    "naive_request": "You are trying to verify the faithfulness of statements made in a given summary of a book against the actual text of the book. To do so, you first need to break the summary into a set of \"atomic claims\", each of which will then be passed to a human who will verify its faithfulness. Each claim should be self-contained with all the necessary context. Each claim should contain no more than two sentences. Each individual claim should be on its own line prefixed by a \"- \".\n\nSummary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "task_material": "Summary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "role": "You are a claim extraction specialist who decomposes summaries into independently verifiable atomic statements.",
+    "context": "Each extracted claim will be passed to a human fact-checker who will verify it against the source text. Claims must be self-contained so the checker does not need additional context.",
+    "instructions": [
+      "Break the summary into atomic, self-contained claims.",
+      "Each claim must include sufficient context to be verified independently.",
+      "Limit each claim to no more than two sentences.",
+      "Prefix each claim with a dash and put each on its own line."
+    ],
+    "technique": "Use structured decomposition: parse the summary sentence by sentence and extract each discrete factual assertion as a standalone claim.",
+    "output": "Return a list of atomic claims, each prefixed with a dash on its own line.",
+    "reference_notes": "Should extract claims about: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership, vote to sell property, development company, Carlos Mendez as treasurer, his motive.",
+    "source_paper_id": "63",
+    "source_pattern_id": "63-0-0",
+    "source_paper_title": "FABLES: Evaluating faithfulness and content selection in book-length summarization",
+    "source_pattern_name": "Claim Extraction"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.973606,
+        "run_1_run_3": 0.989703,
+        "run_2_run_3": 0.98236
+      },
+      "mean_similarity": 0.98189,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs extract the same core facts from the summary: Maria Santos is the detective; the setting is Porto Azul; the events occur in summer 2019; the missing people were sailing-club members; they had voted to sell the historic waterfront property; the buyer is a development company; Carlos Mendez is the treasurer; and his motive is to stop the sale/preserve the property for personal financial gain. Differences are limited to phrasing and claim granularity, not substantive content or task fulfillment.",
+        "material_differences": [
+          "Run 1 is more finely atomized, splitting some facts into separate claims (e.g., buyer is a development company; prevent-the-sale motive; personal financial gain motive).",
+          "Run 2 is less atomic, combining multiple facts into single bullets (e.g., Porto Azul plus summer 2019; vote to sell plus development company).",
+          "Run 3 combines Carlos Mendez's motive into one claim rather than separating prevention of the sale and personal financial gain."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 741.0,
+        "output_tokens": 540.0,
+        "total_tokens": 1281.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.921838,
+        "run_1_run_3": 0.924122,
+        "run_2_run_3": 0.983614
+      },
+      "mean_similarity": 0.943191,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs extract the same underlying atomic facts from the summary: Maria Santos is the detective, Porto Azul is the setting, the events occur in summer 2019, the missing people are sailing club members, they voted to sell the historic waterfront property, the buyer is a development company, Carlos Mendez is the treasurer, and he orchestrated the disappearances to stop the sale for personal financial gain. Differences are only in phrasing and claim granularity (some runs combine facts into one bullet while others split them apart), not in substantive content or task fulfillment.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 762.0,
+        "output_tokens": 289.0,
+        "total_tokens": 1051.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.92919,
+        "run_1_run_3": 0.910174,
+        "run_2_run_3": 0.977693
+      },
+      "mean_similarity": 0.939019,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs extract the same 10 atomic claims from the summary and cover the same required facts: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership of the missing persons, the vote to sell the historic waterfront property, the development company as buyer, Carlos Mendez as treasurer, his role in orchestrating the disappearances, and his motive. Differences are only stylistic phrasing and framing (e.g., 'In the novel' vs. 'The summary states').",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 802.0,
+        "output_tokens": 255.0,
+        "total_tokens": 1057.0
+      }
+    }
+  }
+}

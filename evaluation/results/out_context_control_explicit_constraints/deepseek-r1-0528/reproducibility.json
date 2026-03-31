@@ -1,0 +1,99 @@
+{
+  "timestamp_utc": "2026-03-30T19:44:56.540369+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.955036,
+        "run_1_run_3": 0.877694,
+        "run_2_run_3": 0.883506
+      },
+      "mean_similarity": 0.905412,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs are functionally equivalent for this task: each gives a three-point summary of photosynthesis covering light energy, carbon dioxide and water as inputs, chloroplasts as the site/process context, and glucose plus oxygen as outputs. The differences are mainly in level of detail and emphasis, not in overall meaning or task completion. One caveat is that all three include the same prefatory line before the numbered sentences, which may technically conflict with the 'exactly three sentences' constraint, but this issue is consistent across runs rather than a reproducibility difference.",
+        "material_differences": [
+          "Run 2 adds more mechanistic detail, including light-dependent reactions, ATP/NADPH, and the Calvin cycle.",
+          "Run 3 spends one sentence on the broader importance of photosynthesis, making it less mechanistically focused than Runs 1 and 2.",
+          "Run 1 is the simplest/high-level version, while Runs 2 and 3 vary in whether they emphasize biochemical stages or ecological significance."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 570.0,
+        "output_tokens": 1303.0,
+        "total_tokens": 1873.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.80382,
+        "run_1_run_3": 0.798836,
+        "run_2_run_3": 0.889995
+      },
+      "mean_similarity": 0.830884,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three runs give a similar high-level summary of photosynthesis with light, water, carbon dioxide, glucose/sugars, and oxygen, but they are not materially identical under the stated constraints. Run 3 explicitly places the process in chloroplasts, while Runs 1 and 2 only mention plant cells/chlorophyll; Run 1 also adds an intro/numbered-list format and an extra claim about water vapor, so its adherence to the 'exactly three sentences' requirement is weaker.",
+        "material_differences": [
+          "Run 3 explicitly mentions chloroplasts; Runs 1 and 2 do not.",
+          "Run 1 includes a prefatory line and numbered formatting, making compliance with the exact three-sentence constraint less clear than Runs 2 and 3.",
+          "Run 1 adds 'water vapor' as an additional output/byproduct, which the other runs do not mention.",
+          "Run 3 gives a more specific mechanism ('splits water and combines hydrogen with carbon dioxide') than the more general conversion wording in Runs 1 and 2."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 450.0,
+        "output_tokens": 871.0,
+        "total_tokens": 1321.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.929786,
+        "run_1_run_3": 0.920028,
+        "run_2_run_3": 0.959988
+      },
+      "mean_similarity": 0.936601,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "All three responses use the same overall 3-part input/process/output structure and correctly describe photosynthesis at a high level, but they are not fully functionally identical under the stated constraints. Run 1 explicitly locates the process in chloroplasts, matching the reference, while Runs 2 and 3 replace that with broader or different phrasing about plant cells/chlorophyll or specialized structures, so they do not satisfy the required process detail in materially the same way.",
+        "material_differences": [
+          "Run 1 explicitly mentions chloroplasts; Runs 2 and 3 do not name chloroplasts.",
+          "Run 2 describes the process as occurring inside plant cells containing chlorophyll and adds water-splitting/hydrogen-to-sugars detail instead of the chloroplast framing.",
+          "Run 3 refers to specialized structures in plant and algal cells, broadening scope beyond plants and again not explicitly naming chloroplasts.",
+          "The process descriptions differ in emphasis: Run 1 focuses on conversion into chemical energy, while Runs 2 and 3 emphasize splitting water and building/producing energy-rich molecules."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 555.0,
+        "output_tokens": 1397.0,
+        "total_tokens": 1952.0
+      }
+    }
+  }
+}

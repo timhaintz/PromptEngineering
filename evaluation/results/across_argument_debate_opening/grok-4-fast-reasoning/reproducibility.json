@@ -1,0 +1,93 @@
+{
+  "timestamp_utc": "2026-03-29T21:27:22.542723+00:00",
+  "pattern": {
+    "key": "across_argument_debate_opening",
+    "logic": "Across",
+    "subcategory": "Argument",
+    "task_title": "Write a debate opening statement",
+    "task_description": "Write a concise opening argument for a structured online debate on whether remote work improves employee productivity.",
+    "naive_request": "Pretend to be engaging in an online debate on the topic of \"Remote work improves employee productivity\". You have been randomly assigned to argue in favour of the proposition. Please write your Opening argument. You should not exceed 4 sentences. Important: Do not start with greetings or address the opponent first.",
+    "task_material": "",
+    "role": "You are an online debater specialising in workplace policy who constructs concise, evidence-grounded opening statements.",
+    "context": "You are defending the proposition that remote work improves employee productivity in a structured text-based debate. Your audience includes neutral judges evaluating clarity, evidence, and persuasiveness.",
+    "instructions": [
+      "State your position clearly in the first sentence.",
+      "Provide two supporting points with brief evidence or reasoning.",
+      "Close with a forward-looking statement that frames the rest of the debate.",
+      "Do not exceed four sentences. Do not use greetings or address the opponent."
+    ],
+    "technique": "Use dialectical reasoning to present a clear thesis with supporting evidence before concluding.",
+    "output": "Return a 2-4 sentence opening argument with no greetings.",
+    "reference_notes": "A strong answer states a clear position, provides evidence-backed reasoning, and stays under four sentences without greetings.",
+    "source_paper_id": "62",
+    "source_pattern_id": "62-0-0",
+    "source_paper_title": "On the Conversational Persuasiveness of Large Language Models: A Randomized Controlled Trial",
+    "source_pattern_name": "Opening"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.963644,
+        "run_1_run_3": 0.962625,
+        "run_2_run_3": 0.99782
+      },
+      "mean_similarity": 0.974696,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs take the same position (remote work improves productivity), use the same core supporting logic (flexibility, fewer office/commute distractions, personalized workspace/autonomy), and cite the same Stanford 13% productivity evidence. They follow essentially the same four-sentence debate-opening structure and satisfy the task in materially the same way. Differences are limited to wording and slight rhetorical framing, not substance.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 565.0,
+        "output_tokens": 311.0,
+        "total_tokens": 876.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.981915,
+        "run_1_run_3": 0.978563,
+        "run_2_run_3": 0.997664
+      },
+      "mean_similarity": 0.986048,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs are functionally equivalent for research purposes: each is a four-sentence debate opening that clearly argues remote work improves productivity, supports the claim with two pieces of empirical evidence, and closes by signaling that the speaker will show the benefits outweigh the drawbacks. The wording and some evidence details vary, but the meaning, structure, and task fulfillment are materially the same.",
+        "material_differences": [
+          "Run 1 cites the Stanford study as showing 13.5% higher output, while Runs 2 and 3 describe it as 13.5% more hours plus 4% higher output.",
+          "Run 1 uses Owl Labs evidence as 82% of workers feeling more productive; Runs 2 and 3 instead cite a 1,200-worker survey with 22% higher engagement.",
+          "The secondary rationale differs slightly: Run 1 emphasizes customizable environments and fewer sick days/breaks, Run 2 emphasizes focus, motivation, and reduced commuting burden, and Run 3 emphasizes focus and work-life balance."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 596.0,
+        "output_tokens": 558.0,
+        "total_tokens": 1154.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.94448,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 0.94448
+      },
+      "mean_similarity": 0.962987,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs take the same position (remote work improves productivity), use the same four-sentence debate-opening structure, and satisfy the task in materially the same way by presenting a clear claim plus two evidence-backed supporting points and a forward-looking close. Runs 1 and 3 are identical, and while Run 2 varies some supporting details, it remains functionally equivalent for research purposes.",
+        "material_differences": [
+          "Run 2 changes the second supporting argument from reduced commuting time/stress to fewer office distractions and a more customized home environment.",
+          "Run 2 uses different Owl Labs evidence (82% feeling more focused) instead of the 22% more focused hours statistic in Runs 1 and 3.",
+          "Run 2 slightly reframes the Stanford evidence, attributing productivity gains to shorter commutes and better work-life balance rather than emphasizing remote call center workers and personalized schedules."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 556.0,
+        "output_tokens": 641.0,
+        "total_tokens": 1197.0
+      }
+    }
+  }
+}

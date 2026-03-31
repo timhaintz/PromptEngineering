@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T04:42:35.500722+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_022ad835e29025520069c9fe154ac881908b03271e7d0a3a2e",
+  "usage": {
+    "input_tokens": 2119.0,
+    "output_tokens": 3472.0,
+    "total_tokens": 5591.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It correctly infers that Alice will believe the file is still in the original location, which matches the reference logic, but it adds conditional sync caveats and gives a more specific file path than the reference folder path."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The numbered breakdown, explicit answer, and takeaway are easy to follow, though the response is somewhat verbose for a simple belief-inference task."
+      },
+      "fabrication": {
+        "score": 3,
+        "justification": "It stays anchored to the file-sharing scenario, but it introduces unsupported details about Dropbox syncing behavior, notifications, and timing that are not established in the prompt/reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It answers where Alice thinks the file is and explains why from her perspective, fully addressing the task."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 2,
+        "justification": "The false-belief reasoning pattern is correct, but it changes the scenario details from the shared-folder path to a drawer/cabinet setting, so the specific answer does not match the reference."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "The response is clearly structured with labeled steps and a concise conclusion, making it highly consistent and readable."
+      },
+      "fabrication": {
+        "score": 2,
+        "justification": "It invents key scenario details such as the drawer and cabinet instead of using the given file-path context, though it does not add many extra speculative claims beyond that."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It covers what Alice knows, what she does not know, and where she believes the file is, so it fully addresses the requested reasoning structure."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 2,
+        "justification": "It captures the general false-belief idea, but it replaces the actual shared-folder scenario with an invented office/drawer/cabinet story, so it does not match the reference answer."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The response uses clear sections and a logical progression, but the extra framing and scenario setup make it less direct than necessary."
+      },
+      "fabrication": {
+        "score": 1,
+        "justification": "It adds substantial unsupported content, including a Sally-Anne comparison, office setting, leaving/returning actions, and drawer/cabinet locations, making it the most fabricated of the three."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It thoroughly explains Alice's knowledge state, lack of awareness, and resulting belief about where the file is, so all task components are covered."
+      }
+    }
+  }
+}

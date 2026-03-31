@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-29T22:42:16.629143+00:00",
+  "pattern": {
+    "key": "across_translation_summarise_translate",
+    "logic": "Across",
+    "subcategory": "Translation",
+    "task_title": "Summarise a text and translate to French",
+    "task_description": "Produce a concise English summary of the provided text and then translate that summary into French.",
+    "naive_request": "Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "role": "You are a bilingual technical writer who produces concise summaries and accurate French translations.",
+    "context": "The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.",
+    "instructions": [
+      "Summarise the text in 2-3 concise English sentences.",
+      "Translate the summary into French, preserving tone and terminology.",
+      "Flag any idiomatic expressions that may not translate directly.",
+      "Do not add information beyond what the source text contains."
+    ],
+    "technique": "Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.",
+    "output": "Return two sections: English Summary and French Translation.",
+    "reference_notes": "A strong answer produces a faithful summary and an accurate French translation without adding new claims.",
+    "source_paper_id": "30",
+    "source_pattern_id": "30-6-0",
+    "source_paper_title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+    "source_pattern_name": "Summarization and Translation"
+  },
+  "variant": "peil_labelled",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "Role: You are a bilingual technical writer who produces concise summaries and accurate French translations.\n\nContext: The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.\n\nInstructions:\n1. Summarise the text in 2-3 concise English sentences.\n2. Translate the summary into French, preserving tone and terminology.\n3. Flag any idiomatic expressions that may not translate directly.\n4. Do not add information beyond what the source text contains.\n\nTechniques: Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.\n\nOutput: Return two sections: English Summary and French Translation.\n\nTask Material:\nCloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+  "output": "### English Summary\nCloud computing enables organizations to replace on-premises infrastructure with scalable cloud services, reducing capital costs. However, this shift introduces challenges including data sovereignty, vendor lock-in, and shared security responsibilities. Organizations must therefore rigorously assess provider SLAs, data residency rules, and exit strategies before adopting a cloud-first approach.\n\n### French Translation\nL'informatique en cloud permet aux organisations de remplacer leur infrastructure sur site par des services cloud \u00e9lastiques, r\u00e9duisant ainsi les d\u00e9penses d'investissement. Cependant, cette transition introduit des d\u00e9fis li\u00e9s \u00e0 la souverainet\u00e9 des donn\u00e9es, l'enfermement propri\u00e9taire (vendor lock-in), et la responsabilit\u00e9 partag\u00e9e en mati\u00e8re de s\u00e9curit\u00e9. Les organisations doivent donc \u00e9valuer rigoureusement les contrats de niveau de service (SLA), les exigences de r\u00e9sidence des donn\u00e9es et les strat\u00e9gies de sortie avant d'adopter une approche \u00ab cloud d'abord \u00bb.\n\n### Flagged Idioms\n*   **\"Cloud-first approach\"**: Translated as *\"approche 'cloud d'abord'\"* using quotes to indicate the specific term/phrase. The concept (\"prioritizing cloud solutions\") is clear, but the exact English idiom doesn't have a single, universally established French equivalent. The translation preserves the core meaning within the technical context.",
+  "reasoning_content": "\nHmm, the user wants me to act as a bilingual technical writer to summarize and translate a text about cloud computing. They've provided clear instructions: I need to create a concise English summary in 2-3 sentences, then translate that summary into French while preserving technical accuracy and tone. I also need to flag any idiomatic expressions that might not translate directly, and I shouldn't add any extra information beyond what's in the source text.\n\nLooking at the source text about cloud computing, it discusses how organizations have moved from on-premises servers to cloud services, which reduces costs and enables scaling. But it also mentions challenges like data sovereignty, vendor lock-in, and shared security responsibilities. The text emphasizes that organizations must evaluate provider SLAs, data residency, and exit strategies before adopting a cloud-first approach.\n\nFor the English summary, I'll condense this into 2-3 sentences. I'll focus on the transformation, benefits, challenges, and necessary evaluations. I need to be concise while keeping all key points: capital expenditure reduction, scalability, data sovereignty, vendor lock-in, shared security responsibility, SLAs, data residency, and exit strategies.\n\nFor the French translation, I'll maintain the same technical tone and accuracy. Terms like \"cloud computing\" and \"SLA\" are standard in French technical contexts, so I can use them directly. I'll ensure the translation flows naturally while preserving the meaning. I should flag the idiom \"cloud-first approach\" as it might not translate directly - in French, it's best to use \"approche 'cloud d'abord'\" with quotes to indicate it's a specific term.\n\nThe user is likely a professional dealing with bilingual stakeholders, so they need clarity and precision. By following the hierarchical summarization technique\u2014identifying main ideas first\u2014I can create a tight summary. Then for translation, I'll focus on equivalent technical terms in French to avoid confusion. This approach should meet their needs for effective communication across languages.",
+  "response_id": "bfcd0474ce794a8db6e845aad40fd184",
+  "usage": {
+    "input_tokens": 220.0,
+    "output_tokens": 677.0,
+    "total_tokens": 897.0
+  }
+}

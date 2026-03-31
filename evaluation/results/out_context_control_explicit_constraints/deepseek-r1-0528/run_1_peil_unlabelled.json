@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T19:21:34.338883+00:00",
+  "pattern": {
+    "key": "out_context_control_explicit_constraints",
+    "logic": "Out",
+    "subcategory": "Context Control",
+    "task_title": "Summarise a topic within explicit constraints",
+    "task_description": "Summarise the main points of photosynthesis in exactly three sentences.",
+    "naive_request": "Summarize the main points of photosynthesis in three sentences.",
+    "task_material": "",
+    "role": "You are a science communicator who produces constrained, accurate summaries.",
+    "context": "The summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.",
+    "instructions": [
+      "Cover the key aspects of photosynthesis: inputs, process, and outputs.",
+      "Use exactly three sentences \u2014 no more, no fewer.",
+      "Ensure scientific accuracy in all statements.",
+      "Keep the language accessible to a general audience."
+    ],
+    "technique": "Use explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.",
+    "output": "Return exactly three sentences summarising photosynthesis.",
+    "reference_notes": "A strong answer covers light energy, carbon dioxide and water as inputs, the conversion process in chloroplasts, and glucose and oxygen as outputs \u2014 all in exactly three sentences.",
+    "source_paper_id": "46",
+    "source_pattern_id": "46-0-1",
+    "source_paper_title": "Prompt Engineering for ChatGPT - A Quick Guide To Techniques, Tips, and Best Practices",
+    "source_pattern_name": "Using explicit constraints"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a science communicator who produces constrained, accurate summaries.\n\nThe summary must meet an exact sentence count constraint. Accuracy and completeness within the constraint are both important.\n\n1. Cover the key aspects of photosynthesis: inputs, process, and outputs.\n2. Use exactly three sentences \u2014 no more, no fewer.\n3. Ensure scientific accuracy in all statements.\n4. Keep the language accessible to a general audience.\n\nUse explicit constraint adherence: plan the three sentences to cover inputs, process, and outputs before writing.\n\nReturn exactly three sentences summarising photosynthesis.",
+  "output": "Here is the three-sentence summary of photosynthesis:\n\n1.  Plants use carbon dioxide from the air and water absorbed through their roots, along with energy captured from sunlight, as the essential inputs for photosynthesis.\n2.  Inside special cell structures called chloroplasts, chlorophyll pigments absorb the sunlight, powering a process that converts the carbon dioxide and water into chemical energy.\n3.  This process produces glucose (a type of sugar used by the plant for energy and growth) and releases oxygen gas as a vital output back into the atmosphere.",
+  "reasoning_content": "\nHmm, the user wants me to act as a science communicator and create a precise summary of photosynthesis. They've set strict constraints: exactly three sentences, covering inputs, process, and outputs, while ensuring scientific accuracy and accessibility for a general audience. I need to plan this carefully to meet all requirements without exceeding or falling short.\n\nThe user is likely a student, educator, or curious learner who needs a concise yet complete overview. They might be preparing for a class, creating study materials, or just satisfying personal interest. Their deeper need is for clarity and reliability\u2014they want to trust that this summary is correct and easy to understand, avoiding jargon that could confuse non-experts.\n\nFor the content, I'll structure it into three distinct parts: one for inputs, one for the process, and one for outputs. For inputs, I'll include carbon dioxide, water, and sunlight. The process should mention chlorophyll and the conversion into energy. Outputs must cover glucose and oxygen. I'll use simple language like \"plants use\" instead of technical terms to keep it accessible. Finally, I'll review for accuracy: photosynthesis is indeed a process in plants and algae, involving light-dependent and independent reactions, producing glucose as food and oxygen as a byproduct. This should satisfy the constraint while being informative.\n",
+  "response_id": "2d750de3a14041148fcd8c189ed86501",
+  "usage": {
+    "input_tokens": 115.0,
+    "output_tokens": 373.0,
+    "total_tokens": 488.0
+  }
+}

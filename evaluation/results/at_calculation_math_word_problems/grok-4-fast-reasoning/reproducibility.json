@@ -1,0 +1,95 @@
+{
+  "timestamp_utc": "2026-03-30T02:38:48.148434+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 1.0,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same correct answer (29) and the same reasoning structure: start with 9 computers, add 5 per day for 4 days to get 20, then compute 9 + 20 = 29. The wording is effectively identical, so they satisfy the task in materially the same way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 369.0,
+        "output_tokens": 134.0,
+        "total_tokens": 503.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.734859,
+        "run_1_run_3": 0.668101,
+        "run_2_run_3": 0.729122
+      },
+      "mean_similarity": 0.710694,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs do not satisfy the task in the same way and produce different outcomes. Run 1 declines to solve due to missing information and returns N/A, Run 2 invents a placeholder example and returns 175, and Run 3 assumes zero values and returns 0. These are materially different behaviors and answers, so they are not functionally identical.",
+        "material_differences": [
+          "Run 1 does not attempt the calculation and reports insufficient information, ending with N/A.",
+          "Run 2 introduces a fabricated placeholder scenario with specific numbers and computes 175.",
+          "Run 3 assumes unspecified quantities are 0 and computes 0.",
+          "The structure and reasoning approach differ: refusal, invented example, and zero-assumption are distinct solution strategies."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 634.0,
+        "output_tokens": 319.0,
+        "total_tokens": 953.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.786549,
+        "run_1_run_3": 0.845308,
+        "run_2_run_3": 0.729208
+      },
+      "mean_similarity": 0.787021,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. All three fail to solve the intended arithmetic problem, but they do so in materially different ways: Runs 1 and 3 assume missing values are 0 and return 0, while Run 2 invents a different placeholder example and returns 175. Because the inferred numbers, calculations, and final answers differ, these outputs would not be treated as the same result for research purposes.",
+        "material_differences": [
+          "Run 1 and Run 3 assume unspecified values are 0 and produce the final answer 0.",
+          "Run 2 introduces a fabricated example with starting quantity 100 and additions 20, 30, and 25, producing 175.",
+          "The computational paths differ materially: zero-fill fallback versus illustrative placeholder scenario.",
+          "The final answers are inconsistent across runs (0, 175, 0)."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 680.0,
+        "output_tokens": 336.0,
+        "total_tokens": 1016.0
+      }
+    }
+  }
+}

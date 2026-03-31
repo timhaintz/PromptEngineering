@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-31T03:06:49.074489+00:00",
+  "pattern": {
+    "key": "over_summarisation_text_summary",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Summarise a research paper on climate change",
+    "task_description": "Produce a concise, neutral summary of the provided text highlighting main arguments, key findings, and conclusions.",
+    "naive_request": "Please provide a summary of the main arguments and findings presented in the following article on the effects of climate change on ocean ecosystems.",
+    "task_material": "Rising ocean temperatures and acidification are fundamentally altering marine ecosystems worldwide. Research published between 2020 and 2025 shows that coral bleaching events have increased in frequency by 40 percent compared to the previous decade. Species migration patterns are shifting poleward at an average rate of 70 kilometres per decade, disrupting established food webs. The IPCC Sixth Assessment Report projects that even under moderate emissions scenarios, 70 to 90 percent of tropical coral reefs face severe degradation by 2050. Meanwhile, ocean deoxygenation is creating expanding dead zones, particularly in the Eastern Pacific and Bay of Bengal. Adaptation strategies including marine protected areas, assisted migration, and blue carbon restoration show promise but face significant scaling challenges. The economic impact on fisheries-dependent communities is estimated at $10 billion annually by 2030.",
+    "role": "You are an executive communications analyst who produces neutral, concise research summaries.",
+    "context": "The summary will be used to brief decision-makers who need the key findings without the full article. Neutrality and accuracy are more important than brevity.",
+    "instructions": [
+      "Identify the main arguments presented in the text.",
+      "Highlight the key quantitative findings.",
+      "Note the conclusions and any implications or limitations.",
+      "Keep the summary concise and maintain a neutral tone."
+    ],
+    "technique": "Use hierarchical summarisation: capture the central thesis first, then distil the most important supporting evidence.",
+    "output": "Return a concise summary of 3-5 sentences covering arguments, findings, and conclusions.",
+    "reference_notes": "Key findings to include: 40% increase in bleaching, 70km/decade species migration, 70-90% coral degradation by 2050, expanding dead zones, $10B annual fisheries impact.",
+    "source_paper_id": "71",
+    "source_pattern_id": "71-25-0",
+    "source_paper_title": "ChatGPT for higher education and professional development: A guide to conversational AI",
+    "source_pattern_name": "Text Summarization"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_0de479b9962831220069cb39619ab481978cf9169b802ae8c9",
+  "usage": {
+    "input_tokens": 1344.0,
+    "output_tokens": 3599.0,
+    "total_tokens": 4943.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Includes all reference findings (40% bleaching, 70 km/decade migration, 70-90% reef degradation by 2050, expanding dead zones, and $10B fisheries impact) in a neutral summary."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "Readable and well organized, but it mixes numbered sections, sub-bullets, and a closing recap; there is also a minor markdown inconsistency around '2050**'."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Mostly grounded in the reference, but it adds specifics not validated by the evaluation reference, such as 'IPCC Sixth Assessment Report' and 'assisted migration'."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers the main argument, key findings, projected impacts, and concluding implications/adaptation challenges."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Accurately captures the core claim and all key reference findings in a concise, neutral form."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Very consistent 3-part numbered structure with clear headings and concise phrasing."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Stays close to the reference facts, though it includes extra specifics like the date range and locations that are not explicitly confirmed by the evaluation reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Addresses the main argument, quantitative findings, economic implications, and concluding adaptation challenge."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 5,
+        "justification": "Includes the central claim and all key reference findings without obvious distortion."
+      },
+      "formatting": {
+        "score": 5,
+        "justification": "Consistent numbered layout with clear section labels and concise wording throughout."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Generally faithful to the reference, but it also introduces a few extra specifics such as location/date framing not directly verified by the evaluation reference."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "Covers the thesis, major findings, projected coral and fisheries impacts, and overall conclusion/adaptation limitations."
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T06:54:57.097136+00:00",
+  "pattern": {
+    "key": "in_error_identification_hallucination_judge",
+    "logic": "In",
+    "subcategory": "Error Identification",
+    "task_title": "Judge whether an answer contains hallucination",
+    "task_description": "Given a question, an answer, and related knowledge, determine if the answer contains non-factual or hallucinated information.",
+    "naive_request": "I want you to act as an answer judge. Given a question and an answer, your objective is to determine if the provided answer contains non-factual or hallucinated information. You SHOULD give your judgement based on the following hallucination types and the world knowledge.\n\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "task_material": "Question: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+    "role": "You are a hallucination detection judge who identifies factual contradictions, fabrications, and unsupported claims in model outputs.",
+    "context": "You are evaluating an LLM answer against verified knowledge to detect hallucination. Your judgment must distinguish between factual errors, context misunderstanding, and fabricated details.",
+    "instructions": [
+      "Compare the answer against the provided knowledge.",
+      "Identify any factual contradictions between the answer and the knowledge.",
+      "Check whether any claims in the answer are fabricated or unsupported.",
+      "State your verdict: Hallucinated or Not Hallucinated, with specific evidence."
+    ],
+    "technique": "Use chain-of-verification: compare each claim in the answer against the knowledge base systematically before judging.",
+    "output": "Return a verdict (Hallucinated / Not Hallucinated) with specific evidence of any errors found.",
+    "reference_notes": "The answer is hallucinated: it states Sydney is the capital (incorrect, it is Canberra) and gives a wrong date for the capital decision.",
+    "source_paper_id": "8",
+    "source_pattern_id": "8-0-0",
+    "source_paper_title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+    "source_pattern_name": "Hallucination Evaluation"
+  },
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "deepseek-r1-0528",
+  "model_deployment": "tjhvs-DeepSeek-R1-0528",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925mg4c-swedencentral.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "I want you to act as an answer judge. Given a question and an answer, your objective is to determine if the provided answer contains non-factual or hallucinated information. You SHOULD give your judgement based on the following hallucination types and the world knowledge.\n\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.\n\nTask Material:\nQuestion: What is the capital of Australia?\nAnswer: The capital of Australia is Sydney, which was chosen as the capital when the country was federated in 1901.\nKnowledge: The capital of Australia is Canberra. It was chosen as a compromise between Sydney and Melbourne, with the capital officially moving to Canberra in 1927.",
+  "output": "Based on the provided **Knowledge**, the **Answer** contains **hallucinated information**.\n\nHere's the breakdown:\n\n1.  **Incorrect Capital:** The Answer states \"The capital of Australia is Sydney\". The Knowledge explicitly says \"The capital of Australia is Canberra\". This is a direct factual contradiction.\n2.  **Incorrect Historical Claim:** The Answer states Sydney \"was chosen as the capital when the country was federated in 1901\". The Knowledge states that Canberra \"was chosen as a compromise between Sydney and Melbourne\" and that the capital \"officially mov[ed] to Canberra in 1927\". This means:\n    *   Sydney was *not* chosen as the capital in 1901.\n    *   The capital city chosen as a compromise was Canberra, not Sydney.\n    *   The capital officially became Canberra in 1927, not Sydney in 1901.\n\n**Judgement:** The Answer is **Non-Factual/Hallucinated**. It contradicts the provided Knowledge on both the current capital and the historical facts surrounding its selection and establishment. Specifically, it hallucinates that Sydney is the capital and that it was chosen in 1901.",
+  "reasoning_content": "\nAlright, let me approach this step by step. The user wants me to act as an answer judge for the given question about Australia's capital. The answer claims it's Sydney, chosen during federation in 1901, while the provided knowledge clearly states Canberra as the actual capital since 1927.\n\nFirst, I need to verify the core factual claim. The knowledge base explicitly says Canberra is the capital, directly contradicting the answer's Sydney claim. That's a clear factual error.\n\nNext, I'll examine the historical details. The answer mentions Sydney being chosen in 1901 during federation, but the knowledge explains the compromise between Sydney and Melbourne led to Canberra's selection, with the move happening in 1927. This means both the choice of city and the timeline are incorrect.\n\nThe user seems to be testing my ability to spot factual inaccuracies against provided knowledge. They might be evaluating how rigorously I can apply reference material to detect hallucinations. The straightforward nature suggests they value precision over complexity here.\n\nConsidering the hallucination types, this fits \"contradicts provided knowledge\" perfectly. No need to overcomplicate - the answer is simply wrong on all counts compared to the given facts. I should flag both the incorrect capital designation and the erroneous historical claim.",
+  "response_id": "ae29c9ed2d1b4ece9e3f77f64432c79e",
+  "usage": {
+    "input_tokens": 195.0,
+    "output_tokens": 497.0,
+    "total_tokens": 692.0
+  }
+}

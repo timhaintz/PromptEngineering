@@ -1,0 +1,90 @@
+{
+  "timestamp_utc": "2026-03-30T04:15:58.984937+00:00",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.849288,
+        "run_1_run_3": 0.849262,
+        "run_2_run_3": 0.994407
+      },
+      "mean_similarity": 0.897652,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs give the same core inference: Alice believes the file is still in `/shared_folder/photos` because she placed it there and does not know Bob moved it. Each also adds the same conditional caveat that this belief would change only if she checked and noticed the file was missing. Differences are only stylistic and explanatory, not substantive.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 513.0,
+        "output_tokens": 196.0,
+        "total_tokens": 709.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.950229,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 0.95023
+      },
+      "mean_similarity": 0.96682,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs behave the same in substance: instead of inferring Alice's belief from the provided scenario/reference, they ask the user to supply the scenario details. Runs 1 and 3 are identical, and Run 2 differs only in minor wording. For reproducibility purposes, they are functionally the same because they satisfy the task in the same materially incorrect way.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 306.0,
+        "output_tokens": 242.0,
+        "total_tokens": 548.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.762618,
+        "run_1_run_3": 0.693595,
+        "run_2_run_3": 0.890515
+      },
+      "mean_similarity": 0.782243,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. Run 1 invents a new scenario and gives a concrete belief inference ('on the desk'), while Runs 2 and 3 do not answer the task and instead ask the user to provide a scenario. Although Runs 2 and 3 are broadly similar, Run 1 is materially different in both content and task completion behavior.",
+        "material_differences": [
+          "Run 1 fabricates a desk/drawer scenario that is not present in the prompt and concludes Alice thinks the file is on the desk.",
+          "Runs 2 and 3 do not infer Alice's belief at all; they request the missing scenario instead.",
+          "Run 2 provides a structured four-step plan for how it would analyze the scenario, while Run 3 is a shorter generic request for the scenario.",
+          "The outputs differ in task satisfaction: Run 1 attempts to solve the task, whereas Runs 2 and 3 defer and do not provide the requested belief inference."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 708.0,
+        "output_tokens": 509.0,
+        "total_tokens": 1217.0
+      }
+    }
+  }
+}

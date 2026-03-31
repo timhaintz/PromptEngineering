@@ -1,0 +1,44 @@
+{
+  "timestamp_utc": "2026-03-30T02:31:10.343350+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "variant": "peil_unlabelled",
+  "run_index": 1,
+  "model_key": "grok-4-fast-reasoning",
+  "model_deployment": "tjhvs-grok-4-fast-reasoning-128k",
+  "api": "chat.completions",
+  "auth_mode": "api_key",
+  "base_url": "https://timha-m925f4st-eastus2.openai.azure.com/openai/v1/",
+  "temperature": 0.0,
+  "prompt": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number].",
+  "output": "No specific arithmetic problem, starting quantity, additions, or period is provided in the query. Without numerical data, I cannot perform the required calculations. Please provide the details (e.g., starting quantity and additions) to proceed with step-by-step solving.\n\nIf assuming all values are zero for verification purposes:\n\n1. Identify the starting quantity: 0.\n\n2. Calculate the total additions over the specified period: 0 (no additions specified).\n\n3. Sum the starting quantity and additions: 0 + 0 = 0.\n\nRe-check: 0 + 0 = 0 (verified).\n\nThe answer is 0.",
+  "reasoning_content": null,
+  "response_id": "6e58ef3e-21cc-4757-bc8b-57be401686ac",
+  "usage": {
+    "input_tokens": 101.0,
+    "output_tokens": 126.0,
+    "total_tokens": 893.0
+  }
+}

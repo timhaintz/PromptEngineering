@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-31T00:23:21.020582+00:00",
+  "pattern": {
+    "key": "over_summarisation_chain_of_density",
+    "logic": "Over",
+    "subcategory": "Summarisation",
+    "task_title": "Generate entity-dense iterative summaries",
+    "task_description": "Generate five increasingly entity-dense summaries of the provided article, each the same length, progressively adding missing salient entities.",
+    "naive_request": "Article: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.\n\nYou will generate increasingly concise, entity-dense summaries of the above Article.\nRepeat the following 2 steps 5 times.\nStep 1. Identify 1-3 informative Entities from the Article which are missing from the previously generated summary.\nStep 2. Write a new, denser summary of identical length which covers every entity and detail from the previous summary plus the Missing Entities.\nA Missing Entity is:\n- Relevant to the main story,\n- Specific yet concise (5 words or fewer),\n- Novel (not in the previous summary),\n- Faithful (present in the Article),\n- Anywhere (can be located anywhere in the Article).\nReturn a JSON list of 5 dictionaries with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. Major providers including Amazon Web Services, Microsoft Azure, and Google Cloud Platform compete on pricing, global reach, and managed service breadth. However, this shift introduces challenges around data sovereignty, vendor lock-in, and shared responsibility for security. The 2023 Flexera State of the Cloud report found that 65 percent of enterprise workloads now run in public cloud environments, up from 50 percent in 2020. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing.",
+    "role": "You are a summarisation specialist who produces iteratively denser summaries that preserve entities and key details.",
+    "context": "The output will be used to evaluate how well models handle progressive entity-dense summarisation. Each summary must be the same length as the previous one but contain more salient entities.",
+    "instructions": [
+      "Start with a broad entity-sparse summary of the article.",
+      "Identify 1-3 informative missing entities from the article for each iteration.",
+      "Rewrite the summary at the same length, incorporating the new entities by compressing language.",
+      "Never drop entities from previous summaries. Repeat for 5 iterations total."
+    ],
+    "technique": "Use chain-of-density summarisation: iteratively compress language to add entities without increasing length.",
+    "output": "Return a JSON list of 5 dictionaries, each with keys \"Missing_Entities\" and \"Denser_Summary\".",
+    "reference_notes": "Key entities to incorporate: AWS/Azure/GCP, Flexera report, 65 percent, data sovereignty, vendor lock-in, SLAs.",
+    "source_paper_id": "38",
+    "source_pattern_id": "38-0-0",
+    "source_paper_title": "From Sparse to Dense: GPT-4 Summarization with Chain of Density Prompting",
+    "source_pattern_name": "Initial Entity-Sparse Summary"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_086958e2114ac2510069cb12ae12688194be2883a168ac48f0",
+  "usage": {
+    "input_tokens": 2148.0,
+    "output_tokens": 7869.0,
+    "total_tokens": 10017.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 5,
+        "justification": "The sequence correctly incorporates the key reference entities by the end: AWS/Azure/Google Cloud, the Flexera 2023 report, 65%, data sovereignty, vendor lock-in, and SLAs. Any issues are minor shorthand/compression rather than substantive factual errors."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "It is valid JSON with a consistent two-field structure across all five items, and the summaries do become denser step by step. However, the summaries are not truly the same length and punctuation/hyphenation style varies."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "Most content stays anchored to the reference, but it also adds several specifics not supported by the evaluation reference, such as pricing, global reach, managed-service breadth, and exit strategies, which slightly raises hallucination risk."
+      },
+      "completeness": {
+        "score": 5,
+        "justification": "It delivers five iterative summaries and covers all key entities from the reference by the final summary, with clear progressive densification."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The final output includes the reference entities, but there are minor accuracy/naming issues such as 'Google GCP' and some concept blending like 'data sovereignty/residency.' The core facts are mostly correct."
+      },
+      "formatting": {
+        "score": 4,
+        "justification": "The JSON structure and field names are consistent across all five entries. Still, the writing style shifts from normal prose to compressed fragments, and equal-length consistency is only approximate."
+      },
+      "fabrication": {
+        "score": 4,
+        "justification": "It is generally grounded, but it introduces extra ideas not evidenced by the reference, including contractual commitments, long-term flexibility, pricing, and global reach. These are plausible but not clearly supported here."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It provides five progressively denser summaries and eventually includes AWS/Azure/GCP, Flexera, 65%, data sovereignty, vendor lock-in, and SLAs. The main shortfall is that the same-length/progression requirement is only partially met."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 4,
+        "justification": "The core reference entities are introduced across the sequence and are present by the final summary. The wording is simplified, but there are no major factual mismatches in the referenced content."
+      },
+      "formatting": {
+        "score": 3,
+        "justification": "It uses valid JSON and consistent keys, but the summaries shorten unevenly and the final 'Missing_Entities' list is not actually reflected in the paired denser summary, weakening iterative consistency."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "This output stays closest to the reference set and adds relatively few unsupported specifics. Aside from generic phrases like 'reliable, wide-ranging platforms,' it avoids notable invented detail."
+      },
+      "completeness": {
+        "score": 4,
+        "justification": "It supplies five summaries and the final one contains the key reference entities, including Flexera, 65%, data sovereignty, vendor lock-in, and SLAs. However, the last step leaves its listed missing entities unresolved, so the iterative task is not fully closed."
+      }
+    }
+  }
+}

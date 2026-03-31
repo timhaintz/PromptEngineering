@@ -1,0 +1,104 @@
+{
+  "timestamp_utc": "2026-03-29T23:22:07.782924+00:00",
+  "pattern": {
+    "key": "at_assessment_expert_rating",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Rate platforms using weighted criteria",
+    "task_description": "As an expert in online learning, weight evaluation criteria and rate six communication platforms.",
+    "naive_request": "As an expert in the field of online learning, rate the effectiveness of the following criteria for evaluating online learning platforms: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, and user experiences. Please rate these criteria based on the following programs: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, and FaceTime. Use the rating scale: Very Low - Low - Medium Low - Medium - Medium High - High - Very High. Your first task is to weight the criteria.",
+    "task_material": "Criteria: ease of use, functionality and features, compatibility and integration, security and privacy, technical support and training, cost of the program, user experiences.\nPlatforms: Zoom, Microsoft Teams, Skype, Google Meet, WhatsApp, FaceTime.\nScale: Very Low, Low, Medium Low, Medium, Medium High, High, Very High.",
+    "role": "You are an expert in online learning and educational technology evaluation.",
+    "context": "You are providing a structured assessment for a university selecting a communication platform. The evaluation must be transparent, consistent, and justifiable to stakeholders.",
+    "instructions": [
+      "First, assign and justify weights for each of the seven criteria.",
+      "Then rate each of the six platforms on every criterion using the provided scale.",
+      "Present the results in a clear table format.",
+      "Note any significant strengths or limitations for each platform."
+    ],
+    "technique": "Use rubric-based assessment with explicit criteria weighting before applying ratings systematically.",
+    "output": "Return a criteria weighting table followed by a platform rating matrix.",
+    "reference_notes": "A strong answer provides justified weights and consistent ratings across all platforms and criteria.",
+    "source_paper_id": "3",
+    "source_pattern_id": "3-0-0",
+    "source_paper_title": "A Novel Framework leveraging Prompt Engineering and the Grey-Based Approach",
+    "source_pattern_name": "Expert"
+  },
+  "evaluated_model_key": "gpt-5",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.926581,
+        "run_1_run_3": 0.891192,
+        "run_2_run_3": 0.860246
+      },
+      "mean_similarity": 0.892673,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. Runs 1 and 2 both complete the task in a broadly similar way by assigning criterion weights and rating all listed platforms, but they use different weights and several platform ratings differ. Run 3 is materially different because it only provides weighted criteria with explanations and does not actually rate the platforms, so it does not satisfy the full task in the same way.",
+        "material_differences": [
+          "Run 3 omits the platform-by-platform ratings entirely and therefore does not complete the requested evaluation.",
+          "Criterion weights differ across runs: e.g., Run 1 gives Functionality 25% and User Experiences 10%, while Runs 2 and 3 give Functionality 20% and User Experiences 15%.",
+          "Several platform ratings are inconsistent between Runs 1 and 2, especially for Skype, Google Meet, WhatsApp, and FaceTime (for example Skype Ease of use High vs Medium; Cost High vs Very High; Google Meet Ease of use Very High vs High; FaceTime Compatibility Low vs Medium Low).",
+          "Run 3 adds justification text for weights, changing the structure from a direct weighted-rating answer to a partial framework plus follow-up offer."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1166.0,
+        "output_tokens": 461.0,
+        "total_tokens": 1627.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.981172,
+        "run_1_run_3": 0.89621,
+        "run_2_run_3": 0.899052
+      },
+      "mean_similarity": 0.925478,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs use the same overall approach\u2014pre-set weighted criteria, a qualitative rating matrix for the same six platforms, and brief strengths/limitations\u2014but they are not functionally identical for research purposes. The criterion weights change meaningfully across runs, several platform scores shift on important dimensions, and Run 3 introduces explicit weighted overall scores/rankings not present in Runs 1\u20132. These differences could change comparative conclusions, especially between Teams, Zoom, and Google Meet.",
+        "material_differences": [
+          "Criterion weights differ substantially across runs (e.g., Cost = 13% in Run 1, 10% in Run 2, 8% in Run 3; User experiences = 10% in Runs 1/3 but 15% in Run 2; Compatibility = 15% in Runs 1/2 vs 18% in Run 3).",
+          "Platform ratings are not stable across runs on key criteria: Zoom functionality is Very High in Runs 1/2 but High in Run 3; Teams functionality is High in Run 1 but Very High in Runs 2/3; Zoom compatibility is Medium High in Runs 1/3 but High in Run 2.",
+          "Lower-tier platform assessments also vary materially: FaceTime compatibility is Very Low in Run 1 but Low in Runs 2/3; WhatsApp compatibility is Low in Runs 1/2 but Medium Low in Run 3; Skype cost is High in Run 1 but Very High in Runs 2/3.",
+          "Technical support ratings change in meaningful ways (e.g., Teams = High in Runs 1/2 but Very High in Run 3; Google Meet = Medium High in Runs 1/2 but High in Run 3).",
+          "Run 3 adds explicit weighted overall scores and an overall ranking, producing a concrete ordering (Teams > Google Meet > Zoom > WhatsApp > FaceTime > Skype) that is not given in Runs 1\u20132 and may not match their implied ordering.",
+          "Some platform conclusions shift in nuance enough to matter operationally, especially around enterprise readiness, integration strength, and the relative standing of Zoom vs Google Meet vs Teams."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 2906.0,
+        "output_tokens": 1151.0,
+        "total_tokens": 4057.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.951272,
+        "run_1_run_3": 0.935606,
+        "run_2_run_3": 0.936736
+      },
+      "mean_similarity": 0.941204,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs use a very similar framework (same general criteria, same platform set, pre-declared weights, qualitative ratings, and platform pros/cons) and reach broadly similar high-level conclusions, especially that Microsoft Teams is strongest and consumer tools are weaker for university-wide use. However, they are not functionally identical for research purposes because the weighting schemes differ, several criterion-level ratings change meaningfully, the relative ordering of Zoom vs. Google Meet changes, and Run 3 does not provide a computed weighted overall ranking at all.",
+        "material_differences": [
+          "Criteria weights vary materially across runs (e.g., Functionality 20%/18%/17%, Compatibility 15%/15%/18%, User experiences 10%/15%/10%, Ease of use 15%/12%/15%).",
+          "Overall ranking differs: Run 1 places Zoom above Google Meet, while Run 2 places Google Meet above Zoom; Run 3 omits the final weighted ranking/score entirely.",
+          "Some platform ratings shift in nontrivial ways, not just wording: e.g., Zoom functionality is Very High in Runs 1 and 3 but only High in Run 2; WhatsApp functionality is Medium in Run 1 but Medium Low in Runs 2 and 3.",
+          "Cost assessments change materially for multiple platforms: Teams is Medium / Medium High / High across the three runs; FaceTime is High / Very High / Medium Low; Google Meet is Medium / Medium High / High.",
+          "Compatibility/security judgments also differ for lower-tier platforms: WhatsApp compatibility is Medium High in Runs 1 and 2 but Very Low in Run 3; Skype compatibility is Medium/Medium/Low; WhatsApp security moves from Medium High to Medium Low in Run 3.",
+          "Scoring presentation differs: Run 1 uses a 1\u20137 mapped weighted score, Run 2 reports /100 totals, and Run 3 gives only qualitative ratings with no computed aggregate."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 3339.0,
+        "output_tokens": 1599.0,
+        "total_tokens": 4938.0
+      }
+    }
+  }
+}

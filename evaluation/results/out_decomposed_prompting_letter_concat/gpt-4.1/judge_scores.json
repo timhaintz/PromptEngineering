@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-03-30T12:54:17.747973+00:00",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "judge_model_deployment": "tjhvs-gpt-5.4-pro-1m",
+  "api": "responses",
+  "auth_mode": "api_key",
+  "response_id": "resp_07432caf198bf52c0069ca71ab74a48190bfcfd8d377cb2d66",
+  "usage": {
+    "input_tokens": 676.0,
+    "output_tokens": 1720.0,
+    "total_tokens": 2396.0
+  },
+  "scores": {
+    "output_a": {
+      "accuracy": {
+        "score": 4,
+        "justification": "It gives the correct final result for the example, \"J R,\" which matches the reference output. However, it does not explicitly show the decomposition steps."
+      },
+      "formatting": {
+        "score": 2,
+        "justification": "The response is readable, but it does not use explicit numbered sub-questions or intermediate results as requested."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not introduce any unsupported or invented information; it stays within the given example."
+      },
+      "completeness": {
+        "score": 2,
+        "justification": "It provides only the final concatenated letters and omits the required split/extract/merge breakdown with intermediate outputs."
+      }
+    },
+    "output_b": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not perform the task on the example and provides no decomposition or result for \"Jack Ryan.\""
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "It does not follow the requested format of explicit, numbered sub-questions with intermediate results."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It makes no fabricated claims; it simply asks for input instead of inventing an answer."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It fails to complete any part of the requested decomposition task."
+      }
+    },
+    "output_c": {
+      "accuracy": {
+        "score": 1,
+        "justification": "It does not execute the decomposition task and gives no result for the example string."
+      },
+      "formatting": {
+        "score": 1,
+        "justification": "It does not provide numbered sub-steps or intermediate results, so it does not match the requested structure."
+      },
+      "fabrication": {
+        "score": 5,
+        "justification": "It does not contain hallucinated content; it only asks the user for input."
+      },
+      "completeness": {
+        "score": 1,
+        "justification": "It leaves the task entirely unfinished and provides none of the required decomposition steps."
+      }
+    }
+  }
+}

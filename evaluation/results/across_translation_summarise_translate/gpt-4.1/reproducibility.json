@@ -1,0 +1,87 @@
+{
+  "timestamp_utc": "2026-03-29T22:22:22.283406+00:00",
+  "pattern": {
+    "key": "across_translation_summarise_translate",
+    "logic": "Across",
+    "subcategory": "Translation",
+    "task_title": "Summarise a text and translate to French",
+    "task_description": "Produce a concise English summary of the provided text and then translate that summary into French.",
+    "naive_request": "Summarize the following text, then translate the summary to French.\n\nText: Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "task_material": "Cloud computing has transformed how organisations deploy and manage infrastructure. By shifting from on-premises servers to elastic cloud services, businesses reduce capital expenditure and gain the ability to scale resources on demand. However, this shift introduces new challenges around data sovereignty, vendor lock-in, and shared responsibility for security. Organisations must carefully evaluate provider SLAs, data residency requirements, and exit strategies before committing to a cloud-first approach.",
+    "role": "You are a bilingual technical writer who produces concise summaries and accurate French translations.",
+    "context": "The summary will be shared with both English-speaking and French-speaking stakeholders. Preserve technical accuracy and flag any ambiguous idioms.",
+    "instructions": [
+      "Summarise the text in 2-3 concise English sentences.",
+      "Translate the summary into French, preserving tone and terminology.",
+      "Flag any idiomatic expressions that may not translate directly.",
+      "Do not add information beyond what the source text contains."
+    ],
+    "technique": "Use hierarchical summarisation first, then apply careful bilingual translation preserving key technical terms.",
+    "output": "Return two sections: English Summary and French Translation.",
+    "reference_notes": "A strong answer produces a faithful summary and an accurate French translation without adding new claims.",
+    "source_paper_id": "30",
+    "source_pattern_id": "30-6-0",
+    "source_paper_title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+    "source_pattern_name": "Summarization and Translation"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.979132,
+        "run_1_run_3": 0.963751,
+        "run_2_run_3": 0.971755
+      },
+      "mean_similarity": 0.971546,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "Runs 1 and 2 are effectively the same in meaning, structure, and task completion, with only minor wording/spelling differences. Run 3 is very close, but it changes the recommendation from adopting general cloud solutions to adopting a \"cloud-first strategy\"/\"une approche cloud-first,\" which is a narrower framing and introduces a potentially new claim. Because of that added specificity, the three outputs are not fully functionally identical.",
+        "material_differences": [
+          "Run 3 replaces \"before adopting cloud solutions\" with \"before adopting a cloud-first strategy\" (and the French translation mirrors this), which changes the scope of the recommendation and adds a more specific claim."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 644.0,
+        "output_tokens": 941.0,
+        "total_tokens": 1585.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.976429,
+        "run_1_run_3": 0.976294,
+        "run_2_run_3": 0.999524
+      },
+      "mean_similarity": 0.984082,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs provide the same English summary verbatim and a materially equivalent French translation conveying the same points: cost reduction, flexible scaling, migration from on-premises to cloud, and the risks/considerations of sovereignty, lock-in, security, SLAs, data residency, and exit strategies. Differences are limited to minor French phrasing choices and slightly different idiom notes, which do not change meaning or task fulfillment for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 897.0,
+        "output_tokens": 467.0,
+        "total_tokens": 1364.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.960319,
+        "run_1_run_3": 1.0,
+        "run_2_run_3": 0.960319
+      },
+      "mean_similarity": 0.973546,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs satisfy the task in materially the same way: they provide the same core English summary and an accurate French translation conveying the same claims about cost reduction, scalability, data sovereignty, vendor lock-in, shared security, and the need to assess SLAs/data residency/exit strategies. Runs 1 and 3 are identical. Run 2 differs only in wording and in how it treats the phrase \"cloud-first\" (kept in quotes rather than paraphrased, and marked as not requiring special attention), but this does not change the substantive meaning or usefulness for research purposes.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 892.0,
+        "output_tokens": 420.0,
+        "total_tokens": 1312.0
+      }
+    }
+  }
+}

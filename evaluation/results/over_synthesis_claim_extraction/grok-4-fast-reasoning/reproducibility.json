@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-31T02:16:07.355395+00:00",
+  "pattern": {
+    "key": "over_synthesis_claim_extraction",
+    "logic": "Over",
+    "subcategory": "Synthesis",
+    "task_title": "Extract atomic claims from a book summary",
+    "task_description": "Break a summary into self-contained atomic claims that can each be independently verified against the source text.",
+    "naive_request": "You are trying to verify the faithfulness of statements made in a given summary of a book against the actual text of the book. To do so, you first need to break the summary into a set of \"atomic claims\", each of which will then be passed to a human who will verify its faithfulness. Each claim should be self-contained with all the necessary context. Each claim should contain no more than two sentences. Each individual claim should be on its own line prefixed by a \"- \".\n\nSummary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "task_material": "Summary: In the novel, detective Maria Santos investigates a series of disappearances in the coastal town of Porto Azul during the summer of 2019. She discovers that the missing persons were all members of a local sailing club and had recently voted to sell the club's historic waterfront property to a development company. Her investigation reveals that the club's treasurer, Carlos Mendez, orchestrated the disappearances to prevent the sale and preserve the property for personal financial gain.",
+    "role": "You are a claim extraction specialist who decomposes summaries into independently verifiable atomic statements.",
+    "context": "Each extracted claim will be passed to a human fact-checker who will verify it against the source text. Claims must be self-contained so the checker does not need additional context.",
+    "instructions": [
+      "Break the summary into atomic, self-contained claims.",
+      "Each claim must include sufficient context to be verified independently.",
+      "Limit each claim to no more than two sentences.",
+      "Prefix each claim with a dash and put each on its own line."
+    ],
+    "technique": "Use structured decomposition: parse the summary sentence by sentence and extract each discrete factual assertion as a standalone claim.",
+    "output": "Return a list of atomic claims, each prefixed with a dash on its own line.",
+    "reference_notes": "Should extract claims about: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership, vote to sell property, development company, Carlos Mendez as treasurer, his motive.",
+    "source_paper_id": "63",
+    "source_pattern_id": "63-0-0",
+    "source_paper_title": "FABLES: Evaluating faithfulness and content selection in book-length summarization",
+    "source_pattern_name": "Claim Extraction"
+  },
+  "evaluated_model_key": "grok-4-fast-reasoning",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.99771,
+        "run_1_run_3": 0.990822,
+        "run_2_run_3": 0.992581
+      },
+      "mean_similarity": 0.993704,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs extract the same core atomic claims: Maria Santos is the detective, Porto Azul is the setting, the events occur in summer 2019, the missing people were sailing club members, they voted to sell the waterfront property to a development company, Carlos Mendez is the treasurer, and he orchestrated the disappearances for a motive tied to stopping the sale and personal financial gain. Differences are only minor wording and attribution choices, not substantive changes in meaning or task completion.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 595.0,
+        "output_tokens": 391.0,
+        "total_tokens": 986.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.999999,
+        "run_1_run_3": 0.999999,
+        "run_2_run_3": 1.0
+      },
+      "mean_similarity": 0.999999,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs are identical in meaning, structure, and level of detail. Each extracts the same eight atomic claims, covering the required entities and relations: Maria Santos as detective, Porto Azul as setting, summer 2019 timing, sailing club membership, vote to sell the property, development company involvement, Carlos Mendez as treasurer, and his motive/actions.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 656.0,
+        "output_tokens": 142.0,
+        "total_tokens": 798.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.993731,
+        "run_1_run_3": 0.9949,
+        "run_2_run_3": 0.992425
+      },
+      "mean_similarity": 0.993685,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs extract the same core atomic claims: Maria Santos is the detective; the setting is Porto Azul; the timing is summer 2019; the missing people are sailing club members; they voted to sell the historic waterfront property to a development company; Carlos Mendez is the treasurer; and he orchestrated the disappearances to stop the sale for personal financial gain. Differences are only in phrasing and whether some claims are split or combined into separate bullets.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 659.0,
+        "output_tokens": 303.0,
+        "total_tokens": 962.0
+      }
+    }
+  }
+}

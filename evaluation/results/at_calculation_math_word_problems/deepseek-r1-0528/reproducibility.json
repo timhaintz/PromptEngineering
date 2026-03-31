@@ -1,0 +1,96 @@
+{
+  "timestamp_utc": "2026-03-30T02:48:21.978423+00:00",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "evaluated_model_key": "deepseek-r1-0528",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.946087,
+        "run_1_run_3": 0.987128,
+        "run_2_run_3": 0.942946
+      },
+      "mean_similarity": 0.95872,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs compute the same quantity in the same way: identify Monday\u2013Thursday as 4 days, compute 4 \u00d7 5 = 20 installed computers, add to the initial 9, and conclude 29. They all satisfy the task correctly and equivalently; the only differences are phrasing and level of explanation.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 635.0,
+        "output_tokens": 186.0,
+        "total_tokens": 821.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.715188,
+        "run_1_run_3": 0.741576,
+        "run_2_run_3": 0.85869
+      },
+      "mean_similarity": 0.771818,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. All fail to solve the intended problem, but they do so in materially different ways: Run 1 refuses to compute and asks for missing inputs, while Runs 2 and 3 invent different placeholder examples and produce different numerical answers. For reproducibility purposes, these are distinct behaviors and outcomes rather than minor wording variations.",
+        "material_differences": [
+          "Run 1 does not perform any calculation and requests the missing starting quantity and additions.",
+          "Run 2 performs a placeholder calculation using assumed values (100, 20, 30, 10) and returns 160.",
+          "Run 3 performs a different placeholder calculation using assumed values (150, 40, 60, 30) and returns 280.",
+          "The structure differs materially: clarification request versus full worked examples.",
+          "The final answers differ across runs (no answer / 160 / 280), so the outputs are not interchangeable."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 1008.0,
+        "output_tokens": 381.0,
+        "total_tokens": 1389.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.868679,
+        "run_1_run_3": 0.726003,
+        "run_2_run_3": 0.716216
+      },
+      "mean_similarity": 0.770299,
+      "llm_assessment": {
+        "functionally_identical": false,
+        "justification": "The three runs are not functionally identical. All fail to solve the intended math problem, but they do so in materially different ways: Run 1 invents one set of example numbers and gives 255, Run 2 invents a different set and gives 950, and Run 3 does not compute anything and instead asks for missing information. These differences change both the computation performed and the final outcome.",
+        "material_differences": [
+          "Run 1 assumes example values 150, 25, 35, 45 and computes a final answer of 255.",
+          "Run 2 assumes different example values 500, 120, 80, 200, 50 and computes a final answer of 950.",
+          "Run 3 performs no calculation and requests additional information instead of giving a numeric answer.",
+          "The runs differ in task completion behavior: two provide fabricated demonstration solutions, while one refuses to solve without more input."
+        ]
+      },
+      "judge_usage": {
+        "input_tokens": 997.0,
+        "output_tokens": 358.0,
+        "total_tokens": 1355.0
+      }
+    }
+  }
+}

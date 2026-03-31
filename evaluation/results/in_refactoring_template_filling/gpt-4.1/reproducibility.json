@@ -1,0 +1,85 @@
+{
+  "timestamp_utc": "2026-03-30T07:38:36.559059+00:00",
+  "pattern": {
+    "key": "in_refactoring_template_filling",
+    "logic": "In",
+    "subcategory": "Refactoring",
+    "task_title": "Fill placeholders in a provided template",
+    "task_description": "Given a template with marked placeholders, fill each placeholder while preserving the template formatting.",
+    "naive_request": "I am going to provide a template for your output. Everything in all caps is a placeholder. Any time that you generate text, try to fit it into one of the placeholders that I list. Please preserve the formatting and overall template that I provide at https://myapi.com/NAME/profile/JOB",
+    "task_material": "Template: https://myapi.com/NAME/profile/JOB\nPlaceholder NAME: a realistic full name\nPlaceholder JOB: a realistic job title",
+    "role": "You are a template-filling assistant who populates marked placeholders while preserving all surrounding formatting.",
+    "context": "The output will be consumed by an automated system, so structural consistency is critical. Only replace the explicit placeholders.",
+    "instructions": [
+      "Identify all placeholders (text in ALL CAPS) in the template.",
+      "Replace each placeholder with appropriate content.",
+      "Preserve all non-placeholder text and formatting exactly.",
+      "If a placeholder cannot be filled, flag it rather than guessing."
+    ],
+    "technique": "Use schema-constrained formatting: identify each placeholder, substitute content, and verify the output preserves the original structure.",
+    "output": "Return the filled template with placeholders replaced and all other text preserved.",
+    "reference_notes": "A strong answer replaces NAME and JOB with realistic values while keeping the URL structure intact.",
+    "source_paper_id": "0",
+    "source_pattern_id": "0-1-4",
+    "source_paper_title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+    "source_pattern_name": "Template"
+  },
+  "evaluated_model_key": "gpt-4.1",
+  "judge_model_key": "gpt-5.4-pro",
+  "variants": {
+    "naive": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.898038,
+        "run_1_run_3": 0.777591,
+        "run_2_run_3": 0.778231
+      },
+      "mean_similarity": 0.817953,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs fulfill the task in essentially the same way: they replace NAME and JOB with realistic values and preserve the intended URL pattern `https://myapi.com/{name}/profile/{job}`. The differences are only superficial\u2014different example names, different separators/encodings within the path segment (`%20`, `_`, `-`), and varying amounts of surrounding explanatory text. For research purposes, these outputs are functionally equivalent.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 432.0,
+        "output_tokens": 554.0,
+        "total_tokens": 986.0
+      }
+    },
+    "peil_labelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 0.541478,
+        "run_1_run_3": 0.528338,
+        "run_2_run_3": 0.764441
+      },
+      "mean_similarity": 0.611419,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three outputs satisfy the task in the same way: they replace NAME and JOB with plausible values while preserving the required URL pattern. The differences are only in which realistic name and job title were chosen, which does not change the functional result for this template-filling task.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 256.0,
+        "output_tokens": 336.0,
+        "total_tokens": 592.0
+      }
+    },
+    "peil_unlabelled": {
+      "pairwise_similarity": {
+        "run_1_run_2": 1.0,
+        "run_1_run_3": 0.942719,
+        "run_2_run_3": 0.942719
+      },
+      "mean_similarity": 0.961812,
+      "llm_assessment": {
+        "functionally_identical": true,
+        "justification": "All three runs identify the same placeholders and substitute the same underlying person/job concept in the same URL template. Runs 1 and 2 are identical; Run 3 differs only in formatting the JOB value as a capitalized, space-separated title with URL encoding instead of a lowercase hyphenated slug. That changes the exact string but not the substantive task completion for this prompt variant.",
+        "material_differences": []
+      },
+      "judge_usage": {
+        "input_tokens": 366.0,
+        "output_tokens": 1341.0,
+        "total_tokens": 1707.0
+      }
+    }
+  }
+}
