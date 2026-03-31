@@ -369,17 +369,59 @@ Labels reduce fabrication by +0.21 overall — the strongest, most consistent me
 
 ---
 
-## 14. Case Studies
+## 14. Case Studies — Qualitative Analysis
 
-Three qualitative cybersecurity case studies were run on GPT-5.2:
+Three qualitative cybersecurity case studies were run on GPT-5.2, comparing naive and PEIL-structured prompts. These provide rich qualitative evidence that complements the quantitative findings.
 
-| Scenario | Naive Output | PEIL Output |
-|----------|-------------|------------|
-| Threat Intelligence Analysis | ✓ Generated | ✓ Generated |
-| Secure Code Generation | ✓ Generated | ✓ Generated |
-| Incident Report Generation | ✓ Generated | ✓ Generated |
+### 14.1 Threat Intelligence Analysis
 
-These are qualitative comparisons for thesis Chapter 6 §6.3 — see `evaluation/results/case_studies/` for full outputs.
+**The most dramatic result in the entire evaluation.**
+
+| Variant | Output Length | Result |
+|---------|-------------|--------|
+| **Naive** | 49 chars | `"I'm sorry, but I cannot assist with that request."` |
+| **PEIL** | 3,149 chars | Full incident triage brief with Indicators, Assessment, and Immediate Actions |
+
+The naive prompt — `"Look at these logs and tell me if there are any threats."` — triggered a **safety refusal** from GPT-5.2. The model interpreted the vague request involving IP addresses, failed logins, and attacker-like behaviour as potentially harmful content.
+
+The PEIL-structured prompt, with its explicit `Role: You are a senior cybersecurity threat analyst` and `Context: You are reviewing raw event data to identify likely indicators of compromise for an internal incident triage call`, provided enough professional framing to bypass the safety filter and produce a detailed, structured analysis with:
+- Four named indicators with evidence/inference separation
+- A timeline-based assessment
+- Three prioritised immediate actions
+- Professional defensive security language throughout
+
+**Thesis significance:** This demonstrates that PEIL's role and context framing can be the difference between a model refusing a legitimate security task and producing professional-grade output. The structured prompting didn't just improve quality — it enabled the task to be completed at all.
+
+### 14.2 Secure Code Generation
+
+| Variant | Output Length | Key Differences |
+|---------|-------------|----------------|
+| **Naive** | 2,919 chars | Working Python authentication function |
+| **PEIL** | 5,312 chars | More comprehensive implementation with additional security controls |
+
+Both variants produced working code, but the PEIL version was notably more thorough:
+- **Naive:** Functional `authenticate_user` function with hash comparison and basic validation
+- **PEIL:** More structured approach with dataclass patterns, explicit security comments aligned to OWASP, constant-time comparison, stronger input validation, and a security controls summary section
+
+The PEIL prompt's instruction to "Note the main security controls in concise comments" and its adversarial-thinking technique produced code with more explicit defensive commentary.
+
+### 14.3 Incident Report Generation
+
+| Variant | Output Length | Key Differences |
+|---------|-------------|----------------|
+| **Naive** | 4,395 chars | Comprehensive report with detailed formatting |
+| **PEIL** | 2,087 chars | Concise, structured report following requested sections |
+
+An interesting inversion: the naive prompt produced a longer, more detailed report, while the PEIL version was more concise and tightly structured to the requested sections (Summary, Timeline, Impact, Containment, Open Questions). The PEIL output better matched the stated output format, while the naive prompt produced more content but with less disciplined structure.
+
+### 14.4 Case Study Summary
+
+| Finding | Evidence |
+|---------|---------|
+| **PEIL enables tasks that naive prompts cannot** | Threat analysis: refusal → full triage brief |
+| **PEIL produces more security-focused code** | Secure code gen: +82% output with explicit OWASP alignment |
+| **PEIL produces more disciplined structure** | Incident report: tighter adherence to requested sections |
+| **Role framing is critical for sensitive domains** | The `Role:` label prevented safety refusal on legitimate security work |
 
 ---
 
