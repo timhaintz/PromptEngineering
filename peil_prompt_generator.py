@@ -115,9 +115,14 @@ peil_chat_system_prompt_peil_techniques = r'''
 ## A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications
 ### https://arxiv.org/abs/2402.07927
 
+## The Prompt Report: A Systematic Survey of Prompt Engineering Techniques
+### https://arxiv.org/abs/2406.06608
+
 ## Hybrid Prompt Structure Research
 ### https://arxiv.org/abs/2503.06926
 ### https://ijirt.org/publishedpaper/IJIRT183166_PAPER.pdf
+
+## Empirical Evidence: PEIL labels improve output quality on 13/18 patterns (+0.094 overall). Fabrication reduction is the strongest benefit (+0.208). Use explicit labels (Role:, Context:, Instructions:, Techniques:, Output:) for best results.
 
 ### TECHNIQUES AND APPLICATIONS ###
 | Application | Prompting Technique | Add to PE | Summary from Paper |
@@ -151,6 +156,17 @@ peil_chat_system_prompt_peil_techniques = r'''
 | Optimization and Efficiency | Optimization by Prompting (OPRO) | Use natural language prompts to iteratively generate solutions. | Uses natural language prompts to iteratively generate solutions. |
 | Understanding User Intent | Rephrase and Respond (RaR) Prompting | Rephrase and expand questions in a single prompt. | Rephrases and expands questions to improve comprehension and response accuracy. |
 | Metacognition and Self-Reflection | Take a Step Back Prompting | Engage in abstraction and extract high-level concepts. | Engages in abstraction to extract high-level concepts and fundamental principles. |
+| Role and Style Control | Role Prompting (Persona) | Act as [role]. Provide outputs that [role] would create. | Assigns a role or persona to shape output style and improve task-specific accuracy. |
+| | Style Prompting | Write in a [tone/style/genre]. | Specifies desired style, tone, or genre to shape output without changing the task. |
+| Decomposition | Least-to-Most Prompting | Break the problem into sub-problems, then solve them sequentially. | Decomposes problems into ordered sub-problems and solves them in sequence. |
+| | Plan-and-Solve Prompting | Let's first understand the problem and devise a plan to solve it. | Improved Zero-Shot-CoT that plans before solving. |
+| | Skeleton-of-Thought | Provide only the skeleton outline for the answer. | Creates a minimal outline for parallel expansion. |
+| Self-Criticism | Self-Refine | Generate answer, critique it, then improve based on the critique. | Iterative answer-feedback-improvement framework. |
+| | Self-Verification | Mask parts of the question and check if the model can predict them. | Scores solutions by testing if they explain the original question. |
+| | Analogical Prompting | Auto-generate exemplars with reasoning chains. | Self-generates relevant examples when no training data exists. |
+| | Re-reading (RE2) | Read the question again: [repeat question]. | Repeating the question improves reasoning on complex problems. |
+| | Self-Ask | Decide if follow-up questions are needed, answer them, then answer the original. | Model generates its own clarifying sub-questions. |
+| Multi-Party Reasoning | SimToM | Establish what facts one person knows, then answer based only on those. | Separates knowledge per person for theory-of-mind tasks. |
 ### END TECHNIQUES AND APPLICATIONS ###
 # END Prompt Engineering Instructional Language (PEIL) #
 '''

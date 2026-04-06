@@ -95,6 +95,24 @@ Argument, Assessment, Calculation, Categorising, Classification, Clustering, Com
 
 ## Research Sources
 
-- [A Systematic Survey of Prompt Engineering in Large Language Models](https://arxiv.org/abs/2402.07927)
+- [A Systematic Survey of Prompt Engineering in Large Language Models](https://arxiv.org/abs/2402.07927) (Sahoo et al., 2024)
+- [The Prompt Report: A Systematic Survey of Prompt Engineering Techniques](https://arxiv.org/abs/2406.06608) (Schulhoff et al., 2024) — 58 text-based + 40 multimodal techniques
 - [Hybrid Prompt Structure Research](https://arxiv.org/abs/2503.06926)
 - [IJIRT Prompt Engineering Paper](https://ijirt.org/publishedpaper/IJIRT183166_PAPER.pdf)
+
+## Empirical Evidence
+
+A 2026 quantitative evaluation tested PEIL across 4 model architectures (GPT-4.1, GPT-5.2, Grok-4-fast-reasoning, DeepSeek-R1-0528) on 18 research-paper patterns. Key findings:
+
+- **PEIL labels improve quality over unlabelled prompts** on 13/18 patterns (+0.094 overall, +0.208 on fabrication reduction).
+- **Fabrication reduction is the strongest benefit** — explicit labels help models stay grounded and avoid inventing facts.
+- **PEIL is most effective for structured output tasks** such as template filling (+0.69), expert assessment (+0.50), and code generation (+0.38).
+- **Role framing is critical for sensitive domains** — in a cybersecurity case study, a naive prompt was refused by the model while the PEIL-structured prompt with Role and Context framing produced a full professional analysis.
+- **PEIL is designed as a system prompt for agents.** When tested as a single-turn chat prompt without embedded task data, models correctly recognised the system-prompt architecture and waited for user input — validating the design but requiring adaptation for single-turn use.
+
+### Usage Modes
+
+| Mode | How It Works | When to Use |
+|------|-------------|-------------|
+| **System-prompt mode** (primary) | PEIL defines agent behaviour in the system prompt; user messages supply task data separately | Agent and multi-turn workflows |
+| **Single-turn mode** (portable) | All task data must be embedded in the prompt body, typically after the Output section | One-off chat interactions, benchmarks |

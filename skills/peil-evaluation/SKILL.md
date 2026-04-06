@@ -154,7 +154,26 @@ Before detailed evaluation, check:
 | Too long | Focus on essential instructions, move details to examples |
 | Too short | Add constraints, examples, or edge case handling |
 
+## Empirical Evaluation Findings (2026)
+
+A quantitative LLM-as-Judge evaluation tested PEIL across 4 model architectures (GPT-4.1, GPT-5.2, Grok-4, DeepSeek-R1) on 18 research-grounded patterns. Key findings for evaluators:
+
+| Finding | Implication for Evaluation |
+|---------|---------------------------|
+| Labels improve 13/18 patterns (+0.094 overall) | **Penalise prompts missing explicit PEIL labels** (Role:, Context:, etc.) |
+| Fabrication reduction strongest (+0.208) | **Prioritise grounding and citation techniques** when evaluating accuracy |
+| Formatting consistency identical with/without PEIL | Don't over-weight formatting — it's not where PEIL adds value |
+| PEIL excels at structured output (+0.69 template, +0.50 assessment) | **Score higher for tasks requiring defined output schemas** |
+| Role framing prevents safety refusals | **Check that sensitive domain prompts include Role and Context framing** |
+| PEIL designed as system prompt | **Evaluate system-prompt prompts differently** — "waiting for input" is correct behaviour, not a failure |
+
+### Red Flags to Watch For
+- PEIL prompt used in single-turn mode without embedded task data → will produce "waiting for input" responses
+- Missing Role label when task is domain-sensitive → risk of model refusal
+- Using Auto-CoT or Self-Consistency as technique labels without corresponding instructions → technique name alone is insufficient
+
 ## Additional Resources
 
 - [PEIL Skill](../peil/SKILL.md) - Main prompt generation methodology
 - [Evaluation Criteria Details](references/CRITERIA.md) - Extended criterion definitions
+- [The Prompt Report](https://arxiv.org/abs/2406.06608) - 58 text-based techniques taxonomy (Schulhoff et al., 2024)

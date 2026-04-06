@@ -1,6 +1,17 @@
 # Prompting Techniques and Applications
 
-Based on: [A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications](https://arxiv.org/abs/2402.07927)
+Based on:
+- [A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications](https://arxiv.org/abs/2402.07927) (Sahoo et al., 2024)
+- [The Prompt Report: A Systematic Survey of Prompt Engineering Techniques](https://arxiv.org/abs/2406.06608) (Schulhoff et al., 2024) — 58 text-based + 40 multimodal techniques
+
+### Empirical Evidence from PEIL Evaluation (2026)
+
+A quantitative evaluation of PEIL across 4 model architectures (GPT-4.1, GPT-5.2, Grok-4, DeepSeek-R1) found:
+- **Explicit PEIL labels** (Role:, Context:, Instructions:, etc.) improve output quality over unlabelled structured prompts on **13/18 patterns** (+0.094 overall).
+- **Fabrication reduction** is the strongest metric improvement with labels (+0.208).
+- PEIL labels match naive prompts on **formatting consistency** (4.264 = 4.264) while unlabelled drops to 4.139.
+- PEIL is most effective for **structured output tasks** (template filling +0.69, expert assessment +0.50, code generation +0.38).
+- **Role framing prevented safety refusal** on a legitimate cybersecurity analysis task where a naive prompt was refused.
 
 ## Model-Specific Guidance
 
@@ -86,6 +97,22 @@ For agents, this means the task is usually already known from the current user r
 | Optimization and Efficiency | Optimization by Prompting (OPRO) | Use natural language prompts to iteratively generate solutions. | Uses natural language prompts to iteratively generate solutions. |
 | Understanding User Intent | Rephrase and Respond (RaR) Prompting | Rephrase and expand questions in a single prompt. | Rephrases and expands questions to improve comprehension and response accuracy. |
 | Metacognition and Self-Reflection | Take a Step Back Prompting | Engage in abstraction and extract high-level concepts. | Engages in abstraction to extract high-level concepts and fundamental principles. |
+| Role and Style Control | Role Prompting (Persona) | Act as [role]. Provide outputs that [role] would create. | Assigns a role or persona to shape output style and improve task-specific accuracy. |
+| | Style Prompting | Write in a [tone/style/genre]. | Specifies desired style, tone, or genre to shape output without changing the task. |
+| Decomposition | Least-to-Most Prompting | Break the problem into sub-problems, then solve them sequentially. | Decomposes problems into ordered sub-problems and solves them in sequence, appending each answer. |
+| | Plan-and-Solve Prompting | Let's first understand the problem and devise a plan to solve it. | Improved Zero-Shot-CoT that plans before solving, producing more robust reasoning. |
+| | Skeleton-of-Thought | Provide only the skeleton outline (3-10 short points) for the answer. | Creates a minimal outline for parallel expansion, improving response speed and structure. |
+| | Metacognitive Prompting | Clarify, judge, evaluate, confirm, then assess confidence. | Five-step process mirroring human metacognition for more reflective responses. |
+| Self-Criticism and Verification | Self-Refine | Generate answer, critique it, then improve based on the critique. | Iterative framework: answer → feedback → improvement until stopping condition met. |
+| | Self-Verification | Mask parts of the question and check if the model can predict them from its answer. | Scores candidate solutions by testing whether they explain the original question. |
+| | Reversing Chain-of-Thought (RCoT) | Reconstruct the problem from the answer and check for inconsistencies. | Detects errors by reverse-engineering the question from the generated answer. |
+| | Cumulative Reasoning | Generate potential steps, evaluate them, accept or reject, and repeat. | Iteratively builds reasoning by evaluating each step before proceeding. |
+| Reasoning with Fewer Examples | Analogical Prompting | Auto-generate exemplars with reasoning chains for the current problem. | Self-generates relevant examples with CoTs when no training data exists. |
+| | Re-reading (RE2) | Read the question again: [repeat question]. | Repeating the question in the prompt improves reasoning on complex problems. |
+| | Self-Ask | Decide if follow-up questions are needed, answer them, then answer the original. | Model generates and answers its own clarifying sub-questions before the final answer. |
+| Multi-Party Reasoning | SimToM | Establish what facts one person knows, then answer based only on those facts. | Separates knowledge per person for theory-of-mind and multi-party reasoning tasks. |
+| Ensembling | Demonstration Ensembling (DENSE) | Create multiple few-shot prompts with different exemplar subsets and aggregate. | Uses diverse exemplar sets and aggregates outputs for more robust results. |
+| | Mixture of Reasoning Experts (MoRE) | Use specialised prompts for different reasoning types and select the best. | Routes to domain-specific reasoning experts and selects the best answer by agreement. |
 
 ## Technique Selection Guide
 
@@ -98,14 +125,18 @@ For agents, this means the task is usually already known from the current user r
 | Multi-step reasoning | Chain-of-Thought (CoT) |
 | Complex problem-solving | Tree-of-Thoughts (ToT), Graph-of-Thought (GoT) |
 | Long document analysis | Thread of Thought (ThoT) |
+| Problem decomposition | Least-to-Most, Plan-and-Solve, Skeleton-of-Thought |
+| Multi-party reasoning | SimToM |
 
 ### By Accuracy Requirements
 
 | Requirement | Recommended Techniques |
 | ----------- | ---------------------- |
 | Reduce hallucinations | RAG, Chain-of-Verification (CoVe) |
-| Verify reasoning | LogiCoT, Self-Consistency |
+| Verify reasoning | LogiCoT, Self-Consistency, Self-Verification |
 | Filter irrelevant info | Chain-of-Note (CoN) |
+| Iterative improvement | Self-Refine, Cumulative Reasoning |
+| Check for errors | RCoT, Re-reading (RE2) |
 
 ### By Output Type
 
