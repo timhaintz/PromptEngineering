@@ -1,8 +1,8 @@
 {
-  "name": "ballarat-prompt-dictionary-website-e2e",
+  "name": "ballarat-prompt-taxonomy-website-e2e",
   "version": "0.1.0",
   "private": true,
-  "description": "External Playwright E2E suite for the deployed Ballarat AI Prompt Dictionary website.",
+  "description": "External Playwright E2E suite for the deployed Ballarat AI Prompt Taxonomy website.",
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",

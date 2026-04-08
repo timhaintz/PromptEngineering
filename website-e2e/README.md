@@ -1,6 +1,6 @@
 # Website E2E
 
-This is a separate Playwright end-to-end suite for the deployed Ballarat AI Prompt Dictionary website.
+This is a separate Playwright end-to-end suite for the deployed Ballarat AI Prompt Taxonomy website.
 
 It is intentionally outside `prompt-pattern-dictionary/` so it can validate the live site as a consumer would, without coupling test execution to the app workspace.
 

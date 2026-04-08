@@ -4,8 +4,8 @@ test.describe('homepage and global navigation', () => {
   test('homepage renders the primary entry points', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page).toHaveTitle(/Ballarat AI Prompt Dictionary/i);
-    await expect(page.getByRole('heading', { level: 1, name: /Ballarat AI Prompt Dictionary/i })).toBeVisible();
+    await expect(page).toHaveTitle(/Ballarat AI Prompt Taxonomy/i);
+    await expect(page.getByRole('heading', { level: 1, name: /Ballarat AI Prompt Taxonomy/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Browse Patterns/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Orientation \/ Getting Started/i })).toBeVisible();
     await expect(page.getByRole('search', { name: /Prompt pattern search/i })).toBeVisible();
