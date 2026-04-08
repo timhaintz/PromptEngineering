@@ -1,0 +1,53 @@
+{
+  "make": "Toyota",
+  "model": "Corolla",
+  "year": "2019-2024 (12th generation, E210 hatchback)",
+  "license_plate": "ABC122",
+  "damage_severity": "Severe",
+  "damage_components": [
+    {
+      "component": "Windshield",
+      "description": "Entire windshield is spider-webbed with extensive cracking across the full surface. Multiple impact points visible. Not repairable.",
+      "repair_action": "replace",
+      "estimated_cost_aud": "$400-$600"
+    },
+    {
+      "component": "Bonnet/Hood",
+      "description": "Severely crumpled and buckled with visible deformation across the full panel. Creasing indicates structural deformation beyond panel beating.",
+      "repair_action": "replace",
+      "estimated_cost_aud": "$800-$1,500"
+    },
+    {
+      "component": "Front bumper bar",
+      "description": "Detached and hanging from the vehicle. Lower bumper section separated. Bumper cover and reinforcement both compromised.",
+      "repair_action": "replace",
+      "estimated_cost_aud": "$1,000-$2,000"
+    },
+    {
+      "component": "Driver-side (left) headlight assembly",
+      "description": "Housing and surrounding mounting area crushed. Headlight likely non-functional due to structural intrusion.",
+      "repair_action": "replace",
+      "estimated_cost_aud": "$500-$900"
+    },
+    {
+      "component": "Driver-side front fender/quarter panel",
+      "description": "Severe crush damage with panel pushed inward. Paint damage, panel deformation, and possible structural compromise to the inner guard.",
+      "repair_action": "replace",
+      "estimated_cost_aud": "$1,200-$2,500"
+    },
+    {
+      "component": "Front grille and Toyota badge surround",
+      "description": "Partially intact but misaligned due to bumper and hood displacement. Badge surround cracked.",
+      "repair_action": "replace",
+      "estimated_cost_aud": "$200-$400"
+    },
+    {
+      "component": "Repainting (affected panels)",
+      "description": "Blue metallic paint required for all replaced panels. Colour matching and blending needed across bonnet, bumper, fender, and surrounding areas.",
+      "repair_action": "repair",
+      "estimated_cost_aud": "$1,500-$3,500"
+    }
+  ],
+  "total_estimated_cost_aud": "$5,600-$11,400",
+  "assessor_notes": "Damage severity classified as Severe. Multiple structural and cosmetic components are affected. The extent of front-end crush damage, particularly to the driver-side fender and A-pillar area, raises concern about possible chassis or subframe damage that cannot be confirmed from a photograph alone. If structural inspection reveals chassis damage, the vehicle may be assessed as an economic total loss given the age and market value of a Toyota Corolla in this class. Emergency vehicles visible in background confirm this was a significant collision event. Cost estimates are indicative ranges based on Australian panel beating and parts pricing data retrieved via web lookup (source: Oneflare panel beating cost guide, April 2026). Individual quotes from authorised Toyota repairers may vary. Engine and mechanical damage cannot be assessed from external photographs."
+}
