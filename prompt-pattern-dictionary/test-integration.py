@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Integration test script for the Prompt Pattern Dictionary project.
+Integration test script for the Prompt Pattern Taxonomy project.
 
 This script performs a comprehensive test of the entire system:
 1. Tests Azure OpenAI client initialization
@@ -252,7 +252,7 @@ def test_package_dependencies():
 
 def main():
     """Run all tests and report results."""
-    print("🚀 Running Prompt Pattern Dictionary Integration Tests")
+    print("🚀 Running Prompt Pattern Taxonomy Integration Tests")
     print("=" * 60)
     
     tests = [

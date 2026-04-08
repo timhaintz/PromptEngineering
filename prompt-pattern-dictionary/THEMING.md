@@ -1,6 +1,6 @@
 # Theming & Design Tokens
 
-This document codifies the semantic theming system for the Prompt Pattern Dictionary (PPD).
+This document codifies the semantic theming system for the Prompt Pattern Taxonomy (PPT).
 
 > Goal: Zero raw Tailwind palette usage in feature code. All color/spacing/interaction decisions pass through semantic CSS custom properties and utility classes so we can evolve appearance (light/dark/high‑contrast) without churn.
 

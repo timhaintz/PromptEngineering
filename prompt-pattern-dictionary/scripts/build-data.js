@@ -1,5 +1,5 @@
 /**
- * Data processing script for Prompt Pattern Dictionary
+ * Data processing script for Prompt Pattern Taxonomy
  * Transforms promptpatterns.json into optimized formats for the web application
  */
 

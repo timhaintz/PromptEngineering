@@ -1,6 +1,6 @@
 """
 DESCRIPTION
-Azure OpenAI Embedding Generation for Prompt Pattern Dictionary
+Azure OpenAI Embedding Generation for Prompt Pattern Taxonomy
 
 Generates embeddings for prompt patterns using Azure OpenAI text-embedding-3-large
 with paper-based chunking, modern authentication, and Azure best practices.
@@ -9,7 +9,7 @@ This script processes promptpatterns.json and creates embeddings organized by pa
 for efficient loading and similarity comparisons in the web application.
 
 Version:        1.0
-Author:         Generated for Prompt Pattern Dictionary
+Author:         Generated for Prompt Pattern Taxonomy
 Creation Date:  20250729
 
 FEATURES
@@ -565,7 +565,7 @@ class EmbeddingGenerator:
             True if successful (even with partial failures), False if complete failure
         """
         try:
-            logger.info("Starting embedding generation for Prompt Pattern Dictionary")
+            logger.info("Starting embedding generation for Prompt Pattern Taxonomy")
             logger.info(f"Using model: {self.model_name}")
             logger.info(f"Source file: {self.source_file}")
             logger.info(f"Output directory: {self.output_dir}")

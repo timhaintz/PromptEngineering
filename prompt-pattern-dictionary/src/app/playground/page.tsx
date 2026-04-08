@@ -11,7 +11,7 @@ import Link from 'next/link';
 import PageShell from '@/components/layout/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Similarity Playground - Ballarat AI Prompt Dictionary',
+  title: 'Similarity Playground - Ballarat AI Prompt Taxonomy',
   description: 'Find relevant prompt patterns by describing your task in natural language using semantic search.',
 };
 
@@ -41,7 +41,7 @@ export default function PlaygroundPage() {
                 href="/"
                 className="text-accent hover:underline font-medium"
               >
-                ← Back to Dictionary
+                ← Back to Taxonomy
               </Link>
             </div>
           </div>

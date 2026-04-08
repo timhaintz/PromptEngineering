@@ -4,7 +4,7 @@ import { ORIENTATION_SECTIONS } from './data/sections';
 import { ReadingTimeBadge } from './components/ReadingTimeBadge';
 import SectionPager from './components/SectionPager';
 
-export const metadata = { title: 'Orientation – About', description: 'What, Why & How of the Ballarat AI Prompt Dictionary.' };
+export const metadata = { title: 'Orientation – About', description: 'What, Why & How of the Ballarat AI Prompt Taxonomy.' };
 
 export default function OrientationLandingPage() {
   const meta = ORIENTATION_SECTIONS.find(s => s.slug === 'about');

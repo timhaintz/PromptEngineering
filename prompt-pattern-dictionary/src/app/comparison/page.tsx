@@ -11,7 +11,7 @@ import Link from 'next/link';
 import PageShell from '@/components/layout/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Pattern Comparison - Ballarat AI Prompt Dictionary',
+  title: 'Pattern Comparison - Ballarat AI Prompt Taxonomy',
   description: 'Compare multiple prompt patterns using semantic similarity analysis to discover relationships and patterns.',
 };
 
@@ -35,7 +35,7 @@ export default function ComparisonPage() {
                 href="/"
                 className="text-accent hover:underline font-medium"
               >
-                ← Back to Dictionary
+                ← Back to Taxonomy
               </Link>
             </div>
           </div>

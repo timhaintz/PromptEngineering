@@ -27,7 +27,7 @@ const AUDIENCE_MAP = [
 ];
 
 export const metadata = {
-  title: 'Orientation Hub | Ballarat AI Prompt Dictionary',
+  title: 'Orientation Hub | Ballarat AI Prompt Taxonomy',
   description: 'Hub for Orientation sections, quick start, and consolidated view.'
 };
 
@@ -41,7 +41,7 @@ export default function OrientationHubPage() {
         {meta?.title ?? 'Orientation Hub'}
       </h1>
       <div className="not-prose">
-        <p className="text-base font-semibold text-primary max-w-3xl leading-relaxed">A research-grounded prompt pattern dictionary for building safer, evaluable AI workflows&mdash;not a generic prompt dump.</p>
+        <p className="text-base font-semibold text-primary max-w-3xl leading-relaxed">A research-grounded prompt pattern taxonomy for building safer, evaluable AI workflows&mdash;not a generic prompt dump.</p>
         <p className="text-secondary max-w-3xl leading-relaxed mb-4">Use this hub to jump into focused sections or view the full consolidated page. Each section is deliberately concise and accessible; the <em>All Sections</em> view preserves original anchor stability.</p>
         <div className="mb-6 rounded-lg border border-muted bg-surface-1 shadow-sm p-4 text-sm text-secondary">
           <p><strong className="text-primary">Static, provenance-first experience:</strong> similarity scores, enrichment, and PEIL prompts are precomputed from research artifacts. No live model calls run in your browser; bring your own tooling when you move from exploration to testing.</p>

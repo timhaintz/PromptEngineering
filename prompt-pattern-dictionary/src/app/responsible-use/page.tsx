@@ -3,14 +3,14 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Responsible Use & Ethical Guidelines',
-  description: 'Principles, acceptable use, prohibited behaviors, safeguards, and reporting for the Prompt Pattern Dictionary.'
+  description: 'Principles, acceptable use, prohibited behaviors, safeguards, and reporting for the Prompt Pattern Taxonomy.'
 };
 
 export default function ResponsibleUsePage() {
   return (
     <article className="prose prose-slate max-w-none">
       <h1 className="mb-2">Responsible Use & Ethical Guidelines</h1>
-      <p className="text-sm">This page outlines principles and guardrails for ethical, privacy‑respectful and secure usage of the prompt pattern dictionary, similarity tooling, and enrichment features.</p>
+      <p className="text-sm">This page outlines principles and guardrails for ethical, privacy‑respectful and secure usage of the prompt pattern taxonomy, similarity tooling, and enrichment features.</p>
 
       <section>
         <h2>Core Principles</h2>

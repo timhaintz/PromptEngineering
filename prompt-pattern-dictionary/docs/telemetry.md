@@ -1,4 +1,4 @@
-# Telemetry Event Schema (Orientation & Dictionary)
+# Telemetry Event Schema (Orientation & Taxonomy)
 
 > Draft for Phase 6 P5 – Continuous Learning. Non-invasive, privacy-conscious instrumentation plan. No PII; only interaction intent and coarse timing. Opt-out respected via local storage flag (`pe-telemetry-optout`).
 
@@ -18,7 +18,7 @@
 | decision_tree_select_goal | User selects a goal in decision tree | `{ goal: string, suggestedCategories: string[], ts: ISOString }` | Categories as normalized slugs |
 | anti_pattern_table_view | Anti-pattern remediation table enters viewport | `{ visibleCount: number, ts: ISOString }` | IntersectionObserver based |
 
-## Dictionary & Pattern Detail Events (Existing / Extended)
+## Taxonomy & Pattern Detail Events (Existing / Extended)
 | Event Name | Trigger | Payload Fields | Notes |
 | pattern_expand_template | Template expanded from collapsed state | `{ patternId: string, ts: ISOString }` | Pattern ID only |
 | pattern_expand_examples | Examples disclosure toggled open | `{ patternId: string, exampleCount: number, ts: ISOString }` | Count helps measure density usage |

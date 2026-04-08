@@ -19,7 +19,7 @@ function getLogicSummary(logic: Logic): string {
 }
 
 export default async function LogicPage() {
-  // Load base taxonomy (dictionary) and semantic overrides for counts
+  // Load base taxonomy and semantic overrides for counts
   const data: PatternCategoriesData = loadPatternCategories();
   const semantic = loadSemanticOverrides();
   // Apply semantic counts per logic's categories to ensure consistency with Browse/Categories pages

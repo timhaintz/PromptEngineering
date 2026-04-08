@@ -1,7 +1,7 @@
 # Phase 2 Implementation Summary: Similarity Comparison Features
 
 ## Overview
-Phase 2 of the Prompt Pattern Dictionary embedding infrastructure has been successfully implemented, building upon the solid foundation established in Phase 1. This phase introduces comprehensive similarity comparison and visualization features.
+Phase 2 of the Prompt Pattern Taxonomy embedding infrastructure has been successfully implemented, building upon the solid foundation established in Phase 1. This phase introduces comprehensive similarity comparison and visualization features.
 
 ## Completed Components
 

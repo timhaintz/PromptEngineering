@@ -1,6 +1,6 @@
 # Theming & Design Tokens (Canonical)
 
-This canonical document unifies prior theming guidance (previously split across two files) for the Prompt Pattern Dictionary (PPD). It covers architecture, tokens, utilities, accessibility, guardrails, and roadmap. All new theming or accessibility-related contributions MUST reference and update this file.
+This canonical document unifies prior theming guidance (previously split across two files) for the Prompt Pattern Taxonomy (PPT). It covers architecture, tokens, utilities, accessibility, guardrails, and roadmap. All new theming or accessibility-related contributions MUST reference and update this file.
 
 > Principle: Zero raw Tailwind palette usage in feature code. All color / spacing / interaction decisions pass through semantic CSS custom properties and utility classes so we can evolve appearance (light / dark / high‑contrast) without refactoring component code.
 

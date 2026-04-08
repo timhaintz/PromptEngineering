@@ -1,10 +1,10 @@
-# Prompt Pattern Dictionary
+# Prompt Pattern Taxonomy
 
-A comprehensive, searchable dictionary of prompt engineering patterns for cybersecurity applications. This project provides an OED-style interface for discovering and learning prompt patterns extracted from research papers.
+A comprehensive, searchable taxonomy of prompt engineering patterns for cybersecurity applications. This project provides an OED-style interface for discovering and learning prompt patterns extracted from research papers.
 
 ## 🎯 Project Overview
 
-This is a Next.js-based web application that transforms academic research on prompt engineering into an accessible, searchable dictionary. It serves as the definitive reference tool for prompt engineering patterns and is designed to help researchers, practitioners, students, and tool builders design safer, more evaluable prompts.
+This is a Next.js-based web application that transforms academic research on prompt engineering into an accessible, searchable taxonomy. It serves as the definitive reference tool for prompt engineering patterns and is designed to help researchers, practitioners, students, and tool builders design safer, more evaluable prompts.
 
 For the normalized Prompt Pattern schema and mapping details, see the Product Requirements Document (Prompt Pattern Schema section): docs/PRD.md.
 
@@ -161,7 +161,7 @@ The project is formalizing a site-wide accessibility and readability strategy be
 - **Live Regions**: Polite announcements for copy success, search result count changes, and user preference changes (font size, theme).
 - **Accessibility Automation**: axe-core + (optional) Playwright keyboard traversal tests integrated into CI, failing builds on critical/serious violations.
 - **Documentation**: A new `docs/ACCESSIBILITY.md` file (added) tracks the checklist, rationale, exceptions, and testing tooling.
-- **Footer (OED-Inspired)**: Planned global footer with grouped links (About, Using the Dictionary, Accessibility Statement, Data & Provenance, License, Feedback) and a brief provenance note for AI-assisted fields.
+- **Footer (OED-Inspired)**: Planned global footer with grouped links (About, Using the Taxonomy, Accessibility Statement, Data & Provenance, License, Feedback) and a brief provenance note for AI-assisted fields.
 
 These items will roll out incrementally; PRD has been updated with the new requirements. Automated verification: `tests/themePersistence.test.tsx` asserts persistence keys and DOM attributes after remount to guard against regressions.
 
@@ -191,7 +191,7 @@ npm run build-data
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the dictionary.
+Open [http://localhost:3000](http://localhost:3000) to view the taxonomy.
 
 ### First-Time User Guide
 
@@ -472,7 +472,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Research papers and authors whose work is cataloged in this dictionary
+- Research papers and authors whose work is cataloged in this taxonomy
 - The prompt engineering and cybersecurity communities
 - Contributors to the open-source ecosystem
 

@@ -1,4 +1,4 @@
-# Prompt Pattern Dictionary — Project Structure
+# Prompt Pattern Taxonomy — Project Structure
 
 > Last verified: July 2025. If you add a route, component, or script please update this file.
 

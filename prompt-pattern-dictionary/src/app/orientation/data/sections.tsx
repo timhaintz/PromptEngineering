@@ -1089,9 +1089,9 @@ const QuickStart = () => (
 const AboutDictionary = () => (
   <div className="space-y-8 text-sm leading-relaxed">
     <section>
-      <h2 className="text-lg font-semibold text-primary mb-3">Ballarat AI Prompt Dictionary: What, Why & How</h2>
+      <h2 className="text-lg font-semibold text-primary mb-3">Ballarat AI Prompt Taxonomy: What, Why & How</h2>
       <p className="mb-4">
-        The Ballarat AI Prompt Dictionary is an <a href="https://github.com/timhaintz/PromptEngineering" target="_blank" rel="noreferrer" className="text-accent hover:underline">open-source research platform and search tool</a> that compiles hundreds of proven prompt patterns from academic work. The webpage itself is hosted in the <a href="https://github.com/timhaintz/PromptEngineering/tree/main/prompt-pattern-dictionary" target="_blank" rel="noreferrer" className="text-accent hover:underline">prompt-pattern-dictionary</a> directory of the repository. A prompt pattern is a reusable, named template for interacting with large language models (LLMs). Each pattern defines a five-part “5-Key” scaffold—Role, Context, Action, Format and Response—to capture intent, provide structural guidance and adaptation advice, and maximise predictability, reproducibility and auditability. By standardising these key elements, the dictionary makes it possible to compare prompts systematically, reduce ambiguity and drift, and monitor for bias or harmful behaviours.
+        The Ballarat AI Prompt Taxonomy is an <a href="https://github.com/timhaintz/PromptEngineering" target="_blank" rel="noreferrer" className="text-accent hover:underline">open-source research platform and search tool</a> that compiles hundreds of proven prompt patterns from academic work. The webpage itself is hosted in the <a href="https://github.com/timhaintz/PromptEngineering/tree/main/prompt-pattern-dictionary" target="_blank" rel="noreferrer" className="text-accent hover:underline">prompt-pattern-dictionary</a> directory of the repository. A prompt pattern is a reusable, named template for interacting with large language models (LLMs). Each pattern defines a five-part “5-Key” scaffold—Role, Context, Action, Format and Response—to capture intent, provide structural guidance and adaptation advice, and maximise predictability, reproducibility and auditability. By standardising these key elements, the taxonomy makes it possible to compare prompts systematically, reduce ambiguity and drift, and monitor for bias or harmful behaviours.
       </p>
       <p>
         You can start by clearly stating your task—for example, “Rank policy risks” or “Compare legal clauses”—and then browse or search the library by theme. The logic layers and categories help you navigate: for instance, “Beyond” logic covers prompts that push the AI’s capabilities, while the Hypothesise category within “Beyond” focuses on generative speculation. Each individual pattern page expands to show a concise description, a general explanation, a usage summary, a detailed 5-Key template (with variables to fill), example prompts and a list of similar patterns.
@@ -1101,7 +1101,7 @@ const AboutDictionary = () => (
     <section>
       <h2 className="text-lg font-semibold text-primary mb-3">Logic Layers and Categories</h2>
       <p className="mb-4">
-        A key insight from the underlying research is that English prepositions provide a natural metaphor for structuring the universe of prompt tasks. The dictionary’s six logic layers are inspired by prepositions—Across, At, Beyond, In, Out and Over—each describing a different behavioural relationship between the prompt and the LLM:
+        A key insight from the underlying research is that English prepositions provide a natural metaphor for structuring the universe of prompt tasks. The taxonomy’s six logic layers are inspired by prepositions—Across, At, Beyond, In, Out and Over—each describing a different behavioural relationship between the prompt and the LLM:
       </p>
       <ul className="list-disc pl-5 space-y-2 mb-4">
         <li><strong>Across Logic</strong> spans multiple domains or disciplines, integrating diverse knowledge.</li>
@@ -1119,7 +1119,7 @@ const AboutDictionary = () => (
     <section>
       <h2 className="text-lg font-semibold text-primary mb-3">Prompt Engineering Instructional Language (PEIL)</h2>
       <p className="mb-4">
-        Building on the five-key schema and informed by prompt engineering research, the dictionary introduces the Prompt Engineering Instructional Language (PEIL). PEIL is an instructional scaffold that helps automate the creation of robust system prompts. You can use the <a href="https://github.com/timhaintz/PromptEngineering/blob/main/peil_prompt_generator.py" target="_blank" rel="noreferrer" className="text-accent hover:underline">PEIL Prompt Generator</a> to automate this process. It decomposes a prompt specification into a set of variables—Role, Provide Clear Context, Break Down Complex Questions, Provide Specific Instructions, Define Conciseness, Research-Based Prompting Techniques (e.g. Chain-of-Thought, Few-Shot etc.), and State Desired Output—which are combined to produce a final system prompt. Each of these variables corresponds to an element of the underlying 5-Key structure and codifies best practices found in prompt engineering literature. For instance:
+        Building on the five-key schema and informed by prompt engineering research, the taxonomy introduces the Prompt Engineering Instructional Language (PEIL). PEIL is an instructional scaffold that helps automate the creation of robust system prompts. You can use the <a href="https://github.com/timhaintz/PromptEngineering/blob/main/peil_prompt_generator.py" target="_blank" rel="noreferrer" className="text-accent hover:underline">PEIL Prompt Generator</a> to automate this process. It decomposes a prompt specification into a set of variables—Role, Provide Clear Context, Break Down Complex Questions, Provide Specific Instructions, Define Conciseness, Research-Based Prompting Techniques (e.g. Chain-of-Thought, Few-Shot etc.), and State Desired Output—which are combined to produce a final system prompt. Each of these variables corresponds to an element of the underlying 5-Key structure and codifies best practices found in prompt engineering literature. For instance:
       </p>
       <ul className="list-disc pl-5 space-y-2 mb-4">
         <li><strong>Role</strong> defines the persona or expertise the model should assume (e.g., “You are a cybersecurity expert”).</li>
@@ -1346,7 +1346,7 @@ const OrientationHubSection = () => (
 );
 
 export const ORIENTATION_SECTIONS: OrientationSectionMeta[] = [
-  { slug: 'about', id: 'about', title: 'About the Dictionary', number: 1, description: 'What, Why & How of the Ballarat AI Prompt Dictionary.', component: <AboutDictionary /> },
+  { slug: 'about', id: 'about', title: 'About the Taxonomy', number: 1, description: 'What, Why & How of the Ballarat AI Prompt Taxonomy.', component: <AboutDictionary /> },
   { slug: 'hub', id: 'hub', title: 'Orientation Hub', number: 2, description: 'Central navigation hub with role-based guides and quick paths.', component: <OrientationHubSection /> },
   { slug: 'quick-start', id: 'quick-start', title: 'Quick Start', number: 3, description: 'Practical 8-step startup path for using patterns safely.', component: <QuickStart /> },
   { slug: 'what-is-a-pattern', id: 'what-is-a-pattern', title: 'What Is a Pattern', number: 4, description: 'Definition, value, and collaboration benefits.', component: <WhatIsPattern /> },

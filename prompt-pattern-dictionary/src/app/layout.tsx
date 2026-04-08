@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ballarat AI Prompt Dictionary",
+  title: "Ballarat AI Prompt Taxonomy",
   description: "Ballarat AI's searchable library of prompt patterns, papers, and examples organized by logic and category.",
 };
 

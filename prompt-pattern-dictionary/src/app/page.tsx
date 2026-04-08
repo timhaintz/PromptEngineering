@@ -52,7 +52,7 @@ export default async function HomePage() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-primary mb-4">
-            Ballarat AI Prompt Dictionary
+            Ballarat AI Prompt Taxonomy
           </h1>
           <p className="text-xl text-secondary max-w-3xl mx-auto mb-8">
             A comprehensive, searchable collection of prompt engineering patterns. 
@@ -261,7 +261,7 @@ export default async function HomePage() {
         {/* Features */}
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-semibold text-primary mb-8">
-            Why Use This Dictionary?
+            Why Use This Taxonomy?
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

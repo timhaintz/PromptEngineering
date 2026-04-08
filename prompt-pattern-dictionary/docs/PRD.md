@@ -1,4 +1,4 @@
-# Product Requirements Document: Prompt Pattern Dictionary & Search Interface
+# Product Requirements Document: Prompt Pattern Taxonomy & Search Interface
 
 ## Executive Summary
 
@@ -39,7 +39,7 @@ Create the definitive reference tool for cybersecurity prompt engineering patter
 
 Provide an explicit, low-friction path for new visitors to understand what the site is, who it is for, and how to complete a first successful session.
 
-- **Tagline & Audience Mapping**: Display a concise positioning statement near the homepage hero and Orientation hub header (e.g., "A research-grounded prompt pattern dictionary for building safer, evaluable AI prompts"), plus a short mapping of common roles (Researcher, Practitioner, Student, Tool Builder) to typical intents.
+- **Tagline & Audience Mapping**: Display a concise positioning statement near the homepage hero and Orientation hub header (e.g., "A research-grounded prompt pattern taxonomy for building safer, evaluable AI prompts"), plus a short mapping of common roles (Researcher, Practitioner, Student, Tool Builder) to typical intents.
 - **Five-Minute Tour**: Orientation "Quick Start" section must include a numbered checklist guiding a complete mini-journey:
   1. Search for a pattern using domain keywords.
   2. Open a pattern page and locate the Pattern ID badge.
@@ -48,7 +48,7 @@ Provide an explicit, low-friction path for new visitors to understand what the s
   5. Inspect Similar Patterns/examples and note differences.
   6. Run a small evaluation harness (example snippet) and record outcomes.
 - **Role-Based Entry Points**: Quick Paths panel should explicitly label which cards are best for Researchers (e.g., comparison & similarity exploration), Practitioners (defensive patterns, evaluation), Students (What is a Pattern, Glossary), and Tool Developers (Playground, embeddings).
-- **Expectation Setting**: Early Orientation copy must clearly state that the site is a static, research-derived dictionary and does not run live model calls in the browser (similarity and enrichment are precomputed).
+- **Expectation Setting**: Early Orientation copy must clearly state that the site is a static, research-derived taxonomy and does not run live model calls in the browser (similarity and enrichment are precomputed).
 
 Acceptance:
 1. A first-time user can reach and complete the Five-Minute Tour without reading the full PRD.
@@ -335,7 +335,7 @@ Acceptance:
 
 Introduce an OED-inspired footer on every page:
 
-- **Sections**: About • Using the Dictionary • Accessibility & Responsible Use • Data & Provenance • Contribute • License & Legal.
+- **Sections**: About • Using the Taxonomy • Accessibility & Responsible Use • Data & Provenance • Contribute • License & Legal.
 - **Elements**: Version/build timestamp, GitHub repo link, AI-assisted disclaimer, link to `ACCESSIBILITY.md` and orientation cheat sheet.
 - **Structure**: `<footer role="contentinfo">` with semantic headings (no skipped levels) and lists of links.
 - **Mobile**: Each section collapsible (disclosure pattern) to reduce vertical scroll.
@@ -639,7 +639,7 @@ This section will be updated as phases progress; status column is the single sou
 
 ## Responsible Use & Ethical Guidelines
 
-This section defines expectations and safeguards for ethical, secure, and privacy‑respectful use of the Prompt Pattern Dictionary and its augmentation tooling. It complements the existing Accessibility commitments and the global footer link labeled "Accessibility & Responsible Use".
+This section defines expectations and safeguards for ethical, secure, and privacy‑respectful use of the Prompt Pattern Taxonomy and its augmentation tooling. It complements the existing Accessibility commitments and the global footer link labeled "Accessibility & Responsible Use".
 
 ### Purpose & Scope
 Provide clear guardrails so pattern exploration, similarity analysis, and enrichment features are applied to legitimate research, defensive security, education, and productivity use cases—never to facilitate harmful misuse of generative systems.
@@ -841,7 +841,7 @@ interface SimilaritySearchResult {
 
 ## Prompt Pattern Schema (normalized)
 
-This section defines the normalized Prompt Pattern (PP) schema used for the dictionary entries and the planned detail page. It maps attributes to existing data sources and documents derivation heuristics. No code changes are required to adopt this schema at documentation level.
+This section defines the normalized Prompt Pattern (PP) schema used for the taxonomy entries and the planned detail page. It maps attributes to existing data sources and documents derivation heuristics. No code changes are required to adopt this schema at documentation level.
 
 ### 1. Attributes and Types
 - ID: string (required)
@@ -1336,6 +1336,6 @@ Comprehensive audit identified concrete issues to resolve before public launch. 
 
 ## Conclusion
 
-This prompt pattern dictionary will serve as the definitive reference for cybersecurity prompt engineering, combining academic rigor with practical usability. By creating an OED-style interface with modern search capabilities, we'll provide immense value to the prompt engineering and cybersecurity communities while establishing a foundation for future research and collaboration.
+This prompt pattern taxonomy will serve as the definitive reference for cybersecurity prompt engineering, combining academic rigor with practical usability. By creating an OED-style interface with modern search capabilities, we'll provide immense value to the prompt engineering and cybersecurity communities while establishing a foundation for future research and collaboration.
 
 The phased approach ensures we can deliver value quickly while iterating based on user feedback. The focus on performance, accessibility, and user experience will make this tool indispensable for professionals working at the intersection of AI and cybersecurity.
