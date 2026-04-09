@@ -1,4 +1,4 @@
-name: CI — Prompt Pattern Dictionary
+name: CI — Prompt Pattern Taxonomy
 
 on:
   pull_request:

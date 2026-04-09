@@ -3,7 +3,7 @@ name: Website E2E
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Deploy Ballarat AI Prompt Dictionary"]
+    workflows: ["Deploy Ballarat AI Prompt Taxonomy"]
     types: [completed]
 
 permissions:

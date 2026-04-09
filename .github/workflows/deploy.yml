@@ -1,4 +1,4 @@
-name: Deploy Ballarat AI Prompt Dictionary
+name: Deploy Ballarat AI Prompt Taxonomy
 
 on:
   push:
