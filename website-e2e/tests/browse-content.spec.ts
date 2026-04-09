@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('browse and content pages', () => {
   test('categories page lists category tiles and opens a category detail page', async ({ page }) => {
-    await page.goto('/categories/');
+    await page.goto('./categories/');
 
     await expect(page.getByRole('heading', { level: 1, name: /Categories/i })).toBeVisible();
     await page.getByRole('link', { name: /Argument/i }).first().click();
@@ -12,7 +12,7 @@ test.describe('browse and content pages', () => {
   });
 
   test('taxonomy page shows logic groups and category links', async ({ page }) => {
-    await page.goto('/taxonomy/');
+    await page.goto('./taxonomy/');
 
     await expect(page.getByRole('heading', { level: 1, name: /PP Taxonomy/i })).toBeVisible();
     await expect(page.getByText(/Across Logic/i)).toBeVisible();
@@ -20,7 +20,7 @@ test.describe('browse and content pages', () => {
   });
 
   test('papers page opens an internal paper detail page', async ({ page }) => {
-    await page.goto('/papers/');
+    await page.goto('./papers/');
 
     await expect(page.getByRole('heading', { level: 1, name: /^Papers$/ })).toBeVisible();
     await page.getByRole('link').filter({ hasText: /Patterns:/i }).first().click();
@@ -31,7 +31,7 @@ test.describe('browse and content pages', () => {
   });
 
   test('examples page filters examples and exposes parent navigation links', async ({ page }) => {
-    await page.goto('/examples/');
+    await page.goto('./examples/');
 
     await expect(page.getByRole('heading', { level: 1, name: /All Prompt Examples/i })).toBeVisible();
     await expect(page.getByRole('search', { name: /Filter examples/i })).toBeVisible();

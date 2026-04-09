@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'https://www.timhaintz.com.au/PromptEngineering';
+const raw = process.env.PLAYWRIGHT_BASE_URL ?? 'https://www.timhaintz.com.au/PromptEngineering';
+const baseURL = raw.endsWith('/') ? raw : `${raw}/`;
 
 export default defineConfig({
   testDir: './tests',

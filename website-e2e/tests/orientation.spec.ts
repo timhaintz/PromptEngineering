@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('orientation hub', () => {
   test('hub presents role map and quick paths without leftover phase labels', async ({ page }) => {
-    await page.goto('/orientation/hub/');
+    await page.goto('./orientation/hub/');
 
     await expect(page.getByRole('heading', { level: 1, name: /Orientation Hub/i })).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: /^Role → Intent Map$/ })).toBeVisible();
@@ -12,7 +12,7 @@ test.describe('orientation hub', () => {
   });
 
   test('researcher intent link opens the similarity preview guidance', async ({ page }) => {
-    await page.goto('/orientation/hub/');
+    await page.goto('./orientation/hub/');
 
     await page.getByRole('link', { name: /Researchers quick intent link/i }).click();
 
@@ -21,7 +21,7 @@ test.describe('orientation hub', () => {
   });
 
   test('quick path for evaluation opens quality and evaluation guidance', async ({ page }) => {
-    await page.goto('/orientation/hub/');
+    await page.goto('./orientation/hub/');
 
     await page.getByRole('link', { name: /Go to Evaluate Prompt Quality/i }).click();
 
