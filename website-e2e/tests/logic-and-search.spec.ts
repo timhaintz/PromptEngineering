@@ -14,7 +14,7 @@ test.describe('logic layers and search', () => {
   test('homepage search redirects into the dedicated search page', async ({ page }) => {
     await page.goto('./');
 
-    await page.getByLabel(/Search prompt patterns/i).fill('security');
+    await page.getByRole('textbox', { name: /Search prompt patterns/i }).fill('security');
     await page.getByRole('button', { name: /^Search$/ }).click();
 
     await expect(page).toHaveURL(/\/search\/?\?q=security/);
