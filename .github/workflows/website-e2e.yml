@@ -2,6 +2,11 @@ name: Website E2E
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'website-e2e/**'
+      - '.github/workflows/website-e2e.yml'
   workflow_run:
     workflows: ["Deploy Ballarat AI Prompt Taxonomy"]
     types: [completed]
