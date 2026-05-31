@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-07-30T08:02:40.566201",
+  "generatedAt": "2026-05-31T17:06:00.592031",
   "model": "embedding-3",
   "modelInfo": {
     "name": "embedding-3",
@@ -14,9 +14,9 @@
     "default_temperature": null,
     "temperature_range": null
   },
-  "apiCalls": 221,
-  "totalTokensUsed": 16513,
-  "averageTokensPerCall": 74.71945701357465,
+  "apiCalls": 315,
+  "totalTokensUsed": 22059,
+  "averageTokensPerCall": 70.02857142857142,
   "failedPatterns": 0,
   "failedExamples": 0,
   "circuitBreakerTriggered": false,

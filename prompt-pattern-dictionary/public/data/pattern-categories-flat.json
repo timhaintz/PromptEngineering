@@ -63,6 +63,14 @@
     "logicSlug": "at"
   },
   {
+    "name": "Induction",
+    "slug": "induction",
+    "patternCount": 0,
+    "patterns": [],
+    "logic": "At",
+    "logicSlug": "at"
+  },
+  {
     "name": "Hypothesise",
     "slug": "hypothesise",
     "patternCount": 0,

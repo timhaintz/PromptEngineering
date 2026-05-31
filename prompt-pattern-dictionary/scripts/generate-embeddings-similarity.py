@@ -172,6 +172,21 @@ class EmbeddingGenerator:
         """Generate SHA-256 hash for change detection."""
         return hashlib.sha256(text.encode('utf-8')).hexdigest()
     
+    def _example_to_text(self, example) -> str:
+        """
+        Normalise an example prompt to a single string.
+
+        Most examples are plain strings, but some papers store structured
+        examples as dicts (e.g. {"Prompt": ...} or
+        {"OriginalPrompt": ..., "RephrasedPrompt": ...}). For embedding we
+        concatenate the dict's string values so the text is captured.
+        """
+        if isinstance(example, str):
+            return example
+        if isinstance(example, dict):
+            return " ".join(str(v) for v in example.values() if isinstance(v, str) and v)
+        return str(example)
+
     def _create_embedding_text(self, pattern_name: str, description: str = "", examples: Optional[List[str]] = None) -> str:
         """
         Create optimized text for embedding generation.
@@ -186,7 +201,7 @@ class EmbeddingGenerator:
         
         if examples is not None:
             # Include up to 3 examples to avoid token limit issues
-            example_text = " ".join(examples[:3])
+            example_text = " ".join(self._example_to_text(e) for e in examples[:3])
             parts.append(example_text)
         
         return " ".join(parts)
@@ -437,13 +452,14 @@ class EmbeddingGenerator:
                 # Process examples
                 for example_index, example in enumerate(pattern.get('ExamplePrompts', [])):
                     example_id = f"{pattern_id}-{example_index}"
-                    example_hash = self._generate_text_hash(example)
+                    example_text = self._example_to_text(example)
+                    example_hash = self._generate_text_hash(example_text)
                     
                     # Check if we need to update this example's embedding
                     if (example_id not in new_storage.examples or 
-                        self._needs_embedding_update(new_storage.examples[example_id].hash, example)):
+                        self._needs_embedding_update(new_storage.examples[example_id].hash, example_text)):
                         
-                        embedding_result = self._generate_single_embedding(example, example_id)
+                        embedding_result = self._generate_single_embedding(example_text, example_id)
                         
                         if embedding_result.success and embedding_result.embedding is not None:
                             new_storage.examples[example_id] = ExampleEmbedding(

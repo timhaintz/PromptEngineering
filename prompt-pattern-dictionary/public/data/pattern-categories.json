@@ -3,7 +3,7 @@
     "generatedAt": "2025-01-28T00:00:00Z",
     "description": "Hierarchical categorization based on English language logic",
     "totalLogics": 6,
-    "totalCategories": 25
+    "totalCategories": 26
   },
   "logics": [
     {
@@ -85,9 +85,17 @@
           "patternCount": 0,
           "patterns": [],
           "hasLatexTable": true
+        },
+        {
+          "name": "Induction",
+          "slug": "induction",
+          "description": "Induction derives general principles, rules, or task descriptions from specific observations or examples.  Rather than applying a known rule, the model infers the underlying pattern that connects a set of instances and  expresses it as a generalised instruction or concept. This supports tasks such as instruction induction, where a  natural language description of a task is recovered from a handful of input-output demonstrations.",
+          "patternCount": 0,
+          "patterns": [],
+          "hasLatexTable": true
         }
       ],
-      "categoryCount": 2
+      "categoryCount": 3
     },
     {
       "name": "Beyond",

@@ -104,7 +104,12 @@ class AzureCredentialManager:
         """
         if cache_name in cls._credential_cache:
             return cls._credential_cache[cache_name]
-        
+
+        # Scope sign-in to the resource's Entra tenant. Without this,
+        # InteractiveBrowserCredential uses the "organizations" authority and
+        # may mint a token for the wrong tenant, which Azure OpenAI rejects (401).
+        tenant_id = os.getenv("AZURE_TENANT_ID") or None
+
         try:
             # Configure persistent token cache with Azure security best practices
             cache_options = TokenCachePersistenceOptions(
@@ -117,6 +122,7 @@ class AzureCredentialManager:
             # Create credential with secure caching enabled
             credential = InteractiveBrowserCredential(
                 cache_persistence_options=cache_options,
+                tenant_id=tenant_id,
                 timeout=60  # 60 second timeout for browser authentication
             )
             
@@ -129,7 +135,10 @@ class AzureCredentialManager:
             logger.info("Falling back to in-memory token cache")
             
             # Fallback to in-memory cache if persistent cache fails
-            credential = InteractiveBrowserCredential(timeout=60)
+            credential = InteractiveBrowserCredential(
+                tenant_id=tenant_id,
+                timeout=60,
+            )
             cls._credential_cache[cache_name] = credential
             return credential
 
