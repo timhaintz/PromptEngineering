@@ -16,10 +16,15 @@ export default async function CategoriesPage() {
           <h1 className="text-2xl font-bold text-primary">Categories ({categories.length})</h1>
           {semantic && (
             <span title="Counts use semantic category assignments" className="badge-ai">
-              Semantic counts
+              {semantic.meta?.totalPatterns ? `${semantic.meta.totalPatterns} semantically assigned` : 'Semantic counts'}
             </span>
           )}
         </div>
+        {semantic?.meta?.totalPatterns && (
+          <p className="-mt-8 text-sm text-secondary">
+            Category counts reflect the patterns with committed embeddings; the complete corpus remains available under Patterns and Papers.
+          </p>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {categories.map(c => (
             <Link key={c.slug} href={`/category/${c.slug}`} className="tile focus-ring">

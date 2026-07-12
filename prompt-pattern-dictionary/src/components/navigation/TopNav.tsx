@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 
 const tabs = [
@@ -19,14 +20,16 @@ const tabs = [
 
 export default function TopNav() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav aria-label="Global navigation" className="fixed top-0 left-0 right-0 z-50 bg-surface-1/80 backdrop-blur border-b border-muted">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-surface-1/95 backdrop-blur border-b border-muted">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 md:gap-3">
         {/* Home button with house icon */}
         <Link
           prefetch={false}
           href="/"
+          onClick={() => setMenuOpen(false)}
           className="inline-flex items-center gap-1 rounded-md border border-muted bg-surface-2 px-2.5 py-1.5 text-sm text-secondary shadow-sm hover:bg-surface-hover focus-ring shrink-0 transition-colors"
           aria-label="Go to homepage"
         >
@@ -36,11 +39,11 @@ export default function TopNav() {
           <span aria-hidden>Home</span>
         </Link>
 
-        {/* Tabs */}
-        <div className="flex-1 overflow-x-auto overflow-y-visible" style={{ WebkitOverflowScrolling: 'touch' }}>
+        {/* Desktop tabs */}
+        <div className="hidden xl:block flex-1 overflow-x-auto overflow-y-visible">
           <nav
             aria-label="Primary"
-            className="flex items-center gap-1 min-w-max px-1 md:px-0 md:justify-center"
+            className="flex items-center justify-center gap-1 min-w-max"
           >
             {tabs.map(tab => {
               const isActive = pathname.startsWith(tab.href);
@@ -50,24 +53,62 @@ export default function TopNav() {
                   aria-current={isActive ? 'page' : undefined}
                   prefetch={false}
                   href={tab.href}
+                  onClick={() => setMenuOpen(false)}
                   className={`px-3 py-1.5 text-sm rounded-md border transition-colors focus-ring shrink-0 ${isActive ? 'active-pill font-medium' : 'bg-surface-2 text-secondary border-muted hover:bg-surface-hover'}`}
                 >
                   {tab.label}
                 </Link>
               );
             })}
-            {/* Theme switcher access within scroll area on small screens */}
-            <div className="md:hidden ml-1 shrink-0">
-              <ThemeSwitcher />
-            </div>
           </nav>
         </div>
 
-        {/* Theme Switcher */}
-        <div className="hidden md:flex shrink-0 items-center h-9">
+        <div className="hidden xl:flex shrink-0 items-center h-9">
           <ThemeSwitcher />
         </div>
+
+        <button
+          type="button"
+          className="xl:hidden ml-auto inline-flex items-center gap-2 rounded-md border border-muted bg-surface-2 px-3 py-1.5 text-sm text-secondary shadow-sm hover:bg-surface-hover focus-ring"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-primary-navigation"
+          onClick={() => setMenuOpen(open => !open)}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5" aria-hidden="true">
+            {menuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 6l12 12M18 6L6 18" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+          Menu
+        </button>
       </div>
-    </nav>
+
+      {menuOpen && (
+        <div id="mobile-primary-navigation" className="xl:hidden max-h-[calc(100dvh-3.25rem)] overflow-y-auto overscroll-contain border-t border-muted bg-surface-1 px-4 py-4 shadow-lg">
+          <nav aria-label="Primary" className="mx-auto grid max-w-2xl grid-cols-2 gap-2 sm:grid-cols-3">
+            {tabs.map(tab => {
+              const isActive = pathname.startsWith(tab.href);
+              return (
+                <Link
+                  key={tab.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  prefetch={false}
+                  href={tab.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`rounded-md border px-3 py-2 text-sm focus-ring ${isActive ? 'active-pill font-medium' : 'bg-surface-2 text-secondary border-muted hover:bg-surface-hover'}`}
+                >
+                  {tab.label}
+                </Link>
+              );
+            })}
+          </nav>
+          <div className="mx-auto mt-3 flex max-w-2xl justify-end border-t border-muted pt-3">
+            <ThemeSwitcher />
+          </div>
+        </div>
+      )}
+    </header>
   );
 }

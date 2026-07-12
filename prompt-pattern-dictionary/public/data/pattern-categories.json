@@ -3,7 +3,7 @@
     "generatedAt": "2025-01-28T00:00:00Z",
     "description": "Hierarchical categorization based on English language logic",
     "totalLogics": 6,
-    "totalCategories": 25
+    "totalCategories": 26
   },
   "logics": [
     {
@@ -28,7 +28,7 @@
           "patternCount": 1,
           "patterns": [
             {
-              "id": "20-0-0",
+              "id": "20-2-0",
               "name": "What round had a higher attendance: SF 2nd Leg or QFR?",
               "description": "",
               "exampleCount": 3
@@ -85,9 +85,17 @@
           "patternCount": 0,
           "patterns": [],
           "hasLatexTable": true
+        },
+        {
+          "name": "Induction",
+          "slug": "induction",
+          "description": "Induction derives general principles, rules, or task descriptions from specific observations or examples. Rather than applying a known rule, the model infers the underlying pattern that connects a set of instances and expresses it as a generalised instruction or concept. This supports tasks such as instruction induction, where a natural language description of a task is recovered from a handful of input-output demonstrations.",
+          "patternCount": 0,
+          "patterns": [],
+          "hasLatexTable": false
         }
       ],
-      "categoryCount": 2
+      "categoryCount": 3
     },
     {
       "name": "Beyond",
@@ -176,19 +184,19 @@
           "patternCount": 3,
           "patterns": [
             {
-              "id": "0-0-0",
+              "id": "0-2-0",
               "name": "Fact Check List",
               "description": "",
               "exampleCount": 4
             },
             {
-              "id": "0-0-0",
+              "id": "0-2-1",
               "name": "Reflection",
               "description": "",
               "exampleCount": 4
             },
             {
-              "id": "2-0-0",
+              "id": "2-1-0",
               "name": "Reflection",
               "description": "",
               "exampleCount": 3
@@ -224,13 +232,13 @@
               "exampleCount": 7
             },
             {
-              "id": "1-0-0",
+              "id": "1-0-1",
               "name": "Specification Disambiguation",
               "description": "",
               "exampleCount": 4
             },
             {
-              "id": "1-0-0",
+              "id": "1-0-2",
               "name": "Change Request Simulation",
               "description": "",
               "exampleCount": 6
@@ -255,7 +263,7 @@
           "patternCount": 1,
           "patterns": [
             {
-              "id": "0-0-0",
+              "id": "0-5-0",
               "name": "Context Manager",
               "description": "",
               "exampleCount": 7
@@ -276,25 +284,25 @@
               "exampleCount": 1
             },
             {
-              "id": "6-0-0",
+              "id": "6-0-1",
               "name": "Hierarchical Decomposition",
               "description": "",
               "exampleCount": 1
             },
             {
-              "id": "6-0-0",
+              "id": "6-0-2",
               "name": "Recursive Decomposition",
               "description": "",
               "exampleCount": 2
             },
             {
-              "id": "6-0-0",
+              "id": "6-0-3",
               "name": "External API Calls",
               "description": "",
               "exampleCount": 2
             },
             {
-              "id": "6-0-0",
+              "id": "6-0-4",
               "name": "Letter Concatenation",
               "description": "",
               "exampleCount": 1
@@ -325,25 +333,25 @@
           "patternCount": 5,
           "patterns": [
             {
-              "id": "0-0-0",
+              "id": "0-3-0",
               "name": "Question Refinement",
               "description": "",
               "exampleCount": 4
             },
             {
-              "id": "0-0-0",
+              "id": "0-3-1",
               "name": "Alternative Approaches",
               "description": "",
               "exampleCount": 2
             },
             {
-              "id": "0-0-0",
+              "id": "0-3-2",
               "name": "Cognitive Verifier",
               "description": "",
               "exampleCount": 5
             },
             {
-              "id": "0-0-0",
+              "id": "0-3-3",
               "name": "Refusal Breaker",
               "description": "",
               "exampleCount": 4
@@ -364,13 +372,13 @@
           "patternCount": 2,
           "patterns": [
             {
-              "id": "1-0-0",
+              "id": "1-3-0",
               "name": "Pseudo-code Refactoring",
               "description": "",
               "exampleCount": 4
             },
             {
-              "id": "1-0-0",
+              "id": "1-3-1",
               "name": "Data-guided Refactoring",
               "description": "",
               "exampleCount": 4

@@ -29,6 +29,8 @@
   --accent-hover: #1d4ed8;
   --accent-active-bg: rgba(37,99,235,0.10);
   --accent-fg: #ffffff;
+  --button-primary-bg: #2563eb;
+  --button-primary-hover: #1d4ed8;
 
   /* Focus & States */
   --focus-ring: #3b82f6;
@@ -75,6 +77,8 @@
   --accent-hover: #4d8cf0;
   --accent-active-bg: rgba(59,130,246,0.16);
   --accent-fg: #ffffff;
+  --button-primary-bg: #1d4ed8;
+  --button-primary-hover: #1e40af;
 
   --focus-ring: #f5f9ff;
   --focus-ring-outer: #2e6fe0;
@@ -109,6 +113,8 @@
   --accent-hover: #ffe352;
   --accent-active-bg: rgba(255,213,0,0.45);
   --accent-fg: #000000;
+  --button-primary-bg: #ffd500;
+  --button-primary-hover: #ffe352;
 
   --focus-ring: #ffffff;
   --focus-ring-outer: #ffd500;

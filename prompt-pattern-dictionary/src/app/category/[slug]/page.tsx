@@ -4,7 +4,6 @@
  * Displays all patterns in a specific category
  */
 
-import { notFound } from 'next/navigation';
 import PageShell from '@/components/layout/PageShell';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/navigation/Breadcrumbs';
@@ -13,7 +12,7 @@ import Badge from '@/components/ui/Badge';
 import PatternDetail, { type NormalizedAttrs, type SimilarMap, type SimilarPatternsMap } from '@/components/patterns/PatternDetail';
 import fs from 'fs';
 import path from 'path';
-import { getAllCategorySlugs } from '@/lib/data/categories';
+import { getAllCategorySlugs, loadPatternCategories } from '@/lib/data/categories';
 
 interface Pattern {
   id: string;
@@ -52,6 +51,7 @@ async function getPatterns(): Promise<Pattern[]> {
 }
 
 type SemanticAssignments = {
+  meta?: { totalPatterns?: number; totalCategories?: number; threshold?: number };
   categories: Record<string, { name: string; slug: string; logic: string; description?: string; patternCount: number; patterns: { id: string; name: string; similarity: number }[] }>; 
   patterns: Record<string, { id: string; name: string; currentCategory?: string | null; bestCategory: { slug: string; name: string; similarity: number }; topCategories: { slug: string; name: string; similarity: number }[] }>
 }
@@ -87,21 +87,15 @@ async function getNormalized(): Promise<NormalizedPatterns | null> {
   return JSON.parse(fileContents);
 }
 
-type CategoryEmbeddings = {
-  metadata: {
-    totalCategories: number;
-  };
-  categories: Record<string, { name: string; slug: string; logic?: string; description?: string }>;
-};
-
-async function getCategoryDescription(slug: string): Promise<{ description?: string; logic?: string } | null> {
-  const filePath = path.join(process.cwd(), 'public', 'data', 'category-embeddings.json');
-  if (!fs.existsSync(filePath)) return null;
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data: CategoryEmbeddings = JSON.parse(fileContents);
-  const entry = data.categories?.[slug];
-  if (!entry) return null;
-  return { description: entry.description, logic: entry.logic };
+function getCategoryMetadata(slug: string): { name: string; description: string; logic: string } | null {
+  const taxonomy = loadPatternCategories();
+  for (const logic of taxonomy.logics) {
+    const category = logic.categories.find(entry => entry.slug === slug);
+    if (category) {
+      return { name: category.name, description: category.description, logic: logic.name };
+    }
+  }
+  return null;
 }
 
 function slugToCategory(slug: string): string {
@@ -113,13 +107,13 @@ function slugToCategory(slug: string): string {
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
-  const categoryName = slugToCategory(slug);
+  const categoryMeta = getCategoryMetadata(slug);
+  const categoryName = categoryMeta?.name ?? slugToCategory(slug);
   const allPatterns = await getPatterns();
   const semantic = await getSemanticAssignments();
   const similar = await getSimilarPatterns();
   const similarExamples = await getSimilarExamples();
   const normalized = await getNormalized();
-  const categoryMeta = await getCategoryDescription(slug);
 
   // Prefer semantic assignments; fallback to original if missing
   let categoryPatterns: Pattern[] = [];
@@ -131,10 +125,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     categoryPatterns = allPatterns.filter(pattern => 
       pattern.category.toLowerCase() === categoryName.toLowerCase()
     );
-  }
-
-  if (categoryPatterns.length === 0) {
-    notFound();
   }
 
   // Derive related categories using semantic similarity across patterns in this category
@@ -183,11 +173,25 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 {categoryMeta.description.replace(/\s+/g, ' ').trim()}
               </p>
             )}
+            {semantic?.meta?.totalPatterns && (
+              <p className="text-xs text-muted">
+                Membership reflects the current semantic analysis of {semantic.meta.totalPatterns} embedded patterns.
+              </p>
+            )}
           </div>
         </div>
 
         {/* Patterns (unified look) */}
-  <div className="space-y-4">
+        <div className="space-y-4">
+          {categoryPatterns.length === 0 && (
+            <div className="surface-card p-6">
+              <h2 className="font-semibold text-primary">No semantic assignments available</h2>
+              <p className="mt-2 text-sm text-secondary">
+                This is a valid thesis taxonomy category, but the current embedding artifact does not assign any patterns to it yet.
+                All source records remain available in the Patterns and Papers views.
+              </p>
+            </div>
+          )}
           {categoryPatterns.map(p => {
             const n = normalizedMap.get(p.id);
             const attrs: NormalizedAttrs | null = n ? {

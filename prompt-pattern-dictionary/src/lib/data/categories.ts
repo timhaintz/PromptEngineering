@@ -37,6 +37,11 @@ export interface PatternCategoriesData {
 }
 
 export interface SemanticAssignments {
+  meta?: {
+    totalPatterns?: number;
+    totalCategories?: number;
+    threshold?: number;
+  };
   categories: Record<string, { patternCount: number }>;
 }
 

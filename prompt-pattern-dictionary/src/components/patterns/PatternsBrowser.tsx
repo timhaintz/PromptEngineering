@@ -55,6 +55,23 @@ type SearchParamsShape = {
 };
 
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'.split('');
+const TOP_TAG_EXCLUSIONS = new Set([
+  'act',
+  'act as an',
+  'ai',
+  'and',
+  'chatgpt exercises',
+  'for',
+  'from',
+  'pattern',
+  'patterns',
+  'prompt',
+  'prompts',
+  'that',
+  'the',
+  'this',
+  'with',
+]);
 
 function parseTagsCsv(csv?: string): string[] {
   if (!csv) return [];
@@ -139,6 +156,7 @@ export function PatternsBrowser({
       }
     }
     return Array.from(counts.entries())
+      .filter(([tag]) => !TOP_TAG_EXCLUSIONS.has(tag.toLowerCase()))
       .sort((a, b) => b[1] - a[1])
       .slice(0, 24)
       .map(([tag, count]) => ({ tag, count }));
@@ -292,14 +310,14 @@ export function PatternsBrowser({
   return (
     <PageShell>
       <div className="space-y-12">
-        <div className="mb-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div className="mb-4 flex flex-col xl:flex-row xl:items-end xl:justify-between gap-4">
           <PageHeader
             compact
             heading={<span>All Patterns <span className="text-muted font-normal">({sortedPatterns.length})</span></span>}
           />
           <form
             method="get"
-            className="surface-card p-3 flex flex-col md:flex-row md:items-end gap-3"
+            className="surface-card p-3 flex flex-col xl:flex-row xl:items-end gap-3"
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col">
@@ -424,7 +442,9 @@ export function PatternsBrowser({
                   <span className="badge-id text-[10px] font-semibold shrink-0">{pattern.id}</span>
                 </div>
                 <div className="flex flex-wrap gap-2 text-xs mb-2">
-                  <Badge variant="category" className="text-[10px] font-semibold">{pattern.category}</Badge>
+                  <Badge variant="category" className="min-w-0 max-w-full whitespace-normal text-[10px] font-semibold">
+                    <span className="min-w-0 max-w-full [overflow-wrap:anywhere]">{pattern.category}</span>
+                  </Badge>
                   {norm?.aiAssisted ? (
                     <Badge
                       variant="ai"

@@ -265,7 +265,8 @@ CATEGORY_TEMPLATES = {
 \end{tabular}
 \end{table}
             """,
-        }
+        },
+        "induction": {}
     },
 
     # Logic Layer: Beyond - Boundary-pushing capabilities/innovation
