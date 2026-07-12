@@ -33,7 +33,7 @@ export function PageShell({
   className,
   variant = 'default',
   noContainer,
-  as = 'main'
+  as = 'div'
 }: PageShellProps) {
   const Comp = as;
   return (

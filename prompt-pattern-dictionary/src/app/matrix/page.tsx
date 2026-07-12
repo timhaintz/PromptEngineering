@@ -9,6 +9,7 @@ import PageShell from '@/components/layout/PageShell';
 interface Pattern { id: string; patternName: string; category: string }
 
 interface SemanticAssignments {
+  meta?: { totalPatterns?: number; totalCategories?: number; threshold?: number };
   categories: Record<string, { slug: string; name: string; patternCount: number; patterns: { id: string; name: string; similarity: number }[] }>;
   patterns: Record<string, { id: string; name?: string; currentCategory?: string | null; bestCategory: { slug: string; name: string; similarity: number } }>
 }
@@ -161,7 +162,8 @@ export default async function MatrixPage() {
         </div>
 
         <p className="text-xs text-muted mt-3">
-          Counts per cell use semantic best-category assignments (columns). Rows are the original taxonomy categories mapped from each pattern&apos;s current/original category. This aligns with &quot;Semantic counts&quot; used across the site.
+          Counts per cell use semantic best-category assignments for {semantic.meta?.totalPatterns ?? Object.keys(semantic.patterns).length} embedded patterns.
+          Rows are taxonomy categories mapped from each pattern&apos;s current source label; this is an exploratory analysis, not the complete corpus count.
         </p>
       </div>
     </PageShell>

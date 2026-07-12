@@ -11,7 +11,10 @@ async function getPatternCategories(): Promise<PatternCategoriesData> {
   return loadPatternCategories();
 }
 
-interface RawPattern { examples?: { id: string; content: string }[] }
+interface RawPattern {
+  examples?: { id: string; content: string }[];
+  paper?: { id: string };
+}
 
 async function loadRawPatterns(): Promise<RawPattern[]> {
   const filePath = path.join(process.cwd(), 'public', 'data', 'patterns.json');
@@ -19,14 +22,13 @@ async function loadRawPatterns(): Promise<RawPattern[]> {
   return JSON.parse(fileContents);
 }
 
-async function getActualPatternsCount(): Promise<number> {
+async function getDatasetStats(): Promise<{ patternCount: number; exampleCount: number; sourceCount: number }> {
   const patterns = await loadRawPatterns();
-  return patterns.length;
-}
-
-async function getTotalExamplesCount(): Promise<number> {
-  const patterns = await loadRawPatterns();
-  return patterns.reduce((sum, p) => sum + (p.examples?.length || 0), 0);
+  return {
+    patternCount: patterns.length,
+    exampleCount: patterns.reduce((sum, pattern) => sum + (pattern.examples?.length || 0), 0),
+    sourceCount: new Set(patterns.map(pattern => pattern.paper?.id).filter(Boolean)).size,
+  };
 }
 
 function getLogicSummary(logic: Logic): string {
@@ -42,8 +44,7 @@ export default async function HomePage() {
   const patternCategories = await getPatternCategories();
   // Load semantic assignments if available to override counts
   const semantic = loadSemanticOverrides();
-  const actualPatternCount = await getActualPatternsCount();
-  const totalExamples = await getTotalExamplesCount();
+  const datasetStats = await getDatasetStats();
   const showExperimentalTools = process.env.NEXT_PUBLIC_SHOW_EXPERIMENTAL_TOOLS === 'true';
 
   return (
@@ -55,8 +56,8 @@ export default async function HomePage() {
             Ballarat AI Prompt Taxonomy
           </h1>
           <p className="text-xl text-secondary max-w-3xl mx-auto mb-8">
-            A comprehensive, searchable collection of prompt engineering patterns. 
-            Discover, learn, and apply proven prompt patterns from academic research.
+            Explore {datasetStats.patternCount} prompt patterns and {datasetStats.exampleCount} examples
+            drawn from {datasetStats.sourceCount} cited sources, organized into six prepositional logic types.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
             <Link
@@ -75,7 +76,7 @@ export default async function HomePage() {
               </svg>
             </Link>
             <Link href="/orientation" className="inline-flex items-center gap-2 rounded-md border border-accent text-accent bg-surface-1 px-6 py-3 font-medium shadow hover:bg-surface-hover focus:outline-none focus-ring">
-              Orientation / Getting Started
+              Start with the Guide
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
@@ -83,20 +84,20 @@ export default async function HomePage() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto mb-12" aria-label="Dataset statistics">
             <Link href="/patterns" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted">
-              <div className="text-2xl font-bold text-accent">{actualPatternCount}</div>
+              <div className="text-2xl font-bold text-accent">{datasetStats.patternCount}</div>
               <div className="text-sm text-secondary">Patterns</div>
             </Link>
-            <Link href="/examples" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted" aria-label={`View all ${totalExamples} prompt examples`}>
-              <div className="text-2xl font-bold text-success">{totalExamples}</div>
+            <Link href="/examples" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted" aria-label={`View all ${datasetStats.exampleCount} prompt examples`}>
+              <div className="text-2xl font-bold text-success">{datasetStats.exampleCount}</div>
               <div className="text-sm text-secondary">Examples</div>
             </Link>
-            <Link href="/logic" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted">
-              <div className="text-2xl font-bold text-accent">{patternCategories.logics.length}</div>
-              <div className="text-sm text-secondary">Logic Layers</div>
+            <Link href="/papers" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted">
+              <div className="text-2xl font-bold text-accent">{datasetStats.sourceCount}</div>
+              <div className="text-sm text-secondary">Sources</div>
             </Link>
             <Link href="/categories" className="bg-surface-1 rounded-lg p-4 shadow-md hover:shadow-lg transition border border-muted">
               <div className="text-2xl font-bold text-accent">{patternCategories.meta.totalCategories}</div>
-              <div className="text-sm text-secondary">Categories</div>
+              <div className="text-sm text-secondary">Taxonomy Categories</div>
             </Link>
           </div>
         </div>
@@ -212,18 +213,25 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto mb-16">
           <div className="flex items-baseline justify-between mb-2">
             <h2 className="text-3xl font-semibold text-primary text-center md:text-left">
-              Browse by Category
+              Browse the Semantic Taxonomy
             </h2>
             <div className="flex items-center gap-3">
               {semantic && (
-        <span title="Counts use semantic category assignments"
+        <span title={`Counts use semantic category assignments for ${semantic.meta?.totalPatterns ?? 'the embedded'} patterns`}
           className="inline-flex items-center gap-1 text-xs bg-surface-2 text-secondary border border-muted rounded px-2 py-1">
-                  Semantic counts
+                  {semantic.meta?.totalPatterns ? `${semantic.meta.totalPatterns} semantically assigned` : 'Semantic counts'}
                 </span>
               )}
               <Link href="/taxonomy" className="text-sm text-accent hover:underline">View Taxonomy</Link>
             </div>
           </div>
+          <p className="text-sm text-secondary mb-8 max-w-3xl">
+            The {patternCategories.meta.totalCategories} normalized categories below span {patternCategories.logics.length} logic layers.
+            They are distinct from the original category labels used by individual sources.
+            {semantic?.meta?.totalPatterns && semantic.meta.totalPatterns < datasetStats.patternCount
+              ? ` Current category counts cover ${semantic.meta.totalPatterns} embedded patterns; ${datasetStats.patternCount - semantic.meta.totalPatterns} patterns await semantic analysis.`
+              : ''}
+          </p>
           {/* Logic Groups */}
           <div className="space-y-8">
             {patternCategories.logics.map((logic: Logic) => (
@@ -244,7 +252,7 @@ export default async function HomePage() {
                       href={`/category/${category.slug}`}
                       className="block bg-surface-2 hover:bg-surface-hover rounded-lg p-4 transition-colors border border-muted hover:border-accent"
                     >
-                      <h4 className="text-md font-medium text-accent mb-1">
+                      <h4 className="text-md font-medium text-secondary mb-1">
                         {category.name}
                       </h4>
                       <p className="text-secondary text-sm">
@@ -271,9 +279,9 @@ export default async function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-primary mb-2">Research-Based</h3>
+              <h3 className="text-lg font-semibold text-primary mb-2">Traceable Sources</h3>
               <p className="text-secondary text-sm">
-                All patterns are extracted from peer-reviewed academic research papers with proper citations.
+                Every pattern links back to its cited source, including research papers, websites, and repositories.
               </p>
             </div>
             
@@ -285,7 +293,7 @@ export default async function HomePage() {
               </div>
               <h3 className="text-lg font-semibold text-primary mb-2">Practical Examples</h3>
               <p className="text-secondary text-sm">
-                Each pattern includes real-world examples you can copy and adapt for your use cases.
+                Source-provided prompt examples can be inspected and adapted, with responsible-use guidance for applied work.
               </p>
             </div>
             
@@ -295,9 +303,9 @@ export default async function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-primary mb-2">Security Focused</h3>
+              <h3 className="text-lg font-semibold text-primary mb-2">Research Taxonomy</h3>
               <p className="text-secondary text-sm">
-                Specialized in cybersecurity applications with security considerations for each pattern.
+                Compare source-paper labels with a consistent six-layer taxonomy designed for cross-paper analysis.
               </p>
             </div>
           </div>
