@@ -266,7 +266,28 @@ CATEGORY_TEMPLATES = {
 \end{table}
             """,
         },
-        "induction": {}
+        "induction": {
+            "latex_table": r"""
+\begin{table}[h!]
+\fontsize{9pt}{10pt}\selectfont
+\centering
+\caption{First Letter PP}
+\label{tab:First_Letter_PP}
+\begin{tabular}{|l|}
+    \hline
+    \textbf{Prompt Pattern} \\ \hline
+    	extbf{ID}: 19-0-0\\
+    	extbf{Category}: IND\\
+    	extbf{Name}: First Letter\\
+    	extbf{Media Type}: Text\\
+    	extbf{Description}: Instruction induction recovers a natural language task description\\ from a small set of input-output demonstrations, generalising the underlying rule\\ rather than applying a known one.\\
+    \textbf{Template}: Extract the first letter of the input word.\\
+    	extbf{Example}: 19-0-0-0\\
+    \textbf{Reference:} \cite{Honovich2022InstructionDescriptions}\\ \hline
+\end{tabular}
+\end{table}
+            """,
+        }
     },
 
     # Logic Layer: Beyond - Boundary-pushing capabilities/innovation

@@ -159,6 +159,13 @@ Hypothesising involves making an educated guess or assumption about the outcome 
 input prompt. This requires the model to analyse the input, consider various possibilities, and predict the most likely outcome.
 '''
 
+induction = '''
+Induction derives general principles, rules, or task descriptions from specific observations or examples.
+Rather than applying a known rule, the model infers the underlying pattern that connects a set of instances and
+expresses it as a generalised instruction or concept. This supports tasks such as instruction induction, where a
+natural language description of a task is recovered from a handful of input-output demonstrations.
+'''
+
 input_semantics = '''
 Input semantics refers to the meaning or interpretation of the input prompt. This involves the model understanding 
 the intent of the prompt, the context in which it is presented, and the specific requirements or constraints that it implies.
