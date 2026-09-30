@@ -24,8 +24,13 @@ export default async function TaxonomyPage() {
           <p className="text-secondary">Logic layers and categories derived from papers</p>
           {semantic && (
             <div className="mt-2 badge-ai" title="Counts use semantic category assignments when available">
-              Semantic counts
+              {semantic.meta?.totalPatterns ? `${semantic.meta.totalPatterns} semantically assigned` : 'Semantic counts'}
             </div>
+          )}
+          {semantic?.meta?.totalPatterns && (
+            <p className="mt-3 text-sm text-secondary">
+              Counts reflect the current semantic embedding artifact; browse Patterns for the complete corpus.
+            </p>
           )}
         </div>
 
@@ -46,7 +51,7 @@ export default async function TaxonomyPage() {
                 <ul className="list-disc ml-6 mt-3 text-primary">
                   {l.categories.map(c => (
                     <li key={c.slug} className="my-1">
-                      <Link href={`/category/${c.slug}`} className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5">
+                      <Link href={`/category/${c.slug}`} className="text-secondary underline underline-offset-2 hover:text-primary focus-ring rounded-sm px-0.5">
                         {c.name}
                       </Link>
                       <span className="text-xs text-muted ml-2">({semantic?.categories?.[c.slug]?.patternCount ?? c.patternCount} patterns)</span>

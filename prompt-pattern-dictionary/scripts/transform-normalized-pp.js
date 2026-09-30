@@ -15,6 +15,90 @@ const SIMILAR_PATTERNS_FILE = path.join(DATA_DIR, 'similar-patterns.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'normalized-patterns.json');
 const PRESERVE_ENRICHED = String(process.env.PRESERVE_ENRICHED ?? '1') !== '0';
 
+const CP850_EXTENDED_CODE_POINTS = [
+  0x00c7, 0x00fc, 0x00e9, 0x00e2, 0x00e4, 0x00e0, 0x00e5, 0x00e7, 0x00ea, 0x00eb, 0x00e8, 0x00ef, 0x00ee, 0x00ec, 0x00c4, 0x00c5,
+  0x00c9, 0x00e6, 0x00c6, 0x00f4, 0x00f6, 0x00f2, 0x00fb, 0x00f9, 0x00ff, 0x00d6, 0x00dc, 0x00f8, 0x00a3, 0x00d8, 0x00d7, 0x0192,
+  0x00e1, 0x00ed, 0x00f3, 0x00fa, 0x00f1, 0x00d1, 0x00aa, 0x00ba, 0x00bf, 0x00ae, 0x00ac, 0x00bd, 0x00bc, 0x00a1, 0x00ab, 0x00bb,
+  0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x00c1, 0x00c2, 0x00c0, 0x00a9, 0x2563, 0x2551, 0x2557, 0x255d, 0x00a2, 0x00a5, 0x2510,
+  0x2514, 0x2534, 0x252c, 0x251c, 0x2500, 0x253c, 0x00e3, 0x00c3, 0x255a, 0x2554, 0x2569, 0x2566, 0x2560, 0x2550, 0x256c, 0x00a4,
+  0x00f0, 0x00d0, 0x00ca, 0x00cb, 0x00c8, 0x0131, 0x00cd, 0x00ce, 0x00cf, 0x2518, 0x250c, 0x2588, 0x2584, 0x00a6, 0x00cc, 0x2580,
+  0x00d3, 0x00df, 0x00d4, 0x00d2, 0x00f5, 0x00d5, 0x00b5, 0x00fe, 0x00de, 0x00da, 0x00db, 0x00d9, 0x00fd, 0x00dd, 0x00af, 0x00b4,
+  0x00ad, 0x00b1, 0x2017, 0x00be, 0x00b6, 0x00a7, 0x00f7, 0x00b8, 0x00b0, 0x00a8, 0x00b7, 0x00b9, 0x00b3, 0x00b2, 0x25a0, 0x00a0,
+];
+const CP850_BYTE_BY_CHARACTER = new Map(
+  CP850_EXTENDED_CODE_POINTS.map((codePoint, index) => [String.fromCodePoint(codePoint), index + 0x80]),
+);
+const UTF8_DECODER = new TextDecoder('utf-8', { fatal: true });
+
+function decodeCp850Sequence(value) {
+  const bytes = [];
+  for (const character of value) {
+    const codePoint = character.codePointAt(0);
+    if (codePoint < 0x80) {
+      bytes.push(codePoint);
+      continue;
+    }
+    const byte = CP850_BYTE_BY_CHARACTER.get(character);
+    if (typeof byte === 'undefined') return null;
+    bytes.push(byte);
+  }
+
+  try {
+    const decoded = UTF8_DECODER.decode(Uint8Array.from(bytes));
+    const decodedCharacters = Array.from(decoded);
+    return decodedCharacters.length === 1 && decodedCharacters[0].codePointAt(0) >= 0x80
+      ? decoded
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+function repairMojibakeString(value) {
+  let current = value;
+  for (let pass = 0; pass < 3; pass++) {
+    let repaired = '';
+    let changed = false;
+
+    for (let index = 0; index < current.length;) {
+      let replacement = null;
+      let replacementLength = 0;
+      for (const length of [4, 3, 2]) {
+        const candidate = current.slice(index, index + length);
+        if (candidate.length !== length) continue;
+        const decoded = decodeCp850Sequence(candidate);
+        if (decoded) {
+          replacement = decoded;
+          replacementLength = length;
+          break;
+        }
+      }
+
+      if (replacement) {
+        repaired += replacement;
+        index += replacementLength;
+        changed = true;
+      } else {
+        repaired += current[index];
+        index += 1;
+      }
+    }
+
+    current = repaired;
+    if (!changed) break;
+  }
+  return current;
+}
+
+function repairPreservedValue(value) {
+  if (typeof value === 'string') return repairMojibakeString(value);
+  if (Array.isArray(value)) return value.map(repairPreservedValue);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, repairPreservedValue(entry)]));
+  }
+  return value;
+}
+
 function loadJson(file) {
   if (!fs.existsSync(file)) return null;
   const raw = fs.readFileSync(file, 'utf-8');
@@ -119,7 +203,7 @@ function normalize() {
     const oldEnrichedFields = new Set(Array.isArray(oldItem.aiAssistedFields) ? oldItem.aiAssistedFields : []);
     const maybePreserve = (fieldName) => {
       if (oldEnrichedFields.has(fieldName) && typeof oldItem[fieldName] !== 'undefined') {
-        newItem[fieldName] = oldItem[fieldName];
+        newItem[fieldName] = repairPreservedValue(oldItem[fieldName]);
       }
     };
     // Preserve known enrichable fields
@@ -134,7 +218,7 @@ function normalize() {
     maybePreserve('knowledgeIntent');
     // Preserve the raw bracketed template string if it was enriched
     if (typeof oldItem.templateRawBracketed !== 'undefined') {
-      newItem.templateRawBracketed = oldItem.templateRawBracketed;
+      newItem.templateRawBracketed = repairPreservedValue(oldItem.templateRawBracketed);
     }
     maybePreserve('dependentLLM');
     maybePreserve('turn');
@@ -144,10 +228,10 @@ function normalize() {
     // Unconditionally preserve applicationTasksString if it existed previously,
     // even if aiAssistedFields didn't explicitly list it (backward compatibility)
     if (typeof oldItem.applicationTasksString !== 'undefined') {
-      newItem.applicationTasksString = oldItem.applicationTasksString;
+      newItem.applicationTasksString = repairPreservedValue(oldItem.applicationTasksString);
     }
     if (typeof oldItem.knowledgeIntent !== 'undefined') {
-      newItem.knowledgeIntent = oldItem.knowledgeIntent;
+      newItem.knowledgeIntent = repairPreservedValue(oldItem.knowledgeIntent);
     }
 
     // Merge AI assistance metadata
@@ -218,4 +302,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { normalize };
+module.exports = { normalize, repairMojibakeString };

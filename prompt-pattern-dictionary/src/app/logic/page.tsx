@@ -34,12 +34,19 @@ export default async function LogicPage() {
           <h1 className="text-2xl font-bold text-primary">Logic Layers ({data.logics.length})</h1>
           <div className="flex items-center gap-3 text-sm">
             {semantic && (
-              <span title="Counts use semantic category assignments" className="badge-ai">Semantic counts</span>
+              <span title="Counts use semantic category assignments" className="badge-ai">
+                {semantic.meta?.totalPatterns ? `${semantic.meta.totalPatterns} semantically assigned` : 'Semantic counts'}
+              </span>
             )}
             <Link prefetch={false} href="/taxonomy" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">View Taxonomy</Link>
             <Link prefetch={false} href="/matrix" className="text-secondary hover:text-primary focus-ring rounded-sm px-1">Matrix</Link>
           </div>
         </div>
+        {semantic?.meta?.totalPatterns && (
+          <p className="-mt-8 text-sm text-secondary">
+            Counts reflect the current semantic embedding artifact, not the total number of source records.
+          </p>
+        )}
         <div className="space-y-6">
           {logics.map(l => (
             <div key={l.slug} className="surface-card p-6">

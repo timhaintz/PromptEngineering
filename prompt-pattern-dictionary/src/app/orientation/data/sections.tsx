@@ -315,7 +315,7 @@ const GLOSSARY_ENTRIES: GlossaryEntry[] = [
     letter: 'P',
     definition: (
       <>
-        Structured system prompt derived from the authoritative Template + Application pairing. PEIL wraps, but never rewrites, research text so orchestration tooling can ingest it safely. Examples live in{' '}
+        Model-agnostic instructional language for system prompts, organised into Role, Context, Instructions, Techniques, and Output. PEIL operationalises the taxonomy without replacing source prompt examples. Examples live in{' '}
         <Link href="#pattern-anatomy" className="text-accent hover:underline">Pattern Anatomy</Link>.
       </>
     )
@@ -509,7 +509,7 @@ const PatternAnatomy = () => (
           </div>
           <div>
             <dt className="font-medium">PEIL</dt>
-            <dd>Generated structured system prompt combining template + application domain for consistent downstream use.</dd>
+            <dd>Generated system prompt organised around Role, Context, Instructions, Techniques, and Output.</dd>
           </div>
           <div>
             <dt className="font-medium">AI-Assisted Badge</dt>
@@ -572,21 +572,20 @@ const PatternAnatomy = () => (
           <li><strong>Description</strong>: Research-authoritative narrative. Preserve provenance; only fix typos.</li>
           <li><strong>General Explanation</strong>: Short ELI12 teaching paragraph translating research into plain language.</li>
           <li><strong>Usage Summary</strong>: Pragmatic “when/how to run this” outline including evaluation hooks.</li>
-          <li><strong>Template vs PEIL</strong>: Template is the canonical 5-key scaffold; PEIL is a derivative automation prompt that must reuse those keys verbatim.</li>
+          <li><strong>Template vs PEIL</strong>: the Pattern Template records Role, Context, Action, Format, and Response; PEIL structures an operational system prompt as Role, Context, Instructions, Techniques, and Output.</li>
         </ul>
       </div>
       <div className="p-4 rounded border border-muted bg-surface-1 shadow-sm text-sm">
         <h3 className="text-sm font-semibold mb-2">PEIL Usage Example</h3>
         <p className="text-sm mb-2">Template excerpt:</p>
         <pre className="text-xs bg-surface-2 border border-muted rounded p-3 overflow-auto mb-3"><code>{TEMPLATE_EXCERPT}</code></pre>
-        <p className="text-sm mb-1">PEIL derivation (never replaces Template, but wraps it for downstream automation):</p>
-        <pre className="text-xs bg-surface-2 border border-muted rounded p-3 overflow-auto"><code>{`System Goal: Evaluate each zero-trust policy proposal for coverage gaps.
-      Rules:
-      - Reuse the ROLE/CONTEXT/ACTION/FORMAT/RESPONSE keys exactly as authored.
-      - Reject inputs missing rollout notes.
-      - Output JSON with fields policy_name, coverage_gap, escalation, rationale.
-      - Flag policies lacking MFA in rollout plan as escalation="high".`}</code></pre>
-        <p className="text-xs text-secondary mt-2">Notice how PEIL reiterates Template keys, adds operational guardrails, and is safe to paste into orchestration tooling while maintaining provenance.</p>
+        <p className="text-sm mb-1">PEIL derivation (an operational system prompt, not a replacement for the Pattern Template):</p>
+        <pre className="text-xs bg-surface-2 border border-muted rounded p-3 overflow-auto"><code>{`Role: Zero-trust policy assessor.
+      Context: Proposals include controls and rollout notes.
+      Instructions: Identify coverage gaps; reject incomplete inputs.
+      Techniques: Apply the Assessment pattern and evidence-based comparison.
+      Output: JSON fields policy_name, coverage_gap, escalation, rationale.`}</code></pre>
+        <p className="text-xs text-secondary mt-2">The Pattern Template preserves the reusable research record; PEIL operationalises that knowledge for a system prompt.</p>
       </div>
     </div>
     <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -1091,7 +1090,7 @@ const AboutDictionary = () => (
     <section>
       <h2 className="text-lg font-semibold text-primary mb-3">Ballarat AI Prompt Taxonomy: What, Why & How</h2>
       <p className="mb-4">
-        The Ballarat AI Prompt Taxonomy is an <a href="https://github.com/timhaintz/PromptEngineering" target="_blank" rel="noreferrer" className="text-accent hover:underline">open-source research platform and search tool</a> that compiles hundreds of proven prompt patterns from academic work. The webpage itself is hosted in the <a href="https://github.com/timhaintz/PromptEngineering/tree/main/prompt-pattern-dictionary" target="_blank" rel="noreferrer" className="text-accent hover:underline">prompt-pattern-dictionary</a> directory of the repository. A prompt pattern is a reusable, named template for interacting with large language models (LLMs). Each pattern defines a five-part “5-Key” scaffold—Role, Context, Action, Format and Response—to capture intent, provide structural guidance and adaptation advice, and maximise predictability, reproducibility and auditability. By standardising these key elements, the taxonomy makes it possible to compare prompts systematically, reduce ambiguity and drift, and monitor for bias or harmful behaviours.
+        The Ballarat AI Prompt Taxonomy is an <a href="https://github.com/timhaintz/PromptEngineering" target="_blank" rel="noreferrer" className="text-accent hover:underline">open-source research platform and search tool</a> that compiles 906 prompt patterns and 1,869 examples from 73 cited sources, including research papers, websites, and repositories. The webpage itself is hosted in the <a href="https://github.com/timhaintz/PromptEngineering/tree/main/prompt-pattern-dictionary" target="_blank" rel="noreferrer" className="text-accent hover:underline">prompt-pattern-dictionary</a> directory of the repository. A prompt pattern is a reusable, named template for interacting with large language models (LLMs). Each pattern defines a five-part “5-Key” scaffold—Role, Context, Action, Format and Response—to capture intent, provide structural guidance and adaptation advice, and maximise predictability, reproducibility and auditability. By standardising these key elements, the taxonomy makes it possible to compare prompts systematically, reduce ambiguity and drift, and monitor for bias or harmful behaviours.
       </p>
       <p>
         You can start by clearly stating your task—for example, “Rank policy risks” or “Compare legal clauses”—and then browse or search the library by theme. The logic layers and categories help you navigate: for instance, “Beyond” logic covers prompts that push the AI’s capabilities, while the Hypothesise category within “Beyond” focuses on generative speculation. Each individual pattern page expands to show a concise description, a general explanation, a usage summary, a detailed 5-Key template (with variables to fill), example prompts and a list of similar patterns.
@@ -1112,26 +1111,24 @@ const AboutDictionary = () => (
         <li><strong>Over Logic</strong> supports comprehensive coverage, summarisation and synthesis.</li>
       </ul>
       <p>
-        Within these layers, the library organises patterns into twenty-five categories (with acronyms like ARG for Argument, CAL for Calculation, HYP for Hypothesise, etc.), each capturing a particular task archetype. For example, the categories “Assessment”, “Calculation” and “Logical Reasoning” reside in the At and Beyond logic layers, while “Summarising” and “Synthesis” live in the Over layer. This dual taxonomy—logic layer plus category—acts as a mental map, aligning with research that uses prepositional logic and task typology to organise human-AI conversation patterns.
+        Within these logic types, the library organises patterns into 26 subcategories (with acronyms like ARG for Argument, CAL for Calculation, HYP for Hypothesise, etc.), each capturing a particular task archetype. For example, Assessment, Calculation, and Induction reside in At, while Hypothesise and Logical Reasoning reside in Beyond. Summarising and Synthesis belong to Over. This two-level taxonomy—prepositional logic plus subcategory—acts as a mental map for human-AI communication.
       </p>
     </section>
 
     <section>
       <h2 className="text-lg font-semibold text-primary mb-3">Prompt Engineering Instructional Language (PEIL)</h2>
       <p className="mb-4">
-        Building on the five-key schema and informed by prompt engineering research, the taxonomy introduces the Prompt Engineering Instructional Language (PEIL). PEIL is an instructional scaffold that helps automate the creation of robust system prompts. You can use the <a href="https://github.com/timhaintz/PromptEngineering/blob/main/peil_prompt_generator.py" target="_blank" rel="noreferrer" className="text-accent hover:underline">PEIL Prompt Generator</a> to automate this process. It decomposes a prompt specification into a set of variables—Role, Provide Clear Context, Break Down Complex Questions, Provide Specific Instructions, Define Conciseness, Research-Based Prompting Techniques (e.g. Chain-of-Thought, Few-Shot etc.), and State Desired Output—which are combined to produce a final system prompt. Each of these variables corresponds to an element of the underlying 5-Key structure and codifies best practices found in prompt engineering literature. For instance:
+        Building on the taxonomy, the Prompt Engineering Instructional Language (PEIL) is a model-agnostic structure for creating reusable system prompts. You can use the <a href="https://github.com/timhaintz/PromptEngineering/blob/main/peil_prompt_generator.py" target="_blank" rel="noreferrer" className="text-accent hover:underline">PEIL Prompt Generator</a> to automate this process. PEIL has five components—Role, Context, Instructions, Techniques, and Output—and is distinct from the Prompt Pattern record’s Role, Context, Action, Format, and Response template. The two structures are related, but they serve different purposes:
       </p>
       <ul className="list-disc pl-5 space-y-2 mb-4">
         <li><strong>Role</strong> defines the persona or expertise the model should assume (e.g., “You are a cybersecurity expert”).</li>
-        <li><strong>Provide Clear Context</strong> sets the domain and focus, grounding the model’s responses.</li>
-        <li><strong>Break Down Complex Questions</strong> decomposes broad tasks into smaller, explicit sub-questions, fostering step-by-step reasoning (a core technique like Chain-of-Thought).</li>
-        <li><strong>Provide Specific Instructions</strong> delineates essential requirements, constraints or mandatory inclusions.</li>
-        <li><strong>Define Conciseness</strong> sets word or token limits to control verbosity.</li>
-        <li><strong>Research-Based Techniques</strong> invites the inclusion of methods from scholarly work on prompting, such as instruction-prompt hybrids combining a guiding sentence with bullet-point rules—an approach supported by studies advocating hybrid prompt structures.</li>
-        <li><strong>State Desired Output</strong> specifies the target format, scope and expected information in the response.</li>
+        <li><strong>Context</strong> provides the background and domain information needed for the task.</li>
+        <li><strong>Instructions</strong> state the required actions, constraints, and acceptance conditions.</li>
+        <li><strong>Techniques</strong> select relevant prompt patterns or prompting methods, such as few-shot examples or self-consistency checks.</li>
+        <li><strong>Output</strong> specifies the required format, structure, scope, and characteristics of the response.</li>
       </ul>
       <p>
-        PEIL thus provides a structured, research-informed framework for designing prompts that are clear, concise and conducive to reliable AI responses. It highlights the synergy between theoretical insights (like the 5-Key scaffold and prepositional logic layers) and practical prompting techniques from recent research, supporting both novice and advanced users in crafting instructive prompts that align with best practices.
+        PEIL is intended primarily for system-prompt use, with task-specific data supplied separately in a user message. For single-turn use, the task data must be embedded in the prompt. The thesis evaluation found that this distinction materially affects results.
       </p>
     </section>
   </div>

@@ -4,7 +4,21 @@ import uuid
 
 import pytest
 
+import azure_models
 from azure_models import AzureCredentialManager
+
+
+@pytest.fixture(autouse=True)
+def offline_credential_constructor(monkeypatch):
+    """Test our cache without creating OS token stores or authenticating."""
+    class OfflineCredential:
+        def __init__(self, **kwargs):
+            self.options = kwargs
+
+        def get_token(self, *args, **kwargs):
+            raise AssertionError("Unit tests must not acquire Azure tokens")
+
+    monkeypatch.setattr(azure_models, "InteractiveBrowserCredential", OfflineCredential)
 
 
 @pytest.fixture

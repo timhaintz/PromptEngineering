@@ -26,6 +26,7 @@ try:
         argument,
         assessment,
         calculation,
+        induction,
         categorising,
         classification,
         clustering,
@@ -112,6 +113,7 @@ def get_category_description(category_name: str) -> str:
         'argument': argument,
         'assessment': assessment,
         'calculation': calculation,
+        'induction': induction,
         'categorising': categorising,
         'classification': classification,
         'clustering': clustering,
@@ -166,8 +168,12 @@ def process_patterns_from_source(
     """Extract pattern information from promptpatterns.json data"""
     patterns_by_category: Dict[str, Dict[str, Any]] = {}
     
-    for paper in source_data.get('Source', {}).get('Titles', []):
-        for category_group in paper.get('CategoriesAndPatterns', []):
+    for paper_index, paper in enumerate(
+        source_data.get('Source', {}).get('Titles', [])
+    ):
+        for category_index, category_group in enumerate(
+            paper.get('CategoriesAndPatterns', [])
+        ):
             category_name = category_group.get('PatternCategory', '')
             if not category_name:
                 continue
@@ -189,13 +195,11 @@ def process_patterns_from_source(
                 category_bucket['patterns'],
             )
 
-            for pattern in category_group.get('PromptPatterns', []):
+            for pattern_index, pattern in enumerate(
+                category_group.get('PromptPatterns', [])
+            ):
                 pattern_info: Dict[str, Any] = {
-                    'id': (
-                        f"{paper.get('id', 0)}-"
-                        f"{category_group.get('CategoryID', 0)}-"
-                        f"{pattern.get('PatternID', 0)}"
-                    ),
+                    'id': f"{paper_index}-{category_index}-{pattern_index}",
                     'name': pattern.get('PatternName', ''),
                     'description': pattern.get('Description', ''),
                     'exampleCount': len(pattern.get('ExamplePrompts', []))
