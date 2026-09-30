@@ -195,7 +195,7 @@ export default function PatternDetail({
   const generalExplanation = attrs?.generalExplanation?.trim() ? attrs.generalExplanation.trim() : null;
   const knowledgeIntent = attrs?.knowledgeIntent?.trim() ? attrs.knowledgeIntent.trim() : null;
   const peilPrompt = attrs?.peilPrompt?.trim() ? attrs.peilPrompt.trim() : null;
-  const orientationPeilHref = withBasePath('/orientation/all#peil');
+  const orientationPeilHref = '/orientation/all#peil';
 
   const showReference = context === 'category' && paperTitle && paperUrl;
 

@@ -3,9 +3,11 @@ name: CI — Prompt Pattern Taxonomy
 on:
   pull_request:
     branches: [main]
-    paths:
-      - 'prompt-pattern-dictionary/**'
-      - '.github/workflows/ci.yml'
+    types: [opened, synchronize, reopened, edited]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 defaults:
   run:
@@ -53,14 +55,58 @@ jobs:
       - run: npm ci
       - run: npm test -- --watch=false
 
+  python-tests:
+    name: Python Offline Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    env:
+      PYTHON_DOTENV_DISABLED: '1'
+      LANGSMITH_TRACING: 'false'
+      LANGCHAIN_TRACING_V2: 'false'
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with:
+          version: '0.11.13'
+          python-version: '3.12'
+          enable-cache: true
+      - name: Install locked Python dependencies
+        run: uv sync --locked --python 3.12
+      # Explicitly exclude scripts that invoke live model APIs.
+      - name: Run offline Python unit and dependency tests
+        run: >-
+          uv run --locked --offline --no-sync python -m pytest -q
+          tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py
+          tests/test_dependency_smoke.py
+
   build:
     name: Build
-    needs: [lint, typecheck, test]
+    needs: [lint, typecheck, test, python-tests]
+    # Required checks must report a failure rather than silently skip when
+    # an upstream job (including Python validation) fails or is cancelled.
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       GITHUB_PAGES: 'true'
     steps:
+      - name: Require successful validation
+        working-directory: .
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          TYPECHECK_RESULT: ${{ needs.typecheck.result }}
+          TEST_RESULT: ${{ needs.test.result }}
+          PYTHON_RESULT: ${{ needs.python-tests.result }}
+        run: |
+          for result in "$LINT_RESULT" "$TYPECHECK_RESULT" "$TEST_RESULT" "$PYTHON_RESULT"; do
+            if [ "$result" != success ]; then
+              echo "Validation did not succeed: $result"
+              exit 1
+            fi
+          done
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:

@@ -165,7 +165,7 @@ export function ExamplesBrowser({ entries }: ExamplesBrowserProps) {
                 Pattern:{' '}
                 <Link
                   href={`/patterns?focus=${example.patternId}`}
-                  className="text-secondary hover:text-primary focus-ring rounded-sm px-0.5"
+                  className="text-secondary underline underline-offset-2 hover:text-primary focus-ring rounded-sm px-0.5"
                 >
                   {example.patternName}
                 </Link>

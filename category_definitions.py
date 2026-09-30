@@ -91,6 +91,13 @@ on the input prompt. This could range from simple arithmetic operations to more 
 multiple steps and variables. The accuracy of the calculation is a key factor in assessing the model's performance.
 '''
 
+induction = '''
+Induction derives general principles, rules, or task descriptions from specific observations or examples.
+Rather than applying a known rule, the model infers the underlying pattern that connects a set of instances
+and expresses it as a generalised instruction or concept. This supports tasks such as instruction induction,
+where a natural language description of a task is recovered from a handful of input-output demonstrations.
+'''
+
 categorising = '''
 Categorising involves the model sorting or arranging different inputs or outputs into classes or categories 
 based on shared qualities or characteristics. This process helps in organising the data in a meaningful way and can 
@@ -153,9 +160,9 @@ input prompt. This requires the model to analyse the input, consider various pos
 '''
 
 induction = '''
-Induction derives general principles, rules, or task descriptions from specific observations or examples. 
-Rather than applying a known rule, the model infers the underlying pattern that connects a set of instances and 
-expresses it as a generalised instruction or concept. This supports tasks such as instruction induction, where a 
+Induction derives general principles, rules, or task descriptions from specific observations or examples.
+Rather than applying a known rule, the model infers the underlying pattern that connects a set of instances and
+expresses it as a generalised instruction or concept. This supports tasks such as instruction induction, where a
 natural language description of a task is recovered from a handful of input-output demonstrations.
 '''
 

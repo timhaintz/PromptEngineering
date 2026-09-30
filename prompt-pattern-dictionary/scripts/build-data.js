@@ -58,6 +58,11 @@ function getPythonInvoker() {
     return { command: 'python', preArgs: [] };
   }
 
+  const python3OnPath = spawnSync('python3', ['--version'], { stdio: 'ignore' });
+  if (python3OnPath.status === 0) {
+    return { command: 'python3', preArgs: [] };
+  }
+
   // Fallback: repo venv if available
   const venvPythonPath = path.join(REPO_ROOT, 'venv', 'Scripts', 'python.exe');
   if (fs.existsSync(venvPythonPath)) {
@@ -385,7 +390,7 @@ function processPatterns(data) {
           totalExamples++;
           return {
             id: `${patternId}-${exampleIndex}`,
-            content: example,
+            content: normalizeExampleContent(example),
             index: exampleIndex
           };
         });
@@ -439,6 +444,23 @@ function processPatterns(data) {
   return { patterns, categories, stats };
 }
 
+function normalizeExampleContent(example) {
+  if (typeof example === 'string') return example;
+  if (example === null || typeof example === 'undefined') return '';
+  if (typeof example !== 'object' || Array.isArray(example)) return String(example);
+
+  const fields = Object.entries(example).filter(([, value]) => value !== null && typeof value !== 'undefined');
+  if (fields.length === 1 && typeof fields[0][1] === 'string') {
+    return fields[0][1];
+  }
+
+  return fields.map(([name, value]) => {
+    const label = name.replace(/([a-z])([A-Z])/g, '$1 $2');
+    const text = typeof value === 'string' ? value : JSON.stringify(value);
+    return `${label}: ${text}`;
+  }).join('\n\n');
+}
+
 /**
  * Generate searchable tags for a pattern
  */
@@ -483,7 +505,7 @@ function createSearchableContent(pattern, category, paper) {
     category.PatternCategory,
     paper.Title,
     (paper.Authors || []).join(' '),
-    ...pattern.ExamplePrompts
+    ...pattern.ExamplePrompts.map(normalizeExampleContent)
   ];
   
   return parts.filter(Boolean).join(' ').toLowerCase();
@@ -589,4 +611,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { processData };
+module.exports = { processData, processPatterns, generateSearchIndex, normalizeExampleContent };

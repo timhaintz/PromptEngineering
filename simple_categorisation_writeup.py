@@ -276,13 +276,13 @@ CATEGORY_TEMPLATES = {
 \begin{tabular}{|l|}
     \hline
     \textbf{Prompt Pattern} \\ \hline
-    \textbf{ID}: 19-0-0\\ 
-    \textbf{Category}: IND\\ 
-    \textbf{Name}: First Letter\\ 
-    \textbf{Media Type}: Text\\ 
-    \textbf{Description}: Instruction induction recovers a natural language task description\\ from a small set of input-output demonstrations, generalising the underlying rule\\ rather than applying a known one.\\ 
+    {\bf ID}: 19-0-0\\
+    {\bf Category}: IND\\
+    {\bf Name}: First Letter\\
+    {\bf Media Type}: Text\\
+    {\bf Description}: Instruction induction recovers a natural language task description\\ from a small set of input-output demonstrations, generalising the underlying rule\\ rather than applying a known one.\\
     \textbf{Template}: Extract the first letter of the input word.\\
-    \textbf{Example}: 19-0-0-0\\ 
+    {\bf Example}: 19-0-0-0\\
     \textbf{Reference:} \cite{Honovich2022InstructionDescriptions}\\ \hline
 \end{tabular}
 \end{table}
