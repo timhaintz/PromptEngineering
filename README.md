@@ -5,6 +5,7 @@ This repository contains a collection of Python scripts and tools designed for v
 ## Table of Contents
 
 - [Installation](#installation)
+- [Offline Python Tests](#offline-python-tests)
 - [Usage](#usage)
   - [Extract Text from PDF](#extract-text-from-pdf)
   - [Categorise Text Using Cosine Similarity](#categorise-text-using-cosine-similarity)
@@ -59,6 +60,21 @@ Notes:
     AZURE_OPENAI_KEY=<your-api-key>
     AZURE_OPENAI_ENDPOINT=<your-endpoint>
     ```
+
+## Offline Python Tests
+
+CI installs the Python 3.12 environment with `uv sync --locked --python 3.12`
+and runs this explicit offline suite from the repository root:
+
+```sh
+uv run --locked --offline --no-sync python -m pytest -q tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py tests/test_dependency_smoke.py
+```
+
+The test configuration disables dotenv loading and tracing, blocks network access
+before test collection, and replaces interactive credentials in cache tests.
+No model credentials are needed. The allowlist excludes integration scripts that
+invoke live model APIs. Every PR targeting `main` runs the four required web checks
+and the Python suite; the required Build check also fails if Python validation fails.
 
 ## Usage
 
