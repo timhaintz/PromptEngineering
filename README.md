@@ -25,6 +25,14 @@ This repository contains a collection of Python scripts and tools designed for v
 
 ## Installation
 
+The Python research tools require Python 3.12 on Apple Silicon macOS or a
+supported 64-bit Windows/Linux environment. Intel/x86_64 macOS and 32-bit Windows
+support has been retired: [cryptography 49 removed those platforms](https://cryptography.io/en/49.0.0/changelog/#v49-0-0),
+and this workspace now uses cryptography 50. Native Apple Silicon macOS and
+64-bit Ubuntu CI run the offline tests. Wheel-only installation checks cover
+Windows x86_64 and Linux x86_64/aarch64; those checks do not establish runtime
+validation on every 64-bit platform.
+
 1. Clone the repository:
 ```sh
 git clone https://github.com/yourusername/your-repo.git
