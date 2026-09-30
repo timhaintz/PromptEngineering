@@ -317,20 +317,45 @@ def test_anyio_tls_verifies_idna2008_hostname_in_memory(tmp_path, certificate_ho
 
 
 def test_anyio_process_worker_does_not_block_on_stdout_or_stderr():
-    import anyio
-    from anyio import to_process
+    import os
+    import signal
+    import subprocess
+    import sys
 
-    async def exercise():
-        with anyio.fail_after(10):
-            # Built-in exec is pickle-safe; no application, credentials, or
-            # network access is involved in this disposable worker process.
-            result = await to_process.run_sync(
-                exec,
-                'import sys; sys.stderr.write("x" * 1048576); sys.stderr.flush(); '
-                'sys.stdout.write("x" * 1048576); sys.stdout.flush()',
-                cancellable=True,
-            )
-            assert result is None
-            assert await to_process.run_sync(pow, 2, 8, cancellable=True) == 256
-
-    anyio.run(exercise)
+    # Isolate teardown too: the vulnerable worker pool can hang even during
+    # cancellation, so an outer deadline must protect the pytest process.
+    driver = '''
+import socket
+def network_disabled(*args, **kwargs):
+    raise RuntimeError("Network access is disabled in the offline worker test")
+socket.socket.connect = socket.socket.connect_ex = network_disabled
+socket.create_connection = socket.getaddrinfo = network_disabled
+import anyio
+from anyio import to_process
+async def exercise():
+    with anyio.fail_after(10):
+        result = await to_process.run_sync(
+            exec,
+            'import sys; sys.stderr.write("x" * 1048576); sys.stderr.flush(); '
+            'sys.stdout.write("x" * 1048576); sys.stdout.flush()',
+            cancellable=True,
+        )
+        assert result is None
+        assert await to_process.run_sync(pow, 2, 8, cancellable=True) == 256
+anyio.run(exercise)
+'''
+    process = subprocess.Popen(
+        [sys.executable, "-c", driver], stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE, text=True, start_new_session=os.name == "posix",
+    )
+    try:
+        stdout, stderr = process.communicate(timeout=15)
+    except subprocess.TimeoutExpired:
+        if os.name == "posix":
+            os.killpg(process.pid, signal.SIGKILL)
+        else:
+            process.kill()
+        process.communicate(timeout=5)
+        pytest.fail("AnyIO process worker or teardown exceeded the offline test deadline")
+    assert process.returncode == 0, stderr
+    assert stdout == ""
