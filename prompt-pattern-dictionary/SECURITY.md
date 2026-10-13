@@ -50,6 +50,47 @@ If an immediate patch cannot be shipped:
 - Add a warning or caution badge to affected patterns
 - Document risk in PRD Responsible Use section
 
+## Dependency maintenance (2026-10-13)
+
+The website uses a GitHub Pages static export with image optimization disabled.
+Next.js 16.3.8, Sharp 0.35.5 and source-map-js 1.2.2 remove the newly published
+production high-severity advisories. The scoped Mermaid override selects KaTeX
+0.18.2 because maintained Mermaid releases still request affected 0.16 versions.
+The public rendering API is retained, and strict Mermaid sanitization remains
+in place. Regression tests cover inherited trust, normal maths, explicit trust,
+and invalid or cumulative indexed source-map offsets. Jest 30 removes the old
+Jest Braces chain; the unused ts-jest transformer was removed because Next's
+Jest configuration already uses SWC, also removing its Handlebars dependency.
+
+Run both audits from this directory:
+
+```sh
+npm audit --omit=dev
+npm audit
+```
+
+Production audit is clean. Full audit still reports development-only advisories:
+
+- **Braces** (`GHSA-vfj7-8cjw-p6xm`), through Next's ESLint plugin, fast-glob
+  and micromatch: five affected packages are rated high. Braces 3.0.3 remains
+  the latest published release and is affected. Do not feed untrusted glob
+  patterns into local lint tooling. Downgrading the Next lint configuration
+  is not a compatible security fix.
+- **sprintf-js** (`GHSA-hp3w-g68c-fv3c`), through Istanbul's YAML configuration
+  loader and Jest: nineteen affected packages are rated moderate. The latest
+  published sprintf-js 1.1.3 is affected. Test configuration comes from the
+  trusted checkout. Do not downgrade Jest to follow audit's suggested fix.
+
+These residual findings are upstream blockers, not a clean full-audit result.
+Recheck published versions and dependency chains before the next remediation.
+Neither chain is shipped in the exported browser application.
+
+To verify the Pages prefix as well as the default local routes, build with
+`GITHUB_PAGES=true GITHUB_REPOSITORY=timhaintz/PromptEngineering npm run build`,
+serve the exported artifact at `/PromptEngineering`, then run
+`BASE_URL=http://localhost:4300 BASE_PATH=/PromptEngineering npm run test:a11y`.
+The 33 cases retain the same routes, themes and severity threshold.
+
 ## Verifying Fixes
 
 Security fixes will:

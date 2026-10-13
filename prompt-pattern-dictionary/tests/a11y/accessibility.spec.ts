@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+const BASE_PATH = process.env.BASE_PATH || '';
+
 const ROUTES = [
   '/',
   '/search',
@@ -21,7 +23,7 @@ test.describe('Accessibility (axe-core) across themes', () => {
   for (const route of ROUTES) {
     for (const theme of THEMES) {
       test(`${route} theme=${theme} has no serious/critical violations`, async ({ page }) => {
-        await page.goto(route);
+        await page.goto(`${BASE_PATH}${route}`);
         await page.waitForLoadState('domcontentloaded');
         // Apply theme before potential dynamic content settles
         await page.evaluate(t => {
