@@ -1,0 +1,116 @@
+{
+  "text": "1. SF 2nd Leg: 34,669 (34,669)\n2. QFR: 33,861 (33,861)\n3. Since 34,669 > 33,861, **SF 2nd Leg** had the higher attendance.",
+  "request": {
+    "model": "gpt-6-luna",
+    "input": [
+      {
+        "role": "system",
+        "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+      },
+      {
+        "role": "user",
+        "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6-luna",
+  "returned_model": "gpt-6-luna",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 173.0,
+    "output_tokens": 128.0,
+    "total_tokens": 301.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:17:53.576851+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "52939e91aea4f9d4a7a0455b2d4a9ae569027ff11cedcfb00167c2bc831170db",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "bcc1ff17a53b6c7d600fa6d4938b168a2b3a3b36cef427137c8dc2d5e28b9f04",
+  "actual_request_sha256": "b5cd757d8f8e9858d862fd10e2728b1b43ad82ea08c70754a083f6a388aa212c",
+  "pattern": {
+    "key": "across_comparison_attendance",
+    "logic": "Across",
+    "subcategory": "Comparison",
+    "task_title": "Compare two numeric values and select the larger",
+    "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+    "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+    "task_material": "",
+    "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+    "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+    "instructions": [
+      "Extract the numeric attendance value for each round.",
+      "Handle thousands separators (commas) correctly during comparison.",
+      "State which round has the higher attendance.",
+      "Provide the numeric values to justify the comparison."
+    ],
+    "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+    "output": "Return the round name with the higher attendance and both numeric values.",
+    "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+    "source_paper_id": "20",
+    "source_pattern_id": "20-2-0",
+    "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+    "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+  },
+  "pattern_key": "across_comparison_attendance",
+  "source_pattern_id": "20-2-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_unlabelled",
+  "run_index": 1,
+  "model_key": "gpt-6-luna",
+  "model_deployment": "gpt-6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+    },
+    {
+      "role": "user",
+      "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+    }
+  ],
+  "output": "1. SF 2nd Leg: 34,669 (34,669)\n2. QFR: 33,861 (33,861)\n3. Since 34,669 > 33,861, **SF 2nd Leg** had the higher attendance.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 173,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 128,
+    "output_tokens_details": {
+      "reasoning_tokens": 66
+    },
+    "total_tokens": 301
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "25a7a5a59e07421fcc256986296867f29729840742cb81e0360425b716a459c6",
+    "original_artifact_sha256": "3aaace23956da16e164f8e64e43a6e00aeaade249d5ec4666235a4daaa531f79",
+    "original_record_filename": "52939e91aea4f9d4a7a0455b2d4a9ae569027ff11cedcfb00167c2bc831170db.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "360802bf66b0adbea016d5245c6ec907a76f688953bdd0b1b1a58f33915c6681",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "3ed43bbce39f82c7c4c3ca96243090cc588498cca384180a4ebcb0f85e1a16ac"
+}

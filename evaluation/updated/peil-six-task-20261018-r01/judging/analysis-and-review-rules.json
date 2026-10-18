@@ -1,0 +1,154 @@
+{
+  "version": "analysis-and-human-review-v1",
+  "status": "Prepared before main-study scoring; human assessments and analysis have not run",
+  "authority": "Plan and public result preparation authorised; judging, regeneration and thesis editing are not authorised by this preparation.",
+  "provenance": {
+    "generation_commit": "59d7aa17059b7533874fd6624a73b6fb2e94b93a",
+    "implementation_merge_commit": "a5996df063c27b9daf81f010024d693c527815a0",
+    "protocol": "single-response-judge-v3",
+    "judge": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "reference": "judging/reference-audit.json",
+    "calibration_review": "judging/calibration-record.json",
+    "generation_completion": "run-summary.json"
+  },
+  "scope": {
+    "historical": {
+      "responses": 648,
+      "tasks": 18,
+      "models": 4,
+      "variants": 3,
+      "repeats": 3
+    },
+    "corrective": {
+      "responses": 162,
+      "tasks": 6,
+      "models": [
+        "gpt-6.1-sol",
+        "gpt-6-luna",
+        "grok-4.7"
+      ],
+      "variants": 3,
+      "repeats": 3
+    },
+    "matched_original_scoring_bridge": {
+      "responses": 216,
+      "rule": "The identical historical run-1 texts for all 18 tasks, four models and three variants, matched by source hash and cell identity."
+    },
+    "metrics": [
+      "accuracy",
+      "formatting",
+      "fabrication_avoidance",
+      "completeness"
+    ],
+    "scale": "Each metric is an integer 1-5 with higher better. Preserve four separate outcomes; no primary composite score or unannounced metric weighting.",
+    "population": "The finite set of selected task instances and deployed models. Three generation repeats measure stochastic variation within a cell; they are not independent task samples."
+  },
+  "primary_estimands": {
+    "cohort": "corrective",
+    "contrasts": [
+      "peil_labelled minus naive",
+      "peil_unlabelled minus naive"
+    ],
+    "within_model": "For each metric, task, model and variant, average the three repeat scores; subtract the corresponding naive repeat mean within the same task and model. Report all six task contrasts, then their equal-weight mean within each model.",
+    "repeat_pairing": "Run index is a replicate label, not a shared stochastic seed across variants. Do not claim common-random-number matching or treat 18 repeat differences as 18 independent tasks.",
+    "weighting": "Equal weight per task and per repeat within a complete cell. Report each model separately; any across-model summary gives each of the three models equal weight and is descriptive.",
+    "family": "All 24 primary model/contrast/metric summaries are mandatory (3 models x 2 contrasts x 4 metrics). Do not select a positive metric/model after viewing results or turn one favourable cell into a general success claim.",
+    "ordinal_caution": "Score means and differences summarise the anchored scale, not calibrated interval measurements of latent quality. Accompany them with score-frequency distributions, medians/ranges and task-level win/tie/loss counts.",
+    "secondary_contrast": "peil_labelled minus peil_unlabelled for all four metrics, explicitly secondary."
+  },
+  "uncertainty_and_inference": {
+    "primary": "Descriptive estimates with all six task-level effects visible. No confirmatory significance tests or universal superiority claims are planned for this purposively selected six-task study.",
+    "sensitivity": "Report leave-one-task-out ranges and the predeclared task-resampling sensitivity intervals consistently for every primary mean contrast.",
+    "task_resampling": {
+      "replicates": 10000,
+      "seed": 20261018,
+      "method": "Resample six entire task blocks with replacement; retain all models, variants and repeats within each selected block. Report the 2.5th and 97.5th percentiles as a task-resampling sensitivity interval.",
+      "interpretation": "Only six selected task clusters exist. This interval describes sensitivity to task composition; it is not evidence of random sampling from all tasks or a calibrated population confidence interval."
+    },
+    "within_cell_variation": "Show three observed repeat scores or their range; do not infer a reliable per-cell distribution from n=3.",
+    "multiplicity": "All outcomes/contrasts remain visible; no dichotomous significance decision is made. Any later inferential hypothesis testing must be labelled exploratory or separately specified before use."
+  },
+  "historical_analysis": {
+    "all_runs": "Recompute the same within-task/model contrasts under the final common judging protocol for all 648 historical responses; keep results separate from corrective results.",
+    "missing_input_partition": "Report the six affected historical tasks separately from the other twelve, and report essential-input-missing versus present/not-required. Do not relabel missing-input responses as corrected.",
+    "bridge_216": "For each metric on the matched original run-1 subset, show old/new 5x5 score-transition tables, exact and within-one-point agreement, paired score changes, and changes in naive-to-PEIL contrasts/rankings. Keep the original score artifacts unchanged.",
+    "bridge_limit": "Judge model, presentation, explicit anchors and reference/format/clarification rules changed together. Bridge differences cannot be attributed solely to Astra. Do not pool old and new ratings or assume a numerical conversion between protocols.",
+    "calibration_reuse": "Mark the 12 previously observed calibration source responses. Main-study scoring still uses fresh ratings under the frozen final plan; calibration ratings are never substituted. Present a sensitivity analysis excluding those 12 from historical summaries, with changed denominators explicit; do not call reused cases an untouched validation set."
+  },
+  "cross_cohort_and_taxonomy": {
+    "cross_cohort": "Show historical and corrective results side by side as different cohorts. Input restoration, contemporary generator models and system/user role placement changed together; their separate causal effects are not identified.",
+    "model_comparison": "Sol/Luna/Grok comparisons are descriptive; generation settings and reasoning compute are not equalised. Astra shares the OpenAI provider family with Sol and Luna.",
+    "taxonomy": "Use stable task IDs for primary scoring and analysis. Resolve task-versus-technique mappings before category-level claims; maintain a versioned mapping table and preserve original labels. Do not claim the six corrected tasks cover all six logic categories.",
+    "scope": "No result generalises automatically to other tasks, prompt patterns, papers, model versions or later deployments."
+  },
+  "response_status_and_missingness": {
+    "clarification": "Retain appropriate clarifications: accuracy/completeness 1 under v3, with formatting/fabrication assessed independently. Report answer-status and appropriate-clarification frequencies separately so low attainment is not presented as fabricated behaviour.",
+    "hypotheticals": "Keep v3 distinctions between requested illustrations, clearly labelled hypotheticals accompanying requests for missing data, and invented actual task facts.",
+    "not_zero": "Invalid or absent judge ratings are missing, never score 0 or 1 by default. No imputation or exclusion based on a low/unfavourable score.",
+    "completion_gate": "Prefer analysis only after 810 valid planned ratings and integrity checks. If unresolved failures remain, report exact missing cells/denominators and do not present a complete-balanced analysis.",
+    "retries": "Runner is append-only and disables automatic retries. On network, unknown-outcome, schema, quote or model/config failure, stop and preserve attempt/raw evidence. Any later retry needs a linked append-only attempt/version and reason; never overwrite or keep retrying for a preferred rating.",
+    "selection_rule": "Use the first schema-valid rating obtained under unchanged frozen settings for a response; preserve all invalid/unknown attempts. Do not regenerate a valid rating simply because its score is unexpected.",
+    "configuration_change": "If judge deployment/build, protocol, references, schema or settings materially change, stop and create a new version; do not silently pool mixed versions."
+  },
+  "human_review": {
+    "purpose": "An independent-of-Astra assessment of a preselected balanced sample plus targeted evidence adjudication. It is not a claim that human assessments already exist.",
+    "base_sample_n": 108,
+    "selection_seed": 20261018,
+    "corrective_sample": {
+      "n": 54,
+      "strata": "One response from every task x current-model x variant cell, selecting one of its three repeats. This covers 6 x 3 x 3 cells.",
+      "selection": "Sort 54 strata by SHA-256 of a canonical JSON object containing selection seed, cohort and stratum. Assign repeat 1+(index mod 3), giving 18 of each repeat. Pick the unique matching planned job."
+    },
+    "historical_sample": {
+      "n": 54,
+      "strata": "One response per task x variant (18 x 3).",
+      "selection": "Sort the 54 strata by SHA-256 of canonical JSON containing selection seed, cohort, nonce and stratum. In that order assign model by index mod 4 over a frozen lexicographically sorted model list, and repeat 1+(index mod 3). This gives model counts 14/14/13/13 and repeat counts 18/18/18. Use the smallest nonnegative nonce whose selected source hashes exclude all 12 prior calibration source responses; abort selection rather than silently relaxing this exclusion if no nonce 0..999 succeeds.",
+      "chosen_nonce": 2,
+      "model_order": [
+        "deepseek-r1-0528",
+        "gpt-4.1",
+        "gpt-5",
+        "grok-4-fast-reasoning"
+      ]
+    },
+    "sample_freeze": "Record selection algorithm, model ordering, seed/nonce, selected job/source hashes and final masked presentation order before any new judge scores are read. The selector may use metadata and hashes only, never response quality or judge score.",
+    "presentation": "Reviewer first receives neutral audited task facts/common requirements, the same rubric/policies and response text under an opaque review ID. Hide generator, variant, taxonomy, cohort label, run number and Astra scores/rationales. Writing style can still reveal condition/model; record partial masking rather than complete blinding.",
+    "ratings": "At least one named human reviewer records all four 1-5 scores, answer_status, appropriate_clarification, exact supporting quotes, uncertainty and verification needs independently before seeing Astra ratings. Prefer a supervisor/second reviewer who did not design the prompts; author review is acceptable if clearly disclosed, not labelled independent external validation.",
+    "grounding_second_pass": "After the independent common-rubric pass is locked, inspect the exact submitted generation prompt for the sampled historical missing-input cases and for any disputed grounding claim, especially CAL-08. Record this as a separate prompt-grounding audit; full prompt visibility can reveal treatment. Do not silently feed it into or change the frozen Astra protocol.",
+    "targeted_set": "Separately review all needs_human_review flags, suspected reference conflicts/unverified source claims, structural anomalies, and the predeclared CAL-06/07/08/12 boundary cases even if the judge flag is false. Targeted cases are not part of an unbiased agreement sample and must be labelled separately; deduplicate overlaps with the base sample.",
+    "agreement": "On the base sample, report per-metric exact agreement, within-one-point agreement, mean absolute ordinal-score difference, signed difference, and status confusion tables, with separate historical/corrective denominators. Do not treat sample agreement as a general accuracy estimate across all LLM tasks.",
+    "adjudication_trigger": "A difference of at least 2 points on any metric, answer_status/appropriate_clarification disagreement, unsupported reference fact, or disagreement about invented actual inputs triggers explicit adjudication. Prefer a second human for these cases; record when only the original reviewer can resolve one.",
+    "adjudication_records": "Append reviewer identities, locked independent scores, evidence, decision, reason and timestamps; retain original Astra ratings unchanged. Primary reports use the raw frozen-protocol Astra scores. Report human/Astra comparisons on the fixed base sample and targeted adjudication outcomes separately. Do not create a primary hybrid dataset by replacing only selected ratings. Any human-corrected full-cohort sensitivity analysis needs a separately specified complete affected-scope rule, with comparable coverage and disclosed selection.",
+    "blocking_reference_issue": "A material reference/rubric error found in human review blocks affected substantive claims and requires a versioned protocol correction with a justified complete affected-scope rerating, not ad hoc patching of selected answers.",
+    "claim_gate": "No final thesis performance claims until the preselected sample, targeted flags and reference conflicts have been reviewed or explicitly reported as unresolved with limits."
+  },
+  "preparation_decisions_and_defaults": [
+    {
+      "decision": "Human workload",
+      "default": "108 preselected responses plus all targeted ambiguities; reviewer names not yet assigned.",
+      "required_before": "Human review begins; identities need not block saving the plan."
+    },
+    {
+      "decision": "Statistical claim strength",
+      "default": "Finite-benchmark descriptive contrasts, six-task sensitivity and no confirmatory p-values.",
+      "required_before": "Any scores/aggregate comparisons are inspected."
+    },
+    {
+      "decision": "Taxonomy interpretation",
+      "default": "Stable task IDs only; defer grouped taxonomy claims until the classification record is resolved.",
+      "required_before": "Category-level interpretation, not neutral response scoring."
+    },
+    {
+      "decision": "Judge update policy",
+      "default": "Record observed Astra deployment version/upgrade policy and stop on any detected change; do not promise provider-weight immutability from an alias.",
+      "required_before": "Full judging execution."
+    }
+  ],
+  "limitations": [
+    "This is a dated analysis plan made after the original study and calibration, before final main-study scores. It is not prospective preregistration of the original study or corrective collection.",
+    "The calibration is diagnostic and AI-assisted. Four preselected boundary cases were not flagged by Astra; manual-review selection must be independent of that flag.",
+    "CAL-08 remains a prompt-grounding limitation because Astra receives intended reference facts and a missing-input status, not the complete original generation prompt.",
+    "No experiments, judging, human ratings, score analysis or thesis edits were performed while preparing this document."
+  ]
+}

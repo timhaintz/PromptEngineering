@@ -1,0 +1,108 @@
+{
+  "text": "Based on the evidence, the statement is **misleading and generally false**. From low Earth orbit, the Great Wall is very difficult to distinguish with the naked eye: it is narrow and its color blends into the surrounding terrain. Exceptional viewing conditions may make parts of it detectable, but it is not conspicuously visible from space. It is certainly not visible from the Moon.",
+  "request": {
+    "model": "gpt-6-luna",
+    "input": [
+      {
+        "role": "user",
+        "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6-luna",
+  "returned_model": "gpt-6-luna",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 39.0,
+    "output_tokens": 1634.0,
+    "total_tokens": 1673.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:44:44.988242+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "f53516790c26a0acdafaed76ac3bc1f715f2271496e0edcd18217a92b893d7cd",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "093d813ff3c0a5c7cb6e319836ec1769960ecfdd8c56ed88cc7340450915690f",
+  "actual_request_sha256": "458a08eef0598bc0be1da6863dd22cbd41fad19e56229bc9b741b4046d5675f2",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "pattern_key": "at_assessment_opinion_verification",
+  "source_pattern_id": "37-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-6-luna",
+  "model_deployment": "gpt-6-luna",
+  "messages": [
+    {
+      "role": "user",
+      "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+    }
+  ],
+  "output": "Based on the evidence, the statement is **misleading and generally false**. From low Earth orbit, the Great Wall is very difficult to distinguish with the naked eye: it is narrow and its color blends into the surrounding terrain. Exceptional viewing conditions may make parts of it detectable, but it is not conspicuously visible from space. It is certainly not visible from the Moon.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 39,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1634,
+    "output_tokens_details": {
+      "reasoning_tokens": 1552
+    },
+    "total_tokens": 1673
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "85bfb09107a8c9005eb610b48f0811c6cad8d604c8823996668684873f72cb75",
+    "original_artifact_sha256": "b7e552cf51aa2f7698a0fbf8929e7d25e9c0238dd023e116b64cf184d4ecbfbc",
+    "original_record_filename": "f53516790c26a0acdafaed76ac3bc1f715f2271496e0edcd18217a92b893d7cd.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "49f932e6ce7255ae083eccc54141716c488008d11b4667de72f0d8c808543dbd",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "9304f361020d48d7b8ae9e80c8b17f237c469f9ec9a5825de46a6332f9113755"
+}

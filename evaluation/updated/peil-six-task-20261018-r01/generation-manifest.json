@@ -1,0 +1,2916 @@
+{
+  "schema_version": 1,
+  "protocol_id": "corrective-six-v1",
+  "cohort": "corrective-six-v1",
+  "source": {
+    "path": "evaluation/chapter6_evaluation.py",
+    "git_commit": "59d7aa17059b7533874fd6624a73b6fb2e94b93a",
+    "sha256": "2e9714f9a5758638ee95fbd4b5b369791e673612410d354027941a6463cd10de",
+    "runner_sha256": "a799ca8c3587ad193b552b05903a4ad3601544af9afdf8ca4d8a15b9b0b57777"
+  },
+  "design": {
+    "runs": 3,
+    "variants": [
+      "naive",
+      "peil_labelled",
+      "peil_unlabelled"
+    ],
+    "seed": 20261018,
+    "schedule": "Explicit seeded shuffle of task/model/run/variant jobs",
+    "scope": "Six original task instances; no regeneration of other tasks",
+    "interpretation": "Intended configuration with restored input; role and input effects are not isolated"
+  },
+  "taxonomy": "Original task-level metadata retained as historical assignments; no parent remapping",
+  "model_keys": [
+    "gpt-6.1-sol",
+    "gpt-6-luna",
+    "grok-4.7"
+  ],
+  "model_specs": {
+    "gpt-6.1-sol": {
+      "key": "gpt-6.1-sol",
+      "label": "GPT-6.1-Sol",
+      "endpoint_env": "AZUREVSEASTUS2_OPENAI_ENDPOINT",
+      "deployment_env": "AZUREVSEASTUS2_OPENAI_GPT61SOL_MODEL",
+      "default_endpoint": null,
+      "default_deployment": "",
+      "api_key_env": "AZUREVSEASTUS2_OPENAI_KEY",
+      "use_responses_api": true,
+      "supports_temperature_zero": false,
+      "reasoning_effort": "max"
+    },
+    "gpt-6-luna": {
+      "key": "gpt-6-luna",
+      "label": "GPT-6-Luna",
+      "endpoint_env": "AZUREVSEASTUS2_OPENAI_ENDPOINT",
+      "deployment_env": "AZUREVSEASTUS2_OPENAI_GPT6LUNA_MODEL",
+      "default_endpoint": null,
+      "default_deployment": "",
+      "api_key_env": "AZUREVSEASTUS2_OPENAI_KEY",
+      "use_responses_api": true,
+      "supports_temperature_zero": false,
+      "reasoning_effort": "max"
+    },
+    "grok-4.7": {
+      "key": "grok-4.7",
+      "label": "Grok-4.7",
+      "endpoint_env": "AZUREVSEASTUS2_OPENAI_ENDPOINT",
+      "deployment_env": "AZUREVSEASTUS2_GROK47_MODEL",
+      "default_endpoint": null,
+      "default_deployment": "",
+      "api_key_env": "AZUREVSEASTUS2_OPENAI_KEY",
+      "use_responses_api": true,
+      "supports_temperature_zero": false,
+      "reasoning_effort": null
+    }
+  },
+  "tasks": {
+    "across_comparison_attendance": {
+      "key": "across_comparison_attendance",
+      "logic": "Across",
+      "subcategory": "Comparison",
+      "task_title": "Compare two numeric values and select the larger",
+      "task_description": "Given two attendance figures from different rounds, determine which round had the higher attendance.",
+      "naive_request": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?",
+      "task_material": "",
+      "role": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.",
+      "context": "You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.",
+      "instructions": [
+        "Extract the numeric attendance value for each round.",
+        "Handle thousands separators (commas) correctly during comparison.",
+        "State which round has the higher attendance.",
+        "Provide the numeric values to justify the comparison."
+      ],
+      "technique": "Use step-by-step numeric extraction and comparison before stating the result.",
+      "output": "Return the round name with the higher attendance and both numeric values.",
+      "reference_notes": "Correct answer: SF 2nd Leg (34,669 > 33,861).",
+      "source_paper_id": "20",
+      "source_pattern_id": "20-2-0",
+      "source_paper_title": "Successive Prompting for Decomposing Complex Questions",
+      "source_pattern_name": "What round had a higher attendance: SF 2nd Leg or QFR?"
+    },
+    "at_calculation_math_word_problems": {
+      "key": "at_calculation_math_word_problems",
+      "logic": "At",
+      "subcategory": "Calculation",
+      "task_title": "Solve a multi-step math word problem",
+      "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+      "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+      "task_material": "",
+      "role": "You are a careful arithmetic problem solver who shows all working.",
+      "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+      "instructions": [
+        "Identify the starting quantity.",
+        "Calculate the total additions over the specified period.",
+        "Sum the starting quantity and additions.",
+        "State the final answer clearly on a separate line."
+      ],
+      "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+      "output": "Return the working steps and end with: The answer is [number].",
+      "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+      "source_paper_id": "31",
+      "source_pattern_id": "31-0-0",
+      "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+      "source_pattern_name": "Math Word Problems"
+    },
+    "at_assessment_opinion_verification": {
+      "key": "at_assessment_opinion_verification",
+      "logic": "At",
+      "subcategory": "Assessment",
+      "task_title": "Verify the truth of a factual claim",
+      "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+      "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+      "task_material": "",
+      "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+      "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+      "instructions": [
+        "State whether the claim is true, false, or uncertain.",
+        "Provide the key evidence or reasoning behind the verdict.",
+        "Note any nuance, context-dependence, or common misconceptions.",
+        "Keep the response concise and decision-ready."
+      ],
+      "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+      "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+      "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+      "source_paper_id": "37",
+      "source_pattern_id": "37-0-0",
+      "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+      "source_pattern_name": "Opinion Verification"
+    },
+    "beyond_logical_reasoning_premise_question": {
+      "key": "beyond_logical_reasoning_premise_question",
+      "logic": "Beyond",
+      "subcategory": "Logical Reasoning",
+      "task_title": "Reason step-by-step from premises to conclusion",
+      "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+      "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+      "task_material": "",
+      "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+      "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+      "instructions": [
+        "List the premises explicitly.",
+        "Turn each premise into a question to identify alternatives.",
+        "Reason step by step using both lists, tracking branches.",
+        "State whether the conclusion follows and explain why."
+      ],
+      "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+      "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+      "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+      "source_paper_id": "33",
+      "source_pattern_id": "33-1-1",
+      "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+      "source_pattern_name": "Premise-Question Reasoning"
+    },
+    "beyond_hypothesise_theory_of_mind": {
+      "key": "beyond_hypothesise_theory_of_mind",
+      "logic": "Beyond",
+      "subcategory": "Hypothesise",
+      "task_title": "Infer a person's beliefs from a scenario",
+      "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+      "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+      "task_material": "",
+      "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+      "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+      "instructions": [
+        "Identify what Alice knows and does not know.",
+        "Identify what Bob did and whether Alice is aware of it.",
+        "Reason about Alice's belief state based on her information.",
+        "State where Alice thinks the file is and explain why."
+      ],
+      "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+      "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+      "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+      "source_paper_id": "32",
+      "source_pattern_id": "32-26-0",
+      "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+      "source_pattern_name": "Understanding beliefs"
+    },
+    "out_decomposed_prompting_letter_concat": {
+      "key": "out_decomposed_prompting_letter_concat",
+      "logic": "Out",
+      "subcategory": "Decomposed Prompting",
+      "task_title": "Decompose a string manipulation task into sub-steps",
+      "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+      "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+      "task_material": "",
+      "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+      "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+      "instructions": [
+        "Split the input into individual words.",
+        "Extract the first letter of each word.",
+        "Concatenate the extracted letters using spaces.",
+        "Present each step as a numbered sub-question with its result."
+      ],
+      "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+      "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+      "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+      "source_paper_id": "6",
+      "source_pattern_id": "6-0-0",
+      "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+      "source_pattern_name": "Decomposed Prompt"
+    }
+  },
+  "jobs": [
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "6c9ca3894e52116516044a3544ca5470e204c89a80a8ba64980c57e714b59d69"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "3b4444202ba0e4bfd903384f1f3d13eca60b27ed50811e71ac35cb8ac3d78fd3"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "52939e91aea4f9d4a7a0455b2d4a9ae569027ff11cedcfb00167c2bc831170db"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "eec133b02b2592dd0bec9dce87f57a7219d6b060948bccd46ca1046fae298d70"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "2e9f88d0d382a431678575084d496b1174aee3840819a7aa693f309623b367b2"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "b7db5bb2bedc8f0bf758698aaecb899fc77efc8985b26aa59c4d5e1be1ac7ce3"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "7102177ad25bedf9805ce410330ffb52e04218dffb78b78df0b494952a5c4e29"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "fd5bd405ebd234329d4b38609a63bd8e90380a0cd8c101482ee446719d03dcf0"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "02fcb3fc2a0ddecb59bdecc5fd11da896d950a8b767f64513e4ad00fe9a27dcf"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "9640f806486af94b6a3ff6b26d171b1598e54c12015ca1a188a0874dfa777256"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "ee82dbd9f17c7294d01ce7d64f94aa392bdd1fa9d0c3192d2a3e318693669f43"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "5aa12daa4791e19b16b36374a2cd852191edb68e79aeb6be82ea26ca5161ac4f"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "63e675aa8997ef6a58a4a575bea00fb061ea1cc4cb0d573cd73a03bb79c4b2ef"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "7062193e5e1a61b7a767b20e0faca727a20a404ab4547d3854c846aaa810fcea"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "aef1247dfd34ae9d2d9135693ddab9a5b7fba62eb7a8876a6aa4ecd8572b0255"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "96f791274d67c09e73226b3c89205c218e62bbbc37d2f29d16d4f9003144fe14"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "eb518d4ad703a549629e7d5ae1bff164591e70bbefa9326b41da491b1099facb"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "20cf46d0740ab9daafe795d2f466b0e3bd4b0259e4bfdbafd4411115ef26b7af"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "70e254302dbab6fc304fec593964727515945e5d64dd01f0255bf5238c3bfb7d"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "3cb0cafdc45e8047c2303020c3b5ff67124d0188ea3091118e49f38b99690805"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "31c9e843fdaba251c332fb27951c368d07da641e08bc8ee0240b6c7c20ae6c7a"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "172645fbd945913e6c8ebc097109bb37246d4515d0c54df31d76f52d4cdb69c5"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "34cccffa77a5aa9a787b8e94a0457818b7e1868fc4664ae6eb6dedf111ba3480"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "db37de949c2347d47b56996b4c60cd512e3ecd6a966a4201b6cd0076a4b604ab"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "8caa00c7753f2ce92679d400eb2db427fae6ef4b68b4921c556b376a73963590"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "2a02c5c418816984b52e96eb462fe01305adb174ebf85d9d00e186ca126b4bfd"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "573ef12f5074da2cfb53019f484ac2ee7c3ae56ba11f1caff49685c8835bcfb7"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "417f0d53c7b7f5c1c877e9ee3956786d85acf3854a9e3e0536e3ae0c3008be02"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "ab8cdea729bada10d621a257d54be55c120286e399d0063080535f5f7d6630d5"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "569b10897b245f9f4ceecfccd4977726ff21a159dc03fb20646059bda2cd0008"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "7639bedd7c003d3a792730f85b0692904da5e94509bed6758c77f74ffc70bc59"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "f5c8826ad946b4850063badb5dce63b983f95f58bb1e4d067b65c395fb42d2ab"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "86785ba65dc5a4bf4771df0f4debea5a80a4ad2dc3c0e3fbc706ee8f79d297ff"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "e92477376c416b03265a25997d8203912d5e32d7d54142a7e9b417e81c2d252a"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "0c9b0e1025c6e9d6cf2c245f79c8e9673d05079f768bcf9d8474199ff64e54bb"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "77ebd36ac433db89583cba928ae7b95c98ef9aa13d6d70c28aa14956e70403c9"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "0a541f4b0a0c0aac39e9cb3f5d538cbbbcfc6a3f4a4bb48dff59685d687e3c36"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "35ae64798c598ac0c9bc29cd414db5d5b05a3571d748bde9a20c93d644095594"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "0957bb24bc845f16b3ee0caa536f2aee601e4ed8a1d1c2945d2dd53f075611b5"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "602cf92ed56e45f7fdcd3ee73c9aea260db32bda12e69aae71e83a59dc799a0f"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "2c335751c4b9f2d6d8d54fdc2f9445dcc056a01f776603986e6a7118cdcee8b2"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "2d6129b5953f9613baf036d52b0e3c6dd39be9cd47b70562e10be51af71144cf"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "a2d921e94295a9fb8f2decddf274d054b48cc2ca898999ce6b484085ab36d737"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "d256f544f5b736f06a8a4c79ca8635bdd6a3af8b4e7c15a7c2a07c0f5fe3010c"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "9229dc8c6229d3b2427a03ee34c6da503be7c32f7f1f92fb7002f1e8dc29d79d"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "9594e1c6d4ce2fa689705dacfab283a13f83c86a06cd9a7f34566943c2b8f662"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "593d2fa616a9e3368eb4258d3f24f6ced3b2fcecea0ccc07540147aced0f9b5a"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "cf54446520e1847be211c9392f718c0092f714a86af38164ba5314c98c20bae4"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "84d292a51bb709e6f26bed9494e6a5eb112e7c84b649e09177963d16e5cd3e29"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "811b85d09a106b49bc4af2f11d5488b97798880873c070fed5679e7150703389"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "3bce747beedf561ef94f2a0fb0d8447c62efcc48ea433b524e013f96248876f4"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "83d323a91b46c9a9db26295e5d820614da3dece68871c7821834c81c2877bc62"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "31aebdd0ad94c28742c327861d50aaa1aea6403a15ad250f0093090822603220"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "c55c3b24bdc7d9cba93eb3f5149748f3ea2d96c7a3b86e54fcc219860b2417c4"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "b603355ec724c0bd647bc579a0030f35245f9738320a44a8ed5817faf032568d"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "d3d022c97b8ee8f3e02260cb9c32f0691a6076dd907f6e7a39018406bd00a039"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "829e59a0bd23ea409e3f417cf84eb7af60cb689b1351262a0ab9a0bd2c2f816e"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "f7607d99099a8d307887ae6b032c99cf5d1c01dbbba63d5c94a95075475ba1a0"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "2a2ac5158c422230b7cf81abaaa8e8f423cac8b6d61186f297ddb77dcee2283c"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "01831b8956e3039acc0a9f31b032dc569c28536e3f3f981eb7c9e462a3c7ca28"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "4640e2cf70047c084b8cba1e5b20dbc6c3c3ffaa4ccc5a1cb933eca5568b963c"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "6902ab8f429c2dc775b641a24c4f28d15be7f81572a6ab811ca84595a8878dc3"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "384affebeddee01fb8e161fde4e7562eb57350ed44fcdafdef8bfe4b40939ed8"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "7ca8c7651fab8c5c1e7eb697220357edfc9a605cb78ab63d2510bdb4f5c8307b"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "32d53c9647dc95e2da380f216a1cff3857a9a2cf3498ed99390dbcc439a154c0"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "575fd8c5018f3b76ddff674ede99321f1dfcb1d8bd4f5da982e7f4f9682ad027"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "7c6c9de8d2553fb1030627155f3f97476b01b9f29f9de1f7d494d1fcc9d1ded5"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "98fe6992fb33c170769d717c9d0d72592913e464a0fcbbba55865b790b3adea5"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "15e81a6efb87f21805e5adabf2653f2dbb05a11ba33bda4e1d90140a43c50e8f"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "6dcedc73936936b84098a6f069ed22b7a5dae9f3810444e0b67ad3b40caeccc0"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "d2c9c01e25fc41b182681f6bc73ae1d7fed1a2b898d74c6da2a12789c2a02dac"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "00555adda613074b9bf463521e9f3f819487e112aac471f1f5fb11acb4d89d45"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "dca4139ef6dfb7d02a8b1770b96d04280dd9ef4b6d12062b76e9e7cb350ab0e4"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "3996b2edecee1c4e9e5934327babe7426ee68e773953d3280ed8bcc50630ac85"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "dbfbe65ac39dd92a440d26d25e16ac4cf876c84653e247647d60ad2a2b7a3d6d"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "22d372f4475825347a0402e19e8a5699deaeb7b601c98ca53b22bb4029c1e3f7"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "f7ff64903e767da01d7d381bcbfd9b50f21e78067a90baef497cf7889077f951"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "c567af00e40340ad4ac860d5f483a6964e46127d1c20fe9fd785a24d2787f633"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "49b4aabefb3989b7f9db2651ecb1a3b88641ab6a80b9c3a8df689bce54db9285"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "3cd59babe80b0eb135c552547866bdb0ec056606fc41779a54bc55b71f8af97a"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "8bc9e45050a6c44d62952a2ccc30223e15d1abd0fc7f744134cd93e5d45540ca"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "11d8e6eb593f05f238dc02703fe42e12dfebd17b28f4f3859190013b5407a286"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "e56feba30df341ef18412966e9602ac27bf30ffd318755475777012bb598457a"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "ba68bd02d36e3c346aa2987ea0cd039a822f708d5165aaba7e3944f0d5dd0c27"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "a6a7a49ea67a3d77c42eef1341894c62dc01bb3d2b0ed396c55d99ce3a8ae3cc"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "bc83d18e00cb794fd56c245ff53b1b5024409f382d1f690cd5e9479f607a2051"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "512a1a65d93c75a364ce18f583b99cba535380d94d3e9c5b183f76e18bba6af7"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "365b330662401dbc28b783b3bced6844078faea95fd7dc25c4a563dd81d11d79"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "8c64a4d5a6cfabf48db4bdb78f38810fb3793305cf675fbf1932b5ac85f2c45f"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "b4838221221c630a3beb5c6aa87202f8ca218848043c9db289c97d929307bd53"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "f62401057cc0643cbad0ad27b493895a2dc26fb0e3fd8c3c84c1ac423af5e4d0"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "1508283113bde62e409d34082974109e876ab4ef73b6502086d3ac9c00f09828"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "c28de19975c3b78e20d8525de683a5c7dc9ded7a390f20331650a538b9794734"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "23d8585374d6aea907a50c94de5a76cd70ae8ec82d64fe40a315c87c6931eaf5"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "1b6109b6c525130811d84011c436e0e7ab178082c6482359c247458da91b5ea8"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "f1264f73a72048191e6ef712eb97f9b58afa47a9e3b4675aafe8360b4f5e4810"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "3cb061dca4d1865d2bf52a33a604acf51036ee3396935cc3d1e2bfddd76d608a"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "4275c6d3f63bd977503ca015d44dcd1dc38e84d560e0c2b06da4469dcd37aa4f"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "8fcf771a157a0c7760decd51309c0baff0c07e157c03ca0f766080020951a653"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "1db34e76f046b50267b993733c79dfb0d8c389d5a0b1286af9282d2b8c77777b"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "c3c85fe2b6cc559d2f8045e67d69771031d80f21b5b715724fb327f746ef4d18"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "e3829226472acc9af19e2ce22d6cbb97a47263b415f64c24e250f3ee76555c58"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "27813fced4c772bb3f9d5bdcad8128b20586a58a4b56f2f87e727186accd4a68"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "f53516790c26a0acdafaed76ac3bc1f715f2271496e0edcd18217a92b893d7cd"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "9247cc83ee4a0d69d2e787646a64e345369b21b703589d843725004f2b64808d"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "85074117eb126824e06745daccd37503b359f78dc261c898676f3c9e6550f259"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "907e0d00f004ed364e45892046aaeb6ed50c7925030eec55559d572e8f788242"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "d45160374b9e8eb7ed187e2056a04e39f86d0c869c68a7327472fb9cc78af4b7"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "6bfc316af49eb22f0324764063d7a2f126c8474b988e2454ffb1e232f07ff013"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "20a9238166894c1dea2fc6aac1991d5f5f0b4ffaa160af5d5813090cf83576b5"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "fc7c736bf5926d944ff8419b72c76b5f1e54cbc897898530e328f89bc0a86ab2"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "d43c816865a97b92ad5d31ed5477d1169f13de8043b60bb39e1a81d62052b6d9"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "e08fd13c1f16fbe76ca7f46daaf8f1e23f105eb6b50ea18885d0ae466ab5ad96"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "aa87b9bc33ceed8fb2d53a9c8795e588dcff22704b92037ca859f085e748366d"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "cd6452603174a40f59acd7c320e0bcb4be0d3b21062db46c9a4a4345556282ee"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "8a1b6aefd58d1e2a124c308391dfdb540f2a2ae55c10b59ed77e1f9dd6f54a79"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "b9b1ff68f799a12381e5c8d93719f3c9f32e63f66e5ae5e42afb550a96568394"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "b99c48ca94cbdb7c54ab9794b125492db618cecedaf95fc6179d7f9552a92868"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "c2f94787eab7a59d0cc2770cbdc0a33b020731bea9ee818653b4005168220fc6"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "ff61c6c22a54afb3f4cbbdfc7b8e85ea665cab08dabeba136bea630dbded32cf"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "42092926e4be703af75115948582bcfd30e2bd30cb08d9b43e3d912247b84827"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "268d187bf0b463603c00ea5399f4b2fc04317b209185d0f666e966be84ca6023"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "0414b784337e1b1f3fb9d89ceacc4e6ffd27f418ede98d4cbea15da1d0f0805e"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "5774f9958675eecfd1fcadcc04d74f73e3cc634eefd5e37a5f50de1982af1e6b"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "740952db6ed0b462b407ed8a607604378b96292c8c4d214d927d10b2cedbc46c"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "06f07838c281fa71ec4011b4773ee08b2a20a0ea2d544149dbb1205bbc1b702e"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "ce4e8729639a31aa55225baa0c400988b98647f8bca15b1f5465758230e9d860"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "f8e71e23daedf4f914aa61d5e7f277990b124dc64a0200bec8077f53303953bf"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+        },
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "4c36b5ae771f1c65edc03d6dbd1326d51cbf5901410dd87cf87dae61206ace4e"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "7593aa3e5fbae6f9747b3aee792fef10d1ebb2f1e02e8a24295146e9b04e8317"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "bf1c49476d1cd50e17c5fe8221b2769fa4092cc29ee85cdbd9fc62e0ff7de00c"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "779548940c4c9f1dba1fa04621cc31a2c7e72f51b7416d5da9d20e5b29a433fe"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "ea2710d9f1f3faf84f992309b00fc3fede6860aa91966474b57a76eaae4de02e"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "7af057738f74f46987631863420e5d0ce020517c83c2d816b8d8857ca6829300"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "f9fc02da27f8886e701439f25df1a86f59f9c7ff48035d0cf17552b7786b01bc"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "b3a9e99603b0b68660161fca0a75bdc844d32eac7f9b416442d230c159058394"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "dea4a6c44fd5d1f924552f1174e47ae2fee5af2379d8f6790c5eeb1df457883b"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "747a81bfb097d702fba831c09ee058a766a3a8ec4762a78ce01706ad3b8cb9b0"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "4afc95b542d3e8141e43f0b4d2034ba0cfeeeba713d84041ed7d2dc833f46391"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "1e315ab24be99a2ed41bd19e6c427c3fc21e39de1e9ee110827a3e4a22daaa2d"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "aa42c37f44402a4fc93da3d5075194a6f3eff05ad0570c008e83d3d4dc699868"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "1735059f7969268a7a9bd38fef9cea15a96b307489a71a006dcadd11ed289abf"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "e45aaa088c904f32d294f36f0da79ad30d5a1c680a8f2c659e59df2a456dbf8c"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "d347ec173c46af909ea76646755acc28644147e22a17e6e1247b1a81353e286d"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "d1d74b36ddbabae55e98149bdae24ddf901f20d0d20d100b4f57fc2d53e358c7"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "e4d60459bd61c8cdaacaec2c68a96de6bb0078ae3af0b69bc3646325c35f952a"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "b726125b2d7d75af4bc2005d11c610afe2521f5cbed96736d021bdd2104371c9"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nContext: This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\nInstructions:\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nTechniques: Use perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nOutput: State where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "c4d521f6fc809cb11e95716345926cc5863b92b4619c23e46b4a22e7bf1a515a"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "d66a26ab097e1aff086f44bf50a92a803275807d04f53ee842077566c8298998"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "6dd476ddd9a3a6819343f7a607baae3b384d3eb51af0e39cf157f98435a79737"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "eb083669b9f735ceb2a3f53ca473182ab963bfddc2c34c4b413c480b611ecf54"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "9990b64f3d80d14a36e1a592ad5cdcab2a5fcfb719cc3d54a0348426be913407"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "e7dbd3fdbb9af229c35068eb12cb46ecb8820cfce817f643e1a6126923705d25"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 2,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nYou are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nUse step-by-step numeric extraction and comparison before stating the result.\n\nReturn the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "3acfcca0a0b624a95a3e22d9279e1dafffb50eac2c5727901d7d06725c07551e"
+    },
+    {
+      "pattern_key": "at_assessment_opinion_verification",
+      "source_pattern_id": "37-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+        },
+        {
+          "role": "user",
+          "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+        }
+      ],
+      "job_id": "b76b04814f2381fd66f697c2e71ec4ca046c40cb3bd9416df91e10bf8e3c8f3f"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a careful arithmetic problem solver who shows all working.\n\nThe result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nUse explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nReturn the working steps and end with: The answer is [number]."
+        },
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "4d3886b0155abe13b3440feebd12b1b3a7c96965af3ac93b705c78f2c89356c2"
+    },
+    {
+      "pattern_key": "out_decomposed_prompting_letter_concat",
+      "source_pattern_id": "6-0-0",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nContext: This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\nInstructions:\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nTechniques: Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nOutput: Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+        },
+        {
+          "role": "user",
+          "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+        }
+      ],
+      "job_id": "9e072ed3acbab570fcbeda73fcb9c638b280cd6514868c23499bc708ab6cd37f"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "grok-4.7",
+      "run_index": 1,
+      "variant": "peil_unlabelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+        },
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "5fd8a01b27e2d28d9303f0f82ce5998dada240c3e00abdf9f06f9145bf18cc88"
+    },
+    {
+      "pattern_key": "beyond_hypothesise_theory_of_mind",
+      "source_pattern_id": "32-26-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 1,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+        }
+      ],
+      "job_id": "f02c39cb21d2212ec2f2f57b959b3a6c4190ec1683bc9027ac7b23aa588631a3"
+    },
+    {
+      "pattern_key": "across_comparison_attendance",
+      "source_pattern_id": "20-2-0",
+      "model_key": "gpt-6-luna",
+      "run_index": 3,
+      "variant": "peil_labelled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Role: You are a data comparison analyst who extracts numeric values, normalises formatting, and identifies the larger value.\n\nContext: You are comparing attendance figures from two sporting event rounds. The figures may include thousands separators that must be handled correctly.\n\nInstructions:\n1. Extract the numeric attendance value for each round.\n2. Handle thousands separators (commas) correctly during comparison.\n3. State which round has the higher attendance.\n4. Provide the numeric values to justify the comparison.\n\nTechniques: Use step-by-step numeric extraction and comparison before stating the result.\n\nOutput: Return the round name with the higher attendance and both numeric values."
+        },
+        {
+          "role": "user",
+          "content": "Q: What was the attendance when round was SF 2nd Leg? A: 34,669\nQ: What was the attendance when round was QFR? A: 33,861\nWhich round had a higher attendance?"
+        }
+      ],
+      "job_id": "69da3d2a6fc2af957eca9ae9f91f31a35db2db7801a2641c1932841b5a7b64d2"
+    },
+    {
+      "pattern_key": "beyond_logical_reasoning_premise_question",
+      "source_pattern_id": "33-1-1",
+      "model_key": "gpt-6.1-sol",
+      "run_index": 2,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+        }
+      ],
+      "job_id": "38d02f233e925420a5aa75e78de6ffb30106026dc7e7747a80f95db3cba83f09"
+    },
+    {
+      "pattern_key": "at_calculation_math_word_problems",
+      "source_pattern_id": "31-0-0",
+      "model_key": "grok-4.7",
+      "run_index": 3,
+      "variant": "naive",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+        }
+      ],
+      "job_id": "553ec1c54891decb86575b1d307ea5f34f8dc9db4024590755c3006ef6ead9eb"
+    }
+  ],
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b"
+}

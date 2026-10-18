@@ -1,0 +1,112 @@
+{
+  "text": "**Premises:**\n\n1. All managers in the company have completed leadership training.\n2. Sarah is a manager in the company.\n3. The leadership training includes a module on conflict resolution.\n\n**Derived questions (to surface alternatives):**\n\n1. From Premise 1: Does “completed leadership training” mean every participant finished every component the program contains, or can completion be certified while omitting some included parts? (Alternatives: full mandatory completion vs. partial/credit-based completion.)\n2. From Premise 2: Is Sarah covered by the universal claim with no exceptions or different training tracks? (Alternatives: uniform application vs. unstated special cases.)\n3. From Premise 3: Does “includes a module” mean the conflict-resolution module is a required element that must be finished for the training to count as completed, or merely that the module exists within the program (possibly elective, version-dependent, or non-blocking)? (Alternatives: mandatory integral component vs. optional/available/non-universal component.)\n\n**Step-by-step reasoning (tracking branches):**\n\n- Combine Premises 1 and 2. The universal quantifier applies directly to Sarah, yielding the intermediate result that Sarah has completed leadership training. No open branch remains on this step; the deduction is immediate and exception-free under the stated premises.\n- Introduce Premise 3 and test the inferential link to the conclusion. The critical question is whether completion of “the leadership training” entails completion of every module the training is said to include.\n  - Branch A (mandatory reading): Treat the module as an indispensable part of the curriculum, so that finishing the training is impossible without finishing the module. On this branch the conclusion follows at once.\n  - Branch B (non-mandatory reading): The program “includes” the module yet still permits official completion without it (elective status, alternative pathways, or credit thresholds that do not require every listed module). Premises 1–3 remain true while Sarah has not completed the conflict-resolution module. The conclusion is false on this branch.\n  - Branch C (version/timing reading): Managers (including Sarah) completed whatever version was current at the time; the present-tense claim that the training “includes” the module does not guarantee the module belonged to the version each manager actually finished. Again the premises can hold and the conclusion fail.\n- Because Branches B and C are consistent with the literal premises yet incompatible with the conclusion, the move from the intermediate result to “Sarah has completed a module on conflict resolution” requires an extra, unstated assumption (that inclusion = mandatory completion for every past or present participant). No such assumption is supplied by the three premises.\n\n**Final verdict:**\n\nThe conclusion does not follow. The premises establish only that Sarah completed a leadership training that somewhere includes a conflict-resolution module; they do not establish that every such completion necessarily encompassed that specific module. Valid alternatives remain in which all three premises are true and the conclusion is false.",
+  "request": {
+    "model": "grok-4.7",
+    "input": [
+      {
+        "role": "system",
+        "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+      },
+      {
+        "role": "user",
+        "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+      }
+    ]
+  },
+  "requested_deployment": "grok-4.7",
+  "returned_model": "grok-4.7",
+  "model": "grok-4.7",
+  "usage": {
+    "input_tokens": 202.0,
+    "output_tokens": 2600.0,
+    "total_tokens": 2802.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": null,
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:48:18.800289+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "fc7c736bf5926d944ff8419b72c76b5f1e54cbc897898530e328f89bc0a86ab2",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "f531bc8bdc3bfa2c733090e31e73aff1b351c1964140dc2b5a93b5d6eca0802e",
+  "actual_request_sha256": "e751e660bf7ebd7b1ec4f1a87a3c78205937a0530e1e45c598799f8aadcdbb36",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "pattern_key": "beyond_logical_reasoning_premise_question",
+  "source_pattern_id": "33-1-1",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "grok-4.7",
+  "model_deployment": "grok-4.7",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nThe analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nUse premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nReturn the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+    },
+    {
+      "role": "user",
+      "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+    }
+  ],
+  "output": "**Premises:**\n\n1. All managers in the company have completed leadership training.\n2. Sarah is a manager in the company.\n3. The leadership training includes a module on conflict resolution.\n\n**Derived questions (to surface alternatives):**\n\n1. From Premise 1: Does “completed leadership training” mean every participant finished every component the program contains, or can completion be certified while omitting some included parts? (Alternatives: full mandatory completion vs. partial/credit-based completion.)\n2. From Premise 2: Is Sarah covered by the universal claim with no exceptions or different training tracks? (Alternatives: uniform application vs. unstated special cases.)\n3. From Premise 3: Does “includes a module” mean the conflict-resolution module is a required element that must be finished for the training to count as completed, or merely that the module exists within the program (possibly elective, version-dependent, or non-blocking)? (Alternatives: mandatory integral component vs. optional/available/non-universal component.)\n\n**Step-by-step reasoning (tracking branches):**\n\n- Combine Premises 1 and 2. The universal quantifier applies directly to Sarah, yielding the intermediate result that Sarah has completed leadership training. No open branch remains on this step; the deduction is immediate and exception-free under the stated premises.\n- Introduce Premise 3 and test the inferential link to the conclusion. The critical question is whether completion of “the leadership training” entails completion of every module the training is said to include.\n  - Branch A (mandatory reading): Treat the module as an indispensable part of the curriculum, so that finishing the training is impossible without finishing the module. On this branch the conclusion follows at once.\n  - Branch B (non-mandatory reading): The program “includes” the module yet still permits official completion without it (elective status, alternative pathways, or credit thresholds that do not require every listed module). Premises 1–3 remain true while Sarah has not completed the conflict-resolution module. The conclusion is false on this branch.\n  - Branch C (version/timing reading): Managers (including Sarah) completed whatever version was current at the time; the present-tense claim that the training “includes” the module does not guarantee the module belonged to the version each manager actually finished. Again the premises can hold and the conclusion fail.\n- Because Branches B and C are consistent with the literal premises yet incompatible with the conclusion, the move from the intermediate result to “Sarah has completed a module on conflict resolution” requires an extra, unstated assumption (that inclusion = mandatory completion for every past or present participant). No such assumption is supplied by the three premises.\n\n**Final verdict:**\n\nThe conclusion does not follow. The premises establish only that Sarah completed a leadership training that somewhere includes a conflict-resolution module; they do not establish that every such completion necessarily encompassed that specific module. Valid alternatives remain in which all three premises are true and the conclusion is false.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 202,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 2600,
+    "output_tokens_details": {
+      "reasoning_tokens": 1991
+    },
+    "total_tokens": 2802
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "bb02ad185dbc11da168401caa26e2e7496662181569c698b728510322f4f60c7",
+    "original_artifact_sha256": "6190aaf4595bbedf33acfb93816daba40cf69f325292f57de449b3c04723b373",
+    "original_record_filename": "fc7c736bf5926d944ff8419b72c76b5f1e54cbc897898530e328f89bc0a86ab2.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "e0aa183eacabbf1f3042acd02f3a41a596228e4de9c15f2d478a74e47c135de5",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "d822c1fcf9b23949f502c3a8885a6dcd08c87264ff0033bb39a2b1e71ee657f2"
+}

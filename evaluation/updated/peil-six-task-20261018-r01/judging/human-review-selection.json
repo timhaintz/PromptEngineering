@@ -1,0 +1,36 @@
+{
+  "sample_size": 108,
+  "seed": 20261018,
+  "historical_nonce": 2,
+  "historical_model_order": [
+    "deepseek-r1-0528",
+    "gpt-4.1",
+    "gpt-5",
+    "grok-4-fast-reasoning"
+  ],
+  "historical_model_counts": {
+    "deepseek-r1-0528": 14,
+    "gpt-4.1": 14,
+    "gpt-5": 13,
+    "grok-4-fast-reasoning": 13
+  },
+  "historical_repeat_counts": {
+    "1": 18,
+    "2": 18,
+    "3": 18
+  },
+  "corrective_model_counts": {
+    "gpt-6-luna": 18,
+    "gpt-6.1-sol": 18,
+    "grok-4.7": 18
+  },
+  "corrective_repeat_counts": {
+    "2": 18,
+    "1": 18,
+    "3": 18
+  },
+  "prior_calibration_sources_in_base_sample": 0,
+  "coordinator_key_location": "Retained separately from the blinded human-review packet.",
+  "algorithm": "The exact deterministic selector is described in analysis-and-review-rules.json; opaque review IDs follow hash ordering by seed and job ID.",
+  "coordinator_map_sha256": "7a5e1650b27a2d99451e3f8224f087bd64c14d810de7ab0403f82df5f12cfc69"
+}

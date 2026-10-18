@@ -1,0 +1,112 @@
+{
+  "text": "**False**\n\nThe claim is a longstanding myth. The Great Wall is generally not visible to the naked eye from low Earth orbit (the relevant “space” altitude for human spaceflight, roughly 160–400+ km). Its typical width (a few to ~10 m) falls well below the angular resolution of the unaided human eye at those distances, and its materials/color often blend with the surrounding terrain. Astronaut reports (including from China’s Yang Liwei and various NASA/ISS crew) and NASA assessments confirm it is not discernible without optical aid; photographs that show it use cameras, zoom, or enhanced contrast, not naked-eye viewing. It is entirely invisible from the Moon. \n\n“From space” is sometimes loosely interpreted, and rare near-ideal lighting/atmospheric conditions have prompted occasional marginal claims, but these do not support the popular statement that the Wall is visible with the naked eye.",
+  "request": {
+    "model": "grok-4.7",
+    "input": [
+      {
+        "role": "system",
+        "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+      },
+      {
+        "role": "user",
+        "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+      }
+    ]
+  },
+  "requested_deployment": "grok-4.7",
+  "returned_model": "grok-4.7",
+  "model": "grok-4.7",
+  "usage": {
+    "input_tokens": 183.0,
+    "output_tokens": 753.0,
+    "total_tokens": 936.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": null,
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:19:12.371441+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "9640f806486af94b6a3ff6b26d171b1598e54c12015ca1a188a0874dfa777256",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "e4ba16cb2bc2e0f66839936e50f7c7ee5060aaa8a15e4eb0c38ab2a7d65d0b6f",
+  "actual_request_sha256": "b2181e71d0eb8e4dac2d24c44e613c79c88f36fc794beb9195e029da2bcd4066",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "pattern_key": "at_assessment_opinion_verification",
+  "source_pattern_id": "37-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_unlabelled",
+  "run_index": 3,
+  "model_key": "grok-4.7",
+  "model_deployment": "grok-4.7",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nThe user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nUse evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nReturn a clear verdict (True / False / Uncertain) followed by a brief justification."
+    },
+    {
+      "role": "user",
+      "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+    }
+  ],
+  "output": "**False**\n\nThe claim is a longstanding myth. The Great Wall is generally not visible to the naked eye from low Earth orbit (the relevant “space” altitude for human spaceflight, roughly 160–400+ km). Its typical width (a few to ~10 m) falls well below the angular resolution of the unaided human eye at those distances, and its materials/color often blend with the surrounding terrain. Astronaut reports (including from China’s Yang Liwei and various NASA/ISS crew) and NASA assessments confirm it is not discernible without optical aid; photographs that show it use cameras, zoom, or enhanced contrast, not naked-eye viewing. It is entirely invisible from the Moon. \n\n“From space” is sometimes loosely interpreted, and rare near-ideal lighting/atmospheric conditions have prompted occasional marginal claims, but these do not support the popular statement that the Wall is visible with the naked eye.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 183,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 753,
+    "output_tokens_details": {
+      "reasoning_tokens": 568
+    },
+    "total_tokens": 936
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "077e4374d44421879dea1a5dd894f3f0ed37351ac86ce49ff4276458584dbbfd",
+    "original_artifact_sha256": "612370b62679f7b1b94d79192e6fe638502fdb2cfadd1a07003b33ea14550769",
+    "original_record_filename": "9640f806486af94b6a3ff6b26d171b1598e54c12015ca1a188a0874dfa777256.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "a17dd2c83b599945c17e2a27722f0b6b184d87139ba65b61b4cc1bc3e36938b4",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "cd425e5b17c747943277fbaeced8a7fe05373cc10c75fdf16e64bfb5664a1a10"
+}

@@ -1,0 +1,116 @@
+{
+  "text": "**Verdict: False as a general claim.** NASA notes that the Great Wall is difficult to pick out from low Earth orbit without magnification; its narrow width and similarity to the surrounding terrain make it hard to distinguish. Exceptional naked-eye sightings have been reported, but it is not reliably visible from space—and it cannot be seen from the Moon.",
+  "request": {
+    "model": "gpt-6-luna",
+    "input": [
+      {
+        "role": "system",
+        "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+      },
+      {
+        "role": "user",
+        "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6-luna",
+  "returned_model": "gpt-6-luna",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 191.0,
+    "output_tokens": 1746.0,
+    "total_tokens": 1937.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:37:45.604924+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "c567af00e40340ad4ac860d5f483a6964e46127d1c20fe9fd785a24d2787f633",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "e09fd1a4b3bfcb84a396ddfbabde2a6bad49788f22b418618ea38a14cc94521a",
+  "actual_request_sha256": "e942cfcd9d065c6dcc9fbdf93353cee8d2c85b8ab7ba560c86df411cff1812f1",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "pattern_key": "at_assessment_opinion_verification",
+  "source_pattern_id": "37-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_labelled",
+  "run_index": 1,
+  "model_key": "gpt-6-luna",
+  "model_deployment": "gpt-6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Role: You are a fact-verification specialist who separates evidence-based claims from common misconceptions.\n\nContext: The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.\n\nInstructions:\n1. State whether the claim is true, false, or uncertain.\n2. Provide the key evidence or reasoning behind the verdict.\n3. Note any nuance, context-dependence, or common misconceptions.\n4. Keep the response concise and decision-ready.\n\nTechniques: Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.\n\nOutput: Return a clear verdict (True / False / Uncertain) followed by a brief justification."
+    },
+    {
+      "role": "user",
+      "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+    }
+  ],
+  "output": "**Verdict: False as a general claim.** NASA notes that the Great Wall is difficult to pick out from low Earth orbit without magnification; its narrow width and similarity to the surrounding terrain make it hard to distinguish. Exceptional naked-eye sightings have been reported, but it is not reliably visible from space—and it cannot be seen from the Moon.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 191,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1746,
+    "output_tokens_details": {
+      "reasoning_tokens": 1670
+    },
+    "total_tokens": 1937
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "98fcd805a0429d5937400fdda123234bf10eec951cfbccffe6d87cc410e205ab",
+    "original_artifact_sha256": "c1f41c5a307ebf8be847b64e6c00bbeabdd5c4977b6253f1b7fc8608ff19c77e",
+    "original_record_filename": "c567af00e40340ad4ac860d5f483a6964e46127d1c20fe9fd785a24d2787f633.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "4d0925db2ece013adea8fdb43ad6d77668981a04ab6e656762b0ec644d8d7cc1",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "7559a7bab7d8f94e199cc753e2336ef11b856a4b142e9164f9aa94c892b19d25"
+}
