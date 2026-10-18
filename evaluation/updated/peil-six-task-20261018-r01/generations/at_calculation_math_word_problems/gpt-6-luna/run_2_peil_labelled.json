@@ -1,0 +1,116 @@
+{
+  "text": "1. Starting quantity: 9 computers.\n2. Monday through Thursday is 4 days: \\(5 \\times 4 = 20\\) computers added.\n3. Total: \\(9 + 20 = 29\\) computers.\n4. Check: \\(9 + 5 + 5 + 5 + 5 = 29\\).\n\nThe answer is 29.",
+  "request": {
+    "model": "gpt-6-luna",
+    "input": [
+      {
+        "role": "system",
+        "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+      },
+      {
+        "role": "user",
+        "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6-luna",
+  "returned_model": "gpt-6-luna",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 156.0,
+    "output_tokens": 134.0,
+    "total_tokens": 290.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:20:49.577097+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "70e254302dbab6fc304fec593964727515945e5d64dd01f0255bf5238c3bfb7d",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "b128cce950066cd3c6c863fc31c71748e045055861b32c2ce787861c25de9809",
+  "actual_request_sha256": "84745e2668e2f18c01201f730b3611472659ecf6e69abbecf5ecad898678ef3a",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "pattern_key": "at_calculation_math_word_problems",
+  "source_pattern_id": "31-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_labelled",
+  "run_index": 2,
+  "model_key": "gpt-6-luna",
+  "model_deployment": "gpt-6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+    },
+    {
+      "role": "user",
+      "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+    }
+  ],
+  "output": "1. Starting quantity: 9 computers.\n2. Monday through Thursday is 4 days: \\(5 \\times 4 = 20\\) computers added.\n3. Total: \\(9 + 20 = 29\\) computers.\n4. Check: \\(9 + 5 + 5 + 5 + 5 = 29\\).\n\nThe answer is 29.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 156,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 134,
+    "output_tokens_details": {
+      "reasoning_tokens": 50
+    },
+    "total_tokens": 290
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "b7632e27ed5e5b3d2eb6e2323fa4a7dabfc3a7d4f8e89124a9e818da0dca57e0",
+    "original_artifact_sha256": "d49778555239f9571df618793f7b7ed4318e2d63c48c77c438b149a752a8168e",
+    "original_record_filename": "70e254302dbab6fc304fec593964727515945e5d64dd01f0255bf5238c3bfb7d.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "35bb123fa131b005051939d85f8b8164167db4a3a1fe0211dfd3100fcd24f9d7",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "51f4fa5f54b30c92b5a5f1bcee15c910f68f752fa2b9c6d20ce8e94bf5cb47ec"
+}

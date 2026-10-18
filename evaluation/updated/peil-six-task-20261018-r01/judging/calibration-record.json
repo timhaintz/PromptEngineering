@@ -1,0 +1,104 @@
+{
+  "protocol": "single-response-judge-v3",
+  "accepted": 12,
+  "main_study_ratings": 0,
+  "status": "declared_calibration_checks_passed_with_documented_limits",
+  "hard_metric_deviations": [],
+  "hard_status_flag_deviations": [],
+  "diagnostic_flag_deviations": [
+    {
+      "case": "CAL-06",
+      "field": "needs_human_review",
+      "expected": true,
+      "actual": false,
+      "gate": "diagnostic"
+    },
+    {
+      "case": "CAL-07",
+      "field": "needs_human_review",
+      "expected": true,
+      "actual": false,
+      "gate": "diagnostic"
+    },
+    {
+      "case": "CAL-08",
+      "field": "needs_human_review",
+      "expected": true,
+      "actual": false,
+      "gate": "diagnostic"
+    },
+    {
+      "case": "CAL-12",
+      "field": "needs_human_review",
+      "expected": true,
+      "actual": false,
+      "gate": "diagnostic"
+    }
+  ],
+  "limitations": "The rationale identifies one unsupported event, but does not explicitly address all belief/move assumptions unsupported by the actual omitted-input prompt. Judge messages contain the intended reference plus a binary missing-input flag, not the full submitted prompt. This case therefore does not establish comprehensive prompt-grounding sensitivity or turn a correct generic answer into evidence that the generation was grounded.",
+  "reviewer_type": "AI-assisted diagnostic review; not independent human gold or supervisor approval",
+  "prior_observation": "Cases reused during protocol development; not an untouched holdout.",
+  "source_review_sha256": "4198eb0d00cd54af670f12ed46c3b77f4d8c07e6b457ade4c08d0d09a5c1b692",
+  "cases": [
+    {
+      "case_id": "CAL-01",
+      "job_id": "cd84534740c1b78088e8bba06974c29aaf89c3257a3b5a47d5d369b947c85f23",
+      "source_sha256": "feaad20284f5028c423441ba9f8fa03c8e351d56a8c46c8804a81370bd22cf89"
+    },
+    {
+      "case_id": "CAL-02",
+      "job_id": "2d489dc7cab580e893d80639417f962e37a20b7ef5abd7c2e4480055d12499d0",
+      "source_sha256": "2c2e345a55d76e477664e9b232a4f3f4ae142fdb53f7ca90b03dad5124d29f2b"
+    },
+    {
+      "case_id": "CAL-03",
+      "job_id": "f551298436c73e6a8845ca7a9006cf9d94a2b977ed8236ea5c7f8a7f64e30aac",
+      "source_sha256": "6663f60bc2fa88f7b01b55e8851cddaaa167a82db23b17396cfa3de36c5ea184"
+    },
+    {
+      "case_id": "CAL-04",
+      "job_id": "565b791144dc6ff01a7db2fab97b672cd13b3af256713b84988a476f1282888f",
+      "source_sha256": "1afdaf7e61ca957320c596b48fbd4f6c4699cdf5ccc904f212d8d736adbfeb8f"
+    },
+    {
+      "case_id": "CAL-05",
+      "job_id": "ba9b5fc8172e7e93ff090ff3220546245e04bacc7f246d0db3c46361218e6190",
+      "source_sha256": "f9ac47cc63d24620b463c61dec9b257cf89cccc6c5994bc7160d33659aa1ea43"
+    },
+    {
+      "case_id": "CAL-06",
+      "job_id": "b9f82b2e84db825f95b3ecb8e174351c28cdf7727d5371ca9be3f565cb5761c0",
+      "source_sha256": "aa8902e7cc2191b42e51d81d2c6a5cd3682b79efc1094abaf771194f9043fce5"
+    },
+    {
+      "case_id": "CAL-07",
+      "job_id": "f0304276b2161ea7478abd9f8be9ed24af657304929e38938d82bb4ec80d4c2e",
+      "source_sha256": "148155c99fe3ec891b91e3dbceef71a998e35b68e16725e5f71cfc6b9ddac836"
+    },
+    {
+      "case_id": "CAL-08",
+      "job_id": "b97835742c784e73f388a15ed571a6105fb52ab40533baed4a770933f8771c89",
+      "source_sha256": "f585a03fdd2ef3530ab7ea9d359c168fa20de0f302b7b9de72cc8d5aebb266a3"
+    },
+    {
+      "case_id": "CAL-09",
+      "job_id": "412481017f845f6ae0fcda7d9386464a363fa45684e59cdb4289e690a9a04d96",
+      "source_sha256": "a0d991248a6e5eb7ed7cb2958aba757d6164fb7b79c5a180bd5f20cc4ca54557"
+    },
+    {
+      "case_id": "CAL-10",
+      "job_id": "cbf063be4c6fef8aed7ebe2650538e31c751aec010351abe7ff985d1fb233c50",
+      "source_sha256": "2f3cd4d03e98e5003f4c52dc405ee0bb59310f852174fc070eb36529fbd8f0e2"
+    },
+    {
+      "case_id": "CAL-11",
+      "job_id": "690ddf32eaf48a58a781a2d86d8d666ff4cf3e5f10c49a38fa53ec5f63fccad0",
+      "source_sha256": "a8d704509022d68a57bd6e9fff3517d7e9c464e949942c0a162a77cfbc7ea44f"
+    },
+    {
+      "case_id": "CAL-12",
+      "job_id": "5cf64ae2a0b8e7eed30064cf4ad4cdbda4002aa2787c0c30b05d29d7f754f314",
+      "source_sha256": "0cc94faf9501345b7f82773bf33f92d94a81c28762e8cbdad1e5d42e691f6764"
+    }
+  ]
+}

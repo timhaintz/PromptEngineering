@@ -1,0 +1,1737 @@
+{
+  "count": 216,
+  "metric_mapping": {
+    "fabrication": "fabrication_avoidance"
+  },
+  "records": [
+    {
+      "job_id": "23583d82cb84ddc91133463eff1ca38f9ad915a8947310f3fe3385f0c30266c9",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "71f94212cbe9eecb32b5b1934f1f319414d711897fd2b4078ef3dc638d9b2ae0",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "e4130d804b620858e87a176f175dcef6da10d89c099c59a331cd54d5338fb435",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "0d512a2110275eaf520138593b43cd08a5523c12be8ba2ccfa450823e8aabf0a",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-4.1/run_1_naive.json",
+      "source_sha256": "736ea28719010f1eee892c8a4d16716c81129d657fde288b106c0d685b13099f",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "e4130d804b620858e87a176f175dcef6da10d89c099c59a331cd54d5338fb435",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "5f1bd8273c0ff6d2aa250dce330d7ff1073c0cb78b90e8ad149013bc9d37d9d7",
+      "source_file": "evaluation/results/in_classification_relevancy_check/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "d1290745a4d9a67f9a37739915be68baaebc229ca230a709a244bbd3b0ca41d9",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "6bbaff4c44d20c868f918eac40a19b59440cdd83e44b3089e22f8d9c2f5fcaf3",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "a60702b3ee3663c824684534cd1ff0ba9e90e14e0bff69e3543325e4c1fe6724",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "7c5da66d8035909979d43ab81f2f03e56bf01349bbf0c9f38b18c695c6756a96",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a55894b8d163ce9ca2b306b0517ed0ae0cb0f4273a8141256a150643b2ecc70f",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "93ecb2010d6a29725bb605bb7b93afd2df58fdb164faecb6dccb6a4ff7ead322",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "a70d1d056349e2b4837eceb8106f319a15deafe3467a7278a3e100cf5a3f725b",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "e4130d804b620858e87a176f175dcef6da10d89c099c59a331cd54d5338fb435",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "0e7f853b70520c0059c78c1c0e7aff5787c5c9169baddd92e825800d8ea14738",
+      "source_file": "evaluation/results/beyond_simulation_change_request/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "7893d3b8386416bde29d6d75f0243141a560b257c17b40432a58f0955923c4af",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "0271cf810efcd85ceb64feb4dd172c6dbca48687995f87ff1996404b1758f42c",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "a905796f8bc47d7d9314c556bdf2b4abc5f15092e0383f4b1448e2c6df02dd6d",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-4.1/run_1_naive.json",
+      "source_sha256": "63800a6ed6a3227321bbb79175813ab6a7f4a69bfc223e8724942854ff8aa5a6",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "2c4a459b1f7e42bdf341cad6c8cfed4fa7f71135e1c812947b0ba73da73ca4e7",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "91da93683913a3a46a725f9070745823d225028c07e1d4604f9e76c4c4fe4c6c",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "56c10a53716ac6b2e8b6d4e5391c08f8c6a6c2a68351c260c410afa1d8197b99",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "c73d2761dbb141b3ed77b94c1f2fde7a011f5a23872a417c8a63c403fa6a0993",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "58dc4da32d145ebb5c6e5d11f4f8143f771f2d0fbaad448764db3501c92b0d63",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "7693ecf610c07976d9c52cf3c00687417ba5c5b60891a37dec41ccb21f315773",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "8fdf8c0cfe8f74fbc20d9557968bd7ede899bab98ddfbafffb2836971ccee1f7",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "0295b8505837c97f2c93fb296cac9ed9fb014a7f6226d518f1af3c0abd8d853f",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "81d91be624ea206d1d8c6338d9d37d8879f4c8cdc6840c02fe18c870c38f4508",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "c7a4da73d41a4345e2742a9c943428102e724dc329fa761cb2ad4a386cdf4dac",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "69a151744d5972c779de083f915a59e679dd3d6bfc0189452190f8b50b236b98",
+      "source_file": "evaluation/results/in_classification_relevancy_check/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "7c4ac6cc215e23c279f2d012c8632af6c5a2599cd931a68b9a5445c94732fb99",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "64ea58e8b2eab65b31e431d93283c094c4ab4cb0fa76914eaafb6d48e8892ed8",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "9a4fb6f7df57df423f857702cd847dc8d7ac1b3c274780c69a997f650b294f98",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "14ac050c43ef4aa5999406047486275dfb8ec9fac504abe2a6638ad481c6ca13",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "209f2caadae81c957a8afbf348c331faf11249918c3a5b83e07fa041ab588430",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "920af64b1812fc3cb7643d105a3bd6e7900bafa2ef932373ace71c103e12ad7e",
+      "source_file": "evaluation/results/across_comparison_attendance/gpt-4.1/run_1_naive.json",
+      "source_sha256": "91fb71e8bc0e8b10d6e1120834158fdbe67e4a8052ad15957354f143b83a1f97",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "191d2a0b32f745957aaa12ff98874bd9713fc257f86f717cd803f5da0bb14867",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "6af6d2558467fb1a9151b108865e9969d4d1a644d1e963acb67fd2e0add01543",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "fc59e685a953d8b35d486607e34de544a05fe020213169c5d8a3d51f4b930435",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "0caf06f248ce5e30bbc18a95383b0b3e48f282d255e177ce88ebea75824279b2",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "8af96322f451617a9d87190fd93edd9094943ae1b1cbf63080e4b819df4f68c6",
+      "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "64bb766e14aaa4ec90889d726d5ba7a27e4a45e0f4972ad1bff522f676a0a47d",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "cefbe86fff57f8b456133bf3ca88a2ac19e57011acf15e0246288fdebbb66695",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "c5548668c9e54a61dccfc134ed967b2377b6c89d8430f2ddc0e427c0ca8ae9ab",
+      "source_file": "evaluation/results/beyond_simulation_change_request/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "76c2e82e83bd5546f3a320b0e10004cbd23fac06091c8ba9e592ae64a600629c",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "1be9bb62390e975b6d7f8454768806be6f289033bb25d9f68d8d1ec581620e93",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "d495fd7aff28732ac5ca6b614c4649cd6bd6220a34dc9e98b8bb029c50de0396",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "43a2a068c0daaff131943295c9ba1953a00a5fe3413c77a430399321f47ae7d0",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "d1d7b7c60e498d1d21a17672a80932d2be0c917126bcb15195e26ed4569da36d",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "2f9fb12c0662ee56019f26869e5bb007918b635ad5e255e5d60da97aca7dde7e",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "934106a493886506b119bb178750cb4a3b686298851426ac84029b276a97bdb7",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "851bca86cd0d30fc4bdc9cf0a78563a598a33ccbb203bde3e1a1c7a118778d27",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "67207526744fbb4eb5f417d548c85f1ead5826dc473aa31c04e06a82b0cdd9a2",
+      "source_file": "evaluation/results/across_translation_summarise_translate/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "b0a3cf96dfd1d1cfa53cae841ad730ecd4e1c28a24b1a4f76f1b1a5bb4cb3fa3",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "1684d87b4e158ee9269b4cd0452ceaf4e444912aaab90c5fe8554a80560c1d68",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "2f5c7667b7104ef39603f11816b67a40a93d8f0809b06e0c0d6731a305139623",
+      "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "031f2fe7bd18d28e18650e05107922d618f6445d630d1319783eef53717b3cf2",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "483cf7f4858ee5e0ae19882cfe192f1626b2fd5ef450af4e14e7243fc32e3e3b",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "b3586c5fd200e6b81486f8f359ac34f050a80a0876733a49ebd87d86e7a194e6",
+      "source_file": "evaluation/results/beyond_simulation_change_request/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "f1949d7b9a962c19e0e3438d745f8feaa9dd4b27bd7890b25b79c1ed19e04e91",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "1be9bb62390e975b6d7f8454768806be6f289033bb25d9f68d8d1ec581620e93",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "23ff7412ba326fa550d759d0cf83bfbb51bb243175ec717e201b8d7ac7fe9e9c",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "8abd80b59e7235733b3f2cf6bc91421d99fe19c794321d548e8d08299d0ad018",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "851bca86cd0d30fc4bdc9cf0a78563a598a33ccbb203bde3e1a1c7a118778d27",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "8fc0aa8994fb337ddce2280762da2e1f0f9e66810e251921dbd114e64d19b3c7",
+      "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_1_naive.json",
+      "source_sha256": "6521856d55bda4c3782e8b7af4a17848d198f9ac14912d1014a8cf5f0e9aad97",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "3a8e1ed3a51adf6de270998eeb4bee24909a634e31d75d4247df4f68acb05357",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "fed2a22f9815fa87d91585f269953943ee38335a7d4ad20e4a6d20d042887feb",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "2186a0be3a059e2289c1d9a1ff617659a82d659a5871ef0fe52117fbca7b8eba",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "bc994f8d6c77e9d6828d84d080f8a657b9ae9a77c3d32e3702283a329a6569cf",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "29116f1c6d347f0c914237c984e8c8d8527cd4143b143596d16d8d9ebc7dac06",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "b932e27248d3d001dc33671cad98579df9b01902403c1481efe14ba0651c9445",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "937624fb87189f6d7f87c30caa78be8354129244b0b929609d884952715d1f46",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "b7d2143dd153d3f2423ffea0d1ae836177d7553aee4d3d99fda6e077bef6ea9a",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "0cc3dc3196aacd7ec75c234f23023c30d1add998116c531b6c061e5376b217be",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5dfb9d984f0b68eac1a43a21cee49c98746b369829c47860438a9184101cff89",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "0e5cb6901678ec372b8557f18e850ba5ccddfda9530f3be1f6efb7ce90ed2c19",
+      "source_file": "evaluation/results/in_refactoring_template_filling/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "e34121c7633444139d7979069bf0ef464f3432b2dee1e4c5fe0f52834d49631e",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "1791e1213323a268fa58459adcef841eacafebdf6e718760877d26b94e39f3de",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "5373118f15f3b6286917f0b1cfd206eeceafb9024ba2ffedb00bc69f889ae2f7",
+      "source_file": "evaluation/results/in_refactoring_template_filling/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "df3577ea8aea1d2f274eb28a8ab76a62304947852e5ff6c8f67b57d1c28c7328",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "354bf0c7f62f00ef4fe04ee4bd86135093e806a349acf464fb6e80564effac66",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "7ed9ce1cbf3e0f65c9293cc4b7923f3ce11cd4e0166585e250e8678360a06691",
+      "source_file": "evaluation/results/across_comparison_attendance/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "d25a7738f1a4cfb8dec19e2652825db185f934d848250928c397d6b31de7b1c3",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ab57cccf897755665695d7be1a44171df955b2ff1c0e76b75af3f4ce3a32113a",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "aac7459693aff0706946e634218c0a39d18218e3585cc29b550c4b8e947bd017",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "7919d12b9f700788ce0ca906d99bed7edbb46f2f70095884ff8577683800f787",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "77a1551d14ff197adf3ba0855b4a4ff2f5ff6f977ada40ea88328be7eb99e649",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "2d489dc7cab580e893d80639417f962e37a20b7ef5abd7c2e4480055d12499d0",
+      "source_file": "evaluation/results/across_comparison_attendance/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "2c2e345a55d76e477664e9b232a4f3f4ae142fdb53f7ca90b03dad5124d29f2b",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "191d2a0b32f745957aaa12ff98874bd9713fc257f86f717cd803f5da0bb14867",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "3e6a084f6cd85a496df63c2b98e3da93f85bae72c67c9863a9d05dfac4e75009",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "ce9eb3d39312b1e62014bcd131f01a97fa43b9348a7518fe7f5c9e4e524eabd8",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c28bfcddf4be33f631a424391cb4a88d3f30d918f9cc308cb8533fbd3464694b",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "34ff527e12a732b79c627e7d34daeb25cde415dfcbb3cfc40f20c6a8bd21069f",
+      "source_file": "evaluation/results/across_translation_summarise_translate/gpt-4.1/run_1_naive.json",
+      "source_sha256": "16ab25de121ca9ac14f925cae37649605074c72156882a6e4a2ba23dcbbd2906",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "19b9fe5f9f05384d197a227ffab743c0ea20287b8773d10109e3955b388f783a",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "1e136f37beea6f258f9d38493d608e6edd362aea072b43d5a7c7ee54b71d9329",
+      "source_file": "evaluation/results/beyond_simulation_change_request/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "25e78aee7ab111f87fd36e8bd8c75244e252d12171d6cf2cc426b3247217c916",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "0271cf810efcd85ceb64feb4dd172c6dbca48687995f87ff1996404b1758f42c",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "7e9a3542fb1c9be4b0fc18fe526fbdce41ebebf77a59997b2983a117b3afb5b2",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "19f8935e8dc62df43a769d3710f1d9d73257631b16e78e8d58084d3255309abe",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "fc7bb4bbfac79243b7e740cd9e45335c31b5e0a15942a4f0039fff0fc4a3dd4c",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "187a5ecc4dda7c4e963519b56153d25b73421855769dd2ad868e4ab2617184fd",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "3cf08512e2925f7f56ab7fc580641dc76b00332e895a58cc0647c3506548ffc6",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a55894b8d163ce9ca2b306b0517ed0ae0cb0f4273a8141256a150643b2ecc70f",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "985dfe945228f115e292cb35587c77e99dddb8efae6990b08f7d3e5faaf0813e",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "135e465c1a9a1068d38d4631f7a5fc21c81271720d6608eada9dea521e40f8e5",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "83d38ddc794d2d75daabc0899e0e2198829c68ad0c0d0475f845b78e5c5695e8",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "7bd82d5cf33dc10b6675181a17e384fd23db78054aab0e4a2056b870d491d78f",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "b9d2885e6e56ef6cce439bb66ce8bdc4ff049eee849cac381c3885236fcd1116",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5c9492ca345311e531f8c7e1e435eadac7a5283ebe553ef5548b028b10f60065",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "f1d2de44ad325d23bdf0bab432499eb218c532433570055e9f3702d869b2897c",
+      "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "dee49dd9273f786c22f7b2506986b8e97f164bfa53e7597e2a2825031b380c98",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "bc342e04677f4c4c06ebba0f8d7ff78625a709d11ab4abbb73bac766b10d45fc",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "75cc154b66ef9dfc9b79282b21979b97f8fca53ec7bb0112b183add7751b606e",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "b7459baccb63f42f638c6f08a20fd26d830fc00db347b0a5d8e261418b67c4a5",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a6222e87f1b80adfe85ab805b7ea93c2451a6aaf684d24ff4ca73f056bc943eb",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "f277cc563e6ef8cc7190d5d5a23e2bb8e5b1e3f5c523e82123b6154d378172e6",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "08820e30f1286545bb26f2bc334bfafcfc89ca1eb86e328acc009558aad9d028",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "8e0711508539cee72157bcd51a9e3346aefb012c6d87baebb1782f6f1d02aeab",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "10d70a15b48660a067f8f17f41b8907f12c5adb6bc71df698a0d6fa953076e08",
+      "source_file": "evaluation/results/across_comparison_attendance/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "4961a5b0f86579b2806be8034872bb2d6831083514cfaed8cd69f5afb4fd61dd",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ab57cccf897755665695d7be1a44171df955b2ff1c0e76b75af3f4ce3a32113a",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "f5d785f1263634e3af495cf2bbe33719555df4ab7df27be3670255908e097a38",
+      "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "1e4a2d027f6bbd0a096cadb770f5b8d985f1434f0f3bdc8930153c34cb1ef5c0",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "6a2704c7d789c2f3b3887608e7930fbdead3c66b2e0600e9075bfa9010f57341",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "809869f608361454d7ab9a03332707063428b67df3076d5a3d55e8d60bedc9fd",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "d764e00387dadc2bd37a0af452067c9c83c4acbbbde092f5591e6f0fef380b22",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "c7a4da73d41a4345e2742a9c943428102e724dc329fa761cb2ad4a386cdf4dac",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "eaab434e311ec60ea820599720403a3374e9e266dd4aa34f82da49e69762b3dd",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/run_1_naive.json",
+      "source_sha256": "13e6f0f3f855c9bcf067a6576722023fbf9a022cd42ec2d593d2d97f79e9bff4",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "c64490da63bd61ac4246dc9eebb838c5050b256eabc368b26fc7df45ebaefccf",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "11319c32ce0e0d859d42e1bb3d0915eaa765cc95471705de6e358d1a48764f2f",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "d537019c8a2e47e81b8dc7bbffc034d1b53a97e051dca44f93741d75b3d61a78",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a1bb7b5b2ccde7c3c5ebfb2debef3b530aaea3cd16d46ddd45c529a6de933d6d",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "24c46483bf50d6839deefb0a0cc947e494b1cce87d238445dab06301fe9b0b43",
+      "source_file": "evaluation/results/beyond_simulation_change_request/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "508b453077fedf41b8dddd24d1e94935771b04a76c339a38635ed2600bb21495",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "54c899b8c532d703dab945edaf61dd2f5b712724f1a78952a884ece58fbaafba",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "769feca4def264e93d55e3baf1523e040749243879b3617eaab0433e366c5a8b",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-5/run_1_naive.json",
+      "source_sha256": "73aa76ae4be555802bc7b22fcd903b66899ef0de024e05fe023fb2caccb237a6",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "240ed2d8ef0cf915bb850db112b484e35d38b18ed328af42cfe4186e1f7f4454",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "0c6651909215a7c4f8d841cb4d83ccb04e66096d3aea81b52241ce10e6031575",
+      "source_file": "evaluation/results/over_summarisation_text_summary/gpt-5/run_1_naive.json",
+      "source_sha256": "876103109966edb5eaec274ccf0922923c158ceaaf722e4387e7ab6e82ca0b95",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "dcad79b3b15fdab86057fa54d83ed261c3449f34049ae6accaf54b7ff4be6220",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "d943f9881989bcff28ace59affdef8de5b03ca481563dae5b15b08e45b0ddcfe",
+      "source_file": "evaluation/results/over_summarisation_text_summary/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "720c416f03411f5846f84019a247140a00891eb52966c33f3b1d75d07cc85f3c",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "dcad79b3b15fdab86057fa54d83ed261c3449f34049ae6accaf54b7ff4be6220",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "537cd40985f9b9a8b51187c9fdef3218892c7499cd10725e631be93658a4edbd",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "2d73c0fe61ae68280f832f5d4e398749766aa82cbff977331bceca31cdcc88c2",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "319b11f3356a5548d4b83fb0088f3c3018af707b6fafaac60a5d030355a1ef6f",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "446522840e3042d0c6f256b8ab8739ea3aee0b3c35339802e7a79e3c3b4ffea3",
+      "source_file": "evaluation/results/in_refactoring_template_filling/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "3bde48fb400556011cd699cd9a29326b02dc7d9dc9a8bb621aecee76327138fc",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "082fc7addb6de19e10907afb725f05a3b068e227a2ead9177ac2266438d383af",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "a5b880c9337f1d459048f11440ba34a9d80405f2e345ab2e07c65e9bc8ff26bb",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "838cc7257c559500db3de133b4b45c2685ee36bb43ac83f07d02d3e0cb03ef0e",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "d1d7b7c60e498d1d21a17672a80932d2be0c917126bcb15195e26ed4569da36d",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "e4c2f301a8f3fb73bf656cfa1da0d1fce36f9572637e07d41e86a1c46b89221e",
+      "source_file": "evaluation/results/in_refactoring_template_filling/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "8514dee8d1f4bac3508cbecdcf63806615988a7b56c36fde3ec0089ec51cbd61",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "1791e1213323a268fa58459adcef841eacafebdf6e718760877d26b94e39f3de",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "91e3781ad00d01b29069d12220513418d91a0ba9f88155666fe9f5dbd9c1ed68",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "0ec5086823708c02355a8d9533a10fcb4f6e583a7224bbebdd04161375015729",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "bc994f8d6c77e9d6828d84d080f8a657b9ae9a77c3d32e3702283a329a6569cf",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "f551298436c73e6a8845ca7a9006cf9d94a2b977ed8236ea5c7f8a7f64e30aac",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "6663f60bc2fa88f7b01b55e8851cddaaa167a82db23b17396cfa3de36c5ea184",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "2c4a459b1f7e42bdf341cad6c8cfed4fa7f71135e1c812947b0ba73da73ca4e7",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "673ac9bb6918c8aa57b3391d763ec10ec29027cb00f7d9c705dc9521f8a38726",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "bae31ab436d11b12ce6a9fd368b83597c12ae95af72a03e18f6359acf4e3a602",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c4f44f3b041c8b0cdbfdd81d60066ee5f44887f981828121a5dde927fe58fee9",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "29f3f51095f4d4b77f477769100806c4b17f543a37ed78e5633b34bf493288e1",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "13aece6c0555c7839f2cb0d99600f21b71c7639ca234d32cfc3dcab100a54455",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ff6839b059841bd0aa608e135e2f174af15fc34c4793fe05faebd2d39ab30548",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "7d6b224131a0eb911590d41ff08d12baeb99c61ea1beb40dce341cfe45e88ee2",
+      "source_file": "evaluation/results/across_comparison_attendance/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "56cb6ca93452ccc099b5b97300b3fdb4280d179ac3068fc0c2e297a1f761f157",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ab57cccf897755665695d7be1a44171df955b2ff1c0e76b75af3f4ce3a32113a",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "03c2341054b98663b45826b0dcee39ccf456136961d9dd167ba578d09e445622",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "5a7dffc4e821643e6444f2188ceda109c1f0b41f4b9e25c4145d001fcbdc8e33",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "c73d2761dbb141b3ed77b94c1f2fde7a011f5a23872a417c8a63c403fa6a0993",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "b9284b9487d546d3c0ce327cfc66d3dfe8dcd965354ed0fecbb893628ae0b97c",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "82765ee2a87c9a4cde4cba4b310c9480498b4b1fc5cbc3becc7c02125ce33f75",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ec32c7a531c329638f4a41679fd99b5ed748744a717afe9d56982a1b72e6a819",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "177937542e7cceffd85f1d16a0a8a36dae3b675674d6e625c10fe21c6c471245",
+      "source_file": "evaluation/results/beyond_simulation_change_request/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "46015940c4fef41e2cf3d6136dfdc7b089283124d461bd8674b7e01092995076",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "350beb74764afa169a078738aa32b65b75508d4877dc844d96fc69e2ecd9317c",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "49f1db9631db14c0008e220da3a4c9ebedb517f94b053a127d9fe62fe57c5d06",
+      "source_file": "evaluation/results/across_translation_summarise_translate/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "0eafbe0df70c7c2d63395337e9458601a2e3431e15d06266f3a1781ff195a4ce",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "7af69f64d6070d80b19edd87cf2f4c1214ff2ab241051e42cf7c4a6c6eeb83f8",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "f112ff13d5347d57a606740e1c851cc8276011b31c43d96b0982be3554fd5544",
+      "source_file": "evaluation/results/across_translation_summarise_translate/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "573b9f852804f392e0d42736286463e921b812b365cd4f4cab3391ba81804a57",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "19b9fe5f9f05384d197a227ffab743c0ea20287b8773d10109e3955b388f783a",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "6ce123ae14864e0c3e2b9708f05b0a288f68e92eb09488a0232d490737e26d10",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "cd39812425f8173a380b64c530893ca2db7f5425bce3943860ae1ef52eacb422",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "319b11f3356a5548d4b83fb0088f3c3018af707b6fafaac60a5d030355a1ef6f",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "3540310b94d3be268299852cbbb102d002daf45e79b42bfd15fefd2ddfdc1351",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "63519dce58264603ac21c30dd6fe516b260af7abe1ff8f633b474970447e154f",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "f2e7e6820444b599200a6f8a891e3f0d5bf4190579f9b1bfc32bcd9974b41444",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "ed677ff59bb24ee7f72e97439c66011160f6c559973a0b45f263086ede11e543",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "81d35f5d0f85c9a89c9f77079f8bf1eea22bef2c8acc17fcb1f3e67499c27fff",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5c89ed4ad6c3246f4e789a5a3726cce4f446bf3d9b1ca8d458b72230c5d93ff9",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "4dfbafbef7d4b930a980a1b71495c16d5888cec1e157cfe78203172d24646715",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "eda85542065416401a4ff2d1190057f355ca9ec8ed6de8f778275f613490bb30",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "f2e7e6820444b599200a6f8a891e3f0d5bf4190579f9b1bfc32bcd9974b41444",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "c3bcf9f493d635867e1e55e66338166606970194cdae1d3a9e756a546283588c",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "798ebae5292913bfd17bf744b1f015c5502d92dab25df7ec586e55a8f945b8c2",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "a5833387be95614a7154220ae9881d5d15edce7d2a15afd86ff8135648374bd4",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "51b41183b3ab797fd2df4d028291b764e42168f9e84bf26e8f855d53ccefadf5",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "435bc5746f240fd7f759e9c616a8ca9b70e7549d5875aadb96db5c220852933f",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "274e08d10790827d768cb711f1e1abfc24ad85af30f740b443c7f2cdab7421cd",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "4e8c5a4835ea39559f64bc75c259e846f185865d8d9d17e44b324b16759cf70c",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/gpt-4.1/run_1_naive.json",
+      "source_sha256": "24ab39d455be510f459149f7a6f63e599e356127377fc123280217a496156249",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "77a1551d14ff197adf3ba0855b4a4ff2f5ff6f977ada40ea88328be7eb99e649",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "6fe16b0e079850c450bf3f7b2128dfbc613046a3cfc370d784be329f1f1ee119",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/gpt-5/run_1_naive.json",
+      "source_sha256": "c3081f2d862b9afffd4e8472fe18ea7a2ab35cdfc61398795247ea0b4e3b24c1",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5c9492ca345311e531f8c7e1e435eadac7a5283ebe553ef5548b028b10f60065",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "3648001a1b61dfa43ea573697e31629c85144a91880f40f34a1c419ca2546a82",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "51e1a8c810e13d56169f2e8f0e56e1da86be069066a0ca1487adffa79d99fd0c",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "d1cb5c5e27484644a122f85308d1c1302d6c32d4a8e2cc52718f08460c1668dc",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "8666c3b133503de26a3321ba5893877a3523e9145b17d970b478b600d814aa09",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "ad915281c6ed988b5a5eabef94bfbed35ba0ba085841ab7e1cd9567a01454fef",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "be86e8c7ad2e1d61662848157925b312afec734cafa938f50ac22a165cc18f4e",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "d62569cb5d657c675757c17be7c664a86365e6c2e148e8a92e690a3c8f068397",
+      "source_file": "evaluation/results/in_classification_relevancy_check/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "fb64fe210df30490276b5fef543241adcaeecc0fdd9ceb1bb609df0658bbfa87",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "6bbaff4c44d20c868f918eac40a19b59440cdd83e44b3089e22f8d9c2f5fcaf3",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "41c4cee0e59816cd21f2c9cdb62574091c25e2e4cfe8c37d41c1ae0331b6a073",
+      "source_file": "evaluation/results/across_translation_summarise_translate/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "9fe1cd1ee7dd4267356894eb83e94f546c9517c73c545b83522cd5e10732fa73",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "19b9fe5f9f05384d197a227ffab743c0ea20287b8773d10109e3955b388f783a",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "b3504556d712f0f788adc6c24cbeccceed0a9d4e7baa4462f4e7e32bb82a86c1",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "fd3ea827c063462231a7e0978482b44738bbbf8f67b2be02dc1bf3b1ba22308c",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "f76162bf2e5771c3a84e44ddf42c84df2a5abb27cc090ca4d7e3bf985a418965",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "b9f82b2e84db825f95b3ecb8e174351c28cdf7727d5371ca9be3f565cb5761c0",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "aa8902e7cc2191b42e51d81d2c6a5cd3682b79efc1094abaf771194f9043fce5",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "be86e8c7ad2e1d61662848157925b312afec734cafa938f50ac22a165cc18f4e",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "e171c5d5e96ecdb09da04e504d9999879d37979b26202853950780bb12f21bd6",
+      "source_file": "evaluation/results/beyond_simulation_change_request/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "d4b694fdfe5aa00d7e3b3f534828eadb461ad0143e39086f39b8b8be254f409e",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "54c899b8c532d703dab945edaf61dd2f5b712724f1a78952a884ece58fbaafba",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "58145965324028d30706fc06728650bd15b36c723b511c430736b57b3d8aa3ca",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "988838ddb41334502069d4676cb1ea7acb25284c07050d3404d082b5f0ab2b42",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a6222e87f1b80adfe85ab805b7ea93c2451a6aaf684d24ff4ca73f056bc943eb",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "d4ddb5fb2b30cc0974d1cdda687c7b0b6335e685868d8d79bee1632913b6055f",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "0fda5f1edf5f711afed0776d8e1ddb1b151e1c1484900cc9bdaa10148ae88a52",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "2c4a459b1f7e42bdf341cad6c8cfed4fa7f71135e1c812947b0ba73da73ca4e7",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "6f97a731dba2fd8979b0fae497c3ac81c487b853070f976b060bb19a646400ee",
+      "source_file": "evaluation/results/over_summarisation_text_summary/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "2a93987fa3c5ce241de55ae1ebf14b5affc36a842f03a64417e3d4071c8051a5",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "2e6c43ed4984c148220241f03165e099b1d108c37687e76e2a8f371244dce7ae",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "f57dbbf8581aeb762d54c45a9396e2f681c06076283b1bb01f9a131d41342b6c",
+      "source_file": "evaluation/results/in_classification_relevancy_check/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "cd28942e3984f2581c6c880416d263ae7bceb2820d161fe41762cf837a5bb706",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "6bbaff4c44d20c868f918eac40a19b59440cdd83e44b3089e22f8d9c2f5fcaf3",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "5cf64ae2a0b8e7eed30064cf4ad4cdbda4002aa2787c0c30b05d29d7f754f314",
+      "source_file": "evaluation/results/across_comparison_attendance/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "0cc94faf9501345b7f82773bf33f92d94a81c28762e8cbdad1e5d42e691f6764",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "3583f877a71ba4f88f5c83c7fca398798df9df8e662a5ab700ab4276b55eab7b",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "88dfb4d519d466689e515121d248c7f75c15a285746a209fe040eff5f5de0d84",
+      "source_file": "evaluation/results/over_summarisation_text_summary/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "db6a361f5f92102dc5050b8d15df1e210c170de82aa7b8daaecb2c5672c4eb99",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "23068133a72d8fba8e1ac8b9370d771065c73345955198ff661b8a2811728e9f",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "b0954221c2ae0268f2fe7499ef45f85de313d20b07b567addb0595a223bd3c64",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "8ba2f3a620a2a951f2d71c77c0f75293596447dc9f4767ea54ad848e24389b8d",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5c89ed4ad6c3246f4e789a5a3726cce4f446bf3d9b1ca8d458b72230c5d93ff9",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "c0f3d0594d65d1158f9d9c444afbc74585aa52c6c90b5da90e8c412adccb415a",
+      "source_file": "evaluation/results/in_classification_relevancy_check/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "04b86eaa0cf8668706f796bccff8af90b5088e5f2d41c5ca0dc1c51ba953a3bd",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "64ea58e8b2eab65b31e431d93283c094c4ab4cb0fa76914eaafb6d48e8892ed8",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "65a83df4ef211ce6afe01452ddb837af1bb57c4c61244b91d07e17e8ed394b6c",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "5a4234ca2190095771e9863c90fc80deffb5b352a6ee226dbb1889939eb22304",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "8caa839e4f7aadac09677d58dbda9b1c03b30f885bba628aa278e8b477ca3241",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "412481017f845f6ae0fcda7d9386464a363fa45684e59cdb4289e690a9a04d96",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "a0d991248a6e5eb7ed7cb2958aba757d6164fb7b79c5a180bd5f20cc4ca54557",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "a5833387be95614a7154220ae9881d5d15edce7d2a15afd86ff8135648374bd4",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "7975b7566651ddc6dd42a4139c1c131d024509a508ea3500f9ba15850a7003ed",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "378b1261b66aea9b0677043323f3a95b031b9ecb7f3e33e749bf5f847c2c1714",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "851bca86cd0d30fc4bdc9cf0a78563a598a33ccbb203bde3e1a1c7a118778d27",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "8c1468b2c0c80e96893964ae374c9e88597ec9ace28fdda100eeb1ea2c470c17",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "4f61c7433134237a6c6cf23c00d5ff58fddcacf9eed25a7fad52d156338ad8d3",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "937624fb87189f6d7f87c30caa78be8354129244b0b929609d884952715d1f46",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "eabc789aa84c52fcde9c25ac2b71ae93887fcbd3ef9c53c06436a92501ad0014",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "1236ea61b2929e26b548a831a2eeba882e6239a1a6eb85c6b0e36f3a6ee72b9a",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "4231728d475caf6c9b51af9dd3eb0b45b0cd72b94230ddfa343d30b7c07d5665",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "1713b7098fc73497c9d8e40726c75f1eedb1b58047ee91d8c20d1e7522cd95b8",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "d71d1f31786030a2381452658ee0a3e004fe127a29983d80957f49132b688b86",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "77a1551d14ff197adf3ba0855b4a4ff2f5ff6f977ada40ea88328be7eb99e649",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "13058a3387c65a4928bf3c978168b7ebf7e88e20c10dbb6738373470346ec123",
+      "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_1_naive.json",
+      "source_sha256": "c4699eec19d32c9f5ea12844c258cd6bb1e843891bd0d780a72cb150ad8e5a5c",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "6a2704c7d789c2f3b3887608e7930fbdead3c66b2e0600e9075bfa9010f57341",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "b34e2f3589cee43c9bdc38004a6f1f302396137616bb4c1b52eccff665606c8d",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "1007d6ba487dcd485e09ea263111c4e9e0ad285d4b53366b872d8fa1dd336320",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "240ed2d8ef0cf915bb850db112b484e35d38b18ed328af42cfe4186e1f7f4454",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "8304e3d8bb1ebd7f1b74ad88e02c1459d779a1e712811e76d8d2b9218da10373",
+      "source_file": "evaluation/results/in_classification_relevancy_check/gpt-4.1/run_1_naive.json",
+      "source_sha256": "f59813f0feadf4ffdfdb59a98079967865673a0bda1cf053b9ddc245b4d56065",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "cc1772469b25f287c5da5d31573e7487dac09171749d8c5700b783d1d6b6dda3",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "08341346313cec9ac2d21cfdf667384241f5c6ed2e8222cde95818da9111ee87",
+      "source_file": "evaluation/results/across_translation_summarise_translate/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "c40f89e65da7aad9feccaf5b22da02fc3dd92d3b52ef7a0f6bc3eb56dc2a38cd",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "076fb1a6964dfc6976038b6c064f55001678f72784d9a8cc80630b4f095ef625",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "853a87d9d7c185d82f93685723d544d278987f39464d79ea7e63c556b5f403e7",
+      "source_file": "evaluation/results/beyond_simulation_change_request/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "3fe5b7cc3c23e2e1471d2c51d324610932596836c22e49b6040f56f68fe6d136",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "350beb74764afa169a078738aa32b65b75508d4877dc844d96fc69e2ecd9317c",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "e06e5958ee1da3befea09d4f704297c59752122041c1453b57fc2bdd884eb055",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-5/run_1_naive.json",
+      "source_sha256": "abddc276ce178bed249cc23cba499936f25cd5de55efa9d47617e1b45828acd1",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5c89ed4ad6c3246f4e789a5a3726cce4f446bf3d9b1ca8d458b72230c5d93ff9",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "10039d470be6c9fd817002fc3854f73e5a3f92c1ab1381ab68635cc940860f9e",
+      "source_file": "evaluation/results/over_summarisation_text_summary/gpt-4.1/run_1_naive.json",
+      "source_sha256": "dd83f1f2c923ca4cdfbd0e5df4a2ce2d7d006713f06312c38d46abd804cd5d33",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "874d6abfb6ec345a1edf0c72731725a928fc86bdb3790d02821dffeb45656271",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "c700345bc78c0c856b8ecb07e12941dd97c44c1a84e03d2d168e52b9cf8144c0",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "b7ec76bc11d3c3cef7065406d07615f15e651e176990ef0542beabc881e69574",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a55894b8d163ce9ca2b306b0517ed0ae0cb0f4273a8141256a150643b2ecc70f",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "03ede4a9b3145b49e8ff136cdf6e3d8f0927558dbd0865b7aa06d82da6c47be8",
+      "source_file": "evaluation/results/in_refactoring_template_filling/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "a30437ae42b7c9339ec17780db089f717741b17ad671b1d092d48f1be804b329",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "082fc7addb6de19e10907afb725f05a3b068e227a2ead9177ac2266438d383af",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "b806f600c00f9d4b011ad3cf7dd167c5642e39c9bac8c7559deff110ecf824c2",
+      "source_file": "evaluation/results/in_refactoring_template_filling/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "dc2e235395bbbec0e322ba447b85e75e06e6eafd872dcfb9312d09b1cf6935d5",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "53049c705d13d9780101eb9da2ba6a9487cea2121d1fc1e2b007a1003e656740",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "a88c7bda38f68f3f589477c16e6d58274695fb2212deccdc6b14b96785c6e011",
+      "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "08a08ae9b9a87fe5404602e3aea88afb0904c3891d86485a35a4497f5d690aa2",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "080895acbdbe22fd8ecd3a9d26e7d464d2c37a209815f1368c131d1d0d2e6088",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "ba6daa9dcffecee80a00598f1b4b8afd5d8726a16019528106e3b8838e9722ad",
+      "source_file": "evaluation/results/over_summarisation_text_summary/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "e32412c64444538a69759187b0b87b3b009973b10e8f301bd8f0b7150f979e37",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "2e6c43ed4984c148220241f03165e099b1d108c37687e76e2a8f371244dce7ae",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "f6f12b8d609e0ce4460b2c403860eab8c07479510ba0d5132c088921b133a16c",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/gpt-4.1/run_1_naive.json",
+      "source_sha256": "f7c03987a236d7827937f1b70f14527f06eeb51736fe4f503368dca606095d57",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "c7a4da73d41a4345e2742a9c943428102e724dc329fa761cb2ad4a386cdf4dac",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "6c533991945dbf51fd9969f019df4d7f8ce891524870565690cc59af71e15e54",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "a02bdc73326af146c3b741ae8b88a7e10a4935637785d256d34921e2521bed16",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "57a827279fc9ea08f6f801adb083f1f7d018bc11a93666286bbee0c5c525822e",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "cc8ca5618384a88790b18eaf780166c5a2de9dcd176a26b53c7e149695baac4c",
+      "source_file": "evaluation/results/in_classification_relevancy_check/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "9203ea281348218840d31ca96202cc914eaa2202beb742b4d58c6c8d4f0feb47",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "cc1772469b25f287c5da5d31573e7487dac09171749d8c5700b783d1d6b6dda3",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "da324ec7e62950d084b2d8c30413ff634e373b222d09e8a2537776b380589e85",
+      "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "54934669bf77c70f0af0aecd98993656650547f42dc51fbf97608b4a87184cb6",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "483cf7f4858ee5e0ae19882cfe192f1626b2fd5ef450af4e14e7243fc32e3e3b",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "690ddf32eaf48a58a781a2d86d8d666ff4cf3e5f10c49a38fa53ec5f63fccad0",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "a8d704509022d68a57bd6e9fff3517d7e9c464e949942c0a162a77cfbc7ea44f",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "c73d2761dbb141b3ed77b94c1f2fde7a011f5a23872a417c8a63c403fa6a0993",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "55e011146511d387470b183a737617323bf5f2239eeec2c8ba1d9e4d2c3ad597",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "40a7789a43f8b33cfe77dbb2a35b3552e38efedde295b2bdba62e256c661a95f",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "209f2caadae81c957a8afbf348c331faf11249918c3a5b83e07fa041ab588430",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "79eca3250653081333e8d3875f1473d14f67223b4d478deba6d0e2f04c780d51",
+      "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "58b536a3005b96f92b984ff00c223b7835d6a34a34d70ccf91418bff86524fe8",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "bc342e04677f4c4c06ebba0f8d7ff78625a709d11ab4abbb73bac766b10d45fc",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "0dc87d6ece835200e32b90a5481dfe049d39ffee7c9ab1364b63f6794db14042",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-4.1/run_1_naive.json",
+      "source_sha256": "dacfaf2f72017d2022a144bd0090e6892703ddfa793ef80158bfe3235579d9e3",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "f76162bf2e5771c3a84e44ddf42c84df2a5abb27cc090ca4d7e3bf985a418965",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "a674cd2c529bfa520149155449d9f9e6fd04c15dc937cff89a2dffa340165b76",
+      "source_file": "evaluation/results/across_translation_summarise_translate/gpt-5/run_1_naive.json",
+      "source_sha256": "38e809dce9108ba25556c2bf2aa6f654663a5897e3a1d6e24b4ccc806efac054",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "076fb1a6964dfc6976038b6c064f55001678f72784d9a8cc80630b4f095ef625",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "1afd9885b0e74db8fedd64237f0708c3368005642c55def1dff3013b4eb3413f",
+      "source_file": "evaluation/results/in_refactoring_template_filling/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "7de912799a4642a081abf07b14bc0561717ba681f559bcd4e321fc79c1c8847f",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "53049c705d13d9780101eb9da2ba6a9487cea2121d1fc1e2b007a1003e656740",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "0bfe0806930f09504bc4f05ada98e3428aa007d97f09b868cbcd22461bf55edb",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/gpt-4.1/run_1_naive.json",
+      "source_sha256": "6ffa5198d728480edea9fa6792b2c78a80d56abd729b0c6d7e5687d9d67d4915",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "2c6d688c0e7e07fe3552cb7f6762649fe0d6ac65c2a060dd92bc0ff282c683e6",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "5ad7dc2d1ea9a60f67d83d6d70256e8462295ea11b9f12476ec5888af1e16a48",
+      "source_file": "evaluation/results/in_classification_relevancy_check/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "4a5a50f067ef1473cfabe6d60177f05f7a12bbf36b107f791857d7c544ccf6bd",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c0d369b137c648cbd3804696d822f9b1e7b3b415f5f1b62e62f2eb568a9b8c83",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "b111ae2f7bc71b2601e646af82cef02a4a2d486f788738d7ebd6ee8a5ab7119a",
+      "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "5936ec67851d1ceb05a463f3f08803a9fe62aefe1981af3eeb7ed932ea23cc36",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "ce2c7365937bfcf12f6fafbda8f658d256e1e11acb2efd109c733b518aa27053",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "caac19fc3b684a726b7dcc4426f8b5c7bda549d587db21333a3920f30366759d",
+      "source_file": "evaluation/results/across_comparison_attendance/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "b72bf28ea7efd4b2393b3ef8a6ebb63fa0c4b8034ad5aff6da5720192a6d9d4a",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "3583f877a71ba4f88f5c83c7fca398798df9df8e662a5ab700ab4276b55eab7b",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "8676d6b2a05fe8848d6eaae5fbf94bb8aabefa54ae66812d762c476099bfe451",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "f266824842d75bbf607f3ea99a380c900c086c8e22d35f806c98b672765ce4fd",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "d1d7b7c60e498d1d21a17672a80932d2be0c917126bcb15195e26ed4569da36d",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "aeb922c4ae93ca7403c9f66b480c86c08795080e71aca2f9ee02f75e342bf6de",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "a966a7311d1274abc6e68ee9b8a4031333497a665ff7762b7e3967a650d7c2db",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "fc7bb4bbfac79243b7e740cd9e45335c31b5e0a15942a4f0039fff0fc4a3dd4c",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "0c67197a0929591e7a4d835d7ada640083dc7df519a8a7259ddc54c9f44ebc50",
+      "source_file": "evaluation/results/beyond_simulation_change_request/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "5e7aa889daf380de92b6fb7854c41185553ae243cd2f2e8b6479aab4c10bed13",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "350beb74764afa169a078738aa32b65b75508d4877dc844d96fc69e2ecd9317c",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "f8bbc63413c27e84d0d4cb6e0be0823016b7bfa5a64479f28cc70b246401a146",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/gpt-5/run_1_naive.json",
+      "source_sha256": "c376e698cafd6a11fc5482ad9455194a9ce15c0bdf451bc16e6639ddd128b2d5",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "be86e8c7ad2e1d61662848157925b312afec734cafa938f50ac22a165cc18f4e",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "05aa54497792dc326bb26472c10dca0bf8f842b69336508078d7f2344f2eb142",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "681c4bb221b47c855d39dda3e0ee6b5639c2daa20cd30f6a8bf215bfe72ed73e",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "0caf06f248ce5e30bbc18a95383b0b3e48f282d255e177ce88ebea75824279b2",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "d683baf82b05f4231cf8946613e4794b655df08ad53038b5381096ec464d86db",
+      "source_file": "evaluation/results/beyond_simulation_change_request/gpt-4.1/run_1_naive.json",
+      "source_sha256": "e80f31f9bc50493d2ef60c3c12b60ab85233ed6fc24e138ae73463115e72b348",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "54c899b8c532d703dab945edaf61dd2f5b712724f1a78952a884ece58fbaafba",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "5b843857321973630d56b370d9634349facb7a187d7151dc8e400a14b73eb088",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "c575e9924b8b27de03fae493456653686b493a2dbbd3a35559e06acbad871426",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "2c6d688c0e7e07fe3552cb7f6762649fe0d6ac65c2a060dd92bc0ff282c683e6",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "7e58f8f3d5d11bba233e934f8c50bf5fdc3029d99750245cdabea8b8cf66ce15",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "8e55e822d48f8255134d776b19cc83ad0cde14a22e96cd6ef1d49abdb14b329b",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "8e0711508539cee72157bcd51a9e3346aefb012c6d87baebb1782f6f1d02aeab",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "f0304276b2161ea7478abd9f8be9ed24af657304929e38938d82bb4ec80d4c2e",
+      "source_file": "evaluation/results/over_summarisation_text_summary/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "148155c99fe3ec891b91e3dbceef71a998e35b68e16725e5f71cfc6b9ddac836",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "2e6c43ed4984c148220241f03165e099b1d108c37687e76e2a8f371244dce7ae",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "ce056c282314d47db4943effe0eabd2ca9e717bb5ffb09cf5de78169556d12e4",
+      "source_file": "evaluation/results/in_classification_relevancy_check/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "ba9407cda974c9b98a5efcd28bac42ac6b96ead81acff34d806af4865399d4e3",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "cc1772469b25f287c5da5d31573e7487dac09171749d8c5700b783d1d6b6dda3",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "cd84534740c1b78088e8bba06974c29aaf89c3257a3b5a47d5d369b947c85f23",
+      "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_1_naive.json",
+      "source_sha256": "feaad20284f5028c423441ba9f8fa03c8e351d56a8c46c8804a81370bd22cf89",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "bc342e04677f4c4c06ebba0f8d7ff78625a709d11ab4abbb73bac766b10d45fc",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "e84ef17b9e5be2d7c3c57620ffadfdc4375a28ccc17f82a0a1ffab6267a55730",
+      "source_file": "evaluation/results/over_summarisation_text_summary/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "6cc94a74543fbffa909895b3c8daf6f33a189605f0e65e9d14344454b4a2b2f5",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "dcad79b3b15fdab86057fa54d83ed261c3449f34049ae6accaf54b7ff4be6220",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "0d82e5cd6a712047a0e9b3db936ac5e4d6b44273ed6072547b9a476ce0ad7710",
+      "source_file": "evaluation/results/over_summarisation_text_summary/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "3c71b41676c9ff7b55bf24fc1abf4fc8485893415a91e9f9deb523f5acd05d50",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "23068133a72d8fba8e1ac8b9370d771065c73345955198ff661b8a2811728e9f",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "8a49ca43530cd736c2e5d143a759143eae70f7b62a8732786b6bbb3799a1ec51",
+      "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "50e406193bddd7a441511d3c5dddc41f1f2a6c835ef5ecd092a7eb47e91e2b41",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "cefbe86fff57f8b456133bf3ca88a2ac19e57011acf15e0246288fdebbb66695",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "28a3c2ce75704a6a9f7308cbddc57ca991cdcd79692309e671014aca61bca9e6",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "e625543ee46ddfeeb04e3cc17b259cc6866363ad04d2564486cada8f6f65cf75",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "461d0e05b115f027a7531bcd28c6df1db03d27049d3e741762c1658a8aaa859f",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "74dee605f3943d3a258ba8b260c46f1a4c73491c56fd6cb995f99e06ed08dc3b",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-4.1/run_1_naive.json",
+      "source_sha256": "3a05f3c5746565367e7b861147d045e1d32ed8eeef05a9f2393950b0a5e85caf",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "fc7bb4bbfac79243b7e740cd9e45335c31b5e0a15942a4f0039fff0fc4a3dd4c",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "0d774ce7bf5e95e2851836654c2f020d091bf8fecc571f5453dd537ee81fcafa",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/gpt-5/run_1_naive.json",
+      "source_sha256": "1805082ac6fcdcf89808409a075a73223cd67650dd8d11e6f4a4ee036925fa43",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c28bfcddf4be33f631a424391cb4a88d3f30d918f9cc308cb8533fbd3464694b",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "046b5d84663c4c10c99049dddfc6a81f55772e82362dbb16511e83a30fa0bd13",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "f99d6d9ead19bf91b585d54f5cba8c14f1010ffdf58ac382390d08f3c4ee9dd6",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "c64490da63bd61ac4246dc9eebb838c5050b256eabc368b26fc7df45ebaefccf",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "77386872ff35c6183848497bdf8e2ef171d31a4c17f967ea39264855cc65a8b5",
+      "source_file": "evaluation/results/in_refactoring_template_filling/gpt-4.1/run_1_naive.json",
+      "source_sha256": "5fe394b9c1280224de363adb54289d64de2d20a4e2bb360aec5c695c729e083b",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "354bf0c7f62f00ef4fe04ee4bd86135093e806a349acf464fb6e80564effac66",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "720674c050ead992807f00c2d1be5ed0a6008e31b987ca9946d78a6672565585",
+      "source_file": "evaluation/results/across_translation_summarise_translate/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "9b03906f457d94af1aa43632ed199016ab84c01fa7d4b62dcd008ada83585022",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "7af69f64d6070d80b19edd87cf2f4c1214ff2ab241051e42cf7c4a6c6eeb83f8",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "d89d469386cba6644a8dfbcb3912fc7f3482d9321f6820278b1dcff86198dca6",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "4ddc55d59219f2d465ca53d7a19d9dfd04f99324c2b4fea1364d6e6c09498213",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "1ab83ed65967bca318a0ac8bbda46e6790fe67b7169c1f9b9b30db3b71577cdd",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "159d31e36659c3cd8dd2f05d5af6c2c90c7c9acf337cafaf8af71208f55446c0",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "d057640eb76e0ed32e9648d6f3bee467682c3cf4baa3d13b1155ccd6076ca638",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "0caf06f248ce5e30bbc18a95383b0b3e48f282d255e177ce88ebea75824279b2",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "227f6513de11e34b0e45a120041eb58e18426c18aeebe004b1f2b56aa0628437",
+      "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "2c4b0d9f543ffded92523b6a2225099b0646663e829d2e8649a205f9a1743a16",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "483cf7f4858ee5e0ae19882cfe192f1626b2fd5ef450af4e14e7243fc32e3e3b",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "26b4c4ab1c586c54a7de6e047794ba5d51851e59ec99476f8bb2d4c231911b39",
+      "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "dfb26aea7be8ff54ba428cf72417431dc5e068d447524b8e7c4190237af23975",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "cefbe86fff57f8b456133bf3ca88a2ac19e57011acf15e0246288fdebbb66695",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "98481a3a8ccd0379d24b8bf3199b7a5382a7e0ea7a38ac0f7056624b12b797be",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "602001e0845878ae7bb814d64b159d1da93cf835727b5cff91f15722a6bd6a8d",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c28bfcddf4be33f631a424391cb4a88d3f30d918f9cc308cb8533fbd3464694b",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "3eba54e43e835b550a6c58cfb9feb460ff376900ac8a44b8ff1b25335b8113a5",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "ad353d1ac1f1b681b4ba0c45bb822fe502aed1a221661f79c7905018b3383a8f",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "57a827279fc9ea08f6f801adb083f1f7d018bc11a93666286bbee0c5c525822e",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "61d58fb69d867e9e6b56fb9d93e985b4b937ea846c91b698a1cac0f72178f32e",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "fab359edcefcc5d6e81e089d9193d928acda6084e86b2cb36d5c1aa69503010a",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a6222e87f1b80adfe85ab805b7ea93c2451a6aaf684d24ff4ca73f056bc943eb",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "a1ce2ff5a4e5dd39453e158c6c1059319581b8f462726735513bab4038bcbe69",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-5/run_1_naive.json",
+      "source_sha256": "9180e73b01988c5d7072643368d3474e8a23d755e618bc34d0111e6528a8f297",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5dfb9d984f0b68eac1a43a21cee49c98746b369829c47860438a9184101cff89",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "5d31ebb14469e6f7182e75151db8531493317ce612fd2a0e1aa85f233d156af3",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "b8e1c4eb9f17b6226d011f96b3fece5dbd432915141ae2a186f161fed7aedbad",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "f2e7e6820444b599200a6f8a891e3f0d5bf4190579f9b1bfc32bcd9974b41444",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "2e8c5266a471ecabb9db75860a9bf9b2cab9439f251560f0c413506cce635560",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "dd60b4ef57b4474d270720141c2f3cb47b9edbd599898d1255384ea041b28f5f",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "d1cb5c5e27484644a122f85308d1c1302d6c32d4a8e2cc52718f08460c1668dc",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "ba9b5fc8172e7e93ff090ff3220546245e04bacc7f246d0db3c46361218e6190",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "f9ac47cc63d24620b463c61dec9b257cf89cccc6c5994bc7160d33659aa1ea43",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5dfb9d984f0b68eac1a43a21cee49c98746b369829c47860438a9184101cff89",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "06c5eff6469f45c2f90beb353ffb1ea519b99345969956bf2fd25ca205837cc6",
+      "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "09b383d9bac7655491b27c35c24a13bd04c0e236c28fceebd2c6479126631772",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "3a8e1ed3a51adf6de270998eeb4bee24909a634e31d75d4247df4f68acb05357",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "bf15605112258a71a3d92118d4919b6821fd252d8b65a317b65ad27c24e8361d",
+      "source_file": "evaluation/results/over_summarisation_text_summary/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "b4f1b10a2f6b00ad12de12192ab30b7aafb19784e2729a14eea984836fea9b6a",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "874d6abfb6ec345a1edf0c72731725a928fc86bdb3790d02821dffeb45656271",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "61461ac774a8239474867b930ee78fc2084bf64779532a9e9ae1b4f4cd7cfe3d",
+      "source_file": "evaluation/results/beyond_simulation_change_request/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "880dc88b7d718e8871d5c1ad1ee29a5a005fd5cc5dbd123921eb6e49d91baebc",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "0271cf810efcd85ceb64feb4dd172c6dbca48687995f87ff1996404b1758f42c",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "2707254211021f81f88edb2927f74a2430c4518be73ce627adcbb95e13c06aa8",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "350917c4976f354706cb67ed2036fe522bcccc5670a93f2d349cc98cb1c3d981",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "1ab83ed65967bca318a0ac8bbda46e6790fe67b7169c1f9b9b30db3b71577cdd",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "ad8dc09f27b93f766e4f9f0d83a5c7f80a5d527281fad88a2a20d29c48d65b09",
+      "source_file": "evaluation/results/in_classification_relevancy_check/gpt-5/run_1_naive.json",
+      "source_sha256": "430c4b6efc6c2ff1e6a7579315fa7b7ace46a7a5183e5ec0cabf1bdc133b92dc",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c0d369b137c648cbd3804696d822f9b1e7b3b415f5f1b62e62f2eb568a9b8c83",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "c5f323c4896915bbcae6dfeaea462f62b2583c52caa1159d556fe635b289393d",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-5/run_1_naive.json",
+      "source_sha256": "f42c5c020ac8bec64d0105348e9b3b36198dcd91fda89ceb492c30025fad2e99",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "8caa839e4f7aadac09677d58dbda9b1c03b30f885bba628aa278e8b477ca3241",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "a8135282a849f39fe3690e43f387d6ad7bb1e9bd321e2443f7ac4f47c751ffaf",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "7b6459e67a5a408aa6461bb5fe8ee14e4c4124d5aa87cff3cec6ef33960fe2a3",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "8caa839e4f7aadac09677d58dbda9b1c03b30f885bba628aa278e8b477ca3241",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "49413328c82ad8a194bee8d909d93da99b4084b8bb2e3f655dc1e7972e8e7d83",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "6e4bd4e11c4e77f66873f288e13b1b0b8befff87d06a7fa80af4286d37c5e6a9",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "8fdf8c0cfe8f74fbc20d9557968bd7ede899bab98ddfbafffb2836971ccee1f7",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "570a8c95b2985439020430496ef3c3acc9414bc3151efc5fa38ce7b6512f3e24",
+      "source_file": "evaluation/results/in_classification_relevancy_check/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "42e226e0e5cb91c9f7d4fa8fe6653ffd61626433ca1b255715e2e3e3fed8fd7f",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c0d369b137c648cbd3804696d822f9b1e7b3b415f5f1b62e62f2eb568a9b8c83",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "e880fbae15bacbc535d1c5168a8394bc0df6161b78d081378da97a1520ac589d",
+      "source_file": "evaluation/results/in_refactoring_template_filling/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "17b0faf0b9c0bae9106d2b4984395b5d5a866944c49ce5862639a6491a857d76",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "082fc7addb6de19e10907afb725f05a3b068e227a2ead9177ac2266438d383af",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "c27cd9d215b80419eff5d3dce8e26d35f7f444836e8c716448a695ea3ffcfdf0",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "82753a311205532cca7efb38c409e638167f15c56ede647bcf551bb1bb2adafe",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "f76162bf2e5771c3a84e44ddf42c84df2a5abb27cc090ca4d7e3bf985a418965",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "e2a14b5e440a066a0728a8a76f4aecb5d246b55635113e4bcafeab8bc3e98906",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "0f80765187f44100e9163d67f42fc933c4a63675f4dd185c9658d9bd07464291",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ff6839b059841bd0aa608e135e2f174af15fc34c4793fe05faebd2d39ab30548",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "9bbd2aa96a04ae1cd2546768109b24da9852b9b486251e4f1a8ca6764bacc340",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "cec2dedf20740f3b2815dce95eb38b70bad83727a45e7911ef4ccb1d60cbe161",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "83d38ddc794d2d75daabc0899e0e2198829c68ad0c0d0475f845b78e5c5695e8",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "26514eee864c1ba9c6e70df831336e913cc36eb94f15bef003c5533bbfb16d1a",
+      "source_file": "evaluation/results/over_summarisation_text_summary/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "af633646cd2b70023dd78d7e4d21c9e53582cbd55a0de7f045770e063840678d",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "23068133a72d8fba8e1ac8b9370d771065c73345955198ff661b8a2811728e9f",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "6ef0120b5a5e793217275d9ff775c6db64ed573159c0ee20e956fd65dfdbd21c",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "72f7facf37d2045f987c58af1be8319c1cadcda1c7bd118f92c398cbbfc6b932",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "274e08d10790827d768cb711f1e1abfc24ad85af30f740b443c7f2cdab7421cd",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "8cefd68d3aa7931193c8902ef8251a5a65c58da63ab55b60a9f35cc73c24dae4",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "4c7f3afc86808ccd85dbcbea605c398c406635ecb111378ffcf2385ed9d28678",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "4231728d475caf6c9b51af9dd3eb0b45b0cd72b94230ddfa343d30b7c07d5665",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "1215d9157933895712ee9f7df8e36ad95904d9e241576399a2df0db936e5bebb",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "a740ce069763d42980d509aa9ce0db03036ecfd2610e38118a267f980c8ba276",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "c64490da63bd61ac4246dc9eebb838c5050b256eabc368b26fc7df45ebaefccf",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "3705482c9ab015ecaf37b616dd4fea38263b11bdcf981e80acc734cfa3e3c27a",
+      "source_file": "evaluation/results/across_comparison_attendance/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "f4fa7cb6fed70e58d96a3c576d5202ba75ffeb33803145b9e90fd6b32f779ad2",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "6cc992f4b123d573b68b09b0d2419a19db9108771c8cb4059f5dd7a443ad4a83",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "0415b5bd370d83eb95d7aad586b6e6f574d92e71fa4db6a2b1195ae7aa9a0343",
+      "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "1b5a75e80b829edd7703cf1eca193e94572703fe387df4eb92cd044093283ed6",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "6a2704c7d789c2f3b3887608e7930fbdead3c66b2e0600e9075bfa9010f57341",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "b97835742c784e73f388a15ed571a6105fb52ab40533baed4a770933f8771c89",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "f585a03fdd2ef3530ab7ea9d359c168fa20de0f302b7b9de72cc8d5aebb266a3",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "319b11f3356a5548d4b83fb0088f3c3018af707b6fafaac60a5d030355a1ef6f",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "0e55d452682e45a6d6fb686241a2f43f6b60384b05f6477c3a3e8a42529eb1c2",
+      "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "0230b17e2504515fe33fec7c8e68dd688fb3a7aa6fdf8b8aa60ccafbc847dec9",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "3a8e1ed3a51adf6de270998eeb4bee24909a634e31d75d4247df4f68acb05357",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "b17dda76129745d9aea50ba998d78b00a8a34cde007bfddd2fc7c5ddd22016df",
+      "source_file": "evaluation/results/across_comparison_attendance/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "6e27a15a1d0b99be956c07e7716590b979a11a9d1b605f8b5f76ef630f7c46ea",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "3583f877a71ba4f88f5c83c7fca398798df9df8e662a5ab700ab4276b55eab7b",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "d9adc924ff8cf1344802bcdb05a55bb75f42abd027b1df5914274435cf5d130d",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "22cf91f4bb8622afc9490be0507f3b7f7236e4e5b058bc6ea889b518a1616708",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "57a827279fc9ea08f6f801adb083f1f7d018bc11a93666286bbee0c5c525822e",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "875cfff62d5c078e572217c765afe2acdbdac69e24ba3ba78d4dc0f61c7ced10",
+      "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "d43e01cd8f2b018a4740e6086824127e98007cd9ab2ab6dba9b8766c587f3e47",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "080895acbdbe22fd8ecd3a9d26e7d464d2c37a209815f1368c131d1d0d2e6088",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "a45cd1441d543962690fc90aadc6ee4cd7272677849d6a9d04077a2de969e367",
+      "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "92f680549d8ff788fc16ee8eafacb0abde0c3cb341f0d8e31bb1d03125e504a1",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ddb27f44faa3c1912d3e9759f467a633551ff3c8f205aa7e48adb111ff4d6ae3",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "8428bd62b0f3cec4627f665f36b9783f643969469ccdbbb0e5b30ddbbd636538",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/gpt-4.1/run_1_naive.json",
+      "source_sha256": "fe0b3e4d8bf67c65f155b3f48c92ddc2861ca1e88ba1bec6d12104bf4e0a7a93",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "461d0e05b115f027a7531bcd28c6df1db03d27049d3e741762c1658a8aaa859f",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "8462c27591cdd44cd617f2a3d5eb3d3f83b03aa86a55ff55ebe4bc998aaf971a",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "29ed911ffd7c5189bf410a365cb6e440eeaefbf0b2cb17c103d8c85910fbc4eb",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "d1cb5c5e27484644a122f85308d1c1302d6c32d4a8e2cc52718f08460c1668dc",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "1c95b42e6a61816a81a590d80c0674d29c2f3c99d0ba18fbfdbf5b892f87d104",
+      "source_file": "evaluation/results/in_error_identification_hallucination_judge/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "a104c031be86e5a0447a2817b9290902c073ee55919c8805882d07175610568b",
+      "legacy_scores_file": "evaluation/results/in_error_identification_hallucination_judge/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "4231728d475caf6c9b51af9dd3eb0b45b0cd72b94230ddfa343d30b7c07d5665",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "420534764f38ff5a3a4dd03bfeb488e5d8af468ea60dda673ac5afa608f683f1",
+      "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "eaa56450fdbc4eed8e50462e5caf2786bdd95f2d6cc61ce9f914549423ca1e7a",
+      "legacy_scores_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "1ab83ed65967bca318a0ac8bbda46e6790fe67b7169c1f9b9b30db3b71577cdd",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "f34ddef64caa875e6ef1cd9752de8154b2861c9674d73a11654edf55da93eecb",
+      "source_file": "evaluation/results/across_translation_summarise_translate/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "8f4d7da730fd69d3af09bb6ae364dcee5a45f65b72bf09815d74f98c0a88c633",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "076fb1a6964dfc6976038b6c064f55001678f72784d9a8cc80630b4f095ef625",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "21370fe8f8c31ae1f03458c01b8c3c227db8c2194641d4b7e70c87fc9c248ce0",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "4ec43b7325aab9514a1d17dbf83b29302be09cd3a08189cf968d42b33928761d",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ff6839b059841bd0aa608e135e2f174af15fc34c4793fe05faebd2d39ab30548",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "8155559289245bce0766417f2b644299f519045b0ba69c2c28a0858fec33d6d0",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "4000234279386e3ac9adc7710aae8bf59f64dd9aaaa3270a50a89c06441abbf7",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c4f44f3b041c8b0cdbfdd81d60066ee5f44887f981828121a5dde927fe58fee9",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "0ce760d762e40cfb2407b6fa69f6599d0830d045f778515a197a65fa4d5ed7fb",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-5/run_1_naive.json",
+      "source_sha256": "362e556ded942800c18de3a8ab0247034a2e313c670387f7f6865126ce0a4e9e",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "c4f44f3b041c8b0cdbfdd81d60066ee5f44887f981828121a5dde927fe58fee9",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "37aa8c31d560e0d3351106f5a189a69ecba86a120fbe7136f308647eccc547d8",
+      "source_file": "evaluation/results/across_translation_summarise_translate/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "ce28a27aab511fdf1d687fa6b3672b9658198fda2fdd29a32e5a072793e4f2ad",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "1684d87b4e158ee9269b4cd0452ceaf4e444912aaab90c5fe8554a80560c1d68",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "cbf063be4c6fef8aed7ebe2650538e31c751aec010351abe7ff985d1fb233c50",
+      "source_file": "evaluation/results/in_refactoring_template_filling/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "2f3cd4d03e98e5003f4c52dc405ee0bb59310f852174fc070eb36529fbd8f0e2",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "53049c705d13d9780101eb9da2ba6a9487cea2121d1fc1e2b007a1003e656740",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "dc1ed8b2ef5c406dbe4ab88435095e5a967a25a11a4b756f50c4793cf662f66a",
+      "source_file": "evaluation/results/across_comparison_attendance/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "36a8282d644a188da2909899f46e4e6624f34efddfa91184d1f7dcef2b96993a",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "191d2a0b32f745957aaa12ff98874bd9713fc257f86f717cd803f5da0bb14867",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "55a0c26b0fab8b70d115a8aa85a3bc86f06d78d350f5dc8d4654d85503de77fc",
+      "source_file": "evaluation/results/over_summarisation_text_summary/gpt-4.1/run_1_peil_unlabelled.json",
+      "source_sha256": "7c69e735497dd30f4795094cc537f42e24d11f87e2b5147f893ee8626a15a048",
+      "legacy_scores_file": "evaluation/results/over_summarisation_text_summary/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "874d6abfb6ec345a1edf0c72731725a928fc86bdb3790d02821dffeb45656271",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "339f568f4e3e3d579f9173e3d3fb227d11eed5bb678bf3ac2c7abb1970feb918",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "b5e88bcc5055258202f3035146caa3f3fc54dd35bccbad106b4c0b0b5a879c9c",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "83d38ddc794d2d75daabc0899e0e2198829c68ad0c0d0475f845b78e5c5695e8",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "de9fa353efe1fc0e0be75033d6730fcfbe4e1a776449d12c42fbcecad0f906e1",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "fe398deb4a9993b4ffa76de81963675fa4215c9ae6e8bb689c0deee2eba8faab",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "bc994f8d6c77e9d6828d84d080f8a657b9ae9a77c3d32e3702283a329a6569cf",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "308deae0b3d9d2e86fddf30ad6e6ed63272c6d4a3c22296d731be3ef46b9976f",
+      "source_file": "evaluation/results/over_summarisation_chain_of_density/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "ed2947318ed9190aa474ecc684e4742dacec2378c584abd87ece6ca81e181878",
+      "legacy_scores_file": "evaluation/results/over_summarisation_chain_of_density/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "5c9492ca345311e531f8c7e1e435eadac7a5283ebe553ef5548b028b10f60065",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "9b559b4e10270a18ec56e0d56f902f44d0692985be5e6c92d686ac1d27882d85",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "ea69f76c961b5a062971fd176efe6e83a6f862fa90d20ecea9c67938e0d7bc7f",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ec32c7a531c329638f4a41679fd99b5ed748744a717afe9d56982a1b72e6a819",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "565b791144dc6ff01a7db2fab97b672cd13b3af256713b84988a476f1282888f",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-5/run_1_naive.json",
+      "source_sha256": "1afdaf7e61ca957320c596b48fbd4f6c4699cdf5ccc904f212d8d736adbfeb8f",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "274e08d10790827d768cb711f1e1abfc24ad85af30f740b443c7f2cdab7421cd",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "fc28d60bc41e783a3dc317de3946dc300141dbb804d4b6ee4c82076a8b42a368",
+      "source_file": "evaluation/results/across_translation_summarise_translate/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "b85f734423be2023a89ff256d676cc2969d08cbdd83a85a9e38773437fc5edf5",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "7af69f64d6070d80b19edd87cf2f4c1214ff2ab241051e42cf7c4a6c6eeb83f8",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "2f92284fe884570a9da0059f60cda2f45dee9945e1129f41144c8c3909dc070e",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "f594ac4429b5de341f285ce0067149fa9dab878ec1b56ffae063c7730db53826",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "a5833387be95614a7154220ae9881d5d15edce7d2a15afd86ff8135648374bd4",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "535239a1de7c6e78b6933b0a772416ac4cf9a555630db3cf646bbe931803f9bd",
+      "source_file": "evaluation/results/across_translation_summarise_translate/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "f3d48cc466862384f31bc8f37181f52529d30ae8e4e6bd01b0214a9fc6d4ee72",
+      "legacy_scores_file": "evaluation/results/across_translation_summarise_translate/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "1684d87b4e158ee9269b4cd0452ceaf4e444912aaab90c5fe8554a80560c1d68",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "c90d1d8c0b7e28b5f12f8956540b099da0f006646a728d262bd1a209b7020abd",
+      "source_file": "evaluation/results/in_classification_relevancy_check/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "52377eda13f3806559310d00d28342a099a9e785d66d035efceafdb99848eb4b",
+      "legacy_scores_file": "evaluation/results/in_classification_relevancy_check/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "64ea58e8b2eab65b31e431d93283c094c4ab4cb0fa76914eaafb6d48e8892ed8",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "211496aa2d0ff4d9a9ba38e6fe4cacdc5fdf2df349b3b8da6dc8b4c043ab6680",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/gpt-5/run_1_naive.json",
+      "source_sha256": "dc68fa2f37b6d9ac64acdcab786032ee67cdeff0ca993a8cc383d344dbf35e2b",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "8fdf8c0cfe8f74fbc20d9557968bd7ede899bab98ddfbafffb2836971ccee1f7",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "a7f16cb77b8025166b6ca8532d3caa7b9408a90a6a2fb4ce4877fcf26694c4b2",
+      "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "1da59cf6bd2ef74e201ba98fde00c17b4d94c39815425a150490afe727ad7a64",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ddb27f44faa3c1912d3e9759f467a633551ff3c8f205aa7e48adb111ff4d6ae3",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "4fdd583decb5bd3f883520d1c589384a4414f350a766ed641c26fefa9811fbd8",
+      "source_file": "evaluation/results/beyond_simulation_change_request/gpt-5/run_1_naive.json",
+      "source_sha256": "c40b4b76110d327b6f4a023e6d240697ad03c92d110526c558c9c5242feddfc2",
+      "legacy_scores_file": "evaluation/results/beyond_simulation_change_request/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "1be9bb62390e975b6d7f8454768806be6f289033bb25d9f68d8d1ec581620e93",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "8955444b35a615ac8dedaca35b73aa222941d1d4cdf8472ecc7ff1a86559f163",
+      "source_file": "evaluation/results/beyond_hypothesise_theory_of_mind/deepseek-r1-0528/run_1_naive.json",
+      "source_sha256": "681c3cdfb70bc224e8e810d5b1524e51bd877ce867d445454875ebbc85cd1c38",
+      "legacy_scores_file": "evaluation/results/beyond_hypothesise_theory_of_mind/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "937624fb87189f6d7f87c30caa78be8354129244b0b929609d884952715d1f46",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "6c4c4b5b7c17f7a470dc7e1cca64955b3387f8cfdc2b9eafb2edbf6f5580c0de",
+      "source_file": "evaluation/results/across_comparison_attendance/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "47327f4e03836d7aa2386492bd8d5495c5f8495696eb986931c882a349b4eff3",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "6cc992f4b123d573b68b09b0d2419a19db9108771c8cb4059f5dd7a443ad4a83",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "9cefc3162e820c0fe17818c3ff13199149383ee40c09f5837ab316ba167292c7",
+      "source_file": "evaluation/results/out_output_customisation_knapsack_code/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+      "source_sha256": "f0218db9e5d5b3657fa758737eb64101d88bea6cebe624f9e85607b878f40793",
+      "legacy_scores_file": "evaluation/results/out_output_customisation_knapsack_code/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "8e0711508539cee72157bcd51a9e3346aefb012c6d87baebb1782f6f1d02aeab",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "fd9b7daef1ece7e991e04ecf711df4ea5afb2814b55ab3df14dd9d0f31ba643f",
+      "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_1_naive.json",
+      "source_sha256": "5b25c6f7eecf1211d64171ea400c9850aa8dab905c5725c767dfa7b8f37739a7",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "ce2c7365937bfcf12f6fafbda8f658d256e1e11acb2efd109c733b518aa27053",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "02b1be85ea82870528ee0d81f6f4152392a6b4224cdd7cfb0859c08780b36bc9",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/deepseek-r1-0528/run_1_peil_unlabelled.json",
+      "source_sha256": "83cf416df3cb8048c8dbf4f1c26e929faf7272e278bdb16e92aa495a3d6132d8",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a1bb7b5b2ccde7c3c5ebfb2debef3b530aaea3cd16d46ddd45c529a6de933d6d",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "df8951d927e37f293c95276cf518f310fd3b730254631acbbb844d229902bb1c",
+      "source_file": "evaluation/results/in_refactoring_template_filling/gpt-5/run_1_naive.json",
+      "source_sha256": "2a0d88e90a86880f7b4fa808796196bbe409783db7b3c7d82fb281409354fcff",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "1791e1213323a268fa58459adcef841eacafebdf6e718760877d26b94e39f3de",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "d02c774ba96f92962c80a4459be4d5c9adcb34cd1b45c794be586200006bb8af",
+      "source_file": "evaluation/results/across_comparison_attendance/gpt-5/run_1_naive.json",
+      "source_sha256": "2857109994a85375e72b64ae13265b094ef4ca80731c165daa3076e2cf39bb80",
+      "legacy_scores_file": "evaluation/results/across_comparison_attendance/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "6cc992f4b123d573b68b09b0d2419a19db9108771c8cb4059f5dd7a443ad4a83",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "490fa8d2539ba803b65d659f22f9fc72808640be37a361b8017920c17173de93",
+      "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_1_peil_labelled.json",
+      "source_sha256": "f2e0c80f48ef85b79a0c392027ef7a244a2486999d52e27e26bf04b7b2eedfc2",
+      "legacy_scores_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ddb27f44faa3c1912d3e9759f467a633551ff3c8f205aa7e48adb111ff4d6ae3",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "b6170719ff500f63fec440a99c092e7ab72644385e969bdaa837699b68407d61",
+      "source_file": "evaluation/results/in_refactoring_template_filling/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "ab2b483ce846f617ca4cea0788c834c478d48abc299af27879395898993de31c",
+      "legacy_scores_file": "evaluation/results/in_refactoring_template_filling/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "354bf0c7f62f00ef4fe04ee4bd86135093e806a349acf464fb6e80564effac66",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "c966f3cc4a7ffbec074c1d2db23dd9f628e92e29d186f2809b05b556f6f4d38e",
+      "source_file": "evaluation/results/at_calculation_math_word_problems/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "94aacc5d713f4ad72931df6b843118a073d7e1c67b342f6415ddd5226022fdc9",
+      "legacy_scores_file": "evaluation/results/at_calculation_math_word_problems/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "2c6d688c0e7e07fe3552cb7f6762649fe0d6ac65c2a060dd92bc0ff282c683e6",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "0ba9f65c47597c7cab919d7c502856def7cc94c83468f98de19c73aef264f4b1",
+      "source_file": "evaluation/results/over_synthesis_claim_extraction/gpt-4.1/run_1_peil_labelled.json",
+      "source_sha256": "eb3eb6e8a143e56d11df2db45893cbe8801457f98eafe04b330f5f32d19c37af",
+      "legacy_scores_file": "evaluation/results/over_synthesis_claim_extraction/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "461d0e05b115f027a7531bcd28c6df1db03d27049d3e741762c1658a8aaa859f",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "d9f127e7bbcb8b229242122de6808a974875a4a3a89f8e49b665f3411876918b",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-5/run_1_peil_unlabelled.json",
+      "source_sha256": "8d96ed3afad4be422faec6e343bd8fedd7c1f94860df139be5220c726d2d13b2",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "240ed2d8ef0cf915bb850db112b484e35d38b18ed328af42cfe4186e1f7f4454",
+      "legacy_output_slot": "output_c"
+    },
+    {
+      "job_id": "e74d52b7f4f0d3e522b95b677c032703d24dd1905393d7da5aed1882c0eb93a4",
+      "source_file": "evaluation/results/out_decomposed_prompting_letter_concat/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "191efd5c24f4a777d41eab042ed1a7767ea1b49cf6788be6d1a8e10c4eeb55aa",
+      "legacy_scores_file": "evaluation/results/out_decomposed_prompting_letter_concat/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "a1bb7b5b2ccde7c3c5ebfb2debef3b530aaea3cd16d46ddd45c529a6de933d6d",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "56e90e3a57f1ade7e63c6622887829a72808a9ee50e11e0107f0a6da439d07e8",
+      "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_1_peil_labelled.json",
+      "source_sha256": "ca2e9fc408c59aa0144d7acb8f6c39fa3e800041680d3f4ca1e013a135dc25e4",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/judge_scores.json",
+      "legacy_scores_sha256": "080895acbdbe22fd8ecd3a9d26e7d464d2c37a209815f1368c131d1d0d2e6088",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "7f92820b8ce4949bb145e5c3e1491d824c5eed1beaaa644b2835326f89b13a02",
+      "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_1_peil_labelled.json",
+      "source_sha256": "c1fcadf737979521b0167931ae9693879d43596dc2e7f706c396eb27ef6f4e3a",
+      "legacy_scores_file": "evaluation/results/across_argument_debate_opening/gpt-5/judge_scores.json",
+      "legacy_scores_sha256": "ce2c7365937bfcf12f6fafbda8f658d256e1e11acb2efd109c733b518aa27053",
+      "legacy_output_slot": "output_b"
+    },
+    {
+      "job_id": "de54a9740a7a9666210b1b6a13ea14341006732da27efa512c6eb9201ef22be1",
+      "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-4.1/run_1_naive.json",
+      "source_sha256": "6a70dccf8ebe84f94e5fed38059590737e545c97999d30037839519fe7404a54",
+      "legacy_scores_file": "evaluation/results/beyond_logical_reasoning_premise_question/gpt-4.1/judge_scores.json",
+      "legacy_scores_sha256": "209f2caadae81c957a8afbf348c331faf11249918c3a5b83e07fa041ab588430",
+      "legacy_output_slot": "output_a"
+    },
+    {
+      "job_id": "e5bfa3c065441262c4ae8ba3ece213d2f2970b3b88e69f669741c660ef691ee5",
+      "source_file": "evaluation/results/out_context_control_explicit_constraints/grok-4-fast-reasoning/run_1_naive.json",
+      "source_sha256": "9c6424e13b38ffec18a32987ab5b84f41348d9f34382cc90795344dd225eeeea",
+      "legacy_scores_file": "evaluation/results/out_context_control_explicit_constraints/grok-4-fast-reasoning/judge_scores.json",
+      "legacy_scores_sha256": "ec32c7a531c329638f4a41679fd99b5ed748744a717afe9d56982a1b72e6a819",
+      "legacy_output_slot": "output_a"
+    }
+  ],
+  "interpretation": "Same original texts, different scoring procedures; do not attribute changes solely to judge model or pool scores."
+}

@@ -1,0 +1,112 @@
+{
+  "text": "Alice thinks the file is in /shared_folder/photos.  \nShe placed photo.png there herself and has no knowledge of Bob’s unannounced move to /shared_folder/photos/family, so her belief remains unchanged.",
+  "request": {
+    "model": "grok-4.7",
+    "input": [
+      {
+        "role": "system",
+        "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+      },
+      {
+        "role": "user",
+        "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+      }
+    ]
+  },
+  "requested_deployment": "grok-4.7",
+  "returned_model": "grok-4.7",
+  "model": "grok-4.7",
+  "usage": {
+    "input_tokens": 237.0,
+    "output_tokens": 374.0,
+    "total_tokens": 611.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": null,
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T03:07:04.325189+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "5fd8a01b27e2d28d9303f0f82ce5998dada240c3e00abdf9f06f9145bf18cc88",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "a196492428113c56903ededb13b3c38b3df6311331c9790d1aea3f5ee2aa8f63",
+  "actual_request_sha256": "fcafebe0e9a1aeb7aec23748068b50b8bf25938d2e6b82fa2106bab516bbe883",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "pattern_key": "beyond_hypothesise_theory_of_mind",
+  "source_pattern_id": "32-26-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_unlabelled",
+  "run_index": 1,
+  "model_key": "grok-4.7",
+  "model_deployment": "grok-4.7",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.\n\nThis tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.\n\n1. Identify what Alice knows and does not know.\n2. Identify what Bob did and whether Alice is aware of it.\n3. Reason about Alice's belief state based on her information.\n4. State where Alice thinks the file is and explain why.\n\nUse perspective-taking: separate objective facts from each person's knowledge state before answering.\n\nState where Alice thinks the file is and explain the reasoning based on her knowledge."
+    },
+    {
+      "role": "user",
+      "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+    }
+  ],
+  "output": "Alice thinks the file is in /shared_folder/photos.  \nShe placed photo.png there herself and has no knowledge of Bob’s unannounced move to /shared_folder/photos/family, so her belief remains unchanged.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 237,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 374,
+    "output_tokens_details": {
+      "reasoning_tokens": 327
+    },
+    "total_tokens": 611
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "ec09312a3b99c02318060ceed4c6b6f2805d27c73541e67bbf5c065b26ba4c43",
+    "original_artifact_sha256": "30b92d5159256b1a8dfce925ecaf11adeca7e5c897615fd00c0602c7274349a8",
+    "original_record_filename": "5fd8a01b27e2d28d9303f0f82ce5998dada240c3e00abdf9f06f9145bf18cc88.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "66a16fb0f816d2f9d48ac843c54f4b9c71586c700c5fc5389c82a080d68978a6",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "0265c10f69fc7af7b73762f8d2a5a220572777972817dbe1c7eb89ce4a6c8956"
+}

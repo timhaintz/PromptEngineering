@@ -1,0 +1,108 @@
+{
+  "text": "Four days × 5 computers = 20 added. 9 + 20 = **29 computers**.",
+  "request": {
+    "model": "gpt-6-luna",
+    "input": [
+      {
+        "role": "user",
+        "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6-luna",
+  "returned_model": "gpt-6-luna",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 40.0,
+    "output_tokens": 67.0,
+    "total_tokens": 107.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:32:28.703135+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "31aebdd0ad94c28742c327861d50aaa1aea6403a15ad250f0093090822603220",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "a46ff4c657fc81a8b33517cb765180b0e492b407bf126a0c0c8fd0f53467e333",
+  "actual_request_sha256": "79a3a0801e23ee1747494db686f17d334259c7ae6adf74528f1550bc3c124a1c",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "pattern_key": "at_calculation_math_word_problems",
+  "source_pattern_id": "31-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-6-luna",
+  "model_deployment": "gpt-6-luna",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+    }
+  ],
+  "output": "Four days × 5 computers = 20 added. 9 + 20 = **29 computers**.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 40,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 67,
+    "output_tokens_details": {
+      "reasoning_tokens": 39
+    },
+    "total_tokens": 107
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "158d4456728ca2d987c1ccdfbec14558aa26e8709abb666a959c8351e15589c4",
+    "original_artifact_sha256": "03c888d054993409c5bba92926d1cf027ea9b11fa27a48a379f3d85ba71187bd",
+    "original_record_filename": "31aebdd0ad94c28742c327861d50aaa1aea6403a15ad250f0093090822603220.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "87c4a72beec1bbd2fd6709d1fe477fad946850c3fbd39a2ed245b63eedb3e97b",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "b03d807d7f192e156bf39f474cf74bc8a8b2b5875228bdd37df25319a9e1fe63"
+}

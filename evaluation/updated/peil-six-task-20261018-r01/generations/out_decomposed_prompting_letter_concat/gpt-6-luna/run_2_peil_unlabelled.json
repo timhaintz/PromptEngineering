@@ -1,0 +1,116 @@
+{
+  "text": "QC: Input: “Jack Ryan”\n\nQ1 [split]: What are the individual words? **Jack, Ryan**\n\nQ2 [str_pos]: What is the first letter of each word? **J, R**\n\nQ3 [merge]: What are the letters concatenated using spaces? **J R**\n\nFinal answer: **J R**",
+  "request": {
+    "model": "gpt-6-luna",
+    "input": [
+      {
+        "role": "system",
+        "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+      },
+      {
+        "role": "user",
+        "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6-luna",
+  "returned_model": "gpt-6-luna",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 167.0,
+    "output_tokens": 252.0,
+    "total_tokens": 419.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:41:08.972267+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "8c64a4d5a6cfabf48db4bdb78f38810fb3793305cf675fbf1932b5ac85f2c45f",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "598ee5e3de509e9bb67e4a96cf5effca05f8e03d54ab6f4b6152771411dcc8df",
+  "actual_request_sha256": "ee2adaee3ccdef955ced6cbd8aa481aa129c2c44da9f7469f3a4a4b5630090e2",
+  "pattern": {
+    "key": "out_decomposed_prompting_letter_concat",
+    "logic": "Out",
+    "subcategory": "Decomposed Prompting",
+    "task_title": "Decompose a string manipulation task into sub-steps",
+    "task_description": "Break down the task of extracting and concatenating the first letter of each word into explicit, numbered sub-questions with intermediate results.",
+    "naive_request": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces.",
+    "task_material": "",
+    "role": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.",
+    "context": "This tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.",
+    "instructions": [
+      "Split the input into individual words.",
+      "Extract the first letter of each word.",
+      "Concatenate the extracted letters using spaces.",
+      "Present each step as a numbered sub-question with its result."
+    ],
+    "technique": "Use decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.",
+    "output": "Return the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer.",
+    "reference_notes": "Correct decomposition: split into [\"Jack\", \"Ryan\"], extract first letters [\"J\", \"R\"], merge with spaces to get \"J R\".",
+    "source_paper_id": "6",
+    "source_pattern_id": "6-0-0",
+    "source_paper_title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+    "source_pattern_name": "Decomposed Prompt"
+  },
+  "pattern_key": "out_decomposed_prompting_letter_concat",
+  "source_pattern_id": "6-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_unlabelled",
+  "run_index": 2,
+  "model_key": "gpt-6-luna",
+  "model_deployment": "gpt-6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a task decomposition specialist who breaks complex operations into numbered sub-questions with bracketed operations.\n\nThis tests the ability to decompose a string manipulation task into verifiable intermediate steps rather than jumping to the answer.\n\n1. Split the input into individual words.\n2. Extract the first letter of each word.\n3. Concatenate the extracted letters using spaces.\n4. Present each step as a numbered sub-question with its result.\n\nUse decomposed prompting: break the task into ordered sub-questions with bracketed operations ([split], [str_pos], [merge]) and numbered outputs.\n\nReturn the decomposed steps in QC/Q1/Q2/Q3 format with intermediate results, ending with the final answer."
+    },
+    {
+      "role": "user",
+      "content": "Concatenate the first letter of every word in \"Jack Ryan\" using spaces."
+    }
+  ],
+  "output": "QC: Input: “Jack Ryan”\n\nQ1 [split]: What are the individual words? **Jack, Ryan**\n\nQ2 [str_pos]: What is the first letter of each word? **J, R**\n\nQ3 [merge]: What are the letters concatenated using spaces? **J R**\n\nFinal answer: **J R**",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 167,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 252,
+    "output_tokens_details": {
+      "reasoning_tokens": 177
+    },
+    "total_tokens": 419
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "46a2252f37502a0e51fab1af5374e44ee1d5e078cece3a041099a3c32a18b785",
+    "original_artifact_sha256": "28b80b453f540d7875fa6f0d77842436e9ef1c5b48b2a523eb74fccdd6899b8a",
+    "original_record_filename": "8c64a4d5a6cfabf48db4bdb78f38810fb3793305cf675fbf1932b5ac85f2c45f.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "0dee9e65829f004816b149a9b7a96f8f5efcce91c5db1b306cf4533bc9d3d827",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "8308e7972a9d8dd89579a61d055cd4c75590ab6cc7c40b030fddfc7b38f3eed4"
+}

@@ -1,0 +1,112 @@
+{
+  "text": "Starting quantity: 9 computers.  \nAdditions: 5 computers/day × 4 days (Monday–Thursday) = 20 computers.  \nTotal: 9 + 20 = 29.  \nRe-check: 4 × 5 = 20; 9 + 20 = 29.  \n\nThe answer is 29.",
+  "request": {
+    "model": "grok-4.7",
+    "input": [
+      {
+        "role": "system",
+        "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+      },
+      {
+        "role": "user",
+        "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+      }
+    ]
+  },
+  "requested_deployment": "grok-4.7",
+  "returned_model": "grok-4.7",
+  "model": "grok-4.7",
+  "usage": {
+    "input_tokens": 162.0,
+    "output_tokens": 276.0,
+    "total_tokens": 438.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": null,
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:36:35.972393+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "00555adda613074b9bf463521e9f3f819487e112aac471f1f5fb11acb4d89d45",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "97708d09d85a560c9ac8c569e0696a06714df5b34067c565e15dd910af3780de",
+  "actual_request_sha256": "718f41f99f112794c6dc12c601c5a7b6d0310024ee054e52d65bfa3480291b16",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "pattern_key": "at_calculation_math_word_problems",
+  "source_pattern_id": "31-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_labelled",
+  "run_index": 3,
+  "model_key": "grok-4.7",
+  "model_deployment": "grok-4.7",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Role: You are a careful arithmetic problem solver who shows all working.\n\nContext: The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.\n\nInstructions:\n1. Identify the starting quantity.\n2. Calculate the total additions over the specified period.\n3. Sum the starting quantity and additions.\n4. State the final answer clearly on a separate line.\n\nTechniques: Use explicit step-by-step arithmetic and verify the final answer with a re-check.\n\nOutput: Return the working steps and end with: The answer is [number]."
+    },
+    {
+      "role": "user",
+      "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+    }
+  ],
+  "output": "Starting quantity: 9 computers.  \nAdditions: 5 computers/day × 4 days (Monday–Thursday) = 20 computers.  \nTotal: 9 + 20 = 29.  \nRe-check: 4 × 5 = 20; 9 + 20 = 29.  \n\nThe answer is 29.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 162,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 276,
+    "output_tokens_details": {
+      "reasoning_tokens": 205
+    },
+    "total_tokens": 438
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "e09060389163fab56f1e9921e3d3db6ff62226dcd58c03a974fd1eab1103d98d",
+    "original_artifact_sha256": "3e78eb42e9ece9b2d640941f9654d90b224b27502e4a828bfb42358a4834b86d",
+    "original_record_filename": "00555adda613074b9bf463521e9f3f819487e112aac471f1f5fb11acb4d89d45.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "83db722b61729961ff9ee44e87fe0b7e2096b2cdf2b62263d232ab1802159204",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "17d3c87c5d1a1bbd5d02648b6c036a07610729d1ff2adcc0e1af2d89a6808c9b"
+}

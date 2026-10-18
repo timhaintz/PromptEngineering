@@ -1,0 +1,1464 @@
+{
+  "version": 1,
+  "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+  "records": [
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_3_peil_labelled.json",
+      "public_file_sha256": "b67a5d0142ac12a3dc40da96952de79236539b1d51258c1d967b446702977024",
+      "public_artifact_sha256": "17d3c87c5d1a1bbd5d02648b6c036a07610729d1ff2adcc0e1af2d89a6808c9b",
+      "generation_job_id": "00555adda613074b9bf463521e9f3f819487e112aac471f1f5fb11acb4d89d45",
+      "original_file_sha256": "e09060389163fab56f1e9921e3d3db6ff62226dcd58c03a974fd1eab1103d98d",
+      "original_artifact_sha256": "3e78eb42e9ece9b2d640941f9654d90b224b27502e4a828bfb42358a4834b86d",
+      "output_utf8_sha256": "83db722b61729961ff9ee44e87fe0b7e2096b2cdf2b62263d232ab1802159204"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_1_peil_unlabelled.json",
+      "public_file_sha256": "4dc797f9091d82d066160aaa20e69d58de215f45214d434d2956ee72a07221a2",
+      "public_artifact_sha256": "da9928d4070043e714e155f23914dc13e3483e7d1c37572c193cdab96463be93",
+      "generation_job_id": "01831b8956e3039acc0a9f31b032dc569c28536e3f3f981eb7c9e462a3c7ca28",
+      "original_file_sha256": "c9577b1b04405b3582acec64c4b25eb586ec8fd1a685090421d94fe32c7c9383",
+      "original_artifact_sha256": "6963fc6e0441735c2bd062e025f15b704423dfb2007989c8b1c59d941590957a",
+      "output_utf8_sha256": "f0b92dbadffbf7b2e97458300d2387905387dd299c2b1b38ed7dc60fb6d22a4c"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_2_peil_labelled.json",
+      "public_file_sha256": "1b6b2027e2f0674f6723b57beff610221e4af982b6aead40c32f729a57b9ac7b",
+      "public_artifact_sha256": "1515833d62d20bcab97a1da0867ca5794f6c4823d2b3b52924f3421d18f25d1d",
+      "generation_job_id": "02fcb3fc2a0ddecb59bdecc5fd11da896d950a8b767f64513e4ad00fe9a27dcf",
+      "original_file_sha256": "d1669739fa48b9a6d95c524a42888e7bd753033fabf20dabfc2fb9c31ff5381e",
+      "original_artifact_sha256": "22053b2119e9d353018c1f37acc9bd1d1e7eeca7810da00057f2e8f2926d2599",
+      "output_utf8_sha256": "4007efebfb338b03be66724433f2a31c0dbaf7fb6b6bb8b0a83b0077d6034803"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_3_peil_labelled.json",
+      "public_file_sha256": "27e9e9375fb4249ee7c0cf96b195eb626c647522e7c48f04e50ee35b06f6be55",
+      "public_artifact_sha256": "dd90904a899b3dee1c0f9ebcddc1e0e658cca0c9e473f817855d285f0c168bba",
+      "generation_job_id": "0414b784337e1b1f3fb9d89ceacc4e6ffd27f418ede98d4cbea15da1d0f0805e",
+      "original_file_sha256": "fa3a2a88ca094b5247f8dc5cb34000ba6ac65043fbdc463ff405f4d5b4b0675f",
+      "original_artifact_sha256": "483f315419f0974847a7764c3435ff735e862d9cda520126f4fb24f8f209df5f",
+      "output_utf8_sha256": "614a517747f98393091757f7e5f6353a136aa4547b38d6bfcaeeaa3c4e702041"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_1_peil_labelled.json",
+      "public_file_sha256": "cf092dfc57f7d43074225dc1a01130c728f811bb84436b9f2a450ce9864104f8",
+      "public_artifact_sha256": "0c0de6e4cda583e6d95529663ecf965a74d632a83b82c636eaa3d439cb33eb10",
+      "generation_job_id": "06f07838c281fa71ec4011b4773ee08b2a20a0ea2d544149dbb1205bbc1b702e",
+      "original_file_sha256": "89d38488622f6a2034dc26ef69c7580b25d3cabe6a77e88160af6f094fb0f641",
+      "original_artifact_sha256": "d233372504055618a6870b6b2aa7be277a446fe3a75e8374a032d979d5319ae6",
+      "output_utf8_sha256": "dbc22d26b12eaebcc1a4d2ad473a7c931804f21f5b3e47d7006a1c3f046e5c4d"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_1_peil_labelled.json",
+      "public_file_sha256": "14ba9fe36be6f03d9f0c338b39cba6e0f42eb76c6eb1d760e369c336b0d8b690",
+      "public_artifact_sha256": "8f4c216fff9388bda2fda16b2ced21148eddd53dccdff243da59ba287c9bafa4",
+      "generation_job_id": "0957bb24bc845f16b3ee0caa536f2aee601e4ed8a1d1c2945d2dd53f075611b5",
+      "original_file_sha256": "8b780477e20e555a1da59b6a1efd581734b8da9ee175bfd59e5b2330285b6ed1",
+      "original_artifact_sha256": "7de785233037ba734756d2cae2c94aeed9ea7a40e28885b29ab039569f2db9ab",
+      "output_utf8_sha256": "5bb9f69fb15b23533d4bd58f606349b279fc86d2442500812ea57373293fbf6d"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_2_peil_unlabelled.json",
+      "public_file_sha256": "8a555c9c3ef466a3efc99442eafe3480e6b7465341bdbabf2f0f4c2a23e4943f",
+      "public_artifact_sha256": "15d99a014a1e1206a7f69b02ee51fdc66fdca4404ae0f27a99ef6582b0b5a47b",
+      "generation_job_id": "0a541f4b0a0c0aac39e9cb3f5d538cbbbcfc6a3f4a4bb48dff59685d687e3c36",
+      "original_file_sha256": "4d88ee2f4f2c58627abb5e42036673c17a7c2f15474c98bbca8f0eaa2e8522b5",
+      "original_artifact_sha256": "4326a4736e165aaf23144241551f937091d0d5a536c0b8bc773ee95d4134b377",
+      "output_utf8_sha256": "374e3a249537123cc5279b96fde6b9c56e803c0ea03803780d08d4a114e0d79b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_3_peil_unlabelled.json",
+      "public_file_sha256": "c26d6549979e39f5ac0a12133ee3a31aa2cda2b4321ae5620d3128acde7b8f6b",
+      "public_artifact_sha256": "cb8937c48107f3a5783fa86860b4131ccf81f01dd4f631d355163390ad8ac628",
+      "generation_job_id": "0c9b0e1025c6e9d6cf2c245f79c8e9673d05079f768bcf9d8474199ff64e54bb",
+      "original_file_sha256": "ad27f03124d61ead287430267135c7a48bd6f0ae71f8f345eed5d121ee9d6f14",
+      "original_artifact_sha256": "52a21834dc8b759227a490db3bc04c10684341b148807ad053abc67bd8c4ebe1",
+      "output_utf8_sha256": "08eb87902cbfdd943445768bb4a3ce8200f4bb899436275d60fe7f599f0035e0"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_3_peil_labelled.json",
+      "public_file_sha256": "d04a0add0cb9fb3ad5408e77fa9e8e8e4d6b2ddccd0920b7e31760cbdfaa83d1",
+      "public_artifact_sha256": "2af79c881ec94268b25049b3ac844a8de400dc745c6d32365ae436c9044cc23a",
+      "generation_job_id": "11d8e6eb593f05f238dc02703fe42e12dfebd17b28f4f3859190013b5407a286",
+      "original_file_sha256": "9a36583b286125c44d6c76259f4d3e3ef424bf06947a2a3228fff7fa9e0c87e2",
+      "original_artifact_sha256": "c7c82362321fcc42f242faf0ffeda1bf3a97ba6b7a9971d1b6a4a528e1685d3b",
+      "output_utf8_sha256": "8465811581659c9339603021348f10e55b4bd3f4d957c3abf5ec94e3cf3e35f1"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_1_naive.json",
+      "public_file_sha256": "3e8af2e1d1393fcccae510573b3db757d93c40ccc3e77c283a05646f7106fb83",
+      "public_artifact_sha256": "397768944e3c343058bcfdbc5a246209bc5568631523c48c143b4860663814d9",
+      "generation_job_id": "1508283113bde62e409d34082974109e876ab4ef73b6502086d3ac9c00f09828",
+      "original_file_sha256": "4eab1d987f1af104d442ca0b8b306d804092c1fb9c121668dda6c55da4a3a9fc",
+      "original_artifact_sha256": "056503832af2cbc0a3a349027fcee1c302ba547c2fd7098a99863729fdc1d87d",
+      "output_utf8_sha256": "665df0cf4e58a748a5dfa20dc797012ae185b3e2f083f2fe90b4144d29e50382"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_2_peil_labelled.json",
+      "public_file_sha256": "322fcc0902bb49bc5748bb8faef9fc74e01b17a9fe17000e3c8affbaa25455a5",
+      "public_artifact_sha256": "6e9179cf8cdc0fee90fa0a949f5bc3541b72f530bf358d645b6494e0eaa6775d",
+      "generation_job_id": "15e81a6efb87f21805e5adabf2653f2dbb05a11ba33bda4e1d90140a43c50e8f",
+      "original_file_sha256": "778fbd31c176e9903a30f6d0e48d3410d0efbe479e0ffc48c2dac1419938176b",
+      "original_artifact_sha256": "55295bd36f660d22ed033ed0fb02bc6fd96382b4c62bcd5e6215e2f241fc0437",
+      "output_utf8_sha256": "e456eb1fa228e8b898d498544c1af9b1afd453b04e4789d8473215912f1c9c46"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_2_peil_unlabelled.json",
+      "public_file_sha256": "073e1961797a8cf687e0d7e44b47a0c0453e24f254714990cc264ae61fd190fa",
+      "public_artifact_sha256": "e5c482ab6a0a23f6313e18b5cf4ff54d3e90c8a13ad8ac45d38af46e3b2c51bd",
+      "generation_job_id": "172645fbd945913e6c8ebc097109bb37246d4515d0c54df31d76f52d4cdb69c5",
+      "original_file_sha256": "d2bc000edf67cd10abffb6c2ba097d1fa4622c065319c36008b7608908b5b86c",
+      "original_artifact_sha256": "896b74bc96ebb1de214cbac271b8226f3ebbfebda72924ab85e2c75b3538b315",
+      "output_utf8_sha256": "5d78fc1405b2c17afad73f7a8d7bcb9a2d63c3b6220eaa41f18afff21fc6c9d3"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_1_peil_labelled.json",
+      "public_file_sha256": "6d6bae45be79e83f1b69d61f1505e1113ce293def83930352313d4b874c9378d",
+      "public_artifact_sha256": "63bb5fd5b9a477e74ea3ca413cffa8aba60e95dc30838f853165a16dd065ab4c",
+      "generation_job_id": "1735059f7969268a7a9bd38fef9cea15a96b307489a71a006dcadd11ed289abf",
+      "original_file_sha256": "695205c1870cdc30aaf1f6e34c3d1473795158fc7e056bf2181161815d6cf62d",
+      "original_artifact_sha256": "bf9703aa46ca4476e1f8d32a0346a9e6df4b9b85141488392c9b8fae84ef537e",
+      "output_utf8_sha256": "fca97a02d15d025a07daea2db48ab9de45e3b952f5aeb0cea19e29a58c66560b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_3_naive.json",
+      "public_file_sha256": "e1c08396162a8b453dbb992f14dfc94ff6bd08a79087d970bb0f9cb6d40b380b",
+      "public_artifact_sha256": "615f12a4a0c0b5256fa9ee47dbfafc0bd592832f3223d1c912c1b8fa01cdaa2a",
+      "generation_job_id": "1b6109b6c525130811d84011c436e0e7ab178082c6482359c247458da91b5ea8",
+      "original_file_sha256": "8e703d1c0ab9edee9c056a60ed0877b4e32a541b9c95ccf9e9a4837028a2e94b",
+      "original_artifact_sha256": "fea6287f86dd9ee92ddc2be98bfe6ad3323520809cda1690a559dc03c740329e",
+      "output_utf8_sha256": "ece42b34a8953c0a03f0af047f4d2875100980473858f35cf7600c4ee223f65c"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_1_peil_labelled.json",
+      "public_file_sha256": "1d35d301ca425dec5883b534cfded36a6274eec1548da19760e661bbb61258b7",
+      "public_artifact_sha256": "63478a1b8854fd67768922a0ec37e3a510ffe6abf0100f25a8b78b2b82fffbbb",
+      "generation_job_id": "1db34e76f046b50267b993733c79dfb0d8c389d5a0b1286af9282d2b8c77777b",
+      "original_file_sha256": "0e0053a7c65ed0999403d228f61dd3237598aef06de21ddfab5ea60ceca8b8ed",
+      "original_artifact_sha256": "af387dc20fcb003fedb0d4f0759e320d9860c488cd7250a847a334fa4be3a21f",
+      "output_utf8_sha256": "c4add1a4e6a71d2693b1526e0f9e66b8baea33a93c7bd70cd0ec028717adfb24"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_2_peil_labelled.json",
+      "public_file_sha256": "f6d6faa7b072d81714fbac33025f016249a616d372df5e53e158af577dfa8710",
+      "public_artifact_sha256": "57a1e235de8293b385bca8fe92b3e57eb916d21363ac8384cb615aae4eb99769",
+      "generation_job_id": "1e315ab24be99a2ed41bd19e6c427c3fc21e39de1e9ee110827a3e4a22daaa2d",
+      "original_file_sha256": "7791c1afd90b82b1b2b58671bb7bba105c0ebe1639996faaacaaa94372fca8dd",
+      "original_artifact_sha256": "52b9dd234482d7fedd6dd84c7ef11a888b39f9dbe6a966d01121d3a9b15af57e",
+      "output_utf8_sha256": "2c6355e231a6dea82228aa1a473e72110ed704d29040a52d8f375146acf7892c"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_1_peil_labelled.json",
+      "public_file_sha256": "1186308231a494aa7393882d56e345091c2e32a80a40368478ca2875dbc58f7f",
+      "public_artifact_sha256": "a3471c3b85412f74f6c26982ff688c88776e2b4ac837a58d4b3a58f2843fbeb1",
+      "generation_job_id": "20a9238166894c1dea2fc6aac1991d5f5f0b4ffaa160af5d5813090cf83576b5",
+      "original_file_sha256": "b4f0a76b63cfaba0c4b5495fa5adb81f847ae3357cac2dab416757b00a6e09eb",
+      "original_artifact_sha256": "15ac0cdb0c1cce78203fed8501520cd6774fbd2835b9f6dcaded85a251ef9454",
+      "output_utf8_sha256": "65d27d49051be36257d749e413f685ae12573bb08f19277902a33ebaa1cef14a"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_3_peil_unlabelled.json",
+      "public_file_sha256": "bd2c7232e3a7227ed57f5c21fdf40257d951dad9826a78c87ed8b07682acaf8f",
+      "public_artifact_sha256": "81750cfbc5200c49157a42933ffbaa0c8b98e54ccca76e32d49b2636245c48fc",
+      "generation_job_id": "20cf46d0740ab9daafe795d2f466b0e3bd4b0259e4bfdbafd4411115ef26b7af",
+      "original_file_sha256": "66523770d7717b1723f74450a701bd24870bcf045fe30516971c69163a59aea4",
+      "original_artifact_sha256": "ad57defbf2183decfc8202fb5e8267b33ead55ce54e3e9bfe493c0f7a5b05caa",
+      "output_utf8_sha256": "8e032ce16b0870e635cb1e716fbfcc18fc6436381d9a85a18000ddd772087d7b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_3_naive.json",
+      "public_file_sha256": "72883c254eaf69dca690bb12c59c45b4e76deab3e93e042ee4f06ed4d9a448a1",
+      "public_artifact_sha256": "8520d121cf2709786b5327b5685bcaa512fc47875b414e9c1392da1a4d531378",
+      "generation_job_id": "22d372f4475825347a0402e19e8a5699deaeb7b601c98ca53b22bb4029c1e3f7",
+      "original_file_sha256": "8cb7fb3fc8f2822ae99134ffdc219e07508add84c97afb413d06bc55aeb4ced1",
+      "original_artifact_sha256": "1efb660f0fcb817a55342bcdf00f2000ee6b2641cd126018899d6a260011f577",
+      "output_utf8_sha256": "22ce393fea833a27c44a3aa4a831a8d37a5db8046e2b8bb638f3f798ceeeeedf"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_2_naive.json",
+      "public_file_sha256": "ba0f8572eb4dc4fea211b509232680012a32eb05a6f9fc7f727bc8aee598b9e4",
+      "public_artifact_sha256": "9ae9ef70be6ddcd9b2fb905c84fc15ae04d3136c8035e567b3480f32130c65d4",
+      "generation_job_id": "23d8585374d6aea907a50c94de5a76cd70ae8ec82d64fe40a315c87c6931eaf5",
+      "original_file_sha256": "b589d0c82de6bbf455552e5d0dbe8ea240abdd4f7e1738d432ae9315ec2682b9",
+      "original_artifact_sha256": "6433f3895e3dadd2f156c0fe31f1b03eac390cf9ec1049c0b87880ab22372ec8",
+      "output_utf8_sha256": "c8ca0a4b59f130b09aacb56000e76bcb7430651344b02b395fa37bf80ce410bf"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_3_naive.json",
+      "public_file_sha256": "4759995e905c83140a47273cdfdfb780538960c7b10c006241ce1611698b6ad8",
+      "public_artifact_sha256": "5ea788666f2627049561fbd1a67260b1cc322999ab8a1ceab1219ef29171cf02",
+      "generation_job_id": "268d187bf0b463603c00ea5399f4b2fc04317b209185d0f666e966be84ca6023",
+      "original_file_sha256": "aa30e583f47e4b5af7652ed967d32655463b990f5d4aa2915d441360ad9e1fb9",
+      "original_artifact_sha256": "b00017341fcef9ebb2b51c9438882e1773490dd6fc62b34a4e8480681b446568",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_1_peil_labelled.json",
+      "public_file_sha256": "767aa976707ffa3b08e824415b442db129f3b7c342263f9317db9c231c909079",
+      "public_artifact_sha256": "7ec1bca8d27a5939111afcc27b73f78ff654e316c14163ba32dbc085cdb84959",
+      "generation_job_id": "27813fced4c772bb3f9d5bdcad8128b20586a58a4b56f2f87e727186accd4a68",
+      "original_file_sha256": "3ba1034d9353074b803dc1786ba1fe4e08406e048ae0b0aec9d7b168fbdc94f2",
+      "original_artifact_sha256": "fddd56f952069cc96323cffc17e54b7a255c733b78295edc31c0b7d6ba7f36f6",
+      "output_utf8_sha256": "56767f0940d046f26885bfe26fa72e857c5a8d0aa1d57f206540d936ba2fc0cb"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_3_naive.json",
+      "public_file_sha256": "439073db13eb954004ac2bb78b1df38511809de05d7f69e12e94c1cc4f9bd1ab",
+      "public_artifact_sha256": "8a7edc7b1db51c70c842c86add70bea9bae0adcd9f29b4e3af648f4068d048d4",
+      "generation_job_id": "2a02c5c418816984b52e96eb462fe01305adb174ebf85d9d00e186ca126b4bfd",
+      "original_file_sha256": "343a290ee56a4d3d072ad88f0b199bf9577de912268850605a3c9c1683092f9e",
+      "original_artifact_sha256": "4f19de44201fdb4fc55a87d40444eee9d7df21498d4c83f2fa695601fde20a3b",
+      "output_utf8_sha256": "c8ca0a4b59f130b09aacb56000e76bcb7430651344b02b395fa37bf80ce410bf"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_2_naive.json",
+      "public_file_sha256": "9ed711106f82933a44bcd381e7de8d311037aa34131f9db89373488e9c23a93c",
+      "public_artifact_sha256": "012dc1eb18a8bdcb2598bf7d17a072024ab19061a3f380f1cadc0590e053c512",
+      "generation_job_id": "2a2ac5158c422230b7cf81abaaa8e8f423cac8b6d61186f297ddb77dcee2283c",
+      "original_file_sha256": "a65e61c0a4578cf46cf366a4735b8c0e3382862c4bb495e49a1487f859c188d1",
+      "original_artifact_sha256": "9b7610f383bac3135efb35895e60a201ea9be31c1cfc7f25150b8b8574bd689f",
+      "output_utf8_sha256": "79a81a6203295efceec03ba79b5cd90dbbf1de3a15e7583cd590d37c7e133ffa"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_2_peil_labelled.json",
+      "public_file_sha256": "d1483cfd0f14a08513beb5522396ddf299a6ffd31732a3ab513286c88da718de",
+      "public_artifact_sha256": "f50427b13b0a7b6cca59217d4322897a883112c4b41078052ee518c40565e2df",
+      "generation_job_id": "2c335751c4b9f2d6d8d54fdc2f9445dcc056a01f776603986e6a7118cdcee8b2",
+      "original_file_sha256": "687d20a7efdb958bd93506fad0bfc550c4c190b68ad45fb30cb1b79a2e1247b6",
+      "original_artifact_sha256": "f7e628d4599af0cff7f55156bb00376b75219d0ef72c046949bfcf6ac7f95bad",
+      "output_utf8_sha256": "664c22538dd559cbf743c889b48203398c2df43ecb538f5763d8d5b21611960b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_3_naive.json",
+      "public_file_sha256": "4a03191c67791d4440906536419a401eec861ef895a747471eae8e30ffaf4a68",
+      "public_artifact_sha256": "38482080cfafbae2aec9d40276215d6f47ec4e860dde957f1e2202faa28227ce",
+      "generation_job_id": "2d6129b5953f9613baf036d52b0e3c6dd39be9cd47b70562e10be51af71144cf",
+      "original_file_sha256": "0865d39564041ccf951acdc6d387cbce14aa32b9a26a28ec17c599cdf958e51a",
+      "original_artifact_sha256": "ecfad3e8a2a4b517f23e66e90f3aee9e723112e4d5f9966bc1558bac654236e8",
+      "output_utf8_sha256": "6dbf3d2181434c440e08ff84291dad98a7bb867dbdc751fbdc02ea0169721174"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_2_peil_labelled.json",
+      "public_file_sha256": "90745705d9b655156b8c6cec1f02c417783fd46a6a126d800744e30b7342a8ca",
+      "public_artifact_sha256": "c35397384df143a94b896953074d6ef9ad7cd533b9d1ada3750a6c81574ce4b9",
+      "generation_job_id": "2e9f88d0d382a431678575084d496b1174aee3840819a7aa693f309623b367b2",
+      "original_file_sha256": "68de8f015113b36c70c298504a5d6988b59747e3f82fe10321e593f443f9c3d7",
+      "original_artifact_sha256": "ce74d5c3c57e0ebdfcb7032dc5bf1edac6cc64fb08c062d29ae5b6158fecf854",
+      "output_utf8_sha256": "e0b64af1def5bb65702e760742f3832457aa6cf8ecdef340277acb6b6c34d34c"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_1_naive.json",
+      "public_file_sha256": "241aa831e0ef2b899ea4b24a4f577c7e016bc1bbd02188fe528892e55b4b2952",
+      "public_artifact_sha256": "b03d807d7f192e156bf39f474cf74bc8a8b2b5875228bdd37df25319a9e1fe63",
+      "generation_job_id": "31aebdd0ad94c28742c327861d50aaa1aea6403a15ad250f0093090822603220",
+      "original_file_sha256": "158d4456728ca2d987c1ccdfbec14558aa26e8709abb666a959c8351e15589c4",
+      "original_artifact_sha256": "03c888d054993409c5bba92926d1cf027ea9b11fa27a48a379f3d85ba71187bd",
+      "output_utf8_sha256": "87c4a72beec1bbd2fd6709d1fe477fad946850c3fbd39a2ed245b63eedb3e97b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_1_peil_unlabelled.json",
+      "public_file_sha256": "5965953c92dee002a4597829ee7630d617aeb3b05cf5d477f6c64d3e119ea601",
+      "public_artifact_sha256": "30af4dc2b55abe2232b38176f5cbc91d711fe9b757a9b0e733129f58f37ef1b9",
+      "generation_job_id": "31c9e843fdaba251c332fb27951c368d07da641e08bc8ee0240b6c7c20ae6c7a",
+      "original_file_sha256": "695e587652c04a976ee7519d2c3077fe4e4de344a4d670ab0496e8634f9df301",
+      "original_artifact_sha256": "e3cca795a3be3cff9fa866f346c7ff5d1260de53ab064e5e9d3dd457f0530b99",
+      "output_utf8_sha256": "dcda3d2266bea74ec3554cad97aecb0c47efab9068782fac69335a751165031a"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_1_naive.json",
+      "public_file_sha256": "1153934c8bb4b5fa3e82abf3fa4d17ef366e3e6a879c00ed02c231055d3d2c05",
+      "public_artifact_sha256": "fd46dacc7c78eab0b694fe488620b06170cae6e78551f44f844eb26205f90db5",
+      "generation_job_id": "32d53c9647dc95e2da380f216a1cff3857a9a2cf3498ed99390dbcc439a154c0",
+      "original_file_sha256": "dc3ce1ebe09fff32573fd8ed2339a543dd78571a3b7ae4426ba3c3c97027d247",
+      "original_artifact_sha256": "cf090dc8c0e40071ad72ed8c80c26e4b8e381c8640d54365b573bea147ffae07",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_1_naive.json",
+      "public_file_sha256": "fd138d29b3ccdc756d3502271b01c6744287d025714723b576f1516c45f41815",
+      "public_artifact_sha256": "b077e2ffb3d98f82c5f1309a5c9b481fb728814290afd0cd806e1b4332d3e7ce",
+      "generation_job_id": "34cccffa77a5aa9a787b8e94a0457818b7e1868fc4664ae6eb6dedf111ba3480",
+      "original_file_sha256": "7640b89403d574dcac040790066e2b6a9a25072aea6c05dc673ab931c6fb548c",
+      "original_artifact_sha256": "5db4048677a861c3479eb43d2cd42050301d4589ac647885bccfd609de24196e",
+      "output_utf8_sha256": "c6d9aad1bfb32cfa284a453a6d1f2572f622d7a16d12dbe03d83ce57aaf03b65"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_3_naive.json",
+      "public_file_sha256": "3b858bae21fa1dee9b95159e19e93f1290aa83229fb206ff2a794eda252c9789",
+      "public_artifact_sha256": "4a6bc76a3e2a43e59cfb1b38c76983af8844990a2231107df14ad3e1957dce00",
+      "generation_job_id": "35ae64798c598ac0c9bc29cd414db5d5b05a3571d748bde9a20c93d644095594",
+      "original_file_sha256": "edcadee3894f6a3e8fce179c78b4516338d1c5bfc958adf6b6d81fd809a6fb8d",
+      "original_artifact_sha256": "e6d41e164440e194116107c346c52021377941bf0454c5a1c49443739ea48b1d",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_3_peil_labelled.json",
+      "public_file_sha256": "48225ff40cc0e142ad461ba2ff8a5240e07d03a51ad8d333d4b1056285c88972",
+      "public_artifact_sha256": "6e476bfa10690b58e592aa9b6892dbff6bb131643a9f7735154bce5024ac9673",
+      "generation_job_id": "365b330662401dbc28b783b3bced6844078faea95fd7dc25c4a563dd81d11d79",
+      "original_file_sha256": "d84d42ba32c3772fdcaa5f5846ab5af205d396250a277694c06e50f78d22f45c",
+      "original_artifact_sha256": "1832cb4047ff142a43e7e8944d57236060620f75f2df2f4d94b1b3aed0f6b254",
+      "output_utf8_sha256": "6d7012d65ef04ce24469bbe35ac85b5842ef29b11d8500fca5019d1fa73e4250"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_2_naive.json",
+      "public_file_sha256": "94bd787e44a9a6616493199d83012ae455adbd507c73acab032a9c7423823fa0",
+      "public_artifact_sha256": "fd65c70b3a7cbe4f09d9bebbf7aeae003c695e0b844ced66a7372550e7294f17",
+      "generation_job_id": "384affebeddee01fb8e161fde4e7562eb57350ed44fcdafdef8bfe4b40939ed8",
+      "original_file_sha256": "0b001434ed881735aeb1924f95bc126831fced1b72ee06667f5d9a99d10080dc",
+      "original_artifact_sha256": "5388a593b2c0b18feaa53368aca1b2fac401e129157c7ddc61b66178098fb853",
+      "output_utf8_sha256": "02c78f270c94745805391a0ea23e38dbc6a04b862be110991f823d537624a9b8"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_2_naive.json",
+      "public_file_sha256": "c233c89ecb7ce8c6cd050bb4b61883997409fe13afc2af346799835edcedcae8",
+      "public_artifact_sha256": "83308170a3ebbb74e34cf962bb868daedd00c6b4493dd529f5c82a96ea1707cd",
+      "generation_job_id": "38d02f233e925420a5aa75e78de6ffb30106026dc7e7747a80f95db3cba83f09",
+      "original_file_sha256": "d65498347aa3edcb9a02b3de67bf8038375d600a9e02d7ad3368501787104112",
+      "original_artifact_sha256": "2a1434b4a89b1e9fa4964e8f092be5bc350630bf8ee4a4eb37063aace91733e4",
+      "output_utf8_sha256": "ed347df3a6aa28bea25435e7415460c6455d15053dd348b7edf7b55abc38d75f"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_3_naive.json",
+      "public_file_sha256": "8c412f31272d2c13387976ebe8256b12078fc8a0761e94c07c1c6b00c7c3da43",
+      "public_artifact_sha256": "42af767de6623998c403206dbe0b9aac00b6509ba56756335965130747fc32f7",
+      "generation_job_id": "3996b2edecee1c4e9e5934327babe7426ee68e773953d3280ed8bcc50630ac85",
+      "original_file_sha256": "fef3fd81de8dc9b703fe521201a1b17f676d1f54160c1035690a01fc1bc777f3",
+      "original_artifact_sha256": "5344392a3c404061999f5472156960e6f6e133b29e8a461d5acb8c39cf695bff",
+      "output_utf8_sha256": "76de2331ebe612dc87dc1e69946b8c1ad4e38e21bd1d95f1fd41c50752991a25"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_2_peil_unlabelled.json",
+      "public_file_sha256": "6371b8d01b665c36565f9b6b0de7453f9550d00580de511b7c48c8604b8396d5",
+      "public_artifact_sha256": "fa48c84b565146491ea33e28460fd5712a332202e7a051455fdcd903167c9326",
+      "generation_job_id": "3acfcca0a0b624a95a3e22d9279e1dafffb50eac2c5727901d7d06725c07551e",
+      "original_file_sha256": "a2dd90c5dd027c2c80d2e4f1b6319b5863a7e23560b1f3798d62f7e7a1de3f92",
+      "original_artifact_sha256": "aea9ec727c0b389e368d339f34047c478425a71e369039a69bbb8b250e39a326",
+      "output_utf8_sha256": "a63ceb9d49296d259e16241c6769b0be79f6e7d11fa64d55b8ab1215d814a089"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_1_peil_labelled.json",
+      "public_file_sha256": "02eaca6917303dee41dad7d5ee6924b932192b15f58f9b4e2404758f6f1a3515",
+      "public_artifact_sha256": "855af1c412f7b6362eda0fa5ce99c5119bb3057fac9146c01f170b2dab074115",
+      "generation_job_id": "3b4444202ba0e4bfd903384f1f3d13eca60b27ed50811e71ac35cb8ac3d78fd3",
+      "original_file_sha256": "22bfb893eea7410a1ee7fff16f4362aef47f9686cbe74693d10c554d2a91bd12",
+      "original_artifact_sha256": "d38bf12f048a9036d8e09f5fe8d29171b79d8985e89e1688453947d238d738e6",
+      "output_utf8_sha256": "cdee7f72a16de670688fa67b9be06d16df5903ba2b35bf5db7b60fad77909e48"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_2_peil_unlabelled.json",
+      "public_file_sha256": "892ba12512f4e036e1d69150fed1055e83305ac39d52e5c9b1e0c4c46732589d",
+      "public_artifact_sha256": "fd514b60745d267c1beeda75d13d32f5040f8072551fa4294be49f82f2090230",
+      "generation_job_id": "3bce747beedf561ef94f2a0fb0d8447c62efcc48ea433b524e013f96248876f4",
+      "original_file_sha256": "f0313d336d9a6b9f221a1e212cfbdb21a071ce4f0625d8cade613da18834c4b2",
+      "original_artifact_sha256": "531053c15bb400eb33544f0feb29beeafd2b9cd73b702235a9d41092a0500608",
+      "output_utf8_sha256": "374456fc39e43ff6da24090eeee311d67dd3d2e7cd7629d38247f3fbcba91ae0"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_3_peil_unlabelled.json",
+      "public_file_sha256": "c57d967e1ec2ac06e520a465c8d25fa817074fe3f5b7072014b18bc7982c48c5",
+      "public_artifact_sha256": "f891a81260f29fc2b42393e6f3ab3d62b15b8664c7dfd3f531647070422d3fe6",
+      "generation_job_id": "3cb061dca4d1865d2bf52a33a604acf51036ee3396935cc3d1e2bfddd76d608a",
+      "original_file_sha256": "0969829c579d35121bd894a9c3fa0bea515397d3d1ab2a6e6ff3b0940c671d7c",
+      "original_artifact_sha256": "a357395dcb6b10e7199d248e59da12eea4607f45bcbdf24171bf44b14d6496c8",
+      "output_utf8_sha256": "aaa916806e2df30fe2d98221c699068a123456408a8351657fd1eb018c1530b5"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_1_peil_labelled.json",
+      "public_file_sha256": "71446f2697c1db57691067c1f626c44984bb01f888b505893587fe335637b9fa",
+      "public_artifact_sha256": "2a40fa65546569ee2f74873be419974dddb4d180d79d68f45bf8e072592a51e6",
+      "generation_job_id": "3cb0cafdc45e8047c2303020c3b5ff67124d0188ea3091118e49f38b99690805",
+      "original_file_sha256": "c3095363258f8b4813f56540358ffafdb89b5bc83f6ec90fd666b4f5094b4c5b",
+      "original_artifact_sha256": "80daf21d1e29a02e0603bc1a82f6349ff568b563a19d50d683a0ce0283575c65",
+      "output_utf8_sha256": "43e66fc68eb4c3258c6747d609d933a16cd7e2fbc3bac749b2eb37b6d8692761"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_3_peil_unlabelled.json",
+      "public_file_sha256": "fcc45edbe92494eae4b8fd11fe8e33a37db52ca871a99675d2ef658f52423528",
+      "public_artifact_sha256": "bea69d6f59621303d257db31ce60ac2febe54d3cb4f04c6fa33bf33486bed534",
+      "generation_job_id": "3cd59babe80b0eb135c552547866bdb0ec056606fc41779a54bc55b71f8af97a",
+      "original_file_sha256": "be3bcd0726870c4012f8c042bb30245482c7a7fd22e8838b605f21375fb45dd2",
+      "original_artifact_sha256": "67550f6cb69dff2c91b1f0089e70106cfe0779b63314f7c234ff520d904dff40",
+      "output_utf8_sha256": "e65a904fa969f2813f52b6bd6c181483d37b23c865e00378646866001adc4259"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_1_peil_unlabelled.json",
+      "public_file_sha256": "4380b97876cf59898514f0c440dff9d582467e5f4037af15ecfec052c30f9581",
+      "public_artifact_sha256": "a26087b812edb775f12bc9d612c9c5bf5521f43e07700c709fd4ec7bf39c3f63",
+      "generation_job_id": "417f0d53c7b7f5c1c877e9ee3956786d85acf3854a9e3e0536e3ae0c3008be02",
+      "original_file_sha256": "edf2705c5f43a2fe792674879fb28316c1d28afbe09f09d87fbca271ad7c988f",
+      "original_artifact_sha256": "ed332031359aa641ba1eeba89bad04a70d43d38360303aea3e31b566b15621e6",
+      "output_utf8_sha256": "af4f2f37efcb0e8ff1b74bc62d41666ca6ab4298dec5cefeadf5fff4393489f9"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_1_naive.json",
+      "public_file_sha256": "4fc49035bd052695580da09f3e7fba76541aab6e6d5665470e951ad9a10f9a94",
+      "public_artifact_sha256": "ecf67daa835eae8e54d8a062e79b07ae958cf6c05548249e06db8f0f6d31ee97",
+      "generation_job_id": "42092926e4be703af75115948582bcfd30e2bd30cb08d9b43e3d912247b84827",
+      "original_file_sha256": "5c2f4f47e5b0c452b9142e910fdf9f702774ad2985f8b10d5294a004cd6b0e3c",
+      "original_artifact_sha256": "dff508029cf0e2be5d8c4c837ed12f4ddb85a076c659b405fbf95a5cfd772845",
+      "output_utf8_sha256": "b93d206ff96d28f384ad6f9bab58e584c097f98c6680de94b95938f49f43776e"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_1_peil_unlabelled.json",
+      "public_file_sha256": "96df9ebe434cf279a78fe004d35037e7d87db0ca6254b5c767020a8c76168d23",
+      "public_artifact_sha256": "80c3c5d1fbea20922dccd8ee261fb29ed36d53abd12d9200478be3375ee1f924",
+      "generation_job_id": "4275c6d3f63bd977503ca015d44dcd1dc38e84d560e0c2b06da4469dcd37aa4f",
+      "original_file_sha256": "d83eba2f202bb0b29d786065a1579f4f43ec375ea682fe8ceceee2a08280e422",
+      "original_artifact_sha256": "65ba7be7984a40ff56f66a9d840325e038d3922e47966983ff24ef3031abd3f6",
+      "output_utf8_sha256": "68513a612e48cebf65cf301e0060353e0f50442eb34e8834e45e2953d416bcef"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_3_peil_unlabelled.json",
+      "public_file_sha256": "4ac29aef579cca103156d0f6c255a6a02f19de014e4cfd05c525176a351695cf",
+      "public_artifact_sha256": "0adb02301f47941bd69cdd30962ec8642b826d2afeef319285e7a5b7d9a642e1",
+      "generation_job_id": "4640e2cf70047c084b8cba1e5b20dbc6c3c3ffaa4ccc5a1cb933eca5568b963c",
+      "original_file_sha256": "efc63876db7ed2a3e73933833303fd87401abe5d6dd87637026f65030c0a41cf",
+      "original_artifact_sha256": "ffb37b104199aa5da68622adb86334b12bf022e83a84e0d4d1263a797c53eaf8",
+      "output_utf8_sha256": "cbd71769a88e4a28eb4787435043dd5bb4ec805d472b719c54c2ec2ba011f76b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_1_peil_unlabelled.json",
+      "public_file_sha256": "697b60969687e9f7435e2a9cba65097ca1060b8226927db0c0cc23b0a40d62ef",
+      "public_artifact_sha256": "b1a6254624a8077846d4565d6b60b71cabc78079535413c4b5b1e6d14be522fc",
+      "generation_job_id": "49b4aabefb3989b7f9db2651ecb1a3b88641ab6a80b9c3a8df689bce54db9285",
+      "original_file_sha256": "df66685d8d5b7537ab343feb55e543f7be15d5de87399259e670461c2ed7b394",
+      "original_artifact_sha256": "54f230cc9fa5d699c734459607ccad981d91a11b85e944a5a21e76b6991656f9",
+      "output_utf8_sha256": "4d37854827bf42e4316bf6ecf47bd815d00f9be7ec0f28a3aff54c11d77c5484"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_3_naive.json",
+      "public_file_sha256": "d67652e0fb14122898d3e3d059ef9713a1ed27aabf8632f688fa3e75c51b535d",
+      "public_artifact_sha256": "117b7454218785bc7318d0fdeb07af3f932296f034af19e45fdad9dee85454d8",
+      "generation_job_id": "4afc95b542d3e8141e43f0b4d2034ba0cfeeeba713d84041ed7d2dc833f46391",
+      "original_file_sha256": "e771909e6054bf1e236786f3679a1ae1b10376109b2bc83952cd40cf66b0b5b5",
+      "original_artifact_sha256": "412769112645cbe87f591cd0827b933d0bda7301d8edd5f989387f6f6b0d7b85",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_2_peil_unlabelled.json",
+      "public_file_sha256": "faff848912235b68d7fef3fd04764668e6fe06d1e4e57d244dbaf799b444cdb0",
+      "public_artifact_sha256": "311a900ae06e97b7ee44432e842eb3a43d30f006f872642a6f4c8360deadf378",
+      "generation_job_id": "4c36b5ae771f1c65edc03d6dbd1326d51cbf5901410dd87cf87dae61206ace4e",
+      "original_file_sha256": "9850facc85e6a44639d18a607be12bd2ae9b53a008376bca19211fd49febee31",
+      "original_artifact_sha256": "a40d35bea18d172fdc83c50934bf29c297a8cde78ed0ec92891fe8f0749e00f5",
+      "output_utf8_sha256": "a9611f02914bba1640426ea3d6d5fd86042e50f7577b0ccee3714364c5473d4f"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_1_peil_unlabelled.json",
+      "public_file_sha256": "faa2b0e4c8c9580a04c9c18b46d73a58974460abd293bc9cd28e70d4941dc36f",
+      "public_artifact_sha256": "c97f7417f4eef762ee2014da8387eebafb32881e2d097c44a62240512f78fac1",
+      "generation_job_id": "4d3886b0155abe13b3440feebd12b1b3a7c96965af3ac93b705c78f2c89356c2",
+      "original_file_sha256": "fede5f891e1f8631793802b785a0bb86464bfd438b75384a5b9462cf5e67a59a",
+      "original_artifact_sha256": "d451ba560072fde73f1cfe7fddade802b8296c83206ddd542212ec8b1b2a0540",
+      "output_utf8_sha256": "7c36b4e7856dd2e41a9f5b680ce9bcd4b9b6b07aecd1f79db3af6714009404b7"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_2_naive.json",
+      "public_file_sha256": "88bc9506d539ae9ced5fc63aa9582a58707fc194ca81e21ebe62fc1ff292980d",
+      "public_artifact_sha256": "12c513fa92fc5e0ede7b2da19a16398f931075cdc5cf4413386f3a1d37f1fb75",
+      "generation_job_id": "512a1a65d93c75a364ce18f583b99cba535380d94d3e9c5b183f76e18bba6af7",
+      "original_file_sha256": "8575150ba26c422cc0b298bbc851fc48ba387214c07540f67f1e0f0f083b55a2",
+      "original_artifact_sha256": "fc13789a395f12811231109a37ae9881a64959052f08909cf8f1bfdbe3039c29",
+      "output_utf8_sha256": "345213aeb38eaf7dfb168704c967fe2087ce910942e5b394723f31d0d9ffc218"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_1_peil_unlabelled.json",
+      "public_file_sha256": "6be250ab6c54a4528f4dd853490d1d68b15482d21d37c28effdf6ad83e1276b5",
+      "public_artifact_sha256": "3ed43bbce39f82c7c4c3ca96243090cc588498cca384180a4ebcb0f85e1a16ac",
+      "generation_job_id": "52939e91aea4f9d4a7a0455b2d4a9ae569027ff11cedcfb00167c2bc831170db",
+      "original_file_sha256": "25a7a5a59e07421fcc256986296867f29729840742cb81e0360425b716a459c6",
+      "original_artifact_sha256": "3aaace23956da16e164f8e64e43a6e00aeaade249d5ec4666235a4daaa531f79",
+      "output_utf8_sha256": "360802bf66b0adbea016d5245c6ec907a76f688953bdd0b1b1a58f33915c6681"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_3_naive.json",
+      "public_file_sha256": "2d994fe812d895ccdd20e48fc598022fd077f307c722f8f5d28e0ddc61b9f6c2",
+      "public_artifact_sha256": "aa295625635558278a44d9af338e2bc81127cbce3b04e1217d4d995b4da71b37",
+      "generation_job_id": "553ec1c54891decb86575b1d307ea5f34f8dc9db4024590755c3006ef6ead9eb",
+      "original_file_sha256": "daa3f0b0fa1c1ab7471ca157cd97e45815035d271f37cbd0721732562b864173",
+      "original_artifact_sha256": "efaeb04f1118dae7a575547a1c9147fd8ba5c7d218e7e7fc78ef91e6e6e3d036",
+      "output_utf8_sha256": "66152609aa24ed4ffbf941cc07803c9a197aec7684f9a440239133eef9b18927"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_2_peil_labelled.json",
+      "public_file_sha256": "7d061c8ead56d86c215c7c22461536b2cce312973e01629faf52196daba39b32",
+      "public_artifact_sha256": "37f7fd902f55be7be57139aa9bade6b648fb474ef6178f6de7d914b185067807",
+      "generation_job_id": "569b10897b245f9f4ceecfccd4977726ff21a159dc03fb20646059bda2cd0008",
+      "original_file_sha256": "909c8d5a6f0fd46602a844f9284a5684e8bfac18e5864e75985cdf170d73fb4d",
+      "original_artifact_sha256": "42707937c9a09cec0a308cbe50021acd8650eb183e1c321ca678bb4603f6b4b5",
+      "output_utf8_sha256": "4959edd3223a0b4664cfa1a0e31b0755dd5ca8182868d0d69e692f6c940dea0f"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_2_peil_unlabelled.json",
+      "public_file_sha256": "14d5764d57920c53fe39cf4b5273fec54c419eb0b8d03cdff7bdbf8be6556464",
+      "public_artifact_sha256": "e5c91a34e260c2eb1a5968e4cd7eeac18565c1a039569d41362895be20813038",
+      "generation_job_id": "573ef12f5074da2cfb53019f484ac2ee7c3ae56ba11f1caff49685c8835bcfb7",
+      "original_file_sha256": "b789276bd5bcf69837dc4dd809f8c9c388d6d8f5be7b6297607518a3875e39e1",
+      "original_artifact_sha256": "c889043babdb35ba28f24c5e86ae934882f6493d098bc38ff807647550853da4",
+      "output_utf8_sha256": "68513a612e48cebf65cf301e0060353e0f50442eb34e8834e45e2953d416bcef"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_3_naive.json",
+      "public_file_sha256": "2c67a72d477dc2f9be945053b5318bd3a4976454cac95e5047f980cb8cd4b5bf",
+      "public_artifact_sha256": "75ebef16b2d454be811735c403f8189ff32e381078f698e0a5e60a5315fd5e43",
+      "generation_job_id": "575fd8c5018f3b76ddff674ede99321f1dfcb1d8bd4f5da982e7f4f9682ad027",
+      "original_file_sha256": "3c54ec79e90c16b17c71702dffd49a2b09f7f2d896a8a965fcae59c339de6ace",
+      "original_artifact_sha256": "b4f4af59a066b03a5ecd66711a4a10216d1aede1a45844dc799a05e32162317b",
+      "output_utf8_sha256": "0a2fc7e31c868aeee8a3afc2c08d33d946993b79bd888ba16277b7498da009b7"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_1_naive.json",
+      "public_file_sha256": "a846db33b9dcd64cb4a2a4c14aa783f4a3f991e8d35e50fda728ec8f46d5c7b9",
+      "public_artifact_sha256": "cafb0cb980b9b84279d2eb3729ee8fd55c1e00cc63ac7b16f133b4c95052b196",
+      "generation_job_id": "5774f9958675eecfd1fcadcc04d74f73e3cc634eefd5e37a5f50de1982af1e6b",
+      "original_file_sha256": "adcc91111ad86e315cea44ddf89485398e094e50abfd5dfdb982e007194e9708",
+      "original_artifact_sha256": "b73677a929741bc70552b39dbc5064ffee11232564a29972ed8af1a803dd7eb2",
+      "output_utf8_sha256": "094bcf76872e6a01669fd6303763301b5aaaeeee531f6af58695cb71abe2300b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_3_peil_labelled.json",
+      "public_file_sha256": "e5274f2008d3c68c6c1e8cf205a6b563f547dc92aa1ebc840e2f99c34e6be11c",
+      "public_artifact_sha256": "67ccfdaf16a0509ef90698c3566012481b6c9d135513a297bd0f3d09eda9e81a",
+      "generation_job_id": "593d2fa616a9e3368eb4258d3f24f6ced3b2fcecea0ccc07540147aced0f9b5a",
+      "original_file_sha256": "1df1fb7bfbc773c9cdbf96445a85dccbf5e8f710ff6d1dd698c898aaa88f956c",
+      "original_artifact_sha256": "e2bd36e20078ac32850fd1b61bbff11b6b778ed51515a51af04cad09acb8e6d3",
+      "output_utf8_sha256": "8c9f11c35e3c224e2a84ebc1a774af1cbf2dd72f6a48d4e0e5ec9d6a41fe945c"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_2_peil_labelled.json",
+      "public_file_sha256": "ff74a179bd3a283d398c501b01d998db3c993c97ee22854dbf4a6214e016ed8f",
+      "public_artifact_sha256": "a21135761ec39d9241233e64d134d1d56a8e6b90b3fb8553649f0bd57db1957e",
+      "generation_job_id": "5aa12daa4791e19b16b36374a2cd852191edb68e79aeb6be82ea26ca5161ac4f",
+      "original_file_sha256": "2412865442c55b65eec0f4b286e646d9b9198df33ec0c5ccdcdf802d97df5e38",
+      "original_artifact_sha256": "6b6c83bf73eea64f618a2edf53cedd82a60823f65cbdb4aec80ddd00cabfaf97",
+      "output_utf8_sha256": "d1c685f0ab149bc8eb709b6de15a7c45c5afa5cb6cca4dde1a122a15bc293be8"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_1_peil_unlabelled.json",
+      "public_file_sha256": "820345467768ef9bdf7696ef793912d866942912b8e0417f504259040776fe09",
+      "public_artifact_sha256": "0265c10f69fc7af7b73762f8d2a5a220572777972817dbe1c7eb89ce4a6c8956",
+      "generation_job_id": "5fd8a01b27e2d28d9303f0f82ce5998dada240c3e00abdf9f06f9145bf18cc88",
+      "original_file_sha256": "ec09312a3b99c02318060ceed4c6b6f2805d27c73541e67bbf5c065b26ba4c43",
+      "original_artifact_sha256": "30b92d5159256b1a8dfce925ecaf11adeca7e5c897615fd00c0602c7274349a8",
+      "output_utf8_sha256": "66a16fb0f816d2f9d48ac843c54f4b9c71586c700c5fc5389c82a080d68978a6"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_2_peil_labelled.json",
+      "public_file_sha256": "7cb9fd464c895adcd09a62c2505f5f45f27e577fdebc3b2f86697479656c1df5",
+      "public_artifact_sha256": "09a5215cc8d342dbcf37fa4539be66fa97e393624635787dcc148b020d489eae",
+      "generation_job_id": "602cf92ed56e45f7fdcd3ee73c9aea260db32bda12e69aae71e83a59dc799a0f",
+      "original_file_sha256": "bece9974883c0ba80134588e19a6a83578e09ba34aca031a99bcb1bd11559c69",
+      "original_artifact_sha256": "7e1b91dad88d56b91aa875a9e90bf47d3e84c7234a06dd2942750e134ce26219",
+      "output_utf8_sha256": "ead65e298d93ef723e74a49e11857fbfc131ee19a13b487278a978ee17015c5a"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_3_peil_unlabelled.json",
+      "public_file_sha256": "420cebc2914b38f20780cd80959ec57dc8727c876ea33985f06944891231e571",
+      "public_artifact_sha256": "81a947424ef307825cf60b25e8074b35b5190d6634980aee35f772439403505b",
+      "generation_job_id": "63e675aa8997ef6a58a4a575bea00fb061ea1cc4cb0d573cd73a03bb79c4b2ef",
+      "original_file_sha256": "9e28233550e6d41e30cab670fd2935cad378b2551c9f5d854f34f25624f1e6d1",
+      "original_artifact_sha256": "d014ea614a5846efec742bfc4b19e43af1629f27c3879eb3c23a62d762168f9d",
+      "output_utf8_sha256": "df1000ed0c9fed9f5b6423186bf50e67ef8491dfd0353cf0a85ab9b5241ffea8"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_3_peil_unlabelled.json",
+      "public_file_sha256": "aba296caa18bb3e4db79fba05f880955520c59173ab826d74349f970304e4009",
+      "public_artifact_sha256": "95e99238ee187a558beaea8915d344c18bf5a2b5f7a33ad603225c54765a4949",
+      "generation_job_id": "6902ab8f429c2dc775b641a24c4f28d15be7f81572a6ab811ca84595a8878dc3",
+      "original_file_sha256": "e9ec1e70aa0e2004ba7bced54d3ee718630318658a54b13b2ffb65f1bcaab8dd",
+      "original_artifact_sha256": "3172134fd8e96f871f893ce3a0f69597e1fe6bd8827644a2f74614b91a1d067f",
+      "output_utf8_sha256": "0db6c2c47b015aa6883d87960feb1d7c90fd0b6a11b60ec394c8a66e886d5515"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_3_peil_labelled.json",
+      "public_file_sha256": "62a5fef7307d15b85c5b915d91c6542eaf0939217b1dd125cba761ec070b3fbf",
+      "public_artifact_sha256": "f8752fa4854ae6ee5643e2a98982e2e0d9a4f32fecc7ff872bc2fd7bc04804b6",
+      "generation_job_id": "69da3d2a6fc2af957eca9ae9f91f31a35db2db7801a2641c1932841b5a7b64d2",
+      "original_file_sha256": "4350a9d662a22094726df10e5e536aa7837599a8e1a41df923fa3526a79c29c8",
+      "original_artifact_sha256": "f23b9393076f9755355ba12d45a5f5ecf6ccb06cd07d29eda71efcbd5c9acb62",
+      "output_utf8_sha256": "4959edd3223a0b4664cfa1a0e31b0755dd5ca8182868d0d69e692f6c940dea0f"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_2_peil_unlabelled.json",
+      "public_file_sha256": "067c280aa69f1ac5c993c7123a795d6aaf769ae9ce763e338f67055e5f5745a5",
+      "public_artifact_sha256": "6f92ac37bcedaeea63db001ae1cb65e3b39173c890753c66858e33fe9d42291b",
+      "generation_job_id": "6bfc316af49eb22f0324764063d7a2f126c8474b988e2454ffb1e232f07ff013",
+      "original_file_sha256": "d8c404489aad2c1fd42f436edb9f85a58697e888b06b61e8eb332b457df3204f",
+      "original_artifact_sha256": "a3056a8e3386c3f7f9df3c8d0f4c0c1a9f1a43483d98346b4e515deebc59fd26",
+      "output_utf8_sha256": "1a72ad98cd1d9ea07e510dc63b95d7fa042cdfff06daa1759e02644afaaf2adf"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_2_peil_unlabelled.json",
+      "public_file_sha256": "d2ac42ef6e0c474ef19651979b202bb38b12a212d9d65bb5ccb6f6caba369976",
+      "public_artifact_sha256": "4502ebc4b4d66bde9a3e4bee4d9902a5444fd572cb1feed7559fd08e776824f2",
+      "generation_job_id": "6c9ca3894e52116516044a3544ca5470e204c89a80a8ba64980c57e714b59d69",
+      "original_file_sha256": "7e6adc2e11c5f27a797c82af522e169ad3c521c5065351f70df8ce6add484108",
+      "original_artifact_sha256": "8073720c1f00725994a77a1551dec68daef6a04f8d1f85e41c8156e15fadd342",
+      "output_utf8_sha256": "1da5d9f75de55dfde0b51b92bb9e9c18655baf81c601c233f38882e6ebfecaa1"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_1_peil_unlabelled.json",
+      "public_file_sha256": "f68c49549a18aff8c60087c784c28ca6ad6bb079e9f76050747ab0dbb16458b7",
+      "public_artifact_sha256": "e420b6ef98d8032981c440c79eecd4b658a1b09e414624c285cf94a89aea39fa",
+      "generation_job_id": "6dcedc73936936b84098a6f069ed22b7a5dae9f3810444e0b67ad3b40caeccc0",
+      "original_file_sha256": "3a321ebfb12d9cd1eb7a6014e5135a581c63d3ed777fbcbb125e46ab33b29e7c",
+      "original_artifact_sha256": "30d8a8fddd9107d982e070e1a1f9ce574560c37f231a6dce2f51bd60287ef0e9",
+      "output_utf8_sha256": "1dfc54c4bb62c5038b21ec9c3ef89db913b9776d1615e9c6b53a215c02d1b7d3"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_1_peil_unlabelled.json",
+      "public_file_sha256": "8494b0db5086835f6f9045768f34c0b9684db6fc588f7ddac435ceccd2f0cdde",
+      "public_artifact_sha256": "0e0b453583fd51b87f424b57f0a4be57b5f356e5e4bb7f5497157256bfe5b370",
+      "generation_job_id": "6dd476ddd9a3a6819343f7a607baae3b384d3eb51af0e39cf157f98435a79737",
+      "original_file_sha256": "968b441159614007975216dc6b12b0aab8b727d3d8c5b6f2f800c9faa4ee84fa",
+      "original_artifact_sha256": "c187b350c3140d3b9b8d99273f78f0333f6f4c73b31ae010881e083fd55a77aa",
+      "output_utf8_sha256": "3c855202c59824f782d37c13374b9491b08c3502e206948d9d0496630f8dbcc3"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_2_peil_unlabelled.json",
+      "public_file_sha256": "0e081037f506db1cba12bb4b936f57a137b25d34da7e3730d3615d04985c56c5",
+      "public_artifact_sha256": "67981be959b9619d811c3cab5ea94cbb4f865cd263ba213c6d9821a7d6316508",
+      "generation_job_id": "7062193e5e1a61b7a767b20e0faca727a20a404ab4547d3854c846aaa810fcea",
+      "original_file_sha256": "586efdb94bb6e117c51784e2a6fb2d7c45c6946cb53d00bf797673667c7ccf4f",
+      "original_artifact_sha256": "465678a7cb645b935931370acd82942df7bfbc017c6a2026be1219fc46d760db",
+      "output_utf8_sha256": "8bf0208e25ded666f612286bc5c3ce282f51d537f525b67de770d10475a3490b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_2_peil_labelled.json",
+      "public_file_sha256": "6b825ebf6d218256240a3683d0fc90e2b979a96c158e834d8c983922a31453cb",
+      "public_artifact_sha256": "51f4fa5f54b30c92b5a5f1bcee15c910f68f752fa2b9c6d20ce8e94bf5cb47ec",
+      "generation_job_id": "70e254302dbab6fc304fec593964727515945e5d64dd01f0255bf5238c3bfb7d",
+      "original_file_sha256": "b7632e27ed5e5b3d2eb6e2323fa4a7dabfc3a7d4f8e89124a9e818da0dca57e0",
+      "original_artifact_sha256": "d49778555239f9571df618793f7b7ed4318e2d63c48c77c438b149a752a8168e",
+      "output_utf8_sha256": "35bb123fa131b005051939d85f8b8164167db4a3a1fe0211dfd3100fcd24f9d7"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_3_naive.json",
+      "public_file_sha256": "aee6065950e8322436d6ff6fa5f2652ed75ab1dee28b65aadee93e512d4af569",
+      "public_artifact_sha256": "892e15fb1d575f93970790be440d7c2e0644d2f18e3fdf92ab122e2332b2d404",
+      "generation_job_id": "7102177ad25bedf9805ce410330ffb52e04218dffb78b78df0b494952a5c4e29",
+      "original_file_sha256": "c1e13129625ed29e40b34e6151a2c565838217262aaad6d4ed48d91235e14a2c",
+      "original_artifact_sha256": "29efc43b71c562574148db75869cc910abbf19b45be91165c898b7d470d1dfcb",
+      "output_utf8_sha256": "2102463adb9f8bb25481e7cd6c0c8ccdd3016a8b1db53a9dea8f6dc1f78b72f3"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_1_peil_unlabelled.json",
+      "public_file_sha256": "3b9837391df2e3a51e1bb30d6e7be5544af7b94e8a904c052f524fbae4668906",
+      "public_artifact_sha256": "beed717e8f81f4693b2bc73a52da9e43a32a88216bf72bc6ad6e183c6b6197e1",
+      "generation_job_id": "740952db6ed0b462b407ed8a607604378b96292c8c4d214d927d10b2cedbc46c",
+      "original_file_sha256": "fc72ef9f9d2ce801cb9c80d4c30a1528694ff423140a70f0a6fcf49ccbc56e69",
+      "original_artifact_sha256": "694d810ef6371d893179c2e92af3cd59f346322de9e78b3a66ebe19b267545ec",
+      "output_utf8_sha256": "08595760a084c75937aee5086e43c01a83d019bceb2afbfca748ec221dc980ad"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_3_naive.json",
+      "public_file_sha256": "7ac3761d658d931a50a2493e4d1d5a282454651648425d0a3254e3807668b2fd",
+      "public_artifact_sha256": "74f8945f0786953b590d0408333ef1754d089395da0a8184bbffd18ec2505a2e",
+      "generation_job_id": "747a81bfb097d702fba831c09ee058a766a3a8ec4762a78ce01706ad3b8cb9b0",
+      "original_file_sha256": "7d0d15797c861febe600b01bf3292edcba6a55524f5356f47e0a1cb136c88819",
+      "original_artifact_sha256": "054c0c2ccb7c796797ffabc6c5309e380f8cbae42ba2325ac18facd12f378c7a",
+      "output_utf8_sha256": "578e2e35672cbfddc2cbc17342432f7008dc7919c9de93a8bd69cb8a54f90604"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_3_peil_unlabelled.json",
+      "public_file_sha256": "797e90a3b14a683a6aa9c71e0f0d38deae2008092bda020acf8ada65894e8740",
+      "public_artifact_sha256": "05ca67924a22cc6f9d8642aecbb63080877591628534c77b38feb5896ebff9ce",
+      "generation_job_id": "7593aa3e5fbae6f9747b3aee792fef10d1ebb2f1e02e8a24295146e9b04e8317",
+      "original_file_sha256": "d625c9984e557d328752c02dff91d8ce395c9eba814439d608fe61b24de7b07c",
+      "original_artifact_sha256": "098e450a94a51a48810f525cc4d4519fa82ec5443caed285fee926fd85315a29",
+      "output_utf8_sha256": "3e48c92b5be8690448b0036d18306923c0454ac81c065d4c7b8311e715bee2e2"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_3_peil_labelled.json",
+      "public_file_sha256": "55a53deda75a1e04538fcba8062fecfaa0d767500821bfeee276bffa36c340c8",
+      "public_artifact_sha256": "38c65f37683d42f8e1dd36e69e22c0f063ece8529faa51e414e5b57471dacf63",
+      "generation_job_id": "7639bedd7c003d3a792730f85b0692904da5e94509bed6758c77f74ffc70bc59",
+      "original_file_sha256": "388bcdda6641e8b91319149cfdecf35732ecddd26d2d5a782d9362836fb62ba2",
+      "original_artifact_sha256": "414278a52c01369e851b349cd7a69f26c341cce83a9d6f9ace9521d4b9e1ec52",
+      "output_utf8_sha256": "96b834eaee7d511d4b1a402f4604c5d101b1f9b9a529b78bc181c39cd5e04f5b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_2_peil_unlabelled.json",
+      "public_file_sha256": "f360e074b00c863951ce6078e422fb8b5cb98540ff1a26ba0e2ec1064acbbff1",
+      "public_artifact_sha256": "9659cc87e8cfff9192e47f4b8e294fdcd622f01c32dfa739c936326eefdf5a6a",
+      "generation_job_id": "779548940c4c9f1dba1fa04621cc31a2c7e72f51b7416d5da9d20e5b29a433fe",
+      "original_file_sha256": "ebfe1dd123736bb6df777e0326c94bb4fe7fe5ccdfaeb5e1ec15ff0e6dfe161b",
+      "original_artifact_sha256": "cdd9c39894c34ba365be76932e01b66d1a43fc17214e8690598f0609119c8910",
+      "output_utf8_sha256": "33e175d3be4428bc834ea470ba4a8f3408ef60e5fcbf0bd0d42d49dbd0f42afd"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_3_naive.json",
+      "public_file_sha256": "ccbd6fd83925e688100dd160e924102980d446b2475e687663328f65a8662e97",
+      "public_artifact_sha256": "9ac8629938e5b180c1048261528e0f1849fea7991d223f750bd486fe1b13bbe9",
+      "generation_job_id": "77ebd36ac433db89583cba928ae7b95c98ef9aa13d6d70c28aa14956e70403c9",
+      "original_file_sha256": "da522a0a93097ecc72bf958afdc99ebb4942c1dea008a525a8e50c2d9ca520d8",
+      "original_artifact_sha256": "8c7ed56d83c6dcc78c42f150e9847f271d3905af705b1f105f6c4987936a0c05",
+      "output_utf8_sha256": "a2d67ef09303f6012be6fbab8be9b8cc7501c415323ff9656d5f9e5053e24ce1"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_3_peil_unlabelled.json",
+      "public_file_sha256": "4e852b7f7846fc1ede2c230690db3e97e8094a7989f978a84310fa09768e3ff9",
+      "public_artifact_sha256": "091e6fe29cb5ae1da5b8efe437ebc0347a54674145db746ed5afebec71bb6c77",
+      "generation_job_id": "7af057738f74f46987631863420e5d0ce020517c83c2d816b8d8857ca6829300",
+      "original_file_sha256": "364b8f972effb0e485722d11addcbd5bcaa68bcf8ed5983df7aa4edd87a5a8b6",
+      "original_artifact_sha256": "9b3f3de12a9ec79817913da62410ac9151f2f12bde85f63a1e8f9f069a11501e",
+      "output_utf8_sha256": "3b90bbad38f802ce2e24cb0858f76b3a6d6e071a464d2f8b4e9832661fdf2421"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_1_peil_unlabelled.json",
+      "public_file_sha256": "df8a62dd428ec9a791d5c859d55358395bc926f6896f87f8a7b3a3ec82e0c3ef",
+      "public_artifact_sha256": "f587d6e95b7897b1147909eabcad5090ca94762bec0bf02ed7029f366f587c5a",
+      "generation_job_id": "7c6c9de8d2553fb1030627155f3f97476b01b9f29f9de1f7d494d1fcc9d1ded5",
+      "original_file_sha256": "51fa3a49704b04716a182c707f042a5cc8c1899f3024c55c5512944dc7182843",
+      "original_artifact_sha256": "3e5ed9d6b1d15fc5cbcca4252671f8a0ae01bef48bf9166e6b3f87030314cd71",
+      "output_utf8_sha256": "cfa78c07c3465a8c1902c9eea106dfc27d2b19b18fa97e97b96c64ec3a81859b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_2_naive.json",
+      "public_file_sha256": "3d1d1f12b2c52c7574dbc30c892122953ce5a1ea8c63ed817b686bead9427615",
+      "public_artifact_sha256": "7aa9764e7f7caf17c9cf599f05f8df236296a89a78c2a488077263ec99511433",
+      "generation_job_id": "7ca8c7651fab8c5c1e7eb697220357edfc9a605cb78ab63d2510bdb4f5c8307b",
+      "original_file_sha256": "0a70190cbe9d69138a8e14e5bd82704841d8a16ee2d561a443cdc4cd3142b548",
+      "original_artifact_sha256": "32f8b1aa9ca9aa7deadaab745f99eba07c1a623f19fbf1c7fc1dcc390f9cf4d5",
+      "output_utf8_sha256": "6804d6319e6bac86c99c5868688b1363a5773dd9df3eb8f4aacf6a1e64d53404"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_1_peil_labelled.json",
+      "public_file_sha256": "b769cdb58d8b767792100b0b9a5fbbd80d5123c2a4c5e1d312d91506e757a5e0",
+      "public_artifact_sha256": "ff07548c252a3f349011bfd47fcf0b7f3de6119f2f04e0817243cce0978b746b",
+      "generation_job_id": "811b85d09a106b49bc4af2f11d5488b97798880873c070fed5679e7150703389",
+      "original_file_sha256": "b1d03a84a9b074de9fe0bbe677f0c484451ffe93cfb5f74c306bc7b48445fdd4",
+      "original_artifact_sha256": "278a3320594b03da3cd6761e9eb03b80000ff05564c3f90c5c07174209ab74e6",
+      "output_utf8_sha256": "8f4c4489a633c211b19f7a37f810be231d0cb89e21057a156b0fd722ed960647"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_3_peil_labelled.json",
+      "public_file_sha256": "b9dd6ce7c0784ab02b5184b18b8910d428f541c09d7ae534fb81cff54a1e8f82",
+      "public_artifact_sha256": "731bd6bdef0553fcb6f307d98d5ada807f3f50dd551c08f5f2bfcbf0cd54fc23",
+      "generation_job_id": "829e59a0bd23ea409e3f417cf84eb7af60cb689b1351262a0ab9a0bd2c2f816e",
+      "original_file_sha256": "32828cba32cdc656f5d7fdc59504c0539cadcb403eaa3e79a12757111c1dc7d4",
+      "original_artifact_sha256": "8bde6fa786d1f267f972b9eb21fb58323147c1670b45f38f5ddaa3a89d6d57fb",
+      "output_utf8_sha256": "fca97a02d15d025a07daea2db48ab9de45e3b952f5aeb0cea19e29a58c66560b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_3_peil_unlabelled.json",
+      "public_file_sha256": "ec2dc305a1d02f829587b248e7e83969f383bc7997ecfde78f0a608ed12ea188",
+      "public_artifact_sha256": "c54b16edc063e0e425fd3499918d19ab54d69c73fd3f11a0849338e8ff389e7e",
+      "generation_job_id": "83d323a91b46c9a9db26295e5d820614da3dece68871c7821834c81c2877bc62",
+      "original_file_sha256": "f79758dc6adb6e2b071699b8a0c91ff2e599a27eb7691468bc09cf4c4541dbcd",
+      "original_artifact_sha256": "0d0cca270ceeb0334e0b3a74be47be9f97e91c6accd142f237d248bda4b42b57",
+      "output_utf8_sha256": "ce98d34a284b8180d7139eb84feacc3466184d327bf49b1f2958be5e53720d02"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_2_naive.json",
+      "public_file_sha256": "618feeb5cc49197b659b51236d02ff939d651798de21880ba68472c4ac697bba",
+      "public_artifact_sha256": "fc25c3fdf01d58e396851096e4b46f1d8bce2f84f75e549afe068c90e4dbd976",
+      "generation_job_id": "84d292a51bb709e6f26bed9494e6a5eb112e7c84b649e09177963d16e5cd3e29",
+      "original_file_sha256": "21105e99d8066b8e67c8489d62c10855c69b5001d1cb9e76e56192f892b70b6b",
+      "original_artifact_sha256": "ca68cd9dbb62df677df3edacf6c0e3b873c3bda5a52b37d00bed5d22f9568519",
+      "output_utf8_sha256": "9d30432928b4d1a835d89eb56c129e4de9d90d8af408f614b0b9c9b9335d7bda"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_3_naive.json",
+      "public_file_sha256": "13cb21371ea84e008b6a144fc69cda728eedcaba5f4211c11ec73e1273ea9bb3",
+      "public_artifact_sha256": "333b704091f931908b4388294c4b940f6efe93e44588c8541ba3cca257203a83",
+      "generation_job_id": "85074117eb126824e06745daccd37503b359f78dc261c898676f3c9e6550f259",
+      "original_file_sha256": "e11624209835e80eb8ba365d83f29220eaa41cbfe27991164778da8b61bdb4fc",
+      "original_artifact_sha256": "53ef7e400325d65417630d2e28a0e3e38ed2da8d0fab767fd917b1c017203571",
+      "output_utf8_sha256": "2739624fe6052333dad47be806af44868e59e02de4b10c587c62ecc380fe3dfa"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_1_peil_labelled.json",
+      "public_file_sha256": "8704b38c788d074d1eeb205bf6fe96baa92561aa7e7e3fb22e508b6b477471ad",
+      "public_artifact_sha256": "383315595f36ec92687a41bfbd583ad0943e09a676a445971e3f0da86ea184a1",
+      "generation_job_id": "86785ba65dc5a4bf4771df0f4debea5a80a4ad2dc3c0e3fbc706ee8f79d297ff",
+      "original_file_sha256": "c1e30344b508f6087ea77ecc607d40e9451d4386513287241337f03f10e1a3c4",
+      "original_artifact_sha256": "0a4db94ae2659af5f923995aac58a7b74cb94e07a1993816db097738474182e4",
+      "output_utf8_sha256": "d672b3744f883c7bdc4f3d2d0c3c8640752a934dcbf2a093dd46b8fd39807888"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_1_naive.json",
+      "public_file_sha256": "41d2000fbcb94443629dcc65efc47617e85eff22b4ecdf68acffb22ab3700d78",
+      "public_artifact_sha256": "3342ba68f997e9e436feb03dbc15db2d3663206aecf8a6d7cf3c0d9ce98d575e",
+      "generation_job_id": "8a1b6aefd58d1e2a124c308391dfdb540f2a2ae55c10b59ed77e1f9dd6f54a79",
+      "original_file_sha256": "3447e4894d7ab35cd841fc980e95b96b473389bad05b46519c9e33aa8e66c43f",
+      "original_artifact_sha256": "7f8ec7f909a17ae5201c4ca24470dbbbb8beaf7e42909fc0d030139979f95358",
+      "output_utf8_sha256": "2fbb3ed2c0cd18d45ee61ed0622b1d9a4bb09e913edd419fd31db102830dc6c2"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_3_peil_unlabelled.json",
+      "public_file_sha256": "33e1c2c092e9aa584a09c3ef578a421d365c41a37b6cc263ae8524e0af4e461d",
+      "public_artifact_sha256": "64a7cc07f447e816ee5657c0c3367dfcae4e97dff086af2c8131a67da027982f",
+      "generation_job_id": "8bc9e45050a6c44d62952a2ccc30223e15d1abd0fc7f744134cd93e5d45540ca",
+      "original_file_sha256": "2b4a2087868d08b174fd9d162e09d078412389d5bffa6447554744945ccb671a",
+      "original_artifact_sha256": "6c648549401dddf6fd66adb7527b1fbb1a2fbfb5456c17bf2f79a88f61b399c0",
+      "output_utf8_sha256": "e735911f06873728f3bedffdc7ddd9662d2b5cc0befc9a92b1dfa72337658d8d"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_2_peil_unlabelled.json",
+      "public_file_sha256": "0173b3854cb73fbee185d342b5b4a2f9036f5bd7e5ccc402b58086c2da3288d5",
+      "public_artifact_sha256": "8308e7972a9d8dd89579a61d055cd4c75590ab6cc7c40b030fddfc7b38f3eed4",
+      "generation_job_id": "8c64a4d5a6cfabf48db4bdb78f38810fb3793305cf675fbf1932b5ac85f2c45f",
+      "original_file_sha256": "46a2252f37502a0e51fab1af5374e44ee1d5e078cece3a041099a3c32a18b785",
+      "original_artifact_sha256": "28b80b453f540d7875fa6f0d77842436e9ef1c5b48b2a523eb74fccdd6899b8a",
+      "output_utf8_sha256": "0dee9e65829f004816b149a9b7a96f8f5efcce91c5db1b306cf4533bc9d3d827"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_1_naive.json",
+      "public_file_sha256": "bed74375ba0df70afd7c390e378b7233ee36c4d39ba56595a99b6cc717777bd7",
+      "public_artifact_sha256": "2af49d8d2f3cceb78fd697349a8c673b555cd1398729275a0f43a6eacc5ac5ed",
+      "generation_job_id": "8caa00c7753f2ce92679d400eb2db427fae6ef4b68b4921c556b376a73963590",
+      "original_file_sha256": "77070ed8df4b105008d7e27e0eb793c5c05bc52acb8993a5e495b2f3af8b13c4",
+      "original_artifact_sha256": "5ce7208e1f6e6a6713287cc07d03a430de2af0b9dfbd148ab79fce1ecee8b51c",
+      "output_utf8_sha256": "13ce1edd737707ba162885d131e3e05993914bd19492caff1f891d495481a9c5"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_2_naive.json",
+      "public_file_sha256": "29a2175c55f937367ad6693f43e19fcd63256a11acf73a96c625031750ed19e6",
+      "public_artifact_sha256": "d97fc2ccd43d451959421521469b504a1ea1a354f7e2c574494023d7626e5138",
+      "generation_job_id": "8fcf771a157a0c7760decd51309c0baff0c07e157c03ca0f766080020951a653",
+      "original_file_sha256": "1de1667a4b2be42f72eba27fa26a9f0e221ba334b5355efe22793a437d7c8a54",
+      "original_artifact_sha256": "c87eba9d9792acd54ecb94ec9a19a262ec4275dc5714efa922780253bc2a291e",
+      "output_utf8_sha256": "be1be35e919b7e1996248af82b9bfe95a1279312387eb93096ab0e3644516d36"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_2_naive.json",
+      "public_file_sha256": "6e1c3b8811a9fe2598d0ae9ed5e3c2a1d6257fc97500c3ea069edfe665850080",
+      "public_artifact_sha256": "775cd44e0280d1162d4b6259378c300bd410f07f2b718213d27c016c0917e261",
+      "generation_job_id": "907e0d00f004ed364e45892046aaeb6ed50c7925030eec55559d572e8f788242",
+      "original_file_sha256": "834cb48bc0f0714170f4a9bca3208cd8bfa47b75f0c76611e03f385ccbfe1785",
+      "original_artifact_sha256": "b39b4101f99e3484628ca3f4300c918360701e56a63013c5f089dc58afe8ad55",
+      "output_utf8_sha256": "a2d67ef09303f6012be6fbab8be9b8cc7501c415323ff9656d5f9e5053e24ce1"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_2_peil_labelled.json",
+      "public_file_sha256": "2c27673044b2550c6a74e5d95098a9de2d68d55cd10dfd78e427f5949357d771",
+      "public_artifact_sha256": "3890c2245f30b4a180c07de5cae5b7aa78b2bdc6b06e6785ce0de218cd879aba",
+      "generation_job_id": "9229dc8c6229d3b2427a03ee34c6da503be7c32f7f1f92fb7002f1e8dc29d79d",
+      "original_file_sha256": "37fb550d1f584434ef40905060e760f3da302263270d6902433d340aba7b6fd9",
+      "original_artifact_sha256": "0aa32ddab00ffca6837250cf7abb75fff8bc3bd59870f5906207cec87c8de9e6",
+      "output_utf8_sha256": "d2bae04cca6fcf0b11fc0aa9c2879dca5143b301c6190d5542eaa4b76397ee93"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_1_peil_labelled.json",
+      "public_file_sha256": "01d5a822a591f01a4262046bf7edbebbacb08700d30db867e02724dfef0f5228",
+      "public_artifact_sha256": "55aedd6662bfcf5c1571005caa0de2b5ccec0732bc0467d47f6cffe74d47342b",
+      "generation_job_id": "9247cc83ee4a0d69d2e787646a64e345369b21b703589d843725004f2b64808d",
+      "original_file_sha256": "343cbec7c030185d6958099b65403290937659977233b268ffb02c71ad9d8710",
+      "original_artifact_sha256": "d191d8eca5f8d27f73cd931a1c424301a0ed904af868427581c30c840a9a652d",
+      "output_utf8_sha256": "474d69cae5a76d0536c4405071256969cb1535760cb0ad09f9ade3ed13474652"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_2_peil_unlabelled.json",
+      "public_file_sha256": "be8546970e3d9bd6c0f777e683853542830b8a3f1d4461943e24865d84832bc9",
+      "public_artifact_sha256": "372a9a8dab7b784957f8883a288b7d646b9df52778e502c8b615e24ac1d4a46e",
+      "generation_job_id": "9594e1c6d4ce2fa689705dacfab283a13f83c86a06cd9a7f34566943c2b8f662",
+      "original_file_sha256": "4ef80605fbc078d5536f25f2b9cbb480889b3044dc24e01521ca252a8fb2e9a9",
+      "original_artifact_sha256": "cab44885a1cccfd06ec5867dc9ecbcba6f114c7e6e1c86579587f309e2224af8",
+      "output_utf8_sha256": "566fe8afe75ad4de21fb9ef2458cc0e81644d07a451cf661649fa3e0ec72e870"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_3_peil_unlabelled.json",
+      "public_file_sha256": "55dd91f6bc568966919110a2d042b3650e4dca9dfe959fcebf7925caf2dc139b",
+      "public_artifact_sha256": "cd425e5b17c747943277fbaeced8a7fe05373cc10c75fdf16e64bfb5664a1a10",
+      "generation_job_id": "9640f806486af94b6a3ff6b26d171b1598e54c12015ca1a188a0874dfa777256",
+      "original_file_sha256": "077e4374d44421879dea1a5dd894f3f0ed37351ac86ce49ff4276458584dbbfd",
+      "original_artifact_sha256": "612370b62679f7b1b94d79192e6fe638502fdb2cfadd1a07003b33ea14550769",
+      "output_utf8_sha256": "a17dd2c83b599945c17e2a27722f0b6b184d87139ba65b61b4cc1bc3e36938b4"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_2_peil_unlabelled.json",
+      "public_file_sha256": "5c58b452ab32117c6df57ae792a2cc7a6be15329952caa5162c78230f150b0cc",
+      "public_artifact_sha256": "39192805a376315f878692426a9dfe8c80ba81e10034dddb1af36cb9de546d91",
+      "generation_job_id": "96f791274d67c09e73226b3c89205c218e62bbbc37d2f29d16d4f9003144fe14",
+      "original_file_sha256": "ad91d6dfe75ec7334b71182425ae0dc4cd2aae6a6500737f1b5505ee6b85095a",
+      "original_artifact_sha256": "5d1c5b1dd4b2373f1507e5617bf66da8dd799e95433aa6b69762eafe37530c81",
+      "output_utf8_sha256": "cf351f91c3064d46e619315beb8a3a42f2884d24600eaa839ca14febc234c98b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_1_peil_labelled.json",
+      "public_file_sha256": "7d945443e4d61b8a9e3bc7951718884b6256ec8a6820ad6547c33b64b59111a4",
+      "public_artifact_sha256": "b51fe57ea6fd5368642dd9baffa0a39161d4f30bb3337c588d07e28ddbb12092",
+      "generation_job_id": "98fe6992fb33c170769d717c9d0d72592913e464a0fcbbba55865b790b3adea5",
+      "original_file_sha256": "e9c2aef87e1ffb071ba297103be0b8be03c01b318a6a4fed20ea5e90d439ad98",
+      "original_artifact_sha256": "3dd919ed11644720d21a66d8ac84429689a81f6d177173b2678630544228fae8",
+      "output_utf8_sha256": "cf21cac6f7d9bdfb3e849734d1619585fdbdbd0ee3c01f956f1d5d442bd1f032"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_1_peil_unlabelled.json",
+      "public_file_sha256": "3cd4de68defb2b49c1f1864e29ab9ef9a4475156ae9b2f8ea61fb691ce38703f",
+      "public_artifact_sha256": "44b760d9ae0390f91eaf749d59a786c22f833c014968fd709908e4d4ff7c3525",
+      "generation_job_id": "9990b64f3d80d14a36e1a592ad5cdcab2a5fcfb719cc3d54a0348426be913407",
+      "original_file_sha256": "9de32bb8e6522a84527339622b1087193302f024967c03288d2ff5c41893ee6f",
+      "original_artifact_sha256": "161e013c2face1f5d1e493d1c6e9b20d55e4232783e3a0e6dc7475f079c46f0a",
+      "output_utf8_sha256": "b2c1f2f36e2162873872194fc754598294e5af9419ba55926134242b39a76a92"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_2_peil_labelled.json",
+      "public_file_sha256": "8c23604db5ea95968d336a16a67e8e76c0d46b1c4755a9b04260c28ac2608a70",
+      "public_artifact_sha256": "bb9066807f29a2d46935cdeed61dd97d802c0a9320fbd436a9e373f62e5cf9eb",
+      "generation_job_id": "9e072ed3acbab570fcbeda73fcb9c638b280cd6514868c23499bc708ab6cd37f",
+      "original_file_sha256": "352b77e68599883ad812b759ea8e2d2061a94630b5b5e033c9c4ddbf3d35a026",
+      "original_artifact_sha256": "0c4c2d04a59e4006a3d8fc6773b90580230374112f6de5f3c0d08daafc4b68c5",
+      "output_utf8_sha256": "a18c71d1382ded57c61da2c26e549ed64c9e720921acc18ad8c3693bf547d9f4"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_2_peil_unlabelled.json",
+      "public_file_sha256": "3fed78a5c53744fdf271512b0c005fe01556ec697bf4b53534b7e919dd17d098",
+      "public_artifact_sha256": "78a69b628556a015df8b93b2622ebf68f4126c3106b11ef1b70ea865b2ec8f41",
+      "generation_job_id": "a2d921e94295a9fb8f2decddf274d054b48cc2ca898999ce6b484085ab36d737",
+      "original_file_sha256": "d18dbfe17792fd53ac3e03ee9c4bbcb93828f9db344ee01707c4883f9b3bba0d",
+      "original_artifact_sha256": "f18e97c74ac6869772fa2505e56f96a694c3f40a37a693950385ca2e73b6461b",
+      "output_utf8_sha256": "7f3966e0bb1278aaeaa78e5a16c13746518ab4366e3c70b1aafc047820e343db"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_1_naive.json",
+      "public_file_sha256": "539b305c261e41b05dbbd74dd45113ea1eabe21b2d828ab46f72daa4599c7415",
+      "public_artifact_sha256": "76aca62e2fd4d1efe804d0057ede98f86d726d1611ce5860f9da9edcf489d313",
+      "generation_job_id": "a6a7a49ea67a3d77c42eef1341894c62dc01bb3d2b0ed396c55d99ce3a8ae3cc",
+      "original_file_sha256": "49f5417697e02536416e44affe415b3e67e3b6eb1f61486a6906a166108a0376",
+      "original_artifact_sha256": "7cbc42c4cd2acc111d849dfc0b689e80f944703266a851f745b15ddba62a04fb",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_1_naive.json",
+      "public_file_sha256": "5bafda0cd45c99bcc390770451238af3e211fa5e9cd74f74bbefee50823eec63",
+      "public_artifact_sha256": "9a91ffbe461908abb93883278a5316b71f5825bba8584ed8195b1d0992e6f44a",
+      "generation_job_id": "aa42c37f44402a4fc93da3d5075194a6f3eff05ad0570c008e83d3d4dc699868",
+      "original_file_sha256": "30bc891281cb91240c3cc7a63b1c32a40471e7eddff9bf89d3fd4076069e353a",
+      "original_artifact_sha256": "3c9fa754b9c9383e354c6c2960ecfd13a7571fc6ae61a708fb094ebeaa93b32d",
+      "output_utf8_sha256": "8d5b3669521919f8259a8354f63a0ede133160a84acf2b556ddc3007a1222b22"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_3_naive.json",
+      "public_file_sha256": "460515606648cc91703a44503f2abe904a3113b6a20ef9b4dfbee414c48e87e5",
+      "public_artifact_sha256": "2799ed72a56ed333158aca36bdb2a110fcafdf29ac92ba20c97cef302d92f816",
+      "generation_job_id": "aa87b9bc33ceed8fb2d53a9c8795e588dcff22704b92037ca859f085e748366d",
+      "original_file_sha256": "dea0400045299a5841b67604c27d9a49e3578b293ae68decc57b431e4f5aeebf",
+      "original_artifact_sha256": "e7812823a31b3c14bc5909792e5804ddf8a9943d38f7b7b535d2bdf09a8ff693",
+      "output_utf8_sha256": "dd100f56d6e3645875ccc5c8f33ded66ed02a3eae27a4395d0d54317e8d85db6"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_2_peil_unlabelled.json",
+      "public_file_sha256": "0b9d5ab768ebd59d5b7dcc13a6b7498256ef746793759faba40ae96f3a34b2ea",
+      "public_artifact_sha256": "2f4b32ce07bc4b421649fc18300ebe9539c42d4690d9467e140eef75e207722e",
+      "generation_job_id": "ab8cdea729bada10d621a257d54be55c120286e399d0063080535f5f7d6630d5",
+      "original_file_sha256": "56b80e7a4d21d5ec804769f6cca6b406a2c916104f552bdb7c18158d8e118e92",
+      "original_artifact_sha256": "d5fc54ce4254284c69acb620011b4b492838a0966ca8819075721d7ad80a6382",
+      "output_utf8_sha256": "88725d3b65d098d6b8d7f913206d4eeb1248dfe7f0a4417305eca6fb6e2810a2"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_2_naive.json",
+      "public_file_sha256": "61fafb6e5e3592a80178b5d903285e7d0b1f423ab0ea020a18388e5dd410c992",
+      "public_artifact_sha256": "8fcc146acc68b60729aaa30371e0e1c67848d99c855b311b7c0e2c5dbc93590d",
+      "generation_job_id": "aef1247dfd34ae9d2d9135693ddab9a5b7fba62eb7a8876a6aa4ecd8572b0255",
+      "original_file_sha256": "c6d21204aa957cd0aa0e5cd566868bd11e7812c83962feb0528dd738e3b813ce",
+      "original_artifact_sha256": "8cfaadecc24f0e536b29e0f158b8fcc81d75bf5043ed6eb5e122bd4cb658c336",
+      "output_utf8_sha256": "63b24543c9c1d248ca668f0c313a6f898a0070473bfff52222e6c495acf2c6a4"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_1_naive.json",
+      "public_file_sha256": "5bff9213ec279c15a1b03f8bf04d1ee1e8cb2efb88fe4ec368cf36ec6711cb60",
+      "public_artifact_sha256": "ef324e99dc61590fe1ff87049496ea3236061ea74d41f26af8bbca6bd345b912",
+      "generation_job_id": "b3a9e99603b0b68660161fca0a75bdc844d32eac7f9b416442d230c159058394",
+      "original_file_sha256": "ad75173a464642e96dc382fd7a93145c0378abad01327afb837244e67ab4c769",
+      "original_artifact_sha256": "803175f741ac85154ec3da5b84bfed9b1904ef9651cc1d9331816617cc14b512",
+      "output_utf8_sha256": "a2d67ef09303f6012be6fbab8be9b8cc7501c415323ff9656d5f9e5053e24ce1"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_1_peil_labelled.json",
+      "public_file_sha256": "10c4539d04bc46b740d929f6fae7a1d2a4abab6adef907f549dc52fff381975c",
+      "public_artifact_sha256": "320df79ea01829c1627b4bc01f77837f5c2b64fa22c0d54f3955c5572ffe43e0",
+      "generation_job_id": "b4838221221c630a3beb5c6aa87202f8ca218848043c9db289c97d929307bd53",
+      "original_file_sha256": "e5a785d3ed407253285485d3d610071f7be1dbb4fba0fd89ad987358359b5a1b",
+      "original_artifact_sha256": "270b0b6c004be5aabd26aaabe7105f2cfb53d46d3a32b0cdff946cf179c4a1c5",
+      "output_utf8_sha256": "af09c0c2fd5e139c4c4225cda03e81590f2cc1835572c67281f6870fcbea0a5e"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_3_peil_labelled.json",
+      "public_file_sha256": "d8b36f0435a6b1c4a140c288dbcb9c8c576a33ad7306c4f5a8b813e191d9e7a5",
+      "public_artifact_sha256": "5f410d1970511ba09d6856d5567048bc350c933a50a401fa09030cf0925ea376",
+      "generation_job_id": "b603355ec724c0bd647bc579a0030f35245f9738320a44a8ed5817faf032568d",
+      "original_file_sha256": "53e1b938874215b8c1654626f9e856e526e9a6180b81b7d95610c82df986b8f0",
+      "original_artifact_sha256": "8a38009ecc3f9bcb1b42eed65ea532a92d1bd96d0b43d96d8c68693a530e9349",
+      "output_utf8_sha256": "d429978e7bb3611fea3e5124915283964d40a62d42e6a8ddfcc3ad77428c600b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_2_naive.json",
+      "public_file_sha256": "1e0bb9671c4116939cacc97ae68ebe93b2f59786400857d178c948fffdcfa0e8",
+      "public_artifact_sha256": "e24cffd6f164b502c46178e4ce63a215167e78ab0ccbad495f21ae6d310349ec",
+      "generation_job_id": "b726125b2d7d75af4bc2005d11c610afe2521f5cbed96736d021bdd2104371c9",
+      "original_file_sha256": "361330988e36e6af013757accf2842c626263e7ed3b0a406ad582c618ec3a05a",
+      "original_artifact_sha256": "a02ca174ed39da1028240516e4413b96b7cad5202a081516add48d1180e0a206",
+      "output_utf8_sha256": "4b75929a69fb920117ffa3762ca4eed66e903728bed9482dc09472634c77a3a8"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_1_peil_unlabelled.json",
+      "public_file_sha256": "0b21bd6ec4e9faf8265ab6be31b0d45f73e9787be601667dcba899a6970aa629",
+      "public_artifact_sha256": "985472e812a32857c05adc4c427575510241b980294dae6a168e67f82b9c99f4",
+      "generation_job_id": "b76b04814f2381fd66f697c2e71ec4ca046c40cb3bd9416df91e10bf8e3c8f3f",
+      "original_file_sha256": "c737a065caa0c3255813061d612270e279461e27d92869a2da52e1f2eed30b9a",
+      "original_artifact_sha256": "8b27bd66e549d1707961e90e56ec9fba79733ed6d78b3fbfb655d3bc08df72db",
+      "output_utf8_sha256": "299fb7c42088537abe439da29fe77a2beb07964e2e8eed0b4c2d5710bec5c6c4"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_2_naive.json",
+      "public_file_sha256": "a457f6d5e6a6ff1e0c8c59c40bcb5f970c558b4f0b8132aca7a604d893333eee",
+      "public_artifact_sha256": "180be13585709f453930bee96d0b727858b9e2ee9d4e217449d71a500c632d87",
+      "generation_job_id": "b7db5bb2bedc8f0bf758698aaecb899fc77efc8985b26aa59c4d5e1be1ac7ce3",
+      "original_file_sha256": "c91ebda1694690d803f5e7dec7ba4379ab12727bd489040861fc5f0ce525b3fb",
+      "original_artifact_sha256": "c6e787aef8c12e3aec76f1433f121a4f3beb8a3d72787b09c404a9e832c414e1",
+      "output_utf8_sha256": "341036fbceb2357bb7b26e113799b99a4b0a640d4b4babb2d4e96ed5ef558961"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_2_naive.json",
+      "public_file_sha256": "0b9060f0b6b7ec8655fe5f1b696cf0ec16bc3dd9a839d5d2c00484a5c1596606",
+      "public_artifact_sha256": "a131a10d16a08b9b2bebc86788d6df3193cdf9d8b01c118051c365f9e58db013",
+      "generation_job_id": "b99c48ca94cbdb7c54ab9794b125492db618cecedaf95fc6179d7f9552a92868",
+      "original_file_sha256": "26866eb239382ec0e2ea82eef4dfa115b3351d98592d6c08307915448c9d70af",
+      "original_artifact_sha256": "e76352faa9eb185786ff4163be52efe6bab68f5f0d8e090528fb7154e2313016",
+      "output_utf8_sha256": "d11e3023820b513db3d371d8e309bfc8cc0a29d1117f1e5d13ffd56ee81e90eb"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_1_peil_labelled.json",
+      "public_file_sha256": "02d19704d5673c0f96c0388b987ea7c5247050185e9e90b6a70a4544285d9e31",
+      "public_artifact_sha256": "27bd110e77604be97b4a7623f7a9b7de5e8b2218ef98a603fd8240c958d0946f",
+      "generation_job_id": "b9b1ff68f799a12381e5c8d93719f3c9f32e63f66e5ae5e42afb550a96568394",
+      "original_file_sha256": "6a102e5b59707347458536513c6f3116cf994f7fcaaf6848bf06602efb1e020e",
+      "original_artifact_sha256": "e442d669dd55be074110e2ddf46e6f68b47b8d66799584209786ec34692546b0",
+      "output_utf8_sha256": "548e739602efdb86fb448c2a6078819900503584bb6e7b67d6fc2e3f30d26db5"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_2_naive.json",
+      "public_file_sha256": "6247a1f5fda770164dc1e866fbe17275a25c59ed2308b767ccdcd9611231922d",
+      "public_artifact_sha256": "dcc44871baed2fc931e70cac3c11787fb5524609d7051d1698ea47214acab411",
+      "generation_job_id": "ba68bd02d36e3c346aa2987ea0cd039a822f708d5165aaba7e3944f0d5dd0c27",
+      "original_file_sha256": "32c861b92a0553e475922dde86d87990effac9dc76f06fe389847c84e374b83f",
+      "original_artifact_sha256": "742fcff2c0c5c3e82436a43e967727d47b40a3e5ff6747c33e1c0856376478c0",
+      "output_utf8_sha256": "3313a5a33d98f4119e910b4da798968eea39818473cec57e60d5df7cc63231fa"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_3_peil_labelled.json",
+      "public_file_sha256": "039daab6620d8a6712bb12972f2bb649804f01cdb93984b0c006909e188dc14f",
+      "public_artifact_sha256": "a11551409deffd0d0ee71f909a80e983dbe95ac5f23e88bb92a3f99a336a5060",
+      "generation_job_id": "bc83d18e00cb794fd56c245ff53b1b5024409f382d1f690cd5e9479f607a2051",
+      "original_file_sha256": "289939122698acaec8620af6295c2d658bb68699dc9b981fff042666acb09eb4",
+      "original_artifact_sha256": "91dce774fdffff8ee88afdc63bca6bc84084a8177f51f5c830d099e6d4a91a5b",
+      "output_utf8_sha256": "ea8efb4701100bf334ae6d31fb50499af054a3671a9a997930273b47c0f89df4"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_1_peil_labelled.json",
+      "public_file_sha256": "12baf9b4bfd6062406dbfca41094e7669366b8969a5409b17dc5d1b5f33b1c37",
+      "public_artifact_sha256": "57db1cc1088b0c0a79c1fc84ddd9cf4f791d77331aa1c97416602a0e56ab31f1",
+      "generation_job_id": "bf1c49476d1cd50e17c5fe8221b2769fa4092cc29ee85cdbd9fc62e0ff7de00c",
+      "original_file_sha256": "a60522eea409f8a46fdf68bd25f400de3584767b419038e1dcf457634e7c4f34",
+      "original_artifact_sha256": "796a4ee157d049031bcd91ac568413a0d48e36ac4ac75e8da8380075c92006d4",
+      "output_utf8_sha256": "4959edd3223a0b4664cfa1a0e31b0755dd5ca8182868d0d69e692f6c940dea0f"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_3_peil_unlabelled.json",
+      "public_file_sha256": "6dfbd501e07b7a89e8d8b7a7c8a44ce533be1623a06eafafc43e9839f3372181",
+      "public_artifact_sha256": "12254ff9ffd72158f123b23162d1c1e828f555cd563b001fb0bbc07474818213",
+      "generation_job_id": "c28de19975c3b78e20d8525de683a5c7dc9ded7a390f20331650a538b9794734",
+      "original_file_sha256": "9a97b09e00e46f43a9a0b89e9e9c4116e26158413f68db693165a90659de4ebd",
+      "original_artifact_sha256": "7743a3c51a6ef9b3bd44111b907036bf976ecbbfd54dcebf408441f2a5fdf9da",
+      "output_utf8_sha256": "ef5d98fc0f394315597f0d46b596b334413532f2a90cd5bd0c926e3e4db6a2ed"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_2_peil_labelled.json",
+      "public_file_sha256": "62c1c0ea9213f451b4079b303db0eeca16d24b6cd333da53506d6561ac821189",
+      "public_artifact_sha256": "20eee875d4e30dbb38cc95920db4a7b95792c16945680b400ddc99d485a5f4c0",
+      "generation_job_id": "c2f94787eab7a59d0cc2770cbdc0a33b020731bea9ee818653b4005168220fc6",
+      "original_file_sha256": "f5d378bb446381c3333fcb822a0a700006221821beb13236272254901a750536",
+      "original_artifact_sha256": "835f45086a439373e2f3e1f6d00f0314c1dfea6adfee49d4f793bbcc5eb52bee",
+      "output_utf8_sha256": "90d006e5340f41234622cac02217733ec53870bb6c2d9c5dfe6751c0192f7e8e"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_1_peil_unlabelled.json",
+      "public_file_sha256": "a53e533d44f4e3d64ae87d047aa277b65a6e3e25afed46cfa013ebb21c9e5b03",
+      "public_artifact_sha256": "56a7194c17529fa811bbc2c2e77999b404423bc90223c61b4f2fb8c99c002540",
+      "generation_job_id": "c3c85fe2b6cc559d2f8045e67d69771031d80f21b5b715724fb327f746ef4d18",
+      "original_file_sha256": "8fb09ea410267fa2b88c7330add1a70301c7f96cde83e93caac8295f705d8cb6",
+      "original_artifact_sha256": "1e7bf42179575c63a1e6115b1db8f71c774bba1d5c98a9af4d3c7e5252262ede",
+      "output_utf8_sha256": "8e1777e8f4a515d26d4605a1076491e29125f9b2636cf344b7e712fa54cfe727"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/grok-4.7/run_2_peil_labelled.json",
+      "public_file_sha256": "6602d569fdb7f65c048c34fa70b5daddb4fa4982c466c052a361ed0f650ffd87",
+      "public_artifact_sha256": "69f5a185a84c33550bdda3ce18afa0fe57a88ffe5ba2bdd45348c935096b8d3b",
+      "generation_job_id": "c4d521f6fc809cb11e95716345926cc5863b92b4619c23e46b4a22e7bf1a515a",
+      "original_file_sha256": "d43a523e336b378ea9c0081c89d5004ce89c65c116e12534ba9f0cbbbede7e53",
+      "original_artifact_sha256": "e1c2cb440d4471351a550b16ad187bd422fbfe7c403ead77e6e4bf923767feb1",
+      "output_utf8_sha256": "f990b916ff3175ae56facf2bde13741faf469125265ef2ce9798486357072719"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_2_peil_unlabelled.json",
+      "public_file_sha256": "34e560ec24f83c77d6fb05561cb45751c2bf50fc49b7e7da96d7772e7ccbdc83",
+      "public_artifact_sha256": "2dd2a3e3b1e35f579272f418de2db09e0d5f60472854c41ac7afcc3d6fbfaa01",
+      "generation_job_id": "c55c3b24bdc7d9cba93eb3f5149748f3ea2d96c7a3b86e54fcc219860b2417c4",
+      "original_file_sha256": "11d30c4f90e1ec407aef05e02ce39d600dfdbfce6ff60bf27c1a6e0f38244be3",
+      "original_artifact_sha256": "0c5b75381a73d5d3baa97d05aee0989a89aba0863ba47cd083a710164934c87d",
+      "output_utf8_sha256": "9e729fe3eded350d0ac8a9810c147162846367b204605955b3105e24a216d022"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_1_peil_labelled.json",
+      "public_file_sha256": "81192ce954aa928e8cd8117e6c33facba204bca6a687e598a11079cca00fdfd0",
+      "public_artifact_sha256": "7559a7bab7d8f94e199cc753e2336ef11b856a4b142e9164f9aa94c892b19d25",
+      "generation_job_id": "c567af00e40340ad4ac860d5f483a6964e46127d1c20fe9fd785a24d2787f633",
+      "original_file_sha256": "98fcd805a0429d5937400fdda123234bf10eec951cfbccffe6d87cc410e205ab",
+      "original_artifact_sha256": "c1f41c5a307ebf8be847b64e6c00bbeabdd5c4977b6253f1b7fc8608ff19c77e",
+      "output_utf8_sha256": "4d0925db2ece013adea8fdb43ad6d77668981a04ab6e656762b0ec644d8d7cc1"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_2_peil_unlabelled.json",
+      "public_file_sha256": "82b865ecc9bd28bf53e1bf77e96562fef3113c802edbc89ebc2875a2bd5eeb03",
+      "public_artifact_sha256": "4087dc1635449b14b33097611553749b3205f4475cac0d240cfce4718a6c72a4",
+      "generation_job_id": "cd6452603174a40f59acd7c320e0bcb4be0d3b21062db46c9a4a4345556282ee",
+      "original_file_sha256": "5f5ab1d9fc1b5245dcf4abba49682dc3e202cd882b138892e0faa7a87f23a169",
+      "original_artifact_sha256": "c275e9a9d5712d5b66aceb149d712cb70c421aa2bb559025d266e34ef44fa578",
+      "output_utf8_sha256": "34fede51957fbb56ab589234437d2f8533ae1b4b616baf3b2da19c12030804de"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_3_peil_labelled.json",
+      "public_file_sha256": "8b7595b5a39c626233d9a2a56a160c635548dd1c8dfac75a5a274a738473379b",
+      "public_artifact_sha256": "e403bfc8be7c07e594175eefd2bcb04210d9adb59a15962970d4cf3e1aa54303",
+      "generation_job_id": "ce4e8729639a31aa55225baa0c400988b98647f8bca15b1f5465758230e9d860",
+      "original_file_sha256": "922bc15b843d094e4907be8542461729703e53c656b25b97eb0f35dc1d23123e",
+      "original_artifact_sha256": "8fb4349d037ee02af4b6d581c4e5d3342b3fdf575e28b4c676fa40c10ced0611",
+      "output_utf8_sha256": "37f4a8c69d2bc1a421beb1382d21a8662c2159c71e5933fc002e736a07786c9d"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_3_naive.json",
+      "public_file_sha256": "249035a618e42c13fc347eef0e7e035e591a3fa0d88e16583e958ff709c85b3b",
+      "public_artifact_sha256": "9c0310f9b9f98bfc27e0f6863f8cb5f6b340dbdc5546943bfeaf69bbdbe397d8",
+      "generation_job_id": "cf54446520e1847be211c9392f718c0092f714a86af38164ba5314c98c20bae4",
+      "original_file_sha256": "53705fca25f060b3637c717e3b6f89696ca7092fc309200569c8060bd8b7b94e",
+      "original_artifact_sha256": "2b4c181e04226749f1578fcfc39ca1115bffa33d00e0afd7f011ff2884d9a267",
+      "output_utf8_sha256": "4c868d1ee958acb0fd06322b5ed84f66fb19f0f5e47adfe5fdd64308c1fbece6"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_2_peil_unlabelled.json",
+      "public_file_sha256": "aa44e2f690f5710ab0f75ee00d6204ff23f4f107c4efa3522cb4da5bab258c7d",
+      "public_artifact_sha256": "e890718a5aa8b55b5219d26b01b8fc5ce5794b91082592867f103a2a4a34a0f4",
+      "generation_job_id": "d1d74b36ddbabae55e98149bdae24ddf901f20d0d20d100b4f57fc2d53e358c7",
+      "original_file_sha256": "9dd5a3b4e1801ff35037b5423a1a4a8625bbb383bac770816c704e15309745e0",
+      "original_artifact_sha256": "8527baab1388f29d60cfbeb1f10c10f57bc19bf8c1087ef966b697ae1923e1eb",
+      "output_utf8_sha256": "40ae0f8281e02b2d6c90facebbc8426c10a8f567ab01e2c4d8bbb9564e3c4ddb"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_3_peil_labelled.json",
+      "public_file_sha256": "83564eb62bc9d055dc5d1678ea5efb0f05fbadeece24c557d9c0c34d660704fc",
+      "public_artifact_sha256": "8a58e7ebc742dec4d9518c996d7cdf523b3b69cc95fa249bebf3aac001f3cdd3",
+      "generation_job_id": "d256f544f5b736f06a8a4c79ca8635bdd6a3af8b4e7c15a7c2a07c0f5fe3010c",
+      "original_file_sha256": "9d71de0d5790dc7d7d9da2693f4838152b9ddc1aad5d84bef5b5e35ca5bb9b02",
+      "original_artifact_sha256": "18e485b30ba40f55258e6ccd7e2ee8691b3d4837d0aa022c1adcdb67831564a8",
+      "output_utf8_sha256": "30b72f2ed6b0101672f88f84e77914d01217f3a1b581802988851ba4c80d5c01"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_2_naive.json",
+      "public_file_sha256": "f28037687f14d088cc0dd6c3280f93ac0190b2d4c9e5b61e04be73fd79f4e66f",
+      "public_artifact_sha256": "15b13bce2faf412799e64bd8bca63ce22d31fa0b0f78912546ae937c4311223d",
+      "generation_job_id": "d2c9c01e25fc41b182681f6bc73ae1d7fed1a2b898d74c6da2a12789c2a02dac",
+      "original_file_sha256": "63c0da5a53039e6c83cf092235c5c28bd97ce8b11665b3bb68fc6011f28e1992",
+      "original_artifact_sha256": "435764a78da2781ba5d8f8e13b3e668b4635acad44d75b33b8bf35541fd78e7d",
+      "output_utf8_sha256": "2739624fe6052333dad47be806af44868e59e02de4b10c587c62ecc380fe3dfa"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_1_peil_labelled.json",
+      "public_file_sha256": "598afbd4608947aefe419e9f201bf4769f526cb315317eb6049179777bfa6eab",
+      "public_artifact_sha256": "79b417623b77f48a51948747f7dd9d5a85ab4ffc6eb67009403684bee3987710",
+      "generation_job_id": "d347ec173c46af909ea76646755acc28644147e22a17e6e1247b1a81353e286d",
+      "original_file_sha256": "ee014b7b27ef488e02ef1d0d2c048d91bf229a18b52c0bbc9df13c7c44b7df27",
+      "original_artifact_sha256": "9a22506b05cbd6995a9d94cbfa16b82ec8a3ace9002b9598abe1cb1f9722be0b",
+      "output_utf8_sha256": "5ef7ba3e2dcfc07d0a0e2d9e4838741bd7714dc07aac76273f52e4e52b2ce130"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_2_peil_labelled.json",
+      "public_file_sha256": "ecf31c46b46641edbe86efa27b42d8a2e44b30b52ef6b147e52901fa0233cc45",
+      "public_artifact_sha256": "706e513685eb11dfcea0c72943364ac17192fb18801b3ebb40bf3489a651dcbd",
+      "generation_job_id": "d3d022c97b8ee8f3e02260cb9c32f0691a6076dd907f6e7a39018406bd00a039",
+      "original_file_sha256": "dc02f5fe6358004ecfc924e9316ba7f15da8f4b4d87e35c40a5e036b24563dc4",
+      "original_artifact_sha256": "139aba9a7470acabf82202ae16928630610905923c6c48ecb63c297c4c6c9866",
+      "output_utf8_sha256": "b46fd2ecaa998831036a60177f5880b1f7a48816981b2058331a258d13740840"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_3_peil_labelled.json",
+      "public_file_sha256": "78654408becb394ce77933c3433416603381d3bc134fc8028a9c9761cea27e0a",
+      "public_artifact_sha256": "2ecff192c2bd3c4af2714e399b2f2483af58d95d9951fd530a148dcc98366f8a",
+      "generation_job_id": "d43c816865a97b92ad5d31ed5477d1169f13de8043b60bb39e1a81d62052b6d9",
+      "original_file_sha256": "275545138bfdb9c7d08b2d0be3932131d420d880dfc0c44033bd217f6abedcaa",
+      "original_artifact_sha256": "62195eda56f9c9d82cb9261a5ff46a1ec2e9c8de2d89a254a048bf53843f6a08",
+      "output_utf8_sha256": "5451f4788bbd336f3949db8cf600fba6154a25162e8c7cf43659cdebafd6fe13"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_3_peil_labelled.json",
+      "public_file_sha256": "53d6ead436c9057a2b15c82e12b508400c97ab90d26127d9101f044c356687bf",
+      "public_artifact_sha256": "69c2a675c46fbf9dd8359f1b5140cd492e1361d4d4b52f505cecbe524976e591",
+      "generation_job_id": "d45160374b9e8eb7ed187e2056a04e39f86d0c869c68a7327472fb9cc78af4b7",
+      "original_file_sha256": "0d93708f23a6bff2a23dddf89ffb4c0aa10f452c5feff0c2fe4a1e54f711bb58",
+      "original_artifact_sha256": "15020803f74054f3220d4c72f3deaa8bc7a7759834a9aa017075a6f06be5f7dd",
+      "output_utf8_sha256": "9a38acfaf50765989ed53268cfd3450ae361135fe19f399a461973dd7263ed51"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_2_naive.json",
+      "public_file_sha256": "4bb388b155879838b33688d13204c01e44945f7ad572cb12663be8e614984466",
+      "public_artifact_sha256": "e7022b36823bac1510ab5e6cd9483ecfc594853630120232b79ce131f0cee5bf",
+      "generation_job_id": "d66a26ab097e1aff086f44bf50a92a803275807d04f53ee842077566c8298998",
+      "original_file_sha256": "63428a7dc73ede974f4952c62aaba6540d5ade04e648e8d26772c199b9734515",
+      "original_artifact_sha256": "261f7c13189e652b07eaab7391d7b053bfc8dc0b9841a3a9d367946c8b3aa77f",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6.1-sol/run_1_naive.json",
+      "public_file_sha256": "0a926e6beaac3c68c15ebb0a9793bc80a2ccd48bfc28f71291d042a2cd65b85f",
+      "public_artifact_sha256": "e7444ebb502fd69901eb2266febe6250d415b2df224f2ab3d4d43c754e0befcf",
+      "generation_job_id": "db37de949c2347d47b56996b4c60cd512e3ecd6a966a4201b6cd0076a4b604ab",
+      "original_file_sha256": "d783348e4ed87fc21fd6cd25e1bf0d37f459234fae9b49c1a6a1053b57839ef3",
+      "original_artifact_sha256": "37068c19c82f588d5a52a02f11300d9212cf4a6ecbf749a0f9a8dc3301fb66d0",
+      "output_utf8_sha256": "bf59ef466281e37ecd997eb8a95ad2a7e3f5d94e6e1b345dc862bf5b6843a687"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/grok-4.7/run_1_naive.json",
+      "public_file_sha256": "60ac6d82d845669dc9bb189576ff89467d30e1eec88543c4a66475949754f4be",
+      "public_artifact_sha256": "8bf27f6175ad695f7558744884509537dad04fe84a4c7fe0150cd303061a8a2f",
+      "generation_job_id": "dbfbe65ac39dd92a440d26d25e16ac4cf876c84653e247647d60ad2a2b7a3d6d",
+      "original_file_sha256": "738d492ec7ac32214c87cd88c5c4f65a84b01d474156f910800f338b30d7d090",
+      "original_artifact_sha256": "ccef13070db5f8d3445356d7957883b080712bb4ed0b20fe7033ea66e59a6839",
+      "output_utf8_sha256": "71d1abf14f3e08a1c9c389f607a46a4e9bfa57b5e92300508acc01b73a5c7c72"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6.1-sol/run_1_naive.json",
+      "public_file_sha256": "56821c60895da5ddf980deada4ddf9f10a5bec8def94060a3c0c1277b9ce76df",
+      "public_artifact_sha256": "749ccdbc6f7071ae7deac71ff54591bed76f560eec27345a9c84cef7168ce134",
+      "generation_job_id": "dca4139ef6dfb7d02a8b1770b96d04280dd9ef4b6d12062b76e9e7cb350ab0e4",
+      "original_file_sha256": "5fd4ddf3539360cfb691d236a86c0077548396a6a593fd198658a6d5c6f6724a",
+      "original_artifact_sha256": "4d7bed4dde65f0e35f5ceb234a8ff062b00ab50083df55cd4c72d6f59e732f01",
+      "output_utf8_sha256": "2102463adb9f8bb25481e7cd6c0c8ccdd3016a8b1db53a9dea8f6dc1f78b72f3"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_3_peil_labelled.json",
+      "public_file_sha256": "3d36344995d9b055d5a1423b7d6a6834085fbe60a5decab04a916c611676b69e",
+      "public_artifact_sha256": "d46cf5bd6ad8756aac758b6e5381e5a104818fd93c4964e536fbac1db8e253ce",
+      "generation_job_id": "dea4a6c44fd5d1f924552f1174e47ae2fee5af2379d8f6790c5eeb1df457883b",
+      "original_file_sha256": "580268bbfb6e5ae58c29010e9e244f87ed2cd933daa4183841f87ede5eb50c07",
+      "original_artifact_sha256": "7f14a97fc5b189047504925b875fef8e73b563fc727ef217f5afec2538ceb115",
+      "output_utf8_sha256": "0dbcd5d56340d93a7ed0aacfd99836873fb5c656a40ae0dac007121577c350b0"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_3_peil_unlabelled.json",
+      "public_file_sha256": "eb900113b06c013260e203a7577ab6fd98194a4b24494a55292049b83081ac34",
+      "public_artifact_sha256": "d97de970ece5d4fa675e895f05565e0c2593275d7486d964f8e4e8697256e96b",
+      "generation_job_id": "e08fd13c1f16fbe76ca7f46daaf8f1e23f105eb6b50ea18885d0ae466ab5ad96",
+      "original_file_sha256": "6d24a0835a4c7a4e68adc4772e610042509596a7221cba744535ce10de196687",
+      "original_artifact_sha256": "28c9ef6d2c115d2ac6ff9b35ad3cee499e11448a6a36273b3f12461f30963cc2",
+      "output_utf8_sha256": "061908cc96c07c00054a58297c82604a42daa02435d385efd730c09ad1b9193b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_2_naive.json",
+      "public_file_sha256": "6a58d6c3f683ac6a92a6ed95048396f2236343f6f32e4ff540d2a9f56a973567",
+      "public_artifact_sha256": "defed2d4f73693c69f5643c0139c8dc2c899f1d85785e714b8e8ac1b1ddab6a0",
+      "generation_job_id": "e3829226472acc9af19e2ce22d6cbb97a47263b415f64c24e250f3ee76555c58",
+      "original_file_sha256": "e800e34d1a845504e25281af1e59c60d821e868f102b4773ddd98f27259f4941",
+      "original_artifact_sha256": "f10d94e8be1e42e9a8798c1fac0aed86b8b877f01927a7d32c3d0e2d1f9d9ce8",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/grok-4.7/run_1_peil_labelled.json",
+      "public_file_sha256": "7c83164cdbe0df76ee22d41007bcc0fa61abacfa3df90b1f9d52c4005855734b",
+      "public_artifact_sha256": "a19668713ac7ea6e497598aca1113688e68e9c574e19ade5a7036f1f4e92c300",
+      "generation_job_id": "e45aaa088c904f32d294f36f0da79ad30d5a1c680a8f2c659e59df2a456dbf8c",
+      "original_file_sha256": "2a1ecaae694272008f72cd3c67c98e6427388b9a9ff28df4a5bf2f033fb63d4a",
+      "original_artifact_sha256": "9e3812b27f67adfad7d3e5e89fbe35d741064ba5a2e4dfd9f7ffd43ca14d35e7",
+      "output_utf8_sha256": "eb886bcd97b4ec2239677bccf940e8fbb93373b8211ce15541b2670cc4ff0f30"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_3_peil_labelled.json",
+      "public_file_sha256": "d745d8494e46d4c21a57ce944937196ee3e8e87b6ec65bc41ab62f16fd66b121",
+      "public_artifact_sha256": "3b107b2ae2f31125d303f57b26e4cb3156720c4bc21878b273a84f0eabd35bd9",
+      "generation_job_id": "e4d60459bd61c8cdaacaec2c68a96de6bb0078ae3af0b69bc3646325c35f952a",
+      "original_file_sha256": "42cb30de95bcb5ca0d0bd206b4d9b45b388beec43b43c7f62d832e3c99333058",
+      "original_artifact_sha256": "25c9d396da54fd69158fc66118c804c67a5f9ae5282ea17ec08d3ded6590ab50",
+      "output_utf8_sha256": "6855a4c51383f0ff39f7fe3f6cf4528c077f4f32141512dc6dda4625dc0a37f5"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6-luna/run_1_naive.json",
+      "public_file_sha256": "9c9d36d2b7e5db256ecb1dd482daf132639988637a0ad2cca5a5cfe69d46ef76",
+      "public_artifact_sha256": "92d0123f9c35d8a9df7406e617ffbb62cdaa2c70bd55067efbe558bf0b905d41",
+      "generation_job_id": "e56feba30df341ef18412966e9602ac27bf30ffd318755475777012bb598457a",
+      "original_file_sha256": "a0f681bd8ce4aa8a74f9114e55c0a35b79706cd154f796d580a5379fb9d0e378",
+      "original_artifact_sha256": "142ca4ecf6f76f44974d46b15ef2c2e2e21c2c59eee431d441819bd462bbd29f",
+      "output_utf8_sha256": "4fda17ec8c9e8ef2e79c0833e9ccfad9ba9b443263713b7b5d20d37154cb687b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_3_naive.json",
+      "public_file_sha256": "96845227023c6eef375e63a5c0f13afcae0f3ca60a609c84fb6cd4516b3df579",
+      "public_artifact_sha256": "fae014c7009d23117270aecd8715767bfcbba9a1a7ca9c4c3cd4d2b741fb21ca",
+      "generation_job_id": "e7dbd3fdbb9af229c35068eb12cb46ecb8820cfce817f643e1a6126923705d25",
+      "original_file_sha256": "f616a376c4db6458c8b052b5fb3dc13e286e237fc6c3fa94488a3e48fb163729",
+      "original_artifact_sha256": "73d2bd82706532ad54c9c8781a3e858c08ef56f9fc33fae2f998734371e9a2a4",
+      "output_utf8_sha256": "c744ea714209b12a0d3332b51994da3432c754a90bd73e014cfe62b19f0608c9"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_3_peil_unlabelled.json",
+      "public_file_sha256": "b8d0a7521fc99ff9ee74c4f6942ada26413ce0179bff5cdf3215e57f258a226f",
+      "public_artifact_sha256": "9783c0ae840acbdd2c972de98caaca4ebe8f86b5330d024d3944c33bd4176973",
+      "generation_job_id": "e92477376c416b03265a25997d8203912d5e32d7d54142a7e9b417e81c2d252a",
+      "original_file_sha256": "8c0bd1d4cb06b264266daa723a1511caf250b8e2c5fb62e9cf98f6ab53d3bbfa",
+      "original_artifact_sha256": "468c408a00ddd8191b4d32e5888bc16c063698e80df5e49b0e0aca496b4c0551",
+      "output_utf8_sha256": "8cdded9ef00430035baf9779a96eabb4b680cc6e75bc8108716469e594f9021c"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_3_peil_labelled.json",
+      "public_file_sha256": "a10bfde387f7d3bffbd72eee072150a05145e3fa9a6483a70c7fc60f7ca7d0e1",
+      "public_artifact_sha256": "4fcfb17b818d3eb84df31413ae45c6fe6f2764cb9f90853f82b7b3a0a412bdef",
+      "generation_job_id": "ea2710d9f1f3faf84f992309b00fc3fede6860aa91966474b57a76eaae4de02e",
+      "original_file_sha256": "3ee1813bd55a27bd9832a1d65a8c3807db0aaaabea9f13d0d4004b5f8487461d",
+      "original_artifact_sha256": "1aa76b1d69b23c42176b62db82b3e27606e711e7173840ab7d61e7bd5c751ad3",
+      "output_utf8_sha256": "c1ab003e1f8be6bebd0cb10d7de364d9f5f4424fd2b4ebe51370f64eacfa9425"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6-luna/run_2_naive.json",
+      "public_file_sha256": "546c931cbb5a561655646723854443c130065a982438675649a46fea20727b63",
+      "public_artifact_sha256": "569abdb2d46d395c4414e01c19956ed573c518679a7ee489ff0205e74a4be32b",
+      "generation_job_id": "eb083669b9f735ceb2a3f53ca473182ab963bfddc2c34c4b413c480b611ecf54",
+      "original_file_sha256": "7f989f06fd902cecd31e7a7314050315bc01b7c365b8658482baccfae67ac436",
+      "original_artifact_sha256": "be53d82abce22fdec800965f387fbb21c1656f11b5b92179059f919be5a05c15",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_3_naive.json",
+      "public_file_sha256": "f006826bacce5d8a9a641c7b6606833a72285524285a8c1bbf00a2672664e65f",
+      "public_artifact_sha256": "f533951e1fbe32893c5f12f817cef8e3587f3fde9d8303c51b90507bcbe44f88",
+      "generation_job_id": "eb518d4ad703a549629e7d5ae1bff164591e70bbefa9326b41da491b1099facb",
+      "original_file_sha256": "aa65d1eb38748c7c2b077facefea3465b923ad5b856602b4114220bd6e8d9b71",
+      "original_artifact_sha256": "93b53a9f38fe6a99386d6d112c4f3b92a6aa080ec14b9045bb5f884ff1992b76",
+      "output_utf8_sha256": "956ca03e42cf010585b08e33b9127cb72fc6ef2337d969383ec067e644846d41"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_calculation_math_word_problems/gpt-6-luna/run_1_peil_unlabelled.json",
+      "public_file_sha256": "e8a35a00fd4d8cc63f2e678209f5e31e5c8d12ce64e7730220c0e7bedbe7ea31",
+      "public_artifact_sha256": "305377965f3ef6433dd00f39e09ae8dbcdaecb3fed47e99f029b814520d84a5d",
+      "generation_job_id": "ee82dbd9f17c7294d01ce7d64f94aa392bdd1fa9d0c3192d2a3e318693669f43",
+      "original_file_sha256": "d2e461c056ec998c60b1cdb457c9866f0517a28c995be9f88ea2af05a8693924",
+      "original_artifact_sha256": "4182b475085212203190eb9e2f15060a03e9bba6caf099a7e05bb29749450fa8",
+      "output_utf8_sha256": "0c30fd8a2ac52fe9bcc8af021a6a955c72a5a4bf19f9e2b78eb480527b3bef1d"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_1_peil_unlabelled.json",
+      "public_file_sha256": "8e0836f280ff8fca5a22d6232905e5b8bd581eacda9ee0894196a40359f271d2",
+      "public_artifact_sha256": "502d6e477fb8cc86394b8cec724981b44b8df5bd1202529a7479e9920a30113b",
+      "generation_job_id": "eec133b02b2592dd0bec9dce87f57a7219d6b060948bccd46ca1046fae298d70",
+      "original_file_sha256": "3162c6c4df389b6ec0c1a1ca4c4e0af392779e0a648f240b056ab00df48d7963",
+      "original_artifact_sha256": "5a12399d62f954434cdcb1a329134f101a0d766a766063844539c3bd2d173450",
+      "output_utf8_sha256": "5044d919cfa4fca3733fd35d304cb40c192bf8a3eab6f547bcb0eb10c9fef015"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_1_naive.json",
+      "public_file_sha256": "792be17a90fb96f2e815747590ffd593852236d898a39fba318e887398d8287f",
+      "public_artifact_sha256": "8b598ef4c5c4a355c56764f1e04d60bbce8bd673f33f8bee6149b3379fa6d6ac",
+      "generation_job_id": "f02c39cb21d2212ec2f2f57b959b3a6c4190ec1683bc9027ac7b23aa588631a3",
+      "original_file_sha256": "99c255b5b58fb90c232b0063a24c584b49037e6c3a70df4a4a8248cbcce13092",
+      "original_artifact_sha256": "6d85bb758057dfe514feb2c564448ca169e1df67d4696080c2a140e57e0b4357",
+      "output_utf8_sha256": "76de2331ebe612dc87dc1e69946b8c1ad4e38e21bd1d95f1fd41c50752991a25"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_2_peil_labelled.json",
+      "public_file_sha256": "2ca1c2f38ea8bc0034ed769148ec536b8146d779154be25f00729d98dc962a55",
+      "public_artifact_sha256": "2d25550c397ad4a59aa8fce1c031b204641006ca98f57cc24ff67c3f93e49d4e",
+      "generation_job_id": "f1264f73a72048191e6ef712eb97f9b58afa47a9e3b4675aafe8360b4f5e4810",
+      "original_file_sha256": "071838602b24b161c68f5bb30e48c58865163c49f8b664e70d60093f3199e88c",
+      "original_artifact_sha256": "4cc384a904bdeaf28ba927b0864c8a87ac777610316c325f185a6b788635ab66",
+      "output_utf8_sha256": "4488d240995e7139c2e86cb9424ba8b304c49e8623c388d80af8bba804b39eff"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6-luna/run_1_naive.json",
+      "public_file_sha256": "e5ded8830cf40bfc96bd845aeec78def652a8d092e7b7dd0a2be8499bb6eacd8",
+      "public_artifact_sha256": "9304f361020d48d7b8ae9e80c8b17f237c469f9ec9a5825de46a6332f9113755",
+      "generation_job_id": "f53516790c26a0acdafaed76ac3bc1f715f2271496e0edcd18217a92b893d7cd",
+      "original_file_sha256": "85bfb09107a8c9005eb610b48f0811c6cad8d604c8823996668684873f72cb75",
+      "original_artifact_sha256": "b7e552cf51aa2f7698a0fbf8929e7d25e9c0238dd023e116b64cf184d4ecbfbc",
+      "output_utf8_sha256": "49f932e6ce7255ae083eccc54141716c488008d11b4667de72f0d8c808543dbd"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_2_peil_labelled.json",
+      "public_file_sha256": "6826456cb8166711919a2119b3d230d0ce5bf55e24417d82dc6d88662988ee15",
+      "public_artifact_sha256": "b78206e4ad3ccd13688cc3f38a605e0e6d34f31995f842d01189633278eafddf",
+      "generation_job_id": "f5c8826ad946b4850063badb5dce63b983f95f58bb1e4d067b65c395fb42d2ab",
+      "original_file_sha256": "81beee8a442be1ebdef21796592054e4cb32a644365b156602915118d4fce3b4",
+      "original_artifact_sha256": "9685dddf72f38673bb6905bd42d260f0febc5bf773af3baa57c985a09ce2dcff",
+      "output_utf8_sha256": "c8939d2e2a4f897118e225a5efca17419d14b01da51cec1374c53383496ffa4f"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/across_comparison_attendance/gpt-6.1-sol/run_2_peil_labelled.json",
+      "public_file_sha256": "7ce2b60e3d73260063ab21ee8e42cef8d77d92120ac4be4c3369ebb78b9f93de",
+      "public_artifact_sha256": "01df6b79c8f34538608e44d14bbc45c421c2ad707c1b39f929ebe2d890973561",
+      "generation_job_id": "f62401057cc0643cbad0ad27b493895a2dc26fb0e3fd8c3c84c1ac423af5e4d0",
+      "original_file_sha256": "61993985ab19a6192331bdfe0500142eea862ebc85cd61668a35609fcc2827a3",
+      "original_artifact_sha256": "f22765ea88f58baa548d83ba03d6326150b306308175c58358292e625b8e2440",
+      "output_utf8_sha256": "614a517747f98393091757f7e5f6353a136aa4547b38d6bfcaeeaa3c4e702041"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6.1-sol/run_3_peil_unlabelled.json",
+      "public_file_sha256": "368a3c4163a9fbdb627661c00df2652eefe814387e52fedd2b840935f6288d13",
+      "public_artifact_sha256": "d9259b2ce3bac4c0f0fdde7cffef394b17447902dc96b282aececd54e048cfd8",
+      "generation_job_id": "f7607d99099a8d307887ae6b032c99cf5d1c01dbbba63d5c94a95075475ba1a0",
+      "original_file_sha256": "e5dc80ffa7d3307dce32d3a643723407b95b4b709fe3681f8ce79e35e115cbe7",
+      "original_artifact_sha256": "27fafc5ec0d86bf22a500f4a7939c9dc9d585ff69afbb98c2e421f16944481bd",
+      "output_utf8_sha256": "1857d435b0a4eacc280f20182ba95323ebcf02e2466bcb42e8d68c6ea836db4b"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_hypothesise_theory_of_mind/gpt-6-luna/run_2_peil_labelled.json",
+      "public_file_sha256": "5896f5f1603150232b4d75479074f657456fbf5b6f22a8dd3306868784336825",
+      "public_artifact_sha256": "00ed192e65aeac183264d03771f0213d75066fff11722fbcd292502a67518dc1",
+      "generation_job_id": "f7ff64903e767da01d7d381bcbfd9b50f21e78067a90baef497cf7889077f951",
+      "original_file_sha256": "d6299616014ba57ce058e900ef29b21a10cc7b2bf5d599f75649e4d81d2f63f0",
+      "original_artifact_sha256": "db97bacef005c5e0ece29845c5b7225fd875ae19320e78e6bb9ce6d779282a9f",
+      "output_utf8_sha256": "b641ad1ff2406a484d36c82795065803f5d31c429c4c4ee7f75435de8fe9f2b0"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/grok-4.7/run_1_peil_unlabelled.json",
+      "public_file_sha256": "cc14f7845afa616ee6bb1563fa3472fee896a79100d8d1b33029e2be5fc8e3fc",
+      "public_artifact_sha256": "d6b4aa9e06a799e822765658929e9517c32b2a13d8771f69873407284d2452c1",
+      "generation_job_id": "f8e71e23daedf4f914aa61d5e7f277990b124dc64a0200bec8077f53303953bf",
+      "original_file_sha256": "6d6ab09c4b1242c94e30ab329d0410253eb6a850aaebe4f2de5ccb158db01272",
+      "original_artifact_sha256": "c43a838e039d19ffb3f0ec4a9f9cf7b9e3b7c486697e2adb62ec384c6f4ec87d",
+      "output_utf8_sha256": "a8646e8804f2253d4471f750c36302823f21e38ef42de19821dd45b5b1f1d9c0"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_3_peil_labelled.json",
+      "public_file_sha256": "d426ae25d09604e245fa3a3fccf1caba8924f804ab93a1635b155b8536e57500",
+      "public_artifact_sha256": "8dc2fb4dcbd0e1b8d81e6afb562c6595df54a2c44bfd2ac3d7ed0bd10eab2513",
+      "generation_job_id": "f9fc02da27f8886e701439f25df1a86f59f9c7ff48035d0cf17552b7786b01bc",
+      "original_file_sha256": "f7129ce7f4587b961d458286ac2d8ef227491a689a8f58213f8ff71f8851a3db",
+      "original_artifact_sha256": "5e87664d1c065f5552dac41cddc938adc1dccf11a8d92a62b575e8113eb60508",
+      "output_utf8_sha256": "6f9a40f4c91e23239c13f09ac3ffd665c37a5c398fd5cc630dad6165cf8a5a4f"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/grok-4.7/run_3_peil_unlabelled.json",
+      "public_file_sha256": "56d1bdd62d8c6dafaa28dbdb3a330de45ff95f7bd9bbb912592aee1e1c919036",
+      "public_artifact_sha256": "d822c1fcf9b23949f502c3a8885a6dcd08c87264ff0033bb39a2b1e71ee657f2",
+      "generation_job_id": "fc7c736bf5926d944ff8419b72c76b5f1e54cbc897898530e328f89bc0a86ab2",
+      "original_file_sha256": "bb02ad185dbc11da168401caa26e2e7496662181569c698b728510322f4f60c7",
+      "original_artifact_sha256": "6190aaf4595bbedf33acfb93816daba40cf69f325292f57de449b3c04723b373",
+      "output_utf8_sha256": "e0aa183eacabbf1f3042acd02f3a41a596228e4de9c15f2d478a74e47c135de5"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/out_decomposed_prompting_letter_concat/gpt-6.1-sol/run_1_naive.json",
+      "public_file_sha256": "5f29beefb269e7cb74c54ac12c4be9475484f7a90612ec7eb183ff614642ccc3",
+      "public_artifact_sha256": "73e7dc6277ea061d52b0eeb653cd3f458d9880cd3df2970d6e0f8c41cf83cdf4",
+      "generation_job_id": "fd5bd405ebd234329d4b38609a63bd8e90380a0cd8c101482ee446719d03dcf0",
+      "original_file_sha256": "da935cf83bb84e7c72e9ffcb5586d3a9cbe36203aaaf2255aa2a7d84750173b2",
+      "original_artifact_sha256": "00a58e2efac183e19f88c21a7cba9583c3129a892380215857f5c1e8eaf80556",
+      "output_utf8_sha256": "9ba934e16fcdd587b3d1c11bd30cd0b6d5604f1a7661e915c05b0fe0c10d9743"
+    },
+    {
+      "public_file": "evaluation/updated/peil-six-task-20261018-r01/generations/beyond_logical_reasoning_premise_question/gpt-6-luna/run_3_peil_unlabelled.json",
+      "public_file_sha256": "069cc3a4ae85c59cb29a219d16c8d6e5bcd7f547d10a10f982f74b95a825114e",
+      "public_artifact_sha256": "1c9d8b680366bd932e43c97705fca947c997ea592bf73ce3359d6b2eb3312be7",
+      "generation_job_id": "ff61c6c22a54afb3f4cbbdfc7b8e85ea665cab08dabeba136bea630dbded32cf",
+      "original_file_sha256": "c103ed846efa7b3459ef2225d633efe9bd53404132c2f2e951955cfec8c9b6a0",
+      "original_artifact_sha256": "3b90948897d7dac9dc91063a29f7d7d16262526d363d415f8f7b6a028e49a721",
+      "output_utf8_sha256": "827fa32b85f0df19ed6df69c7212979ddb244218dbedaf23892c2e01c34b6002"
+    }
+  ]
+}

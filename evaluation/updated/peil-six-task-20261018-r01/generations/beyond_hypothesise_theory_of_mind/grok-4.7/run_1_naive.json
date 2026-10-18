@@ -1,0 +1,104 @@
+{
+  "text": "The file remains (in Alice's mind) at the path where she herself just placed it. Bob's subsequent move is unknown to her, so it does not update her belief about the file's location.\n\nFinal answer: `/shared_folder/photos`",
+  "request": {
+    "model": "grok-4.7",
+    "input": [
+      {
+        "role": "user",
+        "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+      }
+    ]
+  },
+  "requested_deployment": "grok-4.7",
+  "returned_model": "grok-4.7",
+  "model": "grok-4.7",
+  "usage": {
+    "input_tokens": 105.0,
+    "output_tokens": 2584.0,
+    "total_tokens": 2689.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": null,
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:51:50.417768+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "8a1b6aefd58d1e2a124c308391dfdb540f2a2ae55c10b59ed77e1f9dd6f54a79",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "4813e20349db4b3a7a14b281c472d223d6bba217b1063abe4c36652d433c0416",
+  "actual_request_sha256": "ecba1bcc36844320cf2cf81f9744b62edf30de595c357731a6d33debd1e2b335",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "pattern_key": "beyond_hypothesise_theory_of_mind",
+  "source_pattern_id": "32-26-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "grok-4.7",
+  "model_deployment": "grok-4.7",
+  "messages": [
+    {
+      "role": "user",
+      "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+    }
+  ],
+  "output": "The file remains (in Alice's mind) at the path where she herself just placed it. Bob's subsequent move is unknown to her, so it does not update her belief about the file's location.\n\nFinal answer: `/shared_folder/photos`",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 105,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 2584,
+    "output_tokens_details": {
+      "reasoning_tokens": 2533
+    },
+    "total_tokens": 2689
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "3447e4894d7ab35cd841fc980e95b96b473389bad05b46519c9e33aa8e66c43f",
+    "original_artifact_sha256": "7f8ec7f909a17ae5201c4ca24470dbbbb8beaf7e42909fc0d030139979f95358",
+    "original_record_filename": "8a1b6aefd58d1e2a124c308391dfdb540f2a2ae55c10b59ed77e1f9dd6f54a79.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "2fbb3ed2c0cd18d45ee61ed0622b1d9a4bb09e913edd419fd31db102830dc6c2",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "3342ba68f997e9e436feb03dbc15db2d3663206aecf8a6d7cf3c0d9ce98d575e"
+}

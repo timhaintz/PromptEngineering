@@ -1,0 +1,116 @@
+{
+  "text": "## Premises\n\n1. All managers in the company have completed leadership training.\n2. Sarah is a manager in the company.\n3. Leadership training includes a module on conflict resolution.\n\n## Questions raised by the premises\n\n1. **Does the claim about all managers apply to Sarah?**  \n   Yes, if Sarah is a manager in the company; the premise states no exceptions.\n\n2. **Is Sarah a manager in the company?**  \n   Yes, according to Premise 2.\n\n3. **Is conflict resolution part of leadership training?**  \n   Yes, according to Premise 3. A further question is whether “completed leadership training” means completing all of its included modules.\n\n## Step-by-step reasoning\n\n1. Sarah is a company manager (Premise 2).\n2. All company managers have completed leadership training (Premise 1).\n3. Therefore, Sarah has completed leadership training.\n4. The training includes a conflict-resolution module (Premise 3).\n5. If completing the training means completing its included modules, Sarah completed that module.\n\n**Alternative branch:** If “completed leadership training” could mean completing the program without completing every included module—for example, if the module were optional—then the premises alone would not establish that Sarah completed it.\n\n## Verdict\n\n**The conclusion follows on the ordinary reading** that completing leadership training includes completing its modules. Strictly speaking, the inference depends on that assumption; it would be made fully explicit by adding: *Anyone who completes leadership training completes its conflict-resolution module.*",
+  "request": {
+    "model": "gpt-6-luna",
+    "input": [
+      {
+        "role": "system",
+        "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+      },
+      {
+        "role": "user",
+        "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6-luna",
+  "returned_model": "gpt-6-luna",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 209.0,
+    "output_tokens": 1630.0,
+    "total_tokens": 1839.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:33:15.887432+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "d3d022c97b8ee8f3e02260cb9c32f0691a6076dd907f6e7a39018406bd00a039",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "2d6ac3a2d3b987b7ad49a2c11a0d5fd7011b2c7da7b9aaf1604b033350ebd3bc",
+  "actual_request_sha256": "2684f4b59959309e224be849ac66527f1ca3e7bb7537caa6c354b9772254c4e7",
+  "pattern": {
+    "key": "beyond_logical_reasoning_premise_question",
+    "logic": "Beyond",
+    "subcategory": "Logical Reasoning",
+    "task_title": "Reason step-by-step from premises to conclusion",
+    "task_description": "Apply premise-to-question reasoning to determine whether a conclusion follows from the given premises.",
+    "naive_request": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?",
+    "task_material": "",
+    "role": "You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.",
+    "context": "The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.",
+    "instructions": [
+      "List the premises explicitly.",
+      "Turn each premise into a question to identify alternatives.",
+      "Reason step by step using both lists, tracking branches.",
+      "State whether the conclusion follows and explain why."
+    ],
+    "technique": "Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.",
+    "output": "Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict.",
+    "reference_notes": "The conclusion follows: Sarah is a manager (P2), all managers completed training (P1), training includes conflict resolution (P3), therefore Sarah completed a conflict resolution module.",
+    "source_paper_id": "33",
+    "source_pattern_id": "33-1-1",
+    "source_paper_title": "Humans in Humans Out: On GPT Converging Toward CommonSense in both Success and Failure",
+    "source_pattern_name": "Premise-Question Reasoning"
+  },
+  "pattern_key": "beyond_logical_reasoning_premise_question",
+  "source_pattern_id": "33-1-1",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "peil_labelled",
+  "run_index": 2,
+  "model_key": "gpt-6-luna",
+  "model_deployment": "gpt-6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Role: You are a logical reasoning specialist who validates conclusions through disciplined premise analysis.\n\nContext: The analysis will be used to assess whether a policy conclusion is logically sound. The answer should show structured reasoning, not just a yes/no verdict.\n\nInstructions:\n1. List the premises explicitly.\n2. Turn each premise into a question to identify alternatives.\n3. Reason step by step using both lists, tracking branches.\n4. State whether the conclusion follows and explain why.\n\nTechniques: Use premise-question reasoning: convert premises to questions, explore alternatives, and reason through branches before concluding.\n\nOutput: Return the listed premises, the derived questions, the step-by-step reasoning, and a final verdict."
+    },
+    {
+      "role": "user",
+      "content": "Premise 1: All managers in the company have completed leadership training.\nPremise 2: Sarah is a manager in the company.\nPremise 3: The leadership training includes a module on conflict resolution.\nConclusion: Sarah has completed a module on conflict resolution.\nDoes the conclusion follow from the premises?"
+    }
+  ],
+  "output": "## Premises\n\n1. All managers in the company have completed leadership training.\n2. Sarah is a manager in the company.\n3. Leadership training includes a module on conflict resolution.\n\n## Questions raised by the premises\n\n1. **Does the claim about all managers apply to Sarah?**  \n   Yes, if Sarah is a manager in the company; the premise states no exceptions.\n\n2. **Is Sarah a manager in the company?**  \n   Yes, according to Premise 2.\n\n3. **Is conflict resolution part of leadership training?**  \n   Yes, according to Premise 3. A further question is whether “completed leadership training” means completing all of its included modules.\n\n## Step-by-step reasoning\n\n1. Sarah is a company manager (Premise 2).\n2. All company managers have completed leadership training (Premise 1).\n3. Therefore, Sarah has completed leadership training.\n4. The training includes a conflict-resolution module (Premise 3).\n5. If completing the training means completing its included modules, Sarah completed that module.\n\n**Alternative branch:** If “completed leadership training” could mean completing the program without completing every included module—for example, if the module were optional—then the premises alone would not establish that Sarah completed it.\n\n## Verdict\n\n**The conclusion follows on the ordinary reading** that completing leadership training includes completing its modules. Strictly speaking, the inference depends on that assumption; it would be made fully explicit by adding: *Anyone who completes leadership training completes its conflict-resolution module.*",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 209,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1630,
+    "output_tokens_details": {
+      "reasoning_tokens": 1313
+    },
+    "total_tokens": 1839
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "dc02f5fe6358004ecfc924e9316ba7f15da8f4b4d87e35c40a5e036b24563dc4",
+    "original_artifact_sha256": "139aba9a7470acabf82202ae16928630610905923c6c48ecb63c297c4c6c9866",
+    "original_record_filename": "d3d022c97b8ee8f3e02260cb9c32f0691a6076dd907f6e7a39018406bd00a039.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "b46fd2ecaa998831036a60177f5880b1f7a48816981b2058331a258d13740840",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "706e513685eb11dfcea0c72943364ac17192fb18801b3ebb40bf3489a651dcbd"
+}

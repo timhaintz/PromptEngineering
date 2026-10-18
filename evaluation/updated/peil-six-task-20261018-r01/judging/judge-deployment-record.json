@@ -1,0 +1,19 @@
+{
+  "observed_at_utc": "2026-10-17T23:34:57.253573+00:00",
+  "deployment_name": "gpt-6-astra",
+  "model_name": "gpt-6-astra",
+  "model_version": "2026-09-03",
+  "deployment_status": "Succeeded",
+  "deployment_type": "Global Standard",
+  "model_version_upgrade_policy_portal": "Upgrade once new default version becomes available",
+  "versionUpgradeOption_documented_equivalent": "OnceNewDefaultVersionAvailable",
+  "policy_api_value_directly_read": false,
+  "inference_authentication": "api_key",
+  "reasoning_effort": "max",
+  "metadata_scope": "Version and policy observed in control-plane portal; response model field is alias only and cannot prove immutable underlying weights.",
+  "verification_status": "Previously observed; live control-plane preflight must be repeated immediately before authorised judging and after each bounded batch.",
+  "expected_model_version": "2026-09-03",
+  "automatic_upgrade_enabled": true,
+  "settings_changed": false,
+  "stop_rule": "Stop on any version/configuration drift; preserve previous ratings and version any revised plan. No inference/authentication request was made during preparation."
+}

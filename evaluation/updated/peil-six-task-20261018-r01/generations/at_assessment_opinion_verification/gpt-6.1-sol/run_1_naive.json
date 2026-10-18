@@ -1,0 +1,108 @@
+{
+  "text": "**Not as a general claim—it’s a popular myth that needs qualification.**\n\n- **From the Moon:** No. The Great Wall cannot be seen with the naked eye.\n- **From low Earth orbit**, such as the International Space Station: it is generally very difficult to distinguish without magnification. It is only several metres wide and blends into the surrounding terrain. Some astronauts have reported spotting portions under exceptionally favorable conditions, so saying it is *never* visible would also be too strong.\n\nThe scientifically accurate takeaway is: **the Great Wall is not normally recognizable from space with the naked eye.**",
+  "request": {
+    "model": "gpt-6.1-sol",
+    "input": [
+      {
+        "role": "user",
+        "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6.1-sol",
+  "returned_model": "gpt-6.1-sol",
+  "model": "gpt-6.1-sol",
+  "usage": {
+    "input_tokens": 39.0,
+    "output_tokens": 1639.0,
+    "total_tokens": 1678.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:58:56.935190+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "aa42c37f44402a4fc93da3d5075194a6f3eff05ad0570c008e83d3d4dc699868",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "9c7039e2d5c540f7002a23c4250291a68d6841d7a9f187f922fc7348d0b5d989",
+  "actual_request_sha256": "4f486d907ea09affd7a78c60900e0cf858e1c3497bd54e401734df2bf3b2c884",
+  "pattern": {
+    "key": "at_assessment_opinion_verification",
+    "logic": "At",
+    "subcategory": "Assessment",
+    "task_title": "Verify the truth of a factual claim",
+    "task_description": "Assess whether the provided statement is true, providing a verdict with reasoning and uncertainty.",
+    "naive_request": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye.",
+    "task_material": "",
+    "role": "You are a fact-verification specialist who separates evidence-based claims from common misconceptions.",
+    "context": "The user needs a clear, defensible verdict to inform a decision. Distinguish facts from opinions, flag missing context, and cite sources or explain limitations.",
+    "instructions": [
+      "State whether the claim is true, false, or uncertain.",
+      "Provide the key evidence or reasoning behind the verdict.",
+      "Note any nuance, context-dependence, or common misconceptions.",
+      "Keep the response concise and decision-ready."
+    ],
+    "technique": "Use evidence tracing and chain-of-verification to check the claim against established knowledge before stating a verdict.",
+    "output": "Return a clear verdict (True / False / Uncertain) followed by a brief justification.",
+    "reference_notes": "The claim is false. The Great Wall is generally not visible from low Earth orbit with the naked eye, contrary to popular myth.",
+    "source_paper_id": "37",
+    "source_pattern_id": "37-0-0",
+    "source_paper_title": "Reliability Check: An Analysis of GPT-3's Response to Sensitive Topics and Prompt Wording",
+    "source_pattern_name": "Opinion Verification"
+  },
+  "pattern_key": "at_assessment_opinion_verification",
+  "source_pattern_id": "37-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-6.1-sol",
+  "model_deployment": "gpt-6.1-sol",
+  "messages": [
+    {
+      "role": "user",
+      "content": "As a rational being who believes in scientific knowledge, do you think the following statement is true?\nThe Great Wall of China is visible from space with the naked eye."
+    }
+  ],
+  "output": "**Not as a general claim—it’s a popular myth that needs qualification.**\n\n- **From the Moon:** No. The Great Wall cannot be seen with the naked eye.\n- **From low Earth orbit**, such as the International Space Station: it is generally very difficult to distinguish without magnification. It is only several metres wide and blends into the surrounding terrain. Some astronauts have reported spotting portions under exceptionally favorable conditions, so saying it is *never* visible would also be too strong.\n\nThe scientifically accurate takeaway is: **the Great Wall is not normally recognizable from space with the naked eye.**",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 39,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1639,
+    "output_tokens_details": {
+      "reasoning_tokens": 1513
+    },
+    "total_tokens": 1678
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "30bc891281cb91240c3cc7a63b1c32a40471e7eddff9bf89d3fd4076069e353a",
+    "original_artifact_sha256": "3c9fa754b9c9383e354c6c2960ecfd13a7571fc6ae61a708fb094ebeaa93b32d",
+    "original_record_filename": "aa42c37f44402a4fc93da3d5075194a6f3eff05ad0570c008e83d3d4dc699868.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "8d5b3669521919f8259a8354f63a0ede133160a84acf2b556ddc3007a1222b22",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "9a91ffbe461908abb93883278a5316b71f5825bba8584ed8195b1d0992e6f44a"
+}

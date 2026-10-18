@@ -1,0 +1,108 @@
+{
+  "text": "Alice thinks the file is still in `/shared_folder/photos`, where she originally put it.",
+  "request": {
+    "model": "gpt-6.1-sol",
+    "input": [
+      {
+        "role": "user",
+        "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+      }
+    ],
+    "reasoning": {
+      "effort": "max",
+      "summary": "auto"
+    }
+  },
+  "requested_deployment": "gpt-6.1-sol",
+  "returned_model": "gpt-6.1-sol",
+  "model": "gpt-6.1-sol",
+  "usage": {
+    "input_tokens": 91.0,
+    "output_tokens": 178.0,
+    "total_tokens": 269.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": "max",
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:21:22.638095+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "db37de949c2347d47b56996b4c60cd512e3ecd6a966a4201b6cd0076a4b604ab",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "56dda435b9839e1e78cc8e802b18367dbbc21a5ad83cc7192348dc59b29881df",
+  "actual_request_sha256": "ce2a866e1961645b84fa8e3b87128078c165e1b8d296ec0821d6851a88666ec9",
+  "pattern": {
+    "key": "beyond_hypothesise_theory_of_mind",
+    "logic": "Beyond",
+    "subcategory": "Hypothesise",
+    "task_title": "Infer a person's beliefs from a scenario",
+    "task_description": "Read the scenario and answer where the unaware person will look for the moved item.",
+    "naive_request": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?",
+    "task_material": "",
+    "role": "You are a theory-of-mind analyst who infers what a person believes based on what they know and do not know.",
+    "context": "This tests the ability to distinguish between what is objectively true and what a specific person believes based on their limited knowledge.",
+    "instructions": [
+      "Identify what Alice knows and does not know.",
+      "Identify what Bob did and whether Alice is aware of it.",
+      "Reason about Alice's belief state based on her information.",
+      "State where Alice thinks the file is and explain why."
+    ],
+    "technique": "Use perspective-taking: separate objective facts from each person's knowledge state before answering.",
+    "output": "State where Alice thinks the file is and explain the reasoning based on her knowledge.",
+    "reference_notes": "Alice thinks the file is in /shared_folder/photos because she put it there and was not told about the move.",
+    "source_paper_id": "32",
+    "source_pattern_id": "32-26-0",
+    "source_paper_title": "Sparks of artificial general intelligence: Early experiments with GPT-4",
+    "source_pattern_name": "Understanding beliefs"
+  },
+  "pattern_key": "beyond_hypothesise_theory_of_mind",
+  "source_pattern_id": "32-26-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "gpt-6.1-sol",
+  "model_deployment": "gpt-6.1-sol",
+  "messages": [
+    {
+      "role": "user",
+      "content": "We will read about a scenario, and then have a question and answer session about it.\n--\nScenario:\nAlice and Bob have a shared Dropbox folder.\nAlice puts a file called 'photo.png' inside /shared_folder/photos.\nBob notices Alice put the file there, and moves the file to /shared_folder/photos/family without telling Alice.\n--\nQ: After the file is moved, where does Alice think the file is?"
+    }
+  ],
+  "output": "Alice thinks the file is still in `/shared_folder/photos`, where she originally put it.",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 91,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 178,
+    "output_tokens_details": {
+      "reasoning_tokens": 154
+    },
+    "total_tokens": 269
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "d783348e4ed87fc21fd6cd25e1bf0d37f459234fae9b49c1a6a1053b57839ef3",
+    "original_artifact_sha256": "37068c19c82f588d5a52a02f11300d9212cf4a6ecbf749a0f9a8dc3301fb66d0",
+    "original_record_filename": "db37de949c2347d47b56996b4c60cd512e3ecd6a966a4201b6cd0076a4b604ab.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "bf59ef466281e37ecd997eb8a95ad2a7e3f5d94e6e1b345dc862bf5b6843a687",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "e7444ebb502fd69901eb2266febe6250d415b2df224f2ab3d4d43c754e0befcf"
+}

@@ -1,0 +1,104 @@
+{
+  "text": "The initial number of computers in the server room was 9.\n\nFive additional computers were installed on each of 4 days (Monday through Thursday). This adds a total of \\(5 \\times 4 = 20\\) computers.\n\nAdding these to the initial number gives a final total of \\(9 + 20 = 29\\).\n\nFinal answer: \\(29\\)",
+  "request": {
+    "model": "grok-4.7",
+    "input": [
+      {
+        "role": "user",
+        "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+      }
+    ]
+  },
+  "requested_deployment": "grok-4.7",
+  "returned_model": "grok-4.7",
+  "model": "grok-4.7",
+  "usage": {
+    "input_tokens": 47.0,
+    "output_tokens": 1066.0,
+    "total_tokens": 1113.0
+  },
+  "api": "responses",
+  "auth_mode": "api_key",
+  "reasoning_effort": null,
+  "temperature": null,
+  "status": "completed",
+  "schema_version": 1,
+  "cohort": "corrective-six-v1",
+  "timestamp_utc": "2026-10-18T02:37:11.197689+00:00",
+  "manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "job_id": "dbfbe65ac39dd92a440d26d25e16ac4cf876c84653e247647d60ad2a2b7a3d6d",
+  "execution_config_sha256": "35162f575578ad4ef36d532b5b38b2ed91bb382f28f3705008aed16dff1077ef",
+  "request_sha256": "51a112d3504094d0e1b8a8aae1c43b6021ac7807ef2ba417ead2058109fd3387",
+  "actual_request_sha256": "0c815b109a82af3eb289a91fbb4f8077471ade1cbb104c1a031d86f8a8c7dd5d",
+  "pattern": {
+    "key": "at_calculation_math_word_problems",
+    "logic": "At",
+    "subcategory": "Calculation",
+    "task_title": "Solve a multi-step math word problem",
+    "task_description": "Solve the word problem using step-by-step arithmetic and provide the final answer.",
+    "naive_request": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?",
+    "task_material": "",
+    "role": "You are a careful arithmetic problem solver who shows all working.",
+    "context": "The result will be used in an operational report, so arithmetic accuracy is more important than prose quality.",
+    "instructions": [
+      "Identify the starting quantity.",
+      "Calculate the total additions over the specified period.",
+      "Sum the starting quantity and additions.",
+      "State the final answer clearly on a separate line."
+    ],
+    "technique": "Use explicit step-by-step arithmetic and verify the final answer with a re-check.",
+    "output": "Return the working steps and end with: The answer is [number].",
+    "reference_notes": "Correct calculation: 9 + (5 * 4) = 9 + 20 = 29. The answer is 29.",
+    "source_paper_id": "31",
+    "source_pattern_id": "31-0-0",
+    "source_paper_title": "Chain-of-thought prompting elicits reasoning in large language models",
+    "source_pattern_name": "Math Word Problems"
+  },
+  "pattern_key": "at_calculation_math_word_problems",
+  "source_pattern_id": "31-0-0",
+  "taxonomy_assignment": "historical_task_level",
+  "variant": "naive",
+  "run_index": 1,
+  "model_key": "grok-4.7",
+  "model_deployment": "grok-4.7",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Q: There were nine computers in the server room. Five more computers were installed each day, from Monday to Thursday. How many computers are now in the server room?"
+    }
+  ],
+  "output": "The initial number of computers in the server room was 9.\n\nFive additional computers were installed on each of 4 days (Monday through Thursday). This adds a total of \\(5 \\times 4 = 20\\) computers.\n\nAdding these to the initial number gives a final total of \\(9 + 20 = 29\\).\n\nFinal answer: \\(29\\)",
+  "analysis_eligible": true,
+  "validation": {
+    "config_matches": true,
+    "returned_model_matches": true,
+    "request_matches": true
+  },
+  "provider_usage": {
+    "input_tokens": 47,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1066,
+    "output_tokens_details": {
+      "reasoning_tokens": 992
+    },
+    "total_tokens": 1113
+  },
+  "public_export": {
+    "policy": "research-fields-preserved-resource-metadata-omitted-v1",
+    "original_file_sha256": "738d492ec7ac32214c87cd88c5c4f65a84b01d474156f910800f338b30d7d090",
+    "original_artifact_sha256": "ccef13070db5f8d3445356d7957883b080712bb4ed0b20fe7033ea66e59a6839",
+    "original_record_filename": "dbfbe65ac39dd92a440d26d25e16ac4cf876c84653e247647d60ad2a2b7a3d6d.json",
+    "omitted_fields": [
+      "base_url",
+      "response_id",
+      "request_id",
+      "raw_response"
+    ],
+    "output_utf8_sha256": "71d1abf14f3e08a1c9c389f607a46a4e9bfa57b5e92300508acc01b73a5c7c72",
+    "preserved": "Exact response text, messages, request payload, task/variant/repeat/model metadata, settings, usage, validation and generation provenance. Full raw provider envelope remains in the original private archive."
+  },
+  "artifact_sha256": "8bf27f6175ad695f7558744884509537dad04fe84a4c7fe0150cd303061a8a2f"
+}

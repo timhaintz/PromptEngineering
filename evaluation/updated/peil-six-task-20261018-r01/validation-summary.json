@@ -1,0 +1,43 @@
+{
+  "local_focused_tests": {
+    "passed": 69,
+    "transport": 14,
+    "corrective": 11,
+    "rejudging": 44,
+    "network_blocked": true
+  },
+  "local_test_evidence": "Retained local summary record; no standalone pytest stdout or JUnit report was found. This is not a raw test log.",
+  "local_verification_file_sha256": "1cb62b7adb5cff28b46bc476456b108a10fd9db00415908cf08d85e5c8b85c61",
+  "github_ci": {
+    "url": "https://github.com/timhaintz/PromptEngineering/actions/runs/39093325940",
+    "head_commit": "59d7aa17059b7533874fd6624a73b6fb2e94b93a",
+    "passed_jobs": [
+      "Unit Tests",
+      "Python Offline Tests",
+      "Lint",
+      "Type Check",
+      "Build"
+    ],
+    "coverage_note": "The CI Python allowlist does not include the three new focused evaluation test files; the 69 focused passes were local."
+  },
+  "bundle_validation": {
+    "eligible_response_count": 810,
+    "source_hashes_verified": 810,
+    "source_cells_unique": true,
+    "historical_judge_payloads_unchanged": 648,
+    "corrected_messages_and_outputs_exact": 162,
+    "corrected_reference_inputs_present": 162,
+    "bridge_records": 216,
+    "base_human_sample": 108,
+    "calibration_sources_excluded_from_base_sample": 12,
+    "network_disabled": true,
+    "model_calls": 0,
+    "judging_calls": 0
+  },
+  "implementation_preserved": {
+    "original_commit": "59d7aa17059b7533874fd6624a73b6fb2e94b93a",
+    "merge_commit": "a5996df063c27b9daf81f010024d693c527815a0",
+    "merge_tree_equals_original_tree": true,
+    "prepared_tag_object": "6be670dfee4ec58862df39aaf67e3c7374b0fc04"
+  }
+}

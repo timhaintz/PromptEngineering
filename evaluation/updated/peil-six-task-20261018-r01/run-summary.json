@@ -1,0 +1,140 @@
+{
+  "run_id": "peil-six-task-20261018-r01",
+  "status": "generation_complete_verified_judging_prepared_not_started",
+  "prepared_at_utc": "2026-10-18T04:07:07.030066+00:00",
+  "generation_commit": "59d7aa17059b7533874fd6624a73b6fb2e94b93a",
+  "implementation_merge_commit": "a5996df063c27b9daf81f010024d693c527815a0",
+  "generation_prepared_tag": "experiments/peil-six-task-20261018-r01-prepared",
+  "generation_prepared_tag_object": "6be670dfee4ec58862df39aaf67e3c7374b0fc04",
+  "generation_manifest_sha256": "0585eaa4a08240d174c0c7a6f8dffbd14c9b5793ca30dbeb386839c24463b94b",
+  "generation_counts": {
+    "planned": 162,
+    "attempt_records": 162,
+    "generation_records": 162,
+    "valid_completed_responses": 162,
+    "failure_records": 0,
+    "unattempted_jobs": 0,
+    "attempts_without_generation": 0,
+    "by_model": {
+      "grok-4.7": 54,
+      "gpt-6.1-sol": 54,
+      "gpt-6-luna": 54
+    },
+    "by_task": {
+      "at_calculation_math_word_problems": 27,
+      "across_comparison_attendance": 27,
+      "beyond_hypothesise_theory_of_mind": 27,
+      "out_decomposed_prompting_letter_concat": 27,
+      "at_assessment_opinion_verification": 27,
+      "beyond_logical_reasoning_premise_question": 27
+    },
+    "by_variant": {
+      "peil_labelled": 54,
+      "peil_unlabelled": 54,
+      "naive": 54
+    },
+    "by_repeat": {
+      "3": 54,
+      "1": 54,
+      "2": 54
+    }
+  },
+  "generation_deployment_observations": {
+    "gpt-6.1-sol": {
+      "deployment": "gpt-6.1-sol",
+      "model": "gpt-6.1-sol",
+      "version": "2026-09-29",
+      "status": "Succeeded",
+      "deployment_type": "Global Standard"
+    },
+    "gpt-6-luna": {
+      "deployment": "gpt-6-luna",
+      "model": "gpt-6-luna",
+      "version": "2026-09-22",
+      "status": "Succeeded",
+      "deployment_type": "Global Standard"
+    },
+    "grok-4.7": {
+      "deployment": "grok-4.7",
+      "model": "grok-4.7",
+      "version": "1",
+      "status": "Succeeded",
+      "deployment_type": "Global Standard"
+    }
+  },
+  "generation_usage": {
+    "basis": "Raw provider usage for saved responses; normalized usage was cross-checked.",
+    "reasoning_accounting": "Reasoning is a subset of output_tokens; do not add it again to total_tokens. Missing breakdowns remain unknown.",
+    "all_saved_responses": {
+      "input_tokens": 23333,
+      "input_tokens_reported_responses": 162,
+      "output_tokens": 131220,
+      "output_tokens_reported_responses": 162,
+      "total_tokens": 154553,
+      "total_tokens_reported_responses": 162,
+      "reasoning_tokens_reported_sum": 114916,
+      "reasoning_tokens_reported_responses": 162,
+      "responses_with_saved_raw_usage": 162
+    },
+    "by_model": {
+      "grok-4.7": {
+        "input_tokens": 7997,
+        "input_tokens_reported_responses": 54,
+        "output_tokens": 35063,
+        "output_tokens_reported_responses": 54,
+        "total_tokens": 43060,
+        "total_tokens_reported_responses": 54,
+        "reasoning_tokens_reported_sum": 28671,
+        "reasoning_tokens_reported_responses": 54,
+        "responses_with_saved_raw_usage": 54
+      },
+      "gpt-6.1-sol": {
+        "input_tokens": 7668,
+        "input_tokens_reported_responses": 54,
+        "output_tokens": 55394,
+        "output_tokens_reported_responses": 54,
+        "total_tokens": 63062,
+        "total_tokens_reported_responses": 54,
+        "reasoning_tokens_reported_sum": 49926,
+        "reasoning_tokens_reported_responses": 54,
+        "responses_with_saved_raw_usage": 54
+      },
+      "gpt-6-luna": {
+        "input_tokens": 7668,
+        "input_tokens_reported_responses": 54,
+        "output_tokens": 40763,
+        "output_tokens_reported_responses": 54,
+        "total_tokens": 48431,
+        "total_tokens_reported_responses": 54,
+        "reasoning_tokens_reported_sum": 36319,
+        "reasoning_tokens_reported_responses": 54,
+        "responses_with_saved_raw_usage": 54
+      }
+    },
+    "limitation": "Not a billing invoice; failed or unknown-outcome requests may have unreported usage."
+  },
+  "public_results": "generations/",
+  "publication_policy": "publication-index.json",
+  "judging": {
+    "responses": 810,
+    "historical": 648,
+    "corrected": 162,
+    "plan": "judging/plan.json",
+    "plan_sha256": "f46d7256679ed7bd1e894d8fe69e0fa4ba364abc978d01cdc24f86a795b29528",
+    "execution_authorized": false,
+    "ratings_created": 0,
+    "ready_for_execution_field_meaning": "Technical plan/reference validation only, not authorisation or live-deployment preflight."
+  },
+  "preservation": {
+    "original_artifacts_unchanged": true,
+    "historical_baseline_files_verified": 846,
+    "frozen_preparation_files_verified": 6,
+    "execution_checksum_entries_verified": 341
+  },
+  "limitations": [
+    "Different historical/current models, restored input and role placement change together; no isolated causal estimate of input restoration.",
+    "Response wording may reveal model or prompt condition despite metadata masking.",
+    "Astra shares provider family with two generators.",
+    "Dated preparation after calibration and generation; not public preregistration of collection."
+  ]
+}
