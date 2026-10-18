@@ -369,6 +369,54 @@ def build_model_registry() -> dict[str, ModelSpec]:
             supports_temperature_zero=False,
             reasoning_effort="medium",
         ),
+        "gpt-6.1-sol": ModelSpec(
+            key="gpt-6.1-sol",
+            label="GPT-6.1-Sol",
+            endpoint_env="AZUREVSEASTUS2_OPENAI_ENDPOINT",
+            deployment_env="AZUREVSEASTUS2_OPENAI_GPT61SOL_MODEL",
+            default_endpoint=None,
+            default_deployment="",
+            api_key_env="AZUREVSEASTUS2_OPENAI_KEY",
+            use_responses_api=True,
+            supports_temperature_zero=False,
+            reasoning_effort="max",
+        ),
+        "gpt-6-luna": ModelSpec(
+            key="gpt-6-luna",
+            label="GPT-6-Luna",
+            endpoint_env="AZUREVSEASTUS2_OPENAI_ENDPOINT",
+            deployment_env="AZUREVSEASTUS2_OPENAI_GPT6LUNA_MODEL",
+            default_endpoint=None,
+            default_deployment="",
+            api_key_env="AZUREVSEASTUS2_OPENAI_KEY",
+            use_responses_api=True,
+            supports_temperature_zero=False,
+            reasoning_effort="max",
+        ),
+        "grok-4.7": ModelSpec(
+            key="grok-4.7",
+            label="Grok-4.7",
+            endpoint_env="AZUREVSEASTUS2_OPENAI_ENDPOINT",
+            deployment_env="AZUREVSEASTUS2_GROK47_MODEL",
+            default_endpoint=None,
+            default_deployment="",
+            api_key_env="AZUREVSEASTUS2_OPENAI_KEY",
+            use_responses_api=True,
+            supports_temperature_zero=False,
+            reasoning_effort=None,
+        ),
+        "gpt-6-astra": ModelSpec(
+            key="gpt-6-astra",
+            label="GPT-6-Astra",
+            endpoint_env="AZUREVSEASTUS2_OPENAI_ENDPOINT",
+            deployment_env="AZUREVSEASTUS2_OPENAI_GPT6ASTRA_MODEL",
+            default_endpoint=None,
+            default_deployment="",
+            api_key_env="AZUREVSEASTUS2_OPENAI_KEY",
+            use_responses_api=True,
+            supports_temperature_zero=False,
+            reasoning_effort="max",
+        ),
         "embedding-3": ModelSpec(
             key="embedding-3",
             label="text-embedding-3-large",
@@ -476,6 +524,75 @@ class AzureModelRuntime:
             )
         )
         return list(response.data[0].embedding)
+
+    def generate_messages(
+        self,
+        model_key: str,
+        messages: list[dict[str, str]],
+        *,
+        json_schema: Optional[dict[str, Any]] = None,
+    ) -> dict[str, Any]:
+        """Execute one recorded request without retries or protocol fallbacks.
+
+        This entry point preserves message roles for versioned evaluations. The
+        historical string-prompt path remains unchanged for reproducibility.
+        Failed requests are surfaced to the caller, which owns the audit log.
+        """
+        if not messages or any(
+            set(message) != {"role", "content"}
+            or message["role"] not in {"system", "user", "assistant"}
+            or not isinstance(message["content"], str)
+            or not message["content"].strip()
+            for message in messages
+        ):
+            raise ValueError("Expected nonempty role/content messages")
+        client, resolved = self.get_client(model_key)
+        client = client.with_options(max_retries=0)
+        spec = resolved.spec
+        request: dict[str, Any] = {"model": resolved.deployment}
+        if spec.supports_temperature_zero:
+            request["temperature"] = 0.0
+        if spec.use_responses_api:
+            request["input"] = [dict(message) for message in messages]
+            if spec.reasoning_effort:
+                request["reasoning"] = {"effort": spec.reasoning_effort, "summary": "auto"}
+            if json_schema is not None:
+                request["text"] = {"format": {
+                    "type": "json_schema", "name": json_schema["name"],
+                    "schema": json_schema["schema"], "strict": True,
+                }}
+            response = client.responses.create(**request)
+            output_text = getattr(response, "output_text", "") or self._extract_response_output(response)
+            usage = self._extract_response_usage(response)
+            status = getattr(response, "status", None)
+            api = "responses"
+        else:
+            if json_schema is not None:
+                raise ValueError("Structured evaluation judging requires a Responses API deployment")
+            request["messages"] = [dict(message) for message in messages]
+            response = client.chat.completions.create(**request)
+            choices = getattr(response, "choices", []) or []
+            output_text = (choices[0].message.content or "") if choices else ""
+            usage = self._extract_chat_usage(response)
+            status = choices[0].finish_reason if choices else None
+            api = "chat.completions"
+        return {
+            "text": output_text.strip(),
+            "request": request,
+            "raw_response": response.model_dump(mode="json"),
+            "requested_deployment": resolved.deployment,
+            "returned_model": getattr(response, "model", None),
+            "model": resolved.deployment,
+            "response_id": getattr(response, "id", None),
+            "request_id": getattr(response, "_request_id", None),
+            "usage": usage,
+            "api": api,
+            "auth_mode": resolved.auth_mode,
+            "base_url": resolved.base_url,
+            "reasoning_effort": spec.reasoning_effort,
+            "temperature": request.get("temperature"),
+            "status": status,
+        }
 
     def _get_token_provider(self) -> Any:
         """Return a bearer token provider for Azure auth."""
