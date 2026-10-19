@@ -1,0 +1,85 @@
+{
+  "schema_version": "astra-results-only-snapshot-v1",
+  "snapshot_created_at_utc": "2026-10-19T20:42:50.452817+00:00",
+  "validated_distinct_responses": 810,
+  "inference_attempts": 811,
+  "successful_attempts_by_segment": {
+    "original": 743,
+    "authorized_retry": 1,
+    "continuation": 66
+  },
+  "cohort_counts": {
+    "original": 648,
+    "corrective-six-v1": 162
+  },
+  "unresolved_flags": 81,
+  "human_rescoring_performed": false,
+  "judge": {
+    "returned_model": "gpt-6-astra",
+    "recorded_control_plane_version": "2026-09-03",
+    "reasoning_effort": "max",
+    "version_caveat": "The returned alias and recorded control-plane version do not prove immutable underlying weights."
+  },
+  "measures": [
+    "accuracy",
+    "formatting",
+    "fabrication_avoidance",
+    "completeness"
+  ],
+  "scale": {
+    "minimum": 1,
+    "maximum": 5,
+    "higher_is_better": true
+  },
+  "known_usage": {
+    "input_tokens": 2160781,
+    "output_tokens": 1663471,
+    "total_tokens": 3824252
+  },
+  "known_estimated_cost_aud": "136.407912915304",
+  "cost_complete": false,
+  "original_timeout_usage": null,
+  "original_timeout_cost_aud": null,
+  "accounting_note": "Recorded token-based estimate only; excludes the unknown original timeout. No current portal balance or actual invoice is asserted.",
+  "frozen_parent_plan": {
+    "repository_path": "evaluation/updated/peil-six-task-20261018-r01/judging/plan.json",
+    "canonical_sha256": "f46d7256679ed7bd1e894d8fe69e0fa4ba364abc978d01cdc24f86a795b29528",
+    "file_sha256": "bb00661cea6ab711cd83d23117db460c1867b1976882ee72122ee3550017561a"
+  },
+  "execution_provenance": {
+    "original": {
+      "plan_canonical_sha256": "f46d7256679ed7bd1e894d8fe69e0fa4ba364abc978d01cdc24f86a795b29528",
+      "plan_file_sha256": "bb00661cea6ab711cd83d23117db460c1867b1976882ee72122ee3550017561a"
+    },
+    "continuation": {
+      "plan_canonical_sha256": "1ae68b39538044c76db345d0e8cdc41e2ed75ec61ce351069b11c41178a50ae1",
+      "plan_file_sha256": "692d1337b05afe2e62b72083e5e913cdb8c5aa5ed15180cf370916bae38e6eff",
+      "amendment_canonical_sha256": "7a45ddf013be0426fda8246bb6629c6c0dc9ad5b49922f73598b1f7d9ef303fd",
+      "amendment_file_sha256": "4a8402905aa44d4ae882019353395190859248c627c9c3badaea3f23b0d183e7"
+    },
+    "authorized_retry": {
+      "plan_canonical_sha256": "38c9a84a3e675cd6aba7fce1fc40ea289c56b1a2568bb3dc69d25d2b70d44e8d",
+      "plan_file_sha256": "8a628dd343126a80f34e293563505fb101a94902584c9a7b82ae05ae7bed3ea2",
+      "amendment_canonical_sha256": "3b40d0c7d7f4be1653fffd5e42a83f93430a57121c3f48f7eb1492625fa4026d",
+      "amendment_file_sha256": "71a61b594c0b10788b1e1e2fcbdee78940d9e6e22bb73a24307a9925c1404743"
+    }
+  },
+  "repository_base_commit": "7ac8431329e3cdac229bf27816635e3fc28e9a13",
+  "scope": "Frozen judging outputs and their provenance only. Historical and corrective cohorts remain distinct. No comparative analysis, composite score, category remapping, human assessments or thesis edits are included.",
+  "limitations": [
+    "81 model review flags remain unresolved; their reasons are retained verbatim.",
+    "The original timeout outcome, usage and charge remain unknown despite the successful authorized retry.",
+    "These are model ratings under the frozen audited rubric, not independently established ground truth.",
+    "Calibration limitations and protocol context remain in the previously committed judging preparation; this snapshot supplies no new calibration or category adjudication."
+  ],
+  "integrity_checks": {
+    "distinct_jobs_match_frozen_plan": true,
+    "source_file_hashes_verified": 810,
+    "exact_requests_and_message_hashes_verified": 810,
+    "exact_output_and_rating_bindings_verified": 810,
+    "recorded_accounting_verified": 810,
+    "retry_result_verification_passed": true,
+    "original_timeout_preserved": true,
+    "preserved_execution_files_verified": 3456
+  }
+}

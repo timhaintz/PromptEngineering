@@ -1,0 +1,1651 @@
+{
+  "count": 81,
+  "cohort_counts": {
+    "original": 74,
+    "corrective-six-v1": 7
+  },
+  "human_rescoring_performed": false,
+  "policy": "Astra remains the scoring mechanism. Human rescoring was discontinued. Preserve all scores, classifications, flags and verbatim review reasons; no flag is resolved by this snapshot.",
+  "flags": [
+    {
+      "job_id": "274cc91b3d90322f0760a2e5907e5fc80a9da2088b86d757fe5ada74876e968c",
+      "public_file": "judgements/274cc91b3d90322f0760a2e5907e5fc80a9da2088b86d757fe5ada74876e968c.json",
+      "source": {
+        "job_id": "274cc91b3d90322f0760a2e5907e5fc80a9da2088b86d757fe5ada74876e968c",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_3_peil_labelled.json",
+        "source_sha256": "8d820ed3ec0a017697084dd9e42d41d9e3f36fda4f02347781a4095123c98b2d",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "02ee0d6215ec7741d46a799246dc0bc80c09c489e8b10dffbf5c78a17d02e0f4"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the claimed systematic evaluation and its review, case-study, and deployment evidence.",
+        "The additional product-specific assertions, including WhatsApp group screen sharing and FaceTime compatibility, cannot be resolved using the audited reference, which supplies no versioned product facts."
+      ]
+    },
+    {
+      "job_id": "87e14622589caf1dc5058585cf9498687c21b1dc9bf24e43407a18c514df18de",
+      "public_file": "judgements/87e14622589caf1dc5058585cf9498687c21b1dc9bf24e43407a18c514df18de.json",
+      "source": {
+        "job_id": "87e14622589caf1dc5058585cf9498687c21b1dc9bf24e43407a18c514df18de",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_2_peil_unlabelled.json",
+        "source_sha256": "d088f003447250cc0c17c6c3a11600acba503f315081045eecdce7148f31788e",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "eaaf1500930d04d856dfb73fa036d837f1441e5a42fdf5a31ba1575c5cb14dd9"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the claimed 2020 Stanford study, its 13% productivity finding, and the attribution to shorter commutes and better work-life balance.",
+        "Verify whether Owl Labs reported that 82% of remote employees felt more focused specifically without office noise or unplanned meetings."
+      ]
+    },
+    {
+      "job_id": "0e749009354bd4681d9d1d0dbf8063088270aad08a1a794c13749fa2ef42b0d9",
+      "public_file": "judgements/0e749009354bd4681d9d1d0dbf8063088270aad08a1a794c13749fa2ef42b0d9.json",
+      "source": {
+        "job_id": "0e749009354bd4681d9d1d0dbf8063088270aad08a1a794c13749fa2ef42b0d9",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/run_2_naive.json",
+        "source_sha256": "aa3b2c3737c9ba7c990de309fabd65bda65b6f8d488019c3624a5379636ed0b1",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "6b1e9848bcafa7b6759a68d507acc234cba3186a93a24e750e26fdf3d4d67d26"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplied reference does not verify that Chris Hadfield photographed the Wall or made the attributed characterization. This specific source attribution requires checking."
+      ]
+    },
+    {
+      "job_id": "8af96322f451617a9d87190fd93edd9094943ae1b1cbf63080e4b819df4f68c6",
+      "public_file": "judgements/8af96322f451617a9d87190fd93edd9094943ae1b1cbf63080e4b819df4f68c6.json",
+      "source": {
+        "job_id": "8af96322f451617a9d87190fd93edd9094943ae1b1cbf63080e4b819df4f68c6",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_1_peil_labelled.json",
+        "source_sha256": "64bb766e14aaa4ec90889d726d5ba7a27e4a45e0f4972ad1bff522f676a0a47d",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "2c10084e07c8b559ec0d5440bc5cf3c748c5135c9243d31feae12ec2d36c6959"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford/Ctrip study attribution, the claimed study population of over 16,000 employees, the 13.5% output increase, and the associated explanation.",
+        "Verify the 2023 Owl Labs survey attribution, the 82% figure, and whether the survey supports the stated explanation involving customizable environments and fewer interruptions."
+      ]
+    },
+    {
+      "job_id": "7d609b3954d66a49906ef65d68e60b2f57815a383f413fc07f257307e149f823",
+      "public_file": "judgements/7d609b3954d66a49906ef65d68e60b2f57815a383f413fc07f257307e149f823.json",
+      "source": {
+        "job_id": "7d609b3954d66a49906ef65d68e60b2f57815a383f413fc07f257307e149f823",
+        "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_2_peil_labelled.json",
+        "source_sha256": "ea26568e6ac6b943981137f4d0d84ba952a1c04effa40e12af8b00a84554580a",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "6baae712b8eda679ff797c00cd957e23a493216b20eb36ead751846338ad5907"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the attributed Stanford study's duration, 9% productivity finding, and explanation involving breaks and sick days.",
+        "Verify whether Buffer's 2023 report supports the claim that 71% of remote employees achieve deeper focus at home."
+      ]
+    },
+    {
+      "job_id": "cdd84be90e44241a58c417b804d74d3ab4415dfeddaaae7e19d63b69d64e7e92",
+      "public_file": "judgements/cdd84be90e44241a58c417b804d74d3ab4415dfeddaaae7e19d63b69d64e7e92.json",
+      "source": {
+        "job_id": "cdd84be90e44241a58c417b804d74d3ab4415dfeddaaae7e19d63b69d64e7e92",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_2_naive.json",
+        "source_sha256": "b11a9a136598d7ad9272c13b5ed243a997659d8dd2e7c669ebdd09162e74f865",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "da150df31f6d1b77085c44b788e2a04ece6534502be9ef8c96b8bf1aecb9c94a"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The added platform capability, security, support, pricing and user-experience claims, together with their asserted documentation/review basis, cannot be verified from the audited facts. These require verification rather than an assumed platform ranking or a finding of fabrication."
+      ]
+    },
+    {
+      "job_id": "46382e7f1dc61fd7781699304e9d9d0489079246600849f29563ad6d17e44e36",
+      "public_file": "judgements/46382e7f1dc61fd7781699304e9d9d0489079246600849f29563ad6d17e44e36.json",
+      "source": {
+        "job_id": "46382e7f1dc61fd7781699304e9d9d0489079246600849f29563ad6d17e44e36",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_3_peil_labelled.json",
+        "source_sha256": "fe6d3daeaf5246f6002796920d8f03442940dc45770af71d6db226587b607993",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "09ae85ad1edcbc0810cb22a5c396c6bfceb9ea864e7e44925bb13e3a27ce3eb4"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The claim about a 2014 review involving 25.5M+ children and its support from the CDC/WHO links cannot be verified from the audited material. Citation fabrication is not established."
+      ]
+    },
+    {
+      "job_id": "62fb6c77db333221016f9a002a5803af1b8ce579cb606e842aced729a50dd741",
+      "public_file": "judgements/62fb6c77db333221016f9a002a5803af1b8ce579cb606e842aced729a50dd741.json",
+      "source": {
+        "job_id": "62fb6c77db333221016f9a002a5803af1b8ce579cb606e842aced729a50dd741",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_3_peil_labelled.json",
+        "source_sha256": "83b687b0f14a73476aa5696d09475ea988dd85bcf5118af3c222b337731f1e60",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-4.1",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "0769747bd15d12332dc212211ba79a5a26c158375d2a4ddcd6727e405a7d2a91"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The audited reference supplies no versioned product facts or observed user data to verify the additional platform claims, particularly those concerning user feedback, student adoption, and relative support quality."
+      ]
+    },
+    {
+      "job_id": "7bb4663706e10e43ebe3789a2a8397f838eaca7a003708fa0612cdd8b37afca2",
+      "public_file": "judgements/7bb4663706e10e43ebe3789a2a8397f838eaca7a003708fa0612cdd8b37afca2.json",
+      "source": {
+        "job_id": "7bb4663706e10e43ebe3789a2a8397f838eaca7a003708fa0612cdd8b37afca2",
+        "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_2_peil_unlabelled.json",
+        "source_sha256": "e594ed761fc32db1852a11767b94e258a6313a78b995a8474a63358eda41b515",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "17262b7cace935b164e696d85f868d5f84b0e6d0326334f9cb0612ba869ca2e6"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford study attribution, the 13% productivity figure, and the stated causal explanation; these are not established by the audited facts.",
+        "Verify the Owl Labs attribution and the claimed average weekly commuting savings of 8.5 hours."
+      ]
+    },
+    {
+      "job_id": "2f5c7667b7104ef39603f11816b67a40a93d8f0809b06e0c0d6731a305139623",
+      "public_file": "judgements/2f5c7667b7104ef39603f11816b67a40a93d8f0809b06e0c0d6731a305139623.json",
+      "source": {
+        "job_id": "2f5c7667b7104ef39603f11816b67a40a93d8f0809b06e0c0d6731a305139623",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_1_peil_unlabelled.json",
+        "source_sha256": "031f2fe7bd18d28e18650e05107922d618f6445d630d1319783eef53717b3cf2",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "64d20362d8a7ae66dd12369c8b07c9e8653cc724f2badf36ed6f94715d11970e"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The claimed industry-standard and vendor-documentation basis is not identifiable or verifiable from the audited reference.",
+        "The reference supplies no versioned product facts to resolve categorical assertions about FaceTime access for non-Apple users, WhatsApp security/compliance, or other platform capabilities. These additional claims need verification; no platform ranking was assumed when scoring the weighting task."
+      ]
+    },
+    {
+      "job_id": "8fc0aa8994fb337ddce2280762da2e1f0f9e66810e251921dbd114e64d19b3c7",
+      "public_file": "judgements/8fc0aa8994fb337ddce2280762da2e1f0f9e66810e251921dbd114e64d19b3c7.json",
+      "source": {
+        "job_id": "8fc0aa8994fb337ddce2280762da2e1f0f9e66810e251921dbd114e64d19b3c7",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_1_naive.json",
+        "source_sha256": "6521856d55bda4c3782e8b7af4a17848d198f9ac14912d1014a8cf5f0e9aad97",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "fb4d5eb8e8f779df0d80c0716ed9ef7084ffd088b6817fc781d07d5ffaf5e85b"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The optional platform-rating matrix makes comparative product claims that cannot be verified from the supplied reference. These require human review rather than an assumed correct platform ranking."
+      ]
+    },
+    {
+      "job_id": "ab672b241b08e29ceec2143df9344811b4b05779dff6a7bb89c182ce94659238",
+      "public_file": "judgements/ab672b241b08e29ceec2143df9344811b4b05779dff6a7bb89c182ce94659238.json",
+      "source": {
+        "job_id": "ab672b241b08e29ceec2143df9344811b4b05779dff6a7bb89c182ce94659238",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_2_peil_labelled.json",
+        "source_sha256": "410367e2e2331f44e8766209374611f2527cc25f519b9e736341f69a8dbdd254",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "9c16649cbcda9751c2dd9820e9c6d90642a44615f4264df85a25fb37e32a980d"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford/Ctrip study attribution, sample size, and claimed 13.5% increase in hours and 4% increase in output; these specifics are not established by the audited reference.",
+        "Verify the Owl Labs 2023 survey's claimed sample of 1,200 workers and 22% higher engagement finding; these specifics are not established by the audited reference."
+      ]
+    },
+    {
+      "job_id": "7cf2066243a9b7c2ea1682bfd7bc42d64127388cc3d604c64fa00150c4e69c47",
+      "public_file": "judgements/7cf2066243a9b7c2ea1682bfd7bc42d64127388cc3d604c64fa00150c4e69c47.json",
+      "source": {
+        "job_id": "7cf2066243a9b7c2ea1682bfd7bc42d64127388cc3d604c64fa00150c4e69c47",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_3_naive.json",
+        "source_sha256": "2a47799b8f153032ee6d66bd21b0fed97a3502aff2ca674811c2b0e8ad9dbfd3",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 3,
+        "variant": "naive",
+        "messages_sha256": "303165b2474fd341ce8f2f74a99b025be2196a08adf83e1e6de22fac053e1389"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The broad empirical attribution to numerous studies cannot be verified from the supplied reference; its validity remains unresolved."
+      ]
+    },
+    {
+      "job_id": "18a185120be84e0169c4d12321b7d9076aad2fe7a00c64346372af7d90df8fb5",
+      "public_file": "judgements/18a185120be84e0169c4d12321b7d9076aad2fe7a00c64346372af7d90df8fb5.json",
+      "source": {
+        "job_id": "18a185120be84e0169c4d12321b7d9076aad2fe7a00c64346372af7d90df8fb5",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_2_peil_unlabelled.json",
+        "source_sha256": "d01e7d712df43cc870798e572af3c2c23bbebed4b421c9255e95882b88b54fc9",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "ca05ce1be743157e1ebf37e3cdce93142549467779fe3d226449e0bbfce2f00a"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The optional platform-specific claims about encryption, integration, pricing, and support cannot be verified from the audited facts. They require verification and were not used to determine the primary weighting scores."
+      ]
+    },
+    {
+      "job_id": "afa58f41be726e0efcdc56065344dfd86912efdf6284e7b58d002e5d449b2eaa",
+      "public_file": "judgements/afa58f41be726e0efcdc56065344dfd86912efdf6284e7b58d002e5d449b2eaa.json",
+      "source": {
+        "job_id": "afa58f41be726e0efcdc56065344dfd86912efdf6284e7b58d002e5d449b2eaa",
+        "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_3_peil_unlabelled.json",
+        "source_sha256": "eb900113b06c013260e203a7577ab6fd98194a4b24494a55292049b83081ac34",
+        "cohort": "corrective-six-v1",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-6.1-sol",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "80c9a3d8cb581388f10ff09184189fc46a696a2c820a4bae720d7b9009a1ab9a"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The reference supports the NASA-attributed conclusion, but it does not independently verify the linked page or the additional claim about astronauts reporting sightings."
+      ]
+    },
+    {
+      "job_id": "13e799a7341bb121138b0ae7f849d72bfc8fe1f4ba7deeabb2834a648b2c348e",
+      "public_file": "judgements/13e799a7341bb121138b0ae7f849d72bfc8fe1f4ba7deeabb2834a648b2c348e.json",
+      "source": {
+        "job_id": "13e799a7341bb121138b0ae7f849d72bfc8fe1f4ba7deeabb2834a648b2c348e",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_2_peil_labelled.json",
+        "source_sha256": "f3882b2a8e4e5628d78aa9f3aecd642deee1edd399d8cc642ce17e72ffe21c2e",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "02ee0d6215ec7741d46a799246dc0bc80c09c489e8b10dffbf5c78a17d02e0f4"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The claimed systematic evaluation using documentation, reviews and educational case studies cannot be verified from the supplied record.",
+        "The additional platform-specific ratings and feature, security, compatibility and cost assertions exceed the audited weighting reference and require factual verification."
+      ]
+    },
+    {
+      "job_id": "f1d2de44ad325d23bdf0bab432499eb218c532433570055e9f3702d869b2897c",
+      "public_file": "judgements/f1d2de44ad325d23bdf0bab432499eb218c532433570055e9f3702d869b2897c.json",
+      "source": {
+        "job_id": "f1d2de44ad325d23bdf0bab432499eb218c532433570055e9f3702d869b2897c",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_1_peil_unlabelled.json",
+        "source_sha256": "dee49dd9273f786c22f7b2506986b8e97f164bfa53e7597e2a2825031b380c98",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-4.1",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "9114b0f6605664db9e71ed24cb68170061d4ed625d2019d100d44779f1170055"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The optional platform ratings, product claims and recommendations cannot be verified from the audited reference, which supplies no versioned product facts or observed performance measurements. Claims such as \"Apple-only\" and \"declining support\" require verification."
+      ]
+    },
+    {
+      "job_id": "133858a79af822d471601b0c1d5ce402603e60ccdc47f77612273f6dd717563e",
+      "public_file": "judgements/133858a79af822d471601b0c1d5ce402603e60ccdc47f77612273f6dd717563e.json",
+      "source": {
+        "job_id": "133858a79af822d471601b0c1d5ce402603e60ccdc47f77612273f6dd717563e",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_3_peil_unlabelled.json",
+        "source_sha256": "00434d5419b5fd0716a9fdb72bd6263063aeb15e32665d80f21c2b4021ed0ae2",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-5",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "6c9797774ca11a57571d5d5afbf45e4ebb868d40fbe1ad383a87a3d8f25a7999"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the existence and attributed findings of the specified 2022–2023 Nature Human Behaviour meta-analysis, and whether Microsoft’s 2022 Work Trend Index supports the stated output and focus-time claims. The audited reference does not resolve these empirical citations."
+      ]
+    },
+    {
+      "job_id": "f5d785f1263634e3af495cf2bbe33719555df4ab7df27be3670255908e097a38",
+      "public_file": "judgements/f5d785f1263634e3af495cf2bbe33719555df4ab7df27be3670255908e097a38.json",
+      "source": {
+        "job_id": "f5d785f1263634e3af495cf2bbe33719555df4ab7df27be3670255908e097a38",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_1_peil_labelled.json",
+        "source_sha256": "1e4a2d027f6bbd0a096cadb770f5b8d985f1434f0f3bdc8930153c34cb1ef5c0",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "eecbf5166c6203ed553b29fedde0073320fa831124556b3700827012771e592c"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford and Harvard attribution, the 13% performance increase and fewer-sick-days finding, and the stated causal explanation. Their accuracy remains unresolved under the supplied reference."
+      ]
+    },
+    {
+      "job_id": "98a2a78be21d96c983ce554fe4a6c33e56ca3a1b5d2408bb40173f5e6e9dd10d",
+      "public_file": "judgements/98a2a78be21d96c983ce554fe4a6c33e56ca3a1b5d2408bb40173f5e6e9dd10d.json",
+      "source": {
+        "job_id": "98a2a78be21d96c983ce554fe4a6c33e56ca3a1b5d2408bb40173f5e6e9dd10d",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_3_peil_unlabelled.json",
+        "source_sha256": "09b17d8b42b2f23bf0a5fb82d2006daf049e0281e767e1ccc8e2ddecc2d35071",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "f5f9817169acb6d1273ae054ea271f4400e4eafe3f06895095668d139b84a500"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the purported 2022 Stanford survey, its attribution of a 13% output increase, and the Gallup evidence for the stated benefits. These empirical claims are not established by the audited reference."
+      ]
+    },
+    {
+      "job_id": "eaab434e311ec60ea820599720403a3374e9e266dd4aa34f82da49e69762b3dd",
+      "public_file": "judgements/eaab434e311ec60ea820599720403a3374e9e266dd4aa34f82da49e69762b3dd.json",
+      "source": {
+        "job_id": "eaab434e311ec60ea820599720403a3374e9e266dd4aa34f82da49e69762b3dd",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/run_1_naive.json",
+        "source_sha256": "13e6f0f3f855c9bcf067a6576722023fbf9a022cd42ec2d593d2d97f79e9bff4",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-4.1",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "f6ede32f141e2bd2e3dcffd523db8999f1134854ce480bcb6db7b415c6c29fad"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The exact wording and attribution of the Yang Liwei and Chris Hadfield quotations cannot be verified from the audited material."
+      ]
+    },
+    {
+      "job_id": "23a3e393811c96d53130258688db7a4fc18c596650262a2d8238898228c15ee3",
+      "public_file": "judgements/23a3e393811c96d53130258688db7a4fc18c596650262a2d8238898228c15ee3.json",
+      "source": {
+        "job_id": "23a3e393811c96d53130258688db7a4fc18c596650262a2d8238898228c15ee3",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_3_peil_unlabelled.json",
+        "source_sha256": "cfbb47d23e7a768b5a39b42b204e22cf4b2fbf4c67575e77f0fb5f5b1e9b61b4",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "ea59d257e710417098285aea75d7114c506b88350dffb2d7b5f3d3dad632022b"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The reference supplies no versioned product facts or institution-specific requirements. Verify the added FaceTime browser/device restrictions, participant limits and assertion that only Zoom and Microsoft Teams meet core university requirements; these claims are unresolved, not established false by this audit."
+      ]
+    },
+    {
+      "job_id": "da140e49135b9d62d96a06e2c2aa5115d92522d2dcdf9e99cc1e465027c7570d",
+      "public_file": "judgements/da140e49135b9d62d96a06e2c2aa5115d92522d2dcdf9e99cc1e465027c7570d.json",
+      "source": {
+        "job_id": "da140e49135b9d62d96a06e2c2aa5115d92522d2dcdf9e99cc1e465027c7570d",
+        "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_3_peil_unlabelled.json",
+        "source_sha256": "472c2335df228e7d72454592f7521247fee55c4207c7d8aa6edee3509adf488d",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "b94285c0bdb4a7b341f01c86bd29d887aa31a254b9e2a8f270110a615079e4a1"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify whether Stanford research and University of Minnesota studies support the specific empirical claims attributed to them; these attributions are unresolved by the supplied reference."
+      ]
+    },
+    {
+      "job_id": "4c8f436b4fb1eba5c85b9abf3d650badc46a5d5d0a88a5b4f5e45807dbf1e886",
+      "public_file": "judgements/4c8f436b4fb1eba5c85b9abf3d650badc46a5d5d0a88a5b4f5e45807dbf1e886.json",
+      "source": {
+        "job_id": "4c8f436b4fb1eba5c85b9abf3d650badc46a5d5d0a88a5b4f5e45807dbf1e886",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_2_peil_labelled.json",
+        "source_sha256": "8d88a16facf09f0f186cdcda74d22f02f15eaa829013ea1c83bc0590b7dfebe2",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "0ee5d68a7d4206574d3abb94462ff9d902f3988cb4a400d041a821c2ac3b9a36"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The example’s CDC/WHO citations and assertion that the original 1998 study was retracted for fraud are outside the audited reference and remain unverified."
+      ]
+    },
+    {
+      "job_id": "3c63fe116b13c34bba76523ebbe70a1b48da9beeb30c7bd5dfe852ff65fd7074",
+      "public_file": "judgements/3c63fe116b13c34bba76523ebbe70a1b48da9beeb30c7bd5dfe852ff65fd7074.json",
+      "source": {
+        "job_id": "3c63fe116b13c34bba76523ebbe70a1b48da9beeb30c7bd5dfe852ff65fd7074",
+        "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_2_peil_labelled.json",
+        "source_sha256": "62c1c0ea9213f451b4079b303db0eeca16d24b6cd333da53506d6561ac821189",
+        "cohort": "corrective-six-v1",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-6.1-sol",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "d38f8201be48dec8b7b08a06fe82865c63ce629453b324606512f7fac776db7d"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplied audit facts do not independently verify the exact NASA article citation or its support for the reported astronaut sightings."
+      ]
+    },
+    {
+      "job_id": "830087acfd697afbe6e9e47a93fd196af8571a7495975f9e77245b11d04aa098",
+      "public_file": "judgements/830087acfd697afbe6e9e47a93fd196af8571a7495975f9e77245b11d04aa098.json",
+      "source": {
+        "job_id": "830087acfd697afbe6e9e47a93fd196af8571a7495975f9e77245b11d04aa098",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_3_peil_unlabelled.json",
+        "source_sha256": "b309bba94cef4752f78036c0ff83307c006dadfa4414365daa5bcc9fffc64cc0",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "1a1cf662f5da61f2ce2025d713896540418635b8dfe522558a165ffb21a3d135"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford study's reported 13% productivity improvement and whether it supports the specific peak-time scheduling explanation.",
+        "Verify the Owl Labs claim of 22% more focused hours annually and its attribution to reduced commuting. Neither empirical claim can be verified from the audited reference."
+      ]
+    },
+    {
+      "job_id": "c83fd6cbc3c0608ed75717b98a629a72486f0c5eb6727e12f60a6479c4157ed3",
+      "public_file": "judgements/c83fd6cbc3c0608ed75717b98a629a72486f0c5eb6727e12f60a6479c4157ed3.json",
+      "source": {
+        "job_id": "c83fd6cbc3c0608ed75717b98a629a72486f0c5eb6727e12f60a6479c4157ed3",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_3_naive.json",
+        "source_sha256": "27d3a03066427c1b378a88f6849763c181c976f94ccf8efbc5f1b704dd4a5cb0",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 3,
+        "variant": "naive",
+        "messages_sha256": "66f3e6921a593d44e36074f00a4603a2b393cb23cc5232170efe5aa330becbdf"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The audited facts contain no versioned product evidence to verify the additional WhatsApp participant-limit and phone-connection assertions or the FaceTime browser-support assertions. These require separate factual verification and were not used to judge the shared criterion-weighting task."
+      ]
+    },
+    {
+      "job_id": "2de0054c2bf1b6084f6ad6fa33efb6289d2163fa0acaa67a70de4107f587047c",
+      "public_file": "judgements/2de0054c2bf1b6084f6ad6fa33efb6289d2163fa0acaa67a70de4107f587047c.json",
+      "source": {
+        "job_id": "2de0054c2bf1b6084f6ad6fa33efb6289d2163fa0acaa67a70de4107f587047c",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_2_peil_labelled.json",
+        "source_sha256": "0e975f178ea1d91932789a33d2912459777f8f0d0f9b82bcfcf37be610402dd3",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "3cd04794c79209671e8c3f0e6afe0b43842bd21c19b54a9d7c6fe8db3335f4b0"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The added platform capability, security and compliance assertions cannot be verified from the audited reference.",
+        "The claimed support from EDUCAUSE reviews and platform documentation requires verification; an unverified source claim is not automatically a fabricated citation."
+      ]
+    },
+    {
+      "job_id": "13058a3387c65a4928bf3c978168b7ebf7e88e20c10dbb6738373470346ec123",
+      "public_file": "judgements/13058a3387c65a4928bf3c978168b7ebf7e88e20c10dbb6738373470346ec123.json",
+      "source": {
+        "job_id": "13058a3387c65a4928bf3c978168b7ebf7e88e20c10dbb6738373470346ec123",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_1_naive.json",
+        "source_sha256": "c4699eec19d32c9f5ea12844c258cd6bb1e843891bd0d780a72cb150ad8e5a5c",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "87d9789ec242e8734261dd8675196fab73420e20fc05de6d1e3a10db732a7900"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The assertion that numerous studies show higher reported productivity and job satisfaction requires empirical verification beyond the supplied reference."
+      ]
+    },
+    {
+      "job_id": "5c6f8b025780c4bebba15f00afd9884cf3ae565c6d173ac540bdf1c1f6997f4d",
+      "public_file": "judgements/5c6f8b025780c4bebba15f00afd9884cf3ae565c6d173ac540bdf1c1f6997f4d.json",
+      "source": {
+        "job_id": "5c6f8b025780c4bebba15f00afd9884cf3ae565c6d173ac540bdf1c1f6997f4d",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_2_peil_labelled.json",
+        "source_sha256": "a0607f730a29ad0933a94855f26df8fb786978ade307cf5a0ba92e61e854d77e",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "ed63886d9178fc438009b73c5002b73916de8e948ee282a1994889b7df274e49"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The optional platform-specific claims about capabilities, security, integration, support, and comparative superiority cannot be verified from the audited facts. These require factual review without imposing an unsupported platform ranking or changing the shared weighting assessment."
+      ]
+    },
+    {
+      "job_id": "ea4768b18b1b9cab59ccd966b933a5d55721dc8e4c8463155845e7be3100e795",
+      "public_file": "judgements/ea4768b18b1b9cab59ccd966b933a5d55721dc8e4c8463155845e7be3100e795.json",
+      "source": {
+        "job_id": "ea4768b18b1b9cab59ccd966b933a5d55721dc8e4c8463155845e7be3100e795",
+        "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_1_peil_unlabelled.json",
+        "source_sha256": "0b21bd6ec4e9faf8265ab6be31b0d45f73e9787be601667dcba899a6970aa629",
+        "cohort": "corrective-six-v1",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-6.1-sol",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "2ad44567b82a144885c8e12d31e6fd5c9e79359161866fc39441fce7f6452cb4"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplied reference does not independently verify the NASA article title/date or the specific astronaut-sighting reports; source verification remains unresolved."
+      ]
+    },
+    {
+      "job_id": "fdb2c2287965e45d11dec6d3d3bbbcd1cb7cf30c33fa343ffb30aee5089f107f",
+      "public_file": "judgements/fdb2c2287965e45d11dec6d3d3bbbcd1cb7cf30c33fa343ffb30aee5089f107f.json",
+      "source": {
+        "job_id": "fdb2c2287965e45d11dec6d3d3bbbcd1cb7cf30c33fa343ffb30aee5089f107f",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_3_peil_labelled.json",
+        "source_sha256": "4b10892065096d7ae1cf16357f6d6e2351d17dd5b048160ac5b61a5e4250c34f",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "268413bce77855668d3f2f19b32b9c650724dd092ac1becfda49befe1238ed41"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify whether Stanford and Harvard Business Review research supports the attributed findings about task completion, job satisfaction, and their stated causes."
+      ]
+    },
+    {
+      "job_id": "1ead9b8e1884562d9717e0e11594a4e68bf694aae782d09c0def8d4faf22b025",
+      "public_file": "judgements/1ead9b8e1884562d9717e0e11594a4e68bf694aae782d09c0def8d4faf22b025.json",
+      "source": {
+        "job_id": "1ead9b8e1884562d9717e0e11594a4e68bf694aae782d09c0def8d4faf22b025",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_3_peil_unlabelled.json",
+        "source_sha256": "2919ddfe877c70b8690df3b2d93634d0eb755870b4d61d6b4604921c765b0cc7",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "672c2a48f768def90fcf48141665553b8e6412220e69c98251432dc15ef7636e"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The audited facts do not establish the ancillary platform claims, including “Best-in-class teaching meeting controls” for Zoom and “Apple-only ecosystem severely limits compatibility” for FaceTime. These require product-specific verification; they do not change the shared criterion-weighting scores."
+      ]
+    },
+    {
+      "job_id": "bee78d97f1fabbb7adbbd652996a7483aafc7c187439f186566edb834e1a6eb2",
+      "public_file": "judgements/bee78d97f1fabbb7adbbd652996a7483aafc7c187439f186566edb834e1a6eb2.json",
+      "source": {
+        "job_id": "bee78d97f1fabbb7adbbd652996a7483aafc7c187439f186566edb834e1a6eb2",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_3_peil_labelled.json",
+        "source_sha256": "1f9e92d06b44a28336996507f68a3313e1f8c881befe081e1831961025347f86",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-5",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "e0ca99e3745097aad76826fcd1c08af35440123b6b1916e325fc63a58919aa72"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Trip.com randomized-trial attribution, the claimed approximately 13% performance gain, and the mechanisms attributed to that finding; these details are not established by the audited reference."
+      ]
+    },
+    {
+      "job_id": "7add3063b13a16c1fadd9f1b61454840eed8aebb42851984c1fe2e1e0519b8f0",
+      "public_file": "judgements/7add3063b13a16c1fadd9f1b61454840eed8aebb42851984c1fe2e1e0519b8f0.json",
+      "source": {
+        "job_id": "7add3063b13a16c1fadd9f1b61454840eed8aebb42851984c1fe2e1e0519b8f0",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_3_naive.json",
+        "source_sha256": "066ca228b970f76e01e0235f006f7e069a24903dce4331ee077e668718104b69",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 3,
+        "variant": "naive",
+        "messages_sha256": "1b53e5c904f4b3e9ee8569d638f7ad0edd8967eb95db8bd2a7c4b04bb4d52fe4"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford University attribution, the claimed output increase of up to 13%, and the attribution of that increase to reduced commuting stress and personalized workspaces; the audited reference does not establish these empirical details."
+      ]
+    },
+    {
+      "job_id": "ecf7efcfdab13d07e7fa6b8739e0b177144691539b2d89a89e425947f1f7fbf7",
+      "public_file": "judgements/ecf7efcfdab13d07e7fa6b8739e0b177144691539b2d89a89e425947f1f7fbf7.json",
+      "source": {
+        "job_id": "ecf7efcfdab13d07e7fa6b8739e0b177144691539b2d89a89e425947f1f7fbf7",
+        "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_3_peil_labelled.json",
+        "source_sha256": "964cf83da5512dd629fe9b8c00d92c78ce612b0b508d164aaae7efa6f01a5838",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "7b0f9aaa21f2e677eeee80f5395294ba9dc5fa78f8d20be2391aa16c391eeb44"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the attributed Stanford finding of 9% higher productivity and Gallup finding of 25% lower burnout. Neither precise empirical claim is established by the audited reference."
+      ]
+    },
+    {
+      "job_id": "da324ec7e62950d084b2d8c30413ff634e373b222d09e8a2537776b380589e85",
+      "public_file": "judgements/da324ec7e62950d084b2d8c30413ff634e373b222d09e8a2537776b380589e85.json",
+      "source": {
+        "job_id": "da324ec7e62950d084b2d8c30413ff634e373b222d09e8a2537776b380589e85",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_1_naive.json",
+        "source_sha256": "54934669bf77c70f0af0aecd98993656650547f42dc51fbf97608b4a87184cb6",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "f15a735bec2614384597dc83c831b25881ff89599e5f5f1517871c05e3d21fa1"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplemental late-2023 platform claims, including “FaceTime is Apple-only, severely limiting accessibility in mixed-device environments.” and the security/support comparisons, are not verifiable from the audited reference. They require factual review but do not affect the shared criterion-weighting scores."
+      ]
+    },
+    {
+      "job_id": "8171716c839bbde75eb34dbc8201e6a40aaa3cc84cc284e3560094835d668a58",
+      "public_file": "judgements/8171716c839bbde75eb34dbc8201e6a40aaa3cc84cc284e3560094835d668a58.json",
+      "source": {
+        "job_id": "8171716c839bbde75eb34dbc8201e6a40aaa3cc84cc284e3560094835d668a58",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_3_peil_labelled.json",
+        "source_sha256": "aea4777edbbb862e4a609c1340fe82880109b5d5913902091190e1c2b892bc5d",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "f42969c130f3ffb494db5379b640067f8245de0a50f0368910701075d5080b16"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford/Ctrip study's sample size, reported hours and output effects, and attributed mechanisms.",
+        "Verify the Owl Labs 2023 survey's sample size and claimed association with 22% higher engagement."
+      ]
+    },
+    {
+      "job_id": "79eca3250653081333e8d3875f1473d14f67223b4d478deba6d0e2f04c780d51",
+      "public_file": "judgements/79eca3250653081333e8d3875f1473d14f67223b4d478deba6d0e2f04c780d51.json",
+      "source": {
+        "job_id": "79eca3250653081333e8d3875f1473d14f67223b4d478deba6d0e2f04c780d51",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_1_peil_labelled.json",
+        "source_sha256": "58b536a3005b96f92b984ff00c223b7835d6a34a34d70ccf91418bff86524fe8",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-4.1",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "52cee8c0214d0a3af9020ea24b7f2b813e998504476b6fdc35e6ddd6f7f7c82a"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The additional platform ratings and product-specific claims, including FaceTime's Apple-only limitation and comparative security and feature assessments, cannot be verified from the supplied reference. They require human verification without assuming a preferred platform ranking."
+      ]
+    },
+    {
+      "job_id": "864851dd62b65571d1bc4bfe48b16bc7ed801406730ee1155e3f186b50e195d7",
+      "public_file": "judgements/864851dd62b65571d1bc4bfe48b16bc7ed801406730ee1155e3f186b50e195d7.json",
+      "source": {
+        "job_id": "864851dd62b65571d1bc4bfe48b16bc7ed801406730ee1155e3f186b50e195d7",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/run_3_naive.json",
+        "source_sha256": "64f51bd122cce17c50290f5244fcb79484dda53e83c7247025de13ae6df49cf3",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-4.1",
+        "run_index": 3,
+        "variant": "naive",
+        "messages_sha256": "9f620f6212b0668fc1adcef8158ad03ad55afa342c46be51fb5b14a03a65c172"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the specific statements attributed to Yang Liwei and Chris Hadfield; the audited reference supports NASA's general assessment but does not verify those individual attributions."
+      ]
+    },
+    {
+      "job_id": "bb8082979f5a0f6e8c7532922adb6849da9c1fd495cd878aad8107ca91ecf78d",
+      "public_file": "judgements/bb8082979f5a0f6e8c7532922adb6849da9c1fd495cd878aad8107ca91ecf78d.json",
+      "source": {
+        "job_id": "bb8082979f5a0f6e8c7532922adb6849da9c1fd495cd878aad8107ca91ecf78d",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_2_naive.json",
+        "source_sha256": "c81055d8cd87434397396d4b4acb2bcd51f67c394d1337829ed89f14edfa87f4",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "235385fefc6fcfe41f2af4ed62691eef6d0f47453bb38fec8c994c9cd2c2d5d9"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The audited reference supplies no versioned product evidence to verify the additional claims about FaceTime compatibility, WhatsApp features and support, or paid-plan requirements. These ancillary factual assertions need review; no objective platform ranking should be inferred."
+      ]
+    },
+    {
+      "job_id": "5d8d733fd3609d37e5af807338a1bcf185bf16951efe667e8494eeb6c7e3e0f4",
+      "public_file": "judgements/5d8d733fd3609d37e5af807338a1bcf185bf16951efe667e8494eeb6c7e3e0f4.json",
+      "source": {
+        "job_id": "5d8d733fd3609d37e5af807338a1bcf185bf16951efe667e8494eeb6c7e3e0f4",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_2_peil_labelled.json",
+        "source_sha256": "a01e0dd54a48bfbd99f5caf9564b1a025377563ac12d51f4abbfcc3c39b30fcd",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-5",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "15bcc0faecf1b49ce93a16d2f08dd90be958219a24318a57dc3c81a71c7c2063"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The claims about employer studies, meta-analyses, and multi-firm performance data cannot be verified from the supplied reference."
+      ]
+    },
+    {
+      "job_id": "60fb150f67271db6cfb68a8e58cafb4f6d42d26346779e60c32bdb58b5de4ef0",
+      "public_file": "judgements/60fb150f67271db6cfb68a8e58cafb4f6d42d26346779e60c32bdb58b5de4ef0.json",
+      "source": {
+        "job_id": "60fb150f67271db6cfb68a8e58cafb4f6d42d26346779e60c32bdb58b5de4ef0",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_2_naive.json",
+        "source_sha256": "bf8c86c2923c43a5e73966cd1994b2c53a9830a7fc43319e679c1622aa2da414",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "352b7ff44b1cedda951ad4342c417af4a4892a5d493aa9a385b2f738e88cdccc"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The claim about numerous studies finding higher job satisfaction and output requires empirical verification; no identifiable study is provided."
+      ]
+    },
+    {
+      "job_id": "b111ae2f7bc71b2601e646af82cef02a4a2d486f788738d7ebd6ee8a5ab7119a",
+      "public_file": "judgements/b111ae2f7bc71b2601e646af82cef02a4a2d486f788738d7ebd6ee8a5ab7119a.json",
+      "source": {
+        "job_id": "b111ae2f7bc71b2601e646af82cef02a4a2d486f788738d7ebd6ee8a5ab7119a",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_1_peil_unlabelled.json",
+        "source_sha256": "5936ec67851d1ceb05a463f3f08803a9fe62aefe1981af3eeb7ed932ea23cc36",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-5",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "d0ead7b19084847a668e54876b29a3c46f858dfb89e5a567ae71810e45cb1ae7"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the COVID-era evidence and Stanford field-experiment attribution, including the claimed output findings and causal mechanisms. These empirical claims cannot be verified from the audited reference."
+      ]
+    },
+    {
+      "job_id": "e9e0f8014169ce88d28500d7445fe3158f8620159db848b28867c8bb0c64d687",
+      "public_file": "judgements/e9e0f8014169ce88d28500d7445fe3158f8620159db848b28867c8bb0c64d687.json",
+      "source": {
+        "job_id": "e9e0f8014169ce88d28500d7445fe3158f8620159db848b28867c8bb0c64d687",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_2_peil_unlabelled.json",
+        "source_sha256": "b11a780cd49fac579eca225fc3b869ad46b1a35fa38db5ec18e5615f5761e75c",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "a2c9f47e07353edd5e84c492fededb11d31197ce81c80fad20fdd3f6fa3b061b"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify whether Stanford and Harvard studies support the stated findings about higher output and fewer interruptions; the response does not identify the studies."
+      ]
+    },
+    {
+      "job_id": "09c42a6dfba44ddd8365d35d0e3deb9fa01adda0746689876c78e6da4e67286c",
+      "public_file": "judgements/09c42a6dfba44ddd8365d35d0e3deb9fa01adda0746689876c78e6da4e67286c.json",
+      "source": {
+        "job_id": "09c42a6dfba44ddd8365d35d0e3deb9fa01adda0746689876c78e6da4e67286c",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_2_peil_labelled.json",
+        "source_sha256": "1edac04fdf21a20c36e18a84a648843b8e5b598da57ed7284952431d8d102282",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-4.1",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "4d6d522e64d0e6e007aff1a2ad90b14a99e8acef42204767bd509bc99362cd31"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The added platform claims about user feedback, support trends, access restrictions, and comparative capabilities require verification. The audited reference supplies no versioned product facts or observed performance evidence to resolve them."
+      ]
+    },
+    {
+      "job_id": "cb448e3e4daec90296a287e197400740adab7e7e95fed64fed18e152f3072a57",
+      "public_file": "judgements/cb448e3e4daec90296a287e197400740adab7e7e95fed64fed18e152f3072a57.json",
+      "source": {
+        "job_id": "cb448e3e4daec90296a287e197400740adab7e7e95fed64fed18e152f3072a57",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-5/run_2_peil_unlabelled.json",
+        "source_sha256": "b25b0d325a4eecdd4b9b8fb129853aaea6f83e263db585ba0b41e0752f543df7",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-5",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "f8677ce163c82ee86d4ae9135337a2b6b3a6853aa733f6189e3d7a58d56f1ca2"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the claimed Chinese travel-agency study's year, employee count, approximately 13% performance increase, and stated mechanisms; these details are not established by the audited reference.",
+        "Verify the attribution to Gallup of repeated findings linking remote-capable roles with higher self-reported efficiency."
+      ]
+    },
+    {
+      "job_id": "8a49ca43530cd736c2e5d143a759143eae70f7b62a8732786b6bbb3799a1ec51",
+      "public_file": "judgements/8a49ca43530cd736c2e5d143a759143eae70f7b62a8732786b6bbb3799a1ec51.json",
+      "source": {
+        "job_id": "8a49ca43530cd736c2e5d143a759143eae70f7b62a8732786b6bbb3799a1ec51",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_1_naive.json",
+        "source_sha256": "50e406193bddd7a441511d3c5dddc41f1f2a6c835ef5ecd092a7eb47e91e2b41",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "426871b03a548f462b58ebfb58bde00ff02fc3e6d00b55f9719d6761d3401e57"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford study attribution, the 13% productivity figure, and whether reduced commuting and office distractions support the stated causal explanation; these are not established by the audited reference."
+      ]
+    },
+    {
+      "job_id": "9366f862c8ec7fcee037300ce085d44c38d6b3c47ff1a3032e1dcfd62ae982cf",
+      "public_file": "judgements/9366f862c8ec7fcee037300ce085d44c38d6b3c47ff1a3032e1dcfd62ae982cf.json",
+      "source": {
+        "job_id": "9366f862c8ec7fcee037300ce085d44c38d6b3c47ff1a3032e1dcfd62ae982cf",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_2_naive.json",
+        "source_sha256": "901c45c51a15173859f5e86f69ddae43ac80d7330983bf248582ef7f4c6a62b0",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "5ac27f8e1423f7ae8d9f5c1f7300659e4d4a9acded123df84da5c52550fd71d0"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify whether the Stanford research supports the claimed productivity increase of up to 13% and attributes it to reduced commute stress and personalized workspaces."
+      ]
+    },
+    {
+      "job_id": "1a5e1009cf35008537e30180df4660a4ce898dbd12e957e972080b0860260c97",
+      "public_file": "judgements/1a5e1009cf35008537e30180df4660a4ce898dbd12e957e972080b0860260c97.json",
+      "source": {
+        "job_id": "1a5e1009cf35008537e30180df4660a4ce898dbd12e957e972080b0860260c97",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_2_peil_unlabelled.json",
+        "source_sha256": "68c127e3f29d3b03a25f835f61350b904b7aa9ac827d8ff6b27f2cf1698a58a3",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "644909ba46b65f3c6762935a2c5ee3409c1a45a81ad6d50ec652c3ef2ec2389d"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplementary platform ratings, claimed benchmark and user-feedback basis, and dated product-feature/security assertions cannot be verified from the audited facts. They require human verification and were excluded from the primary weighting assessment."
+      ]
+    },
+    {
+      "job_id": "e5d588571b1d5e094cdf284c6f3a9e8045350ed20690a3f7b7bc93bcc2c4c1dc",
+      "public_file": "judgements/e5d588571b1d5e094cdf284c6f3a9e8045350ed20690a3f7b7bc93bcc2c4c1dc.json",
+      "source": {
+        "job_id": "e5d588571b1d5e094cdf284c6f3a9e8045350ed20690a3f7b7bc93bcc2c4c1dc",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_2_peil_unlabelled.json",
+        "source_sha256": "a96ce699fb07fe8e98c944d44c2112ecd6a94fa26eedf6e29056888af3b6b96d",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "4bcb1d9f2cc3e30c2648913200bc2909ded7cf8db2e36671ff9d687968bea8f6"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The audit supplies no versioned product facts or performance measurements to verify the additional platform ratings and categorical feature/security claims.",
+        "The claimed reliance on industry benchmarks, vendor documentation, and academic use cases has no identifiable sources in the response and requires verification."
+      ]
+    },
+    {
+      "job_id": "d89d469386cba6644a8dfbcb3912fc7f3482d9321f6820278b1dcff86198dca6",
+      "public_file": "judgements/d89d469386cba6644a8dfbcb3912fc7f3482d9321f6820278b1dcff86198dca6.json",
+      "source": {
+        "job_id": "d89d469386cba6644a8dfbcb3912fc7f3482d9321f6820278b1dcff86198dca6",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_1_peil_unlabelled.json",
+        "source_sha256": "4ddc55d59219f2d465ca53d7a19d9dfd04f99324c2b4fea1364d6e6c09498213",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "22ca0d0a929ea06af1f340b35e12ff7ecd4c40288a824ad704d34c77f5bb27ee"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The length statistics and source attributions, particularly the specific Journal of Ancient History citation, cannot be verified from the audited reference. Their authenticity should be checked rather than presumed fabricated."
+      ]
+    },
+    {
+      "job_id": "227f6513de11e34b0e45a120041eb58e18426c18aeebe004b1f2b56aa0628437",
+      "public_file": "judgements/227f6513de11e34b0e45a120041eb58e18426c18aeebe004b1f2b56aa0628437.json",
+      "source": {
+        "job_id": "227f6513de11e34b0e45a120041eb58e18426c18aeebe004b1f2b56aa0628437",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_1_peil_labelled.json",
+        "source_sha256": "2c4b0d9f543ffded92523b6a2225099b0646663e829d2e8649a205f9a1743a16",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "d6455a731b1a345bf68d4aab7111413149457c8da14d24eb7b66d68809e3d578"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The audited reference supplies no versioned product evidence. The optional analysis's categorical capability, compatibility, support, and privacy/compliance assertions require factual verification."
+      ]
+    },
+    {
+      "job_id": "f1a22bb8e72e3e19d4b37c85f3e9fc36698adfda23468df4ba69d5ae30e8280e",
+      "public_file": "judgements/f1a22bb8e72e3e19d4b37c85f3e9fc36698adfda23468df4ba69d5ae30e8280e.json",
+      "source": {
+        "job_id": "f1a22bb8e72e3e19d4b37c85f3e9fc36698adfda23468df4ba69d5ae30e8280e",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/run_3_naive.json",
+        "source_sha256": "6dae40d827bc0e7e2b87f0168da7f879a926abda94bdc4f2d085b880d5f1fcc5",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 3,
+        "variant": "naive",
+        "messages_sha256": "faf952e47cac64b1f2957292590489dd46dc96c457b28c6e221b76f0a70cf30a"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the specific NASA citation and Apollo-astronaut attribution; the supplied reference supports the general assessment but does not establish these source details."
+      ]
+    },
+    {
+      "job_id": "ec2fcbe85f0061ec4e9c5c3a3ecff6dadf1f810a3536c5a7261025bdbef6037a",
+      "public_file": "judgements/ec2fcbe85f0061ec4e9c5c3a3ecff6dadf1f810a3536c5a7261025bdbef6037a.json",
+      "source": {
+        "job_id": "ec2fcbe85f0061ec4e9c5c3a3ecff6dadf1f810a3536c5a7261025bdbef6037a",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_3_peil_unlabelled.json",
+        "source_sha256": "7ad98faecd32ce928fe29291b354fd294076827aad649da3c26597cec8e75496",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "9b9f57315e1b722d1629632a82d6ebff4af45f2b4b49de03bb6074423cc80492"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the asserted use of Gartner, EDUCAUSE, G2, and Capterra benchmarks or user data as of 2023; no identifiable supporting documents or datasets are provided.",
+        "The additional platform claims require version-specific verification, including \"Extremely limited compatibility (Apple devices only)\" and \"minimal features (no screen sharing in groups)\". The audited reference does not resolve these claims."
+      ]
+    },
+    {
+      "job_id": "26b4c4ab1c586c54a7de6e047794ba5d51851e59ec99476f8bb2d4c231911b39",
+      "public_file": "judgements/26b4c4ab1c586c54a7de6e047794ba5d51851e59ec99476f8bb2d4c231911b39.json",
+      "source": {
+        "job_id": "26b4c4ab1c586c54a7de6e047794ba5d51851e59ec99476f8bb2d4c231911b39",
+        "source_file": "evaluation/results/across_argument_debate_opening/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+        "source_sha256": "dfb26aea7be8ff54ba428cf72417431dc5e068d447524b8e7c4190237af23975",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "1a1cf662f5da61f2ce2025d713896540418635b8dfe522558a165ffb21a3d135"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford study attribution, the 13% productivity figure, and whether the study supports the claimed scheduling-flexibility mechanism.",
+        "Verify the Owl Labs attribution for 22% more focused hours annually and the claimed causal connection to reduced commuting; these details are not established by the audited reference."
+      ]
+    },
+    {
+      "job_id": "5d31ebb14469e6f7182e75151db8531493317ce612fd2a0e1aa85f233d156af3",
+      "public_file": "judgements/5d31ebb14469e6f7182e75151db8531493317ce612fd2a0e1aa85f233d156af3.json",
+      "source": {
+        "job_id": "5d31ebb14469e6f7182e75151db8531493317ce612fd2a0e1aa85f233d156af3",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/grok-4-fast-reasoning/run_1_naive.json",
+        "source_sha256": "b8e1c4eb9f17b6226d011f96b3fece5dbd432915141ae2a186f161fed7aedbad",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "6b1e9848bcafa7b6759a68d507acc234cba3186a93a24e750e26fdf3d4d67d26"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The claims that Chris Hadfield photographed the Wall and made the attributed characterization are not verified by the supplied reference. The Apollo-astronaut attribution also requires source verification."
+      ]
+    },
+    {
+      "job_id": "06c5eff6469f45c2f90beb353ffb1ea519b99345969956bf2fd25ca205837cc6",
+      "public_file": "judgements/06c5eff6469f45c2f90beb353ffb1ea519b99345969956bf2fd25ca205837cc6.json",
+      "source": {
+        "job_id": "06c5eff6469f45c2f90beb353ffb1ea519b99345969956bf2fd25ca205837cc6",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_1_peil_unlabelled.json",
+        "source_sha256": "09b383d9bac7655491b27c35c24a13bd04c0e236c28fceebd2c6479126631772",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "354fe01993cd3228df227028dffd0fd02c238d765796beeecd16daa61a228e74"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Supplemental platform claims concerning security, reliability, features, and current user preferences cannot be verified from the audited facts. They require separate review and do not establish a reference platform ranking."
+      ]
+    },
+    {
+      "job_id": "9ed454529e47660fbfebec5b3d8531e48b7e7fe102de84bdeaac0b8611f34839",
+      "public_file": "judgements/9ed454529e47660fbfebec5b3d8531e48b7e7fe102de84bdeaac0b8611f34839.json",
+      "source": {
+        "job_id": "9ed454529e47660fbfebec5b3d8531e48b7e7fe102de84bdeaac0b8611f34839",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_3_peil_unlabelled.json",
+        "source_sha256": "35a71b14015fcde794dc9f4c18fa58755896f4f8474b78d8956d0e856aa90bd3",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-4.1",
+        "run_index": 3,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "07bd9438a6edba221520b64046dc29d07af5a040de7f622e59c208c3834b1fb4"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The optional platform comparison includes factual assertions such as FaceTime being “Apple-only” and Skype having “declining support.” The audited reference provides no versioned product facts to verify these claims, so they require human review and were not used to establish a preferred platform ranking."
+      ]
+    },
+    {
+      "job_id": "2707254211021f81f88edb2927f74a2430c4518be73ce627adcbb95e13c06aa8",
+      "public_file": "judgements/2707254211021f81f88edb2927f74a2430c4518be73ce627adcbb95e13c06aa8.json",
+      "source": {
+        "job_id": "2707254211021f81f88edb2927f74a2430c4518be73ce627adcbb95e13c06aa8",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_1_naive.json",
+        "source_sha256": "350917c4976f354706cb67ed2036fe522bcccc5670a93f2d349cc98cb1c3d981",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "4d9cbec10a1dad53ca3cc52e780df83db44caabf84008e1534f63bf6e215665d"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplied audit does not verify the specific testimony attributed to Yang Liwei, Chris Hadfield, and Leroy Chiao; those source attributions warrant verification."
+      ]
+    },
+    {
+      "job_id": "04429f1c365cfa5e92721e7b10ebae505e7b1ecec8f247e36a1cf6196b5b0b0b",
+      "public_file": "judgements/04429f1c365cfa5e92721e7b10ebae505e7b1ecec8f247e36a1cf6196b5b0b0b.json",
+      "source": {
+        "job_id": "04429f1c365cfa5e92721e7b10ebae505e7b1ecec8f247e36a1cf6196b5b0b0b",
+        "source_file": "evaluation/results/at_assessment_expert_rating/deepseek-r1-0528/run_3_peil_labelled.json",
+        "source_sha256": "95e604b1be2d7bca396c3a7b69caf1c8c86fbe1e5c2948213bd7c97a2122ec57",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "84eb54aadc6f3c294dca11d6ea2b180a90003a85df0860986495fc606a62cbeb"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The reference supplies no versioned product facts or observed platform performance. Verify the additional platform assertions, particularly WhatsApp's call limit, FaceTime's device restrictions, and user-satisfaction claims; no reference platform ranking should be inferred."
+      ]
+    },
+    {
+      "job_id": "5919819d1976691f5907e435bc29001f5afd6d8e53d41a3c6acbf66a6700fddf",
+      "public_file": "judgements/5919819d1976691f5907e435bc29001f5afd6d8e53d41a3c6acbf66a6700fddf.json",
+      "source": {
+        "job_id": "5919819d1976691f5907e435bc29001f5afd6d8e53d41a3c6acbf66a6700fddf",
+        "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_1_peil_labelled.json",
+        "source_sha256": "1186308231a494aa7393882d56e345091c2e32a80a40368478ca2875dbc58f7f",
+        "cohort": "corrective-six-v1",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-6.1-sol",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "43857e911e588ca08f62c06211a18f6869d68d8650e77dc5a43abadcb915aac6"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplied reference does not verify the named NASA article or its support for the specific astronaut-sighting attribution."
+      ]
+    },
+    {
+      "job_id": "e43801884684011a51011d5195790d723c6128f9a71f0b84fc4d5036851c6931",
+      "public_file": "judgements/e43801884684011a51011d5195790d723c6128f9a71f0b84fc4d5036851c6931.json",
+      "source": {
+        "job_id": "e43801884684011a51011d5195790d723c6128f9a71f0b84fc4d5036851c6931",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_2_naive.json",
+        "source_sha256": "3d74ad6d1a562ca33e76153f9f7169231d713f3bb5d893e438f3d8fe85a399e1",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "9fb756a9124e6e119cb73a63b4bbef7a6710046c679c856cf20020302aebe3fb"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The optional platform-rating matrix makes comparative assessments of security, support, functionality, and other attributes that cannot be verified from the supplied reference. These unresolved assessments do not affect the primary weighting scores."
+      ]
+    },
+    {
+      "job_id": "abe1e649b5fae12a2096384e0a38fb0f5f362bb91fd9428cfd188acab127fbcc",
+      "public_file": "judgements/abe1e649b5fae12a2096384e0a38fb0f5f362bb91fd9428cfd188acab127fbcc.json",
+      "source": {
+        "job_id": "abe1e649b5fae12a2096384e0a38fb0f5f362bb91fd9428cfd188acab127fbcc",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_3_peil_labelled.json",
+        "source_sha256": "fd6c0549a571597de965d697270ffd13b09530f2debdc3ece1b5fb18e378a5dc",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "023b6c39462520cd0244b1402f1454720f42c3156f783ae710f343e11ff6fdeb"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The additional platform ratings and comparative integration, security, and support claims cannot be verified from the audited facts, which supply no versioned product evidence or performance measurements. These unresolved claims require human verification and do not affect the shared weighting scores."
+      ]
+    },
+    {
+      "job_id": "0417c2e59291c8b672ad6e00e7cfd8eac322dab5098929bb7b3cbf74c06702cb",
+      "public_file": "judgements/0417c2e59291c8b672ad6e00e7cfd8eac322dab5098929bb7b3cbf74c06702cb.json",
+      "source": {
+        "job_id": "0417c2e59291c8b672ad6e00e7cfd8eac322dab5098929bb7b3cbf74c06702cb",
+        "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_3_peil_labelled.json",
+        "source_sha256": "d745d8494e46d4c21a57ce944937196ee3e8e87b6ec65bc41ab62f16fd66b121",
+        "cohort": "corrective-six-v1",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-6.1-sol",
+        "run_index": 3,
+        "variant": "peil_labelled",
+        "messages_sha256": "ee315d347765e5bd589d3458c6d570a332a5bbe778e929ebc27984e0f0e02bd5"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplied reference facts do not independently verify the NASA article’s exact title/year or its support for the reported exceptional sightings; citation verification remains unresolved."
+      ]
+    },
+    {
+      "job_id": "0415b5bd370d83eb95d7aad586b6e6f574d92e71fa4db6a2b1195ae7aa9a0343",
+      "public_file": "judgements/0415b5bd370d83eb95d7aad586b6e6f574d92e71fa4db6a2b1195ae7aa9a0343.json",
+      "source": {
+        "job_id": "0415b5bd370d83eb95d7aad586b6e6f574d92e71fa4db6a2b1195ae7aa9a0343",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_1_peil_unlabelled.json",
+        "source_sha256": "1b5a75e80b829edd7703cf1eca193e94572703fe387df4eb92cd044093283ed6",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "5c433ef69820341b1db70bda8d3244df965526db68c2b7e158a38bbd7bf164fc"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify whether Stanford and Harvard studies support the stated output, sick-day, and causal claims.",
+        "The claimed observed increases in organizational task completion and employee satisfaction also require empirical verification."
+      ]
+    },
+    {
+      "job_id": "0e55d452682e45a6d6fb686241a2f43f6b60384b05f6477c3a3e8a42529eb1c2",
+      "public_file": "judgements/0e55d452682e45a6d6fb686241a2f43f6b60384b05f6477c3a3e8a42529eb1c2.json",
+      "source": {
+        "job_id": "0e55d452682e45a6d6fb686241a2f43f6b60384b05f6477c3a3e8a42529eb1c2",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-5/run_1_peil_labelled.json",
+        "source_sha256": "0230b17e2504515fe33fec7c8e68dd688fb3a7aa6fdf8b8aa60ccafbc847dec9",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-5",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "8b35c28d83201376615b8272c1794021100c35fad135c77e2b0c64bc55c0e689"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplemental platform ratings and product claims, including comparative security assessments and FaceTime compatibility, require verification. The reference supplies no product-specific facts or established platform ranking; these extras do not affect the core weighting scores."
+      ]
+    },
+    {
+      "job_id": "875cfff62d5c078e572217c765afe2acdbdac69e24ba3ba78d4dc0f61c7ced10",
+      "public_file": "judgements/875cfff62d5c078e572217c765afe2acdbdac69e24ba3ba78d4dc0f61c7ced10.json",
+      "source": {
+        "job_id": "875cfff62d5c078e572217c765afe2acdbdac69e24ba3ba78d4dc0f61c7ced10",
+        "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_1_peil_unlabelled.json",
+        "source_sha256": "d43e01cd8f2b018a4740e6086824127e98007cd9ab2ab6dba9b8766c587f3e47",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "9766bc5c632de38276686a1b3ec064b8945df6b1249bdcc9c5f603c3307dd253"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the findings attributed to Stanford, the University of Chicago, and the Journal of Environmental Psychology, particularly the claims about focused work hours and drastic distraction reductions."
+      ]
+    },
+    {
+      "job_id": "a45cd1441d543962690fc90aadc6ee4cd7272677849d6a9d04077a2de969e367",
+      "public_file": "judgements/a45cd1441d543962690fc90aadc6ee4cd7272677849d6a9d04077a2de969e367.json",
+      "source": {
+        "job_id": "a45cd1441d543962690fc90aadc6ee4cd7272677849d6a9d04077a2de969e367",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_1_naive.json",
+        "source_sha256": "92f680549d8ff788fc16ee8eafacb0abde0c3cb341f0d8e31bb1d03125e504a1",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 1,
+        "variant": "naive",
+        "messages_sha256": "264a87aea634e3f136f2a6d5e613b68eb6e29752a85d3ea57cd035ba6b355ede"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The optional platform assessments include version-dependent feature, pricing, encryption, and support claims that cannot be verified from the audited reference.",
+        "The claimed reliance on G2, Capterra, and unnamed educational case studies lacks traceable references and requires verification; it is not automatically evidence of fabrication."
+      ]
+    },
+    {
+      "job_id": "fbdeff83d95487e52026bf07644b5d7b5202c00b2856446548acec215e3fafb6",
+      "public_file": "judgements/fbdeff83d95487e52026bf07644b5d7b5202c00b2856446548acec215e3fafb6.json",
+      "source": {
+        "job_id": "fbdeff83d95487e52026bf07644b5d7b5202c00b2856446548acec215e3fafb6",
+        "source_file": "evaluation/results/across_argument_debate_opening/gpt-4.1/run_2_peil_labelled.json",
+        "source_sha256": "97a902ed3f5fc8af7ac7857b2137f1c9d97b7837f91c99a8c0cabc431598498c",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "gpt-4.1",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "1f6d3ad17edfc7b626bebdb9005579fd3a8334ba1a52729ac66fd297896efbb5"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford and Harvard attribution, the 13% performance increase and fewer-sick-days finding, and whether the research supports the stated causes and broad scope."
+      ]
+    },
+    {
+      "job_id": "54044fb687fe4d8c7d1e99232bf1853b4b44ef7a62904321e6258a90d0628e45",
+      "public_file": "judgements/54044fb687fe4d8c7d1e99232bf1853b4b44ef7a62904321e6258a90d0628e45.json",
+      "source": {
+        "job_id": "54044fb687fe4d8c7d1e99232bf1853b4b44ef7a62904321e6258a90d0628e45",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_2_peil_unlabelled.json",
+        "source_sha256": "4cc5ce3e606ed0fc27dd527a6350f878587022c5cf170f7a3689f17f36f2f94b",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-4.1",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "1e9aeedbf34ee633e8f617786130659c379c683f0ee7ed3239a93b4e8b76bb5c"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The FaceTime availability assertion and other added platform-specific claims cannot be verified from the audited reference, which supplies no versioned product facts or performance evidence."
+      ]
+    },
+    {
+      "job_id": "a7f16cb77b8025166b6ca8532d3caa7b9408a90a6a2fb4ce4877fcf26694c4b2",
+      "public_file": "judgements/a7f16cb77b8025166b6ca8532d3caa7b9408a90a6a2fb4ce4877fcf26694c4b2.json",
+      "source": {
+        "job_id": "a7f16cb77b8025166b6ca8532d3caa7b9408a90a6a2fb4ce4877fcf26694c4b2",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_1_peil_unlabelled.json",
+        "source_sha256": "1da59cf6bd2ef74e201ba98fde00c17b4d94c39815425a150490afe727ad7a64",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 1,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "97a62e5cdf29ddceff4d688e2260c166576ceaeeac41409703361c6fcafb64e3"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The claimed reliance on EDUCAUSE, Gartner, G2 and Capterra material as of 2023 cannot be verified from the audited evidence.",
+        "Supplemental product assertions, particularly WhatsApp participant and screen-sharing limits and FaceTime cross-platform compatibility, require version-specific verification. The reference supplies no product-performance evidence."
+      ]
+    },
+    {
+      "job_id": "3d9fc28ec2b9ac8ced9908412592acdcd4c68006917532ade506d2487ed6ba09",
+      "public_file": "judgements/3d9fc28ec2b9ac8ced9908412592acdcd4c68006917532ade506d2487ed6ba09.json",
+      "source": {
+        "job_id": "3d9fc28ec2b9ac8ced9908412592acdcd4c68006917532ade506d2487ed6ba09",
+        "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_2_peil_unlabelled.json",
+        "source_sha256": "892ba12512f4e036e1d69150fed1055e83305ac39d52e5c9b1e0c4c46732589d",
+        "cohort": "corrective-six-v1",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-6.1-sol",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "da9e96d3e130fcf9f6013c09ebccb67c81ce0b696110c45392072b99d7c9892b"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The supplied audit does not verify the NASA article's exact title/year or its support for the specific astronaut-report claim; citation verification remains unresolved."
+      ]
+    },
+    {
+      "job_id": "5f7844d71c74e6213215cf3941cc32c34ec2f137a048085a30b99a6a2a0ff537",
+      "public_file": "judgements/5f7844d71c74e6213215cf3941cc32c34ec2f137a048085a30b99a6a2a0ff537.json",
+      "source": {
+        "job_id": "5f7844d71c74e6213215cf3941cc32c34ec2f137a048085a30b99a6a2a0ff537",
+        "source_file": "evaluation/results/beyond_logical_reasoning_premise_question/grok-4-fast-reasoning/run_2_peil_unlabelled.json",
+        "source_sha256": "9aad2eddc701ffa8a84127d93b5647a6a38b9a872874da54189bb06f1a9ecbee",
+        "cohort": "original",
+        "pattern_key": "beyond_logical_reasoning_premise_question",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 2,
+        "variant": "peil_unlabelled",
+        "messages_sha256": "df427a4417b2a616ee7fdcfa57b5577f878553b59933001bc4c91cc010c518b3"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The attributed core-policy quotation cannot be verified from the audited material; its attribution requires review."
+      ]
+    },
+    {
+      "job_id": "c5af4ac3b1f394fa972080df9ad3af5e5a2ba64b3a7c11ee9d131c020cf16c51",
+      "public_file": "judgements/c5af4ac3b1f394fa972080df9ad3af5e5a2ba64b3a7c11ee9d131c020cf16c51.json",
+      "source": {
+        "job_id": "c5af4ac3b1f394fa972080df9ad3af5e5a2ba64b3a7c11ee9d131c020cf16c51",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/deepseek-r1-0528/run_2_naive.json",
+        "source_sha256": "f835061495a610e0859994a8ae6490c714edbc7e0c8312207ad5714c66a8a4ec",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "cfaa3fefe8957519a04261655320ff57d904b6b5803881bbfb880ac1d35ff478"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verification of the specific astronaut testimony and categorical NASA attribution remains unresolved. In particular, the NASA attribution is stronger than the qualified position in the audited reference."
+      ]
+    },
+    {
+      "job_id": "862093fc84f81230cde5e70996b6c008456126c14b3ef82786a476ecb7b78435",
+      "public_file": "judgements/862093fc84f81230cde5e70996b6c008456126c14b3ef82786a476ecb7b78435.json",
+      "source": {
+        "job_id": "862093fc84f81230cde5e70996b6c008456126c14b3ef82786a476ecb7b78435",
+        "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/grok-4.7/run_2_peil_labelled.json",
+        "source_sha256": "90745705d9b655156b8c6cec1f02c417783fd46a6a126d800744e30b7342a8ca",
+        "cohort": "corrective-six-v1",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "grok-4.7",
+        "run_index": 2,
+        "variant": "peil_labelled",
+        "messages_sha256": "b6a9143be205dc62b205ed1248f6a14ef510142730cad4ac1d313f944da4cc5d"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The specific attribution to Yang Liwei’s reports is not verifiable from the supplied reference and requires source verification."
+      ]
+    },
+    {
+      "job_id": "490fa8d2539ba803b65d659f22f9fc72808640be37a361b8017920c17173de93",
+      "public_file": "judgements/490fa8d2539ba803b65d659f22f9fc72808640be37a361b8017920c17173de93.json",
+      "source": {
+        "job_id": "490fa8d2539ba803b65d659f22f9fc72808640be37a361b8017920c17173de93",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_1_peil_labelled.json",
+        "source_sha256": "f2e0c80f48ef85b79a0c392027ef7a244a2486999d52e27e26bf04b7b2eedfc2",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "a5d16ec1e0c9ea166e0bfab77153450f9e2ff5baef64c2e274ca34327b1cb488"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The added adoption statistic, dated platform specifications and pricing/support claims, and asserted review-based sourcing cannot be verified from the audited reference. They require factual and source verification without assuming a gold platform ranking."
+      ]
+    },
+    {
+      "job_id": "4839525a580085f766bd3db2a3886b552307f85e60e5b3c3eeccf3a840aaea3e",
+      "public_file": "judgements/4839525a580085f766bd3db2a3886b552307f85e60e5b3c3eeccf3a840aaea3e.json",
+      "source": {
+        "job_id": "4839525a580085f766bd3db2a3886b552307f85e60e5b3c3eeccf3a840aaea3e",
+        "source_file": "evaluation/results/at_assessment_opinion_verification/gpt-4.1/run_2_naive.json",
+        "source_sha256": "189a010dc2cc2997136830e0a1018ca3fc3a06b9a016a918cfa31f4549a1b416",
+        "cohort": "original",
+        "pattern_key": "at_assessment_opinion_verification",
+        "model_key": "gpt-4.1",
+        "run_index": 2,
+        "variant": "naive",
+        "messages_sha256": "d47cafa5ab56973f066e9516be7da7c912b7d72cd0a3d22278db44831a0153a9"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The specific testimony attributed to Yang Liwei and Chris Hadfield is not documented in the audited reference and requires source verification."
+      ]
+    },
+    {
+      "job_id": "bf4cf5dd422f88ea9c5c1f304cbdac61c600b6efb44776a429012d730e7cd86e",
+      "public_file": "judgements/bf4cf5dd422f88ea9c5c1f304cbdac61c600b6efb44776a429012d730e7cd86e.json",
+      "source": {
+        "job_id": "bf4cf5dd422f88ea9c5c1f304cbdac61c600b6efb44776a429012d730e7cd86e",
+        "source_file": "evaluation/results/at_assessment_expert_rating/grok-4-fast-reasoning/run_3_naive.json",
+        "source_sha256": "bbe0540a56a3286942dc93dd89cc3ebacc6d53a165621212a457c9310e301ff4",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "grok-4-fast-reasoning",
+        "run_index": 3,
+        "variant": "naive",
+        "messages_sha256": "2d9d73db4b1efa7115a7bc6d72596e6a2c713bbbe54c0ffb84b1bcd24d99b8eb"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Supplementary product-specific claims about pricing, support, compatibility and security are outside the audited reference and require verification.",
+        "The asserted documentation, user-review and case-study basis for the platform ratings is not independently verifiable from the supplied material."
+      ]
+    },
+    {
+      "job_id": "b23c2cd832b7a9742aa6ff618bf3cbb5b5b4e574887a564d9e7614a2ccc279f0",
+      "public_file": "judgements/b23c2cd832b7a9742aa6ff618bf3cbb5b5b4e574887a564d9e7614a2ccc279f0.json",
+      "source": {
+        "job_id": "b23c2cd832b7a9742aa6ff618bf3cbb5b5b4e574887a564d9e7614a2ccc279f0",
+        "source_file": "evaluation/results/at_assessment_expert_rating/gpt-4.1/run_3_naive.json",
+        "source_sha256": "8832eb1a48b58723f3177181bc1810f46130a357415b00c43b378e7f6ec5b312",
+        "cohort": "original",
+        "pattern_key": "at_assessment_expert_rating",
+        "model_key": "gpt-4.1",
+        "run_index": 3,
+        "variant": "naive",
+        "messages_sha256": "257497cf2a626d4aa8858a78f5e33e9aa69ec86aaede881f4bc4e3d5eb312600"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "The ancillary assertion that “many platforms offer free tiers for education” cannot be verified from the audited facts. This does not affect the shared weighting task scores."
+      ]
+    },
+    {
+      "job_id": "56e90e3a57f1ade7e63c6622887829a72808a9ee50e11e0107f0a6da439d07e8",
+      "public_file": "judgements/56e90e3a57f1ade7e63c6622887829a72808a9ee50e11e0107f0a6da439d07e8.json",
+      "source": {
+        "job_id": "56e90e3a57f1ade7e63c6622887829a72808a9ee50e11e0107f0a6da439d07e8",
+        "source_file": "evaluation/results/across_argument_debate_opening/deepseek-r1-0528/run_1_peil_labelled.json",
+        "source_sha256": "ca2e9fc408c59aa0144d7acb8f6c39fa3e800041680d3f4ca1e013a135dc25e4",
+        "cohort": "original",
+        "pattern_key": "across_argument_debate_opening",
+        "model_key": "deepseek-r1-0528",
+        "run_index": 1,
+        "variant": "peil_labelled",
+        "messages_sha256": "a37028886e2cd29922970853405b80f8abcccaaba18ab0cd6ad1877fd7976f59"
+      },
+      "needs_human_review": true,
+      "review_status": "needs_resolution",
+      "review_reasons": [
+        "Verify the Stanford study attribution and 13% statistic, including whether the study's scope supports the general productivity claim.",
+        "Verify the Gallup attribution and the claimed lower likelihood of job changes among remote-ready workers."
+      ]
+    }
+  ]
+}
