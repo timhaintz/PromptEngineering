@@ -1,0 +1,47 @@
+{
+  "job_id": "3d9fc28ec2b9ac8ced9908412592acdcd4c68006917532ade506d2487ed6ba09",
+  "source": {
+    "job_id": "3d9fc28ec2b9ac8ced9908412592acdcd4c68006917532ade506d2487ed6ba09",
+    "source_file": "evaluation/updated/peil-six-task-20261018-r01/generations/at_assessment_opinion_verification/gpt-6.1-sol/run_2_peil_unlabelled.json",
+    "source_sha256": "892ba12512f4e036e1d69150fed1055e83305ac39d52e5c9b1e0c4c46732589d",
+    "cohort": "corrective-six-v1",
+    "pattern_key": "at_assessment_opinion_verification",
+    "model_key": "gpt-6.1-sol",
+    "run_index": 2,
+    "variant": "peil_unlabelled",
+    "messages_sha256": "da9e96d3e130fcf9f6013c09ebccb67c81ce0b696110c45392072b99d7c9892b"
+  },
+  "original_attempt": {
+    "attempt_number_for_job": 1,
+    "quarantined": true,
+    "record": {
+      "version": "single-response-judge-v3",
+      "plan_sha256": "f46d7256679ed7bd1e894d8fe69e0fa4ba364abc978d01cdc24f86a795b29528",
+      "job_id": "3d9fc28ec2b9ac8ced9908412592acdcd4c68006917532ade506d2487ed6ba09",
+      "source_sha256": "892ba12512f4e036e1d69150fed1055e83305ac39d52e5c9b1e0c4c46732589d",
+      "timestamp_utc": "2026-10-18T20:44:48.889517+00:00",
+      "expected_request_sha256": "da660b258d363c24363080827faee9799501f2f3ac104230c410fc9adc8e6621",
+      "error_type": "APITimeoutError",
+      "http_status": null,
+      "status": "request_failed_or_outcome_unknown",
+      "automatic_retry": false
+    },
+    "attempt_file_sha256": "70be8c2c29604f80d7003aad619eb646025b8b23dbd744e90a369ae0fc3a60c7",
+    "raw_record_file_sha256": "d5d33f7988fa71e49004ab6f73a40ea014568394946e4b363faa88a81423c0bd",
+    "result_recovered": false,
+    "provider_outcome": "unknown",
+    "usage": null,
+    "estimated_cost_aud": null
+  },
+  "authorized_retry": {
+    "attempt_number_for_job": 2,
+    "automatic_retry": false,
+    "successful": true,
+    "public_file": "judgements/3d9fc28ec2b9ac8ced9908412592acdcd4c68006917532ade506d2487ed6ba09.json",
+    "exact_request_matches_original": true,
+    "plan_sha256": "38c9a84a3e675cd6aba7fce1fc40ea289c56b1a2568bb3dc69d25d2b70d44e8d",
+    "amendment_sha256": "3b40d0c7d7f4be1653fffd5e42a83f93430a57121c3f48f7eb1492625fa4026d",
+    "amendment_file_sha256": "71a61b594c0b10788b1e1e2fcbdee78940d9e6e22bb73a24307a9925c1404743"
+  },
+  "interpretation": "810 distinct responses have validated ratings from 811 inference attempts. The authorized second attempt supplies one rating; it does not recover or resolve the original timeout outcome, usage or charge."
+}
