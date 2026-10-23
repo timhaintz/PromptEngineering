@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "scope": "Offline mechanical integrity and coverage; not independent factual adjudication",
+  "source_files_verified": 167,
+  "public_judgement_bindings_verified": 81,
+  "public_response_bindings_verified": 81,
+  "scores_flags_and_review_reasons_unchanged": true,
+  "all_response_quotes_verbatim": true,
+  "all_reason_indices_covered": true,
+  "all_referenced_sources_present": true,
+  "case_rollups_reproduced": true,
+  "counts": {
+    "cases": 81,
+    "original_review_reasons": 101,
+    "evidence_items": 500,
+    "sources": 57,
+    "case_outcomes": {
+      "partly_supported": 58,
+      "not_verifiable": 4,
+      "contradicted": 16,
+      "supported": 3
+    },
+    "evidence_item_outcomes": {
+      "not_verifiable": 228,
+      "supported": 111,
+      "partly_supported": 131,
+      "contradicted": 30
+    },
+    "by_cohort": {
+      "original": {
+        "cases": 74,
+        "review_reasons": 94,
+        "outcomes": {
+          "partly_supported": 51,
+          "not_verifiable": 4,
+          "contradicted": 16,
+          "supported": 3
+        }
+      },
+      "corrective-six-v1": {
+        "cases": 7,
+        "review_reasons": 7,
+        "outcomes": {
+          "partly_supported": 7
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "cases": 81,
+  "original_review_reasons": 101,
+  "evidence_items": 500,
+  "sources": 57,
+  "case_outcomes": {
+    "partly_supported": 58,
+    "not_verifiable": 4,
+    "contradicted": 16,
+    "supported": 3
+  },
+  "evidence_item_outcomes": {
+    "not_verifiable": 228,
+    "supported": 111,
+    "partly_supported": 131,
+    "contradicted": 30
+  },
+  "by_cohort": {
+    "original": {
+      "cases": 74,
+      "review_reasons": 94,
+      "outcomes": {
+        "partly_supported": 51,
+        "not_verifiable": 4,
+        "contradicted": 16,
+        "supported": 3
+      }
+    },
+    "corrective-six-v1": {
+      "cases": 7,
+      "review_reasons": 7,
+      "outcomes": {
+        "partly_supported": 7
+      }
+    }
+  }
+}

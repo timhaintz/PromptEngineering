@@ -1,0 +1,131 @@
+{
+  "disclosures": [
+    "Post hoc AI-assisted audit of a flag-selected subset; not independent human validation or another quality judging run. The working audit protocol is recorded, but this is not a preregistered study or an exhaustive systematic review.",
+    "74 historical flagged responses belong to the 648-response cohort; 7 corrective flagged responses belong to the 162-response cohort. The matched 216 is a subset of the historical cohort, not another independent sample.",
+    "Only claims implicated by the 101 original review reasons are audited. The other 729 responses and unflagged claims inside these responses were not comprehensively fact-checked.",
+    "Evidence items are audit units, not independent statistical observations. Several responses repeat the same claim or cite the same source; outcome counts are descriptive and are not model accuracy estimates.",
+    "Original Astra scores, flags and classifications remain unchanged. Evidence statuses are separate annotations; a supported checked claim does not validate the entire response.",
+    "The original timeout remains preserved and quarantined. A separately authorised successful retry supplies the missing judgment: 810 distinct validated judgments from 811 attempts, not recovery of the original timeout. Its original outcome and charge remain unknown.",
+    "Public pages may change. Current vendor documentation is not by itself proof of historical feature availability. Source dates, version limits and retrieval limitations are recorded.",
+    "The analysts used tools unavailable to the original generation models. This is a later evidence audit, not a fair-tools performance contest or a replacement for the frozen scores.",
+    "Casebooks omitted scores, model names, variants and cohort names during assessment, but prior context and response content can reveal them. This is partial masking, not blinded independent validation."
+  ],
+  "group_limitations": [
+    {
+      "audit_group": "misc",
+      "limitation": "Scope is the flag reasons, not complete verification of every sentence in the four responses."
+    },
+    {
+      "audit_group": "misc",
+      "limitation": "The vaccination claims occur in responses to a different assigned task. Task relevance and original scores are not reassessed."
+    },
+    {
+      "audit_group": "misc",
+      "limitation": "Public sources cannot authenticate private runtime policy. Search failure is not a fabrication finding."
+    },
+    {
+      "audit_group": "misc",
+      "limitation": "Primary scientific evidence takes precedence over changing public-agency webpage wording for the scientific association claim."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Post-hoc factuality/source audit of 29 flagged remote-work responses only; all original reason indices are addressed. No quality scores, classifications or original flags changed."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Case findings sometimes point to lettered shared evidence cards, especially REM001, to avoid reproducing the same source repeatedly. Read those cards alongside the exact response quotations."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "An unlocated citation is not proven fabricated. Bounded searches and current accessible versions cannot exhaust all studies, report editions or inaccessible material."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Related primary evidence can support a narrow proposition without verifying the response’s exact date, percentage, population, comparator or causal explanation."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Partly supported is used for compound assertions with a supported core and qualified extensions. Contradicted requires direct conflict with identifiable evidence, not a different study having different results."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Institutional reports featuring study authors are identified where original publisher/PDF access failed. Search snippets alone were not accepted as verification."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Self-reported productivity, focus, happiness, engagement, sick leave, retention intentions and observed output/turnover are distinct constructs. They are not pooled."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "The audit uses external evidence after generation; it is not a new tool-assisted answer competition, human rescoring, interrater study, or a representative error-rate estimate."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Prior context prevents a claim of independent blinding; assessment casebook omits scores, generators and variants. Only flagged statements are audited; unflagged text is not cleared."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "Original timeout and authorized retry records remain separate and untouched; no new request was made to a judging model."
+    },
+    {
+      "audit_group": "remote",
+      "limitation": "When a response identifies only Stanford or Harvard, a related paper is an evidence comparison, not authenticated provenance. Inferred matches cannot by themselves establish false dates, samples or mechanisms. Such unresolved matches are not_verifiable; explicit Ctrip and named report comparisons remain distinguished."
+    },
+    {
+      "audit_group": "platform",
+      "limitation": "Flag-selected platform subset only:33 responses; not an accuracy estimate for all810. All supplied generation periods are historical March2026, with exact timestamps unverified. Explicit2023/late2023 content is assessed at that stated date."
+    },
+    {
+      "audit_group": "platform",
+      "limitation": "Source documents establish listed capabilities, not objective ordinal ratings, institutional suitability, actual reviews conducted, or causal performance/adoption claims. An unresolved item is not automatically false or fabricated."
+    },
+    {
+      "audit_group": "platform",
+      "limitation": "Exact model-response quotations are preserved. Source descriptions are centralized and case findings deliberately compact. A supported claim is only the specified assertion, never clearance of the whole response."
+    },
+    {
+      "audit_group": "platform",
+      "limitation": "Browser participation, native app availability, hosting, screen sharing and remote control are distinct. Consumer Skype and Skype for Business are distinct. Licensing, configuration and date remain material."
+    },
+    {
+      "audit_group": "platform",
+      "limitation": "Blanket FERPA/GDPR/HIPAA compliance or noncompliance and comparative security are not established without a defined deployment, contract and data flow. Current documentation is not silently used to establish historical features or prices."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "This is a post-hoc audit of the specified flagged attributions only. It neither changes scores/flags nor clears whole responses, and it is not new LLM judging or researcher rescoring."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "All 15 original review reasons are covered through zero-based reason index 0. No generator, variant, score or cohort was introduced into the case assessments."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "Source existence, quotation accuracy, reported observation and physical visibility are different propositions. Failed retrieval is not evidence of fabrication. Individual non-sighting is not universal impossibility; instrument imagery is not unaided vision."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "Several original public statements were unavailable. Firsthand official witness evidence and dated reprints are distinguished from exact original transcripts; secondary sources are labeled."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "All dated evidence predates the supplied generation periods. The undated current FAQ has an explicit historical-version limitation."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "Cases involving purported successful sightings retain uncertainty about multiple witnesses, optical aids and actual observing conditions. No controlled reconstruction or universal visibility finding was made."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "Exact source excerpts are quoted once in the shared source register. Response quotations are from the supplied casebook and are retained for traceability. Shared evidence avoids duplicating external quotations."
+    },
+    {
+      "audit_group": "greatwall",
+      "limitation": "Analyst had prior research context: partial masking, not independent blinded human validation. No representative accuracy or interrater reliability estimate follows."
+    },
+    {
+      "audit_group": "all",
+      "limitation": "No original score, flag, classification or timeout record is changed by this audit or publication projection."
+    }
+  ]
+}

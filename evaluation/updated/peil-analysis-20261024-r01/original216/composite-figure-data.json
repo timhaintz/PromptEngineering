@@ -1,0 +1,777 @@
+{
+  "title": "Original run-1 quality: task means and fixed-model ranges",
+  "metric": "legacy_equal_weight_composite",
+  "ordering": "Descending labelled-minus-naive mean composite; no category grouping",
+  "rows": [
+    {
+      "task": "in_refactoring_template_filling",
+      "display_name": "Template filling",
+      "original_logic": "In",
+      "reporting_logic": "Out",
+      "labelled_minus_naive": 0.6875,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.75,
+            "gpt-4.1": 4.5,
+            "gpt-5": 2.25,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.125,
+          "min": 2.25,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.8125,
+          "min": 4.25,
+          "max": 5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.75,
+            "gpt-4.1": 4,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.4375,
+          "min": 3.75,
+          "max": 5
+        }
+      }
+    },
+    {
+      "task": "at_assessment_expert_rating",
+      "display_name": "Expert rating",
+      "original_logic": "At",
+      "reporting_logic": "At",
+      "labelled_minus_naive": 0.5,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 3.75,
+            "gpt-5": 3.75,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 3.875,
+          "min": 3.75,
+          "max": 4.25
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 4.5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 4.375,
+          "min": 3.75,
+          "max": 5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4,
+            "gpt-4.1": 4.5,
+            "gpt-5": 4.5,
+            "grok-4-fast-reasoning": 4.25
+          },
+          "mean": 4.3125,
+          "min": 4,
+          "max": 4.5
+        }
+      }
+    },
+    {
+      "task": "out_output_customisation_knapsack_code",
+      "display_name": "Knapsack code",
+      "original_logic": "Out",
+      "reporting_logic": "Out",
+      "labelled_minus_naive": 0.375,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 2.25,
+            "gpt-4.1": 3.25,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 3.8125,
+          "min": 2.25,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 3.25
+          },
+          "mean": 4.1875,
+          "min": 3.25,
+          "max": 5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 3
+          },
+          "mean": 4.5,
+          "min": 3,
+          "max": 5
+        }
+      }
+    },
+    {
+      "task": "in_error_identification_hallucination_judge",
+      "display_name": "Hallucination evaluation",
+      "original_logic": "In",
+      "reporting_logic": "In",
+      "labelled_minus_naive": 0.25,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 5,
+            "gpt-4.1": 4.75,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 4.5
+          },
+          "mean": 4.75,
+          "min": 4.5,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 5,
+          "min": 5,
+          "max": 5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 4.75,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.75,
+          "min": 4.25,
+          "max": 5
+        }
+      }
+    },
+    {
+      "task": "over_summarisation_chain_of_density",
+      "display_name": "Chain of density",
+      "original_logic": "Over",
+      "reporting_logic": "Over",
+      "labelled_minus_naive": 0.1875,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.25,
+            "gpt-4.1": 2.5,
+            "gpt-5": 4.5,
+            "grok-4-fast-reasoning": 3.5
+          },
+          "mean": 3.4375,
+          "min": 2.5,
+          "max": 4.5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.75,
+            "gpt-4.1": 3.75,
+            "gpt-5": 4,
+            "grok-4-fast-reasoning": 3
+          },
+          "mean": 3.625,
+          "min": 3,
+          "max": 4
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.75,
+            "gpt-4.1": 3.25,
+            "gpt-5": 4,
+            "grok-4-fast-reasoning": 2.75
+          },
+          "mean": 3.4375,
+          "min": 2.75,
+          "max": 4
+        }
+      }
+    },
+    {
+      "task": "over_synthesis_claim_extraction",
+      "display_name": "Claim extraction",
+      "original_logic": "Over",
+      "reporting_logic": "Over",
+      "labelled_minus_naive": 0.1875,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.5,
+            "gpt-4.1": 4.25,
+            "gpt-5": 4.5,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 4.25,
+          "min": 3.75,
+          "max": 4.5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 4.25,
+            "gpt-5": 4.5,
+            "grok-4-fast-reasoning": 4.75
+          },
+          "mean": 4.4375,
+          "min": 4.25,
+          "max": 4.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.75,
+            "gpt-4.1": 4.25,
+            "gpt-5": 4.25,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 4.25,
+          "min": 3.75,
+          "max": 4.75
+        }
+      }
+    },
+    {
+      "task": "across_argument_debate_opening",
+      "display_name": "Debate opening",
+      "original_logic": "Across",
+      "reporting_logic": "Across",
+      "labelled_minus_naive": 0.125,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4,
+            "gpt-4.1": 4.25,
+            "gpt-5": 4.25,
+            "grok-4-fast-reasoning": 4.25
+          },
+          "mean": 4.1875,
+          "min": 4,
+          "max": 4.25
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.75,
+            "gpt-4.1": 4,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 4.3125,
+          "min": 3.75,
+          "max": 4.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 4.25,
+            "gpt-5": 4.25,
+            "grok-4-fast-reasoning": 3.5
+          },
+          "mean": 4.0625,
+          "min": 3.5,
+          "max": 4.25
+        }
+      }
+    },
+    {
+      "task": "in_classification_relevancy_check",
+      "display_name": "Relevancy",
+      "original_logic": "In",
+      "reporting_logic": "In",
+      "labelled_minus_naive": 0.0625,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.75,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.9375,
+          "min": 4.75,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 5,
+          "min": 5,
+          "max": 5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.875,
+          "min": 4.5,
+          "max": 5
+        }
+      }
+    },
+    {
+      "task": "beyond_simulation_change_request",
+      "display_name": "Change request",
+      "original_logic": "Beyond",
+      "reporting_logic": "Beyond",
+      "labelled_minus_naive": -0.0625,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.5,
+            "gpt-4.1": 4,
+            "gpt-5": 4.5,
+            "grok-4-fast-reasoning": 4.5
+          },
+          "mean": 4.375,
+          "min": 4,
+          "max": 4.5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.5,
+            "gpt-4.1": 4.75,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 4.25
+          },
+          "mean": 4.3125,
+          "min": 3.5,
+          "max": 4.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4,
+            "gpt-4.1": 4.75,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 4.3125,
+          "min": 3.75,
+          "max": 4.75
+        }
+      }
+    },
+    {
+      "task": "over_summarisation_text_summary",
+      "display_name": "Text summary",
+      "original_logic": "Over",
+      "reporting_logic": "Over",
+      "labelled_minus_naive": -0.0625,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.5,
+            "gpt-4.1": 4.75,
+            "gpt-5": 4.5,
+            "grok-4-fast-reasoning": 4.75
+          },
+          "mean": 4.625,
+          "min": 4.5,
+          "max": 4.75
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.75,
+            "gpt-4.1": 4.25,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 4.5
+          },
+          "mean": 4.5625,
+          "min": 4.25,
+          "max": 4.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.75,
+            "gpt-4.1": 4.5,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 4.75
+          },
+          "mean": 4.6875,
+          "min": 4.5,
+          "max": 4.75
+        }
+      }
+    },
+    {
+      "task": "out_context_control_explicit_constraints",
+      "display_name": "Explicit constraints",
+      "original_logic": "Out",
+      "reporting_logic": "Out",
+      "labelled_minus_naive": -0.25,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.75,
+          "min": 4,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.25,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 4.75
+          },
+          "mean": 4.5,
+          "min": 3.25,
+          "max": 5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.5,
+            "gpt-4.1": 3.75,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.5,
+          "min": 3.75,
+          "max": 5
+        }
+      }
+    },
+    {
+      "task": "out_decomposed_prompting_letter_concat",
+      "display_name": "Letter concatenation",
+      "original_logic": "Out",
+      "reporting_logic": "Out",
+      "labelled_minus_naive": -0.5,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.75,
+            "gpt-4.1": 3.25,
+            "gpt-5": 3,
+            "grok-4-fast-reasoning": 2.75
+          },
+          "mean": 3.4375,
+          "min": 2.75,
+          "max": 4.75
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.25,
+            "gpt-4.1": 2,
+            "gpt-5": 2.75,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 2.9375,
+          "min": 2,
+          "max": 3.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3,
+            "gpt-4.1": 2,
+            "gpt-5": 3.5,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 3.0625,
+          "min": 2,
+          "max": 3.75
+        }
+      }
+    },
+    {
+      "task": "across_translation_summarise_translate",
+      "display_name": "Summarise & translate",
+      "original_logic": "Across",
+      "reporting_logic": "Across",
+      "labelled_minus_naive": -0.625,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 4.75
+          },
+          "mean": 4.9375,
+          "min": 4.75,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 4,
+            "gpt-5": 4.5,
+            "grok-4-fast-reasoning": 4.5
+          },
+          "mean": 4.3125,
+          "min": 4,
+          "max": 4.5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 4,
+            "gpt-4.1": 3.75,
+            "gpt-5": 4,
+            "grok-4-fast-reasoning": 4
+          },
+          "mean": 3.9375,
+          "min": 3.75,
+          "max": 4
+        }
+      }
+    },
+    {
+      "task": "beyond_hypothesise_theory_of_mind",
+      "display_name": "Theory of mind",
+      "original_logic": "Beyond",
+      "reporting_logic": "Beyond",
+      "labelled_minus_naive": -1.375,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4,
+            "gpt-4.1": 4.5,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 4.5625,
+          "min": 4,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.5,
+            "gpt-4.1": 2.75,
+            "gpt-5": 3,
+            "grok-4-fast-reasoning": 3.5
+          },
+          "mean": 3.1875,
+          "min": 2.75,
+          "max": 3.5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 3,
+            "gpt-4.1": 2.25,
+            "gpt-5": 2.75,
+            "grok-4-fast-reasoning": 2.75
+          },
+          "mean": 2.6875,
+          "min": 2.25,
+          "max": 3
+        }
+      }
+    },
+    {
+      "task": "beyond_logical_reasoning_premise_question",
+      "display_name": "Premise question",
+      "original_logic": "Beyond",
+      "reporting_logic": "Beyond",
+      "labelled_minus_naive": -2.125,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 3.75,
+            "gpt-4.1": 4.75,
+            "gpt-5": 4.75,
+            "grok-4-fast-reasoning": 3.75
+          },
+          "mean": 4.25,
+          "min": 3.75,
+          "max": 4.75
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2,
+            "gpt-4.1": 2,
+            "gpt-5": 2.5,
+            "grok-4-fast-reasoning": 2
+          },
+          "mean": 2.125,
+          "min": 2,
+          "max": 2.5
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2.25,
+            "gpt-4.1": 2,
+            "gpt-5": 2.5,
+            "grok-4-fast-reasoning": 2.25
+          },
+          "mean": 2.25,
+          "min": 2,
+          "max": 2.5
+        }
+      }
+    },
+    {
+      "task": "at_assessment_opinion_verification",
+      "display_name": "Opinion verification",
+      "original_logic": "At",
+      "reporting_logic": "At",
+      "labelled_minus_naive": -2.25,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 4.25,
+            "gpt-4.1": 4.5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 4.25
+          },
+          "mean": 4.5,
+          "min": 4.25,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2.75,
+            "gpt-4.1": 2,
+            "gpt-5": 2,
+            "grok-4-fast-reasoning": 2.25
+          },
+          "mean": 2.25,
+          "min": 2,
+          "max": 2.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2.75,
+            "gpt-4.1": 2,
+            "gpt-5": 2,
+            "grok-4-fast-reasoning": 2.75
+          },
+          "mean": 2.375,
+          "min": 2,
+          "max": 2.75
+        }
+      }
+    },
+    {
+      "task": "across_comparison_attendance",
+      "display_name": "Attendance",
+      "original_logic": "Across",
+      "reporting_logic": "Across",
+      "labelled_minus_naive": -2.375,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 5
+          },
+          "mean": 5,
+          "min": 5,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2.25,
+            "gpt-4.1": 2.75,
+            "gpt-5": 2.75,
+            "grok-4-fast-reasoning": 2.75
+          },
+          "mean": 2.625,
+          "min": 2.25,
+          "max": 2.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2,
+            "gpt-4.1": 2.75,
+            "gpt-5": 2.75,
+            "grok-4-fast-reasoning": 2.75
+          },
+          "mean": 2.5625,
+          "min": 2,
+          "max": 2.75
+        }
+      }
+    },
+    {
+      "task": "at_calculation_math_word_problems",
+      "display_name": "Math word problems",
+      "original_logic": "At",
+      "reporting_logic": "At",
+      "labelled_minus_naive": -2.5625,
+      "variants": {
+        "naive": {
+          "model_scores": {
+            "deepseek-r1-0528": 5,
+            "gpt-4.1": 5,
+            "gpt-5": 5,
+            "grok-4-fast-reasoning": 4.5
+          },
+          "mean": 4.875,
+          "min": 4.5,
+          "max": 5
+        },
+        "peil_labelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2.75,
+            "gpt-4.1": 2,
+            "gpt-5": 2.5,
+            "grok-4-fast-reasoning": 2
+          },
+          "mean": 2.3125,
+          "min": 2,
+          "max": 2.75
+        },
+        "peil_unlabelled": {
+          "model_scores": {
+            "deepseek-r1-0528": 2.25,
+            "gpt-4.1": 2,
+            "gpt-5": 2.5,
+            "grok-4-fast-reasoning": 2
+          },
+          "mean": 2.1875,
+          "min": 2,
+          "max": 2.5
+        }
+      }
+    }
+  ],
+  "models": [
+    "deepseek-r1-0528",
+    "gpt-4.1",
+    "gpt-5",
+    "grok-4-fast-reasoning"
+  ],
+  "variants": [
+    "naive",
+    "peil_labelled",
+    "peil_unlabelled"
+  ],
+  "original_source_ratings_only": true,
+  "whiskers": "Minimum and maximum of the four fixed-model composites; not confidence or repeat-run intervals.",
+  "four_measures_stay_separate_in_primary_tables": true
+}

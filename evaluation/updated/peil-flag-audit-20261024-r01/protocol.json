@@ -1,0 +1,49 @@
+{
+  "version": "posthoc-flagged-claim-evidence-audit-v1",
+  "started_at_utc": "2026-10-20T11:10:33.864078+00:00",
+  "source_commit": "9cecab8d4e2f5a131880e9040e7e4799c5bced4a",
+  "source_snapshot": "evaluation/updated/peil-810-astra-v3-20261018-r01-results-20261020-r01",
+  "index_sha256": "dfc6105e0ec0e7e0e3505569a23b89371c1b419071f35f3702159d4471513d78",
+  "manifest_sha256": "cf0c643a1cdde1d4616ccacb4a98caefc28322ffbdcd2ea47f3c9bf731198d18",
+  "sampling": "Flag-selected audit, not representative accuracy estimation; 729 unflagged responses not audited. Historical74 and corrective7 reported separately.",
+  "units": "Each original review reason is addressed; split multi-claim reasons into evidence items. Preserve exact response excerpt and original reason; do not assume all81 false or clear whole response when only some claims checked.",
+  "evidence_precedence": [
+    "Original research and source authors for empirical claims",
+    "Official publisher, NASA, agency or vendor documentation for direct statements and versioned features",
+    "Secondary sources only when needed and labeled; search snippets/discovery are not full verification",
+    "Private inaccessible provenance cannot be established by plausible similar public text"
+  ],
+  "outcomes": [
+    "supported",
+    "partly_supported",
+    "contradicted",
+    "not_verifiable"
+  ],
+  "case_outcome_rule": "Contradicted if at least one checked assertion has direct contrary evidence; otherwise not_verifiable if no assertions supported; otherwise partly_supported if any unsupported/qualified assertions remain; otherwise supported. Detail-level results govern; summary never means full response validated.",
+  "timing": "Use claim-specific dates and historical source versions where possible; record current-document limitations; no hindsight inference of feature availability.",
+  "bias_control": "Casebooks omit scores, generator names, variants and cohort names during evidence assessment, but response content and generation period may reveal them. Analyst has prior context: this is partial masking, not independent blinded validation.",
+  "search_process": "Record query strings and checked sources; inability to locate is not proof of nonexistence. No unsupported numeric confidence scores.",
+  "preservation": "Frozen ratings, flags, sources and timeout remain unchanged. Audit statuses are separate annotations. Do not claim interrater reliability or human adjudication.",
+  "scope": "Factual claims and source attributions implicated by the existing 81 flags and 101 review reasons. No new quality ratings, generation or classification changes.",
+  "outcome_semantics": {
+    "supported": "Inspected evidence supports the specific checked assertion within recorded limits.",
+    "partly_supported": "Some content is supported, but qualification or an unresolved part remains.",
+    "contradicted": "At least one checked assertion has direct contrary evidence; this does not mean every assertion in the response is wrong.",
+    "not_verifiable": "Available sources did not establish the checked assertion or its provenance; not proof of fabrication.",
+    "case_rollup": "Any contradicted item -> contradicted; all not_verifiable -> not_verifiable; all supported -> supported; otherwise partly_supported. Partial support counts as some support in the prospective protocol."
+  },
+  "publication_projection": {
+    "published_package_date": "2026-10-24",
+    "source_audit_sha256": "c56987f06ce718939c0121971c7c5074f3f3656591f3836ee131be3984e3f20f",
+    "findings": "All 81 cases, 500 claim findings and 57 source records retained without changes to their evidence statuses, quotations, explanations or references.",
+    "full_response_storage": "Responses and rating rationales remain in the linked public source files, not duplicated in this audit package.",
+    "omitted_fields": [
+      "complete response copies",
+      "duplicate task/reference-fact context",
+      "working delivery instructions",
+      "local working-file paths",
+      "provider envelopes and accounting/authentication records"
+    ],
+    "protocol_projection": "Scientific protocol fields are retained. Administrative scope/delivery text is replaced by the scope statement above; no retrospective claim of preregistration or independent blinding is introduced."
+  }
+}
