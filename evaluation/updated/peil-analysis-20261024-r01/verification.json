@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "checks": {
+    "source_hashes": 1124,
+    "original_source_rows": 216,
+    "original_mean_rows": 345,
+    "original_sensitivity_intervals": 75,
+    "original_contrast_rows": 345,
+    "category_mean_rows": 450,
+    "category_contrast_rows": 450,
+    "figure_variant_rows": 54,
+    "corrective_source_rows": 162,
+    "corrective_mean_rows": 336,
+    "corrective_sensitivity_intervals": 48,
+    "corrective_contrast_rows": 336,
+    "corrective_repeat_cells": 216,
+    "retry_sensitivity_rows": 336,
+    "reproducibility_source_cells": 216,
+    "reproducibility_mean_rows": 630,
+    "reproducibility_sensitivity_intervals": 90,
+    "reproducibility_contrast_rows": 630
+  },
+  "source_files_unchanged": true,
+  "new_generation_or_judging": false,
+  "scope": "Recomputed source bindings, descriptive and paired summaries, task-resampling intervals, category views, figure points, repeat variation and retry sensitivity."
+}

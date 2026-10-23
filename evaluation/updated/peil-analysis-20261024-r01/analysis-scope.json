@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-24",
+  "new_generation_or_judging": false,
+  "scores_changed": false,
+  "source_classifications_changed": false,
+  "cohorts": {
+    "original216": "Original GPT-5.4-pro quality scores for run 1 only: 18 tasks x 4 models x 3 variants.",
+    "corrective162": "Astra quality scores: 6 tasks x 3 models x 3 variants x 3 runs.",
+    "historical648_reproducibility": "Original semantic and functional measurements over 18 x 4 x 3 three-run cells."
+  },
+  "not_pooled": [
+    "Original and Astra judge scores",
+    "Original and corrective generation cohorts",
+    "Four quality measures",
+    "Semantic and functional reproducibility"
+  ],
+  "quality_scale": "Ordinal integers 1-5, all higher is better. Legacy fabrication is renamed fabrication avoidance, not inverted.",
+  "snapshot_disclosure": {
+    "validated_distinct_responses": 810,
+    "unresolved_flags": 81,
+    "historical_flags": 74,
+    "corrective_flags": 7,
+    "original_timeout_quarantined": true,
+    "original_timeout_outcome_usage_cost": "unknown",
+    "authorized_retry_successful": true,
+    "human_rescoring_performed": false
+  },
+  "interpretation": [
+    "Neither judge is ground truth. Calibration observations and ceiling effects limit interpretation; no independent human agreement estimate is supplied.",
+    "Task-block sensitivity intervals describe composition of the fixed selected benchmark, not population confidence, judge reliability or a causal estimate.",
+    "The corrective experiment changes inputs and models, and PEIL prompts add a system message while naive prompts use a user message only. It is not an isolated causal test of labels or of adding missing inputs.",
+    "Category crosswalks are reporting views only. Broad category conclusions are withheld where mappings remain unsettled; no original classifications are rewritten."
+  ]
+}
