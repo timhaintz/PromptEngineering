@@ -1,0 +1,25 @@
+{
+  "historical": {
+    "responses": 648,
+    "three_run_cells": 216,
+    "tasks": 18,
+    "fixed_models": 4,
+    "variants": 3,
+    "semantic_measure": "Stored mean of the three pairwise cosine similarities; configured text-embedding-3-large.",
+    "functional_measure": "One saved GPT-5.4-pro Boolean for each three-output set.",
+    "threshold_diagnostic": "All three saved pairwise cosine similarities strictly greater than 0.85. This is a diagnostic, not the stored functional-identity score.",
+    "disagreements": 51
+  },
+  "matched216": {
+    "coverage": "Run-1 subset of historical responses; cannot constitute a separate three-run reproducibility study."
+  },
+  "corrective162": {
+    "semantic_functional_results_found": false,
+    "quality_repeat_variation": "Available separately in corrective162/repeat-analysis.json; quality-score ties do not establish semantic or functional identity."
+  },
+  "limitations": [
+    "Stored reproducibility records name task/model/variant but do not contain response hashes or embedding vectors. Current responses match recorded source hashes; these checks do not recover an original server-side request receipt.",
+    "Original functional judgments received explicit variant names, task information and outputs in fixed run order. They were not blinded to condition.",
+    "One functional judgment per cell and three runs do not estimate judge-repeat uncertainty; three cosine pairs share outputs and are not independent observations."
+  ]
+}
