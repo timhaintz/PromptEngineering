@@ -75,7 +75,7 @@ CI installs the Python 3.12 environment with `uv sync --locked --python 3.12`
 and runs this explicit offline suite from the repository root:
 
 ```sh
-uv run --locked --offline --no-sync python -m pytest -q tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py tests/test_dependency_smoke.py tests/test_dependency_oauthlib.py tests/test_dependency_templates_and_multidict.py
+uv run --locked --offline --no-sync python -m pytest -q tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py tests/test_dependency_smoke.py tests/test_dependency_oauthlib.py tests/test_dependency_templates_and_multidict.py tests/test_dependency_security_refresh.py
 ```
 
 The test configuration disables dotenv loading and tracing, blocks network access
@@ -92,6 +92,12 @@ and case-sensitive query keys are compatibility controls. Reference generators
 require the explicit `simple_templates=False` mode after the security update.
 Use trusted reference catalogues; this update addresses the published Jinja
 code-execution advisory and does not establish safety for every template mode.
+
+The November dependency regressions cover CA distrust, lock-file content and
+permissions, bounded trace headers, negative TAR sizes, and cookie scope and
+expiration. Ordinary TLS configuration, reentrant locks, local tracing, image
+round trips and local vector retrieval are compatibility controls. The malformed
+TAR probe runs in a subprocess with a deadline so a regression cannot hang CI.
 
 ChromaDB 1.5.9 remains affected by four published advisories with no patched
 release. The repository uses local legacy retrieval; no Chroma HTTP server or
