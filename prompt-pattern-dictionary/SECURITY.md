@@ -50,17 +50,25 @@ If an immediate patch cannot be shipped:
 - Add a warning or caution badge to affected patterns
 - Document risk in PRD Responsible Use section
 
-## Dependency maintenance (2026-10-13)
+## Dependency maintenance (2026-11-03)
 
 The website uses a GitHub Pages static export with image optimization disabled.
-Next.js 16.3.8, Sharp 0.35.5 and source-map-js 1.2.2 remove the newly published
-production high-severity advisories. The scoped Mermaid override selects KaTeX
-0.18.2 because maintained Mermaid releases still request affected 0.16 versions.
-The public rendering API is retained, and strict Mermaid sanitization remains
-in place. Regression tests cover inherited trust, normal maths, explicit trust,
-and invalid or cumulative indexed source-map offsets. Jest 30 removes the old
-Jest Braces chain; the unused ts-jest transformer was removed because Next's
-Jest configuration already uses SWC, also removing its Handlebars dependency.
+Next.js 16.4.4 addresses the three Next alerts requiring 16.4.1. Mermaid resolves
+DOMPurify 3.4.17 through a scoped minimum-version override. Strict Mermaid
+sanitization and the existing KaTeX override remain in place. Tests resolve the
+actual Mermaid sanitizer and cover split shadow-root templates, detached hook
+subtrees, XHTML/HTML SMIL attributes, and ordinary SVG output.
+
+The development graph uses glob 14.0.3 for its cancellation fix
+(`GHSA-3g3m-2fjr-6pw4`). Modern minimatch consumers use 11.0.4. The overrides
+retain the callable minimatch 3 API required by legacy ESLint plugins. Tests
+exercise cancellation after the first directory read and ordinary sync/async
+discovery with ignore options; the full Jest coverage run checks its consumers.
+The existing ESLint configuration version is retained to preserve the project's
+lint policy. Node 20 (CI) and 22 (local validation) support the selected versions.
+Its React Hooks validator resolves Zod 4.6.7, addressing
+`GHSA-mrhx-c7xc-m3w5`. Bounded regressions verify oversized constrained arrays
+and sets fail before element parsing while ordinary transforms still run.
 
 Run both audits from this directory:
 
@@ -71,19 +79,22 @@ npm audit
 
 Production audit is clean. Full audit still reports development-only advisories:
 
-- **Braces** (`GHSA-vfj7-8cjw-p6xm`), through Next's ESLint plugin, fast-glob
-  and micromatch: five affected packages are rated high. Braces 3.0.3 remains
-  the latest published release and is affected. Do not feed untrusted glob
-  patterns into local lint tooling. Downgrading the Next lint configuration
-  is not a compatible security fix.
-- **sprintf-js** (`GHSA-hp3w-g68c-fv3c`), through Istanbul's YAML configuration
-  loader and Jest: nineteen affected packages are rated moderate. The latest
-  published sprintf-js 1.1.3 is affected. Test configuration comes from the
-  trusted checkout. Do not downgrade Jest to follow audit's suggested fix.
+- **minimatch** ([GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249)):
+  the patched 11.x export is incompatible with the callable 3.x API used by
+  ESLint and its React, import and accessibility plugins. Current parent
+  releases still require that API, and no patched 3.x release is published.
+  A global 11.x override breaks those lint rules. Keep glob patterns trusted.
+- **deepmerge** ([GHSA-gcqx-w48m-w2h4](https://github.com/advisories/GHSA-gcqx-w48m-w2h4)):
+  Jest's configuration loader still requires 4.3.1, the latest published
+  release, with no upstream patch. Keep test configuration trusted. Downgrading
+  to 4.1.2 removes older prototype protections and violates Jest's dependency
+  range; downgrading Jest is not a compatible fix.
 
 These residual findings are upstream blockers, not a clean full-audit result.
 Recheck published versions and dependency chains before the next remediation.
-Neither chain is shipped in the exported browser application.
+Neither chain is shipped in the exported browser application. The root Python
+workspace separately retains four ChromaDB alerts without a patched stable
+release; see the root README for the local retrieval constraint.
 
 To verify the Pages prefix as well as the default local routes, build with
 `GITHUB_PAGES=true GITHUB_REPOSITORY=timhaintz/PromptEngineering npm run build`,

@@ -82,6 +82,7 @@ jobs:
           tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py
           tests/test_dependency_smoke.py tests/test_dependency_oauthlib.py
           tests/test_dependency_templates_and_multidict.py
+          tests/test_dependency_security_refresh.py
 
   build:
     name: Build
