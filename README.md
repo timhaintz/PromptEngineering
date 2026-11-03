@@ -75,7 +75,7 @@ CI installs the Python 3.12 environment with `uv sync --locked --python 3.12`
 and runs this explicit offline suite from the repository root:
 
 ```sh
-uv run --locked --offline --no-sync python -m pytest -q tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py tests/test_dependency_smoke.py tests/test_dependency_oauthlib.py tests/test_dependency_templates_and_multidict.py tests/test_dependency_security_refresh.py
+uv run --locked --offline --no-sync python -m pytest -q tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py tests/test_dependency_smoke.py tests/test_dependency_security_refresh.py tests/test_two_agent_entrypoint.py tests/test_evaluation_transport.py tests/test_corrective_evaluation.py tests/test_rejudging.py
 ```
 
 The test configuration disables dotenv loading and tracing, blocks network access
@@ -84,25 +84,19 @@ No model credentials are needed. The allowlist excludes integration scripts that
 invoke live model APIs. Every PR targeting `main` runs the four required web checks
 and the Python suite; the required Build check also fails if Python validation fails.
 
-The dependency tests also exercise fsspec 2026.6.0's explicit Jinja-template
-sandbox and native multidict 6.9.1 items-view ownership. Jinja2 is installed only
-in the development group to make these optional template paths mandatory in
-CI. Local memory references, normal template substitution, duplicate headers
-and case-sensitive query keys are compatibility controls. Reference generators
-require the explicit `simple_templates=False` mode after the security update.
-Use trusted reference catalogues; this update addresses the published Jinja
-code-execution advisory and does not establish safety for every template mode.
+The dependency regressions cover CA distrust, bounded trace headers and negative
+TAR sizes, with ordinary TLS configuration, trace propagation and image round
+trips as compatibility controls. The malformed TAR probe runs in a subprocess
+with a deadline so a regression cannot hang CI. The suite also covers ordinary
+two-agent chat construction and prompt dispatch, evaluation transports, generation
+and resume behavior, and rejudging artifacts without contacting model services.
 
-The November dependency regressions cover CA distrust, lock-file content and
-permissions, bounded trace headers, negative TAR sizes, and cookie scope and
-expiration. Ordinary TLS configuration, reentrant locks, local tracing, image
-round trips and local vector retrieval are compatibility controls. The malformed
-TAR probe runs in a subprocess with a deadline so a regression cannot hang CI.
-
-ChromaDB 1.5.9 remains affected by four published advisories with no patched
-release. The repository uses local legacy retrieval; no Chroma HTTP server or
-tenant/RBAC configuration is defined here. The alerts remain open pending a
-patched upstream release or a separate retrieval-workflow decision.
+The unused ChromaDB RAG workflow was retired on 3 November 2026. Its original
+script is preserved as non-executable text in [the legacy RAG archive](archive/legacy-rag/README.md).
+ChromaDB and dependencies used only by that workflow are removed; obsolete tests
+for those removed packages are retired too. Existing database files are untouched.
+The ordinary `autogen02_two_agents.py` chat uses the current AutoGen configuration
+loader and no longer imports retrieval components.
 
 ## Usage
 

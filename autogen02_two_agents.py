@@ -17,10 +17,7 @@ python autogen_two_agents.py --prompt "Please tell me the latest news in AutoGen
 ###########
 # IMPORTS #
 ###########
-from autogen import Agent, AssistantAgent, ConversableAgent, GroupChat, GroupChatManager, register_function, UserProxyAgent, config_list_from_json
-from autogen.agentchat.contrib.retrieve_assistant_agent import RetrieveAssistantAgent
-from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
-from chromadb.utils import embedding_functions
+from autogen import Agent, AssistantAgent, ConversableAgent, GroupChat, GroupChatManager, register_function, UserProxyAgent, LLMConfig
 from typing import Annotated
 from langchain_text_splitters import RecursiveJsonSplitter
 import pandas as pd
@@ -30,7 +27,7 @@ import argparse
 #############
 # VARIABLES #
 #############
-config_list = config_list_from_json(env_or_file="OAI_CONFIG_LIST")
+config_list = LLMConfig.from_json(env="OAI_CONFIG_LIST").model_dump()["config_list"]
 work_dir = "AutoGen/TwoAgents"
 
 llm_config = {
@@ -49,7 +46,7 @@ gpt4o = llm_config['config_list'][5]
 
 import autogen
 
-from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
+from autogen import AssistantAgent, UserProxyAgent
 def parse_args():
     parser = argparse.ArgumentParser(description="Run AutoGen with Two Agents")
     parser.add_argument(

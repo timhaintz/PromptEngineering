@@ -1,6 +1,5 @@
 """Exercise updated dependencies locally, without models, downloads, or tokens."""
 
-import asyncio
 import base64
 from datetime import datetime, timedelta, timezone
 import hashlib
@@ -38,23 +37,6 @@ def test_langsmith_run_schema_and_langchain_splitter():
     assert restored.outputs == run.outputs
 
 
-def test_pydantic_settings_environment_and_validation(monkeypatch):
-    from pydantic import ValidationError
-    from pydantic_settings import BaseSettings, SettingsConfigDict
-
-    class OfflineSettings(BaseSettings):
-        model_config = SettingsConfigDict(env_prefix="OFFLINE_SMOKE_", env_file=None)
-        retries: int = 1
-        tracing: bool = False
-
-    monkeypatch.setenv("OFFLINE_SMOKE_RETRIES", "3")
-    monkeypatch.setenv("OFFLINE_SMOKE_TRACING", "false")
-    assert OfflineSettings().model_dump() == {"retries": 3, "tracing": False}
-    monkeypatch.setenv("OFFLINE_SMOKE_RETRIES", "invalid")
-    with pytest.raises(ValidationError):
-        OfflineSettings()
-
-
 def test_pillow_png_round_trip():
     from PIL import Image
 
@@ -67,20 +49,6 @@ def test_pillow_png_round_trip():
         assert decoded.format == "PNG"
         assert decoded.size == image.size
         assert decoded.getpixel((1, 1)) == (12, 34, 56)
-
-
-def test_aiohttp_session_and_cookie_lifecycle():
-    from aiohttp import ClientSession
-    from yarl import URL
-
-    async def exercise():
-        async with ClientSession(trust_env=False) as session:
-            session.cookie_jar.update_cookies({"local": "value"}, response_url=URL("https://example.invalid/"))
-            assert session.cookie_jar.filter_cookies(URL("https://example.invalid/"))["local"].value == "value"
-            assert session.closed is False
-        assert session.closed is True
-
-    asyncio.run(exercise())
 
 
 def test_cryptography_authenticated_encryption_and_tamper_detection():

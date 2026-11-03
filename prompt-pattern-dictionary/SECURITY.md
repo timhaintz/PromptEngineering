@@ -77,24 +77,33 @@ npm audit --omit=dev
 npm audit
 ```
 
-Production audit is clean. Full audit still reports development-only advisories:
+Production audit is clean. Full audit still reports two development-only advisory
+roots whose repository alerts have been assessed as inaccurate:
 
 - **minimatch** ([GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249)):
-  the patched 11.x export is incompatible with the callable 3.x API used by
-  ESLint and its React, import and accessibility plugins. Current parent
-  releases still require that API, and no patched 3.x release is published.
-  A global 11.x override breaks those lint rules. Keep glob patterns trusted.
+  the installed legacy 3.1.5 compiler does not clone/reprocess globparts or run
+  the pairwise preprocessing described by this CVE. The
+  [project advisory](https://github.com/isaacs/minimatch/security/advisories/GHSA-g3hv-75wg-m249)
+  identifies 10.2.6; the broader database range includes the separate legacy
+  implementation. Modern consumers already use 11.0.4. Retaining 3.x preserves
+  the callable and `makeRe` APIs required by existing lint plugins. This finding
+  is scoped to the named CVE, not every possible glob/regex resource cost.
 - **deepmerge** ([GHSA-gcqx-w48m-w2h4](https://github.com/advisories/GHSA-gcqx-w48m-w2h4)):
-  Jest's configuration loader still requires 4.3.1, the latest published
-  release, with no upstream patch. Keep test configuration trusted. Downgrading
-  to 4.1.2 removes older prototype protections and violates Jest's dependency
-  range; downgrading Jest is not a compatible fix.
+  its [canonical CVE record](https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/93xxx/CVE-2026-93753.json)
+  was rejected by the assigning authority on 2 November 2026 because it does not
+  describe a security vulnerability. The GitHub advisory still reflects an older
+  assessment. Jest and its merge semantics are retained.
 
-These residual findings are upstream blockers, not a clean full-audit result.
-Recheck published versions and dependency chains before the next remediation.
-Neither chain is shipped in the exported browser application. The root Python
-workspace separately retains four ChromaDB alerts without a patched stable
-release; see the root README for the local retrieval constraint.
+Alerts #596 and #587 were dismissed as inaccurate with evidence after owner
+approval and independent review. This is a classification correction, not a
+dependency patch; npm audit can continue reporting stale/broad metadata until
+the upstream database is corrected. Neither chain is shipped in the exported
+browser application, and the full audit is not claimed clean. Reassess the
+classification if versions or affected mechanisms change.
+
+The root Python workspace no longer installs ChromaDB: the owner confirmed its
+legacy RAG workflow is unused, and its original script is archived as text.
+The four ChromaDB alerts are addressed by dependency removal, not dismissal.
 
 To verify the Pages prefix as well as the default local routes, build with
 `GITHUB_PAGES=true GITHUB_REPOSITORY=timhaintz/PromptEngineering npm run build`,
