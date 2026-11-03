@@ -13,7 +13,6 @@ dependencies = [
 	"azure-ai-inference",
 	"azure-core",
 	"azure-identity",
-	"chromadb",
 	"langchain-text-splitters",
 	"numpy",
 	"openai",
@@ -27,7 +26,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-	"jinja2>=3.1.6,<4",
 	"pytest",
 ]
 
