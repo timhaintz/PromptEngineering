@@ -19,8 +19,6 @@ python autogen_two_agents.py --prompt "Please tell me the latest news in AutoGen
 ###########
 from autogen import Agent, AssistantAgent, ConversableAgent, GroupChat, GroupChatManager, register_function, UserProxyAgent, LLMConfig
 from typing import Annotated
-from langchain_text_splitters import RecursiveJsonSplitter
-import pandas as pd
 import json
 import argparse
 
