@@ -238,6 +238,11 @@ prompt-pattern-dictionary/
 
 ## 🔧 Development
 
+Jest uses `next/jest` and SWC, so the former Babel presets are no longer installed.
+ESLint uses the flat Next.js configuration; its legacy configuration bridge is
+managed by ESLint itself rather than declared directly here. Keep the
+accessibility packages and types: the Jest and Playwright suites use them.
+
 ### Available Scripts
 
 - `npm run dev` - Start development server

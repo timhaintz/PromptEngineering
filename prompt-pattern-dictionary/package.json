@@ -37,10 +37,6 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",
-    "@babel/preset-env": "^7.25.0",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
-    "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.48.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.4.2",
