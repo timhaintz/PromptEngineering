@@ -22,7 +22,8 @@ permissions:
 jobs:
   live-site-tests:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
-    runs-on: ubuntu-latest
+    # Keep the runner compatible with the locked Playwright browser dependencies.
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: website-e2e
