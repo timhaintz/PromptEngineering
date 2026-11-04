@@ -15,8 +15,6 @@ def _network_disabled(*args, **kwargs):
 def pytest_sessionstart(session):
     # Apply before collection: application imports must not contact services either.
     _offline_guard.setenv("PYTHON_DOTENV_DISABLED", "1")
-    _offline_guard.setenv("LANGSMITH_TRACING", "false")
-    _offline_guard.setenv("LANGCHAIN_TRACING_V2", "false")
     _offline_guard.setenv("ANONYMIZED_TELEMETRY", "false")
     _offline_guard.setattr(socket.socket, "connect", _network_disabled)
     _offline_guard.setattr(socket.socket, "connect_ex", _network_disabled)

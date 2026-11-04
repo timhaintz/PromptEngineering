@@ -7,7 +7,6 @@ import hmac
 from io import BytesIO
 import json
 import socket
-from uuid import uuid4
 
 import pytest
 
@@ -15,26 +14,6 @@ import pytest
 def test_offline_guard_rejects_network():
     with pytest.raises(RuntimeError, match="Network access is disabled"):
         socket.create_connection(("example.invalid", 443))
-
-
-def test_langsmith_run_schema_and_langchain_splitter():
-    from langchain_core.documents import Document
-    from langchain_text_splitters import RecursiveCharacterTextSplitter
-    from langsmith.schemas import Run
-
-    document = Document(page_content="alpha beta gamma delta", metadata={"source": "local"})
-    chunks = RecursiveCharacterTextSplitter(chunk_size=10, chunk_overlap=0).split_documents([document])
-    assert [chunk.page_content for chunk in chunks] == ["alpha beta", "gamma", "delta"]
-    assert all(chunk.metadata == document.metadata for chunk in chunks)
-
-    run = Run(
-        id=uuid4(), name="offline-split", run_type="chain",
-        start_time=datetime.now(timezone.utc), inputs={"text": document.page_content},
-        outputs={"chunks": [chunk.page_content for chunk in chunks]},
-    )
-    restored = Run.model_validate_json(run.model_dump_json())
-    assert restored.inputs == run.inputs
-    assert restored.outputs == run.outputs
 
 
 def test_pillow_png_round_trip():

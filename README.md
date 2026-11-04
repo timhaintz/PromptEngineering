@@ -78,7 +78,7 @@ and runs this explicit offline suite from the repository root:
 uv run --locked --offline --no-sync python -m pytest -q tests/test_models.py tests/quick_test.py tests/test_oauth_caching.py tests/test_dependency_smoke.py tests/test_dependency_security_refresh.py tests/test_two_agent_entrypoint.py tests/test_evaluation_transport.py tests/test_corrective_evaluation.py tests/test_rejudging.py
 ```
 
-The test configuration disables dotenv loading and tracing, blocks network access
+The test configuration disables dotenv loading, blocks network access
 before test collection, and replaces interactive credentials in cache tests.
 No model credentials are needed. The allowlist excludes integration scripts that
 invoke live model APIs. Every PR targeting `main` runs the four required web checks
@@ -97,6 +97,12 @@ ChromaDB and dependencies used only by that workflow are removed; obsolete tests
 for those removed packages are retired too. Existing database files are untouched.
 The ordinary `autogen02_two_agents.py` chat uses the current AutoGen configuration
 loader and no longer imports retrieval components.
+
+A follow-up dependency audit removed `pandas` and `langchain-text-splitters`:
+their only imports in active code were unused in the two-agent script. This also
+removes the unused LangChain/LangSmith stack and packages needed only by pandas.
+The remaining direct dependencies support the PDF, categorisation, evaluation,
+Azure/OpenAI, mind-map, and agent workflows.
 
 ## Usage
 
