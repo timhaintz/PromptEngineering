@@ -6,8 +6,14 @@ from unittest.mock import Mock
 import pytest
 
 from evaluation.chapter6_evaluation import (
-    AzureModelRuntime, DEFAULT_EVALUATION_MODELS, DEFAULT_JUDGE_MODEL, MODEL_REGISTRY, ResolvedModel,
+    AzureModelRuntime, DEFAULT_CYBER_MODEL, DEFAULT_EVALUATION_MODELS, DEFAULT_JUDGE_MODEL,
+    MODEL_REGISTRY, ResolvedModel, parse_args, validate_keys,
 )
+
+GPT_62_DEPLOYMENTS = [
+    ("gpt-6.2-astra", "AZUREVSEASTUS2_OPENAI_GPT62ASTRA_MODEL"),
+    ("gpt-6.2-sol", "AZUREVSEASTUS2_OPENAI_GPT62SOL_MODEL"),
+]
 
 
 def runtime_with_response(monkeypatch, key, response):
@@ -68,6 +74,10 @@ def test_astra_uses_shared_resource_with_its_own_deployment(monkeypatch):
 def test_historical_defaults_and_model_settings_are_preserved():
     assert DEFAULT_EVALUATION_MODELS == ["gpt-4.1", "gpt-5", "grok-4-fast-reasoning", "deepseek-r1-0528"]
     assert DEFAULT_JUDGE_MODEL == "gpt-5.4-pro"
+    assert DEFAULT_CYBER_MODEL == "gpt-5"
+    defaults = parse_args(["run-quantitative"])
+    assert defaults.models.split(",") == DEFAULT_EVALUATION_MODELS
+    assert (defaults.judge_model, defaults.cyber_model) == ("gpt-5.4-pro", "gpt-5")
     expected = {
         "gpt-4.1": ("AZUREVSEASTUS2_OPENAI_GPT41_MODEL", True, True, None),
         "gpt-5": ("AZUREVSEASTUS2_OPENAI_GPT52_MODEL", True, False, "medium"),
@@ -76,11 +86,59 @@ def test_historical_defaults_and_model_settings_are_preserved():
         "deepseek-v3.2": ("AZUREVS_DEEPSEEK_V32_MODEL", False, True, None),
         "gpt-5.4-pro": ("AZUREVSEASTUS2_OPENAI_GPT54PRO_MODEL", True, False, "medium"),
         "gpt-6.1-sol": ("AZUREVSEASTUS2_OPENAI_GPT61SOL_MODEL", True, False, "max"),
+        "gpt-6-astra": ("AZUREVSEASTUS2_OPENAI_GPT6ASTRA_MODEL", True, False, "max"),
         "embedding-3": ("AZUREVS_OPENAI_EMBEDDING3_MODEL", False, False, None),
     }
     for key, settings in expected.items():
         spec = MODEL_REGISTRY[key]
         assert (spec.deployment_env, spec.use_responses_api, spec.supports_temperature_zero, spec.reasoning_effort) == settings
+
+
+@pytest.mark.parametrize(("model_key", "deployment_env"), GPT_62_DEPLOYMENTS)
+def test_gpt_62_requires_an_explicit_independent_deployment(monkeypatch, model_key, deployment_env):
+    monkeypatch.setenv("AZUREVSEASTUS2_OPENAI_ENDPOINT", "https://example.openai.azure.com/")
+    monkeypatch.setenv("AZUREVSEASTUS2_OPENAI_KEY", "not-a-real-key")
+    for other_key, other_env in GPT_62_DEPLOYMENTS:
+        if other_key != model_key:
+            monkeypatch.setenv(other_env, "must-not-be-used")
+    monkeypatch.delenv(deployment_env, raising=False)
+    runtime = AzureModelRuntime("api_key")
+    with pytest.raises(ValueError, match="No deployment configured"):
+        runtime.resolve_model(model_key)
+    args = parse_args(["run-quantitative", "--models", model_key])
+    assert validate_keys(args.models.split(","), MODEL_REGISTRY, "models") == [model_key]
+    monkeypatch.setenv(deployment_env, f"test-{model_key}-deployment")
+    resolved = runtime.resolve_model(model_key)
+    assert resolved.deployment == f"test-{model_key}-deployment"
+    assert resolved.base_url == "https://example.openai.azure.com/openai/v1/"
+    assert resolved.auth_mode == "api_key"
+
+
+@pytest.mark.parametrize(("model_key", "_deployment_env"), GPT_62_DEPLOYMENTS)
+def test_gpt_62_uses_exact_responses_request_in_both_transports(monkeypatch, model_key, _deployment_env):
+    response = SimpleNamespace(
+        output_text="Answer", usage=None, status="completed", model="reported-model-version",
+        id="response-1", model_dump=lambda **kwargs: {"model": "reported-model-version"},
+    )
+    runtime, client = runtime_with_response(monkeypatch, model_key, response)
+    expected = {"model": "test-deployment", "reasoning": {"effort": "medium", "summary": "auto"}}
+
+    legacy = runtime.generate_text(model_key, "Original prompt.")
+    assert client.responses.create.call_args.kwargs == {
+        **expected, "input": [{"role": "user", "content": "Original prompt."}],
+    }
+    assert legacy["api"] == "responses"
+    assert legacy["temperature"] is None
+
+    messages = [{"role": "system", "content": "Original instructions."},
+                {"role": "user", "content": "Original prompt."}]
+    result = runtime.generate_messages(model_key, messages)
+    assert client.responses.create.call_args.kwargs == {**expected, "input": messages}
+    assert result["request"] == {**expected, "input": messages}
+    assert result["requested_deployment"] == "test-deployment"
+    assert result["returned_model"] == "reported-model-version"
+    assert result["reasoning_effort"] == "medium"
+    client.chat.completions.create.assert_not_called()
 
 
 def test_chat_preserves_system_message_and_temperature(monkeypatch):

@@ -229,9 +229,22 @@ What it does:
 
 Default model setup in the CLI:
 
-- Quantitative evaluation models: `gpt-4o`, `gpt-5`, `o4-mini`, `deepseek-r1-0528`
+- Quantitative evaluation models: `gpt-4.1`, `gpt-5`, `grok-4-fast-reasoning`, `deepseek-r1-0528`
 - Judge model: `gpt-5.4-pro`
 - Qualitative cybersecurity model: `gpt-5`
+
+GPT-6.2 is optional. To use it as a quantitative test model, select
+`--models gpt-6.2-astra` or `--models gpt-6.2-sol`. Set
+`AZUREVSEASTUS2_OPENAI_GPT62ASTRA_MODEL` or `AZUREVSEASTUS2_OPENAI_GPT62SOL_MODEL`
+to the corresponding deployment name on the configured Azure resource. No
+deployment name is assumed. Both use the existing
+[Azure Responses transport](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/responses#supported-models)
+with medium reasoning and no sampling or log-probability parameters. The
+default model list, prompts and judge are unchanged. Record the deployment
+version separately when comparing research results, and avoid overwriting
+existing artifacts with `--force` when comparing deployments. The quantitative
+run also calls the configured judge and embedding model; `doctor --probe`
+sends live requests, including to the configured judge.
 
 Auth behavior:
 
@@ -243,7 +256,7 @@ Useful options:
 
 ```powershell
 python .\evaluation\chapter6_evaluation.py doctor --probe
-python .\evaluation\chapter6_evaluation.py run-quantitative --models gpt-4o,gpt-5,o4-mini,deepseek-r1-0528
+python .\evaluation\chapter6_evaluation.py run-quantitative --models gpt-4.1,gpt-5,grok-4-fast-reasoning,deepseek-r1-0528
 python .\evaluation\chapter6_evaluation.py run-cybersecurity --cyber-model gpt-5
 python .\evaluation\chapter6_evaluation.py run-all --auth-mode entra
 ```
